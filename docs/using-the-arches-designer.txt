@@ -33,7 +33,7 @@ The Graph Designer allows you to create, modify, and view the graph for a Resour
 
 The Graph Designer interface is split into three sections, as shown in the image below.
 
-.. image:: ../arches/app/media/img/help/graph-manager-panes.png
+.. image:: images/graph-manager-panes.png
     
 The **Node List** displays all of the nodes present in this graph. You can select a node in the Node List to open the Node Manager.
 
@@ -41,7 +41,7 @@ The **Graph** panel displays all nodes and their connections (called "properties
 
 The **Node Manager** is where the action takes place. Within this panel you will be able to build the graph by adding new Branches (if you are working with a Resource Model), or refine it by modifying nodes that already exists. Once you have selected a node, the Node Manager settings tab will look something like this:
 
-.. image:: ../arches/app/media/img/help/node-manager.png
+.. image:: images/node-manager.png
 
 * Node Name
     Used to identify this node within the graph interface. In other parts of app, custom labels can be used in place of this name. Node names need not be unique across a graph, but it will make everything easier if they are.
@@ -63,7 +63,7 @@ Editing a Branch's Graph
 
 To build the graph of a Branch, your main course of action will be adding nodes, naming them, and defining their data type. If your Branch uses an ontology, you'll also need to define the CRM class and property of each new node. When choosing classes and properties, the interface will automatically enforce preloaded ontological rules.
 
-.. image:: ../arches/app/media/img/help/add-node-to-branch.gif
+.. image:: images/add-node-to-branch.gif
         
 Editing a Resouce Model's Graph
 -------------------------------
@@ -74,7 +74,7 @@ As shown below, you must select the top node and then use  to add a Branch. Once
 
 Once data is saved to a nodegroup, nodes belonging to that nodegroup cannot be deleted.
             
-.. image:: ../arches/app/media/img/help/add-graph-branch.gif
+.. image:: images/add-graph-branch.gif
 
 About Data Types
 ----------------
@@ -107,7 +107,7 @@ In the Card Designer you will be able to edit one of the Cards (or Card Containe
 
 The Card Designer interface is split into three sections, as shown in the image below.
 
-.. image:: ../arches/app/media/img/help/card-designer-panes.png
+.. image:: images/card-designer-panes.png
 
 The **Contents** panel show all Widgets within this Card. In some cases, a third, over-arching tier is added to this heirarchy, called a "Card Container". This happens when multiple Cards are used to organize complex Branches.
 
@@ -124,13 +124,13 @@ This panel displays all of the components present in this Card. Note that there 
     
     A Card will have one or more Widgets in it. You can reorder these widgets by moving them in the contents panel, or in the card preview. Note that different icons are used for different types of Widgets.
     
-    .. image:: ../arches/app/media/img/help/reorganize-contents-card.gif
+    .. image:: images/reorganize-contents-card.gif
     
 * Example 2: Card Container with Cards
 
     In some cases, a complex Branch will have a Card Container, which aggregates multiple Cards (and their Widgets) in order to thematically organize data entry. These Cards will appear as 'tabs' in the preview. You can reorder these tabs just as you would Widgets. Note that different icons are used for different types of Widgets.
     
-    .. image:: ../arches/app/media/img/help/reorganize-contents-card-container.gif
+    .. image:: images/reorganize-contents-card-container.gif
     
 Managing Card Containers and Cards
 ----------------------------------
@@ -196,5 +196,5 @@ Permissions Manager
 
 *Please utilize the in-app help for this content, it has not be transferred here yet.*
 
-.. |q-help| image:: ../arches/app/media/img/help/rtd/in-app-help-icon.png
+.. |q-help| image:: images/in-app-help-icon.png
   :align: middle
