@@ -79,7 +79,10 @@ Depending on your Resource Model's graph structure, some attributes will be hand
 
 You must have values for any required nodes in your resource models.
 
-The ``data_type`` attribute in the `mapping file`_ will help you determine what the format of the values in the column for a given node must be.
+Value Formats
+-------------
+
+The ``data_type`` attribute in the `mapping file`_ will help you determine what the format of the value(s) in the column for a given node must be.
 
 * ``string`` - Strings need not be single-quoted **unless** they contain a comma or contain HTML tags (as in the case strings display/collected with the rich text editor widget).
 * ``number`` - Numbers don't need quotes.
