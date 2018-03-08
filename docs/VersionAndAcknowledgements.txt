@@ -5,8 +5,8 @@ Version and Acknowledgments
 Version
 =======
 
-This version is issued to support Version 2.0 of Arches, released in
-March 2014.
+This version is issued to support Version 2.1 of Arches, released in
+2014.
 
 Acknowledgments
 ===============
