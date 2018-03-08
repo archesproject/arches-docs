@@ -1,0 +1,46 @@
+Introduction
+============
+
+Welcome to the **Arches Installation Guide**. This document is intended
+to help you quickly get Arches running on your server.
+
+Once you have installed Arches there is a companion book to this one,
+the [**Arches User Guide**](http://www.archesproject.org/documentation),
+with more information about how to use the software, and how to join the
+Arches community, a growing online network of Arches developers and
+users.
+
+What do I need to know to use this guide?
+-----------------------------------------
+
+Arches is designed to let you manage many types of cultural heritage
+data. And while we've tried to make it easy to install Arches, you'll
+need to make some decisions on how you wish to describe and manage the
+information that goes into Arches. But don't worry, we've also included
+lots of examples and well-thought-out defaults for setting up the
+software.
+
+So, installing Arches means loading software and deciding how you want
+to describe the cultural heritage information that's important to you.
+We've written this guide assuming that you are comfortable working with
+your computer's command line, and that you can edit text files with
+ease.
+
+That's it! Feel free to tap a colleague on the shoulder if you need a
+little help along the way, or check out the resources at
+[www.archesproject.org](http://www.archesproject.org) for more support.
+
+Installation Options
+--------------------
+
+It's important to recognize that Arches is designed to manage large,
+enterprise-scale Cultural Heritage inventories. The software is
+sophisticated and is designed to be support extensive customization.
+This means that there are many ways to deploy Arches.
+
+We've written this guide to streamline the installation of Arches Server
+and the CDS Package in the more straight-forward manner possible. These
+installation instructions provide step-by-step guidelines for installing
+Arches Server, installing the CDS Package, and configugin Arches for
+daily use.
+

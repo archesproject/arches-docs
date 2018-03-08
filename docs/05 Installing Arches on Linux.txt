@@ -1,0 +1,209 @@
+Installing Arches on a Linux (Ubuntu 12.04)
+===========================================
+
+The following instructions were written with Ubuntu 12.04 LTS in mind.
+Other versions of Ubuntu or other Linux distributions might have some
+different steps, but the general outline should be similar. All
+instructions assume that they are entered through the terminal and that
+the user has root privileges. Installing on alternate flavors of Linux
+will follow a similar pattern.
+
+Of course, you may use the same instructions to install Arches either an
+in-house or remote server. And, while this guide does not cover it,
+Arches can be installed across multiple machines for deployments that
+demand high fault tolerance.
+
+Step 1: Download Arches
+-----------------------
+
+Create the following folder on your computer:
+
+::
+
+    arches-web
+
+Download the Arches v2.0 code http://archesproject.org/download-arches/
+and copy it to the archesproject folder (be sure and unzip if
+necessary).
+
+Step 2: Install Required Dependencies
+-------------------------------------
+
+This step installs PostgreSQL, PostGIS, GEOS and the latest JDK by
+running a single script.
+
+.. note::
+
+    If you would rather install the components seperately, simply open the
+    script file and run only the portions of the script you want.
+
+Open a terminal and navigate to:
+
+::
+
+    archesproject/install
+
+Run the following script to build install PostgreSql, PostGIS, GEOS and
+the latest JDK:
+
+::
+
+    source ubuntu_precise_setup.sh
+
+.. warning::
+
+    **PostgreSQL Warnings** 
+
+    If you experience errors during the
+    installation, please check that the setting
+    'standard\_conforming\_strings' in 'postgresql.conf' is uncommented and
+    set to 'off'. 
+
+    See `this question on stackoverflow`__ for more information.
+
+    .. _stackoverflow: http://stackoverflow.com/questions/7667724/error-saving-geodjango-pointfield
+
+    __ stackoverflow_
+
+Step 3: Install Web Framework and Search Engine
+-----------------------------------------------
+
+Arches uses the Django web framework (https://www.djangoproject.com/)
+and the ElasticSearch engine (http://www.elasticsearch.org/). This step
+installs these technologies. Open a command window and navigate to:
+
+::
+
+    archesproject/install
+
+Then run the following script:
+
+::
+
+    source install_dependencies.sh
+
+Once this script runs you'll need to start the Django development server
+and ElasticSearch search engine, by navigating to the root folder and
+running the following script:
+
+::
+
+    source runserver.sh  
+
+.. warning::
+
+    If you get an error similar to this, "Could not import user-defined
+    GEOMETRY\_BACKEND "geos"", you might try adding the path to the GDAL dll
+    to your archesproject/settings.py file (for more information see `the
+    django docs <https://docs.djangoproject.com/en/1.6/ref/contrib/gis/install/geolibs/#gdal-library-path>`__):
+
+::
+
+      GDAL_LIBRARY_PATH = '/path/to/libgdal.so'  #<-- make sure this path is correct and points to the actual .so file, note the forward slashess
+
+.. warning::
+
+    **A note about runserver.bat**
+
+    Running runserver.sh runs two process, one for the inbuilt Django
+    webserver, the other for the Elasticsearch search engine.
+
+    If you happen to run runserver.sh again without first killing both
+    of those processes then you'll end up with mulitple instances of the
+    webserver and search engine running. The search engine can consume a lot
+    of resources and additionaly will try and replicate itself to the new
+    instance, taking up additional memory and hard drive space. If you want
+    to disable this "feature" then 
+
+    **uncomment line 87 in the
+    archesproject/arches/Search/engines/elasticsearch-0.90.3/config/elasticsearch.yml
+    file where it says: #node.max\_local\_storage\_nodes: 1**
+
+.. note::
+
+    We use the Django development server to make it easy for you to
+    confirm that Arches has installed properly. You WILL NEED to configure
+    Arches to use a production quality web server such as Apache if you want
+    to use Arches in production. See the chapter on Arches configuration for
+    guidance on how to complete this step.
+
+Step 4: Install and Build Arches
+--------------------------------
+
+Open a new terminal window, and navigate to:
+
+::
+
+    archesproject/build  
+
+Run the following script to build core Arches:
+
+::
+
+    source install_arches_db.sh
+
+.. note:: 
+
+    **Database Password**
+
+    You may be prompted for a password to the Arches database. The
+    default password is: postgis. You can open Settings.py in the arches
+    root folder to change the default arches password, or to install Arches
+    on to an existing instance of PostgreSQL/PostGIS.
+
+Next Steps
+----------
+
+You've just completed the steps needed to install the core Arches
+application. To confirm that Arches installed properly, open a new
+command window, and navigate to:
+
+::
+
+    archesproject/build  
+
+Run the following script to build Arches:
+
+::
+
+    source build.sh
+
+Confirm that Arches is running by typing the following URL
+
+::
+
+    http://localhost:8000/Arches/index.htm
+
+Arches requires that you load a data management package before you can
+start working with your cultural heritage data. Jump to the chapter
+entitled **Loading the CDS Package** to install a cultural heritage data
+management package based on the CIDOC Core Data Standard.
+
+You may also check the archesproject.org website to see whether the
+community has developed other data management packages.
+
+It's also possible to create your own Arches Data Management Package.
+You'll want to review an existing package (such as the CDS Package) to
+see how to structure an Arches package. You can find more information on
+creating packages by joining the Arches Discussion Forum
+(http://archesproject.org/forum/).
+
+Installing Arches on a Mac (notes only)
+=======================================
+
+There are no official instructions for installing Arches on a Mac other
+then to say that it closesly follows the instructions for installing
+Arches on Ubuntu linux. Several of us have installed Arches successfully
+on Macs, so we know it can be done.
+
+Here's a good resource for information about installing some of the
+software that Arches depends on:
+https://docs.djangoproject.com/en/dev/ref/contrib/gis/install/#macosx
+
+.. note::
+
+    If you run into issues with GDAL you might want to look at this
+    thread http://stackoverflow.com/questions/11294556/missing-libgeos-c-so-on-osx.
+    You may need to add entries into your settings.py file for the locations
+    of your GDAL and GEOS libraries (GEOS\_LIBRARY\_PATH and
+    GDAL\_LIBRARY\_PATH settings).

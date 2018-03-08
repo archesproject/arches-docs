@@ -1,0 +1,174 @@
+Installing Arches on a Vagrant Development Machine
+==================================================
+
+This chapter summarizes the installation steps a Software Developer
+should follow for installing Arches on a Vagrant development machine.
+Developers may wish to install Arches using Vagrant. Vagrant ensures
+that all developers can work on the same platform. And if you decide to
+use a local Mercurial client (like SourceTree), Vagrant will allow you
+to quickly test your code in a virtual environment.
+
+Check out http://www.vagrantup.com/ for more information.
+
+Step 1: Clone Arches
+--------------------
+
+Start by getting a copy of the Arches code using a local Mercurial
+client:
+
+::
+
+    hg clone https://bitbucket.org/arches/arches ~/projects/arches
+
+Then, (assuming you want to develop using the CDS package) clone the CDS
+repo into your packages folder:
+
+::
+
+    hg clone https://bitbucket.org/arches/cds ~/projects/arches/archesproject/packages/cds
+
+And create a settings local file as described in "Loading the CDS
+Package", if you're using linux, you can run the following commands:
+touch ~/projects/arches/settings\_local.py echo "INSTALLED\_PACKAGES =
+('cds',)" >> ~/projects/arches/settings\_local.py
+
+Step 2: Install Vagrant
+-----------------------
+
+Navigate to http://www.vagrantup.com; download and install the Vagrant
+software for your operating system (OS).
+
+Step 3: Install VirtualBox
+--------------------------
+
+VirtualBox is an open source Virtual Machine application.
+
+Navigate to https://www.virtualbox.org; download and install VirtualBox
+for your OS.
+
+Step 4: Download Virtual Machine File
+-------------------------------------
+
+Open a command prompt and type the following command to download an
+empty Ubuntu server (version 12.04, 32-bit) VM file
+
+::
+
+    vagrant box add precise32 \ http://files.vagrantup.com/precise32.box
+
+You can consult the Vagrant website if you prefer to use an alternate
+base OS for your Arches VM.
+
+
+.. note::
+
+	**Pro Tip: Windows Installation**
+
+	For some versions of Windows you
+	may get an error when running the vagrant box add command. Try running
+	the command again, this time WITHOUT the "/" after the "precise32".
+	Check the latest vagrant documentation for additional troubleshooting
+	help.
+
+Step 5: Build Arches
+--------------------
+
+Open a command prompt and navigate to folder where you've cloned arches
+and run:
+
+::
+
+    vagrant up
+
+
+.. note::
+
+	**Pro Tip**
+
+	Making Arches run with less than 2 GB of RAM I>Before you
+	"vagrant up", open this file: arches/Vagrantfile with a text editor.
+	Scroll down to vb.customize ["modifyvm", :id, "--memory", "2048"].
+	Replace the 2048 with 1024, and Arches will only request 1GB of RAM.
+
+Vagrant will create a Virtual Machine with a complete Arches install,
+including all required software dependencies, as well as a sample
+dataset ready for you to test Arches with.
+
+
+.. note::
+
+	**How long will it take to build Arches?**
+
+	Depending on your
+	computer, it may take anywhere from 10 minutes to an hour or two to
+	build Arches.You'll know that Arches is ready when the command prompt
+	returns.
+
+Step 6: Start Arches
+--------------------
+
+At the command prompt type:
+
+::
+
+    vagrant ssh
+
+This command will log you onto your virtual Linux server. To start Arches, run the following commands:
+
+::
+
+	cd /vagrant ./runserver-vagrant.sh
+
+
+.. note::
+
+	**Windows Users: Get an ssh client**
+
+	Because Windows doesn't usually come with ssh, you'll need to
+	install a ssh client like PuTTY. See the Vagrant documentation
+	(http://docs-v1.vagrantup.com/v1/docs/getting-started/ssh.html) for more
+	information.
+
+Arches will start and be ready for use in just a moment or two. To
+access Arches, open a browser (note: Arches works with Firefox, Chrome,
+Safari, Opera, and Internet Explorer 10 or higher), and type:
+
+http://localhost:8000/Arches/index.htm#
+
+You should see the following screen:
+
+.. figure:: images/Arches_Search.png
+   :alt: Arches Default Screen: Simple Search
+
+   Arches Default Screen: Simple Search
+
+If you want to test adding or editing cultural heritage data in Arches,
+you'll need to sign in. Click "Map" in the upper right corner of the
+screen, then click
+
+.. figure:: images/Arches_login.png
+   :alt: Arches Sign In
+
+   Arches Sign In
+
+The Username and Password are both "admin" (omit the quotes when
+entering the username and password).
+
+For more help in understanding the Arches app, check out the **Arches
+User Guide** to learn how to work with Arches.
+
+.. warning::
+ 
+  **Using the test data-set**
+
+	All test data supplied is for experimentation in Arches only. The
+	records are not certified for accuracy or completeness.
+
+A Note on Vagrant
+~~~~~~~~~~~~~~~~~
+
+The Vagrant install is only intended for developer use and is not
+intended for use in production. Users should not store production data
+in a Vagrant generated virtual machine. Developers should familiarize
+themselves with the vagrant command line tools as outlined in the
+Vagrant documentation: http://docs.vagrantup.com/v2/cli/index.html

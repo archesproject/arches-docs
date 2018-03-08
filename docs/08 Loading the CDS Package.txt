@@ -1,0 +1,153 @@
+Loading the CDS Package With Sample Data
+========================================
+
+Arches manages cultual heritage resources through the use of packages. A
+package defines the types of resources that Arches should manage and the
+resources' attributes. This can include things like the web based forms
+neccessary to create and edit resources, reports, and services to
+support search. In reality, though, it can include almost anything the
+package developer wants to add into Arches.
+
+You will need to load at least one Arches Package into your Arches
+Server to begin managing a cultural heritage inventory. These are these
+steps demonstrate the process for the CDS Package.
+
+Step 1: Download the CDS Package
+--------------------------------
+
+Get a copy of the CDS package by going to the Packages section at
+http://archesproject.org/download-arches/
+
+Create a folder called "cds" in archesproject/packages and download the
+code to that folder (unzip if neccesary)
+
+I>you should have a directory structure simlar to this:
+
+::
+
+    archesproject/
+        arches/
+        ...
+        packages/
+            cds/
+                install/
+                media/
+                models/
+                ...
+        settings.py
+
+Step 2: Install the Package
+---------------------------
+
+Open the archesproject/settings.py in your favorite text editor.
+
+Add an entry in the INSTALLED\_PACKAGES setting coresponding to the name
+of the folder you created to hold the CDS Package in the packages
+directory (following our example above, it would look like this)
+
+::
+
+        INSTALLED_PACKAGES = (
+            # entries here should correspond to folders within the packages directory
+            'cds',
+        )
+
+I> Don't forget the trailing comma for a single entry in a python tuple
+
+If you don't want to load the test data that comes with the package,
+open the package's settings.py file (don't confuse this with the Arches
+settings.py file from above) and set **LOAD\_TEST\_DATA = False**
+
+Open a command window, and navigate to:
+
+::
+
+    archesproject/build  
+
+Run the following script to install the CDS package:
+
+::
+
+    install_packages.bat (on Windows)
+
+    OR
+    install_packages.sh (on Linux)
+
+Congatulations! You've just completed the steps needed to install the
+core Arches application and CDS package on your server. This package
+comes loaded with sample data provided by English Heritage.
+
+Go to the following URL and check it out!
+
+::
+
+    http://localhost:8000/Arches/index.htm
+
+Loading the CDS Package With Your Own Data
+==========================================
+
+Remember, a package defines the available resource types and attributes
+that you can use to describe resources within those types. What it does
+not define is the content of the data itself. Therefore, it is possible
+to "map" your own data into the resource types and attributes that are
+defined in the CDS Package.
+
+The button pushing for loading the package with your own data is
+identical to the workflow described above. However, before you "Install
+the Package", replace the content of the source data files with your own
+custom content.
+
+Note: If you do this *after* you "Install the Package," then your
+changes will not be reflected in the Arches database. This must be done
+*before* you install the package.
+
+There are two types of source data files to concern yourself with in
+this process 1. Authority Documents 2. resource\_info
+
+Step 1: Modify Authority Documents
+----------------------------------
+
+The purpose and structure of authority documents are described in some
+detail in Section 7 of this document. First and foremost, populate the
+authority document files with the content that you wish to use for the
+attributes that are constrained by controlled vocabularies.
+
+If you want to do anything fancy with your controlled vocabularies like
+associate them with geometries, add attributes supporting attributes to
+them, or arrange them hierarchically, then take a very close look at
+Chapter 7.
+
+Step 2: Populate resource\_info
+-------------------------------
+
+The purpose and structure of resource\_info is described in some detail
+in Section 7 of this document. The key points to remember as you
+construct your resource\_info file are the following:
+
+1. Make sure that the data in the attributename column is constrained to
+   valid attributename values from "CDS attributes.csv". This file
+   defines the set of resource types and attributes for given resource
+   types within the CDS package.
+
+2. Make sure that the attributevalue for any attributename ending with
+   '.E55' is a valid conceptid as defined in one of the authority files…
+   that you ostensibly edited.
+
+Be sure to read up on information from Chapter 7 describing the purpose
+of resourceid, resourcetype, and groupid (especially groupid) columns
+within the resource\_info file.
+
+Step 3: Install the Package
+---------------------------
+
+Follow the direction outlined in Step 2 in the first workflow of this
+chapter.
+
+Lastly
+^^^^^^
+
+There may be a point at which the resource types and their respective
+attributes do not sufficiently meet the business need that you are using
+Arches to fulfill. That is the point when you need create or use a
+differnt "package." See chapter XXX for guidance on defining and
+building your own Arches package.

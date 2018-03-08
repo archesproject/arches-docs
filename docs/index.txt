@@ -1,57 +1,49 @@
-#######################
-Arches Documentation
-#######################
+.. arches documentation master file, created by
+   sphinx-quickstart on Mon Jul 14 14:29:57 2014.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to Arches's documentation!
+==================================
+
+Contents:
 
 .. toctree::
-    :caption: Introduction
-    :maxdepth: 2
+   :maxdepth: 1
 
-    overview
+   VersionAndAcknowledgements
+   Overview
+   01 Introduction
+   03a System Requirements
+   04 Installing Arches on Windows
+   05 Installing Arches on Linux
+   06 Installing Arches on Vagrant
+   07 The CDS Package
+   08 Loading the CDS Package
+   09 Running and Configuring Arches  
+   10 Next Steps
 
-.. toctree::
-    :caption: Installation and Configuration
-    :maxdepth: 2
 
-    requirements-and-dependencies
-    installation
-    initial-configuration
-    projects-and-packages
-    
-.. toctree::
-    :caption: Using Arches
-    :maxdepth: 2
+Indices and tables
+==================
 
-    managing-resources
-    creating-resources
-    using-the-arches-designer
-    managing-map-layers
-    ontologies-in-arches
-    rdm
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
 
-.. toctree::
-    :caption: User Tutorials
-    :maxdepth: 2
+Modules
+=======
 
-    create-resource-model
-    create-branch
-    add-branch-to-resource-model
-    create-menu
-    add-function
-    create-report
-    
-.. toctree::
-    :caption: Developing With Arches
-    :maxdepth: 2
-    
-    creating-a-development-environment
-    import-export
-    command-line-reference
-    additional-configuration
-    creating-new-map-layers
+Modules are only viewable on your local fully built system.
 
-.. toctree::
-    :caption: Reference
-    :maxdepth: 2
+Enable the following lines to view module documentation in your local system
 
-    Appendix A: Arches HIP <arches-hip-contents>
-    Appendix B: Glossary <glossary>
+::
+
+   .. automodule:: archesproject.arches.Models.entity
+      :members:
+      :undoc-members:
+      :inherited-members:
+
+
+

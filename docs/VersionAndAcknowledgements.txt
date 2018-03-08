@@ -1,0 +1,40 @@
+===========================
+Version and Acknowledgments
+===========================
+
+Version
+=======
+
+This version is issued to support Version 2.0 of Arches, released in
+March 2014.
+
+Acknowledgments
+===============
+
+Contributors:
+-------------
+
+| Ryan Anderson, Farallon Geographics
+| Yiannis Avramides, World Monuments Fund
+| Kieran Byrne, English Heritage
+| Phil Carlisle, English Heritage
+| Alison Dalgity, Getty Conservation Institute
+| Rob Gaston, Farallon Geographics
+| Edmund Lee, English Heritage
+| Adam Lodge, Farallon Geographics
+| David Myers, Getty Conservation Institute
+| Alexei Peters, Farallon Geographics
+| Koen Van Daele, Flanders Heritage Agency
+| Dennis Wuthrich, Farallon Geographics
+
+Cover image
+-----------
+
+Extract from a technical survey of the 18th century arch of the
+Ironbridge, England, part of the Ironbridge World Heritage Site.
+Courtesy of Paul Bryan, English Heritage.
+
+Cover design
+------------
+
+Ken Feisel, World Monuments Fund

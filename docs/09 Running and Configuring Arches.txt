@@ -1,0 +1,953 @@
+Running and Configuring Arches
+==============================
+
+In this chapter you'll learn how to define important configuration
+settings and define user accounts. You will have the ability to
+customize Arches, but also the potential to alter the application in
+profound ways. Make sure that you back-up all the default settings
+before you commit your changes!
+
+
+Running Arches
+--------------
+
+Starting Arches is easy: you just have to make sure that you run the
+"runserver" command in the Arches root folder. Stopping Arches is also
+easy: just press Control-C in the terminal window that you used to start
+Arches.
+
+By default, users can log onto Arches (from the host server) with the
+following URL:
+
+::
+
+    http://localhost:8000/Arches/index.htm#
+
+You may wish to configure your web server to support access for users
+from client machines and the internet. This will require you to replace
+the "localhost:8000" part of the URL with a domain or IP address.
+
+Based on the resources (RAM, storage, CPU(s)) of the server that you've
+installed Arches on, you may wish to tune how you allocate memory to
+PostgreSQL (the underlying Arches database) and your web server (e.g.:
+Apache or IIS). You can find guidance on these topics by visiting the
+PostgreSQL, Microsoft, or Linux web sites.
+
+Running Arches with Apache
+--------------------------
+
+If you plan on running Arches in a production setting then it is highly
+recommended that you use Apache (or some other production quality
+webserver).
+
+.. warning::
+
+   Do not use the in built django web server in production. See `the
+   Django docs <https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/modwsgi/>`__ for more information about using django with Apache
+
+Step 1: Download and install Apache
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Windows
+^^^^^^^
+
+Go to the `Apache web
+site <http://httpd.apache.org/docs/2.2/platform/windows.html>`__, and
+follow the instructions for downloading and installing Apache for
+Windows.
+
+Ubuntu
+^^^^^^
+
+From a terminal window type the following to install apache:
+
+::
+
+    sudo apt-get update; sudo apt-get install apache2
+
+To confirm that Apache installed correctly, you should be able to go to
+http://localhost in your browser and get the standard "**It Works!**\ "
+page like:
+
+::
+
+    It works!
+    This is the default web page for this server.
+    The web server software is running but no content has been added, yet.
+
+Step 2: Download and install mod_wsgi for Apache
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Windows
+^^^^^^^
+
+Go to the `installation
+instructions <https://code.google.com/p/modwsgi/wiki/DownloadTheSoftware?tm=2>`__
+page and download and install the mod_wsgi module for Windows Binaries.
+
+Ubuntu
+^^^^^^
+
+From a terminal type the following to install mod_wsgi:
+
+::
+
+    sudo apt-get install libapache2-mod-wsgi  
+    sudo nano /etc/apache2/mods-available/wsgi.load  
+
+add the next string to the file
+
+::
+
+    LoadModule wsgi_module /usr/lib/apache2/modules/mod_wsgi.so  
+
+save, then
+
+::
+
+    sudo a2enmod wsgi  
+    sudo service apache2 restart  
+
+Step 3: Edit your Apach httpd.conf file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Windows and Ubuntu
+^^^^^^^^^^^^^^^^^^
+
+Add the following lines to your httpd.conf (don't forget to replace the
+dummy path names below to the ones corresponding to your setup)
+
+::
+
+    WSGIScriptAlias /<base_url_name>/path/to/arches_web/wsgi.py
+    WSGIPythonPath /path/to/arches_web/archesproject/virtualenv/ENV/lib/python2.7/site-packages
+
+    <Directory /path/to/arches_web/>
+    <Files wsgi.py>
+    Order deny,allow
+    Require all granted
+    </Files>
+    </Directory>
+
+.. note::
+
+  **General Notes**
+
+  Using the example above, your site would be available from the following url: http://localhost/base_url_name/Arches
+          
+  Don't forget to restart apache after making these modifications
+
+.. note::
+
+  **Ubuntu Notes**
+
+  Make sure that apache has (chmod 755) priveleges to all the
+  directories down to the location where your Arches codebase resides
+
+Step 4: Edit your settings.py file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In your favorite editor, open the archesproject/settings.py file and
+edit the following variables:
+
+-  Point the STATIC_ROOT variable to the location in apache were static files are served.
+-  Point the STATIC_URL variable to name of the folder you create to hold the static files (see below)
+
+Windows
+^^^^^^^
+
+STATIC_ROOT = 'C:/Program Files/Apache Software
+Foundation/Apache2.2/htdocs/media/' <-- make sure to create the media
+directory if it doesn't already exist, also make sure the path is
+correct
+STATIC_URL = '/media/'
+
+Ubuntu
+^^^^^^
+
+STATIC_ROOT = '/var/www/media/' <-- make sure to create the media
+directory if it doesn't already exist
+STATIC_URL = '/media/'
+
+After doing this don't forget to run
+
+::
+
+    archesproject/build/build(.bat/.sh)
+
+This will copy all the files in archesproject/arches/Media folder to the
+directory you created above (in this example, called 'media')
+
+You're Done! Go to http://localhost/base_url_name/Arches to browse the
+Arches site.
+
+Arches Configuration
+--------------------
+
+Arches is really two applications in one:
+
+-  A map-based cultural heritage data management tool
+-  A searchable online inventory of cultural heritage
+
+Before you start using Arches, you'll probably need to update a few
+configuration settings. Perhaps the most important of these settings
+are:
+
+-  Managing user accounts
+-  Updating default map settings (mapConfig)
+-  Managing basemaps and GIS layers
+-  Managing resource layers
+
+Arches implements `Django <http://www.djangoproject.com>`__, a
+high-level Python Web framework that supports rapid and robust
+application development. One of several nice features that Django offers
+is a simple Administration Console.
+
+Arches can be configured using the Django Administration Console. You
+may access the console by typing:
+
+::
+
+    http://localhost:8000/admin
+
+Be sure to replace "localhost:8000" with the domain name or IP address
+of the server hosting your version of Arches.
+
+Next, you'll need to log in. Arches comes with the following default
+account:
+
+::
+
+        user: admin
+        password: admin  
+        
+
+.. note::
+
+  **Change the default "admin" password!**
+
+  Its too easy for someone to
+  guess this password! See the section on managing user accounts and
+  change the default password for this account as soon as possible!
+
+Once you've signed in to the Django Administration Console, you should
+see a screen that looks something like this:
+
+.. figure:: images/Django_Console.png
+   :alt: Django's Site Administration Console
+
+   Django's Site Administration Console
+
+This interface will let you Manage users, define the state of the map
+display in Arches, configure resources for display, and add GIS maps to
+Arches.
+
+Managing User Accounts
+----------------------
+
+Arches implements a simple user access model with the following 3 tiers
+of users:
+
+-  Guests
+-  Editors
+-  Administrators
+
+Guests can access Arches and view information (either via the search
+screens or through the Map screen) without having to sign on to the
+system.
+
+Editors require a user account to add, edit, or delete data.
+
+Administrators may configure Arches and manage users.
+
+Updating the Default Administrator Password
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Arches automatically creates a single Administrator account with the
+following credentials:
+
+::
+
+        user: admin
+        password: admin  
+        
+
+You will definitely want to change the default password. To do so, log
+in and click the "Change password" link at the upper right. You'll be
+prompted to type in your current password ("admin" in this case), as
+well as a new password.
+
+Click the "Change my password" button when you're done (and be sure that
+you don't forget your new password!).
+
+Adding a New Editor Account
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+From the Django Administration Console, simply click the "Add" button
+next to "Users". You'll see a screen that looks something like this:
+
+.. figure:: images/New_User.png
+   :alt: New User Input Form
+
+   New User Input Form
+
+Add the Username and Password for the user account, then click the
+"Save" button. Django will confirm that you are adding a unique user
+name and valid password. If so, you'll see the following screen:
+
+.. figure:: images/New_User_Detail.png
+   :alt: New User Detais
+
+   New User Detais
+
+At this point, you can click the "Save" button at the bottom of the form
+to create a user account with data-editing privileges.
+
+.. note::
+
+  **Optional User Information** 
+
+  The "Change user" screen allows you to
+  add additional information about the user, such as name and e-mail
+  address. You may optionally also grant specific administrative
+  permissions to this account in the "User permissions" section of the
+  screen. Arches only requires a unique username and valid password to
+  create an Editor account.
+
+Feel free to explore the User adminstration functions available in the
+Django Console. You'll see that it provides a suite of easy-to-use tools
+for managing your Arches users.
+
+One thing to note: the Django Administrator Console allows you to define
+Groups. As of September 2013, Arches does not recognize Django Groups
+for authentication.
+
+Setting Default Map Settings
+----------------------------
+
+Now that you have Arches running, you'll probably want to configure
+Arches for your particular geographic area of interest. You do this by
+defining the map center point and initial zoom scale that you want
+Arches to use.
+
+From the main Django Administration Console, **Click App configs** and
+then select **mapConfig** to access the configuration settings for the
+map display in Arches display. You should see the following screen:
+
+.. figure:: images/Django_Map_Config.png
+   :alt: mapConfig
+
+   mapConfig
+
+Notice that this page lists the variable (Name: mapConfig), its
+Defaultvalue, Datatype, and associated Notes. We're most interested in
+the Defaultvalue:
+
+::
+
+    {
+     maxExtent: new OpenLayers.Bounds(-200000, -200000, 200000, 200000),
+     center: new OpenLayers.LonLat(-224149.03751366, 6978966.6705368),
+     zoom: 6,
+     numZoomLevels: 19,
+     minZoomLevel: 1,
+     fallThrough: false,
+     controls: [new OpenLayers.Control.Navigation(), new OpenLayers.Control.Zoom()],
+     displayProjection: new OpenLayers.Projection("EPSG:4326"),
+     theme: null
+    } 
+
+In particular, notice that Defaultvalue includes a definition for the
+map center ("center") and initial zoom level ("zoom").
+
+This:
+
+::
+
+        center: new OpenLayers.LonLat(-224149.03751366, 6978966.6705368),
+        zoom: 6,
+
+tells Arches where to set the center of the map and the initial extent
+to use for the map that you will use to create and display your cultural
+heritage information.
+
+The following coordinates set the map center point:
+
+::
+
+        -224149.03751366, 6978966.6705368
+
+By default, Arches centers the map near Nottingham, England. The
+-224149.03751366, 6978966.6705368 numbers are the coordinates for this
+point in the `Spherical
+Mercator <http://docs.openlayers.org/library/spherical_mercator.html>`__
+projection.
+
+To recenter the map, replace the default coordinates with the proper
+coordinates for your preferred area. You can use this website
+http://www.maptiler.org/google-maps-coordinates-tile-bounds-projection/
+to determine the proper coordinates if you don't know them by heart.
+
+.. note::
+
+  **Pro Tip: Getting Coordinates from the Arches Map**
+
+  If you're comfortable using the developer tools that come with Google Chrome,
+  Firefox, or Safari, you can have Arches tell you the map center point.
+  Simply navigate the map to your area of interest and type
+  "arches.appPanel.mapPanel.map.getCenter().toShortString()" in the
+  JavaScript console. Arches will return the center point of the current
+  map.
+
+  Once you've determined the center coordinates and map zoom level that
+  you want to use, simply replace the default values with the coordinates
+  and zoom level for your area of interest.
+
+.. note::
+
+  **Save a copy of the default values!**
+
+  You may wish to copy and paste
+  the Defaultvalue to a text file before making any changes to it. This
+  way, you can be sure and recover to a working map if you run into
+  problems updating the map center coordinates.
+
+Click the save button when you are done. To update Arches with this new
+information, navigate to the arches/build folder and run:
+
+::
+
+        build.bat (Windows) or ./build.sh (Linux)  
+        
+
+Refresh your browser (you may have to clear your cache) and navigate to
+the Map screen in Arches to verify your new values.
+
+Managing Basemaps and External GIS Layers
+-----------------------------------------
+
+Arches lets you define the basemaps and GIS layers (technically map
+services) that your users will be able to work with.
+
+Basemaps are the map(s) that your users will select to view the location
+of resources. Google Streets, Bing Satellite, and OpenStreetMap are all
+examples of commonly used basemaps for web applications.
+
+GIS map services are maps that can be geo-referenced over a basemap,
+allowing users to compare geographic information (such as zoning
+districts or flood-prone areas) to both the basemap and resources.
+Common examples include maps from data providers such as regional or
+local govenerments.
+
+In either case, Arches uses the OpenLayers library
+(`http://openlayers.org <http://www.openlayers.org>`__) to manage the
+display of basemaps and GIS map services.
+
+Adding a new Basemap/GIS Service to Arches
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Open the Arches Administrative console and select Maplayerss.
+
+.. figure:: images/Add_Maplayers.png
+   :alt: A listing of the resource map layers
+
+   A listing of the resource map layers
+
+Arches uses Google basemaps by default. But you can add additional
+basemaps or replace the default maps if you wish.
+
+Note that Arches includes a Map Layer for every resource (e.g.: the map
+layers ending in E.xx), as well as GIS mapservices and basemaps (e.g.;
+Precipitation, Google_Hybrid).
+
+Really, the only technical difference between a basemap and a GIS
+mapservice is that at least one basemap must be visible at all times.
+
+Press the "Add maplayers" button in the upper right corner. You'll see a
+data entry form that looks something like:
+
+.. figure:: images/Add_Basemap_Form.png
+   :alt: Add Maplayer Form
+
+   Add Maplayer Form
+
+**Step 1: Add Id**
+  Each Arches map layer needs to have a unique identifier. Add a number
+  that is not currently being used to identify your new External GIS
+  Layer.
+
+  Arches comes with several map layers by default, and map layer id's
+  start at 1. In our example, Arches already has 18 map layers, so the
+  next available number would be 20 (1 + 18 = 19 layers already
+  sequentially indexed).
+
+  If you're not sure what number to use, try a number like 1000. Don't
+  worry, Django's administration console will tell you if you pick a
+  number that already being used by Arches.
+
+**Step 2: Identify as Basemap or GIS Mapservice Layer**
+  Next decide if you want to create a basemap or a GIS map service. The
+  Arches user interface lists basemaps in a separate grid, allowing users
+  to toggle between maps.
+
+  In contrast, GIS map services appear as "External Services" in the Map
+  Layers grid. Users may display as many maps from the Map Layers grid as
+  they wish.
+
+  If you want to create a new basemap, click the "Basemap" check box.
+
+**Step 3: Name your Layer**
+  Type the name of your new map layer into the "Name i18n key" field.
+  Pick a simple, friendly, and short name as Arches will use it in the
+  list of map layers available for your users.
+
+**Step 4: Define the icon for your layer**
+  Type the name of the icon you want to associate with your new layer
+  into the "Icon" field. Arches will look for your icon in:
+
+  ::
+
+      arches/Arches/Media/images/Asseticons
+     
+**Step 5: Define the Layer Group for your Layer**
+  Arches organizes maps into groups. Basemaps are members of the
+  "Basemaps" group. GIS mapservices are members of the
+  "External_Services" group.
+
+**Step 6: Define the Layer**
+  Arches can display any layer type supported by OpenLayers version
+  2.13. Luckily, this is a pretty long list. Check out the `OpenLayers
+  API <http://dev.openlayers.org/releases/OpenLayers-2.13.1/doc/apidocs/files/OpenLayers-js.html>`__
+  (click on "Layer") to see the full list of 30 or so layers that can be
+  added to Arches.
+
+  For example, to add an esri map service to Arches, you could type:
+
+  ::
+
+      return new OpenLayers.Layer.XYZ("ESRI Topo", 
+      "http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/${z}/${y}/${x}",
+        {
+          sphericalMercator: true,
+          isBaseLayer: false,
+          zoomOffset: 1
+        }
+      );
+
+  Arches passes this snippet of JavaScript to OpenLayers for rendering map
+  services. The key elements here are:
+
+  -  The name of the service: "ESRI Topo"
+  -  Service URL:
+     "http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/${z}/${y}/${x}"
+  -  sphericalMercator: true. This is a flag that tells OpenLayers to use
+     the common webmapping projection
+  -  isBaseLayer: false. Overrides the ESRI default.
+
+  You may wish to consult the OpenLayers documentation for a more detailed
+  summary of map service parameters.
+
+**Step 7: Save**
+  Press the "Save" button to complete the layer definition.
+
+**Step 8: Register your Layer Name with Arches** 
+
+  From the console home
+  page, click on i18ns. Then click on the "Add i18n" button in the upper
+  right part of the page.
+
+  .. note::
+
+    **What is i18n?**
+    
+    i18n is quick way to refer to "internationalization" (i +18 letters
+    + n). Arches supports multiple languages for its user interface (UI),
+    and uses i18n to keep track of each label (and its language)in the UI.
+
+  Type in the name of your layer (entered in Step 3 above) into the "key"
+  field. Enter the label you want the Arches UI to show for your layer in
+  the "value" field.
+
+  Next, enter the language identifier for your layer name in the
+  "Languageid" field. Use
+
+  ::
+
+      en-us  
+
+  for the version of English spoken in the United States. You can consult
+  the web to determine the specific code if you want to use a language
+  other than English.
+
+  Finally, enter the following string:
+
+  ::
+
+      Arches.widgets.LayerLibrary  
+
+  into the Widgetname field. This tells Arches where in the UI to place
+  your label. Press the "save" button.
+
+  You've just completed the steps necessary to add new basemaps or map
+  layers to Arches. You should see a new entry in the i18n form that looks
+  something like:
+
+  .. figure:: images/Map_Layer_Completed.png
+     :alt: New Map Layer Label
+
+     New Map Layer Label
+
+  You'll need to complete Steps 1 through Step 8 for each layer that you
+  wish to add to Arches
+
+**Step 9: Update Arches**
+  Once you've completed entering your layer information, you'll need to
+  re-build Arches. Go to the terminal window running Arches and press the
+  Contol button and C button:
+
+  ::
+
+      control-C  
+
+  To stop the Arches server. Navigate to:
+
+  ::
+
+      arches/build   
+
+  and run the build script:
+
+  ::
+
+      build.bat (./build.sh in Linux)  
+
+  This script will update Arches to include your new layers. Once the
+  script completes (usually in just a minute or two), navigate to the
+  Arches root folder and start Arches:
+
+  ::
+
+      runserver.bat (./runserver.sh in Linux)  
+
+  Log back on to Arches (you may need to clear your browser's cache), and
+  open the Basemaps Widget or the Map Layers widget to see your new maps.
+
+Removing a GIS Map Service from Arches
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Removing an existing basemap or GIS map service layer is simple. Just
+open the maplayerss console, click the check box next to the map layers
+that you want to remove, Select "delete selected maplayerss" from the
+"action" dropdown, then press the "go" button.
+
+Django will prompt you to confirm your selection. Click "Yes, I'm sure"
+to delete the selected layers.
+
+Cosmetic Settings
+-----------------
+
+Arches comes with some settings that are purely a matter of taste.
+Things like the default image on the search page, and the colors we use
+to symbolize resource geometries on a map.
+
+You can easily update Arches to use images, colors, and geometry styles
+that you find more attractive.
+
+Changing the Image on the Arches Splash Screen
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can easily replace the image of Stonehenge on Arches' screen screen
+with something a bit more appropriate for your area. Open:
+
+::
+
+    arches/Arches/Media/css
+
+in a text editor.
+
+You'll find css classes for most of the UI components used by Arches.
+You're free to replace Arches defaults with values for colors, fonts,
+weights, and images with your own favorites.
+
+Most of the class names should be reasonably self explanatory. For
+example, find
+
+::
+
+    .quick-search-content 
+
+this is the css class for Arches default page (e.g.: the "quick search"
+page). Note the background-image value defines a jpeg image in the
+/images sub-folder. Replace this value with an reference to the image
+you want to use instead of Stonehenge.
+
+You can follow similar steps to change the colors and fonts that Arches
+uses by default. Once you've made your changes, go to the terminal
+window running Arches and press:
+
+::
+
+    control-C  
+
+To stop the Arches server. Navigate to:
+
+::
+
+    arches/build   
+
+and run the build script:
+
+::
+
+    build.bat (./build.sh in Linux)  
+
+This script will update Arches with your new css settings. Once the
+script completes (usually in just a minute or two), navigate to the
+Arches root folder and start Arches:
+
+::
+
+    runserver.bat (./runserver.sh in Linux)  
+
+Log back on to Arches (you may need to clear your browser's cache) to
+view your changes.
+
+Changing the Style of a Resource Layer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Arches allows you to define the map display for each resource. Although
+Arches provides reasonable default settings, you can override the color,
+transparency, line widths, and clustering display for any resource that
+you wish.
+
+From the main Django Administration Console, click on **Maplayerss**.
+You'll see a screen similar to this:
+
+.. figure:: images/Map_Layers.png
+   :alt: A listing of the resource map layers
+
+   A listing of the resource map layers
+
+Click on a resource, such as ARCHAEOLOGICAL HERITAGE (SITE).E27. You'll
+see a summary of information about how this resource is displayed as a
+map layer:
+
+.. figure:: images/Map_Layer_Properties.png
+   :alt: Some of the display properties for the Archaeological Heritage(Site).E27 resource
+
+   Some of the display properties for the Archaeological Heritage(Site).E27 resource
+
+Scroll down to the "Layer" variable. You'll see something that starts
+out like:
+
+::
+
+    var clusterStrategy = new OpenLayers.Strategy.Cluster({distance: 100, threshold: 3});  
+      var layer = new OpenLayers.Layer.Vector("ARCHAEOLOGICAL HERITAGE (SITE).E27", {  
+        rendererOptions: {zIndexing: true},  
+        styleMap: new OpenLayers.StyleMap({  
+            "default": new OpenLayers.Style({  
+                 cursor: "pointer",  
+                 strokeColor: "#2eb027",  
+                 fillColor: "#2eb027",   
+                 strokeOpacity: "${getStrokeOpacity}",  
+                 fillOpacity: "${getFillOpacity}",  
+                 pointRadius: "${getRadius}",  
+                 strokeWidth: "${getStrokeWidth}",  
+                 labelOutlineWidth: 1,  
+                 fontColor: "#ffffff",  
+                 fontOpacity: 1,  
+                 fontSize: "12px",  
+                 fontWeight:"bold",  
+                 label: "${getLabel}"  
+        },{  
+      ...
+
+OK, its a bit intimidating. But fear not, it will all make sense soon.
+This is a bit of JavaScript that Arches uses to define how the layer for
+each Resource Type is displayed on a map. It includes instructions on
+how to cluster resources of the same type when viewing data at regional
+scales, and it also tells Arches how to render each individual resource
+when the map is zoomed in.
+
+.. note::
+
+  **OpenLayers Mapping Library**
+
+  Arches uses the OpenLayers
+  (`http://openlayers.org <http://www.openlayers.org>`__) library to
+  manage the display of all mapping data. The JavaScript you see
+  associated with each Resource Type is parsed by OpenLayers. Advanced
+  System Administrators can reference the OpenLayers API and readily
+  extend the default map display instructions.
+
+Arches uses several techniques to display heritage resources on a map.
+They are:
+
+-  **Default Display:** These are the display parameters (colors, line
+   weights, and fonts) that Arches uses to draw resources on the map.
+-  **Temporary Display:** These are the display parameters Arches uses
+   when you place your cursor over a resource. This lets Arches
+   highlight a specific resource when you move your cursor over the map.
+-  **Clusters:** Clusters are groupings of resources that are displayed
+   at regional map scales (e.g: when you have the map zoomed out).
+
+**Changing the Default Display for a Resource**
+You can control how individual resources are drawn on the map by
+updating this snippet of JavaScript:
+
+::
+
+        "default": new OpenLayers.Style({
+           cursor: "pointer",
+           strokeColor: "#2eb027",
+           fillColor: "#2eb027", 
+           strokeOpacity: "${getStrokeOpacity}",
+           fillOpacity: "${getFillOpacity}",
+           pointRadius: "${getRadius}",
+           strokeWidth: "${getStrokeWidth}",
+           labelOutlineWidth: 1,
+           fontColor: "#ffffff",
+           fontOpacity: 1,
+           fontSize: "12px",
+           fontWeight:"bold",
+           label: "${getLabel}"
+        },
+
+Each line in this bit of JavaScript tells Arches how to draw the
+geometry associated with an individual resource on a map.
+
+For example, "strokeColor" defines the color used to draw lines (such as
+for linear features and the outlines of polygonal features). "fillColor"
+defines the color of the inside of polygons. "fillOpacity" and
+"strokeOpacity" define the transparency of the geometries associated
+with a resource.
+
+So, you can change the color used to draw an ARCHAEOLOGICAL HERITAGE
+(SITE).E27 line geometry (for example) from green to white simply by
+replacing
+
+::
+
+       strokeColor: "#2eb027",
+       
+
+with:
+
+::
+
+       strokeColor: "#ffffff",
+
+Notice that some of the drawing variables (such as "fillOpacity") have
+values starting with a "$". These variables inherit values that Arches
+sets for all resources. You're free to replace these values with your
+own if you want a particular resource to have its own specific drawing
+style.
+
+When you've finished defining the drawing variables, click the "Save"
+button to save your edits. To update Arches with this new information,
+navigate to the arches/build folder and run:
+
+::
+
+        build.bat (Windows) or ./build.sh (Linux)  
+        
+
+Refresh your browser (you may have to clear your cache) and navigate to
+the Map screen in Arches to verify your new values.
+
+**Changing the Temporary (Highlight) Display for a Resource**
+You can control how individual resources are highlighted on the map
+when a user moves the cursor over the resource on the Arches map. It
+works just like the default display, except that you update this snippet
+of JavaScript:
+
+::
+
+        "temporary": new OpenLayers.Style({
+           cursor: "pointer",
+           strokeColor: "#2eb027",
+           fillColor: "#2eb027", 
+           strokeOpacity: "${getStrokeOpacity}",
+           fillOpacity: "${getFillOpacity}",
+           pointRadius: "${getRadius}",
+           strokeWidth: "${getStrokeWidth}",
+           labelOutlineWidth: 1,
+           fontColor: "#ffffff",
+           fontOpacity: 1,
+           fontSize: "14px",
+           fontWeight:"bold",
+           label: "${getLabel}"
+        },
+
+When you've finished defining the drawing variables, click the "Save"
+button to save your edits. To update Arches with this new information,
+navigate to the arches/build folder and run:
+
+::
+
+        build.bat (Windows) or ./build.sh (Linux)  
+        
+
+Refresh your browser (you may have to clear your cache) and navigate to
+the Map screen in Arches to verify your new values.
+
+**Clusters**
+If you're new to mapping, "clusters" may not be a familiar concept.
+So, what are clusters? They are simply groups of geometries that
+represent the location of resources.
+
+You'll notice that at regional mapping scales, Arches automatically
+clusters resource vectors. Why does Arches do this? Well, if your Arches
+dataset is large, Arches would have to draw each individual geometry for
+every resource. But at regional scales, with the map zoomed out, you
+wouldn't even be able to see the details of most of these geometries.
+Worse, your computer's browser would probably be overwhelmed by trying
+to draw thousands of small vectors.
+
+So, Arches clusters resources to ensure that you can work with very
+large cultural heritage datasets.
+
+Updating the way Arches renders clusters on the map is a bit of an
+advanced concept. It's really a function of the OpenLayers JavaScript
+library that Arches uses to map resources. Check out the `OpenLayers
+API <http://dev.openlayers.org/releases/OpenLayers-2.13.1/doc/apidocs/files/OpenLayers-js.html>`__
+before you jump into this.
+
+Limiting the Types of Resource to Load
+--------------------------------------
+
+Although most packages will provide a suite of Resource Type
+definitions, you are not required to use them all. Before you can start
+creating and managing cultural heritage data, you'll need to decide
+which Resource Types you want to use and then load the corresponding
+Resource Type definitions into Arches.
+
+Select Resources to Load
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Navigate to and open:
+
+::
+
+    archesproject/settings.py
+
+Scroll down until you find the "LIMIT_ENTITIES_TO_LOAD" parameter:
+
+.. figure:: images/Resources_to_load.png
+   :alt: Settings.py: Simple Search
+
+   Settings.py: Simple Search
+
+By default, Arches loads all the Resource Type definitions (hence the
+"limit to load" is None). You can define the specific definitions to
+load by providing a comma-delimited listing of just the resources you
+want to manage:
+
+::
+
+    LIMIT_ENTITY_TYPES_TO_LOAD = ('ARCHAEOLOGICAL HERITAGE (ARTIFACT).E18', 'LANDSCAPE HERITAGE.E27)
+
+This would limit Arches to just loading the definitions for the
+Archaeological Heritage element) and Landscape Heritage types (from the
+CDS package in this case).

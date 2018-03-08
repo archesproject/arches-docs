@@ -1,0 +1,49 @@
+Next Steps: Using Arches
+========================
+
+Now that you’ve installed and configured Arches, you can start building
+your inventory of cultural heritage. A few things that you’ll probably
+want to consider:
+
+Backup Your Arches Database
+---------------------------
+
+Arches uses the PostgreSQL/PostGIS relational database. You can download
+an application called PGAdmin (http://www.pgadmin.org/) to ease many of
+the basic Arches databasem management tasks.
+
+PGAdmin has a clean and easy-to-understand user interface, and it will
+make database backups easy. But be forwarned! PGAdmin will also allow
+you to work with every aspect of the Arches data model, so tread
+carefully!
+
+Performance Tuning
+------------------
+
+Arches doesn’t attempt to tune any of the many performance variables
+that PostgreSQL exposes. But, based on the size and complexity of your
+dataset, you may want to re-allocate system resources to PostgreSQL.
+
+People have written entire books on how to squeeze the best performance
+out of data management systems. Read-up on the basics before you attempt
+to optimize your system!
+
+User Guide
+----------
+
+Check out the Arches User Guide
+(http://archesproject.org/documentation/) for tips on how to use Arches
+for data creation and maintence, as well as how to effectively filter
+your cultural heritage inventory.
+
+Feedback and Support
+--------------------
+
+Check `http://www.archeproject.org`_ if you’d like to provide feedback
+on your experience with Arches, or if you’re interested in getting
+support to customize or maintain Arches.
+
+.. _`http://www.archeproject.org`: http://archesproject.org
+
+
+

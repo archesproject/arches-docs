@@ -1,0 +1,1004 @@
+The Core Data Standard (CDS) Package
+====================================
+
+The Arches community has developed the CDS Package v1.0 as an initial
+data management module for Arches Server v2.0.0. The CDS Package
+demonstrates the structure and contents of an Arches Package, and
+implements the following standards:
+
+-  CIDOC Conceptual Reference Model (CRM)
+   (`www.cidoc-crm.org <http://www.cidoc-crm.org>`__). The CRM provides
+   definitions and a formal structure for describing the implicit and
+   explicit concepts and relationships used in cultural heritage
+   documentation.
+-  International Core Data Standard for Archaeological and Architectural
+   Heritage. This is a soon-to-be finalized standard for the inventory
+   of both archaeological and architectural heritage, which is based on
+   the earlier Core Data Index to Historic Buildings and Monuments of
+   the Architectural Heritage (adopted by the Council of Europe in 1992)
+   and the Core Data Standard for Archaeological Sites and Monuments
+   (adopted by CIDOC in 1995). The new standard under preparation
+   (referred to here as the "CDS") was used to identify the data fields
+   of the CDS. Organizations that deploy the CDS can customize those
+   data fields to meet their specific requirements.
+
+You may wish to familiarize yourself with these data standards as part
+of your the CDS installation and deployment effort. If you ever wish to
+further customize the CDS, familiarity with both will help you greatly
+along the way.
+
+Some of the key contents of the CDS Package include:
+
+-  Resource Graphs
+-  Authority Documents and Thesauri
+-  Data Import Files
+
+The following sections summarize these components of an Arches Package.
+
+Resource Graphs
+---------------
+
+Arches is designed to manage cultural heritage data anywhere in the
+world. Needless to say, that's an ambitious goal. After all,
+architecture considered culturally significant in San Francisco - a city
+founded in 1776 - might not merit much comment in Cairo or London.
+
+So, how does Arches resolve this?
+
+Arches Server requires a set of Resource Graphs that define the set of
+resource types that you wish to include in your inventory and the terms
+that you will use to describe them.
+
+.. note::
+
+  **What is an Arches Resource Graph?**
+
+  In Arches, the term
+  "Resource Graph" refers to a class of cultural heritage records. Things
+  like "Architectural Heritage", "Investigation Activity", and "Person"
+  are all examples of Resource Graphs. Think of a Resource Graph as
+  defining the attributes for a particular category of information that
+  Arches will manage. 
+
+  A Resource is simply one instance of a particular Resource Graph.
+
+Resource Graphs are described following the CIDOC Conceptual Reference
+Model (CRM). The CRM is an ontology for cultural heritage information
+that has been developed by a the International Committee for
+Documentation (CIDOC) of the International Council of Museums. Arches
+uses the CRM because it was adopted by the International Organization
+for Standardization as the standard (ISO 21127:2006) for the interchange
+of cultural heritage information.
+
+CDS Package Resource Graphs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The CDS Package defines the following Resource Graphs:
+
+::
+
+        ARCHAEOLOGICAL HERITAGE (ARTIFACT).E18
+        ARCHAEOLOGICAL HERITAGE (SITE).E27
+        ARCHITECTURAL HERITAGE.E18
+        LANDSCAPE HERITAGE.E27
+        MARITIME HERITAGE.E18
+        INVESTIGATION.E7
+        MANAGEMENT.E7
+        DESIGNATION AND PROTECTION.E7
+        HISTORICAL EVENT.E5
+        DOCUMENT.E31
+        IMAGE.E38
+        PERSON.E21
+        ORGANIZATION.E74
+
+**Heritage Resources:**
+Heritage Resources are archaeological, built, landscape, or other
+immovable cultural heritage. In the CDS, Heritage Resources include:
+
+Archaeological Heritage (element) : a single archaeological entity that
+could stand alone or be an element of a larger archaeological group
+(e.g., a bath house within a Roman villa)
+
+Archaeological Heritage (site) : an area of archaeological potential or
+an area of known or discovered archaeological elements
+
+.. note:: 
+
+  **What's the difference between archaeological elements and sites?**
+  
+  While conceptually these categories overlap, the CDS differentiates
+  between the two because of the way that they are represented using the
+  CIDOC CRM.
+
+Architectural Heritage : culturally significant buildings, structures,
+and groups thereof
+
+Landscape Heritage : areas of land designed and created intentionally by
+man, such as garden and parkland landscapes constructed for aesthetic
+reasons, organically evolved areas of land resulting from an initial
+social, economic, administrative, and/or religious imperative and that
+has developed its present form by association with and in response to
+its natural environment, or areas of land that are culturally
+significant due to powerful religious, artistic or cultural associations
+of the natural element rather than material cultural evidence, which may
+be insignificant or even absent (UNESCO)
+
+Maritime Heritage : underwater heritage (both under sea and inland),
+which may include heritage inundated by sea level rise and dam
+construction, shipwrecks and aircraft, as well as heritage afloat (e.g.,
+ships, sailing vessels)
+
+**Activities** Activities are events or actions that may take place
+during a given time span and at a location or area. In the CDS,
+Activities include:
+
+Investigation Activity : an activity undertaken with the explicit
+intention of gathering information about, and understanding of, a
+Heritage Resource, and the creation of an information source to record
+that information and understanding
+
+Management Activity : an activity undertaken to prevent damage to,
+promote the survival of, and promote the understanding and appreciation
+of Heritage Resources.
+
+Designation and Protection Activity : an activity which implements or
+revokes statutory and non-statutory designation and protection regimes
+which may apply to Heritage Resources
+
+Historical Event : any activity that took place in the past, including
+both human and natural events
+
+**Documents** Documents are information carriers such as books, texts,
+periodicals, inscriptions, audio files, video files, 3-D models, or
+images. In the CDS, Documents include:
+
+Document : an information carrier, other than an Image, whether physical
+or digital, eg. books, maps, pdfs, word-processed documents
+
+Image : an information carrier that represent an external form, whether
+physical or digital, eg. photographs, slides, drawings, jpegs or tiff
+files.
+
+**Actors**
+Actors refer to individuals or groups of people. In the CDS, Actors
+include:
+
+Person : real persons (i.e., who live or are assumed to have lived)
+
+Organization : A group or legally identifiable body
+
+Authority Documents
+-------------------
+
+Like any good data-editing tool, Arches supports consistent and valid
+data entry. Almost every one is familiar with this concept: it's the
+ability to select a valid value from a list:
+
+.. figure:: images/Dropdown.png
+   :alt: Selecting a value from a "Controlled Vocabulary"
+
+   Selecting a value from a "Controlled Vocabulary"
+
+Notice that in this Arches data entry form, you're able to select the
+kind of Archaeological Heritage Element from among the list of approved
+types or classifications. In Arches, these lists are called "controlled
+vocabularies".
+
+But what if you want to use a particular list of period names, instead
+of the names that come with Arches? Arches allows you to define exactly
+the set of names you want to use for every resource.
+
+Thesauri
+~~~~~~~~
+
+So, why do we use the term "controlled vocabulary" if all we're doing is
+selecting values from a drop-down list? The answer is that Arches treats
+each drop-down list as if it's a thesaurus.
+
+And what's so special about thesauri? They provide a potent way organize
+concepts and a convenient way to attach labels to concepts. This makes
+data entry and searching a large database for specific resources much
+easier.
+
+Lets say we want to create a list of dwellings where people live as a
+drop-down list in Arches. Our list might look like this:
+
+::
+
+        dwelling
+          apartment
+          house
+          hut
+          log cabin
+        
+
+The thesaurus allows you to define concepts and give them labels. For
+example, "dwelling" is the label associated with the concept of "a place
+where people live."
+
+Note also that each concept under "dwelling" is a more precise (or
+narrower) type of dwelling. In this example, there are four additional
+narrower concepts of dwelling. One such concept (eg.: a place where
+families live) has the term "house" associated with it.
+
+This ability to build hierarchies of concepts makes thesauri very
+powerful. We can use the structure of a thesaurus to help make clear the
+relationships between concepts.
+
+But wait just a moment. We know that in some areas, people use different
+terms to mean the same thing. A thesaurus allows us to attach many
+labels to the same concept. For example:
+
+::
+
+        dwellings
+          apartment
+          house [aisled house, bungalow, chalet]
+          hut
+          log cabin
+
+This is a representation that adds more, alternate labels for the
+concept "house". In this example, the labels "aisled house," "bungalow,"
+and "chalet" all represent alternate labels for the same concept. Note
+that we could add "Haus" and "maison" if we wanted to include labels for
+the same concept in additional languages such as German or French.
+
+It's up to you to decide how you want to organize your terms. Is a
+"chalet" really an alternate label for house, or should it be considered
+a narrower concept of dwelling?
+
+At this point you may be wondering why we've made a simple drop-down
+list so complicated.
+
+Well, by using thesauri to power the drop-down lists, Arches will know
+that when you search for a resource using the term "chalet" you really
+mean "house". And if you search for a resource using the term
+"dwelling", you'll get all the narrower concepts for dwelling, even if
+you didn't know that a "hut" a "dwelling".
+
+Understanding the Structure of an Authority Document
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Let's look at an authority document in more detail:
+
+::
+
+    ARCHITECTURAL HERITAGE TYPE AUTHORITY DOCUMENT
+        
+
+This authority document holds the list of Architectural Heritage types
+that the CDS will use. Types are just what you'd guess: a list of the
+kinds of Architectural Heritage that you will allow people to choose
+from when they enter a new Architectural Heritage resource into Arches.
+
+Your ARCHITECTURAL HERITAGE TYPE Authority Document can contain any
+entries that you think are appropriate. Here are some examples:
+
+::
+
+    Air Raid Siren
+    Church
+    House
+    Chalet
+    Fountain
+    Street Lamp
+                
+
+Adding these concepts to Arches would require you to update the
+Architectural Heritage authority document. The good news is that all
+Arches authority files are simple text files with the following 5
+columns:
+
+ConceptID: 
+  a unique identifier for the concept
+
+PrefLabel: 
+  the default label that you wish to use for this concept
+
+AltLabels: 
+  alternative ways to identify the concept
+
+Parent ConceptID: 
+  the unique identifier of a broader concept (this will construct hierarchies)
+
+Provider: 
+  identifies the source of the concept
+
+Building an authority document is just a matter of adding a row for
+every concept that you want to include in your drop down lists. In our
+example, the authority document might look like this:
+
+  +-------------+------------------+--------------------+--------------------+------------+
+  | ConceptID   | PrefLabel        | AltLabels          | Parent ConceptID   | Provider   |
+  +=============+==================+====================+====================+============+
+  |  1          | Air Raid Siren   |                    |                    | EH         |
+  +-------------+------------------+--------------------+--------------------+------------+
+  |  2          | Church           | House of Worship   |                    | EH         |
+  +-------------+------------------+--------------------+--------------------+------------+
+  |  3          | House            |                    |                    | EH         |
+  +-------------+------------------+--------------------+--------------------+------------+
+  |  4          | Chalet           |                    | 3                  | EH         |
+  +-------------+------------------+--------------------+--------------------+------------+
+  |  5          | Fountain         | fount;jet;spout    |                    | EH         |
+  +-------------+------------------+--------------------+--------------------+------------+
+  |  6          | Street Lamp      |                    |                    | EH         |
+  +-------------+------------------+--------------------+--------------------+------------+
+
+Notice that in one line, we can add a concept, define its preferred
+label, optionally provide alternate labels, and define broader/narrower
+relationships between concepts.
+
+There are a few things to be aware of:
+
+.. warning::
+
+  **ConceptIDs must be unique!**
+
+  Make sure that you use a truly unique
+  identifier for each record that you want to load into Arches.
+
+.. note::
+
+  Use a semicolon to separate more than one Alternate Label
+  
+  Commas are used to separate columns, so we need a different way to indicate all
+  the different alternate labels for a concept 
+
+
+.. note::
+
+  **Narrower Terms**
+
+  Use the ConceptID of the broader term in the
+  "Parent ConceptID" field if you want to tell Arches that concepts are
+  related. Arches will use this information to make searching the
+  inventory better and more intuitive.
+
+.. note::
+
+  **Required Terms**
+
+  Arches has only one required term: The term "Primary" is required to
+  appear in NAME TYPE AUTHORITY DOCUMENT. Why? Because Arches supports
+  multiple names for any resource, it needs a way to define the preferred
+  name for a resource.
+
+Understanding Authority Document Values
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You might have noticed that a few Authority Documents seem to come in
+pairs. For example:
+
+::
+
+    CULTURAL PERIOD AUTHORITY DOCUMENT.csv
+    CULTURAL PERIOD AUTHORITY DOCUMENT.values.csv
+
+What's going on here? Sometimes its convenient to know a bit more about
+some of the concepts in a thesaurus than just a set of labels and its
+parent. For example, when discussing specific cultural periods (such as
+"Middle Paleolithic"), it's often useful to reference the start and end
+years of the period.
+
+Arches "values" files let us do this. Open CULTURAL PERIOD AUTHORITY
+DOCUMENT.values.csv and you'll see the following:
+
+.. figure:: images/Periods_Values.png
+   :alt: Cultural Period Values
+
+   Cultural Period Values
+
+Note the first row in this file: **conceptid**, **Value**, **Value
+Type**, **Provider**
+
+These headers define a simple structure of the value file. You simply
+have to reference a conceptID from the CULTURAL PERIOD AUTHORITY
+DOCUMENT.csv file, provide the value and its "type", and the provider of
+the value.
+
+For cultural periods, the values file allows you to attach the start
+year and end year for each Period concept in the CULTURAL PERIOD
+AUTHORITY DOCUMENT.csv file. Look at lines 7 and 9 in the image above
+and you will see:
+
+::
+
+    7  PERIOD_UID:55, -150000, minimum date, EH  
+    9  PERIOD_UID:55, -40000, maximum date, EH  
+
+If you look up "PERIOD\_UID:55" in CULTURAL PERIOD AUTHORITY
+DOCUMENT.csv, you'll see that it's record is:
+
+::
+
+    PERIOD_UID:55,MIDDLE PALAEOLITHIC,,PERIOD_UID:5,EH
+
+So, in the CDS pacakge, the default list of Cultural Periods includes
+the Middle Palaeolithic (as "PERIOD\_UID:55" in CULTURAL PERIOD
+AUTHORITY DOCUMENT.csv), and that period is defined to start at -150,000
+years (row 7 in CULTURAL PERIOD AUTHORITY DOCUMENT.values.csv) and end
+at -40,000 years (row 9 in the same file).
+
+What Value Types Can I Define?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can define any set of key/value pairs that you wish. Arches will
+load your values and associate them with the concept identifier that you
+provide.
+
+By default, Arches defines values for the following Authority Document
+value files:
+
+::
+
+    ADMINISTRATIVE SUBDIVISION AUTHORITY DOCUMENT.values.csv  
+    ARCHES RESOURCE CROSS-REFERENCE RELATIONSHIP TYPE AUTHORITY DOCUMENT.values.csv  
+    CONDITION AUTHORITY DOCUMENT.values.csv  
+    CULTURAL PERIOD AUTHORITY DOCUMENT.values.csv  
+    TYPE OF DESIGNATION OR PROTECTION AUTHORITY DOCUMENT.values.csv  
+    UNIT OF MEASUREMENT AUTHORITY DOCUMENT.values.csv  
+
+If you look at these files, you'll see that Arches already knows how to
+handle the following value types:
+
+**SortOrder**
+You can use the \*.values.csv file to define the order in which terms
+appear for:
+
+::
+
+    UNIT OF MEASUREMENT AUTHORITY DOCUMENT.csv
+    TYPE OF DESIGNATION OR PROTECTION AUTHORITY DOCUMENT.csv
+    CONDITION AUTHORITY DOCUMENT.csv
+
+**Minimum Date, Maximum Date**
+You can use the \*.values.csv file to define the starting and ending
+dates for:
+
+::
+
+    CULTURAL PERIOD AUTHORITY DOCUMENT.values.csv
+
+**Geometry, Administrative Area Type**
+You can use the ADMINISTRATIVE SUBDIVISION AUTHORITY
+DOCUMENT.values.csv file to define administrative subdivision types and
+the geometry associated with each administrative area. For example:
+
+::
+
+    LOC_UID:97317,PARISH,admin area type filter,EH
+
+would define the concept LOC\_UID:97317 (in the ADMINISTRATIVE
+SUBDIVISION AUTHORITY DOCUMENT.csv file) as an "admin area type filter"
+with a value of "PARISH". And
+
+::
+
+    LOC_UID:97345,"POLYGON((-1.32078640715254 54.3728610449506,-1.33713112471483 54.3586411276027,-1.3584180849332 54.371070777731,-1.34399265906457 54.376710180739,-1.32078640715254 54.3728610449506))",geometry,EH
+
+would define the concept LOC\_UID:97345 (in the ADMINISTRATIVE
+SUBDIVISION AUTHORITY DOCUMENT.csv file) as having a geometry with a set
+of particular coordinates that make up a polygon.
+
+**Resource Cross-Reference, Cross-Reference Type Filter** Arches allows
+you to build relationships between resources. For example, you can
+relate a Person resource to an Architectural Heritage resource. Arches
+implements an Authority File that allows you to define the types
+relationships between resources.
+
+::
+
+    ARCHES RESOURCE CROSS-REFERENCE RELATIONSHIP TYPE AUTHORITY DOCUMENT
+
+**Custom Key/Values Pairs**
+Arches will allow you to load any set of key/value pairs, treating the
+information that you load as descriptive data about the concept.
+
+If you want to use your key/value pairs to support data entry (like the
+from/to dates for Cultural Periods), you may need to extend the Arches
+codebase he codebase to use your key/value pairs.
+
+Modifying the Default Authority Files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The CDS package comes with a set of concepts and labels for each
+controlled vocabulary. Of course, you are welcome to use the package
+defaults but you'll probably want to use your own concepts and terms.
+
+To modify the default authority files, just open an authority document
+with a text editor and begin. You can remove records from a file, or add
+new records that better represent the concepts, labels, and
+concept-relationships that you use to describe cultural heritage.
+
+.. note::
+
+  **Back up the original Authority Documents First!**
+
+  It's a good idea
+  to make copies of the original files, just in case you want to go back
+  and confirm that your edits make sense.
+
+.. note::
+
+  **Don't Forget about the "values" Files!**
+
+  If you change an
+  Authority Document that has an associated values file, you'll want to
+  make sure that the conceptIDs match between the Authority Document and
+  the corresponding value file. By the way, Arches will work without any
+  "values" files. They're just a convenient way to augment Authority
+  Documents.
+
+.. note::
+
+  **Geometry in Authority Files** 
+
+  Sometimes the additional "values"
+  that you want to associate to concepts within an authority file are
+  geometries that can be represented on the map or used for spatial
+  analysis. For example, if you have a controlled list of states or
+  provinces, you may wish to assocaite the relevant geometry to describe
+  its borders.
+
+You can use the \*.values file to pass in a geometry associated to a
+concept using a text-based format called Well Known Text (or WKT for
+short.) See http://en.wikipedia.org/wiki/Well-known_text for a good
+description of WKT. Arches assumes that all WKT passed into the system
+is in Lat/Lon coordinates using WSG84 datum (also known as EPSG 4326
+http://spatialreference.org/ref/epsg/4326/).
+
+The CDS includes 13 Resource Types grouped into four categories. And
+each resource has a set of attributes associated with it. The CDS comes
+with a default set of controlled vocabularies and automatically matches
+each vocabulary with the appropriate resource attribute.
+
+In Arches the term "Authority Documents" is used to denote the files
+that hold the concepts, preferred label, alternate labels, and parent
+concept (to support hierarchies of concepts) for each drop-down list.
+Some Authority Documents are common to all Resource Types, while others
+are particular to specific categories of Resource Types. Here is a list
+of all of them:
+
+**Authority Documents common to all Resource Types:**
+
+::
+
+    ABSOLUTE AND SCIENTIFIC DATING METHOD AUTHORITY DOCUMENT.csv
+    ADMINISTRATIVE SUBDIVISION AUTHORITY DOCUMENT.csv
+    ADMINISTRATIVE SUBDIVISION AUTHORITY DOCUMENT.values.csv
+    ADMINISTRATIVE SUBDIVISION TYPE AUTHORITY DOCUMENT.csv
+    ARCHES RESOURCE CROSS-REFERENCE RELATIONSHIP TYPE AUTHORITY DOCUMENT.csv
+    ARCHES RESOURCE CROSS-REFERENCE RELATIONSHIP TYPE AUTHORITY DOCUMENT.values.csv
+    CONDITION AUTHORITY DOCUMENT.csv
+    CONDITION AUTHORITY DOCUMENT.values.csv
+    CULTURAL PERIOD AUTHORITY DOCUMENT.csv
+    CULTURAL PERIOD AUTHORITY DOCUMENT.values.csv
+    DESIGNATION AND PROTECTION TYPE AUTHORITY DOCUMENT.csv
+    EXTERNAL XREF TYPE AUTHORITY DOCUMENT.csv
+    GEOMETRY QUALIFIER AUTHORITY DOCUMENT.csv
+    MATERIAL AUTHORITY DOCUMENT.csv
+    MEASUREMENT TYPE AUTHORITY DOCUMENT.csv
+    NAME TYPE AUTHORITY DOCUMENT.csv
+    SUBJECT AUTHORITY DOCUMENT.csv
+    TYPE OF DESIGNATION OR PROTECTION AUTHORITY DOCUMENT.csv
+    TYPE OF DESIGNATION OR PROTECTION AUTHORITY DOCUMENT.values.csv
+    UNIT OF MEASUREMENT AUTHORITY DOCUMENT.csv
+    UNIT OF MEASUREMENT AUTHORITY DOCUMENT.values.csv
+
+**Archaeological Heritage Authority Documents:**
+
+::
+
+    ARCHAEOLOGICAL COMPONENT TYPE AUTHORITY DOCUMENT.csv
+    ARCHAEOLOGICAL HERITAGE (ARTIFACT) TYPE AUTHORITY DOCUMENT.csv
+    ARCHAEOLOGICAL HERITAGE (SITE) TYPE AUTHORITY DOCUMENT.csv
+    ARCHAEOLOGICAL TECHNIQUE AUTHORITY DOCUMENT.csv
+
+**Architectural Heritage Authority Documents:**
+
+::
+
+    ARCHITECTURAL COMPONENT TYPE AUTHORITY DOCUMENT.csv
+    ARCHITECTURAL HERITAGE TYPE AUTHORITY DOCUMENT.csv
+    ARCHITECTURAL TECHNIQUE AUTHORITY DOCUMENT.csv
+
+**Landscape Heritage Authority Documents:**
+
+::
+
+    LANDSCAPE COMPONENT TYPE AUTHORITY DOCUMENT.csv
+    LANDSCAPE HERITAGE TYPE AUTHORITY DOCUMENT.csv
+    LANDSCAPE TECHNIQUE AUTHORITY DOCUMENT.csv
+
+**Maritime Heritage Authority Documents:**
+
+::
+
+    MARITIME COMPONENT TYPE AUTHORITY DOCUMENT.csv
+    MARITIME HERITAGE TYPE AUTHORITY DOCUMENT.csv
+    MARITIME TECHNIQUE AUTHORITY DOCUMENT.csv
+
+**Investigation Activity Authority Document:**
+
+::
+
+    INVESTIGATION TYPE AUTHORITY DOCUMENT.csv
+
+**Management Activity Authority Document:**
+
+::
+
+    MANAGEMENT TYPE AUTHORITY DOCUMENT.csv
+
+**Historical Event Authority Document:**
+
+::
+
+    HISTORICAL EVENT TYPE AUTHORITY DOCUMENT.csv
+
+**Document Authority Document:**
+
+::
+
+    DOCUMENT COMPONENT TYPE AUTHORITY DOCUMENT.csv
+    DOCUMENT TECHNIQUE AUTHORITY DOCUMENT.csv
+    DOCUMENT TYPE AUTHORITY DOCUMENT.csv
+
+**Image Authority Documents:**
+
+::
+
+    IMAGE COMPONENT TYPE AUTHORITY DOCUMENT.csv
+    IMAGE MATERIAL AUTHORITY DOCUMENT.csv
+    IMAGE TECHNIQUE AUTHORITY DOCUMENT.csv
+    IMAGE TYPE AUTHORITY DOCUMENT.csv
+
+**Person Authority Document:**
+
+::
+
+    TITLE AUTHORITY DOCUMENT.csv
+
+You can find all the Authority Documents in the following folder:
+
+::
+
+     source_data/concepts/authority_files
+
+.. note::
+
+  **What's up with all the ".E Numbers"?** 
+
+  Resource Types, attributes,
+  and all other entities in the CDS are instances of CIDOC CRM classes.
+  The CRM uses a "E.xx" naming style to define its classes, so we append
+  the CRM class identifier to our CDS entities so that its clear what each
+  CDS entity actually represents.
+
+Data Import Files
+-----------------
+
+As you've seen, the CDS package comes with the following 13 Resource
+Types:
+
+-  Heritage Resources
+
+   -  Archaeological Heritage (element)
+
+   -  Archaeological Heritage (site)
+
+   -  Architectural Heritage
+
+   -  Landscape Heritage
+
+   -  Maritime Heritage
+
+-  Activities
+
+   -  Investigation activity
+
+   -  Management activity
+
+   -  Designation and protection activity
+
+   -  Historical event
+
+-  Documents
+
+   -  Document
+
+   -  Image
+
+-  Actors
+
+   -  Person
+
+   -  Organization
+
+Each of these Resource Types has a set of attributes. Attributes are
+really just pieces of information about each resource. For example, one
+of the Attributes of the Archaeological Heritage (Element) resource is
+its cultural period. In the Arches user interface, Attributes are
+organized into Information Themes. See the companion **Arches User
+Guide** for more information on the user interface.
+
+Some attributes are common to many Resource Types. "Name" is a good
+example, which is common to all Resource Types. Every resource can have
+a name associated with it. Most Resource Types have quite a few
+attributes.
+
+.. note::
+
+  **Why do I need to know about attributes?**
+
+  If you already have heritage data in a database or spreadsheet, you
+  can build a file that will let you import your data into Arches. And to
+  do this, you need to know exactly which attributes each resource has.
+
+To see exactly which attributes are associated with a resource, open the
+this file within the CDS repo:
+
+::
+
+    source_data/resource_graphs/CDS attributes.csv
+
+Here are the first few records of CDS attributes.csv:
+
+.. figure:: images/Resource_Attributes.png
+   :alt: Resources Attributes.txt
+
+   Resources Attributes.txt
+
+Each line in this file simply states that an Arches resource has an
+attribute that is associated with it. Notice the three columns:
+
+**ResourceType**: The Arches Resource Type of the Resource
+**AttributeName**: The attribute associated with the Resource Type
+**AuthorityDocument**: If this column is populated, then the attribute
+value must be a unique identifier found in the authority file that is
+named in this column.
+
+You can think of the Resource Attributes.txt file as a listing of the
+set of data that you can load into Arches.
+
+.. note::
+
+  **What's up with all the ".E Numbers"?** 
+  
+  Resources, attributes, and
+  all other entities in Arches are instances of CIDOC CRM classes. The CRM
+  uses a "E.xx" naming style to define its classes, so we append the CRM
+  class identifier to our Arches entities so that its clear what each
+  Arches entity actually represents.
+
+Creating a Data Import File
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The CDS comes with a file that you can use to load information into
+Arches. The is located at:
+
+::
+
+    source_data/resource_info.csv
+
+The package reads the content of resource\_info.csv and loads it into a
+database. If you open this file from the CDS package, you'll see that it
+already contains data for a set of heritage resources. You'll need to
+replace the information in this file with your own data if you want to
+automatically populate Arches with data.
+
+By the way, don't let the file name fool you, "resource\_info.csv" is a
+\| delimited file (a "pipe" delimited file) that illustrates the
+structure of a valid Arches import file.
+
+.. note::
+
+  **Why use a "\|" instead of commas?**
+
+  The Arches import file allows
+  you to include text blocks (so that you can import free text). Text
+  often includes commas, but rarely includes a \|. So we use the \|
+  character to distinguish columns in the resource\_info.csv file.
+
+Here are some representative records from a load file:
+
+.. figure:: images/Resource_Load.png
+   :alt: Resource\_Info.csv
+
+   Resource\_Info.csv
+
+And here's how to understand what's going on: Each line in the file
+defines a resource and an attribute to load into Arches. Each of the
+column headers **RESOURCEID**, **RESOURCETYPE**, **ATTRIBUTENAME**,
+**ATTRIBUTEVALUE**, and **GROUPID** define the content of the file. Most
+are self-explanatory, with the exception of the "GROUPID" field (which
+we'll look at in more detail later).
+
+Let's look at line 1:
+
+::
+
+    15897|ARCHITECTURAL HERITAGE.E18|COMPILER.E82|ROD FITZGERALD|COMPILER.E82-0
+
+This record tells Arches that:
+
+-  We're going to load information about an "ARCHITECTURAL HERITAGE.E18"
+   resource (**RESOURCETYPE**)
+-  Our resource can be uniquely identified by the string "15897"
+   (**RESOURCEID**)
+-  We're going to load a value for the "COMPILER.E82" attribute
+   (**ATTRIBUTENAME**)
+-  The value of the Compiler.E82 attribute is "ROD FITZGERALD"
+   (**ATTRIBUTEVALUE**)
+-  This record is part of a group of records identified as
+   "COMPILER.E82-0" (**GROUPID**)
+
+Notice that we can import lots of information about a single resource
+simply by referencing the same **RESOURCEID** and **RESOURCETYPE**.
+
+Adding Multiple Values to an Attribute
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Why all this formalism and complexity?
+
+Because many cultural heritage objects have more than value for a given
+attribute. For example, a single resource can often have many names. Or
+the characteristics of a resource may change over time. Without allowing
+for multiple values for an attribute, Arches wouldn't be able to track
+the evolution of a resource.
+
+So, the Arches data import file structure is important because many
+resource attributes may have multiple values. Indeed, an Architectural
+Heritage resource may be associated with several cultural periods, have
+many addresses, and have several protection grades.
+
+That's why Arches allows you load many attribute values for a single
+resource attribute.
+
+Notice in the file shown that we can add several compilers into Arches
+for the same resource. In fact, lines 3, 4, and 5 also define
+compilation records. In general, Arches will allow you to add multiple
+values for a given attribute.
+
+.. note::
+
+  **Single Attributes** 
+
+  At present, Arches' user interface can show
+  multiple values for all entities except for the Summary Description,
+  Distinguishing Features, and Location Description entities.
+
+Attribute Goups
+~~~~~~~~~~~~~~~
+
+Now look at lines 8 through 11 in the example file.
+
+Individually, each row assigns a value for a specific attribute. The
+FROM DATE.E49 and TO DATE.E49 attributes are years. Line 8 seems to be
+describing a Cultural Period, and Line 10 the Architectural Resource
+type.
+
+But notice that each record in rows 8 through 11 all share the same
+"PHASE TYPE ASSIGNMENT.E17-0" **GROUPID**. This means that these 4
+records together describe a resource.
+
+By grouping these rows together with the same **GROUPID**, you can tell
+Arches that these 4 records are not independent; rather together they
+describe the resource.
+
+Here's how to interpret what's going on. Each of the records starts
+with:
+
+::
+
+    15897|ARCHITECTURAL HERITAGE.E18
+
+This means that each record contains information about the Architectural
+Heritage.E18 Resource with the unique identifier of 15897. Okay, let's
+focus on what comes next:
+
+::
+
+     8  CULTURAL PERIOD.E55|PERIOD_UID:28|PHASE TYPE ASSIGNMENT.E17-0
+     9  FROM DATE.E49|1066|PHASE TYPE ASSIGNMENT.E17-0
+    10  ARCHITECTURAL HERITAGE TYPE.E55|AH:THE_TE_UID:68841|PHASE TYPE ASSIGNMENT.E17-0
+    11  TO DATE.E49|1540|PHASE TYPE ASSIGNMENT.E17-0
+
+Look at line 8. Its **ATTRIBUTENAME** is "CULTURAL PERIOD.E55", and the
+value of this attribute is "PERIOD\_UID:28". Recall from the Chapter
+"Step 3: Load Controlled Vocabularies" that we use an Authority Document
+for Cultural Periods. So, the **ATTRIBUTEVALUE** "PERIOD\_UID:28" in
+line 8 is a pointer to a concept in CULTURAL PERIOD AUTHORITY
+DOCUMENT.csv (which works out to "Medieval").
+
+OK, now look at line 9. Its **ATTRIBUTENAME** is "FROM DATE.E49" and its
+**ATTRIBUTEVALUE** is "1066". Simple enough: "from date" is the year
+1066.
+
+Line 10 tells Arches to use the unique identifier
+"AH:THE\_TE\_UID:68841" in ARCHITECTURAL HERITAGE TYPE AUTHORITY
+DOCUMENT.csv to define the value for "ARCHITECTURAL HERITAGE TYPE.E55"
+(a "Motte"), and line 11 says that the resource has a "TO DATE.E49"
+value of "1540".
+
+And here's the payoff: by giving these 4 records the same **GROUPID**,
+we are telling Arches that:
+
+    "The ARCHITECTURAL HERITAGE.E18 resource with unique identifier of
+    "15897" was a "Motte" during the "Medieval" cultural period,
+    specifically between the years 1066 and 1540."
+
+Recall that Arches will support many combinations of cultural period,
+heritage type, and from/to dates for a single resource.
+
+Now, we can understand that the purpose of the **GROUPID** is to allow
+for grouping a set of related attributes into a coherent record.
+
+The actual values that you use for **GROUPID** are arbitrary, just make
+sure that you use a unique value for each set of attributes that you
+want to group.
+
+One last note on **GROUPID** and resource\_info: notice that in this
+resource\_info file records with the same **GROUPID** are grouped
+together(located on adjacent lines). This grouping within the
+resource\_info file is necessary to ensure your grouped attributes are
+not duplicated upon import into Arches.
+
+.. note::
+
+  **Required Data**
+
+  By design, Arches can accommodate a wide variety of data. The only
+  real data requirement is this: **If you want to name a resource, you
+  must provide one name with a NAME TYPE.E55 of "Primary."** Because you
+  can give a resource as many names as you want, Arches uses the "Primary"
+  designation to identify the preferred name of the resource.
+
+Which Attributes can be Grouped?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Not all attributes can (or should) be grouped together. Based on the
+*Core Data Standard for Archaeological and Architectural Heritage*
+(introduced in the "Deploying Arches" chapter), Arches allows for the
+following attributes to be grouped:
+
+-  **NAME.E41** and **NAME TYPE.E55**
+-  **SPATIAL COORDINATES\_GEOMETRY.E47** and **SPATIAL COORDINATES
+   QUALIFIER**
+-  Any combination of attributes starting with **ADRESS\_**
+-  Any combination of **PERIOD AUTHORITY DOCUMENT**, **FROM DATE.E49**,
+   **TO DATE.E49**, and **HERITAGE RESOURCE TYPE AUTHORITY DOCUMENT**
+   (e.g.: Archaeological Heritage (Element), Archaeological Heritage
+   (Site), Architectural Heritage, Landscape Heritage, Maritime
+   Heritgae)
+
+Loading Data
+~~~~~~~~~~~~
+
+Loading data into Arches requires three things. Those are:
+
+1. Validly Structured and Populated Resource Graphs
+
+   for defining the resources, their attributes, and how they are
+   related to each other
+
+2. Validly Structured Authority Files and ENTITY\_TYPE\_X\_ADOC file
+
+   for defining the values that can be associated with attributes
+   constrained by controlled vocbularies
+
+3. A resource\_info.csv file with content that adheres to the
+   constraints imposed by the resource graphs and the authority files.
+
+   resource\_info contains the business data that is to be imported to
+   the Arches database.
+
+Once you've prepared your data load file, you may insert its contents
+into Arches. Be sure to confirm that you are referencing your Authority
+Documents properly (e.g.: the unique ID you use in your load file should
+also exist in the appropriate Authority Document).
+
+Arches will load and index each of the cultural heritage data records
+that you've defined in your data file. Don't worry if it takes a few
+attempts to get your data to load cleanly. You can always re-run the
+Arches build scripts to get a pristine instance of Arches.

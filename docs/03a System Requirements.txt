@@ -1,0 +1,30 @@
+System Requirements
+===================
+
+There are a few things to know about Arches before we get started.
+
+Arches has the following software dependencies:
+
+* PostgreSQL relational database (version 9.3)
+* PostGIS (version 2.x) spatial module for PostgreSQL
+* Python (version 2.7.6 - there seem to be issues with later versions of python) 
+* GEOS
+
+These instructions will walk you through the necessary steps to load all
+the required dependencies and get Arches up and running quickly.
+
+Please note that Arches has been developed for modern browsers. It supports:
+
+* Firefox
+* Chrome
+* Safari
+* Opera
+* Internet Explorer 10 or higher.
+
+Requirements
+~~~~~~~~~~~~
+
+-  At least 4GB of RAM for evaulation and testing, or 8 to 16GB for
+   production.
+-  10GB minimum to install the codebase and test dataset, but diskspace
+   requirements will vary greatly depending on the size of your dataset
