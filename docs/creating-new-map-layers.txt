@@ -2,13 +2,16 @@
 Creating New Map Layers
 #######################
 
-A developer can add new layers to the map by registering them through the command line interface. Newly registered layers are treated as Overlays unless the ``-b`` argument is added to the load command.
+A developer can add new layers to the map by registering them through the command line interface. 
 
 New map layers can come from many different geospatial sources -- from shapefiles to GeoTIFFs to external Web Map Services to reconfigurations of the actual resource data stored within Arches.
 
 New map layers can be created with two general definitions, as MapBox layers or tileserver layers, each with its own wide range of options.
 
 For working examples, please see our `arches4-geo-examples <https://github.com/legiongis/arches4-geo-examples>`_ repo.
+
+.. note::
+	By default, new map layers are designated as Overlays. To designate the layer as a Basemap, just add ``-b`` to the load commands shown below.
 
 MapBox Layers
 `````````````
