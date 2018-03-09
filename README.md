@@ -4,7 +4,7 @@ This repo holds the documentation that is published at https://arches.readthedoc
 
 A separate branch is maintained for each recent release of Arches, from v2 to the current v4 release. Read the docs will recognize the branch with the latest version number as the `stable` build. The `latest` build is made from the `master` branch, so any documentation for new features that are in development should be committed to master.
 
-To update or add documentation for the current stable release of Arches, for example 4.1.0 (the current release as of this writing), please make a new branch `docfix_4.1.0` based on the `4.1.0` branch and then make a PR against the `4.1.0` branch. We can then `cherry-pick` those commits into `master`.
+To update or add documentation for the current stable release of Arches, version 4.1.0 for example (the current release as of this writing), please make a new branch `docfix_4.1.0` based on the `4.1.0` branch and then make a PR against the `4.1.0` branch. We can then `cherry-pick` those commits into `master`.
     
 ## make a local build
 
