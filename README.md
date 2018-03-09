@@ -8,22 +8,22 @@ To update or add documentation for the current stable release of Arches, for exa
     
 ## make a local build
 
-to install
++ to install
 
-    git clone https://github.com/archesproject/arches-docs
-    cd arches-docs
-    pip install -r requirements.txt
+      git clone https://github.com/archesproject/arches-docs
+      cd arches-docs
+      pip install -r requirements.txt
     
-to build
++ to build
 
-    cd docs
-    make html
+      cd docs
+      make html
     
-to view, enter `_build/html` and open `index.html` in a browser
++ to view, enter `_build/html` and open `index.html` in a browser
 
-to build a non-master version, checkout the appropriate branch
++ to build a non-master version, checkout the appropriate branch
 
-    git checkout 4.0.1
-    make html
+      git checkout 4.0.1
+      make html
     
-you may want to delete the `_build` directory between builds of different versions, or if big changes have been made
+    you may want to delete the `_build` directory between builds of different versions, or if big changes have been made
