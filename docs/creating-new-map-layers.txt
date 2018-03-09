@@ -2,7 +2,7 @@
 Creating New Map Layers
 #######################
 
-A developer can add new layers to the map by registering them through the command line interface. A newly registered layer can be designated as either a basemap or an overlay. However, because the treatment of basemaps and overlays differs only in the front-end of the app, consider the following documentation to apply equally to both.
+A developer can add new layers to the map by registering them through the command line interface. Newly registered layers are treated as Overlays unless the ``-b`` argument is added to the load command.
 
 New map layers can come from many different geospatial sources -- from shapefiles to GeoTIFFs to external Web Map Services to reconfigurations of the actual resource data stored within Arches.
 
@@ -19,7 +19,7 @@ Arches allows you to make direct references to styles or layers that have been p
 
 Additionally, you can take a MapBox JSON file and place any mapbox.js layer definition in the ``layers`` section, as long as you define its source in the ``sources`` section.
 
-.. note:: One thing to be aware of when trying to cascade a WMS through a MapBox layer is that mapbox.js is `much pickier <https://github.com/mapbox/mapbox-gl-js/issues/2171>`_ about CORS than other js mapping libraries like Leaflet. To use an external WMS or tileset, you may be better off using a tileserver layer as described below.
+.. note:: One thing to be aware of when trying to cascade a WMS through a MapBox layer is that mapbox.js is `much pickier <https://github.com/mapbox/mapbox-gl-js/issues/2171>`_ about CORS than other js mapping libraries like Leaflet. To use an external WMS or tileset, you may be better off using a tileserver layer as described below. You can find WMS examples in the `arches4-geo-examples <https://github.com/legiongis/arches4-geo-examples>`_ repo.
 
 Tileserver Layers
 ``````````````````
