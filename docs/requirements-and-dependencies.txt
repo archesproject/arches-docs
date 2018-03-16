@@ -44,7 +44,7 @@ The installation process for each component listed may differ based on your oper
 Installing Dependencies on Linux
 --------------------------------
 
-You can find fully scripted dependency installations for both Ubuntu and CentOS `here <https://github.com/archesproject/arches/tree/master/arches/install>`_.
+You can find fully scripted dependency installations for both Ubuntu and CentOS `here <https://github.com/archesproject/arches/tree/4.1.0/arches/install>`_.
 
 .. _WindowsInstallation:
 
