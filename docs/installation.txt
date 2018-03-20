@@ -111,6 +111,8 @@ Now that you have Arches installed and a Project created, you are ready to begin
 * For a quick start that will create an example database schema in your new Arches project (and allow you to begin recording data right away), you can **load a sample package** with the following command::
 
     python manage.py packages -o load_package -s https://github.com/archesproject/arches4-example-pkg/archive/master.zip -db true
+
+    This example package has a full set of Resource Models, Branches, and Concepts that are generally based on the original :ref:`Arches HIP Contents`.
     
     .. note:: If you get an "invalid package source" error, please download the zipfile (use the url in the command) and run the same command pointing to the location of the downloaded zipfile.
 
