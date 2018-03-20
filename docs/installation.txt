@@ -112,6 +112,8 @@ Now that you have Arches installed and a Project created, you are ready to begin
 
     python manage.py packages -o load_package -s https://github.com/archesproject/arches-sample-data/archive/stable/4.1.x.zip -db true
 
+    This example package has a full set of Resource Models, Branches, and Concepts that are generally based on the original :ref:`Arches HIP Contents`.
+    
     .. note:: If you get an "invalid package source" error, please download the zipfile (use the url in the command) and run the same command pointing to the location of the downloaded zipfile.
     
 General Troubleshooting

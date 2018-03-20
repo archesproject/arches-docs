@@ -2,15 +2,13 @@
 Arches HIP Contents
 ############################
 
-By default, Arches ships with a set of cohesive Resource Models, Branches, and Concepts which form the v4 version of Arches-HIP (Heritage Inventory Package), a data schema that was originally developed for `Historic Places L.A. <http://historicplacesla.org>`_. HPLA is the Arches implementation in Los Angeles that was designed to hold data from the ongoing Survey LA project.
+An easy way to get started with Arches is to load an example package into your new project.
 
-To import this entire data schema into your Arches database, use these commands (with your virtual environment activated)::
+.. code:: bash
 
-    python manage.py packages -o import_graphs
-    python manage.py packages -o import_reference_data -s ../arches/arches/db/schemes/arches_concept_scheme.rdf -ow overwrite -st keep
-    python manage.py packages -o import_reference_data -s ../arches/arches/db/schemes/arches_concept_collections.rdf -ow overwrite -st keep
+    python manage.py packages -o load_package -s https://github.com/archesproject/arches-sample-data/archive/stable/4.1.x.zip -db true
 
-The package comprises 6 Resource Models and 36 Branches.
+This package is generally based on Arches-HIP that was developed alongside Arches v3, and it comprises 6 Resource Models and 36 Branches.
 
 Resource Models
 ===============
@@ -133,16 +131,6 @@ Branches
     Captures information about special status, protection, or privileges afforded under law.
     
     Applies to: Heritage Resource, Heritage Resource Model
-+ Settings Basic Search
-    Configuration settings for search returns
-+ Settings Saved Searches
-    System configuration for saving searches
-+ Settings Search Map
-    Initial settings for Arches map in the Search UI
-+ Settings System Defaults
-    
-+ Settings Time Search
-    Configuration Settings for temporal search
 + Temporal Coverage
     Defines time span for which the Information Resource is relevant.
     Applies to: Information Resource
