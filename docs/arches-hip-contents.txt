@@ -2,13 +2,7 @@
 Arches HIP Contents
 ############################
 
-An easy way to get started with Arches is to load an example package into your new project.
-
-.. code:: bash
-
-    python manage.py packages -o load_package -s https://github.com/archesproject/arches-sample-data/archive/stable/4.1.x.zip -db true
-
-This package is generally based on Arches-HIP that was developed alongside Arches v3, and it comprises 6 Resource Models and 36 Branches.
+An easy way to get started with Arches is to load the `arches4-example-pkg <https://github.com/archesproject/arches4-example-pkg>`_ into your new project. The database schema of this package is generally based on `Arches-HIP <https://arches-hip.readthedocs.io>`_, which was developed alongside Arches v3, and it comprises 6 Resource Models and 36 Branches.
 
 Resource Models
 ===============
