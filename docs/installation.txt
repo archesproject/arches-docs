@@ -21,6 +21,7 @@ Once you have all the dependencies taken care of you are ready to install Arches
 
 .. code:: bash
 
+    pip install virtualenv
     virtualenv ENV
 
 3. Activate the virtual environment
