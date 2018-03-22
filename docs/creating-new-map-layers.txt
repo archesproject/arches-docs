@@ -1,4 +1,5 @@
-#######################
+.. _creating_new_map_layers_reference:
+
 Creating New Map Layers
 #######################
 

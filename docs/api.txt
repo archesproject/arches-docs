@@ -1,0 +1,157 @@
+===
+API
+===
+
+.. THE FOLLOWING IS AN EXAMPLE 
+
+.. see https://sphinxcontrib-httpdomain.readthedocs.io/en/stable/ 
+.. for api specific directives
+
+.. .. http:get:: /users/(int:user_id)/posts/(tag)
+
+    The posts tagged with `tag` that the user (`user_id`) wrote.
+
+    **Example request**:
+
+    .. code-block:: http
+
+        GET /users/123/posts/web HTTP/1.1
+        Host: example.com
+        Accept: application/json, text/javascript
+
+    **Example response**:
+
+    .. code-block:: http
+
+        HTTP/1.1 200 OK
+        Vary: Accept
+        Content-Type: text/javascript
+
+        [
+            {
+              "post_id": 12345,
+              "author_id": 123,
+              "tags": ["server", "web"],
+              "subject": "I tried Nginx"
+            },
+            {
+              "post_id": 12346,
+              "author_id": 123,
+              "tags": ["html5", "standards", "web"],
+              "subject": "We go to HTML 5"
+            }
+        ]
+
+    :form example: an example formdata parameter   
+
+    :query sort: one of ``hit``, ``created-at``
+    :query offset: offset number. default is 0
+    :query limit: limit number. default is 30
+    :reqheader Accept: the response content type depends on
+                      :mailheader:`Accept` header
+    :reqheader Authorization: optional OAuth token to authenticate
+    :resheader Content-Type: this depends on :mailheader:`Accept`
+                            header of request
+    :statuscode 200: no error
+    :statuscode 404: there's no user
+
+
+
+
+**Authentication**
+------------------
+
+.. _auth:
+
+.. http:post:: /auth/get_token
+
+    gets an authorization token given a username and password
+
+    all requests require users to pass a "Bearer" token when accessing secure services
+
+
+    **Example request**:
+
+    .. code-block:: none
+
+        curl -X POST http://localhost:8000/auth/get_token -d "username=admin&password=admin"
+
+
+    **Example response**:
+
+    .. code-block:: http
+    
+        HTTP/1.0 200 OK
+        Content-Type: text/plain
+
+        eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NjYwYmQifQ.-xN_h82PHVTCMA9vdoHrcZxH-x5mb11y1537t3rGzcM
+
+
+    .. code-block:: http
+
+        HTTP/1.0 401 Unauthorized
+        Content-Type: text/plain
+        WWW-Authenticate: Bearer
+
+
+    :form username: a users username (or email)
+    :form password: a users password
+    :statuscode 401: there's no user or the user has been deactivated, or the token is malformed or expired
+
+
+
+
+**Surveys**
+-----------
+
+.. http:get:: /surveys  
+
+    get a list of surveys/projects that a user has been invited to participate in
+
+
+    **Example request**:
+
+    .. code-block:: none
+
+        curl -X GET http://localhost:8000/surveys -H "Authorization: Bearer {token}"
+
+        curl -X GET http://localhost:8000/surveys -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NjYwYmQifQ.-xN_h82PHVTCMA9vdoHrcZxH-x5mb11y1537t3rGzcM"
+
+
+    **Example response**:
+
+    .. code-block:: http
+    
+        HTTP/1.0 200 OK
+        Content-Type: application/json
+
+        [
+            {
+                "active": true, 
+                "bounds": "MULTIPOLYGON EMPTY", 
+                "cards": [], 
+                "createdby_id": 1, 
+                "datadownloadconfig": {
+                    "count": 1000, 
+                    "custom": null, 
+                    "download": false, 
+                    "resources": []
+                }, 
+                "description": "A very lengthy description of this survey.\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 
+                "enddate": "2018-03-16", 
+                "groups": [
+                    6
+                ], 
+                "id": "e3d95999-2323-11e8-894b-14109fd34195", 
+                "lasteditedby_id": 1, 
+                "name": "Forbidden Survey", 
+                "startdate": "2018-03-04", 
+                "tilecache": "", 
+                "users": [
+                    1
+                ]
+            }
+        ]
+
+
+    :reqheader Authorization: JWT (JSON web token) for user authentication, see :ref:`/auth/get_token <auth>`
