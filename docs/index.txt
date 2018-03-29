@@ -7,6 +7,7 @@ Arches Documentation
     :maxdepth: 2
 
     overview
+    release-process
 
 .. toctree::
     :caption: Installation and Configuration
@@ -16,7 +17,7 @@ Arches Documentation
     installation
     initial-configuration
     projects-and-packages
-    
+
 .. toctree::
     :caption: Using Arches
     :maxdepth: 2
@@ -38,11 +39,11 @@ Arches Documentation
     create-menu
     add-function
     create-report
-    
+
 .. toctree::
     :caption: Developing With Arches
     :maxdepth: 2
-    
+
     api
     creating-a-development-environment
     import-export
