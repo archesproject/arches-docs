@@ -227,13 +227,13 @@ Lists all currently registered datatypes.
 
 .. code-block:: bash
 
-    python manage.py datatype register -source /Users/me/Documents/projects/mynewproject/mynewproject/datatypes/wkt_point.py
+    python manage.py datatype register --source /Users/me/Documents/projects/mynewproject/mynewproject/datatypes/wkt_point.py
 
 Registers a new datatype, in this example as defined in ``wkt_point.py``.
 
 .. code-block:: bash
 
-    python manage.py datatype update -source /Users/me/Documents/projects/mynewproject/mynewproject/datatypes/wkt_point.py
+    python manage.py datatype update --source /Users/me/Documents/projects/mynewproject/mynewproject/datatypes/wkt_point.py
 
 Updates a datatype, necessary anytime changes are made to your datatype's properties.
 
