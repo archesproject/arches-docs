@@ -77,7 +77,7 @@ Temporal Search Settings
 Arches creates a Time Wheel based on the resources in your database, to allow for quick temporal visualization and queries. A few aspects of this temporal search are defined here.
 
 + **Color Ramp** - Currently unused (saved for future implementation). The color ramp for the time wheel. For further reference, check out the `d3 API reference <https://github.com/d3/d3-3.x-api-reference/blob/master/Ordinal-Scales.md>`_.
-+ **Time wheel configuration** - Currently unused (saved for future implementation).
++ **Time wheel configuration** - Currently unused (saved for future implementation).  You can, however, modify the time wheel configuration using the advanced settings, :ref:`time-wheel-configuration`.
 
 Saved Searches
 ----------------
@@ -137,6 +137,8 @@ Advanced Settings
 
 Most users will be able to configure Arches using the settings available in the UI. However, some settings can only be modified in a project's settings_local.py file. Modifying settings in this file will override those in your settings.py located in your arches installation.
 
+.. _time-wheel-configuration:
+
 Time Wheel Configuration
 ------------------------
 
@@ -164,6 +166,7 @@ Time Wheel Configuration
 
     Each tier, ('Millennium', 'Century', 'Decade' are each tiers) will be reflected as ring in the time wheel.
     Properties:
+
         - "name" - The name that will appear in the description of the selected period
         - "interval" - The number of years in each bin. For example, if your data spans 3000 years, and your interval is 1000, you will get three bins in that tier.
         - "root" - This applies only to the root of the config and should not be modified.
@@ -184,3 +187,12 @@ Time Wheel Configuration
         }
 
     This will cache the time wheel to your project's directory. There are other ways to define your cache that you may want to use. You can read more about those options in `Django's cache documentation <https://docs.djangoproject.com/en/1.11/topics/cache/>`_.
+
+    By default the time wheel will only be cached for 'anonymous' user for 24 hours. To add other users or to change the cache duration, you will need to modify this setting::
+
+        `CACHE_BY_USER = {'anonymous': 3600  * 24}`
+
+    The CACHE_BY_USER keys are user names and their corresponding value is the duration (in seconds) of the cache for that user.
+    For example, if I wanted to cache the time wheel for the admin user for 5 minutes, I would change the CACHE_BY_USER setting to::
+
+        `CACHE_BY_USER = {'anonymous': 3600  * 24, 'admin': 300}`
