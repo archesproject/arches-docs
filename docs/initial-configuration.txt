@@ -20,7 +20,79 @@ The most important settings to begin with are related to the map on the Search p
 3. Change Hexagon Bin Settings
     Finally, you can change the size and precision of the search result hexagon bins. We recommend changing these settings in small increments, as making a *small* bin size with a *large* project area (for example) can be costly for your browser and may cause it to crash when loading the Search page.
 
-After getting the Map Settings figured out, you may want to change the name of your app (System Settings), or create some Saved Searches to make it easier for the users to explore your database (Saved Searches).
+After getting the Map Settings figured out, you may want to change the name of your app which can be accomplished through the System Settings and changing the index.htm file in your arches_projects folder, or create some Saved Searches to make it easier for the users to explore your database (Saved Searches).
+
+Arches Production Deployment
+============================
+
+Changing the Admin Password
+---------------------------
+
+The first item of business when preparing your production of Arches is to change the Admin user's password. Follow these steps to do so:
+
+1. First off, you cannot change the Admin user's password in the Arches UI because the Admin account is not associated with an email. Instead, you should navigate to the `user page <http://localhost:8000/admin/auth/user/>`_ of the Django administrator.
+2. Once there, click on the admin user profile. This will take you to a new page called "Change User".
+3. At the top of the "Change User" page, you will be presented with a text box to change the Admin username. Below that text box is a series of descriptors describing the password, accompanied with a description with a link. Click on the link.
+4. Fill out the form that the link takes you to with your desired password.
+5. Click "Change Password".
+
+Configuring Captcha
+-------------------
+
+Setting up your captcha will help protect your production from spam and other unwanted bots. To set up your production with captcha, first `register your captcha <https://www.google.com/recaptcha/intro/v3beta.html>`_ and then add the captcha keys to your arches/arches_projects/my_project/my_project/settings.py. Do this by adding the following::
+
+    RECAPTCHA_PUBLIC_KEY = 'x'
+    RECAPTCHA_PRIVATE_KEY = 'x'
+
+Replace the x's with your captcha keys.
+
+User Sign-up
+------------
+
+To enable users to sign up through the Arches UI, you will have to add the following lines of code to your arches/arches_projects/my_project/my_project/settings.py::
+
+    EMAIL_USE_TLS = True
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST_USER = 'xxxx@xxx.com'
+    EMAIL_HOST_PASSWORD = 'xxxxxxx'
+    EMAIL_PORT = 587
+
+Update the EMAIL_HOST_USER and EMAIL_HOST_PASSWORD with the correct email credentials and save the file. It is possible that this may not be enough to support your production of Arches. In that case, there's more information on setting up an email backend on the `Django site <https://docs.djangoproject.com/en/1.11/topics/email/#smtp-backend>`_.
+
+To configure what group new users are put into, add the following lines of code to your arches/arches_projects/my_project/my_project/settings.py::
+
+    # group to assign users who self sign up via the web ui
+    USER_SIGNUP_GROUP = 'Crowdsource Editor'
+
+If you would like to change which group new users are added to, replace 'Crowdsource Editor' with the group you would like to use.
+
+Configure Media Directory
+-------------------------
+
+Configuring your production's media directory will give file that are uploaded into your production a directory where they will be stored. To do so, add the following lines of code to you arches/arches_projects/my_project/my_project/settings.py::
+
+    # Absolute filesystem path to the directory that will hold user-uploaded files.
+    MEDIA_ROOT =  os.path.join(ROOT_DIR)
+
+    # URL that handles the media served from MEDIA_ROOT, used for managing stored files.
+    # It must end in a slash if set to a non-empty value.
+    MEDIA_URL = '/files/'
+
+Replace the `ROOT_DIR` with the pathway to the folder where you want the directory to be created. For example::
+
+    MEDIA_ROOT = os.path.join('Projects', 'arches_projects', 'my_project')
+
+Permissions Settings
+--------------------
+
+Permissions allow you to tailor the user experience by letting you change what a user or group can view in Arches. To edit permissions, simply perform the following steps in the Arches UI:
+
+1. Navigate to the 'Resource Models' tab of the **Arches Designer**
+2. Select a resource model and click on the **Manage button**. This will trigger a drop-down menu with a few different managers; select the **Permissions Manager**.
+3. In order to actually change a group's permissions, you must first select that user/group within the Group Library and then select a card from the Card Library.
+4. Choose which permissions to grant the user.
+    Giving the user 'No Access' permissions will deny the user from viewing or editing data in that card. 'Read' permissions allow the user/group to see the data presented in that card, but not edit it. 'Create/Update' allows the user/group to view and edit the data in that card, as well as create new data. Finally, 'Delete' permissions allow the user to delete data from the database.
+5. Click on the **Apply Permissions** button.
 
 Full Explanation of the System Settings UI
 ==========================================
