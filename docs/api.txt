@@ -57,9 +57,47 @@ API
 
 
 
+General Notes
+=============
 
-**Authentication**
-------------------
+Arches allows any paramters to be passed in via custom HTTP headers or via the querystring
+
+To use a an HTTP header to pass in a parameter use the form:
+    
+    .. code-block:: none
+
+        HTTP-X-ARCHES-{upper case parameter name}.
+
+So, for example, these are equivelent requests
+    
+    .. code-block:: none
+
+        curl -H "X-ARCHES-FORMAT: json-ld" http://localhost:8000/surveys
+
+        curl http://localhost:8000/surveys?format=json-ld
+
+If both a custom header and querystring with the same name are provided, then the querystring parameter takes precedence.  
+
+    In the following example "html" will be used as the value for the "format" parameter.
+
+    .. code-block:: none
+
+        curl -H "X-ARCHES-FORMAT: json-ld" http://localhost:8000/surveys?format=html
+
+.. note:: Querystring parameters are case sensitive.  Behind the scenes, custom header parameters are converted to lower case querystring parameters.  
+
+    In the following example there are 3 different parameters ("format", "FORMAT", and "Format") with 3 different values ("html", "json", and "xml") respectively
+    
+    .. code-block:: none
+
+        http://localhost:8000/surveys?format=html&FORMAT=json&Format=xml
+
+
+
+
+Authentication
+==============
+
 
 .. _auth:
 
@@ -101,8 +139,8 @@ API
 
 
 
-**Surveys**
------------
+Surveys
+=======
 
 .. http:get:: /surveys  
 
