@@ -119,51 +119,6 @@ In Arches, it's possible to add a vector layer whose features may be "selectable
 
 You will now be able to add this layer to the map and select its features by clicking on them.
 
-Adding Click and Hover Styles
------------------------------
-
-In addition to making overlay features selectable, you can define styles for their hover and click states.
-
-    1. To do so, each feature in your overlay needs a unique `_featureid`. If you're overlay served from PostGIS, you can define this property in the layer config's `queries` array like so::
-
-        "queries": [
-            "select gid as __id__, gid as _featureid, site_name, feature_info_content, st_asgeojson(geom) as geojson, st_transform(geom, 900913) as __geometry__ from example_layer"
-        ]
-
-    2. Next you will need to ensure your `source-layer` is properly defined. In the source layer the `source-layer` property must match the `id` property and cannot contain spaces or periods. This layer will be hidden when the hover or click layer is revealed, so this should be a fill layer if your click or hover layers contain a fill.
-
-    3. Define the hover and click layers. These each must have a _featureid filter their ids must be suffixed with either a `-click` or `-hover`.  For example::
-
-            {
-            "layout": {
-                "visibility": "visible"
-            },
-            "source": "example_layer",
-            "filter": [
-                "all",
-                [
-                    "==",
-                    "$type",
-                    "Polygon"
-                ],
-                [
-                    "==",
-                    "_featureid",
-                    ""
-                ]
-            ],
-            "paint": {
-                "fill-color": "rgb(0, 255, 0)",
-                "fill-opacity": 0.5
-            },
-            "source-layer": "example_layer",
-            "type": "fill",
-            "id": "example_layer-hover"
-        }
-
-    4. If you are loading your layers from a package, each layer must have an accompanying `meta.json` file with a name defined. This will ensure that the `source-layer` property is saved to the layer as you intend. If you do not have a meta.json file, the source-layer name will be the map layer's file name, and will probably not work properly. See the example package for an example:
-
-        https://github.com/archesproject/arches4-example-pkg/tree/master/map_layers/tile_server/overlays/vector_example
 
 Customizing Map Popup Content
 -----------------------------
