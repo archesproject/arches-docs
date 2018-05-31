@@ -170,7 +170,7 @@ Customizing Map Popup Content
 
 You can display custom HTML in the search map popup when a user hovers or clicks on a feature in a vector layer.
 
-1. First, the data source for the layer may be geojson or vector tiles. This could be a tile server layer serving vector features from PostGIS, for example.
+1. The data source for the layer may be geojson or vector tiles. This could be a tile server layer serving vector features from PostGIS, for example.
 2. Add a property to your vector features called "feature_info_content".
 3. Populate this property with either an html element or a url from which to load html. If you use a url, you will need to update the 'ALLOWED_POPUP_HOSTS' to include the host from which you want to request HTML.
 4. Add the overlay as you would any tileserver layer (see above).
