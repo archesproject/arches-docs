@@ -28,7 +28,7 @@ installing from a local repo clone
 Installs Arches into your virtual environment from a local clone of the `archesproject/arches <https://github.com/archesproject/arches>`_ repo, or your own fork of that repo. To do this properly, create a new virtual environment and activate it, clone the repo you want, enter that repo's root directory, and then run the command. Also, this command must be followed by::
 
     pip install -r arches/install/requirements.txt
-    
+
 in order to properly install all of Arches' python requirements. Make sure to use ``\`` instead of ``/`` on Windows.
 
 creating (or recreating) the database
@@ -48,9 +48,9 @@ loading a package into a project
 .. code-block:: bash
 
     python manage.py packages -o load_package -s source_of_package [-db true]
-    
+
 -db Add this argument with the value ``true`` to force the destruction and recreation of your database before loading the package.
-    
+
 The source (``-s``) of a package can be either a path to a local directory, the location of a local zipfile containing a package, or the url to a github repo archive that contains a package. For example, loading the v4 sample package from where it resides in github would just be::
 
     python manage.py packages -o load_package -s https://github.com/archesproject/arches4-example-pkg/archive/master.zip
@@ -61,7 +61,7 @@ ElasticSearch Management
 **install elasticsearch**
 
 .. code-block:: bash
-    
+
     python manage.py es install [-d path_to_destination_directory]
 
 -d  (optional) Path to directory in which ElasticSearch should be installed. Default is the root of your project.
@@ -69,15 +69,59 @@ ElasticSearch Management
 Installs ElasticSearch into the indicated location. If no destination is provided, ElasticSearch is placed in the app root directory. Read [[Installing and Running Elasticsearch]] for more.
 
 **run elasticsearch**
-    
+
 .. code-block:: bash
 
-    
+
 
 Import Commands
 ===============
 
-*Please refer to https://github.com/archesproject/arches/wiki/Command-Line-Reference#import-commands for now*.
+Import Resource Models or Branches in archesjson format
+-------------------------------------------------------
+.. code-block:: bash
+
+   python manage.py packages -o import_graphs [-s path_to_json_directory_or_file]
+
+-s  Path to the source file you are importing.If not specified, the command will look to ``settings.RESOURCE_GRAPH_LOCATIONS`` for directory paths
+
+Import reference data in skos/rdf format
+----------------------------------------
+
+.. code-block:: bash
+
+   python manage.py packages -o import_reference_data -s 'path_to_rdf_file' [-ow {'overwrite'|'ignore'}] [-st {'stage'|'keep'}]
+
+Import business data
+--------------------
+.. code-block:: bash
+
+   python manage.py packages -o import_business_data -s 'path_to_source_file' [-c 'path_to_mapping_file'] [-ow '{overwrite'|'append'}] [--create_concepts {'create'|'append'}] [--bulk_load]
+
+-c
+    The path to the mapping file. The mapping file tells Arches how to map the columns from your csv file to the nodes in your resource graph. This option is required if there is not a mapping file named the same as the business data file and in the same directory with extension '.mapping' instead of '.csv' or '.json'.
+-ow
+    Determines how resources with duplicate ResourceIDs will be handled. This option only applies to csv import; JSON import overwrites data. It will not modify existing data within a card or node.
+-bulk, --bulk_load
+    Bulk load values into the database. By setting this flag the system will use Django's `bulk_create <https://docs.djangoproject.com/en/dev/ref/models/querysets/#bulk-create>`_ operation. The model's ``save()`` method will not be called, and the ``pre_save`` and ``post_save`` signals will not be sent.
+--create_concepts
+    Creates or appends concepts and collections to your rdm according to the option you select. ``create`` will create concepts and collections and associate them to the mapped nodes. ``append`` will append concepts to the existing collections assigned to the mapped nodes and create collections for nodes that do not have an assigned collection.
+
+
+See :ref:`Importing a CSV` for CSV formatting requirements
+
+Additional Shapefile Requirements
+---------------------------------
+* Your geometry node mapping must have a file_field_name value of 'geom'
+* Shapefile needs to be in wgs84
+* Shapefile can be zipped or unzipped
+
+
+Import resource to resource relations.
+--------------------------------------
+.. code-block:: bash
+
+    python manage.py packages -o import_business_data_relations -s 'path_to_relations_file'
 
 Export Commands
 ===============
@@ -88,11 +132,11 @@ export branch or resource model schema
 .. code-block:: bash
 
     python manage.py packages -o export_graphs -d 'path_to_destination_directory' -g uuid/branches/resource_models/all
-    
+
 -o          ``packages`` operation, in this case ``export_graphs``
 -d          Absolute path to destination directory
 -g          UUID of specific graph, or ``branches`` for all branches, ``resource_models`` for all resource models, or ``all`` for everything.
-    
+
 Exports Resource Models and/or Branches. Note that sometimes (as in this case) Resource Models and Branches are generically called "graphs".
 
 export business data to csv or json
@@ -122,16 +166,16 @@ export business data to shapefile
 
 -t  A resource instance database view
 -d  The destination directory for point, line, and polygon shapefiles, created when the command is run.
-    
+
 Other Data Management Commands
 ==============================
 
 .. code-block:: bash
 
     python manage.py packages -o remove_resources [-y]
-    
+
 -y  Forces this command to run without interactive confirmation.
-    
+
 Removes all resources from your database, but leaves the all resources models, branches, thesauri, and collections intact.
 
 .. code-block:: bash
@@ -140,13 +184,13 @@ Removes all resources from your database, but leaves the all resources models, b
 
 -d  Path to directory to place the output in.
 -g  One or more graph UUIDs to create a mapping for.
-    
+
 This mimics the 'Create Mapping File' command from the Arches Designer UI.
 
 .. code-block:: bash
 
     python manage.py packages -o import_mapping_file -s 'path_to_mapping_file'
-    
+
 
     imports a mapping file for a particular resource model. This will be used as the export mapping file for a resource by default (e.g. for search export).
 
@@ -154,7 +198,7 @@ business data export examples
 -----------------------------
 
 .. code-block:: bash
-    
+
     python manage.py packages -o export_business_data -f 'csv' -c 'path_to_mapping_file'
 
 Exports all business data of the resource model indicated in the mapping file. Two files are created. The first file contains one row per resource (if you resources all have the same geometry type this file can be used to create a shape file in QGIS or other program). The second file contains the grouped attributes of your resources (for instance, alternate names, additional classifications, etc.).
@@ -244,7 +288,7 @@ Updates a datatype, necessary anytime changes are made to your datatype's proper
 .. code-block:: bash
 
     python manage.py datatype unregister -d 'wkt-point'
-    
+
 Unregisters a datatype, in this example a datatype named ``wkt-point``.
 
 -d  Name of datatype to unregister. Use the datatype name that is returned by ``datatype list``.
@@ -263,7 +307,7 @@ run the django webserver
 .. code-block:: bash
 
     python manage.py runserver
-    
+
 Run the Django dev server. Add ``0.0.0.0:8000`` to explicitly set the host and port, which may be necessary when using remote servers, like an AWS EC2 instance. More about `runserver <https://docs.djangoproject.com/en/1.11/ref/django-admin/#runserver>`_.
 
 collect static files
@@ -272,7 +316,7 @@ collect static files
 .. code-block:: bash
 
     python manage.py collectstatic
-    
+
 Collects all static files and places them in a single directory. Generally only necessary in production. Also allows all static files to be `hosted on another server <https://docs.djangoproject.com/en/1.11/howto/static-files/deployment/#serving-static-files-from-a-cloud-service-or-cdn>`_).
 
 Django's full ``manage.py`` commands are documented `here <https://docs.djangoproject.com/en/1.11/ref/django-admin/#available-commands>`_.
