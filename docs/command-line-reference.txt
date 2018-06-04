@@ -85,7 +85,7 @@ Import Resource Models or Branches in archesjson format
 
    python manage.py packages -o import_graphs [-s path_to_json_directory_or_file]
 
--s  Path to the source file you are importing.If not specified, the command will look to ``settings.RESOURCE_GRAPH_LOCATIONS`` for directory paths
+-s  Path to the source file you are importing. If not specified, the command will look to ``settings.RESOURCE_GRAPH_LOCATIONS`` for directory paths
 
 Import reference data in skos/rdf format
 ----------------------------------------
