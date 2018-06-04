@@ -103,7 +103,7 @@ Import business data
 -c
     The path to the mapping file. The mapping file tells Arches how to map the columns from your csv file to the nodes in your resource graph. This option is required if there is not a mapping file named the same as the business data file and in the same directory with extension '.mapping' instead of '.csv' or '.json'.
 -ow
-    Determines how resources with duplicate ResourceIDs will be handled. This option only applies to csv import; JSON import overwrites data. It will not modify existing data within a card or node.
+    Determines how resources with duplicate ResourceIDs will be handled. This option only applies to CSV import; JSON import always overwrites data. Existing resources in a card or node without a duplicate ResourceID will not be overwritten in any case.
 -bulk, --bulk_load
     Bulk load values into the database. By setting this flag the system will use Django's `bulk_create <https://docs.djangoproject.com/en/dev/ref/models/querysets/#bulk-create>`_ operation. The model's ``save()`` method will not be called, and the ``pre_save`` and ``post_save`` signals will not be sent.
 --create_concepts
