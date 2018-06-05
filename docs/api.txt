@@ -60,7 +60,8 @@ API
 General Notes
 =============
 
-Arches allows any paramters to be passed in via custom HTTP headers or via the querystring
+Arches allows any paramters to be passed in via custom HTTP headers or via the querystring.  
+All requests to secure services require users to pass a "Bearer" token in the authentication header 
 
 To use a an HTTP header to pass in a parameter use the form:
     
@@ -98,15 +99,11 @@ If both a custom header and querystring with the same name are provided, then th
 Authentication
 ==============
 
+.. _auth_old:
 
-.. _auth:
-
-.. http:post:: /auth/get_token
+.. http:post:: /auth/get_token *deprecated*
 
     gets an authorization token given a username and password
-
-    all requests require users to pass a "Bearer" token when accessing secure services
-
 
     **Example request**:
 
@@ -137,6 +134,208 @@ Authentication
     :statuscode 401: there's no user or the user has been deactivated, or the token is malformed or expired
 
 
+.. _auth:
+
+.. http:post:: /o/token
+
+    gets an oAuth token given a username, password, and client id
+
+    to be used with clients registered with the "Resource Owner Password Credentials Grant" type 
+    see https://tools.ietf.org/html/rfc6749#section-4.3
+
+
+    :form username: a users username (or email)
+    :form password: a users password
+    :form grant_type: "password"
+    :form client_id: the registered applications client id
+    :statuscode 401: there's no user or the user has been deactivated, or the client id is invalid
+
+
+    **Example request**:
+
+    .. code-block:: none
+
+        curl -X POST http://localhost:8000/o/token/ -d "username=admin&password=admin&grant_type=password&client_id=onFiQSbPfgZpsUcl2fBvaaEHA58MKHavl3iuSaRf"
+
+
+    **Example response**:
+
+    .. code-block:: http
+    
+        HTTP/1.1 200 OK
+        Content-Type: application/json
+
+        {
+            "access_token": "TS3pE2bEXRCAkRls4IGKCVVa0Zv6FE", 
+            "token_type": "Bearer", 
+            "expires_in": 36000, 
+            "refresh_token": "y3rzXKf8dXdb25ayMMVIligTkqEKr0", 
+            "scope": "read write"
+        }
+
+
+    returned when an invalid username or password is supplied
+
+    .. code-block:: http
+
+        HTTP/1.1 401 Unauthorized
+        Content-Type: application/json
+        
+
+        {"error_description": "Invalid credentials given.", "error": "invalid_grant"}
+
+
+
+    returned when an invalid client id is supplied, or the registerd client is not "public" or the 
+    grant type used to register the client isn't "Resource Owner Password Credentials Grant"
+
+    .. code-block:: http
+
+        HTTP/1.1 401 Unauthorized
+        Content-Type: application/json
+
+        {"error": "invalid_client"}
+
+
+Resources
+=========
+
+.. http:get:: /resources/
+
+    gets a paged list of resource instance ids in json-ld format
+
+    :query page: number specifing the page of results to return
+
+    **Example request**:
+
+    .. code-block:: none
+
+        curl -X GET http://localhost:8000/resources/
+
+        curl -X GET http://localhost:8000/resources/?page=2
+
+
+    **Example response**:
+
+    .. code-block:: http
+    
+        HTTP/1.0 200 OK
+        Content-Type: application/json
+
+        {
+            "@context": "https://www.w3.org/ns/ldp/",
+            "@id": "",
+            "@type": "ldp:BasicContainer",
+            "ldp:contains": [
+                "http://localhost:8000/resources/00000000-0000-0000-0000-000000000100",
+                "http://localhost:8000/resources/00000000-0000-0000-0000-000000000101",
+                "http://localhost:8000/resources/000ee2fe-4568-457b-960c-3e1ec3f53e10",
+                "http://localhost:8000/resources/000fa53f-0f06-4648-a960-c42b8accd235",
+                "http://localhost:8000/resources/00131129-7451-435d-aab9-33eb9031e6d1",
+                "http://localhost:8000/resources/001b6c4b-f906-4df2-9fcd-b9fda95eed95",
+                "http://localhost:8000/resources/0032990e-f8d6-4a7b-8032-d90d3c764b40",
+                "http://localhost:8000/resources/003619ca-5fa7-4e75-b3b7-a62f40fe9419",
+                "http://localhost:8000/resources/00366caa-3c00-4909-851d-0d650e62f820",
+                "http://localhost:8000/resources/003874d7-8e73-4323-bddf-b893651e22c1",
+                "http://localhost:8000/resources/003e56a0-d0eb-485f-b975-61faf2f22755",
+                "http://localhost:8000/resources/0043a0be-c7be-4a35-9f6c-0ba80269caf4",
+                "http://localhost:8000/resources/0060f35d-47a7-4f22-aaf3-fa2d0bd493f7",
+                "http://localhost:8000/resources/0069dad8-41b6-4cad-8e54-f72fe8093550",
+                "http://localhost:8000/resources/0069db14-a0c1-470e-abf7-eda7b56bf012"
+            ]
+        }
+
+
+.. http:get:: /resources/{uuid:resouce instance id}
+
+    gets a single resource instance
+
+    :query format: {"xml", "json", "json-ld"}
+    :query indent: number of spaces to indent json output
+    :reqheader Authorization: oAuth token for user authentication, see :ref:`/o/token <auth>`
+
+    **Example request**:
+
+    .. code-block:: none
+
+        curl -H "Authorization: Bearer {token}" -X GET http://localhost:8000/resources/{resource instance id}
+
+        curl -H "Authorization: Bearer zo41Q1IMgAW30xOroiCUxjv3yci8Os" -X GET http://localhost:8000/resources/00131129-7451-435d-aab9-33eb9031e6d1?format=json&indent=4
+
+
+    **Example json response**:
+
+    .. code-block:: http
+    
+        HTTP/1.0 200 OK
+        Content-Type: application/json
+
+        {
+            "business_data": {
+                "resources": [
+                    {
+                        "tiles": [
+                            {
+                                "data": {
+                                    "e4b37f8a-343a-11e8-ab89-dca90488358a": "203 Boultham Park Road"
+                                    "e4b4b7f5-343a-11e8-a681-dca90488358a": null,
+                                },
+                                "provisionaledits": null,
+                                "parenttile_id": null,
+                                "nodegroup_id": "e4b37f8a-343a-11e8-ab89-dca90488358a",
+                                "sortorder": 0,
+                                "resourceinstance_id": "99131129-7451-435d-aab9-33eb9031e6d1",
+                                "tileid": "b72225a9-4e3d-47ee-8d94-52316469bc3f"
+                            },
+                            {
+                                "data": {
+                                    "e4b3f15c-343a-11e8-a26b-dca90488358a": null,
+                                    "e4b4ca3d-343a-11e8-ab73-dca90488358a": {
+                                        "type": "FeatureCollection",
+                                        "features": [
+                                            {
+                                                "geometry": {
+                                                    "type": "Point",
+                                                    "coordinates": [
+                                                        -0.559288403624841,
+                                                        53.2132233001817
+                                                    ]
+                                                },
+                                                "type": "Feature",
+                                                "id": "c036e50a-4959-4b6f-93d0-2c03068c0948",
+                                                "properties": {}
+                                            }
+                                        ]
+                                    }
+                                },
+                                "provisionaledits": null,
+                                "parenttile_id": "4e40e6f3-8252-4439-831d-c371655cc4eb",
+                                "nodegroup_id": "e4b3f15c-343a-11e8-a26b-dca90488358a",
+                                "sortorder": 0,
+                                "resourceinstance_id": "99131129-7451-435d-aab9-33eb9031e6d1",
+                                "tileid": "65199340-32c3-4936-a09e-7c5143552d15"
+                            },
+                            {
+                                "data": {
+                                    "e4b386eb-343a-11e8-82ef-dca90488358a": "Detached house built by A B Sindell"
+                                },
+                                "provisionaledits": null,
+                                "parenttile_id": "8870d2d6-e179-4321-a8bb-543fd2db63c6",
+                                "nodegroup_id": "e4b386eb-343a-11e8-82ef-dca90488358a",
+                                "sortorder": 0,
+                                "resourceinstance_id": "99131129-7451-435d-aab9-33eb9031e6d1",
+                                "tileid": "04bb7bef-1e6e-4228-bd87-3f0a129514a8"
+                            }
+                        ],
+                        "resourceinstance": {
+                            "graph_id": "e4b3562b-343a-11e8-b509-dca90488358a",
+                            "resourceinstanceid": "99131129-7451-435d-aab9-33eb9031e6d1",
+                            "legacyid": "99131129-7451-435d-aab9-33eb9031e6d1"
+                        }
+                    }
+                ]
+            }
+        }
 
 
 Surveys
@@ -151,9 +350,9 @@ Surveys
 
     .. code-block:: none
 
-        curl -X GET http://localhost:8000/surveys -H "Authorization: Bearer {token}"
+        curl -H "Authorization: Bearer {token}" -X GET http://localhost:8000/surveys
 
-        curl -X GET http://localhost:8000/surveys -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NjYwYmQifQ.-xN_h82PHVTCMA9vdoHrcZxH-x5mb11y1537t3rGzcM"
+        curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NjYwYmQifQ.-xN_h82PHVTCMA9vdoHrcZxH-x5mb11y1537t3rGzcM" -X GET http://localhost:8000/surveys
 
 
     **Example response**:
@@ -175,7 +374,7 @@ Surveys
                     "download": false, 
                     "resources": []
                 }, 
-                "description": "A very lengthy description of this survey.\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 
+                "description": "A description of this survey", 
                 "enddate": "2018-03-16", 
                 "groups": [
                     6
