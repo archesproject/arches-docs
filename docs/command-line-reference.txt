@@ -285,6 +285,7 @@ Updates a datatype, necessary anytime changes are made to your datatype's proper
 
 -source Location of the ``.py`` file that defines the datatype.
 
+
 **unregister a datatype**
 
 .. code-block:: bash
@@ -299,6 +300,42 @@ widgets
 -------
 
 All widget-related commands are identical to those for datatypes, just substitute ``widget`` for ``datatype``. Also note that where datatypes are defined in ``.py`` files, widgets are defined in ``.json`` files.
+
+
+Creating Map Layers
+=======================
+
+
+See :ref:`Creating New Map Layers` for file format requirements and other in-depth information.
+
+MapBox
+------
+.. code-block:: bash
+
+   python manage.py packages -o add_mapbox_layer -j /path/to/mapbox_style.json -n "New MapBox Layer" [{-b|--is_basemap}] [{-i|--layer_icon} 'icon_class'}]
+
+-j  The path to the Mapbox JSON file
+-n  The name of the Mapbox layer
+
+
+Tileserver
+----------
+
+.. code-block:: bash
+
+   python manage.py packages -o add_tileserver_layer -t /path/to/tileserver_config.json -n "New [Mapnik] Tileserver Layer" [-m /path/to/mapnik_config.xml] [{-b|--is_basemap}] [{-i|--layer_icon} 'icon_class'}]
+
+-j  The path to the Tileserver JSON file
+-n  The name of the Tileserver layer
+-m  (Optional) The path to the Mapnik XML file
+
+Common Options
+--------------
+
+-i, --layer_icon  (Optional) The icon class to use for a Tileserver layer. Default: 'fa fa-globe'
+-b, --is_basemap  (Optional) Add this option to make the layer a basemap.
+
+
 
 Other Useful Django Commands
 ============================
