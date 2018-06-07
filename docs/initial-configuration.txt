@@ -173,7 +173,7 @@ Temporal Search Settings
 Arches creates a Time Wheel based on the resources in your database, to allow for quick temporal visualization and queries. A few aspects of this temporal search are defined here.
 
 + **Color Ramp** - Currently unused (saved for future implementation). The color ramp for the time wheel. For further reference, check out the `d3 API reference <https://github.com/d3/d3-3.x-api-reference/blob/master/Ordinal-Scales.md>`_.
-+ **Time wheel configuration** - Currently unused (saved for future implementation).  You can, however, modify the time wheel configuration using the advanced settings, :ref:`time-wheel-configuration`.
++ **Time wheel configuration** - Currently unused (saved for future implementation).  You can, however, modify the time wheel configuration using the advanced settings, :ref:`Time Wheel Configuration`.
 
 Saved Searches
 ----------------
@@ -232,68 +232,3 @@ Because these settings are stored in the database, as opposed to a ``settings.py
     python manage.py packages -o save_system_settings [-d arches/db/system_settings]
 
 A file named "System_Settings.json" will be saved to the directory indicated. If no directory is indicated the file will be saved to settings.SYSTEM_SETTINGS_LOCAL_PATH, which is ``my_project/my_project/system_settings/`` by default. This same path is used to import settings when a new package is loaded into your project.
-
-Advanced Settings
-=================
-
-Most users will be able to configure Arches using the settings available in the UI. However, some settings can only be modified in a project's settings_local.py file. Modifying settings in this file will override those in your settings.py located in your arches installation.
-
-.. _time-wheel-configuration:
-
-Time Wheel Configuration
-------------------------
-
-    By default Arches will bin your data in the search page time wheel based on your data's temporal distribution. This enables Arches to bin your data efficiently. If your data spans over 1000 years, the bins will be by millennium, half-millennium and century. If your data spans less than a thousand years, your data will be binned by millennium, century, and decade.
-
-    You may decide, however, that the bins do not reflect your data very well, and in that case you can manually define your time wheel configuration by editing the TIMEWHEEL_DATE_TIERS setting.
-
-    Here is an example of a custom time wheel::
-
-        TIMEWHEEL_DATE_TIERS = {
-        "name": "Millennium",
-        "interval": 1000,
-        "root": True,
-        "child": {
-                "name": "Century",
-                "interval": 100,
-                "range": {"min": 1500, "max": 2000},
-                "child": {
-                    "name": "Decade",
-                    "interval": 10,
-                    "range": {"min": 1750, "max": 2000}
-                }
-            }
-        }
-
-    Each tier, ('Millennium', 'Century', 'Decade' are each tiers) will be reflected as ring in the time wheel.
-    Properties:
-
-        - "name" - The name that will appear in the description of the selected period
-        - "interval" - The number of years in each bin. For example, if your data spans 3000 years, and your interval is 1000, you will get three bins in that tier.
-        - "root" - This applies only to the root of the config and should not be modified.
-        - "child" - Adding a child will add an additional tier to your time wheel. You can nest as deeply as you like, but the higher the resolution of your time wheel, the longer it will take to generate the wheel.
-        - "range" - A range is optional, but including one will restrict the bins to only those within the range.
-
-    If you do need to represent decades or years in your time wheel and this impacts performance, you can cache the time wheel for users that may load the search page frequently. To do so, you just need to activate caching for your project.
-    If you have Memcached running at the following location `127.0.0.1:11211` then the time wheel will automatically be cached for the 'anonymous' user. If not you can update the CACHES setting of your project::
-
-        CACHES = {
-            'default': {
-                'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-                'LOCATION': os.path.join(APP_ROOT, 'tmp', 'djangocache'),
-                'OPTIONS': {
-                    'MAX_ENTRIES': 1000
-                }
-            }
-        }
-
-    This will cache the time wheel to your project's directory. There are other ways to define your cache that you may want to use. You can read more about those options in `Django's cache documentation <https://docs.djangoproject.com/en/1.11/topics/cache/>`_.
-
-    By default the time wheel will only be cached for 'anonymous' user for 24 hours. To add other users or to change the cache duration, you will need to modify this setting::
-
-        `CACHE_BY_USER = {'anonymous': 3600  * 24}`
-
-    The CACHE_BY_USER keys are user names and their corresponding value is the duration (in seconds) of the cache for that user.
-    For example, if I wanted to cache the time wheel for the admin user for 5 minutes, I would change the CACHE_BY_USER setting to::
-
-        `CACHE_BY_USER = {'anonymous': 3600  * 24, 'admin': 300}`
