@@ -1,19 +1,21 @@
-##############################
-Basic Production Configuration
-##############################
-
-When you are finished with development on your Arches app, it's time to put it into production. Configurations will differ greatly from project to project, but a few tasks must be handled no matter what:
-
-+ `Switch to a production webserver <#serving-arches-with-apache>`_
-
-+ `Pass static file handling over the new webserver <#handling-static-files>`_
-
-+ `Set Django's DEBUG setting to False <#setting-debug-false>`_
-
-Below are steps for accomplishing these tasks. Please see the "Dev/Production Strategies" section to read about some more complex and efficient strategies.
-
+##########################
 Serving Arches with Apache
-============================
+##########################
+
+When you are putting your Arches app in production, you'll need to serve it with a webserver. The following is a guide using Apache as an example, split into two sections:
+
++ :ref:`Setup Apache`
+
++ :ref:`Handling Static Files`
+
+For reference:
+
++ `Django Documentation <https://docs.djangoproject.com/en/2.1/howto/deployment/wsgi/modwsgi/#how-to-use-django-with-apache-and-mod-wsgi>`_
++ `How to Run Django with mod_wsgi and Apache with a virtualenv Python environment on a Debian VPS (Digital Ocean) <https://www.digitalocean.com/community/tutorials/how-to-run-django-with-mod_wsgi-and-apache-with-a-virtualenv-python-environment-on-a-debian-vps>`_
++ `Using mod_wsgi when developing Django sites (Graham Dumpleton) <http://blog.dscpl.com.au/2008/12/using-modwsgi-when-developing-django.html>`_
+
+Setup Apache
+============
 
 During development, it's easiest to use the Django webserver to view progress on your app. However, once you are ready to put the app into production, you'll have to use a more efficient webserver like Apache or nginx.
 
@@ -26,7 +28,6 @@ We have the most experience using Apache, which is very easy to install and conf
    $ sudo apt-get install apache2
 
    $ sudo apt-get install libapache2-mod-wsgi
-
 
 
 2. In order to properly configure Apache, we must:
@@ -166,21 +167,4 @@ The ``Alias`` line tells Apache where to look when Django sends it the ``/static
 
    $ sudo service apache2 restart
 
-Note that you must now run the ``collectstatic`` command *any time* you make any changes to .js or .css files.
-
-Setting DEBUG = False
-=====================
-
-Now that you have turned over the webserver responsibilities to a production webserver (in this case, Apache), you are ready for the final step. Open your ``settings.py`` (or ``settings_local.py``) file, and set ``DEBUG = False`` (just add that line if necessary). Now restart Apache.
-
-Turning off the Django debug mode will:
-
-1. Suppress the verbose Django error messages in favor of a standard 404 or 500 error page.
-
-.. IMPORTANT:: Make sure these files exist in your templates directory!
-
-2. Cause Django to stop serving static files.
-
-.. NOTE:: This is fine, because we have Apache doing that now.
-
-You will now find Django error messages printed in your ``arches.log`` file.
+.. IMPORTANT:: You must now run ``python manage.py collectstatic`` *any time* you make any changes to static files (.js, .css, or images).

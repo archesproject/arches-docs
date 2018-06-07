@@ -56,4 +56,4 @@ Arches Documentation
 
     Appendix A: Arches HIP <arches-hip-contents>
     Appendix B: Glossary <glossary>
-    Appendix C: Basic Production Configuration <basic-production-configuration>
+    Appendix C: Serving Arches with Apache <serving-arches-with-apache>

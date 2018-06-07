@@ -1,4 +1,4 @@
-####################
+﻿####################
 Configuring Settings
 ####################
 
@@ -99,6 +99,24 @@ If you have data you do not want to share with all users, simply perform the fol
     - `Delete` permissions allow the user to delete data from the database.
 
 5. Click on the **Apply Permissions** button.
+
+Set DEBUG = False
+-----------------
+
+Most importantly, you should never run Arches in production with ``DEBUG = True``. Open your ``settings.py`` file (or ``settings_local.py``) and set ``DEBUG = False`` (just add that line if necessary).
+
+Turning off the Django debug mode will:
+
+1. Suppress the verbose Django error messages in favor of a standard 404 or 500 error page.
+
+    You will now find Django error messages printed in your ``arches.log`` file.
+
+    .. IMPORTANT:: Make sure you have ``500.htm`` and ``404.htm`` files in your project's templates directory!
+
+2. Cause Django to stop serving static files.
+
+    You must set up a real webserver, like Apache or Nginx, to serve your app. To help with this, we have created a basic tutorial on how to :ref:`Serving Arches with Apache`.
+
 
 Full Explanation of the System Settings UI
 ==========================================
