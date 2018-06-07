@@ -25,8 +25,8 @@ Additionally, you can take a MapBox JSON file and place any mapbox.js layer defi
 
 .. note:: One thing to be aware of when trying to cascade a WMS through a MapBox layer is that mapbox.js is `much pickier <https://github.com/mapbox/mapbox-gl-js/issues/2171>`_ about CORS than other js mapping libraries like Leaflet. To use an external WMS or tileset, you may be better off using a tileserver layer as described below. You can find WMS examples in the `arches4-geo-examples <https://github.com/legiongis/arches4-geo-examples>`_ repo.
 
-Tileserver Layers
-``````````````````
+Tileserver Vector Layers
+````````````````````````
 
 ``python manage.py packages -o add_tileserver_layer -t /path/to/tileserver_config.json -n "New Tileserver Layer"``
 
@@ -82,30 +82,6 @@ Here's a full example of a tilestache file that makes a layer from data in PostG
             "write cache": false
         }
     }
-
-Tileserver Mapnik Layers
-````````````````````````
-
-``python manage.py packages -o add_tileserver_layer -m /path/to/mapnik_config.xml -n "New Mapnik Tileserver Layer"``
-
-Mapnik is the provider that TileStache uses to serve rasters, and is very commonly used in Arches. Arches allows you to upload a Mapnik XML file to configure a new tileserver layer, instead of creating the full JSON file. This is the **easiest way to make layers from GeoTiffs and shapefiles**. A basic example of a Mapnik XML file is shown below (it points to a geotiff named ``hillshade.tif``). For more about creating these XML files, see the `Mapnik XML reference <https://github.com/mapnik/mapnik/wiki/XMLConfigReference>`_::
-
-    <Map background-color="transparent">
-        <Layer name="Hillshade">
-            <StyleName>raster</StyleName>
-            <Datasource>
-                <Parameter name="type">gdal</Parameter>
-                <Parameter name="file">hillshade.tif</Parameter>
-                <Parameter name="nodata">0</Parameter>
-            </Datasource>
-        </Layer>
-        <Style name="raster">
-            <Rule name="rule 1">
-                <RasterSymbolizer opacity=".7" scaling="bilinear" mode="normal" />
-            </Rule>
-        </Style>
-    </Map>
-
 
 Making Selectable Vector Layers
 -------------------------------
@@ -176,3 +152,27 @@ You can display custom HTML in the search map popup when a user hovers or clicks
 4. Add the overlay as you would any tileserver layer (see above).
 
 You will now be able to add this layer to the map see the markup defined in the 'feature_info_content' in the search map popup.
+
+Tileserver Mapnik Layers
+````````````````````````
+
+``python manage.py packages -o add_tileserver_layer -m /path/to/mapnik_config.xml -n "New Mapnik Tileserver Layer"``
+
+Mapnik is the provider that TileStache uses to serve rasters, and is very commonly used in Arches. Arches allows you to upload a Mapnik XML file to configure a new tileserver layer, instead of creating the full JSON file. This is the **easiest way to make layers from GeoTiffs and shapefiles**. A basic example of a Mapnik XML file is shown below (it points to a geotiff named ``hillshade.tif``). For more about creating these XML files, see the `Mapnik XML reference <https://github.com/mapnik/mapnik/wiki/XMLConfigReference>`_::
+
+    <Map background-color="transparent">
+        <Layer name="Hillshade">
+            <StyleName>raster</StyleName>
+            <Datasource>
+                <Parameter name="type">gdal</Parameter>
+                <Parameter name="file">hillshade.tif</Parameter>
+                <Parameter name="nodata">0</Parameter>
+            </Datasource>
+        </Layer>
+        <Style name="raster">
+            <Rule name="rule 1">
+                <RasterSymbolizer opacity=".7" scaling="bilinear" mode="normal" />
+            </Rule>
+        </Style>
+    </Map>
+
