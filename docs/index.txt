@@ -44,11 +44,8 @@ Arches Documentation
     :caption: Developing With Arches
     :maxdepth: 2
 
-<<<<<<< HEAD
     api
-=======
     settings-beyond-the-ui
->>>>>>> 95422df... move in-depth settings explanation to develop section
     creating-a-development-environment
     import-export
     command-line-reference
