@@ -184,41 +184,6 @@ Arches allows you save a search and present it as convenience for your users. Sa
 #. **Copy the URL** - In your browser address bar, copy the *entire* URL. This will be a long string that defines each of the search filters created in step 1.
 #. **Create the Saved Search** - Finally, head back to this page and fill out the settings that you see at left. You can also upload an image that will be shown along with your Search Search.
 
-Settings - Beyond the UI
-========================
-
-In reality, many more settings variables are used than are exposed in the UI described above. Here is the full inheritance pattern for a typical Arches project:
-
-- arches/settings.py
-    If you installed Arches through pypi (``pip install arches``) this file will be deep in your virtual environment, and you shouldn't touch it.
-
-    ↓  `values here can be superceded by...`  ↓
-
-- my_project/my_project/settings.py
-    Settings here define backend information specific to your app. For example, this is where you would add new references to template context processors.
-
-    ↓  `values here can be superceded by...`  ↓
-
-- my_project/my_project/settings_local.py (optional)
-    Typically kept out of version control, a settings_local.py file is used for 1) sensitive information like db credentials or keys and 2) environment-specific settings, like paths needed for production configuration.
-
-    ↓  `values here can be superceded by...`  ↓
-
-- System Settings Manager
-    Settings exposed to the UI are the end of the inheritance chain. In fact, these settings are stored as a resource in the database, and the contents of this resource is defined in the System Settings Graph. Nodes in this graph with a name that matches a previously defined setting (i.e. in the files above) will override that value with whatever has been entered through the UI.
-
-----
-
-If you're a developer, you'll notice that the codebase uses::
-
-    from arches.app.models.system_settings import settings
-
-in favor of::
-
-    from django.conf import settings
-
-This is to ensure that UI settings are implemented properly. If you are using settings outside of a UI context you will need to follow the import statement with ``settings.update_from_db()``.
-
 Maintaining UI-Defined Settings
 -------------------------------
 
