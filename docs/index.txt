@@ -44,6 +44,7 @@ Arches Documentation
     :caption: Developing With Arches
     :maxdepth: 2
 
+    settings-beyond-the-ui
     creating-a-development-environment
     import-export
     command-line-reference
