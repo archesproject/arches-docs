@@ -16,7 +16,7 @@ Arches Documentation
     installation
     initial-configuration
     projects-and-packages
-    
+
 .. toctree::
     :caption: Using Arches
     :maxdepth: 2
@@ -38,11 +38,11 @@ Arches Documentation
     create-menu
     add-function
     create-report
-    
+
 .. toctree::
     :caption: Developing With Arches
     :maxdepth: 2
-    
+
     creating-a-development-environment
     import-export
     command-line-reference
@@ -55,3 +55,4 @@ Arches Documentation
 
     Appendix A: Arches HIP <arches-hip-contents>
     Appendix B: Glossary <glossary>
+    Appendix C: Basic Production Configuration <basic-production-configuration>
