@@ -53,7 +53,9 @@ Installing Dependencies on Windows
 
 Be aware that you must install 32-bit or 64-bit versions of all dependencies based on your Windows system's architecture. In our experience, the following installation order should work well.
 
-**PostgreSQL 9.6 with PostGIS 2.3** - Use the `EnterpriseDB installers <https://www.postgresql.org/download/windows/>`_, and use Stack Builder (included) to get PostGIS. After installation, add the following to your system's PATH environment variable: ``C:\Program Files\PostgreSQL\9.6\bin``. **Important** Remember to note the password that you set for the default `postgres` user.
+**PostgreSQL 9.6 with PostGIS 2.3** - Use the `EnterpriseDB installers <https://www.postgresql.org/download/windows/>`_, and use Stack Builder (included) to get PostGIS. After installation, add the following to your system's PATH environment variable: ``C:\Program Files\PostgreSQL\9.6\bin``.
+
+.. important:: Remember to note the password that you set for the default ``postgres`` user, as you will need to put it in ``settings.py`` later.
 
 **GDAL and GEOS** - Use the OSgeo4W installer found here: https://trac.osgeo.org/osgeo4w/, and choose to install the GDAL package (you don't need to install QGIS or GRASS). After installation, add the following to your system's PATH environment variable: ``C:\OSGeo4W64\bin``.
 
