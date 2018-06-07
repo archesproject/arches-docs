@@ -82,15 +82,13 @@ Please post to the `Arches forum <https://groups.google.com/forum>`_ if you find
 
 4. Finally, restart Apache.
 
-Ubuntu
-------
+**Ubuntu**
 
 .. code-block:: bash
 
    $ sudo service apache2 restart
 
-CentOS
-------
+**CentOS**
 
 .. code-block:: bash
 
