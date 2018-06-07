@@ -122,12 +122,24 @@ Now that you have Arches installed and a Project created, you are ready to begin
 General Troubleshooting
 =======================
 
-* On macOS, If you get this error ``ValueError: --enable-zlib requested but zlib not found, aborting.``
+* On macOS, If you get this error
+
+    .. error:: `ValueError: --enable-zlib requested but zlib not found, aborting.`
 
     try running ``xcode-select --install`` (`reference <http://stackoverflow.com/questions/32909426/zlib-error-when-installing-pillow-on-mac>`_)
 
 * Getting a connection error like this (in the dev server output or in the browser)
 
-    `ConnectionError: ConnectionError(<urllib3.connection.HTTPConnection object at 0x0000000005C6BC50>: Failed to establish a new connection: [Errno 10061] No connection could be made because the target machine actively refused it) caused by: NewConnectionError(<urllib3.connection.HTTPConnection object at 0x0000000005C6BC50>: Failed to establish a new connection: [Errno 10061] No connection could be made because the target machine actively refused it)`
-
+    .. error:: `ConnectionError: ConnectionError(<urllib3.connection.HTTPConnection object at 0x0000000005C6BC50>: Failed to establish a new connection: [Errno 10061] No connection could be made because the target machine actively refused it) caused by: NewConnectionError(<urllib3.connection.HTTPConnection object at 0x0000000005C6BC50>: Failed to establish a new connection: [Errno 10061] No connection could be made because the target machine actively refused it)`
+    
     means Arches is not able to communicate with ElasticSearch. Most likely, ElasticSearch is just not running, so just start it up and reload the page. If you can confirm that it `is` running, make sure Arches is pointed to to correct port.
+
+* Postgres password authentication error
+
+    .. error:: `django.db.utils.OperationalError: FATAL: pw authentification  failed for user postgres`
+        
+    Most likely you have not correctly set the database credentials in your ``settings.py`` file. Many of our install scripts set the db user to ``postgres`` and password to ``postgis``, so that's what Arches looks for by default. However, if you have changed these values (particularly if you are on Windows and had to enter a password during the Postgres/PostGIS installation process), the new values must be reflected in in ``settings.py`` or ``settings_local.py``.
+    
+    .. note::
+    
+        On Windows, you can avoid having to repeatedly enter the password while running commands in the console by setting the PGPASSWORD environment variable: ``set PGPASSWORD=<your password>``.
