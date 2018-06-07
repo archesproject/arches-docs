@@ -12,7 +12,7 @@ The most important settings to begin with are related to the map on the Search p
 1. Enter your Mapbox API Key.
     By default, Arches uses a few basemap services from Mapbox, for which you need to provide a key. You can get a free key at `mapbox.com <https://mapbox.com>`_, and for installations that do not expect exceptionally heavy traffic, this free key will be sufficient. Once you have obtained the key, copy it from Mapbox (it will start with ``pk.``). Go to **System Settings -- > Map Settings --> Mapbox API** and enter it there.
 
-    If you don't want to use MapBox, you can avoid this step by loading in a different basemap and removing all of the default MapBox layers. More about loading different basemaps in the `command line reference <https://github.com/archesproject/arches/wiki/Command-Line-Reference#importexport-commands>`_ documentation.
+    .. note:: If you don't want to use MapBox, you can avoid this step by loading in a different basemap and removing all of the default MapBox layers. More about loading different basemaps in :ref:`Creating New Map Layers`.
 
 2. Set the default Map Zoom and Project Extent settings
     The Map Zoom is useful for geometry editing, but note that the Search page will automatically zoom to the extent of your search results every time they are updated. The Project Area is very important as it defines the area for your hexagon bins. It may be best to open a new tab with your Search page, make a change here in the Settings, and then refresh your Search page to preview the changes you make.
