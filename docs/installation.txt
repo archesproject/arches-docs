@@ -51,15 +51,20 @@ Use the following to get the latest stable release of Arches::
 
 Now that Arches is installed, you can make a Project. This is where you will make all of the customizations and branding that will make one installation of Arches different from the next. The name of your project should only be lowercase, and should use underscores instead of spaces or hyphens. The example below uses `my_project`.
 
+.. note:: If this command ends in an error related to yarn, you will need to enter ``my_project\my_project\`` (the directory that contains ``package.json``) and run this command: ``yarn install``.
+
 Linux and macOS::
 
-    arches-project create my_project [{-d|--directory} <directory_name>]
+    arches-project create my_project
 
 Windows::
 
-    python ENV\Scripts\arches-project create my_project [{-d|--directory} <directory_name>]
+    python ENV\Scripts\arches-project create my_project
 
-.. note:: If this command ends in an error related to yarn, you will need to enter ``my_project\my_project\`` (the directory that contains ``package.json``) and run this command: ``yarn install``.
+
+.. note:: You can use the option ``[{-d|--directory} <directory_name>]`` to change the directory your new project will be created in.
+
+
 
 6. Update settings_local.py
 ---------------------------
