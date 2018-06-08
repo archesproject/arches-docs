@@ -84,9 +84,9 @@ If you are a developer running the latest arches you probably want to create a p
 
         .. code-block:: bash
 
-            arches-project create mynewproject
+            arches-project create mynewproject [{-d|--directory} <directory_name>]
 
-    #. Finally run the `load_package` command using the projects manage.py file.
+    #. Finally run the `load_package` command using the project's manage.py file.
 
         .. code-block:: bash
 
