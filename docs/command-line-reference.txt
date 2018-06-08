@@ -334,11 +334,20 @@ Common Options
 -b, --is_basemap  (Optional) Add this option to make the layer a basemap.
 
 
+Creating an Arches Project
+==========================
+
+.. code-block:: bash
+
+   arches-project create <name_of_project> [{-d|--directory} <directory_name>]
+
+-d, --directory
+    (Optional) The name of the directory you'd like your new project located in.
 
 Other Useful Django Commands
 ============================
 
-run the django webserver
+Run the django webserver
 ------------------------
 
 .. code-block:: bash

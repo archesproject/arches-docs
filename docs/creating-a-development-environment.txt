@@ -50,11 +50,11 @@ Setting Everything Up
 
     .. code-block:: bash
 
-        (ENV)$ arches-project create my_project
+        (ENV)$ arches-project create my_project [{-d|--directory} <directory_name>]
 
     or on Windows::
 
-        (ENV)\> ENV\Scripts\python.exe ENV\Scripts\arches-project create my_project
+        (ENV)\> ENV\Scripts\python.exe ENV\Scripts\arches-project create my_project [{-d|--directory} <directory_name>]
 
 #. You can now enter your new project and create a package
 
