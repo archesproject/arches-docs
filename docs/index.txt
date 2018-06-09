@@ -51,6 +51,7 @@ Arches Documentation
     command-line-reference
     additional-configuration
     creating-new-map-layers
+    arches-and-elasticsearch
 
 .. toctree::
     :caption: Reference
