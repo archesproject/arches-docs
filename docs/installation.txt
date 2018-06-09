@@ -74,7 +74,7 @@ Before you continue, you may need to open ``my_project\my_project\settings_local
 
 * See Arches System Settings for a full rundown of how settings are handled in Arches.
 
-.. note:: At this point you must `install ElasticSearch <https://github.com/archesproject/arches/wiki/Installing-and-Running-Elasticsearch>`_ and make sure it is running before continuing.
+.. note:: At this point you must :doc:`install ElasticSearch <arches-and-elasticsearch>` and make sure it is running before continuing.
 
 7. Setup the database
 ---------------------
@@ -108,15 +108,15 @@ Now that you have Arches installed and a Project created, you are ready to begin
 * Modify some :doc:`Initial Configuration </initial-configuration>` settings
 
 * Read more about :doc:`Projects and Packages </projects-and-packages>`
-    
+
 * For a quick start that will create an example database schema in your new Arches project (and allow you to begin recording data right away), you can **load a sample package** with the following command
 
     .. code:: bash
-    
+
         python manage.py packages -o load_package -s https://github.com/archesproject/arches4-example-pkg/archive/master.zip -db true
 
     This example package has a full set of Resource Models, Branches, and Concepts that are generally based on the original :ref:`Arches HIP Contents`.
-    
+
     .. note:: If you get an "invalid package source" error, please download the zipfile (use the url in the command) and run the same command pointing to the location of the downloaded zipfile.
 
 General Troubleshooting
@@ -131,15 +131,15 @@ General Troubleshooting
 * Getting a connection error like this (in the dev server output or in the browser)
 
     .. error:: `ConnectionError: ConnectionError(<urllib3.connection.HTTPConnection object at 0x0000000005C6BC50>: Failed to establish a new connection: [Errno 10061] No connection could be made because the target machine actively refused it) caused by: NewConnectionError(<urllib3.connection.HTTPConnection object at 0x0000000005C6BC50>: Failed to establish a new connection: [Errno 10061] No connection could be made because the target machine actively refused it)`
-    
+
     means Arches is not able to communicate with ElasticSearch. Most likely, ElasticSearch is just not running, so just start it up and reload the page. If you can confirm that it `is` running, make sure Arches is pointed to to correct port.
 
 * Postgres password authentication error
 
     .. error:: `django.db.utils.OperationalError: FATAL: pw authentification  failed for user postgres`
-        
+
     Most likely you have not correctly set the database credentials in your ``settings.py`` file. Many of our install scripts set the db user to ``postgres`` and password to ``postgis``, so that's what Arches looks for by default. However, if you have changed these values (particularly if you are on Windows and had to enter a password during the Postgres/PostGIS installation process), the new values must be reflected in in ``settings.py`` or ``settings_local.py``.
-    
+
     .. note::
-    
+
         On Windows, you can avoid having to repeatedly enter the password while running commands in the console by setting the PGPASSWORD environment variable: ``set PGPASSWORD=<your password>``.
