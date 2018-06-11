@@ -50,6 +50,7 @@ Arches Documentation
     command-line-reference
     additional-configuration
     creating-new-map-layers
+    data-model
 
 .. toctree::
     :caption: Reference
