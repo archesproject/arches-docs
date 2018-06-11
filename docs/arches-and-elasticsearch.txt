@@ -1,0 +1,94 @@
+########################
+Arches and Elasticsearch
+########################
+
+Using Arches to Install Elasticsearch
+=====================================
+
+The easiest way to install Elasticsearch is to use a command that comes with Arches. Once you have installed Arches (either with ``pip`` or from the `Arches repo <https://github.com/archesproject/arches>`_), activate your virtual environment, enter your app/project root directory (the one that contains ``manage.py``), run
+
+.. code-block:: bash
+
+    python manage.py es install
+
+Elasticsearch will be installed in the root folder. You can specify an alternate destination for the installation by using the ``-d`` argument. For example
+
+.. code-block:: shell
+
+    python manage.py es install -d C:\Projects
+
+will result in a new directory ``C:\Projects\elasticsearch-5.2.1`` from which you'll be able to run Elasticsearch.
+
+Running Elasticsearch
+=====================
+
+To start Elasticsearch from a command line, run
+
+**Linux/macOS**
+
+.. code-block:: shell
+
+   path/to/elasticsearch-5.2.1/bin/elasticsearch
+
+.. note:: To run the process in the background, add ``-d``.
+
+**Windows**
+
+.. code-block:: shell
+
+    path\to\elasticsearch-5.2.1\bin\elasticsearch
+
+.. note:: To run the process in a new terminal you can double-click the ``elasticsearch.bat`` file found in ``elasticsearch-5.2.1\bin``. To properly set up Elasticsearch as a background service on Windows, `check out this documentation <https://www.elastic.co/guide/en/elasticsearch/reference/5.2/windows.html>`_
+
+---------------------------------------------------------
+
+To make sure Elasticsearch is running correctly, use
+
+.. code-block:: bash
+
+    curl localhost:9200
+
+on any operating system. You should get a JSON response that includes "You Know, For Search..."
+
+For more information about running the service (and all things Elasticsearch), please visit the official `Elasticsearch documentation <https://www.elastic.co/guide/en/elasticsearch/guide/current/running-elasticsearch.html>`_.
+
+Notes
+-----
+.. note::
+   1. By default, Elasticsearch 5.2.1 uses 2GB of memory (RAM). For basic development purposes, we have found it to run well enough on 1GB. Use ``ES_JAVA_OPTS="-Xms1g -Xmx1g" ./bin/elasticsearch -d`` to set the memory allotment on startup (`read more <https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html>`_). You can use the same command to give **more** memory to Elasticsearch in a production setting.
+
+   2. Some users have reported getting this error right after starting Elasticsearch: ``org.elasticsearch.bootstrap.StartupException: java.lang.IllegalStateException: No match found``. Upgrading to 5.2.2 seems to fix this problem, as described in `this issue <https://github.com/elastic/elasticsearch/issues/23218>`_.
+
+
+Using An Independent Elasticsearch Installation
+===============================================
+
+You may want to use an existing installation of Elasticsearch, integrate with something like `Amazon Elasticsearch Service <https://aws.amazon.com/elasticsearch-service/>`_, or perhaps create a new instance using the normal `Elasticsearch installation process <https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html>`_. In any case, you will need to locate the config file ``elasticsearch.yml`` and add the following two lines to the end of it::
+
+
+    script.inline: true
+    script.indexed: true
+
+You may need to update ``settings.py`` or ``settings_local.py`` in your project so Arches can find Elasticsearch in this new location. Add or modify the following lines as necessary:
+
+.. code-block:: python
+
+    ELASTICSEARCH_HTTP_PORT = XXXX # new port number
+    ELASTICSEARCH_HOSTS = [{'host': 'localhost', 'port': ELASTICSEARCH_HTTP_PORT}]
+
+If you have Elasticsearch running on a different host, update the ``'host'`` directive accordingly and make sure the external host will allow connections to your IP through whatever port is in use.
+
+
+Elasticsearch Index Prefix
+==========================
+
+In ``settings.py`` you'll find the variable ``ELASTICSEARCH_PREFIX``. By default it is the name of your project, and this prefix is prepended to all of the Elasticsearch indices that your project creates and uses (e.g. ``myproject_resource``, ``myproject_resource_relations`` and ``myproject_strings``). This allows multiple projects to use the same Elasticsearch service without sharing any data.
+
+If you want multiple Arches projects to share data, you could set the prefix to be the same in each project and point them to the same Elasticsearch service. This could get very messy...
+
+Using Multiple Nodes
+====================
+
+If you are watching the console output after you start up Elasticsearch, you may notice ``Cluster health status changed from [RED] to [YELLOW]``. "Yellow" status is an indicator that you only have one node running in the cluster, and Elasticsearch will not be able to make replicas. To fix this (go from "Yellow" to "Green"), you'll need to install another Elasticsearch instance and configure its node as part of your existing cluster. Here's some `background <http://chrissimpson.co.uk/elasticsearch-yellow-cluster-status-explained.html>`_ and a `stack overflow question <https://stackoverflow.com/questions/35717790/how-to-add-a-new-node-to-my-elasticsearch-cluster>`_ with straightforward instructions for adding a node.
+
+If you can use AWS and Ubuntu Xenial, then you can to begin with an AMI we have available. The AMI is in the US West (Oregon) region, its id and name are ``ami-56e44f2e`` and ``es-5.2.1-two-nodes``, respectively. If you are going to use both nodes (which are configured to work together in the same cluster), use at least a t2.large instance and run ``source /home/ubuntu/esstart.sh``. To use a single instance, you'll need at least a t2.medium instance and run ``/usr/share/elasticsearch/node1/bin/elasticsearch -d``. Here's more info `specifically about Elasticsearch on AWS <http://chrissimpson.co.uk/using-elasticsearch-on-amazon-ec2.html>`_.

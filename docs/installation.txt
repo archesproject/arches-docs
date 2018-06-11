@@ -79,7 +79,7 @@ Before you continue, you may need to open ``my_project\my_project\settings_local
 
 * See Arches System Settings for a full rundown of how settings are handled in Arches.
 
-.. note:: At this point you must `install ElasticSearch <https://github.com/archesproject/arches/wiki/Installing-and-Running-Elasticsearch>`_ and make sure it is running before continuing.
+.. note:: At this point you must :doc:`install ElasticSearch <arches-and-elasticsearch>` and make sure it is running before continuing.
 
 7. Setup the database
 ---------------------

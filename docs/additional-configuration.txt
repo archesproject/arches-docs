@@ -2,13 +2,6 @@
 Additional Configuration
 ########################
 
-ElasticSearch Index Prefix
-==========================
-
-In ``settings.py`` you'll find the variable ``ELASTICSEARCH_PREFIX``. By default it is the name of your project, and this prefix is prepended to all of the ElasticSearch indices that your project creates and uses (e.g. ``myproject_resource``, ``myproject_resource_relations`` and ``myproject_strings``). This allows multiple projects to use the same ElasticSearch service without sharing any data.
-
-If you want multiple Arches projects to share data, you could set the prefix to be the same in each project and point them to the same ElasticSearch service. This could get very messy...
-
 Password Validators
 ===================
 

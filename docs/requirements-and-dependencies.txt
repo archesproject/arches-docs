@@ -9,16 +9,18 @@ Arches works on Linux, Windows, or macOS, but some of its dependencies may be mo
 
 To begin development or make a test installation of Arches, you will need the following:
 
-+ **2gb disk space**
-	+ ~1.5gb for all dependencies and 600mb for Arches.
-	+ In production, the amount of disk space you need will depend on the number of resources in your database, specifically uploaded images or media files.
++ **2GB disk space**
+    + ~1.5GB for all dependencies and 600mb for Arches.
+    + In production, the amount of disk space you need will depend on the number of resources in your database, specifically uploaded images or media files.
 
-+ **4gb memory (RAM)**
-	+ This recommendation is based on the fact that ElasticSearch requires 2gb to run, and as per `official ElasticSearch documentation <https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html#_give_less_than_half_your_memory_to_lucene>`_ no more than half of your system's memory should be dedicated to ElasticSearch.
-	+ In development, it's possible to force ElasticSearch to run with only 1gb of memory, see `note 1 <https://github.com/archesproject/arches/wiki/Installing-and-Running-Elasticsearch#running-elasticsearch>`_.
-	+ In production, you may want to increase your memory, and allow ElasticSearch to use `up to 32gb of memory <https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html#compressed_oops>`_.
++ **4GB memory (RAM)**
+    + This recommendation is based on the fact that ElasticSearch requires 2GB to run, and as per `official ElasticSearch documentation <https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html#_give_less_than_half_your_memory_to_lucene>`_ no more than half of your system's memory should be dedicated to ElasticSearch.
+    + In development, it's possible to force ElasticSearch to run with only 1GB of memory, see `Note 1 <arches-and-elasticsearch.html#notes>`_
+    + In production, you may want to increase your memory, and allow ElasticSearch to use `up to 32GB of memory <https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html#compressed_oops>`_.
 
-*Please note that Arches v4 is only fully supported in Chrome.*
+.. warning::
+
+   Please note that Arches v4 is only fully supported in Chrome.
 
 Software Dependencies
 =====================
@@ -35,7 +37,7 @@ Software Dependencies
 * **Mapnik 2.2** http://mapnik.org/pages/downloads.html. *Windows users, see below*.
 * **JDK** http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 * **Elasticsearch 5.2.1**
-    - To learn more about how Arches works with ElasticSearch, please read `Installing and Running Elasticsearch <https://github.com/archesproject/arches/wiki/Installing-and-Running-Elasticsearch>`_. We recommend waiting until *after* you have Arches installed to deal with Elasticsearch.
+    - To learn more about how Arches works with ElasticSearch, please read :ref:`Using Arches To Install Elasticsearch`. We recommend waiting until *after* you have Arches installed to deal with Elasticsearch.
 
 ------------------
 
@@ -72,7 +74,7 @@ Once installed, find Java on your operating system. It will be somewhere like ``
 
     python -m pip install --upgrade pip
 
-**Elasticsearch** - Take care of this after you have Arches fully installed. Use the command recommended in `Installing and Running Elasticsearch <https://github.com/archesproject/arches/wiki/Installing-and-Running-Elasticsearch>`_.
+**Elasticsearch** - Take care of this after you have Arches fully installed. Use the command recommended in :ref:`Using Arches to Install Elasticsearch`.
 
 Installing Dependencies on macOS
 --------------------------------
