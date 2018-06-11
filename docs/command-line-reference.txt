@@ -31,6 +31,18 @@ Installs Arches into your virtual environment from a local clone of the `archesp
 
 in order to properly install all of Arches' python requirements. Make sure to use ``\`` instead of ``/`` on Windows.
 
+creating an Arches project
+--------------------------
+
+.. code-block:: bash
+
+   arches-project create <name_of_project> [{-d|--directory} <directory_name>]
+
+-d, --directory
+    (Optional) The name of the directory you'd like your new project located in.
+
+
+
 creating (or recreating) the database
 -------------------------------------
 
@@ -334,11 +346,10 @@ Common Options
 -b, --is_basemap  (Optional) Add this option to make the layer a basemap.
 
 
-
 Other Useful Django Commands
 ============================
 
-run the django webserver
+Run the django webserver
 ------------------------
 
 .. code-block:: bash

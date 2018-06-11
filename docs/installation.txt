@@ -51,6 +51,8 @@ Use the following to get the latest stable release of Arches::
 
 Now that Arches is installed, you can make a Project. This is where you will make all of the customizations and branding that will make one installation of Arches different from the next. The name of your project should only be lowercase, and should use underscores instead of spaces or hyphens. The example below uses `my_project`.
 
+.. note:: If this command ends in an error related to yarn, you will need to enter ``my_project\my_project\`` (the directory that contains ``package.json``) and run this command: ``yarn install``.
+
 Linux and macOS::
 
     arches-project create my_project
@@ -59,7 +61,10 @@ Windows::
 
     python ENV\Scripts\arches-project create my_project
 
-.. note:: If this command ends in an error related to yarn, you will need to enter ``my_project\my_project\`` (the directory that contains ``package.json``) and run this command: ``yarn install``.
+
+.. note:: You can use the option ``[{-d|--directory} <directory_name>]`` to change the directory your new project will be created in.
+
+
 
 6. Update settings_local.py
 ---------------------------
@@ -108,15 +113,15 @@ Now that you have Arches installed and a Project created, you are ready to begin
 * Modify some :doc:`Initial Configuration </initial-configuration>` settings
 
 * Read more about :doc:`Projects and Packages </projects-and-packages>`
-    
+
 * For a quick start that will create an example database schema in your new Arches project (and allow you to begin recording data right away), you can **load a sample package** with the following command
 
     .. code:: bash
-    
+
         python manage.py packages -o load_package -s https://github.com/archesproject/arches4-example-pkg/archive/master.zip -db true
 
     This example package has a full set of Resource Models, Branches, and Concepts that are generally based on the original :ref:`Arches HIP Contents`.
-    
+
     .. note:: If you get an "invalid package source" error, please download the zipfile (use the url in the command) and run the same command pointing to the location of the downloaded zipfile.
 
 General Troubleshooting
@@ -131,15 +136,15 @@ General Troubleshooting
 * Getting a connection error like this (in the dev server output or in the browser)
 
     .. error:: `ConnectionError: ConnectionError(<urllib3.connection.HTTPConnection object at 0x0000000005C6BC50>: Failed to establish a new connection: [Errno 10061] No connection could be made because the target machine actively refused it) caused by: NewConnectionError(<urllib3.connection.HTTPConnection object at 0x0000000005C6BC50>: Failed to establish a new connection: [Errno 10061] No connection could be made because the target machine actively refused it)`
-    
+
     means Arches is not able to communicate with ElasticSearch. Most likely, ElasticSearch is just not running, so just start it up and reload the page. If you can confirm that it `is` running, make sure Arches is pointed to to correct port.
 
 * Postgres password authentication error
 
     .. error:: `django.db.utils.OperationalError: FATAL: pw authentification  failed for user postgres`
-        
+
     Most likely you have not correctly set the database credentials in your ``settings.py`` file. Many of our install scripts set the db user to ``postgres`` and password to ``postgis``, so that's what Arches looks for by default. However, if you have changed these values (particularly if you are on Windows and had to enter a password during the Postgres/PostGIS installation process), the new values must be reflected in in ``settings.py`` or ``settings_local.py``.
-    
+
     .. note::
-    
+
         On Windows, you can avoid having to repeatedly enter the password while running commands in the console by setting the PGPASSWORD environment variable: ``set PGPASSWORD=<your password>``.
