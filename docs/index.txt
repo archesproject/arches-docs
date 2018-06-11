@@ -51,6 +51,8 @@ Arches Documentation
     additional-configuration
     creating-new-map-layers
     arches-and-elasticsearch
+    data-model
+
 
 .. toctree::
     :caption: Reference
