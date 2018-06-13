@@ -184,7 +184,7 @@ Other Data Management Commands
 
 .. code-block:: bash
 
-    python manage.py packages -o remove_resources [-y]
+    python manage.py resources -o remove_resources [-y]
 
 -y  Forces this command to run without interactive confirmation.
 
