@@ -46,7 +46,7 @@ Setting Everything Up
         (ENV)$ pip install -r arches/install/requirements_dev.txt
         (ENV)$ cd ..
 
-#. Create the new project you will be working on. In this project you'll make all of the necessary changes to your templates, define all of your settings.py variables, run ``manage.py``, etc. This is also where all your ``yarn`` components will be installed.
+#. Create the new project you will be working on. In this project you'll make all of the necessary changes to your templates, define all of your settings.py variables, run ``manage.py``, etc. This is also where all your ``bower`` components will be installed.
 
     .. code-block:: bash
 
