@@ -148,11 +148,12 @@ The `create_package` command will help you get started by generating the folder 
         SKOS collection .xml files
     system_settings
         The system settings file for your project
-
+    package_config.json
+        Configuration data for the package.
     \* map layer configuration
         By default mapbox-style layers will be loaded with the name property found in the layer's style.json file. The default name for tile server layers will be the basename of the layer's xml file. For both mapbox-style and tile server layers the default icon-class will be `fa fa-globe`. To customize the name and icon-class, simply add a meta.json file to the layer's directory with the following object:
 
-        .. code-block:: javascript
+        .. code-block:: json
 
             {
                 "name": "example name",
@@ -162,6 +163,27 @@ The `create_package` command will help you get started by generating the folder 
 #. It is not necessary to populate every directory with data. Only add those files that you would like to share.
 
     Once you've added the necessary files to your package, simply compress it as a zip file or push it to a github repository and it's ready to be loaded.
+
+Configuring the Business Data Load Order
+****************************************
+
+You can modify your package's ``package_config.json`` to control the order in which business data files are loaded. To do so, add an array to the dictionary with the key ``"business_data_load_order"``. Here is an example:
+
+        .. code-block:: json
+
+          {
+              "permitted_resource_relationships": [],
+              "business_data_load_order": [
+                  "a_LHD_Investigative_Activities_HM.csv",
+                  "LHD_Actors.csv",
+                  "LHD_Archive_Sources.csv",
+                  "LHD_Bibliographic_Sources.csv",
+                  "LHD_Heritage_Asset_Areas_PC.csv",
+                  "LHD_Heritage_Asset_Artefacts_HM.csv",
+                  "LHD_Organizations.csv",
+                  "Lincoln_Heritage_Asset_Monument.csv"
+              ]
+          }
 
 Updating an Existing Package
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
