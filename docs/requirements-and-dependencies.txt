@@ -33,7 +33,7 @@ Software Dependencies
 
     .. note:: Python 2.7.9 and later comes with pip, however, with < 2.7.9, you will need to get pip from here: https://pip.pypa.io/en/latest/installing.html. We also recommend upgrading pip with this command ``python -m pip install --upgrade pip``.
 
-* **Yarn** https://yarnpkg.com/lang/en/docs/install/ (requires NodeJS/npm)
+* **Bower** Requires NodeJS/npm. Installation instructions here: https://bower.io/#install-bower
 * **Mapnik 2.2** http://mapnik.org/pages/downloads.html. *Windows users, see below*.
 * **JDK** http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 * **Elasticsearch 5.2.1**
