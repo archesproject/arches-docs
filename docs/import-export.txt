@@ -15,7 +15,7 @@ The workflow for creating a CSV should be something like this:
 #. Download the **mapping file** and **concepts file** for that resource model
 #. Modify the mapping file to reference your CSV
 #. Populate the CSV with your data
-#. Import the CSV using the `import_business_data <https://github.com/archesproject/arches/wiki/Command-Line-Reference#importexport-commands>`_ command.
+#. Import the CSV using the :ref:`Import business data` command.
 
 .. note:: Your CSV should be encoded into UTF-8. `These steps <https://help.surveygizmo.com/help/encode-an-excel-file-to-utf-8-or-utf-16>`_ will help you if you are using MS Excel.
 
@@ -164,7 +164,7 @@ To aid with the process, a "concepts file" is created every time you download a 
     },
 
 You would then need to use ``81dd62d2-6701-4195-b74b-8057456bba4b`` instead of ``Primary`` in your CSV.
-    
+
 Shapefile Import
 ================
 
@@ -180,7 +180,7 @@ Dates in a shapefile can be in Esri Shapefile date format, Arches will convert t
 
 In your mapping file, the node you wish to map the geometry to must have a ``file_field_name`` value of 'geom'.
 
-To import a shapefile use the same command as csv import, simply point to your shapefile instead of your csv file. `import_business_data <https://github.com/archesproject/arches/wiki/Command-Line-Reference#importexport-commands>`_
+To import a shapefile use the same command as csv import, simply point to your shapefile instead of your CSV file. See: :ref:`Import business data`
 
 **Note:** More complex geometries may encounter a ``mapping_parser_exception`` error. This error occurs when a geometry is not valid in elasticsearch. To resolve this, first make sure your geometry is valid using ArcMap, QGIS, or PostGIS. Next, you can modify the precision of your geometry to 5 decimals or you can simplify your geometry using the QGIS simplify geometry geoprocessing tool, or the PostGIS st_snaptogrid function.
 
@@ -189,7 +189,7 @@ JSON Import
 
 JSON import of business data is primarily intended for transferring business data between arches instances. Because of this it's especially user-friendly to create or interpret, but doing so is not impossible.
 
-First, there are at least two ways you can familiarize yourself with the format. The system settings in an Arches package is stored in this json format, you can open one of those up and take a look. Perhaps a better way in your case is to create some business data via the ui in your instance of arches and export it to the json format using the business data export command defined here https://github.com/archesproject/arches/wiki/Command-Line-Reference#export-commands. This can act as a template json for data creation. For the rest of this section it may be helpful to have one of these files open to make it easier to follow along. 
+First, there are at least two ways you can familiarize yourself with the format. The system settings in an Arches package is stored in this json format, you can open one of those up and take a look. Perhaps a better way in your case is to create some business data via the ui in your instance of arches and export it to the json format using the business data export command defined here :ref:`Export Commands`. This can act as a template json for data creation. For the rest of this section it may be helpful to have one of these files open to make it easier to follow along.
 
 General structure of the entire file::
 
@@ -213,12 +213,12 @@ Structure of the ``resourceinstance`` object::
         "resourceinstanceid": uuid,
         "legacyid": uuid or text
     }
-    
+
 * ``graph_id`` - the id of the resource model for which this data was created
 * ``resourceinstanceid`` - the unique identifier of this resource instance within Arches (this will need to be unique for every resource in Arches)
-* ``legacyid`` - an identifier that was used for this resource before its inclusion in Arches. This can be the same as the resourceinstanceid (this is the case when you provide a UUID to the ResourceID column in a csv) or it can be another id. Either way it has to be unique among every resource in Arches.
+* ``legacyid`` - an identifier that was used for this resource before its inclusion in Arches. This can be the same as the resourceinstanceid (this is the case when you provide a UUID to the ResourceID column in a CSV) or it can be another id. Either way it has to be unique among every resource in Arches.
 
-The ``tiles`` object is a list of tiles that compose a resource instance. The ``tiles`` object is a bit more complicated than the ``resourceinstance`` object, and the structure can vary depending on the cardinality of your nodes. The following cardinality examples will be covered below: 
+The ``tiles`` object is a list of tiles that compose a resource instance. The ``tiles`` object is a bit more complicated than the ``resourceinstance`` object, and the structure can vary depending on the cardinality of your nodes. The following cardinality examples will be covered below:
 
 #. `1 card`_
 #. `n cards`_
@@ -271,7 +271,7 @@ Now for a detailed look at the actual contents of ``tiles``. Note that below we 
             }
         }
     ]
-    
+
 This structure represents a tile for a nodegroup (consisting of two nodes) with no parents collecting data with a cardinality of 1.
 
 n cards
@@ -308,7 +308,7 @@ n: There are multiple instances of this nodegroup/card in a resource::
 -------------------------------
 
 1-1: One and only one parent nodegroup/card contains one and only one child nodegroup/card::
-    
+
     [
         {
             "tileid": "A",
@@ -333,7 +333,7 @@ n: There are multiple instances of this nodegroup/card in a resource::
 
 1 parent card with n child cards
 --------------------------------
-    
+
 1-n: One and only one parent nodegroup/card containing multiple instances of child nodegroups/cards::
 
     [
@@ -472,11 +472,40 @@ n-n: Many parent nodegroups/cards containing many child nodegroups/cards::
         }
     ]
 
+Importing Resource Relations
+============================
+It is possible to import `Related Resources` relationships between Resources you have imported.
+
+To do so, create a `.relations` file (a CSV-formatted file with a ``.relations`` extension). The header of the file should be as follows:
+
+.. code-block:: text
+
+   resourceinstanceidfrom,resourceinstanceidto,relationshiptype,datestarted,dateended,notes
+
+
+In each row, ``resourceinstanceidfrom`` and ``resourceinstanceidto`` should be the same as a ``ResourceID`` from your business data CSV files. You can find the UUID value for your desired ``relationshiptype`` in the ``concept.json`` file downloaded with your resource model mapping file.
+
+``datestarted``, ``dateended`` and ``notes`` are optional fields. Dates should be formatted YYYY-MM-DD.
+
+Once constructed you can import the ``.relations`` file with the following command:
+
+.. code-block:: shell
+
+   python manage.py packages -o import_business_data_relations -s 'path_to_relations_file'
+
+
+All the resources referenced in the .relations csv need to already be in arches. So make sure to run this command after you import all the business data referenced in the .relations file.
+
+.. note::
+
+   You can also create relationships between resources using the new ``resource-instance`` data type. When you are making the graph for a new resource model, you can set one of the nodes to hold a resource instance.
+
+
 Exporting Arches Data
 =====================
 
 Currently all export must happen through the command line interface.
-Alternatively, users with database access have the option of writing a resource view, adding the view to a GIS client, and exporting data from there. Export commands are listed in the `Wiki documentation <https://github.com/archesproject/arches/wiki/Command-Line-Reference#importexport-commands>`_.
+Alternatively, users with database access have the option of writing a resource view, adding the view to a GIS client, and exporting data from there. Export commands are listed in :ref:`Export Commands`.
 
 Resource Database Views
 -----------------------
