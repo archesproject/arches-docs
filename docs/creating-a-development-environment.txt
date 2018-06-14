@@ -41,7 +41,7 @@ Setting Everything Up
     .. code-block:: bash
 
         (ENV)$ cd arches
-        (ENV)$ pip install -e . --no-binary :all:
+        (ENV)$ pip install -e .
         (ENV)$ pip install -r arches/install/requirements.txt
         (ENV)$ pip install -r arches/install/requirements_dev.txt
         (ENV)$ cd ..
