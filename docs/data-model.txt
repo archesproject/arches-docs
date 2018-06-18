@@ -8,31 +8,31 @@ Graphical Data Models
 
 Arches Models Only
 
-.. image:: images/arches_models.png
-   :target: _images/arches_models.png
+.. image:: images/arches-models-v4.2.x.png
+   :target: _images/arches-models-v4.2.x.png
 
 Full Data Model
 
 
-.. image:: images/full-data-model-080717.png
-   :target: _images/full-data-model-080717.png
+.. image:: images/full-data-model-v4.2.x.png
+   :target: _images/full-data-model-v4.2.x.png
 
 
 Resource Model Overview
 =======================
 
-Resources in an Arches database are separated into distinct resource "classes" (not to be confused with Python classes!), and Arches v4 allows users to create and modify resource classes within the app interface itself, using the Resource Designer. To support these capabilities, resource classes are defined with modular components that can be re-used throughout the system.
+Resources in an Arches database are separated into distinct resource "models", and Arches v4 allows users to create and modify resource models within the app interface itself, using the Resource Designer. To support these capabilities, resource models are defined with modular components that can be re-used throughout the system.
 
-The three basic components of a resource class are a graph, a set of data entry forms, and a report. In the Arches interface, each of these components comprise various sub-components, as illustrated below.
+The three basic components of a resource model are a graph, a set of data entry forms, and a report. In the Arches interface, each of these components comprise various sub-components, as illustrated below.
 
-.. image :: images/resource-class-full.png
-   :target: _images/resource-class-full.png
+.. image :: images/resource-model-full.png
+   :target: _images/resource-model-full.png
 
 The Arches logical model has been developed to support this modular construction, and the relevant models are described below as they pertain to the graph, forms (UI components), and the resource data itself (not illustrated above).
 
 
 Graph Definition
-===================
+================
 
 A resource's graph is defined as a collection of GraphModel instances. In the UI, these GraphModels are listed in the Graph Library. Each GraphModel is a collection of NodeGroups, which are themselves collections of Nodes. All Nodes and NodeGroups are connected to each other by Edges. GraphModels allow for a modular approach to creating resource graphs, as a GraphModel can easily be copied from one graph to another.
 
@@ -40,76 +40,85 @@ NodeGroups can be a single Node or many Nodes. A basic example of a NodeGroup wo
 
 NodeGroups are used to create Cards (see `below <#ui-component-models>`_, and this is done based on the ``cardinality`` property. Therefore, not every NodeGroup will be used to create a Card, which allows NodeGroups to exist within other NodeGroups. The ``parentnodegroup`` property is used to record this nesting.
 
-Validation instances handle base-level data validations that will be applied at the graph level.  For example, ``isrequired`` will be an example of a validation, which would return false if a given node is left empty. This is distinct from the concept of Functions which are applied at the UI level for more superficial validation.
 
 .. code-block:: python
 
-   class GraphModel(models.Model):
-    graphid = models.UUIDField(primary_key=True, default=uuid.uuid1)
-    name = models.TextField(blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deploymentfile = models.TextField(blank=True, null=True)
-    author = models.TextField(blank=True, null=True)
-    deploymentdate = models.DateTimeField(blank=True, null=True)
-    version = models.TextField(blank=True, null=True)
-    isresource = models.BooleanField()
-    isactive = models.BooleanField()
-    iconclass = models.TextField(blank=True, null=True)
-    subtitle = models.TextField(blank=True, null=True)
-    ontology = models.ForeignKey('Ontology', db_column='ontologyid', related_name='graphs', null=True, blank=True)
-    class Meta:
-        managed = True
-        db_table = 'graphs'
+    class GraphModel(models.Model):
+        graphid = models.UUIDField(primary_key=True, default=uuid.uuid1)
+        name = models.TextField(blank=True, null=True)
+        description = models.TextField(blank=True, null=True)
+        deploymentfile = models.TextField(blank=True, null=True)
+        author = models.TextField(blank=True, null=True)
+        deploymentdate = models.DateTimeField(blank=True, null=True)
+        version = models.TextField(blank=True, null=True)
+        isresource = models.BooleanField()
+        isactive = models.BooleanField()
+        iconclass = models.TextField(blank=True, null=True)
+        color = models.TextField(blank=True, null=True)
+        subtitle = models.TextField(blank=True, null=True)
+        ontology = models.ForeignKey('Ontology', db_column='ontologyid', related_name='graphs', null=True, blank=True)
+        functions = models.ManyToManyField(to='Function', through='FunctionXGraph')
+        jsonldcontext = models.TextField(blank=True, null=True)
+
+        class Meta:
+            managed = True
+            db_table = 'graphs'
+
 
 .. code-block:: python
 
-   class NodeGroup(models.Model):
-    nodegroupid = models.UUIDField(primary_key=True, default=uuid.uuid1)  This field type is a guess.
-    cardinality = models.TextField(blank=True, default='n')
-    legacygroupid = models.TextField(blank=True, null=True)
-    parentnodegroup = models.ForeignKey('self', db_column='parentnodegroupid', blank=True, null=True)
-    class Meta:
-        managed = True
-        db_table = 'node_groups'
+    class NodeGroup(models.Model):
+        nodegroupid = models.UUIDField(primary_key=True, default=uuid.uuid1)
+        legacygroupid = models.TextField(blank=True, null=True)
+        cardinality = models.TextField(blank=True, default='1')
+        parentnodegroup = models.ForeignKey('self', db_column='parentnodegroupid', blank=True, null=True)  #Allows nodegroups within nodegroups
+
+        class Meta:
+            managed = True
+            db_table = 'node_groups'
+
 
 .. code-block:: python
 
-   class Node(models.Model):
-    nodeid = models.UUIDField(primary_key=True, default=uuid.uuid1)
-    name = models.TextField()
-    description = models.TextField(blank=True, null=True)
-    istopnode = models.BooleanField()
-    ontologyclass = models.TextField(blank=True, null=True)
-    datatype = models.TextField()
-    nodegroup = models.ForeignKey(NodeGroup, db_column='nodegroupid', blank=True, null=True)
-    graph = models.ForeignKey(Graph, db_column='graphid', blank=True, null=True)
+    class Node(models.Model):
+        """
+        Name is unique across all resources because it ties a node to values within tiles. Recommend prepending resource class to node name.
+
+        """
+
+        nodeid = models.UUIDField(primary_key=True, default=uuid.uuid1)
+        name = models.TextField()
+        description = models.TextField(blank=True, null=True)
+        istopnode = models.BooleanField()
+        ontologyclass = models.TextField(blank=True, null=True)
+        datatype = models.TextField()
+        nodegroup = models.ForeignKey(NodeGroup, db_column='nodegroupid', blank=True, null=True)
+        graph = models.ForeignKey(GraphModel, db_column='graphid', blank=True, null=True)
+        config = JSONField(blank=True, null=True, db_column='config')
+        issearchable = models.BooleanField(default=True)
+        isrequired = models.BooleanField(default=False)
+
+        class Meta:
+            managed = True
+            db_table = 'nodes'
+
 
 .. code-block:: python
 
-   class Edge(models.Model):
-    edgeid = models.UUIDField(primary_key=True, default=uuid.uuid1)
-    name = models.TextField(blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    ontologyproperty = models.TextField(blank=True, null=True)
-    domainnode = models.ForeignKey('Node', db_column='domainnodeid', related_name='edge_domains')
-    rangenode = models.ForeignKey('Node', db_column='rangenodeid', related_name='edge_ranges')
-    graph = models.ForeignKey(Graph, db_column='graphid', blank=True, null=True)
-    class Meta:
-        managed = True
-        db_table = 'edges'
-        unique_together = (('rangenode', 'domainnode'),)
+    class Edge(models.Model):
+        edgeid = models.UUIDField(primary_key=True, default=uuid.uuid1)  # This field type is a guess.
+        name = models.TextField(blank=True, null=True)
+        description = models.TextField(blank=True, null=True)
+        ontologyproperty = models.TextField(blank=True, null=True)
+        domainnode = models.ForeignKey('Node', db_column='domainnodeid', related_name='edge_domains')
+        rangenode = models.ForeignKey('Node', db_column='rangenodeid', related_name='edge_ranges')
+        graph = models.ForeignKey('GraphModel', db_column='graphid', blank=True, null=True)
 
-.. code-block:: python
+        class Meta:
+            managed = True
+            db_table = 'edges'
+            unique_together = (('rangenode', 'domainnode'),)
 
-   class Validation(models.Model):
-    validationid = models.UUIDField(primary_key=True, default=uuid.uuid1)  //This field type is a guess.
-    validation = models.TextField(blank=True, null=True)
-    validationtype = models.TextField(blank=True, null=True)
-    name = models.TextField(blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    class Meta:
-        managed = True
-        db_table = 'validations'
 
 
 UI Component Models
@@ -128,7 +137,6 @@ Each resource class has any number of Form instances attached to it, which are m
 
 While a Card will only handle data entry for a single NodeGroup (which may have many Nodes or children NodeGroups), a single NodeGroup can be handled by more than one Card. This allows a NodeGroup to be represented on one Card in the web app, and in a different Card in the mobile app. Like a NodeGroup, a Card may be nested within a parent Card, which is necessary in the case of wizards/card groups. These nested cards are called "sub-cards" in the Resource Manager interface.
 
-Function instances serve to apply logic dictating data validation or UI behavior based on some data entry event. Functions will, for example, call validations asynchronously to alert users of invalid data that has been entered to a form. They may also serve to hide or expose certain Cards or Forms based on data that has been populated through a Widget. A Function instance can be used on any combination of Card, Node, and Widget instances.
 
 .. code-block:: python
 
@@ -168,20 +176,8 @@ Function instances serve to apply logic dictating data validation or UI behavior
             managed = True
             db_table = 'widgets'
 
-.. code-block:: python
-
-    class Function(models.Model):
-        functionid = models.UUIDField(primary_key=True, default=uuid.uuid1)
-        functiontype = models.TextField()
-        function = models.TextField(blank=True, null=True)
-        name = models.TextField(blank=True, null=True)
-        description = models.TextField(blank=True, null=True)
-        class Meta:
-            managed = True
-            db_table = 'functions'
-
 Resource Data
-================
+=============
 
 Three models are used to store Arches business data:
 
@@ -215,7 +211,8 @@ in practice:
         "20000000-0000-0000-0000-000000000004": "Primary"
    }
 
-(These are an ``E1_NAME`` node and an ``E55_NAME_TYPE`` node.)
+(The keys in the second example refer to an ``E1_NAME`` node and an ``E55_NAME_TYPE`` node, respectively.)
+
 
 Arches also allows for the creation of relationships between resource instances, and these are stored as instances of the ResourceXResource model. The ``resourceinstanceidfrom`` and ``resourceinstanceidto`` fields create the relationship, and ``relationshiptype`` qualifies the relationship. The latter must correspond to the appropriate top node in the RDM. This constrains the list of available types of relationships available between resource instances.
 
