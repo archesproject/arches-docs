@@ -10,7 +10,7 @@ Resources are what we call "database records". Are you using Arches to create an
 What Are Resource Models and Branches?
 ======================================
 
-A central tenant of Arches' design has always been the ability to divide your inventory into distinct categories. For example, you may want to inventory buildings, as well as the architects that designed them. You would want two different categories: one called "Building" and another called "Architect". In Arches v4, we are calling these categories Resource Models. Using different Resource Models allows you to record distinct sets of information for Buildings as compared to Architects, even though all of the records are stored together in your single Arches database.
+A central tenet of Arches' design has always been the ability to divide your inventory into distinct categories. For example, you may want to inventory buildings, as well as the architects that designed them. You would want two different categories: one called "Building" and another called "Architect". In Arches v4, we are calling these categories Resource Models. Using different Resource Models allows you to record distinct sets of information for Buildings as compared to Architects, even though all of the records are stored together in your single Arches database.
 
 You can define these Resource Models within the Arches app itself, and to make this process easier we've added an intermediary concept called Branches. These are modular components that, after being created separately, may be added to any Resource Models you already have.
 
