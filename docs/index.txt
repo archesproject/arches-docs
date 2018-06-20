@@ -47,6 +47,7 @@ Arches Documentation
     settings-beyond-the-ui
     creating-a-development-environment
     import-export
+    functions-widgets-datatypes
     command-line-reference
     additional-configuration
     creating-new-map-layers

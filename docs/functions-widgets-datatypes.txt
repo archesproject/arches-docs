@@ -1,0 +1,79 @@
+#############################
+Functions, Widgets, Datatypes
+#############################
+
+Functions
+=========
+
+In Arches, you have the ability to write and implement custom Functions. A new Function must be created, registered, and then associated with a Resource Model.
+
+Creating a Function
+-------------------
+
+A Function comprises three separate files, which should be seen as front-end/back-end complements. On the front-end, you will need a component made from a HTML template and JavaScript pair, which should share the same name. In your Project, these files must be placed like so.
+
+    /myproject/myproject/media/js/views/components/functions/spatial_join.js
+    /myproject/myproject/templates/views/components/functions/spatial_join.htm
+
+The third file will hold the logic of your Function, as well as the definition of its configuration.
+
+    /myproject/myproject/functions/spatial_join.py
+
+As in the example above, its advisable that all of your files share the same basename. (If your Function is moved into a Package, this is necessary.) A new Project should have an example function in it whose files you can copy to begin this process.
+
+Defining the Function's Details
+-------------------------------
+
+The first step in creating a function is defining the `details` that are in the top of your Function's `.py` file.
+
+
+| detail          | required? | example  |    explanation                           |
+|-----------------|-----------|----------|------------------------------------------|
+| `functionid`    | no        | `''`     | optional, though it's recommended that you populate with a [new UUID](https://www.uuidgenerator.net/version4)|
+| `name`          | yes       |`'Spatial Join'`| name is used to unregister function, and shows up in `fn list` |          |
+| `type`          | yes       |`'node'`| set as `node`     |
+| `description`   | no        | `''`   | add a description if desired                     |
+| `defaultconfig` | yes       | `{}` | see below |
+| `classname`     | yes       |`'SpatialJoin'`|the name of the python class that holds this Function's logic   |
+| `component`     | yes       |`'views/components/functions/spatial_join'`| canonical path to html/js component |
+
+The most important thing here is the `defaultconfig`. When you associate your Function with a Resource Model, you will likely need to add some extra configuration variables to it. For example, if you want to calculate one node's value based on that of another, you will need tell tell the function which nodes to use. Or, if you want the Function to e-mail an administrator whenever a specific node is changed, you may need to enter an e-mail address. The contents of `defaultconfig` are the ingredients for your Function's logic.
+
+Registering Functions
+---------------------
+
+First, list the names of functions you already have registered:
+
+    (ENV)$ python manage.py fn list                  
+
+Now you can register your new function with 
+
+    (ENV)$ python manage.py fn register –-source <path to your function's .py file>
+
+For example...
+     
+    (ENV)$ python manage.py fn register --source /Documents/projects/mynewproject/mynewproject/functions/sample_function.py
+
+Now navigate to the Function Manager in the Arches Designer to confirm that your new function is there and functional. If it's not, you may want to unregister your function, make additional changes, and re-register it. To unregister your function, simply run
+
+    (ENV)$ python manage.py fn unregister --name 'Sample Function'
+
+All commands listed [here](https://github.com/archesproject/arches/wiki/Command-Line-Reference#functions).
+
+DataTypes
+=========
+
+A DataType defines a type of business data. By default, they range from very simple, a string, to complex, a geojson geometry object.
+
+In-depth documentation is still in the works for how to create a new DataType, but in the meantime you can start by studying the sample DataType you'll find in your project's `datatypes` directory.
+
+The process for registering a new DataType is similar to that of registering a new function, just use `datatype` instead of `fn`. Additionally, you can use an `update` command to overwrite an existing DataType (instead of unregistering and re-registering). All commands listed [here](https://github.com/archesproject/arches/wiki/Command-Line-Reference#datatypes).
+
+Widgets
+=======
+
+Each Widget you encounter within the Arches interface is defined with a series of parameters that are stored as JSON.
+
+In-depth documentation is still in the works for how to create a new Widget, but in the meantime you can start by studying the sample widget you'll find in your project's `widgets` directory.
+
+The commands for registering a new Widget are similar to that of registering a new DataType, just use `widget` instead of `datatype`. All commands listed [here](https://github.com/archesproject/arches/wiki/Command-Line-Reference#widgets).
