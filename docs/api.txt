@@ -338,6 +338,109 @@ Resources
             }
         }
 
+.. http:put:: /resources/{uuid:resouce instance id}
+
+    updates a single resource instance
+
+    :query format: {"xml", "json", "json-ld"}
+    :query indent: number of spaces to indent json output
+    :reqheader Authorization: oAuth token for user authentication, see :ref:`/o/token <auth>`
+    :reqheader Accept: optional alternative to "format", {"application/xml", "application/json", "application/ld+json"}
+
+    **Example request**:
+
+    .. code-block:: none
+
+        curl -H "Authorization: Bearer {token}" -X PUT -d {data in json-ld format} http://localhost:8000/resources/{resource instance id}
+
+        curl -H "Authorization: Bearer zo41Q1IMgAW30xOroiCUxjv3yci8Os" -X PUT \
+        -d '{
+            "@id": "http://localhost:8000/resource/47a1830c-74ec-11e8-bff6-14109fd34195",
+            "@type": [
+                "http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing",
+                "http://localhost:8000/graph/ab74af76-fa0e-11e6-9e3e-026d961c88e6"
+            ],
+            "http://www.cidoc-crm.org/cidoc-crm/P140i_was_attributed_by": {
+                "@id": "http://localhost:8000/tile/1f7b4c8f-9932-47e4-9ec5-0284c77d893c/node/677f236e-09cc-11e7-8ff7-6c4008b05c4c",
+                "@type": "http://www.cidoc-crm.org/cidoc-crm/E15_Identifier_Assignment",
+                "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by": [
+                    {
+                        "@id": "http://localhost:8000/tile/6efb8ac0-623c-47cb-9846-4a489c153683/node/677f303d-09cc-11e7-9aa6-6c4008b05c4c",
+                        "@type": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
+                        "http://www.cidoc-crm.org/cidoc-crm/P2_has_type": {
+                            "@id": "http://localhost:8000/tile/6efb8ac0-623c-47cb-9846-4a489c153683/node/677f39a8-09cc-11e7-834a-6c4008b05c4c",
+                            "@type": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                            "http://www.w3.org/1999/02/22-rdf-syntax-ns#value": "ecb20ae9-a457-4011-83bf-1c936e2d6b6a"
+                        },
+                        "http://www.w3.org/1999/02/22-rdf-syntax-ns#value": "Claudio"
+                    },
+                    {
+                        "@id": "http://localhost:8000/tile/b53f2aaa-348b-4b73-9ff9-195090038c8b/node/677f303d-09cc-11e7-9aa6-6c4008b05c4c",
+                        "@type": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
+                        "http://www.cidoc-crm.org/cidoc-crm/P2_has_type": {
+                            "@id": "http://localhost:8000/tile/b53f2aaa-348b-4b73-9ff9-195090038c8b/node/677f39a8-09cc-11e7-834a-6c4008b05c4c",
+                            "@type": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                            "http://www.w3.org/1999/02/22-rdf-syntax-ns#value": "81dd62d2-6701-4195-b74b-8057456bba4b"
+                        },
+                        "http://www.w3.org/1999/02/22-rdf-syntax-ns#value": "Alejandro"
+                    }
+                ],
+                "http://www.cidoc-crm.org/cidoc-crm/P2_has_type": {
+                    "@id": "http://localhost:8000/tile/e818ecc5-8bde-4978-baca-2206a5bbf509/node/677f2c0f-09cc-11e7-b412-6c4008b05c4c",
+                    "@type": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "http://www.w3.org/1999/02/22-rdf-syntax-ns#value": "e4699732-efee-46c0-87e1-3f0a930a43db"
+                }
+            }
+        }' \
+        'http://localhost:8000/resources/00131129-7451-435d-aab9-33eb9031e6d1?format=json-ld&indent=4'
+
+
+    **Example json response**:
+
+    .. code-block:: http
+    
+        HTTP/1.0 200 OK
+        Content-Type: application/json
+
+        {
+            "@id": "http://localhost:8000/resource/47a1830c-74ec-11e8-bff6-14109fd34195",
+            "@type": [
+                "http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing",
+                "http://localhost:8000/graph/ab74af76-fa0e-11e6-9e3e-026d961c88e6"
+            ],
+            "http://www.cidoc-crm.org/cidoc-crm/P140i_was_attributed_by": {
+                "@id": "http://localhost:8000/tile/1f7b4c8f-9932-47e4-9ec5-0284c77d893c/node/677f236e-09cc-11e7-8ff7-6c4008b05c4c",
+                "@type": "http://www.cidoc-crm.org/cidoc-crm/E15_Identifier_Assignment",
+                "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by": [
+                    {
+                        "@id": "http://localhost:8000/tile/6efb8ac0-623c-47cb-9846-4a489c153683/node/677f303d-09cc-11e7-9aa6-6c4008b05c4c",
+                        "@type": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
+                        "http://www.cidoc-crm.org/cidoc-crm/P2_has_type": {
+                            "@id": "http://localhost:8000/tile/6efb8ac0-623c-47cb-9846-4a489c153683/node/677f39a8-09cc-11e7-834a-6c4008b05c4c",
+                            "@type": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                            "http://www.w3.org/1999/02/22-rdf-syntax-ns#value": "ecb20ae9-a457-4011-83bf-1c936e2d6b6a"
+                        },
+                        "http://www.w3.org/1999/02/22-rdf-syntax-ns#value": "Claudio"
+                    },
+                    {
+                        "@id": "http://localhost:8000/tile/b53f2aaa-348b-4b73-9ff9-195090038c8b/node/677f303d-09cc-11e7-9aa6-6c4008b05c4c",
+                        "@type": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
+                        "http://www.cidoc-crm.org/cidoc-crm/P2_has_type": {
+                            "@id": "http://localhost:8000/tile/b53f2aaa-348b-4b73-9ff9-195090038c8b/node/677f39a8-09cc-11e7-834a-6c4008b05c4c",
+                            "@type": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                            "http://www.w3.org/1999/02/22-rdf-syntax-ns#value": "81dd62d2-6701-4195-b74b-8057456bba4b"
+                        },
+                        "http://www.w3.org/1999/02/22-rdf-syntax-ns#value": "Alejandro"
+                    }
+                ],
+                "http://www.cidoc-crm.org/cidoc-crm/P2_has_type": {
+                    "@id": "http://localhost:8000/tile/e818ecc5-8bde-4978-baca-2206a5bbf509/node/677f2c0f-09cc-11e7-b412-6c4008b05c4c",
+                    "@type": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "http://www.w3.org/1999/02/22-rdf-syntax-ns#value": "e4699732-efee-46c0-87e1-3f0a930a43db"
+                }
+            }
+        }
+
 
 Surveys
 =======
