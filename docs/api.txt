@@ -94,60 +94,80 @@ If both a custom header and querystring with the same name are provided, then th
         http://localhost:8000/surveys?format=html&FORMAT=json&Format=xml
 
 
-
-
 Authentication
 ==============
 
-.. _auth_old:
+.. .. _auth_old:
 
-.. http:post:: /auth/get_token *deprecated*
+    .. http:post:: /auth/get_token *deprecated*
 
-    gets an authorization token given a username and password
+        gets an authorization token given a username and password
 
-    **Example request**:
+        **Example request**:
+
+        .. code-block:: none
+
+            curl -X POST http://localhost:8000/auth/get_token -d "username=admin&password=admin"
+
+
+        **Example response**:
+
+        .. code-block:: http
+        
+            HTTP/1.0 200 OK
+            Content-Type: text/plain
+
+            eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NjYwYmQifQ.-xN_h82PHVTCMA9vdoHrcZxH-x5mb11y1537t3rGzcM
+
+
+        .. code-block:: http
+
+            HTTP/1.0 401 Unauthorized
+            Content-Type: text/plain
+            WWW-Authenticate: Bearer
+
+
+        :form username: a users username (or email)
+        :form password: a users password
+        :statuscode 401: there's no user or the user has been deactivated, or the token is malformed or expired
+
+
+Most Arches API endpoints require an OAuth access token.
+
+OAuth 2.0 is a simple and secure authentication mechanism. It allows applications to acquire an access token for Arches via a quick redirect to the Arches site. Once an application has an access token, it can access a user's resources on Arches. Authentication with OAuth can be accomplished in the following steps:
+
+.. _auth_client:
+
+Registering an application with Arches
+--------------------------------------
+
+To create an OAuth client for testing go to the url below and create a application using the image below as an example.  Then use the client id when generating a :ref:`OAuth token <auth>`.
 
     .. code-block:: none
 
-        curl -X POST http://localhost:8000/auth/get_token -d "username=admin&password=admin"
-
-
-    **Example response**:
-
-    .. code-block:: http
+        http://localhost:8000/o/applications/
     
-        HTTP/1.0 200 OK
-        Content-Type: text/plain
-
-        eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NjYwYmQifQ.-xN_h82PHVTCMA9vdoHrcZxH-x5mb11y1537t3rGzcM
-
-
-    .. code-block:: http
-
-        HTTP/1.0 401 Unauthorized
-        Content-Type: text/plain
-        WWW-Authenticate: Bearer
-
-
-    :form username: a users username (or email)
-    :form password: a users password
-    :statuscode 401: there's no user or the user has been deactivated, or the token is malformed or expired
+    .. image:: images/oauth-create-client.png
 
 
 .. _auth:
 
 .. http:post:: /o/token
 
-    gets an oAuth token given a username, password, and client id
+    gets an OAuth token given a username, password, and client id
 
-    to be used with clients registered with the "Resource Owner Password Credentials Grant" type 
-    see https://tools.ietf.org/html/rfc6749#section-4.3
+    .. note:: You should only make this call once and store the returned token securely. You should not make this call per request or at any other high-frequency interval. 
+
+        This token is to be used with clients registered with the "Resource Owner Password Credentials Grant" type 
+        see :ref:`Registering an application with Arches <auth_client>` for more information on registering an application 
+        
+        For additional information see https://tools.ietf.org/html/rfc6749#section-4.3
 
 
     :form username: a users username (or email)
     :form password: a users password
     :form grant_type: "password"
-    :form client_id: the registered applications client id
+    :form client_id: the registered applications client id, see :ref:`Registering an application with Arches <auth_client>`
     :statuscode 401: there's no user or the user has been deactivated, or the client id is invalid
 
 
@@ -252,7 +272,7 @@ Resources
 
     :query format: {"xml", "json", "json-ld"}
     :query indent: number of spaces to indent json output
-    :reqheader Authorization: oAuth token for user authentication, see :ref:`/o/token <auth>`
+    :reqheader Authorization: OAuth token for user authentication, see :ref:`/o/token <auth>`
     :reqheader Accept: optional alternative to "format", {"application/xml", "application/json", "application/ld+json"}
 
     **Example request**:
@@ -344,7 +364,7 @@ Resources
 
     :query format: {"xml", "json", "json-ld"}
     :query indent: number of spaces to indent json output
-    :reqheader Authorization: oAuth token for user authentication, see :ref:`/o/token <auth>`
+    :reqheader Authorization: OAuth token for user authentication, see :ref:`/o/token <auth>`
     :reqheader Accept: optional alternative to "format", {"application/xml", "application/json", "application/ld+json"}
 
     **Example request**:
