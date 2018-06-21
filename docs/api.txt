@@ -60,7 +60,7 @@ API
 General Notes
 =============
 
-Arches allows any paramters to be passed in via custom HTTP headers or via the querystring.  
+Arches allows any parameters to be passed in via custom HTTP headers OR via the querystring.  
 All requests to secure services require users to pass a "Bearer" token in the authentication header 
 
 To use a an HTTP header to pass in a parameter use the form:
