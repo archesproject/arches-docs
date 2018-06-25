@@ -135,6 +135,9 @@ Import resource to resource relations.
 
     python manage.py packages -o import_business_data_relations -s 'path_to_relations_file'
 
+
+See :ref:`Importing Resource Relations`
+
 Export Commands
 ===============
 
