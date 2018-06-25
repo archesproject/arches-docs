@@ -230,7 +230,7 @@ Concepts
     :query includeparentconcepts: option to include parent concepts in the return
     :query includerelatedconcepts: option to include related concepts in the return
     :query depthlimit: limit the number of subconcept layers to return if includesubconcepts is true 
-    :query lang: restrict results to a specified language (to be implemented)
+    :query lang: show suboncept results with specified language first
     :reqheader Authorization: oAuth token for user authentication, see :ref:`/o/token <auth>`
 
     **Example request**:
