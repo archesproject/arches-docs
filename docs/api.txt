@@ -217,6 +217,198 @@ To create an OAuth client for testing go to the url below and create a applicati
         {"error": "invalid_client"}
 
 
+Concepts
+=========
+
+.. http:get:: /rdm/concepts/{uuid:concept instance id}
+
+    gets a single rdm concept instance
+
+    :query format: {"json"}
+    :query indent: number of spaces to indent json output
+    :query includesubconcepts: test
+    :query includeparentconcepts: test
+    :query includerelatedconcepts: tests
+    :query depthlimit: test
+    :query lang: test
+    :reqheader Authorization: oAuth token for user authentication, see :ref:`/o/token <auth>`
+
+    **Example request**:
+
+    .. code-block:: none
+
+        curl -H "Authorization: Bearer {token}" -X GET http://localhost:8000/rdm/concepts/{resource instance id}
+
+        curl -H "Authorization: Bearer zo41Q1IMgAW30xOroiCUxjv3yci8Os" -X GET http://localhost:8000/rdm/concepts/5e04c83e-1ae3-42e8-ae31-4f7c25f737a5?format=json&indent=4
+
+
+    **Example json response**:
+
+    .. code-block:: http
+    
+        HTTP/1.0 200 OK
+        Content-Type: application/json
+
+        {
+            "hassubconcepts": true,
+            "id": "5e04c83e-1ae3-42e8-ae31-4f7c25f737a5",
+            "legacyoid": "http://www.archesproject.org/5e04c83e-1ae3-42e8-ae31-4f7c25f737a5",
+            "nodetype": "Concept",
+            "parentconcepts": [{
+                "hassubconcepts": true,
+                "id": "7b8e4771-2680-4004-9743-40ea78e8c2a9",
+                "legacyoid": "http://www.archesproject.org/7b8e4771-2680-4004-9743-40ea78e8c2a9",
+                "nodetype": "ConceptScheme",
+                "parentconcepts": [],
+                "relatedconcepts": [],
+                "relationshiptype": "hasTopConcept",
+                "subconcepts": [],
+                "values": [{
+                    "category": "label",
+                    "conceptid": "7b8e4771-2680-4004-9743-40ea78e8c2a9",
+                    "id": "b18048a9-4814-43f0-bb88-99fa22a42fbe",
+                    "language": "en-US",
+                    "type": "prefLabel",
+                    "value": "DISCO"
+                }, {
+                    "category": "note",
+                    "conceptid": "7b8e4771-2680-4004-9743-40ea78e8c2a9",
+                    "id": "16ea8772-d5dd-481d-91a7-c09703718138",
+                    "language": "en-US",
+                    "type": "scopeNote",
+                    "value": "Concept scheme for managing Data Integration for Conservation Science thesauri"
+                }, {
+                    "category": "identifiers",
+                    "conceptid": "7b8e4771-2680-4004-9743-40ea78e8c2a9",
+                    "id": "9eaa8a10-e9f2-4ce3-ac8b-c4904097b4c9",
+                    "language": "en-US",
+                    "type": "identifier",
+                    "value": "http://www.archesproject.org/7b8e4771-2680-4004-9743-40ea78e8c2a9"
+                }]
+            }],
+            "relatedconcepts": [],
+            "relationshiptype": "",
+            "subconcepts": [{
+                "hassubconcepts": false,
+                "id": "0788acb1-9968-43e8-80f7-37b37e155f95",
+                "legacyoid": "http://www.archesproject.org/0788acb1-9968-43e8-80f7-37b37e155f95",
+                "nodetype": "Concept",
+                "parentconcepts": [{
+                    "hassubconcepts": false,
+                    "id": "5e04c83e-1ae3-42e8-ae31-4f7c25f737a5",
+                    "legacyoid": "http://www.archesproject.org/5e04c83e-1ae3-42e8-ae31-4f7c25f737a5",
+                    "nodetype": "Concept",
+                    "parentconcepts": [],
+                    "relatedconcepts": [],
+                    "relationshiptype": "narrower",
+                    "subconcepts": [],
+                    "values": []
+                }],
+                "relatedconcepts": [],
+                "relationshiptype": "narrower",
+                "subconcepts": [],
+                "values": [{
+                    "category": "label",
+                    "conceptid": "0788acb1-9968-43e8-80f7-37b37e155f95",
+                    "id": "dd5c6d39-7bc4-438e-abe2-544b8ae06864",
+                    "language": "en-US",
+                    "type": "prefLabel",
+                    "value": "Artist"
+                }, {
+                    "category": "identifiers",
+                    "conceptid": "0788acb1-9968-43e8-80f7-37b37e155f95",
+                    "id": "5f355975-29a7-4a53-8260-4093d63c1967",
+                    "language": "en-US",
+                    "type": "identifier",
+                    "value": "http://www.archesproject.org/0788acb1-9968-43e8-80f7-37b37e155f95"
+                }]
+            }, {
+                "hassubconcepts": false,
+                "id": "63fcea8a-a5c8-414a-b6b7-d7b2d1b12cb7",
+                "legacyoid": "http://www.archesproject.org/63fcea8a-a5c8-414a-b6b7-d7b2d1b12cb7",
+                "nodetype": "Concept",
+                "parentconcepts": [{
+                    "hassubconcepts": false,
+                    "id": "5e04c83e-1ae3-42e8-ae31-4f7c25f737a5",
+                    "legacyoid": "http://www.archesproject.org/5e04c83e-1ae3-42e8-ae31-4f7c25f737a5",
+                    "nodetype": "Concept",
+                    "parentconcepts": [],
+                    "relatedconcepts": [],
+                    "relationshiptype": "narrower",
+                    "subconcepts": [],
+                    "values": []
+                }],
+                "relatedconcepts": [],
+                "relationshiptype": "narrower",
+                "subconcepts": [],
+                "values": [{
+                    "category": "label",
+                    "conceptid": "63fcea8a-a5c8-414a-b6b7-d7b2d1b12cb7",
+                    "id": "6b7f1ab6-f69c-4d71-8ed2-4fb7792bc6da",
+                    "language": "en-US",
+                    "type": "prefLabel",
+                    "value": "Investigator"
+                }, {
+                    "category": "identifiers",
+                    "conceptid": "63fcea8a-a5c8-414a-b6b7-d7b2d1b12cb7",
+                    "id": "b3173444-77b2-4cd9-bf05-e258bdc5960f",
+                    "language": "en-US",
+                    "type": "identifier",
+                    "value": "http://www.archesproject.org/63fcea8a-a5c8-414a-b6b7-d7b2d1b12cb7"
+                }]
+            }, {
+                "hassubconcepts": false,
+                "id": "1341427e-5a31-4db0-b458-b4da3d698767",
+                "legacyoid": "http://www.archesproject.org/1341427e-5a31-4db0-b458-b4da3d698767",
+                "nodetype": "Concept",
+                "parentconcepts": [{
+                    "hassubconcepts": false,
+                    "id": "5e04c83e-1ae3-42e8-ae31-4f7c25f737a5",
+                    "legacyoid": "http://www.archesproject.org/5e04c83e-1ae3-42e8-ae31-4f7c25f737a5",
+                    "nodetype": "Concept",
+                    "parentconcepts": [],
+                    "relatedconcepts": [],
+                    "relationshiptype": "narrower",
+                    "subconcepts": [],
+                    "values": []
+                }],
+                "relatedconcepts": [],
+                "relationshiptype": "narrower",
+                "subconcepts": [],
+                "values": [{
+                    "category": "label",
+                    "conceptid": "1341427e-5a31-4db0-b458-b4da3d698767",
+                    "id": "1f088563-ed2a-407b-ac7e-95f8141ae7a6",
+                    "language": "en-US",
+                    "type": "prefLabel",
+                    "value": "Scientist"
+                }, {
+                    "category": "identifiers",
+                    "conceptid": "1341427e-5a31-4db0-b458-b4da3d698767",
+                    "id": "7b0914e8-1375-4f06-88fe-66785116679e",
+                    "language": "en-US",
+                    "type": "identifier",
+                    "value": "http://www.archesproject.org/1341427e-5a31-4db0-b458-b4da3d698767"
+                }]
+            }],
+            "values": [{
+                "category": "label",
+                "conceptid": "5e04c83e-1ae3-42e8-ae31-4f7c25f737a5",
+                "id": "b75ca80a-3128-421d-ae2b-aacb7d12bbc7",
+                "language": "en-US",
+                "type": "prefLabel",
+                "value": "DISCO Actor Types"
+            }, {
+                "category": "identifiers",
+                "conceptid": "5e04c83e-1ae3-42e8-ae31-4f7c25f737a5",
+                "id": "79d2e5d2-91fc-435d-869a-042c994d3481",
+                "language": "en-US",
+                "type": "identifier",
+                "value": "http://www.archesproject.org/5e04c83e-1ae3-42e8-ae31-4f7c25f737a5"
+            }]
+        }
+
+
 Resources
 =========
 
@@ -266,7 +458,7 @@ Resources
         }
 
 
-.. http:get:: /resources/{uuid:resouce instance id}
+.. http:get:: /resources/{uuid:resource instance id}
 
     gets a single resource instance
 
