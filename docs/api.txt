@@ -226,18 +226,18 @@ Concepts
 
     :query format: {"json"}
     :query indent: number of spaces to indent json output
-    :query includesubconcepts: test
-    :query includeparentconcepts: test
-    :query includerelatedconcepts: tests
-    :query depthlimit: test
-    :query lang: test
+    :query includesubconcepts: option to include sub concepts in the return
+    :query includeparentconcepts: option to include parent concepts in the return
+    :query includerelatedconcepts: option to include related concepts in the return
+    :query depthlimit: limit the number of subconcept layers to return if includesubconcepts is true 
+    :query lang: restrict results to a specified language (to be implemented)
     :reqheader Authorization: oAuth token for user authentication, see :ref:`/o/token <auth>`
 
     **Example request**:
 
     .. code-block:: none
 
-        curl -H "Authorization: Bearer {token}" -X GET http://localhost:8000/rdm/concepts/{resource instance id}
+        curl -H "Authorization: Bearer {token}" -X GET http://localhost:8000/rdm/concepts/{concept instance id}
 
         curl -H "Authorization: Bearer zo41Q1IMgAW30xOroiCUxjv3yci8Os" -X GET http://localhost:8000/rdm/concepts/5e04c83e-1ae3-42e8-ae31-4f7c25f737a5?format=json&indent=4
 
@@ -322,74 +322,6 @@ Concepts
                     "type": "identifier",
                     "value": "http://www.archesproject.org/0788acb1-9968-43e8-80f7-37b37e155f95"
                 }]
-            }, {
-                "hassubconcepts": false,
-                "id": "63fcea8a-a5c8-414a-b6b7-d7b2d1b12cb7",
-                "legacyoid": "http://www.archesproject.org/63fcea8a-a5c8-414a-b6b7-d7b2d1b12cb7",
-                "nodetype": "Concept",
-                "parentconcepts": [{
-                    "hassubconcepts": false,
-                    "id": "5e04c83e-1ae3-42e8-ae31-4f7c25f737a5",
-                    "legacyoid": "http://www.archesproject.org/5e04c83e-1ae3-42e8-ae31-4f7c25f737a5",
-                    "nodetype": "Concept",
-                    "parentconcepts": [],
-                    "relatedconcepts": [],
-                    "relationshiptype": "narrower",
-                    "subconcepts": [],
-                    "values": []
-                }],
-                "relatedconcepts": [],
-                "relationshiptype": "narrower",
-                "subconcepts": [],
-                "values": [{
-                    "category": "label",
-                    "conceptid": "63fcea8a-a5c8-414a-b6b7-d7b2d1b12cb7",
-                    "id": "6b7f1ab6-f69c-4d71-8ed2-4fb7792bc6da",
-                    "language": "en-US",
-                    "type": "prefLabel",
-                    "value": "Investigator"
-                }, {
-                    "category": "identifiers",
-                    "conceptid": "63fcea8a-a5c8-414a-b6b7-d7b2d1b12cb7",
-                    "id": "b3173444-77b2-4cd9-bf05-e258bdc5960f",
-                    "language": "en-US",
-                    "type": "identifier",
-                    "value": "http://www.archesproject.org/63fcea8a-a5c8-414a-b6b7-d7b2d1b12cb7"
-                }]
-            }, {
-                "hassubconcepts": false,
-                "id": "1341427e-5a31-4db0-b458-b4da3d698767",
-                "legacyoid": "http://www.archesproject.org/1341427e-5a31-4db0-b458-b4da3d698767",
-                "nodetype": "Concept",
-                "parentconcepts": [{
-                    "hassubconcepts": false,
-                    "id": "5e04c83e-1ae3-42e8-ae31-4f7c25f737a5",
-                    "legacyoid": "http://www.archesproject.org/5e04c83e-1ae3-42e8-ae31-4f7c25f737a5",
-                    "nodetype": "Concept",
-                    "parentconcepts": [],
-                    "relatedconcepts": [],
-                    "relationshiptype": "narrower",
-                    "subconcepts": [],
-                    "values": []
-                }],
-                "relatedconcepts": [],
-                "relationshiptype": "narrower",
-                "subconcepts": [],
-                "values": [{
-                    "category": "label",
-                    "conceptid": "1341427e-5a31-4db0-b458-b4da3d698767",
-                    "id": "1f088563-ed2a-407b-ac7e-95f8141ae7a6",
-                    "language": "en-US",
-                    "type": "prefLabel",
-                    "value": "Scientist"
-                }, {
-                    "category": "identifiers",
-                    "conceptid": "1341427e-5a31-4db0-b458-b4da3d698767",
-                    "id": "7b0914e8-1375-4f06-88fe-66785116679e",
-                    "language": "en-US",
-                    "type": "identifier",
-                    "value": "http://www.archesproject.org/1341427e-5a31-4db0-b458-b4da3d698767"
-                }]
             }],
             "values": [{
                 "category": "label",
@@ -416,7 +348,7 @@ Resources
 
     gets a paged list of resource instance ids in json-ld format
 
-    :query page: number specifing the page of results to return
+    :query page: number specifying the page of results to return
 
     **Example request**:
 
