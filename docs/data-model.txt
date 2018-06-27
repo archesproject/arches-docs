@@ -239,11 +239,11 @@ Used to extend or overwrite the default behavior of a ``card``
 
 Field description:
 
-* name - a name to be displayed in the UI for this component
-* description - a description to be displayed in the UI for this component
-* component - a require path for the JS module representing this component
-* componentname - a Knockout.js component name used by this component (for rendering via knockout's component binding handler)
-* defaultconfig - a default JSON configuration object to be used by cards that implement this component
+:name: a name to be displayed in the UI for this component
+:description: a description to be displayed in the UI for this component
+:component: a require path for the JS module representing this component
+:componentname: a Knockout.js component name used by this component (for rendering via knockout's component binding handler)
+:defaultconfig: a default JSON configuration object to be used by cards that implement this component
 
 Widget
 ======
@@ -297,7 +297,7 @@ Reports aggregate and display information that has been entered for a resource, 
         name = models.TextField(blank=True, null=True)
         template = models.ForeignKey(ReportTemplate, db_column='templateid')
         graph = models.ForeignKey(GraphModel, db_column='graphid')
-        config = JSONField(blank=True, null=True, db_column='config')
+        config =o JSONField(blank=True, null=True, db_column='config')
         formsconfig = JSONField(blank=True, null=True, db_column='formsconfig')
         active = models.BooleanField(default=False)
 
