@@ -29,7 +29,7 @@ As an example, Name/Name Type pairs tend to allow multiple values. Above, two ne
 Provisional Edits
 -----------------
 
-If you are a member of the Resource Editor group all of your edits, either creating new resources or editing existing ones, will be considered "Provisional". A member of the Resource Reviewer group can then approve your edits, making them "Authoritative".
+If you are a member of the Resource Editor group, all of your edits--either creating new resources or editing existing ones--will be considered "Provisional". A member of the Resource Reviewer group can then approve your edits, making them "Authoritative".
 
 1. Resource Editor makes an edit
 
