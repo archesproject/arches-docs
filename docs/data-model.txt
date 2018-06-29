@@ -21,9 +21,9 @@ Full Data Model
 Resource Model Overview
 ***********************
 
-Resources in an Arches database are separated into distinct resource "models", and Arches v4 allows users to create and modify resource models within the app interface itself, using the Resource Designer. To support these capabilities, resource models are defined with modular components that can be re-used throughout the system.
+Resources in an Arches database are separated into distinct resource "models", and users can create and modify resource models within the app interface itself, using the Arches Designer. To support these capabilities, resource models are defined with modular components that can be re-used throughout the system.
 
-The three basic components of a resource model are a `graph`_, a set of data entry `forms <#form>`_, and a report. In the Arches interface, each of these components comprise various sub-components, as illustrated below.
+The three basic components of a resource model are a `graph`_, a set of data entry `forms <#form>`_,  (also called menus) and a report. In the Arches interface, each of these components comprise various sub-components, as illustrated below.
 
 .. image :: images/resource-model-full.png
    :target: _images/resource-model-full.png
@@ -34,12 +34,11 @@ The Arches logical model has been developed to support this modular construction
 Graph Definition
 ****************
 
-A resource's graph is defined as a collection of `GraphModel <#graph>`_ instances. In the UI, these GraphModels are listed in the Graph Library. Each GraphModel is a collection of `NodeGroups <#nodegroup>`_, which are themselves collections of `Nodes <#node>`_. All Nodes and NodeGroups are connected to each other by `Edges <#edge>`_. GraphModels allow for a modular approach to creating resource graphs, as a GraphModel can easily be copied from one graph to another.
+In the UI you will see a distinction between "resource models" and "branches", but underneath these are both made from `GraphModel <#graph>`_ instances. The difference is that branches utilize fewer properties, and in a resource model `isresource = True`. In practice, a resource model graph is created by associating branch Cards (see below) with it. Visually, a GraphModel is a collection of `NodeGroups <#nodegroup>`_, which are themselves collections of `Nodes <#node>`_. All Nodes and NodeGroups are connected to each other by `Edges <#edge>`_. Logically, when branches are added to a resource model, the Cards for that branch are duplicated and associated with the appropriate resource model's GraphModel. This allow for a modular approach to creating resource graphs, as a branch can be reused in multiple resource models.
 
 NodeGroups can be a single Node or many Nodes. A basic example of a NodeGroup would be ``E1_NAME`` and ``E55_NAME_TYPE``. In this case, each ``E1_NAME`` must be paired with a ``E55_NAME_TYPE``, thereby necessitating a group in order to support multiple name/name_type combos associated with a given resource instance. In other words, NodeGroup represents the logical model-level requirement that certain sets of nodes must be grouped together to retain meaning.
 
 NodeGroups are used to create `Cards <#cardmodel>`_, and this is done based on the ``cardinality`` property. Therefore, not every NodeGroup will be used to create a Card, which allows NodeGroups to exist within other NodeGroups. The ``parentnodegroup`` property is used to record this nesting.
-
 
 Graph
 =====
@@ -393,6 +392,8 @@ Tile
         resourceinstance = models.ForeignKey(ResourceInstance, db_column='resourceinstanceid')
         parenttile = models.ForeignKey('self', db_column='parenttileid', blank=True, null=True)
         nodegroup = models.ForeignKey(NodeGroup, db_column='nodegroupid')
+        sortorder = models.IntegerField(blank=True, null=True, default=0)
+        provisionaledits = JSONField(blank=True, null=True, db_column='provisionaledits')
         class Meta:
             managed = True
             db_table = 'tiles'
