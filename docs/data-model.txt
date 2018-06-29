@@ -1,0 +1,564 @@
+##########
+Data Model
+##########
+
+*********************
+Graphical Data Models
+*********************
+
+Arches Models Only
+
+.. image:: images/arches-models-v4.2.x.png
+   :target: _images/arches-models-v4.2.x.png
+
+Full Data Model
+
+
+.. image:: images/full-data-model-v4.2.x.png
+   :target: _images/full-data-model-v4.2.x.png
+
+***********************
+Resource Model Overview
+***********************
+
+Resources in an Arches database are separated into distinct resource "models", and users can create and modify resource models within the app interface itself, using the Arches Designer. To support these capabilities, resource models are defined with modular components that can be re-used throughout the system.
+
+The three basic components of a resource model are a `graph`_, a set of data entry `forms <#form>`_,  (also called menus) and a report. In the Arches interface, each of these components comprise various sub-components, as illustrated below.
+
+.. image :: images/resource-model-full.png
+   :target: _images/resource-model-full.png
+
+The Arches logical model has been developed to support this modular construction, and the relevant models are described below as they pertain to the graph, forms (UI components), and the resource data itself (not illustrated above).
+
+****************
+Graph Definition
+****************
+
+In the UI you will see a distinction between "resource models" and "branches", but underneath these are both made from `GraphModel <#graph>`_ instances. The difference is that branches utilize fewer properties, and in a resource model `isresource = True`. In practice, a resource model graph is created by associating branch Cards (see below) with it. Visually, a GraphModel is a collection of `NodeGroups <#nodegroup>`_, which are themselves collections of `Nodes <#node>`_. All Nodes and NodeGroups are connected to each other by `Edges <#edge>`_. Logically, when branches are added to a resource model, the Cards for that branch are duplicated and associated with the appropriate resource model's GraphModel. This allow for a modular approach to creating resource graphs, as a branch can be reused in multiple resource models.
+
+NodeGroups can be a single Node or many Nodes. A basic example of a NodeGroup would be ``E1_NAME`` and ``E55_NAME_TYPE``. In this case, each ``E1_NAME`` must be paired with a ``E55_NAME_TYPE``, thereby necessitating a group in order to support multiple name/name_type combos associated with a given resource instance. In other words, NodeGroup represents the logical model-level requirement that certain sets of nodes must be grouped together to retain meaning.
+
+NodeGroups are used to create `Cards <#cardmodel>`_, and this is done based on the ``cardinality`` property. Therefore, not every NodeGroup will be used to create a Card, which allows NodeGroups to exist within other NodeGroups. The ``parentnodegroup`` property is used to record this nesting.
+
+Graph
+=====
+
+.. code-block:: python
+
+    class GraphModel(models.Model):
+        graphid = models.UUIDField(primary_key=True, default=uuid.uuid1)
+        name = models.TextField(blank=True, null=True)
+        description = models.TextField(blank=True, null=True)
+        deploymentfile = models.TextField(blank=True, null=True)
+        author = models.TextField(blank=True, null=True)
+        deploymentdate = models.DateTimeField(blank=True, null=True)
+        version = models.TextField(blank=True, null=True)
+        isresource = models.BooleanField()
+        isactive = models.BooleanField()
+        iconclass = models.TextField(blank=True, null=True)
+        color = models.TextField(blank=True, null=True)
+        subtitle = models.TextField(blank=True, null=True)
+        ontology = models.ForeignKey('Ontology', db_column='ontologyid', related_name='graphs', null=True, blank=True)
+        functions = models.ManyToManyField(to='Function', through='FunctionXGraph')
+        jsonldcontext = models.TextField(blank=True, null=True)
+
+        class Meta:
+            managed = True
+            db_table = 'graphs'
+
+NodeGroup
+=========
+
+.. code-block:: python
+
+    class NodeGroup(models.Model):
+        nodegroupid = models.UUIDField(primary_key=True, default=uuid.uuid1)
+        legacygroupid = models.TextField(blank=True, null=True)
+        cardinality = models.TextField(blank=True, default='1')
+        parentnodegroup = models.ForeignKey('self', db_column='parentnodegroupid', blank=True, null=True)  #Allows nodegroups within nodegroups
+
+        class Meta:
+            managed = True
+            db_table = 'node_groups'
+
+
+Node
+====
+
+.. code-block:: python
+
+    class Node(models.Model):
+        """
+        Name is unique across all resources because it ties a node to values within tiles. Recommend prepending resource model to node name.
+
+        """
+
+        nodeid = models.UUIDField(primary_key=True, default=uuid.uuid1)
+        name = models.TextField()
+        description = models.TextField(blank=True, null=True)
+        istopnode = models.BooleanField()
+        ontologyclass = models.TextField(blank=True, null=True)
+        datatype = models.TextField()
+        nodegroup = models.ForeignKey(NodeGroup, db_column='nodegroupid', blank=True, null=True)
+        graph = models.ForeignKey(GraphModel, db_column='graphid', blank=True, null=True)
+        config = JSONField(blank=True, null=True, db_column='config')
+        issearchable = models.BooleanField(default=True)
+        isrequired = models.BooleanField(default=False)
+
+        class Meta:
+            managed = True
+            db_table = 'nodes'
+
+
+Edge
+====
+
+.. code-block:: python
+
+    class Edge(models.Model):
+        edgeid = models.UUIDField(primary_key=True, default=uuid.uuid1)  # This field type is a guess.
+        name = models.TextField(blank=True, null=True)
+        description = models.TextField(blank=True, null=True)
+        ontologyproperty = models.TextField(blank=True, null=True)
+        domainnode = models.ForeignKey('Node', db_column='domainnodeid', related_name='edge_domains')
+        rangenode = models.ForeignKey('Node', db_column='rangenodeid', related_name='edge_ranges')
+        graph = models.ForeignKey('GraphModel', db_column='graphid', blank=True, null=True)
+
+        class Meta:
+            managed = True
+            db_table = 'edges'
+            unique_together = (('rangenode', 'domainnode'),)
+
+
+Function
+========
+
+.. code-block:: python
+
+    class Function(models.Model):
+        functionid = models.UUIDField(primary_key=True, default=uuid.uuid1)  # This field type is a guess.
+        name = models.TextField(blank=True, null=True)
+        functiontype = models.TextField(blank=True, null=True)
+        description = models.TextField(blank=True, null=True)
+        defaultconfig = JSONField(blank=True, null=True)
+        modulename = models.TextField(blank=True, null=True)
+        classname = models.TextField(blank=True, null=True)
+        component = models.TextField(blank=True, null=True, unique=True)
+
+        class Meta:
+            managed = True
+            db_table = 'functions'
+
+
+
+*******************
+UI Component Models
+*******************
+
+.. important::
+   In the Arches 4.2 UI, **Forms** are called **Menus**. The terms are used interchangeably in this documentation.
+
+
+A number of models exist specifically to support the resource model UI. The purpose of this is to create direct relationships between the resource graph and the data entry menus that are used to create resource instances. Generally, the process works like this:
+
+1. A resource graph is an organized collection NodeGroups which define what information will be gathered for a given resource model.
+
+2. A resource's data entry menus are made of `Cards <#cardmodel>`_ and `CardComponents <#cardcomponent>`_ that are tied to specific NodeGroups and define which input `Widgets <#widget>`_ will be used to gather values for each Node in that NodeGroup.
+
+.. image:: images/graph-forms.png
+   :target: _images/graph-forms.png
+
+Each graph model instance that represents a resource model has any number of Form instances attached to it, which are meant to thematically categorize sets of data entry. Forms are made up of one or more Cards. Cards are UI representations of a NodeGroup, and they encapsulate the Widgets that facilitate data entry for each Node in a given NodeGroup instance.
+
+While a Card will only handle data entry for a single NodeGroup (which may have many Nodes or children NodeGroups), a single NodeGroup can be handled by more than one Card. This allows a NodeGroup to be represented on one Card in the web app, and in a different Card in the mobile app. Like a NodeGroup, a Card may be nested within a parent Card, which is necessary in the case of wizards/card groups. These nested cards are called "sub-cards" in the Resource Manager interface.
+
+
+Form
+====
+
+.. code-block:: python
+
+    class Form(models.Model):
+        formid = models.UUIDField(primary_key=True, default=uuid.uuid1)  # This field type is a guess.
+        title = models.TextField(blank=True, null=True)
+        subtitle = models.TextField(blank=True, null=True)
+        iconclass = models.TextField(blank=True, null=True)
+        visible = models.BooleanField(default=True)
+        sortorder = models.IntegerField(blank=True, null=True, default=None)
+        graph = models.ForeignKey('GraphModel', db_column='graphid', blank=False, null=False)
+
+        class Meta:
+            managed = True
+            db_table = 'forms'
+
+CardModel
+=========
+A ``card`` is the UI container for ``tiles`` (see `tile`_) in menus, reports, etc
+
+.. code-block:: python
+
+    class CardModel(models.Model):
+        cardid = models.UUIDField(primary_key=True, default=uuid.uuid1)  # This field type is a guess.
+        name = models.TextField(blank=True, null=True)
+        description = models.TextField(blank=True, null=True)
+        instructions = models.TextField(blank=True, null=True)
+        helpenabled = models.BooleanField(default=False)
+        helptitle = models.TextField(blank=True, null=True)
+        helptext = models.TextField(blank=True, null=True)
+        nodegroup = models.ForeignKey('NodeGroup', db_column='nodegroupid')
+        graph = models.ForeignKey('GraphModel', db_column='graphid')
+        active = models.BooleanField(default=True)
+        visible = models.BooleanField(default=True)
+        sortorder = models.IntegerField(blank=True, null=True, default=None)
+        component = models.ForeignKey('CardComponent', db_column='componentid', default=uuid.UUID('f05e4d3a-53c1-11e8-b0ea-784f435179ea'))
+        config = JSONField(blank=True, null=True, db_column='config')
+
+        class Meta:
+            managed = True
+            db_table = 'cards'
+
+CardComponent
+=============
+Used to extend or overwrite the default behavior of a ``card``
+
+.. code-block:: python
+
+    class CardComponent(models.Model):
+        componentid = models.UUIDField(primary_key=True, default=uuid.uuid1)
+        name = models.TextField(blank=True, null=True)
+        description = models.TextField(blank=True, null=True)
+        component = models.TextField()
+        componentname = models.TextField()
+        defaultconfig = JSONField(blank=True, null=True, db_column='defaultconfig')
+
+        class Meta:
+            managed = True
+            db_table = 'card_components'
+
+
+Field description:
+
+:name: a name to be displayed in the UI for this component
+:description: a description to be displayed in the UI for this component
+:component: a require path for the JS module representing this component
+:componentname: a Knockout.js component name used by this component (for rendering via knockout's component binding handler)
+:defaultconfig: a default JSON configuration object to be used by cards that implement this component
+
+Widget
+======
+
+.. code-block:: python
+
+    class Widget(models.Model):
+        widgetid = models.UUIDField(primary_key=True, default=uuid.uuid1)  # This field type is a guess.
+        name = models.TextField(unique=True)
+        component = models.TextField(unique=True)
+        defaultconfig = JSONField(blank=True, null=True, db_column='defaultconfig')
+        helptext = models.TextField(blank=True, null=True)
+        datatype = models.TextField()
+
+        class Meta:
+            managed = True
+            db_table = 'widgets'
+
+DDataType
+=========
+Used to validate data entered into ``widgets``
+
+.. code-block:: python
+
+    class DDataType(models.Model):
+        datatype = models.TextField(primary_key=True)
+        iconclass = models.TextField()
+        modulename = models.TextField(blank=True, null=True)
+        classname = models.TextField(blank=True, null=True)
+        defaultwidget = models.ForeignKey(db_column='defaultwidget', to='models.Widget', null=True)
+        defaultconfig = JSONField(blank=True, null=True, db_column='defaultconfig')
+        configcomponent = models.TextField(blank=True, null=True)
+        configname = models.TextField(blank=True, null=True)
+        issearchable = models.NullBooleanField(default=False)
+        isgeometric = models.BooleanField()
+
+        class Meta:
+            managed = True
+            db_table = 'd_data_types'
+
+Report
+======
+
+Reports aggregate and display information that has been entered for a resource, and also allow you to keep certain information hidden from the public. You can also define multiple reports for a given Resource Model, which allow for even more flexibility in how you publish your data.
+
+
+.. code-block:: python
+
+    class Report(models.Model):
+        reportid = models.UUIDField(primary_key=True, default=uuid.uuid1)
+        name = models.TextField(blank=True, null=True)
+        template = models.ForeignKey(ReportTemplate, db_column='templateid')
+        graph = models.ForeignKey(GraphModel, db_column='graphid')
+        config =o JSONField(blank=True, null=True, db_column='config')
+        formsconfig = JSONField(blank=True, null=True, db_column='formsconfig')
+        active = models.BooleanField(default=False)
+
+        class Meta:
+            managed = True
+            db_table = 'reports'
+
+
+ReportTemplate
+==============
+
+Functionally similar to ``CardComponents``, a ReportTemplate allows for customization of the behavior of a ``Report``.
+
+.. code-block:: python
+
+    class ReportTemplate(models.Model):
+        templateid = models.UUIDField(primary_key=True, default=uuid.uuid1)
+        name = models.TextField(blank=True, null=True)
+        description = models.TextField(blank=True, null=True)
+        component = models.TextField()
+        componentname = models.TextField()
+        defaultconfig = JSONField(blank=True, null=True, db_column='defaultconfig')
+
+        class Meta:
+            managed = True
+            db_table = 'report_templates'
+
+
+*************
+Resource Data
+*************
+
+Three models are used to store Arches business data:
+
++ ``ResourceInstance`` - one per resource in the database
+
++ ``Tile`` - stores all business data
+
++ ``ResourceXResource`` - records relationships between resource instances
+
+
+Creating a new resource in the database instantiates a new `ResourceInstance`_, which belongs to one resource model and has a unique ``resourceinstanceid``. A resource instance may also have its own security/permissions properties in order to allow a fine-grained level of user-based permissions.
+
+Once data have been captured, they are stored as Tiles in the database. Each Tile stores one instance of all of the attributes of a given NodeGroup for a resource instance, as referenced by the ``resourceinstanceid``. This business data is stored as a JSON object, which is a dictionary with n number of keys/value pairs that represent a Node's id ``nodeid`` and that Node's value.
+
+in theory:
+
+.. code-block:: json
+
+   {
+        "nodeid": "node value",
+        "nodeid": "node value"
+   }
+
+
+
+in practice:
+
+.. code-block:: json
+
+   {
+        "20000000-0000-0000-0000-000000000002": "John",
+        "20000000-0000-0000-0000-000000000004": "Primary"
+   }
+
+(The keys in the second example refer to an ``E1_NAME`` node and an ``E55_NAME_TYPE`` node, respectively.)
+
+
+Arches also allows for the creation of relationships between resource instances, and these are stored as instances of the `ResourceXResource`_ model. The ``resourceinstanceidfrom`` and ``resourceinstanceidto`` fields create the relationship, and ``relationshiptype`` qualifies the relationship. The latter must correspond to the appropriate top node in the RDM. This constrains the list of available types of relationships available between resource instances.
+
+ResourceInstance
+================
+
+.. code-block:: python
+
+   class ResourceInstance(models.Model):
+    resourceinstanceid = models.UUIDField(primary_key=True, default=uuid.uuid1)
+    resourceclass = models.ForeignKey(Node, db_column='resourceclassid')
+    resourceinstancesecurity = models.TextField(blank=True, null=True) #Intended to support flagging individual resources as unavailable to given user roles.
+    "At present, this field is not fully baked.  Idea here is to acknowldge that we need to be able to apply role-based security at a resourceinstance by resourceinstance level."
+    class Meta:
+        managed = True
+        db_table = 'resource_instances'
+
+Tile
+====
+
+.. code-block:: python
+
+    class Tile(models.Model):
+        tileid = models.UUIDField(primary_key=True, default=uuid.uuid1)
+        data = JSONField(blank=True, null=True, db_column='tiledata')
+        resourceinstance = models.ForeignKey(ResourceInstance, db_column='resourceinstanceid')
+        parenttile = models.ForeignKey('self', db_column='parenttileid', blank=True, null=True)
+        nodegroup = models.ForeignKey(NodeGroup, db_column='nodegroupid')
+        sortorder = models.IntegerField(blank=True, null=True, default=0)
+        provisionaledits = JSONField(blank=True, null=True, db_column='provisionaledits')
+        class Meta:
+            managed = True
+            db_table = 'tiles'
+
+ResourceXResource
+=================
+
+.. code-block:: python
+
+    class ResourceXResource(models.Model):
+        resourcexid = models.AutoField(primary_key=True)
+        relationshiptype = models.ForeignKey('Value', db_column='relationshiptype')
+        resourceinstanceidfrom = models.ForeignKey('ResourceInstance', db_column='resourceinstanceidfrom', blank=True, null=True, related_name='resxres_resource_instance_ids_from')
+        resourceinstanceidto = models.ForeignKey('ResourceInstance', db_column='resourceinstanceidto', blank=True, null=True, related_name='resxres_resource_instance_ids_to')
+        notes = models.TextField(blank=True, null=True)
+        datestarted = models.DateField(blank=True, null=True)
+        dateended = models.DateField(blank=True, null=True)
+        class Meta:
+            managed = True
+            db_table = 'resource_x_resource'
+
+Edit Log
+==========
+
+A change in a Tile's contents, which is the result of any resource edits, is recorded as an instance of the EditLog model.
+
+.. code-block:: python
+
+    class EditLog(models.Model):
+        editlogid = models.UUIDField(primary_key=True, default=uuid.uuid1)
+        resourceclassid = models.TextField(blank=True, null=True)
+        resourceinstanceid = models.TextField(blank=True, null=True)
+        attributenodeid = models.TextField(blank=True, null=True)
+        tileinstanceid = models.TextField(blank=True, null=True)
+        edittype = models.TextField(blank=True, null=True)
+        newvalue = models.TextField(blank=True, null=True)
+        oldvalue = models.TextField(blank=True, null=True)
+        timestamp = models.DateTimeField(blank=True, null=True)
+        userid = models.TextField(blank=True, null=True)
+        user_firstname = models.TextField(blank=True, null=True)
+        user_lastname = models.TextField(blank=True, null=True)
+        user_email = models.TextField(blank=True, null=True)
+        note = models.TextField(blank=True, null=True)
+        class Meta:
+            managed = True
+            db_table = 'edit_log'
+
+
+**********
+RDM Models
+**********
+
+The RDM (Reference Data Manager) stores all of the vocabularies used in your Arches installation. Whether they are simple wordlists or a polyhierarchical thesauri, these vocabularies are stored as "concept schemes" and can be viewed as an aggregation of one or more `concepts <#concept>`_ and the semantic relationships (links) between those concepts.
+
+In the data model, a concept scheme consists of a set of Concept instances, each paired with a `Value`_. In our running name/name_type example, the ``E55_NAME_TYPE`` Node would be linked to a Concept (``E55_NAME_TYPE``) which would have two child Concepts. Thus, where the user sees a dropdown containing "Primary" and "Alternate", these are actually the Values of ``E55_NAME_TYPE``'s two descendent Concepts. The parent/child relationships between Concepts are stored as `Relation`_ instances.
+
+Concept
+=======
+
+.. code-block:: python
+
+    class Concept(models.Model):
+        conceptid = models.UUIDField(primary_key=True, default=uuid.uuid1)  //This field type is a guess.
+        nodetype = models.ForeignKey('DNodeType', db_column='nodetype')
+        legacyoid = models.TextField(unique=True)
+        class Meta:
+            managed = True
+            db_table = 'concepts'
+
+Relation
+========
+
+.. code-block:: python
+
+    class Relation(models.Model):
+        relationid = models.UUIDField(primary_key=True, default=uuid.uuid1)
+        conceptfrom = models.ForeignKey(Concept, db_column='conceptidfrom', related_name='relation_concepts_from')
+        conceptto = models.ForeignKey(Concept, db_column='conceptidto', related_name='relation_concepts_to')
+        relationtype = models.ForeignKey(DRelationType, db_column='relationtype')
+        class Meta:
+            managed = True
+            db_table = 'relations'
+
+Value
+=====
+
+.. code-block:: python
+
+    class Value(models.Model):
+        valueid = models.UUIDField(primary_key=True, default=uuid.uuid1)
+        concept = models.ForeignKey('Concept', db_column='conceptid')
+        valuetype = models.ForeignKey(DValueType, db_column='valuetype')
+        value = models.TextField()
+        language = models.ForeignKey(DLanguage, db_column='languageid', blank=True, null=True)
+        class Meta:
+            managed = True
+            db_table = 'values'
+
+
+**********
+Ontologies
+**********
+
+An ontology standardizes a set of valid CRM (Conceptual Reference Model) classes for Node instances, as well as a set of relationships that will define Edge instances. Most importantly, an ontology enforces which Edges can be used to connect which Nodes. If a pre-loaded ontology is designated for a GraphModel instance, every NodeGroup within that GraphModel must conform to that ontology. You may also create an "ontology-less" graph, which will not define specific CRM classes for the Nodes and Edges.
+
+These rules are stored as `OntologyClass`_ instances, which are stored as JSON. These JSON objects consist of dictionaries with two properties, `down` and `up`, each of which contains another two properties `ontology_property` and `ontology_classes` (`down` assumes a known domain class, while `up` assumes a known range class).
+
+.. code-block:: json
+
+  {
+    "down":[
+      {
+        "ontology_property":"P1_is_identified_by",
+        "ontology_classes": [
+          "E51_Contact_Point",
+          "E75_Conceptual_Object_Appellation",
+          "E42_Identifier",
+          "E45_Address",
+          "E41_Appellation"
+        ]
+      }
+    ],
+  "up":[
+    {
+      "ontology_property":"P1_identifies",
+      "ontology_classes":[
+        "E51_Contact_Point",
+        "E75_Conceptual_Object_Appellation",
+        "E42_Identifier"
+        ]
+      }
+    ]
+  }
+
+
+
+Aches comes preloaded with the `CIDOC CRM <http://www.cidoc-crm.org/>`_, an ontology created by ICOM (International Council of Museums) to model cultural heritage documentation. However, a developer may create and load an entirely new ontology.
+
+
+Ontology
+========
+
+.. code-block:: python
+
+    class Ontology(models.Model):
+        ontologyid = models.UUIDField(default=uuid.uuid1, primary_key=True)
+        name = models.TextField()
+        version = models.TextField()
+        path = models.FileField(storage=get_ontology_storage_system())
+        parentontology = models.ForeignKey('Ontology', db_column='parentontologyid', related_name='extensions', null=True, blank=True)
+        class Meta:
+            managed = True
+            db_table = 'ontologies'
+
+OntologyClass
+=============
+
+.. code-block:: python
+
+    class OntologyClass(models.Model):
+        ontologyclassid = models.UUIDField(default=uuid.uuid1, primary_key=True)
+        source = models.TextField()
+        target = JSONField(null=True)
+        ontology = models.ForeignKey('Ontology', db_column='ontologyid', related_name='ontologyclasses')
+        class Meta:
+            managed = True
+            db_table = 'ontologyclasses'
+            unique_together=(('source', 'ontology'),)
