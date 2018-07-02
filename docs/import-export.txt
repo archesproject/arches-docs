@@ -209,7 +209,7 @@ The json format is primarily a representation of the tiles table in the arches p
 Structure of the ``resourceinstance`` object::
 
     {
-        "graph_id": "<uuid,
+        "graph_id": uuid,
         "resourceinstanceid": uuid,
         "legacyid": uuid or text
     }
@@ -474,16 +474,18 @@ n-n: Many parent nodegroups/cards containing many child nodegroups/cards::
 
 Importing Resource Relations
 ============================
-It is possible to import `Related Resources` relationships between Resources you have imported.
 
-To do so, create a `.relations` file (a CSV-formatted file with a ``.relations`` extension). The header of the file should be as follows:
+It is possible to batch import Resource Relations (also referred to as "resource-to-resource relationships"). To do so, create a `.relations` file (a CSV-formatted file with a 
+``.relations`` extension). The header of the file should be as follows:
 
 .. code-block:: text
 
    resourceinstanceidfrom,resourceinstanceidto,relationshiptype,datestarted,dateended,notes
 
 
-In each row, ``resourceinstanceidfrom`` and ``resourceinstanceidto`` should be the same as a ``ResourceID`` from your business data CSV files. You can find the UUID value for your desired ``relationshiptype`` in the ``concept.json`` file downloaded with your resource model mapping file.
+In each row, ``resourceinstanceidfrom`` and ``resourceinstanceidto`` must either be an Arches ID (the UUID assigned to a new resource when it is first created) or a Legacy ID (an identifier from a legacy database that was used as a ``ResourceID`` in a JSON or CSV import file).
+
+You can find the UUID value for your desired ``relationshiptype`` in the ``concept.json`` file downloaded with your resource model mapping file.
 
 ``datestarted``, ``dateended`` and ``notes`` are optional fields. Dates should be formatted YYYY-MM-DD.
 
@@ -494,11 +496,11 @@ Once constructed you can import the ``.relations`` file with the following comma
    python manage.py packages -o import_business_data_relations -s 'path_to_relations_file'
 
 
-All the resources referenced in the .relations csv need to already be in arches. So make sure to run this command after you import all the business data referenced in the .relations file.
+All the resources referenced in the .relations CSV need to already be in your database. So make sure to run this command `after` you have imported all the business data referenced in the .relations file.
 
 .. note::
 
-   You can also create relationships between resources using the new ``resource-instance`` data type. When you are making the graph for a new resource model, you can set one of the nodes to hold a resource instance.
+   You can also create relationships between resources using the ``resource-instance`` data type. When you are making the graph for a new resource model, you can set one of the nodes to hold a resource instance. This is not the same as creating Resource Relations as described above.
 
 
 Exporting Arches Data
