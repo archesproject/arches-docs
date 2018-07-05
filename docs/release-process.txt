@@ -31,5 +31,5 @@ Feature Release Schedule:
     - 4.1 - User account creation, user profile management (released Jan 2018)
         - 4.1.1 - Bug fixes (released May 2018)
     - 4.2 - QA workflow (anticipated May 2018)
-    - 4.3 - Relaxed graph constraint (anticipated July 2018)
+    - 4.3 - Relaxed graph constraint (anticipated August 2018)
     - 4.4 - Mobile workflow (anticipated Summer 2018)
