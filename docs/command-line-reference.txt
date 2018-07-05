@@ -187,8 +187,9 @@ Other Data Management Commands
 
 .. code-block:: bash
 
-    python manage.py resources remove_resources [-y]
+    python manage.py resources remove_resources [-g graph_id][-y]
 
+-g  A Graph UUID to remove all the resource instances of.
 -y  Forces this command to run without interactive confirmation.
 
 Removes all resources from your database, but leaves the all resources models, branches, thesauri, and collections intact.
