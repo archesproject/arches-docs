@@ -45,7 +45,7 @@ All of these tasks are handled by adding a block of code to Apache's `../sites-e
    $ sudo nano /etc/apache2/sites-enabled/000-default.conf
 
 
-and in the appropriate ``<VirtualHost>`` stanza (``<Virtualhost *:80>`` in the most basic configuration) paste the following code, changing directory and file paths where necessary: ::
+and in the appropriate ``<VirtualHost>`` stanza (``<VirtualHost *:80>`` in the most basic configuration) paste the following code, changing directory and file paths where necessary: ::
 
 
   WSGIDaemonProcess arches python-path=/home/ubuntu/Projects/arches/arches:/home/ubuntu/Projects/ENV/lib/python2.7/site-packages
