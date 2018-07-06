@@ -26,6 +26,36 @@ The procedure for entering data depends on the widget: sometimes you'll enter te
 
 As an example, Name/Name Type pairs tend to allow multiple values. Above, two new Name/Name Type pairs are added. Note the manner in which saved values are summarized above the data entry widget. You may directly edit these existing values where they appear in this summary.
 
+Provisional Edits
+-----------------
+
+If you are a member of the Resource Editor group, all of your edits--either creating new resources or editing existing ones--will be considered "Provisional". A member of the Resource Reviewer group can then approve your edits, making them "Authoritative".
+
+1. Resource Editor makes an edit:
+
+    .. image:: images/prov-edits-submitted.png
+    
+2. For Resource Reviewers, search results indicate provisional data:
+
+    .. image:: images/prov-edits-search-result.png
+
+    `Resource Editors only see provisional data while using the resource editor.`
+    
+3. Resource Reviewer will be prompted to Q/A the edit:
+
+    .. image:: images/prov-edits-qa-prompt.png
+
+4. Accept or Decline:
+
+    .. image:: images/prov-edits-qa-dialog.png
+    
+5. Approved edits are immediately visible:
+
+    .. image:: images/prov-edits-final.png
+    
+.. tip:: A Resource Reviewer can also use the "Q/A Type" search filter (see images above) to only find resources with (or without) provisional edits.
+
+
 ````````````````````````````
 Related Resources
 ````````````````````````````
