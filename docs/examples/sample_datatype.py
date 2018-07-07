@@ -10,9 +10,9 @@ details = {
     'modulename': 'datatypes.py',
     'classname': 'SampleDataType',
     'defaultwidget': sample_widget,
-    'defaultconfig': None,
-    'configcomponent': None,
-    'configname': None,
+    'defaultconfig': {"placeholder_text":""},
+    'configcomponent': 'views/components/datatypes/sample-datatype',
+    'configname': 'sample-datatype-config',
     'isgeometric': False
     }
 
