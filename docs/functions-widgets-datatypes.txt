@@ -1,14 +1,14 @@
-#################################
-Functions, Widgets, and Datatypes
-#################################
+##############################################
+Creating New Functions, Widgets, and DataTypes
+##############################################
 
-`Functions`_, `Widgets`_, and `Datatypes`_ have overlapping
-functionality and architecture. All three constructs are used to add
-extra functionality to Arches upon data entry.
+`Functions`_, `Widgets`_, and `DataTypes`_ have overlapping
+functionality and architecture. These constructs are used to add
+extra functionality to Arches upon data entry or data visualization.
 
 At a high level, if you're trying to add a custom interface for
-entering business data, you'll use a Widget. If you need to enter a
-type of data unknown to Arches, you'll need a Datatype to go with your
+entering business data, you'll use a Widget. If you need to enter and display a
+type of data unknown to Arches, you'll need a new DataType to go with your
 Widget. If you need sophisticated side effects or to perform
 additional computation based on the data entered, it's time for a
 Function.
@@ -46,7 +46,7 @@ The third file is a Python file which contains a dictionary telling
 Arches some important details about your Function, as well as its main
 logic.
 
-    ``/Myproject/Myproject/functions/spatial_join.py``
+    ``/myproject/myproject/functions/spatial_join.py``
 
 .. note::
 
@@ -173,7 +173,7 @@ The Graph view passes a FunctionXGraph object to
 ``after_function_save``, along with the request.
 
 
-The FunxtionXGraph object has a ``config`` attribute which stores that
+The FunctionXGraph object has a ``config`` attribute which stores that
 instance's version of the ``defaultconfig`` dictionary. This is a good
 opportunity, for example, to programmatically manipulate the
 Function's configuration based on the Graph or any other server-side
@@ -238,7 +238,7 @@ re-register it. To unregister your function, simply run
 
     (ENV)$ python manage.py fn unregister --name 'Sample Function'
 
-All commands are listed in the :ref:`Command Line Reference`
+All commands are listed in :ref:`Command Line Reference - Function Commands <function commands>`.
 
 *******
 Widgets
@@ -246,7 +246,7 @@ Widgets
 
 Widgets allow you to customize how data of a certain DataType is
 entered into Arches, and further customize how that data is presented
-in Reports. You might have several Widgets for a given datatype,
+in Reports. You might have several Widgets for a given DataType,
 depending on how you want the Report to look or to match the context
 of a certain Resource.
 
@@ -277,7 +277,7 @@ To start, here is a sample Widget JSON file:
 
 The most important field here is the ``datatype`` field. This controls
 where your Widget will appear in the Arches Resource Designer. Nodes
-each have a DataType, and Widgets matching that datatype will be
+each have a DataType, and Widgets matching that DataType will be
 available when you're designing your Cards. The value must match an
 existing DataType within Arches.
 
@@ -338,7 +338,7 @@ Arches with:
 
     python manage.py widget update --source /Documents/projects/mynewproject/mynewproject/widgets/sample-widget.json
 
-All the Widget commands are detailed in the :ref:`Command Line Reference`
+All the Widget commands are detailed in :ref:`Command Line Reference - Widget Commands <widget commands>`.
 
 *********
 DataTypes
@@ -442,7 +442,7 @@ take here.
 Configuring your DataType
 =========================
 You'll need to populate the ``details`` dictionary to configure your
-new Datatype.
+new DataType.
 
 .. literalinclude:: examples/sample_datatype.py
    :language: python
@@ -452,7 +452,7 @@ new Datatype.
         **Required** The name of your datatype. The convention in
         Arches is to use *kebab-case* here.
 :iconclass:
-        **Required** The FontAwesome icon class your Datatype should
+        **Required** The FontAwesome icon class your DataType should
         use. Browse them `here
         <https://fontawesome.com/icons?d=gallery>`_.
 :modulename:
@@ -569,5 +569,4 @@ Registering your DataType
 =========================
 
 These commands are identical to working with Widgets, but you use the
-word ``datatype`` instead. All DataType commands are included in the
-:ref:`Command Line Reference`
+word ``datatype`` instead. Please refer to :ref:`Command Line Reference - Widget Commands <widget commands>`.
