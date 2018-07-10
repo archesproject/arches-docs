@@ -26,8 +26,14 @@ Function.
 Functions
 *********
 
-In Arches, you have the ability to write and implement custom Functions. A new
-Function must be created, registered, and then associated with a Resource Model.
+Functions are the most powerful extension to Arches. Functions
+associated with a Resource are called during various CRUD operations,
+and have access to any server-side model. Proficient Python/Django
+developers will find few limitations extending an Arches Project with
+Functions.
+
+Function must be created, registered, and then associated with a
+Resource Model.
 
 Creating a Function
 ===================
