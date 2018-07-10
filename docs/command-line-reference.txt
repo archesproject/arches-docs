@@ -244,8 +244,10 @@ load an ontology or ontology extension
 Managing Functions, DataTypes, and Widgets
 ==========================================
 
-functions
----------
+To learn how to build new Functions, DataTypes, or Widgets, please see ref:`Creating New Functions, Widgets, and DataTypes`.
+
+function commands
+-----------------
 
 **list registered functions**
 
@@ -271,8 +273,8 @@ Register a newly created function. These ``.py`` files should sit in your projec
 
 Unregister a function. Use the function name that is returned by ``fn list``.
 
-datatypes
----------
+datatype commands
+-----------------
 
 **list registered datatypes**
 
@@ -309,8 +311,8 @@ Unregisters a datatype, in this example a datatype named ``wkt-point``.
 
 -d  Name of datatype to unregister. Use the datatype name that is returned by ``datatype list``.
 
-widgets
--------
+widget commands
+---------------
 
 All widget-related commands are identical to those for datatypes, just substitute ``widget`` for ``datatype``. Also note that where datatypes are defined in ``.py`` files, widgets are defined in ``.json`` files.
 
