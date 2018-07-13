@@ -173,7 +173,7 @@ Temporal Search Settings
 Arches creates a Time Wheel based on the resources in your database, to allow for quick temporal visualization and queries. A few aspects of this temporal search are defined here.
 
 + **Color Ramp** - Currently unused (saved for future implementation). The color ramp for the time wheel. For further reference, check out the `d3 API reference <https://github.com/d3/d3-3.x-api-reference/blob/master/Ordinal-Scales.md>`_.
-+ **Time wheel configuration** - Currently unused (saved for future implementation).  You can, however, modify the time wheel configuration using the advanced settings, :ref:`Time Wheel Configuration`.
++ **Time wheel configuration** - Currently unused (saved for future implementation).
 
 Saved Searches
 ----------------
