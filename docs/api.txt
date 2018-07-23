@@ -585,6 +585,27 @@ Resources
             }
         }
 
+.. http:delete:: /resources/{uuid:resource instance id}
+
+    deletes a single resource instance
+
+    :reqheader Authorization: OAuth token for user authentication, see :ref:`/o/token <auth>`
+
+    **Example request**:
+
+    .. code-block:: none
+
+        curl -H "Authorization: Bearer {token}" -X DELETE http://localhost:8000/resources/{resource instance id}
+
+        curl -H "Authorization: Bearer zo41Q1IMgAW30xOroiCUxjv3yci8Os" -X DELETE http://localhost:8000/resources/00131129-7451-435d-aab9-33eb9031e6d1
+
+
+    **Example response**:
+
+    .. code-block:: http
+    
+        HTTP/1.0 200 OK
+
 
 Surveys
 =======
