@@ -5,7 +5,7 @@
 <!-- feel free to delete this header if the PR does not specifically address an issue -->
 
 #### further comments
-<!-- feel free to delete this header if the PR does not specifically address an issue -->
+<!-- feel free to delete this header if you have no comments -->
 
 ---
 
