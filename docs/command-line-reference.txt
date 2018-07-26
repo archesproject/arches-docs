@@ -444,7 +444,7 @@ Tileserver
 
 .. code-block:: bash
 
-   python manage.py packages -o delete_tile_server_layer <layer-name>
+   python manage.py packages -o delete_tile_server_layer -n <layer-name>
 
 Deletes the Tileserver layer with the specified name.
 
