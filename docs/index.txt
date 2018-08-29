@@ -30,17 +30,6 @@ Arches Documentation
     rdm
 
 .. toctree::
-    :caption: User Tutorials
-    :maxdepth: 2
-
-    create-resource-model
-    create-branch
-    add-branch-to-resource-model
-    create-menu
-    add-function
-    create-report
-
-.. toctree::
     :caption: Developing With Arches
     :maxdepth: 2
 
