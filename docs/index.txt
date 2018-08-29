@@ -24,7 +24,6 @@ Arches Documentation
 
     managing-resources
     creating-resources
-    using-the-arches-designer
     managing-map-layers
     ontologies-in-arches
     rdm
