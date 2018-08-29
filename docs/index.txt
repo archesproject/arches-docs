@@ -33,16 +33,16 @@ Arches Documentation
     :caption: Developing With Arches
     :maxdepth: 2
 
-    api
-    settings-beyond-the-ui
-    creating-a-development-environment
-    import-export
-    functions-widgets-datatypes
-    command-line-reference
     additional-configuration
-    creating-new-map-layers
     arches-and-elasticsearch
+    api
+    command-line-reference
+    creating-a-development-environment
+    functions-widgets-datatypes
+    creating-new-map-layers
     data-model
+    import-export
+    settings-beyond-the-ui
 
 
 .. toctree::
