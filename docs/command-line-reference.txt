@@ -6,7 +6,7 @@ Command Line Reference
 + `ElasticSearch Management`_
 + `Import Commands`_
 + `Export Commands`_
-+ `Managing Functions, DataTypes, and Widgets`_
++ `Managing Functions, DataTypes, Widgets, and Card Components`_
 + `Other Useful Django Commands`_
 
 This page serves as a quick reference guide for working with Arches
@@ -332,11 +332,11 @@ load an ontology or ontology extension
         Reload ontology. You'll be prompted to choose which ontology
         to reload.
 
-Managing Functions, DataTypes, and Widgets
-==========================================
+Managing Functions, DataTypes, Widgets, and Card Components
+===========================================================
 
 To learn how to build new Functions, DataTypes, or Widgets, please see
-ref:`Creating New Functions, Widgets, and DataTypes`.
+ref:`Creating New Functions, Widgets, Card Components, and DataTypes`.
 
 function commands
 -----------------
@@ -413,6 +413,14 @@ widget commands
 All widget-related commands are identical to those for datatypes, just
 substitute ``widget`` for ``datatype``. Also note that where datatypes
 are defined in ``.py`` files, widgets are defined in ``.json`` files.
+
+
+card component commands
+-----------------------
+
+All component-related commands are identical to those for widgets,
+just substitute ``card_component`` for ``widget``. JSON files are used
+to register Card Components.
 
 
 Creating Map Layers
