@@ -1,0 +1,8 @@
+{
+  "name": "My New Card",
+  "componentid": "eea17d6c-0c32-4536-8a01-392df734de1c",
+  "component": "/views/components/cards/my-new-card",
+  "componentname": "my-new-card",
+  "description": "An awesome new card that does wonderful things.",
+  "defaultconfig": {}
+}
