@@ -349,7 +349,10 @@ Method 2: Graph view
 
    .. note::
 
-      this should be a SKOS file with a .rdf file type.
+      This file should be a SKOS file in any format parseable by
+      Python's `RDFLib <https://rdflib.readthedocs.io/en/stable/>`_.
+      Examples include RDF/XML, N3, NTriples, N-Quads, Turtle, TriX,
+      RDFa and Microdata.
 
 #. Click **Open**. You will be returned to the Import New Concept
    Scheme pop-up and the name of the file will have populated the form.
@@ -359,6 +362,8 @@ Method 2: Graph view
    **ConceptSchemes** panel.
 
 .. image:: images/ImportConceptScheme.jpg
+
+
 
 **Exporting a scheme**
 ``````````````````````
