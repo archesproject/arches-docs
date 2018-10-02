@@ -43,7 +43,7 @@ To promote consistent data creation, update, and indexing workflows, Arches impl
 
 **License**
 
-    Arches is free software and is licensed under the terms of the GNU Affero General Public License (http://www.gnu.org/licenses/agpl-3.0.html)
+    Arches is free software and is licensed under the terms of the GNU Affero General Public License (http://www.gnu.org/licenses/agpl-3.0.html).
 
 Who is Arches for?
 ==================
@@ -59,6 +59,7 @@ Contributing To Arches
 
 Arches is open source software, which means that with your help it will continue to evolve and improve. Contributions to the project can take a few different forms:
 
-+ **Translations** We are always hoping to bring Arches to new audiences around the world. Please get in touch from the main Arches website to express your interest in helping with translations.
-+ **Bug Reports** Reporting bugs is strongly encouraged, and can be made at the official Arches GitHub repository. Please read this article before reporting issues.
-+ **Code Contributions** For developers, good guidelines on how to contribute to the Arches code-base can be found in our `GitHub repo wiki <https://github.com/archesproject/arches/wiki#contributing-to-arches>`_.
++ **Translations** We are always hoping to bring Arches to new audiences around the world. Please post on the `Arches forum <https://groups.google.com/d/forum/archesproject?hl=en>`_ if you are interested in contributing a translation.
++ **Bug Reports and Code Contribution** If you find issues with the Arches interface or code, or have the means to contribute code to fix existing issues, please begin by reading our guidelines for `Contributing to Arches <https://github.com/archesproject/arches/blob/master/.github/CONTRIBUTING.md>`_.
+
+, good guidelines on how to contribute to the Arches code-base can be found in our `GitHub repo wiki <https://github.com/archesproject/arches/wiki#contributing-to-arches>`_.
