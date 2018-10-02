@@ -61,5 +61,3 @@ Arches is open source software, which means that with your help it will continue
 
 + **Translations** We are always hoping to bring Arches to new audiences around the world. Please post on the `Arches forum <https://groups.google.com/d/forum/archesproject?hl=en>`_ if you are interested in contributing a translation.
 + **Bug Reports and Code Contribution** If you find issues with the Arches interface or code, or have the means to contribute code to fix existing issues, please begin by reading our guidelines for `Contributing to Arches <https://github.com/archesproject/arches/blob/master/.github/CONTRIBUTING.md>`_.
-
-, good guidelines on how to contribute to the Arches code-base can be found in our `GitHub repo wiki <https://github.com/archesproject/arches/wiki#contributing-to-arches>`_.
