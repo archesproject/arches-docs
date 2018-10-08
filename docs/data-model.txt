@@ -8,14 +8,14 @@ Graphical Data Models
 
 Arches Models Only
 
-.. image:: images/arches-models-v4.2.x.png
-   :target: _images/arches-models-v4.2.x.png
+.. image:: images/arches-models-v4.3.1.svg
+   :target: _images/arches-models-v4.3.1.svg
 
 Full Data Model
 
 
-.. image:: images/full-data-model-v4.2.x.png
-   :target: _images/full-data-model-v4.2.x.png
+.. image:: images/full-data-model-v4.3.1.svg
+   :target: _images/full-data-model-v4.3.1.svg
 
 ***********************
 Resource Model Overview
