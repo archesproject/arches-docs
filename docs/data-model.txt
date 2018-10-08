@@ -21,24 +21,56 @@ Full Data Model
 Resource Model Overview
 ***********************
 
-Resources in an Arches database are separated into distinct resource "models", and users can create and modify resource models within the app interface itself, using the Arches Designer. To support these capabilities, resource models are defined with modular components that can be re-used throughout the system.
+Resources in an Arches database are separated into distinct resource
+"models", and users can create and modify resource models within the
+app interface itself, using the Arches Designer. To support these
+capabilities, resource models are defined with modular components that
+can be re-used throughout the system.
 
-The three basic components of a resource model are a `graph`_, a set of data entry `forms <#form>`_,  (also called menus) and a report. In the Arches interface, each of these components comprise various sub-components, as illustrated below.
+The three basic components of a resource model are a `graph`_, a set
+of data entry `forms <#form>`_, (also called menus) and a report. In
+the Arches interface, each of these components comprise various
+sub-components, as illustrated below.
 
 .. image :: images/resource-model-full.png
    :target: _images/resource-model-full.png
 
-The Arches logical model has been developed to support this modular construction, and the relevant models are described below as they pertain to the graph, forms (UI components), and the resource data itself (not illustrated above).
+The Arches logical model has been developed to support this modular
+construction, and the relevant models are described below as they
+pertain to the graph, forms (UI components), and the resource data
+itself (not illustrated above).
 
 ****************
 Graph Definition
 ****************
 
-In the UI you will see a distinction between "resource models" and "branches", but underneath these are both made from `GraphModel <#graph>`_ instances. The difference is that branches utilize fewer properties, and in a resource model `isresource = True`. In practice, a resource model graph is created by associating branch Cards (see below) with it. Visually, a GraphModel is a collection of `NodeGroups <#nodegroup>`_, which are themselves collections of `Nodes <#node>`_. All Nodes and NodeGroups are connected to each other by `Edges <#edge>`_. Logically, when branches are added to a resource model, the Cards for that branch are duplicated and associated with the appropriate resource model's GraphModel. This allow for a modular approach to creating resource graphs, as a branch can be reused in multiple resource models.
+In the UI you will see a distinction between "resource models" and
+"branches", but underneath these are both made from `GraphModel
+<#graph>`_ instances. The difference is that branches utilize fewer
+properties, and in a resource model `isresource = True`. In practice,
+a resource model graph is created by associating branch Cards (see
+below) with it. Visually, a GraphModel is a collection of `NodeGroups
+<#nodegroup>`_, which are themselves collections of `Nodes
+<#node>`_. All Nodes and NodeGroups are connected to each other by
+`Edges <#edge>`_. Logically, when branches are added to a resource
+model, the Cards for that branch are duplicated and associated with
+the appropriate resource model's GraphModel. This allow for a modular
+approach to creating resource graphs, as a branch can be reused in
+multiple resource models.
 
-NodeGroups can be a single Node or many Nodes. A basic example of a NodeGroup would be ``E1_NAME`` and ``E55_NAME_TYPE``. In this case, each ``E1_NAME`` must be paired with a ``E55_NAME_TYPE``, thereby necessitating a group in order to support multiple name/name_type combos associated with a given resource instance. In other words, NodeGroup represents the logical model-level requirement that certain sets of nodes must be grouped together to retain meaning.
+NodeGroups can be a single Node or many Nodes. A basic example of a
+NodeGroup would be ``E1_NAME`` and ``E55_NAME_TYPE``. In this case,
+each ``E1_NAME`` must be paired with a ``E55_NAME_TYPE``, thereby
+necessitating a group in order to support multiple name/name_type
+combos associated with a given resource instance. In other words,
+NodeGroup represents the logical model-level requirement that certain
+sets of nodes must be grouped together to retain meaning.
 
-NodeGroups are used to create `Cards <#cardmodel>`_, and this is done based on the ``cardinality`` property. Therefore, not every NodeGroup will be used to create a Card, which allows NodeGroups to exist within other NodeGroups. The ``parentnodegroup`` property is used to record this nesting.
+NodeGroups are used to create `Cards <#cardmodel>`_, and this is done
+based on the ``cardinality`` property. Therefore, not every NodeGroup
+will be used to create a Card, which allows NodeGroups to exist within
+other NodeGroups. The ``parentnodegroup`` property is used to record
+this nesting.
 
 Graph
 =====
@@ -156,21 +188,40 @@ UI Component Models
 *******************
 
 .. important::
-   In the Arches 4.2 UI, **Forms** are called **Menus**. The terms are used interchangeably in this documentation.
+   In the Arches 4.2 UI, **Forms** are called **Menus**. The terms are
+   used interchangeably in this documentation.
 
 
-A number of models exist specifically to support the resource model UI. The purpose of this is to create direct relationships between the resource graph and the data entry menus that are used to create resource instances. Generally, the process works like this:
+A number of models exist specifically to support the resource model
+UI. The purpose of this is to create direct relationships between the
+resource graph and the data entry menus that are used to create
+resource instances. Generally, the process works like this:
 
-1. A resource graph is an organized collection NodeGroups which define what information will be gathered for a given resource model.
+#. A resource graph is an organized collection NodeGroups which define
+   what information will be gathered for a given resource model.
 
-2. A resource's data entry menus are made of `Cards <#cardmodel>`_ and `CardComponents <#cardcomponent>`_ that are tied to specific NodeGroups and define which input `Widgets <#widget>`_ will be used to gather values for each Node in that NodeGroup.
+#. A resource's data entry menus are made of `Cards <#cardmodel>`_ and
+   `CardComponents <#cardcomponent>`_ that are tied to specific
+   NodeGroups and define which input `Widgets <#widget>`_ will be used
+   to gather values for each Node in that NodeGroup.
 
 .. image:: images/graph-forms.png
    :target: _images/graph-forms.png
 
-Each graph model instance that represents a resource model has any number of Form instances attached to it, which are meant to thematically categorize sets of data entry. Forms are made up of one or more Cards. Cards are UI representations of a NodeGroup, and they encapsulate the Widgets that facilitate data entry for each Node in a given NodeGroup instance.
+Each graph model instance that represents a resource model has any
+number of Form instances attached to it, which are meant to
+thematically categorize sets of data entry. Forms are made up of one
+or more Cards. Cards are UI representations of a NodeGroup, and they
+encapsulate the Widgets that facilitate data entry for each Node in a
+given NodeGroup instance.
 
-While a Card will only handle data entry for a single NodeGroup (which may have many Nodes or children NodeGroups), a single NodeGroup can be handled by more than one Card. This allows a NodeGroup to be represented on one Card in the web app, and in a different Card in the mobile app. Like a NodeGroup, a Card may be nested within a parent Card, which is necessary in the case of wizards/card groups. These nested cards are called "sub-cards" in the Resource Manager interface.
+While a Card will only handle data entry for a single NodeGroup (which
+may have many Nodes or children NodeGroups), a single NodeGroup can be
+handled by more than one Card. This allows a NodeGroup to be
+represented on one Card in the web app, and in a different Card in the
+mobile app. Like a NodeGroup, a Card may be nested within a parent
+Card, which is necessary in the case of wizards/card groups. These
+nested cards are called "sub-cards" in the Resource Manager interface.
 
 
 Form
@@ -286,7 +337,11 @@ Used to validate data entered into ``widgets``
 Report
 ======
 
-Reports aggregate and display information that has been entered for a resource, and also allow you to keep certain information hidden from the public. You can also define multiple reports for a given Resource Model, which allow for even more flexibility in how you publish your data.
+Reports aggregate and display information that has been entered for a
+resource, and also allow you to keep certain information hidden from
+the public. You can also define multiple reports for a given Resource
+Model, which allow for even more flexibility in how you publish your
+data.
 
 
 .. code-block:: python
@@ -308,7 +363,8 @@ Reports aggregate and display information that has been entered for a resource, 
 ReportTemplate
 ==============
 
-Functionally similar to ``CardComponents``, a ReportTemplate allows for customization of the behavior of a ``Report``.
+Functionally similar to ``CardComponents``, a ReportTemplate allows
+for customization of the behavior of a ``Report``.
 
 .. code-block:: python
 
@@ -338,9 +394,18 @@ Three models are used to store Arches business data:
 + ``ResourceXResource`` - records relationships between resource instances
 
 
-Creating a new resource in the database instantiates a new `ResourceInstance`_, which belongs to one resource model and has a unique ``resourceinstanceid``. A resource instance may also have its own security/permissions properties in order to allow a fine-grained level of user-based permissions.
+Creating a new resource in the database instantiates a new
+`ResourceInstance`_, which belongs to one resource model and has a
+unique ``resourceinstanceid``. A resource instance may also have its
+own security/permissions properties in order to allow a fine-grained
+level of user-based permissions.
 
-Once data have been captured, they are stored as Tiles in the database. Each Tile stores one instance of all of the attributes of a given NodeGroup for a resource instance, as referenced by the ``resourceinstanceid``. This business data is stored as a JSON object, which is a dictionary with n number of keys/value pairs that represent a Node's id ``nodeid`` and that Node's value.
+Once data have been captured, they are stored as Tiles in the
+database. Each Tile stores one instance of all of the attributes of a
+given NodeGroup for a resource instance, as referenced by the
+``resourceinstanceid``. This business data is stored as a JSON object,
+which is a dictionary with n number of keys/value pairs that represent
+a Node's id ``nodeid`` and that Node's value.
 
 in theory:
 
@@ -362,10 +427,18 @@ in practice:
         "20000000-0000-0000-0000-000000000004": "Primary"
    }
 
-(The keys in the second example refer to an ``E1_NAME`` node and an ``E55_NAME_TYPE`` node, respectively.)
+(The keys in the second example refer to an ``E1_NAME`` node and an
+``E55_NAME_TYPE`` node, respectively.)
 
 
-Arches also allows for the creation of relationships between resource instances, and these are stored as instances of the `ResourceXResource`_ model. The ``resourceinstanceidfrom`` and ``resourceinstanceidto`` fields create the relationship, and ``relationshiptype`` qualifies the relationship. The latter must correspond to the appropriate top node in the RDM. This constrains the list of available types of relationships available between resource instances.
+Arches also allows for the creation of relationships between resource
+instances, and these are stored as instances of the
+`ResourceXResource`_ model. The ``resourceinstanceidfrom`` and
+``resourceinstanceidto`` fields create the relationship, and
+``relationshiptype`` qualifies the relationship. The latter must
+correspond to the appropriate top node in the RDM. This constrains the
+list of available types of relationships available between resource
+instances.
 
 ResourceInstance
 ================
@@ -418,7 +491,8 @@ ResourceXResource
 Edit Log
 ==========
 
-A change in a Tile's contents, which is the result of any resource edits, is recorded as an instance of the EditLog model.
+A change in a Tile's contents, which is the result of any resource
+edits, is recorded as an instance of the EditLog model.
 
 .. code-block:: python
 
@@ -446,9 +520,21 @@ A change in a Tile's contents, which is the result of any resource edits, is rec
 RDM Models
 **********
 
-The RDM (Reference Data Manager) stores all of the vocabularies used in your Arches installation. Whether they are simple wordlists or a polyhierarchical thesauri, these vocabularies are stored as "concept schemes" and can be viewed as an aggregation of one or more `concepts <#concept>`_ and the semantic relationships (links) between those concepts.
+The RDM (Reference Data Manager) stores all of the vocabularies used
+in your Arches installation. Whether they are simple wordlists or a
+polyhierarchical thesauri, these vocabularies are stored as "concept
+schemes" and can be viewed as an aggregation of one or more `concepts
+<#concept>`_ and the semantic relationships (links) between those
+concepts.
 
-In the data model, a concept scheme consists of a set of Concept instances, each paired with a `Value`_. In our running name/name_type example, the ``E55_NAME_TYPE`` Node would be linked to a Concept (``E55_NAME_TYPE``) which would have two child Concepts. Thus, where the user sees a dropdown containing "Primary" and "Alternate", these are actually the Values of ``E55_NAME_TYPE``'s two descendent Concepts. The parent/child relationships between Concepts are stored as `Relation`_ instances.
+In the data model, a concept scheme consists of a set of Concept
+instances, each paired with a `Value`_. In our running name/name_type
+example, the ``E55_NAME_TYPE`` Node would be linked to a Concept
+(``E55_NAME_TYPE``) which would have two child Concepts. Thus, where
+the user sees a dropdown containing "Primary" and "Alternate", these
+are actually the Values of ``E55_NAME_TYPE``'s two descendent
+Concepts. The parent/child relationships between Concepts are stored
+as `Relation`_ instances.
 
 Concept
 =======
@@ -497,9 +583,20 @@ Value
 Ontologies
 **********
 
-An ontology standardizes a set of valid CRM (Conceptual Reference Model) classes for Node instances, as well as a set of relationships that will define Edge instances. Most importantly, an ontology enforces which Edges can be used to connect which Nodes. If a pre-loaded ontology is designated for a GraphModel instance, every NodeGroup within that GraphModel must conform to that ontology. You may also create an "ontology-less" graph, which will not define specific CRM classes for the Nodes and Edges.
+An ontology standardizes a set of valid CRM (Conceptual Reference
+Model) classes for Node instances, as well as a set of relationships
+that will define Edge instances. Most importantly, an ontology
+enforces which Edges can be used to connect which Nodes. If a
+pre-loaded ontology is designated for a GraphModel instance, every
+NodeGroup within that GraphModel must conform to that ontology. You
+may also create an "ontology-less" graph, which will not define
+specific CRM classes for the Nodes and Edges.
 
-These rules are stored as `OntologyClass`_ instances, which are stored as JSON. These JSON objects consist of dictionaries with two properties, `down` and `up`, each of which contains another two properties `ontology_property` and `ontology_classes` (`down` assumes a known domain class, while `up` assumes a known range class).
+These rules are stored as `OntologyClass`_ instances, which are stored
+as JSON. These JSON objects consist of dictionaries with two
+properties, `down` and `up`, each of which contains another two
+properties `ontology_property` and `ontology_classes` (`down` assumes
+a known domain class, while `up` assumes a known range class).
 
 .. code-block:: json
 
@@ -530,7 +627,11 @@ These rules are stored as `OntologyClass`_ instances, which are stored as JSON. 
 
 
 
-Aches comes preloaded with the `CIDOC CRM <http://www.cidoc-crm.org/>`_, an ontology created by ICOM (International Council of Museums) to model cultural heritage documentation. However, a developer may create and load an entirely new ontology.
+Aches comes preloaded with the `CIDOC CRM
+<http://www.cidoc-crm.org/>`_, an ontology created by ICOM
+(International Council of Museums) to model cultural heritage
+documentation. However, a developer may create and load an entirely
+new ontology.
 
 
 Ontology
