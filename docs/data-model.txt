@@ -75,112 +75,33 @@ this nesting.
 Graph
 =====
 
-.. code-block:: python
-
-    class GraphModel(models.Model):
-        graphid = models.UUIDField(primary_key=True, default=uuid.uuid1)
-        name = models.TextField(blank=True, null=True)
-        description = models.TextField(blank=True, null=True)
-        deploymentfile = models.TextField(blank=True, null=True)
-        author = models.TextField(blank=True, null=True)
-        deploymentdate = models.DateTimeField(blank=True, null=True)
-        version = models.TextField(blank=True, null=True)
-        isresource = models.BooleanField()
-        isactive = models.BooleanField()
-        iconclass = models.TextField(blank=True, null=True)
-        color = models.TextField(blank=True, null=True)
-        subtitle = models.TextField(blank=True, null=True)
-        ontology = models.ForeignKey('Ontology', db_column='ontologyid', related_name='graphs', null=True, blank=True)
-        functions = models.ManyToManyField(to='Function', through='FunctionXGraph')
-        jsonldcontext = models.TextField(blank=True, null=True)
-
-        class Meta:
-            managed = True
-            db_table = 'graphs'
+.. literalinclude:: examples/arches/graphmodel.py
+   :language: python
 
 NodeGroup
 =========
 
-.. code-block:: python
-
-    class NodeGroup(models.Model):
-        nodegroupid = models.UUIDField(primary_key=True, default=uuid.uuid1)
-        legacygroupid = models.TextField(blank=True, null=True)
-        cardinality = models.TextField(blank=True, default='1')
-        parentnodegroup = models.ForeignKey('self', db_column='parentnodegroupid', blank=True, null=True)  #Allows nodegroups within nodegroups
-
-        class Meta:
-            managed = True
-            db_table = 'node_groups'
-
+.. literalinclude:: examples/arches/nodegroup.py
+   :language: python
 
 Node
 ====
 
-.. code-block:: python
-
-    class Node(models.Model):
-        """
-        Name is unique across all resources because it ties a node to values within tiles. Recommend prepending resource model to node name.
-
-        """
-
-        nodeid = models.UUIDField(primary_key=True, default=uuid.uuid1)
-        name = models.TextField()
-        description = models.TextField(blank=True, null=True)
-        istopnode = models.BooleanField()
-        ontologyclass = models.TextField(blank=True, null=True)
-        datatype = models.TextField()
-        nodegroup = models.ForeignKey(NodeGroup, db_column='nodegroupid', blank=True, null=True)
-        graph = models.ForeignKey(GraphModel, db_column='graphid', blank=True, null=True)
-        config = JSONField(blank=True, null=True, db_column='config')
-        issearchable = models.BooleanField(default=True)
-        isrequired = models.BooleanField(default=False)
-
-        class Meta:
-            managed = True
-            db_table = 'nodes'
-
+.. literalinclude:: examples/arches/node.py
+   :language: python
 
 Edge
 ====
 
-.. code-block:: python
-
-    class Edge(models.Model):
-        edgeid = models.UUIDField(primary_key=True, default=uuid.uuid1)  # This field type is a guess.
-        name = models.TextField(blank=True, null=True)
-        description = models.TextField(blank=True, null=True)
-        ontologyproperty = models.TextField(blank=True, null=True)
-        domainnode = models.ForeignKey('Node', db_column='domainnodeid', related_name='edge_domains')
-        rangenode = models.ForeignKey('Node', db_column='rangenodeid', related_name='edge_ranges')
-        graph = models.ForeignKey('GraphModel', db_column='graphid', blank=True, null=True)
-
-        class Meta:
-            managed = True
-            db_table = 'edges'
-            unique_together = (('rangenode', 'domainnode'),)
+.. literalinclude:: examples/arches/edge.py
+   :language: python
 
 
 Function
 ========
 
-.. code-block:: python
-
-    class Function(models.Model):
-        functionid = models.UUIDField(primary_key=True, default=uuid.uuid1)  # This field type is a guess.
-        name = models.TextField(blank=True, null=True)
-        functiontype = models.TextField(blank=True, null=True)
-        description = models.TextField(blank=True, null=True)
-        defaultconfig = JSONField(blank=True, null=True)
-        modulename = models.TextField(blank=True, null=True)
-        classname = models.TextField(blank=True, null=True)
-        component = models.TextField(blank=True, null=True, unique=True)
-
-        class Meta:
-            managed = True
-            db_table = 'functions'
-
+.. literalinclude:: examples/arches/function.py
+   :language: python
 
 
 *******************
@@ -224,68 +145,18 @@ Card, which is necessary in the case of wizards/card groups. These
 nested cards are called "sub-cards" in the Resource Manager interface.
 
 
-Form
-====
-
-.. code-block:: python
-
-    class Form(models.Model):
-        formid = models.UUIDField(primary_key=True, default=uuid.uuid1)  # This field type is a guess.
-        title = models.TextField(blank=True, null=True)
-        subtitle = models.TextField(blank=True, null=True)
-        iconclass = models.TextField(blank=True, null=True)
-        visible = models.BooleanField(default=True)
-        sortorder = models.IntegerField(blank=True, null=True, default=None)
-        graph = models.ForeignKey('GraphModel', db_column='graphid', blank=False, null=False)
-
-        class Meta:
-            managed = True
-            db_table = 'forms'
-
 CardModel
 =========
-A ``card`` is the UI container for ``tiles`` (see `tile`_) in menus, reports, etc
 
-.. code-block:: python
+.. literalinclude:: examples/arches/cardmodel.py
+   :language: python
 
-    class CardModel(models.Model):
-        cardid = models.UUIDField(primary_key=True, default=uuid.uuid1)  # This field type is a guess.
-        name = models.TextField(blank=True, null=True)
-        description = models.TextField(blank=True, null=True)
-        instructions = models.TextField(blank=True, null=True)
-        helpenabled = models.BooleanField(default=False)
-        helptitle = models.TextField(blank=True, null=True)
-        helptext = models.TextField(blank=True, null=True)
-        nodegroup = models.ForeignKey('NodeGroup', db_column='nodegroupid')
-        graph = models.ForeignKey('GraphModel', db_column='graphid')
-        active = models.BooleanField(default=True)
-        visible = models.BooleanField(default=True)
-        sortorder = models.IntegerField(blank=True, null=True, default=None)
-        component = models.ForeignKey('CardComponent', db_column='componentid', default=uuid.UUID('f05e4d3a-53c1-11e8-b0ea-784f435179ea'))
-        config = JSONField(blank=True, null=True, db_column='config')
-
-        class Meta:
-            managed = True
-            db_table = 'cards'
 
 CardComponent
 =============
-Used to extend or overwrite the default behavior of a ``card``
 
-.. code-block:: python
-
-    class CardComponent(models.Model):
-        componentid = models.UUIDField(primary_key=True, default=uuid.uuid1)
-        name = models.TextField(blank=True, null=True)
-        description = models.TextField(blank=True, null=True)
-        component = models.TextField()
-        componentname = models.TextField()
-        defaultconfig = JSONField(blank=True, null=True, db_column='defaultconfig')
-
-        class Meta:
-            managed = True
-            db_table = 'card_components'
-
+.. literalinclude:: examples/arches/cardcomponent.py
+   :language: python
 
 Field description:
 
@@ -298,66 +169,17 @@ Field description:
 Widget
 ======
 
-.. code-block:: python
+.. literalinclude:: examples/arches/widget.py
+   :language: python
 
-    class Widget(models.Model):
-        widgetid = models.UUIDField(primary_key=True, default=uuid.uuid1)  # This field type is a guess.
-        name = models.TextField(unique=True)
-        component = models.TextField(unique=True)
-        defaultconfig = JSONField(blank=True, null=True, db_column='defaultconfig')
-        helptext = models.TextField(blank=True, null=True)
-        datatype = models.TextField()
-
-        class Meta:
-            managed = True
-            db_table = 'widgets'
 
 DDataType
 =========
 Used to validate data entered into ``widgets``
 
-.. code-block:: python
+.. literalinclude:: examples/arches/ddatatype.py
+   :language: python
 
-    class DDataType(models.Model):
-        datatype = models.TextField(primary_key=True)
-        iconclass = models.TextField()
-        modulename = models.TextField(blank=True, null=True)
-        classname = models.TextField(blank=True, null=True)
-        defaultwidget = models.ForeignKey(db_column='defaultwidget', to='models.Widget', null=True)
-        defaultconfig = JSONField(blank=True, null=True, db_column='defaultconfig')
-        configcomponent = models.TextField(blank=True, null=True)
-        configname = models.TextField(blank=True, null=True)
-        issearchable = models.NullBooleanField(default=False)
-        isgeometric = models.BooleanField()
-
-        class Meta:
-            managed = True
-            db_table = 'd_data_types'
-
-Report
-======
-
-Reports aggregate and display information that has been entered for a
-resource, and also allow you to keep certain information hidden from
-the public. You can also define multiple reports for a given Resource
-Model, which allow for even more flexibility in how you publish your
-data.
-
-
-.. code-block:: python
-
-    class Report(models.Model):
-        reportid = models.UUIDField(primary_key=True, default=uuid.uuid1)
-        name = models.TextField(blank=True, null=True)
-        template = models.ForeignKey(ReportTemplate, db_column='templateid')
-        graph = models.ForeignKey(GraphModel, db_column='graphid')
-        config =o JSONField(blank=True, null=True, db_column='config')
-        formsconfig = JSONField(blank=True, null=True, db_column='formsconfig')
-        active = models.BooleanField(default=False)
-
-        class Meta:
-            managed = True
-            db_table = 'reports'
 
 
 ReportTemplate
@@ -366,20 +188,8 @@ ReportTemplate
 Functionally similar to ``CardComponents``, a ReportTemplate allows
 for customization of the behavior of a ``Report``.
 
-.. code-block:: python
-
-    class ReportTemplate(models.Model):
-        templateid = models.UUIDField(primary_key=True, default=uuid.uuid1)
-        name = models.TextField(blank=True, null=True)
-        description = models.TextField(blank=True, null=True)
-        component = models.TextField()
-        componentname = models.TextField()
-        defaultconfig = JSONField(blank=True, null=True, db_column='defaultconfig')
-
-        class Meta:
-            managed = True
-            db_table = 'report_templates'
-
+.. literalinclude:: examples/arches/reporttemplate.py
+   :language: python
 
 *************
 Resource Data
@@ -443,50 +253,23 @@ instances.
 ResourceInstance
 ================
 
-.. code-block:: python
+.. literalinclude:: examples/arches/resourceinstance.py
+   :language: python
 
-   class ResourceInstance(models.Model):
-    resourceinstanceid = models.UUIDField(primary_key=True, default=uuid.uuid1)
-    resourceclass = models.ForeignKey(Node, db_column='resourceclassid')
-    resourceinstancesecurity = models.TextField(blank=True, null=True) #Intended to support flagging individual resources as unavailable to given user roles.
-    "At present, this field is not fully baked.  Idea here is to acknowldge that we need to be able to apply role-based security at a resourceinstance by resourceinstance level."
-    class Meta:
-        managed = True
-        db_table = 'resource_instances'
 
-Tile
-====
+TileModel
+=========
 
-.. code-block:: python
+.. literalinclude:: examples/arches/tilemodel.py
+   :language: python
 
-    class Tile(models.Model):
-        tileid = models.UUIDField(primary_key=True, default=uuid.uuid1)
-        data = JSONField(blank=True, null=True, db_column='tiledata')
-        resourceinstance = models.ForeignKey(ResourceInstance, db_column='resourceinstanceid')
-        parenttile = models.ForeignKey('self', db_column='parenttileid', blank=True, null=True)
-        nodegroup = models.ForeignKey(NodeGroup, db_column='nodegroupid')
-        sortorder = models.IntegerField(blank=True, null=True, default=0)
-        provisionaledits = JSONField(blank=True, null=True, db_column='provisionaledits')
-        class Meta:
-            managed = True
-            db_table = 'tiles'
 
 ResourceXResource
 =================
 
-.. code-block:: python
+.. literalinclude:: examples/arches/resourcexresource.py
+   :language: python
 
-    class ResourceXResource(models.Model):
-        resourcexid = models.AutoField(primary_key=True)
-        relationshiptype = models.ForeignKey('Value', db_column='relationshiptype')
-        resourceinstanceidfrom = models.ForeignKey('ResourceInstance', db_column='resourceinstanceidfrom', blank=True, null=True, related_name='resxres_resource_instance_ids_from')
-        resourceinstanceidto = models.ForeignKey('ResourceInstance', db_column='resourceinstanceidto', blank=True, null=True, related_name='resxres_resource_instance_ids_to')
-        notes = models.TextField(blank=True, null=True)
-        datestarted = models.DateField(blank=True, null=True)
-        dateended = models.DateField(blank=True, null=True)
-        class Meta:
-            managed = True
-            db_table = 'resource_x_resource'
 
 Edit Log
 ==========
@@ -494,26 +277,8 @@ Edit Log
 A change in a Tile's contents, which is the result of any resource
 edits, is recorded as an instance of the EditLog model.
 
-.. code-block:: python
-
-    class EditLog(models.Model):
-        editlogid = models.UUIDField(primary_key=True, default=uuid.uuid1)
-        resourceclassid = models.TextField(blank=True, null=True)
-        resourceinstanceid = models.TextField(blank=True, null=True)
-        attributenodeid = models.TextField(blank=True, null=True)
-        tileinstanceid = models.TextField(blank=True, null=True)
-        edittype = models.TextField(blank=True, null=True)
-        newvalue = models.TextField(blank=True, null=True)
-        oldvalue = models.TextField(blank=True, null=True)
-        timestamp = models.DateTimeField(blank=True, null=True)
-        userid = models.TextField(blank=True, null=True)
-        user_firstname = models.TextField(blank=True, null=True)
-        user_lastname = models.TextField(blank=True, null=True)
-        user_email = models.TextField(blank=True, null=True)
-        note = models.TextField(blank=True, null=True)
-        class Meta:
-            managed = True
-            db_table = 'edit_log'
+.. literalinclude:: examples/arches/editlog.py
+   :language: python
 
 
 **********
@@ -539,45 +304,21 @@ as `Relation`_ instances.
 Concept
 =======
 
-.. code-block:: python
+.. literalinclude:: examples/arches/concept.py
+   :language: python
 
-    class Concept(models.Model):
-        conceptid = models.UUIDField(primary_key=True, default=uuid.uuid1)  //This field type is a guess.
-        nodetype = models.ForeignKey('DNodeType', db_column='nodetype')
-        legacyoid = models.TextField(unique=True)
-        class Meta:
-            managed = True
-            db_table = 'concepts'
 
 Relation
 ========
 
-.. code-block:: python
-
-    class Relation(models.Model):
-        relationid = models.UUIDField(primary_key=True, default=uuid.uuid1)
-        conceptfrom = models.ForeignKey(Concept, db_column='conceptidfrom', related_name='relation_concepts_from')
-        conceptto = models.ForeignKey(Concept, db_column='conceptidto', related_name='relation_concepts_to')
-        relationtype = models.ForeignKey(DRelationType, db_column='relationtype')
-        class Meta:
-            managed = True
-            db_table = 'relations'
+.. literalinclude:: examples/arches/relation.py
+   :language: python
 
 Value
 =====
 
-.. code-block:: python
-
-    class Value(models.Model):
-        valueid = models.UUIDField(primary_key=True, default=uuid.uuid1)
-        concept = models.ForeignKey('Concept', db_column='conceptid')
-        valuetype = models.ForeignKey(DValueType, db_column='valuetype')
-        value = models.TextField()
-        language = models.ForeignKey(DLanguage, db_column='languageid', blank=True, null=True)
-        class Meta:
-            managed = True
-            db_table = 'values'
-
+.. literalinclude:: examples/arches/value.py
+   :language: python
 
 **********
 Ontologies
@@ -637,29 +378,12 @@ new ontology.
 Ontology
 ========
 
-.. code-block:: python
+.. literalinclude:: examples/arches/ontology.py
+   :language: python
 
-    class Ontology(models.Model):
-        ontologyid = models.UUIDField(default=uuid.uuid1, primary_key=True)
-        name = models.TextField()
-        version = models.TextField()
-        path = models.FileField(storage=get_ontology_storage_system())
-        parentontology = models.ForeignKey('Ontology', db_column='parentontologyid', related_name='extensions', null=True, blank=True)
-        class Meta:
-            managed = True
-            db_table = 'ontologies'
 
 OntologyClass
 =============
 
-.. code-block:: python
-
-    class OntologyClass(models.Model):
-        ontologyclassid = models.UUIDField(default=uuid.uuid1, primary_key=True)
-        source = models.TextField()
-        target = JSONField(null=True)
-        ontology = models.ForeignKey('Ontology', db_column='ontologyid', related_name='ontologyclasses')
-        class Meta:
-            managed = True
-            db_table = 'ontologyclasses'
-            unique_together=(('source', 'ontology'),)
+.. literalinclude:: examples/arches/ontologyclass.py
+   :language: python
