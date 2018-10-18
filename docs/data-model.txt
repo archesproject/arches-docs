@@ -2,69 +2,107 @@
 Data Model
 ##########
 
-*********************
-Graphical Data Models
-*********************
-
-Arches Models Only
-
-.. image:: images/arches-models-v4.3.1.svg
-   :target: _images/arches-models-v4.3.1.svg
-
-Full Data Model
-
-
-.. image:: images/full-data-model-v4.3.1.svg
-   :target: _images/full-data-model-v4.3.1.svg
-
 ***********************
 Resource Model Overview
 ***********************
 
-Resources in an Arches database are separated into distinct resource
-"models", and users can create and modify resource models within the
-app interface itself, using the Arches Designer. To support these
-capabilities, resource models are defined with modular components that
-can be re-used throughout the system.
+Resources in an Arches database are separated into distinct Resource
+Models designed to represent a kind of physical real-world resource,
+such as a historic artifact or event. In the technical sense, the term
+**Resource Model** refers collectively to the following user-facing
+elements in Arches:
 
-The three basic components of a resource model are a `graph`_, a set
-of data entry `forms <#form>`_, (also called menus) and a report. In
-the Arches interface, each of these components comprise various
-sub-components, as illustrated below.
+#. A Graph data structure representing a physical real-world resource,
+   such as a building, a public figure, a website, an archaeological
+   site, or a historic document.
+
+#. A set of Cards to collect and display data associated with
+   instances of this Resource Model.
+
+
+
+The relationships among these components and their dependencies are
+visualized below:
 
 .. image :: images/resource-model-full.png
    :target: _images/resource-model-full.png
 
 The Arches logical model has been developed to support this modular
 construction, and the relevant models are described below as they
-pertain to the graph, forms (UI components), and the resource data
+pertain to the graph, UI components, and the resource data
 itself (not illustrated above).
+
+.. note::
+
+   In the UI you will see a distinction between "Resource Models" and
+   "Branches", but underneath these are both made from `Graph
+   <#graphmodel>`_ instances. The primary difference between the two
+   is the ``isresource`` property, which is set to ``True`` for a
+   Resource Model.
+
+   Branches are used for records that might appear in multiple
+   Resource Models, such as a person or place. Branches can be
+   included as children of any Ontology-permitted Node in a Resource
+   Model.
+
+
+
+***********
+Controllers
+***********
+
+Arches platform code defines base classes for some of its core data
+models, and uses `proxy models
+<https://docs.djangoproject.com/en/1.11/topics/db/models/#proxy-models>`_
+to implement their controllers. In smaller classes, "controller" code
+is included with the data model class. This documentation primarily
+discusses the models, but controller behavior is discussed where
+relevant to how the models are used, and all models are referred to by
+their more succinct "controller" name.
+
+=====================   ==================
+**Model**               **Controller**
+`ResourceInstance`_     `Resource <https://github.com/archesproject/arches/blob/4.3.1/arches/app/models/resource.py#L35>`_
+`CardModel`_            `Card <https://github.com/archesproject/arches/blob/4.3.1/arches/app/models/card.py#L25>`_
+`TileModel`_            `Tile <https://github.com/archesproject/arches/blob/4.3.1/arches/app/models/tile.py#L36>`_
+`GraphModel`_           `Graph <https://github.com/archesproject/arches/blob/4.3.1/arches/app/models/graph.py#L33>`_
+=====================   ==================
+
+.. note::
+
+   ``ResourceInstance`` breaks the implicit naming convention above
+   because the term "Resource Model" refers to a specific Arches
+   construct, as explained `above <#resource-model-overview>`_.
 
 ****************
 Graph Definition
 ****************
 
-In the UI you will see a distinction between "resource models" and
-"branches", but underneath these are both made from `GraphModel
-<#graph>`_ instances. The difference is that branches utilize fewer
-properties, and in a resource model `isresource = True`. In practice,
-a resource model graph is created by associating branch Cards (see
-below) with it. Visually, a GraphModel is a collection of `NodeGroups
-<#nodegroup>`_, which are themselves collections of `Nodes
-<#node>`_. All Nodes and NodeGroups are connected to each other by
-`Edges <#edge>`_. Logically, when branches are added to a resource
-model, the Cards for that branch are duplicated and associated with
-the appropriate resource model's GraphModel. This allow for a modular
-approach to creating resource graphs, as a branch can be reused in
-multiple resource models.
+A Graph is a collection of `NodeGroups <#nodegroup>`_, `Nodes
+<#node>`_, and `Edges <#edge>`_ which connect the Nodes.
 
-NodeGroups can be a single Node or many Nodes. A basic example of a
-NodeGroup would be ``E1_NAME`` and ``E55_NAME_TYPE``. In this case,
-each ``E1_NAME`` must be paired with a ``E55_NAME_TYPE``, thereby
-necessitating a group in order to support multiple name/name_type
-combos associated with a given resource instance. In other words,
-NodeGroup represents the logical model-level requirement that certain
-sets of nodes must be grouped together to retain meaning.
+.. note::
+
+   This definition does not include UI models and attributes, which
+   are discussed `below <#ui-component-models>`_
+
+In the Arches data model, Nodes represent their graph data structure
+namesakes, sometimes called `vertices`. A Node does the work of
+defining the Graph data structure in conjunction with one or more
+Edges, and sometimes collecting data.
+
+NodeGroups are an Arches feature used to represent a group of one or
+more Nodes that collect data. NodeGroups can be nested, creating a
+metadata structure which is used to display the graph in the UI and
+collect related information together.
+
+A NodeGroup exists for every Node that collects data, and both
+contains and shares its UUID with that node. NodeGroups with more than
+one member Node are used to collect composite or semantically-related
+information. For example, a NodeGroup for a Node named ``Name.E1`` may
+contain a ``Name Type.E55`` Node. This way, a Graph with this
+NodeGroup may store Names with multiple "types", always collecting the
+information together.
 
 NodeGroups are used to create `Cards <#cardmodel>`_, and this is done
 based on the ``cardinality`` property. Therefore, not every NodeGroup
@@ -72,10 +110,21 @@ will be used to create a Card, which allows NodeGroups to exist within
 other NodeGroups. The ``parentnodegroup`` property is used to record
 this nesting.
 
-Graph
-=====
+A user-defined Function may be registered and then associated with a
+Graph in order to extend the behavior of Arches. For more information,
+see :ref:`here <Functions>`.
+
+
+GraphModel
+==========
 
 .. literalinclude:: examples/arches/graphmodel.py
+   :language: python
+
+Node
+====
+
+.. literalinclude:: examples/arches/node.py
    :language: python
 
 NodeGroup
@@ -84,11 +133,6 @@ NodeGroup
 .. literalinclude:: examples/arches/nodegroup.py
    :language: python
 
-Node
-====
-
-.. literalinclude:: examples/arches/node.py
-   :language: python
 
 Edge
 ====
@@ -104,222 +148,6 @@ Function
    :language: python
 
 
-*******************
-UI Component Models
-*******************
-
-.. important::
-   In the Arches 4.2 UI, **Forms** are called **Menus**. The terms are
-   used interchangeably in this documentation.
-
-
-A number of models exist specifically to support the resource model
-UI. The purpose of this is to create direct relationships between the
-resource graph and the data entry menus that are used to create
-resource instances. Generally, the process works like this:
-
-#. A resource graph is an organized collection NodeGroups which define
-   what information will be gathered for a given resource model.
-
-#. A resource's data entry menus are made of `Cards <#cardmodel>`_ and
-   `CardComponents <#cardcomponent>`_ that are tied to specific
-   NodeGroups and define which input `Widgets <#widget>`_ will be used
-   to gather values for each Node in that NodeGroup.
-
-.. image:: images/graph-forms.png
-   :target: _images/graph-forms.png
-
-Each graph model instance that represents a resource model has any
-number of Form instances attached to it, which are meant to
-thematically categorize sets of data entry. Forms are made up of one
-or more Cards. Cards are UI representations of a NodeGroup, and they
-encapsulate the Widgets that facilitate data entry for each Node in a
-given NodeGroup instance.
-
-While a Card will only handle data entry for a single NodeGroup (which
-may have many Nodes or children NodeGroups), a single NodeGroup can be
-handled by more than one Card. This allows a NodeGroup to be
-represented on one Card in the web app, and in a different Card in the
-mobile app. Like a NodeGroup, a Card may be nested within a parent
-Card, which is necessary in the case of wizards/card groups. These
-nested cards are called "sub-cards" in the Resource Manager interface.
-
-
-CardModel
-=========
-
-.. literalinclude:: examples/arches/cardmodel.py
-   :language: python
-
-
-CardComponent
-=============
-
-.. literalinclude:: examples/arches/cardcomponent.py
-   :language: python
-
-Field description:
-
-:name: a name to be displayed in the UI for this component
-:description: a description to be displayed in the UI for this component
-:component: a require path for the JS module representing this component
-:componentname: a Knockout.js component name used by this component (for rendering via knockout's component binding handler)
-:defaultconfig: a default JSON configuration object to be used by cards that implement this component
-
-Widget
-======
-
-.. literalinclude:: examples/arches/widget.py
-   :language: python
-
-
-DDataType
-=========
-Used to validate data entered into ``widgets``
-
-.. literalinclude:: examples/arches/ddatatype.py
-   :language: python
-
-
-
-ReportTemplate
-==============
-
-Functionally similar to ``CardComponents``, a ReportTemplate allows
-for customization of the behavior of a ``Report``.
-
-.. literalinclude:: examples/arches/reporttemplate.py
-   :language: python
-
-*************
-Resource Data
-*************
-
-Three models are used to store Arches business data:
-
-+ ``ResourceInstance`` - one per resource in the database
-
-+ ``Tile`` - stores all business data
-
-+ ``ResourceXResource`` - records relationships between resource instances
-
-
-Creating a new resource in the database instantiates a new
-`ResourceInstance`_, which belongs to one resource model and has a
-unique ``resourceinstanceid``. A resource instance may also have its
-own security/permissions properties in order to allow a fine-grained
-level of user-based permissions.
-
-Once data have been captured, they are stored as Tiles in the
-database. Each Tile stores one instance of all of the attributes of a
-given NodeGroup for a resource instance, as referenced by the
-``resourceinstanceid``. This business data is stored as a JSON object,
-which is a dictionary with n number of keys/value pairs that represent
-a Node's id ``nodeid`` and that Node's value.
-
-in theory:
-
-.. code-block:: json
-
-   {
-        "nodeid": "node value",
-        "nodeid": "node value"
-   }
-
-
-
-in practice:
-
-.. code-block:: json
-
-   {
-        "20000000-0000-0000-0000-000000000002": "John",
-        "20000000-0000-0000-0000-000000000004": "Primary"
-   }
-
-(The keys in the second example refer to an ``E1_NAME`` node and an
-``E55_NAME_TYPE`` node, respectively.)
-
-
-Arches also allows for the creation of relationships between resource
-instances, and these are stored as instances of the
-`ResourceXResource`_ model. The ``resourceinstanceidfrom`` and
-``resourceinstanceidto`` fields create the relationship, and
-``relationshiptype`` qualifies the relationship. The latter must
-correspond to the appropriate top node in the RDM. This constrains the
-list of available types of relationships available between resource
-instances.
-
-ResourceInstance
-================
-
-.. literalinclude:: examples/arches/resourceinstance.py
-   :language: python
-
-
-TileModel
-=========
-
-.. literalinclude:: examples/arches/tilemodel.py
-   :language: python
-
-
-ResourceXResource
-=================
-
-.. literalinclude:: examples/arches/resourcexresource.py
-   :language: python
-
-
-Edit Log
-==========
-
-A change in a Tile's contents, which is the result of any resource
-edits, is recorded as an instance of the EditLog model.
-
-.. literalinclude:: examples/arches/editlog.py
-   :language: python
-
-
-**********
-RDM Models
-**********
-
-The RDM (Reference Data Manager) stores all of the vocabularies used
-in your Arches installation. Whether they are simple wordlists or a
-polyhierarchical thesauri, these vocabularies are stored as "concept
-schemes" and can be viewed as an aggregation of one or more `concepts
-<#concept>`_ and the semantic relationships (links) between those
-concepts.
-
-In the data model, a concept scheme consists of a set of Concept
-instances, each paired with a `Value`_. In our running name/name_type
-example, the ``E55_NAME_TYPE`` Node would be linked to a Concept
-(``E55_NAME_TYPE``) which would have two child Concepts. Thus, where
-the user sees a dropdown containing "Primary" and "Alternate", these
-are actually the Values of ``E55_NAME_TYPE``'s two descendent
-Concepts. The parent/child relationships between Concepts are stored
-as `Relation`_ instances.
-
-Concept
-=======
-
-.. literalinclude:: examples/arches/concept.py
-   :language: python
-
-
-Relation
-========
-
-.. literalinclude:: examples/arches/relation.py
-   :language: python
-
-Value
-=====
-
-.. literalinclude:: examples/arches/value.py
-   :language: python
-
 **********
 Ontologies
 **********
@@ -328,8 +156,8 @@ An ontology standardizes a set of valid CRM (Conceptual Reference
 Model) classes for Node instances, as well as a set of relationships
 that will define Edge instances. Most importantly, an ontology
 enforces which Edges can be used to connect which Nodes. If a
-pre-loaded ontology is designated for a GraphModel instance, every
-NodeGroup within that GraphModel must conform to that ontology. You
+pre-loaded ontology is designated for a Graph instance, every
+NodeGroup within that Graph must conform to that ontology. You
 may also create an "ontology-less" graph, which will not define
 specific CRM classes for the Nodes and Edges.
 
@@ -387,3 +215,224 @@ OntologyClass
 
 .. literalinclude:: examples/arches/ontologyclass.py
    :language: python
+
+**********
+RDM Models
+**********
+
+The RDM (Reference Data Manager) stores all of the vocabularies used
+in your Arches installation. Whether they are simple wordlists or a
+polyhierarchical thesauri, these vocabularies are stored as "concept
+schemes" and can be viewed as an aggregation of one or more `concepts
+<#concept>`_ and the semantic relationships (links) between those
+concepts.
+
+In the data model, a concept scheme consists of a set of Concept
+instances, each paired with a `Value`_. In our running name/name_type
+example, the ``Name Type.E55`` Node would be linked to a Concept
+(``Name Type.E55``) which would have two child Concepts. Thus, where
+the user sees a dropdown containing "Primary" and "Alternate", these
+are actually the Values of ``Name Type.E55``'s two descendent
+Concepts. The parent/child relationships between Concepts are stored
+as `Relation`_ instances.
+
+Concept
+=======
+
+.. literalinclude:: examples/arches/concept.py
+   :language: python
+
+
+Relation
+========
+
+.. literalinclude:: examples/arches/relation.py
+   :language: python
+
+Value
+=====
+
+.. literalinclude:: examples/arches/value.py
+   :language: python
+
+*************
+Resource Data
+*************
+
+Three models are used to store Arches business data:
+
++ ``ResourceInstance`` - one per resource in the database
+
++ ``Tile`` - stores all business data
+
++ ``ResourceXResource`` - records relationships between resource instances
+
+
+Creating a new resource in the database instantiates a new
+`ResourceInstance`_, which belongs to one resource model and has a
+unique ``resourceinstanceid``. A resource instance may also have its
+own security/permissions properties in order to allow a fine-grained
+level of user-based permissions.
+
+Once data have been captured, they are stored as Tiles in the
+database. Each Tile stores one instance of all of the attributes of a
+given NodeGroup for a resource instance, as referenced by the
+``resourceinstanceid``. This business data is stored as a JSON object,
+which is a dictionary with n number of keys/value pairs that represent
+a Node's id ``nodeid`` and that Node's value.
+
+in theory:
+
+.. code-block:: json
+
+   {
+        "nodeid": "node value",
+        "nodeid": "node value"
+   }
+
+
+
+in practice:
+
+.. code-block:: json
+
+   {
+        "20000000-0000-0000-0000-000000000002": "John",
+        "20000000-0000-0000-0000-000000000004": "Primary"
+   }
+
+(In keeping with our running example, the keys in the second example
+would refer to an ``Name.E1`` node and an ``Name Type.E55`` node,
+respectively.)
+
+
+Arches also allows for the creation of relationships between resource
+instances, and these are stored as instances of the
+`ResourceXResource`_ model. The ``resourceinstanceidfrom`` and
+``resourceinstanceidto`` fields create the relationship, and
+``relationshiptype`` qualifies the relationship. The latter must
+correspond to the appropriate top node in the RDM. This constrains the
+list of available types of relationships available between resource
+instances.
+
+ResourceInstance
+================
+
+.. literalinclude:: examples/arches/resourceinstance.py
+   :language: python
+
+
+TileModel
+=========
+
+.. literalinclude:: examples/arches/tilemodel.py
+   :language: python
+
+
+ResourceXResource
+=================
+
+.. literalinclude:: examples/arches/resourcexresource.py
+   :language: python
+
+
+Edit Log
+==========
+
+A change in a Tile's contents, which is the result of any resource
+edits, is recorded as an instance of the EditLog model.
+
+.. literalinclude:: examples/arches/editlog.py
+   :language: python
+
+*******************
+UI Component Models
+*******************
+
+A number of models exist specifically to support the resource model
+UI. The purpose of this is to create direct relationships between the
+resource graph and the data entry cards that are used to create
+resource instances. Generally, the process works like this:
+
+#. A resource graph is an organized collection of NodeGroups which
+   define what information will be gathered for a given resource
+   model.
+
+#. A resource's `Cards <#cardmodel>`_ and are tied to specific
+   NodeGroups and define which input `Widgets <#widget>`_ will be used
+   to gather values for each Node in that NodeGroup. CardComponents
+   are used to render the cards in various contexts in the Arches UI.
+
+
+.. image:: images/graph-forms.png
+   :target: _images/graph-forms.png
+
+
+Cards are UI representations of a NodeGroup, and they encapsulate the
+Widgets that facilitate data entry for each Node in a given NodeGroup
+instance.
+
+While a Card will only handle data entry for a single NodeGroup (which
+may have many Nodes or NodeGroups), a single NodeGroup can be handled
+by more than one Card.
+
+Throughout the Arches UI, CardComponents are used to render Cards in
+both read-only and data entry contexts.
+
+.. note::
+
+   Beginning in Arches 4.3, CardComponents provide functionality
+   formerly provided by Forms, Menus, and Reports.
+
+
+CardModel
+=========
+
+.. literalinclude:: examples/arches/cardmodel.py
+   :language: python
+
+
+CardComponent
+=============
+
+A CardComponent renders a Card.
+
+.. literalinclude:: examples/arches/cardcomponent.py
+   :language: python
+
+Field description:
+
+:name: a name to be displayed in the UI for this component
+:description: a description to be displayed in the UI for this component
+:component: a require path for the JS module representing this component
+:componentname: a Knockout.js component name used by this component (for rendering via knockout's component binding handler)
+:defaultconfig: a default JSON configuration object to be used by cards that implement this component
+
+Widget
+======
+
+.. literalinclude:: examples/arches/widget.py
+   :language: python
+
+
+DDataType
+=========
+Used to validate data entered into ``widgets``
+
+.. literalinclude:: examples/arches/ddatatype.py
+   :language: python
+
+
+******************************
+Data Model Graph Visualization
+******************************
+
+Arches Models Only
+
+.. image:: images/arches-models-v4.3.1.svg
+   :target: _images/arches-models-v4.3.1.svg
+
+Full Data Model
+
+.. image:: images/full-data-model-v4.3.1.svg
+   :target: _images/full-data-model-v4.3.1.svg
