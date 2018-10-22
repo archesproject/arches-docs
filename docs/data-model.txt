@@ -376,12 +376,12 @@ While a Card will only handle data entry for a single NodeGroup (which
 may have many Nodes or NodeGroups), a single NodeGroup can be handled
 by more than one Card.
 
-Throughout the Arches UI, CardComponents are used to render Cards in
+Throughout the Arches UI, Card Components are used to render Cards in
 both read-only and data entry contexts.
 
 .. note::
 
-   Beginning in Arches 4.3, CardComponents provide functionality
+   Beginning in Arches 4.3, Card Components provide functionality
    formerly provided by Forms, Menus, and Reports.
 
 
@@ -392,10 +392,10 @@ CardModel
    :language: python
 
 
-CardComponent
-=============
+Card Component
+==============
 
-A CardComponent renders a Card.
+A Card Component renders a Card.
 
 .. literalinclude:: examples/arches/cardcomponent.py
    :language: python
