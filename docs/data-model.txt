@@ -24,8 +24,8 @@ elements in Arches:
 The relationships among these components and their dependencies are
 visualized below:
 
-.. image :: images/resource-model-full.png
-   :target: _images/resource-model-full.png
+.. image :: images/resource-model.png
+   :target: _images/resource-model.png
 
 The Arches logical model has been developed to support this modular
 construction, and the relevant models are described below as they
@@ -360,12 +360,13 @@ resource instances. Generally, the process works like this:
 
 #. A resource's `Cards <#cardmodel>`_ and are tied to specific
    NodeGroups and define which input `Widgets <#widget>`_ will be used
-   to gather values for each Node in that NodeGroup. CardComponents
-   are used to render the cards in various contexts in the Arches UI.
+   to gather values for each Node in that NodeGroup. `Card Components
+   <#cardcomponent>`_ are used to render the cards in various contexts
+   in the Arches UI.
 
 
-.. image:: images/graph-forms.png
-   :target: _images/graph-forms.png
+.. image:: images/graph-cards.png
+   :target: _images/graph-cards.png
 
 
 Cards are UI representations of a NodeGroup, and they encapsulate the
