@@ -1,0 +1,805 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="297mm"
+   height="210mm"
+   viewBox="0 0 1052.3622 744.09448"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.92.2 2405546, 2018-03-11"
+   sodipodi:docname="graph-cards.svg"
+   inkscape:export-filename="/home/chad/code/legiongis/arches-docs/docs/images/resource-model-full.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96">
+  <defs
+     id="defs4">
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker6342"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path6344"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.4) rotate(180) translate(10,0)" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible;"
+       id="marker6193"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="scale(0.4) rotate(180) translate(10,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path6195" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker23465"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path23467"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker5706"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path5708"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.4) rotate(180) translate(10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker5534"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path5536"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.4) rotate(180) translate(10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Mend"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path5079"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.4) rotate(180) translate(10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lend"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path5073"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-5"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5079-2"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker23465-3"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path23467-5"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-1"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5079-8"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker23465-8"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path23467-0"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-6"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5079-4"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-6-4"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5079-4-5"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker23465-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path23467-1"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-52"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5079-24"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker6342-2"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6344-9"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker6193-7"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path6195-4" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="7.919596"
+     inkscape:cx="737.15247"
+     inkscape:cy="394.466"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer7"
+     showgrid="false"
+     inkscape:window-width="3200"
+     inkscape:window-height="1800"
+     inkscape:window-x="0"
+     inkscape:window-y="-33"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer7"
+     inkscape:label="boxes 3">
+    <rect
+       style="opacity:1;fill:#f0f0f0;fill-opacity:1;stroke:none;stroke-width:1.03753769;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:3.11261343, 3.11261343;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4170-0-9-3-4-3"
+       width="289.73853"
+       height="373.09549"
+       x="716.34125"
+       y="100.70068"
+       rx="6.7541623"
+       ry="7.0052462"
+       inkscape:export-filename="/home/chad/code/legiongis/arches-docs/docs/images/graph-forms.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="opacity:1;fill:#f0f0f0;fill-opacity:1;stroke:none;stroke-width:1.03753769;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:3.11261335, 3.11261335;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4170-0-9-3-4"
+       width="289.73849"
+       height="373.09549"
+       x="407.93564"
+       y="100.46393"
+       rx="6.7541618"
+       ry="7.0052457"
+       inkscape:export-filename="/home/chad/code/legiongis/arches-docs/docs/images/graph-forms.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="opacity:1;fill:#dcdcdc;fill-opacity:1;stroke:#ff0000;stroke-width:1.28299999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:3.849, 3.849;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4170-0-9-2-32-95"
+       width="244.70264"
+       height="157.55981"
+       x="430.45355"
+       y="165.73769"
+       ry="1.8060702"
+       rx="7.2226367" />
+    <rect
+       style="opacity:1;fill:#f0f0f0;fill-opacity:1;stroke:none;stroke-width:1.28299999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:3.849, 3.849;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4170-0-9-3-6-5"
+       width="254.22432"
+       height="319.6149"
+       x="130.72255"
+       y="100.46393"
+       rx="5.9262824"
+       ry="6.0010939"
+       inkscape:export-filename="/home/chad/code/legiongis/arches-docs/docs/images/graph-forms.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="opacity:1;fill:#dcdcdc;fill-opacity:1;stroke:#ff0000;stroke-width:1.28299999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:3.849, 3.849;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4170-0-9-2-32-9-0"
+       width="244.70264"
+       height="107.05219"
+       x="430.45358"
+       y="348.06464"
+       ry="1.2271135"
+       rx="7.2226367" />
+    <rect
+       style="opacity:1;fill:#c8c8c8;fill-opacity:1;stroke:none;stroke-width:1.28299999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4170-0-9-2-32-7-7-4"
+       width="199.28445"
+       height="33.274094"
+       x="453.56848"
+       y="400.25824"
+       ry="0.38141295"
+       rx="5.8820753" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4136-1-4-02-7-5-2"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;line-height:0.01%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(292.20815,289.08394)"><flowRegion
+         id="flowRegion4138-9-1-7-6-6-25"><rect
+           id="rect4140-3-6-6-8-8-9"
+           width="502.85715"
+           height="128.57143"
+           x="237.14285"
+           y="69.808769"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start" /></flowRegion><flowPara
+         id="flowPara4506-2-8"
+         style="font-size:22.5px;line-height:1.25">Card</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4136-1-4-02-7-0-0-0"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;line-height:0.01%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(231.97481,335.15674)"><flowRegion
+         id="flowRegion4138-9-1-7-6-7-5-1"><rect
+           id="rect4140-3-6-6-8-9-1-41"
+           width="502.85715"
+           height="128.57143"
+           x="237.14285"
+           y="69.808769"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:20px;line-height:100%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start" /></flowRegion><flowPara
+         id="flowPara4532-8-0"
+         style="font-size:20px;line-height:1">Data Input Widget</flowPara></flowRoot>    <g
+       id="g12342-5"
+       transform="translate(-17.961433,-285.02342)">
+      <rect
+         rx="2.9639037"
+         ry="1.5804183"
+         y="546.94159"
+         x="164.94893"
+         height="137.87413"
+         width="100.41692"
+         id="rect4170-0-9-2-3-8-0-1"
+         style="opacity:1;fill:#dcdcdc;fill-opacity:1;stroke:#ff0000;stroke-width:1.28299999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:3.849, 3.849;stroke-dashoffset:0;stroke-opacity:1" />
+      <flowRoot
+         transform="translate(-270.69554,498.05232)"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;line-height:0.01%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot4136-1-4-02-8-8-0"
+         xml:space="preserve"><flowRegion
+           id="flowRegion4138-9-1-7-0-6-1"><rect
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:25px;line-height:93.99999976%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle"
+             y="69.808769"
+             x="237.14285"
+             height="128.57143"
+             width="502.85715"
+             id="rect4140-3-6-6-80-4-84" /></flowRegion><flowPara
+           style="font-size:25px;line-height:87.99999952%;text-align:center;text-anchor:middle"
+           id="flowPara4905-7">Node</flowPara><flowPara
+           style="font-size:25px;line-height:87.99999952%;text-align:center;text-anchor:middle"
+           id="flowPara4907-67">Group</flowPara></flowRoot>      <path
+         sodipodi:open="true"
+         d="m 206.00731,665.8735 a 26.640331,25.463022 0 0 1 -16.6414,-32.24796 26.640331,25.463022 0 0 1 33.69007,-16.00041 26.640331,25.463022 0 0 1 16.83885,32.15419 26.640331,25.463022 0 0 1 -33.59138,16.18886"
+         sodipodi:end="1.8877132"
+         sodipodi:start="1.899435"
+         sodipodi:ry="25.463022"
+         sodipodi:rx="26.640331"
+         sodipodi:cy="641.77319"
+         sodipodi:cx="214.60561"
+         sodipodi:type="arc"
+         id="path4832-6-6-6"
+         style="opacity:1;fill:#c8c8c8;fill-opacity:1;stroke:none;stroke-width:1.28299999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <flowRoot
+         transform="matrix(0.73038526,0,0,1,21.95309,557.57769)"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;line-height:0.01%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot4136-1-4-02-7-2-7-6-48"
+         xml:space="preserve"><flowRegion
+           id="flowRegion4138-9-1-7-6-5-8-2-89"><rect
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start"
+             y="69.808769"
+             x="237.14285"
+             height="128.57143"
+             width="502.85715"
+             id="rect4140-3-6-6-8-0-6-0-9" /></flowRegion><flowPara
+           id="flowPara4734-1-8-7"
+           style="font-size:22.5px;line-height:1.25">Node</flowPara></flowRoot>    </g>
+    <g
+       id="g12317-6"
+       transform="translate(101.40397,-152.69343)">
+      <rect
+         rx="3.1001177"
+         ry="2.3483615"
+         y="318.43112"
+         x="163.69431"
+         height="204.86874"
+         width="105.03185"
+         id="rect4170-0-9-2-3-8-6"
+         style="opacity:1;fill:#dcdcdc;fill-opacity:1;stroke:#ff0000;stroke-width:1.28299999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:3.84899998, 3.84899998;stroke-dashoffset:0;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path5004-0-4-9-7"
+         d="m 215.48374,430.3403 -0.44811,23.16804"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend-52)" />
+      <flowRoot
+         transform="translate(-272.93225,261.71588)"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;line-height:0.01%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot4136-1-4-02-8-8-5-2"
+         xml:space="preserve"><flowRegion
+           id="flowRegion4138-9-1-7-0-6-2-4"><rect
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:25px;line-height:93.99999976%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle"
+             y="69.808769"
+             x="237.14285"
+             height="128.57143"
+             width="502.85715"
+             id="rect4140-3-6-6-80-4-8-5" /></flowRegion><flowPara
+           style="font-size:25px;line-height:87.99999952%;text-align:center;text-anchor:middle"
+           id="flowPara4905-0-3">Node</flowPara><flowPara
+           style="font-size:25px;line-height:87.99999952%;text-align:center;text-anchor:middle"
+           id="flowPara4907-1-7">Group</flowPara></flowRoot>      <path
+         sodipodi:open="true"
+         d="m 205.88384,505.39578 a 26.640331,25.463022 0 0 1 -16.64141,-32.24796 26.640331,25.463022 0 0 1 33.69007,-16.00041 26.640331,25.463022 0 0 1 16.83886,32.15419 26.640331,25.463022 0 0 1 -33.59138,16.18885"
+         sodipodi:end="1.8877132"
+         sodipodi:start="1.899435"
+         sodipodi:ry="25.463022"
+         sodipodi:rx="26.640331"
+         sodipodi:cy="481.29547"
+         sodipodi:cx="214.48213"
+         sodipodi:type="arc"
+         id="path4832-6-3-2"
+         style="opacity:1;fill:#c8c8c8;fill-opacity:1;stroke:none;stroke-width:1.28299999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <flowRoot
+         transform="matrix(0.73038526,0,0,1,20.8065,397.77313)"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;line-height:0.01%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot4136-1-4-02-7-2-7-3-4"
+         xml:space="preserve"><flowRegion
+           id="flowRegion4138-9-1-7-6-5-8-0-80"><rect
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start"
+             y="69.808769"
+             x="237.14285"
+             height="128.57143"
+             width="502.85715"
+             id="rect4140-3-6-6-8-0-6-1-97" /></flowRegion><flowPara
+           id="flowPara4734-1-2-4"
+           style="font-size:22.5px;line-height:1.25">Node</flowPara></flowRoot>      <path
+         sodipodi:open="true"
+         d="m 207.11359,433.83416 a 26.640331,25.463022 0 0 1 -16.6414,-32.24796 26.640331,25.463022 0 0 1 33.69006,-16.0004 26.640331,25.463022 0 0 1 16.83886,32.15418 26.640331,25.463022 0 0 1 -33.59138,16.18886"
+         sodipodi:end="1.8877132"
+         sodipodi:start="1.899435"
+         sodipodi:ry="25.463022"
+         sodipodi:rx="26.640331"
+         sodipodi:cy="409.73386"
+         sodipodi:cx="215.71188"
+         sodipodi:type="arc"
+         id="path4832-6-5-7"
+         style="opacity:1;fill:#c8c8c8;fill-opacity:1;stroke:none;stroke-width:1.28299999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <flowRoot
+         transform="matrix(0.73038526,0,0,1,22.036252,326.21151)"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;line-height:0.01%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot4136-1-4-02-7-2-7-2-99"
+         xml:space="preserve"><flowRegion
+           id="flowRegion4138-9-1-7-6-5-8-96-1"><rect
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start"
+             y="69.808769"
+             x="237.14285"
+             height="128.57143"
+             width="502.85715"
+             id="rect4140-3-6-6-8-0-6-14-6" /></flowRegion><flowPara
+           id="flowPara4734-1-29-0"
+           style="font-size:22.5px;line-height:1.25">Node</flowPara></flowRoot>    </g>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#ff0000;stroke-width:0.78593814px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 369.89145,274.5956 58.90151,6.4894"
+       id="path23392-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#ff0000;stroke-width:0.91447121px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 247.29533,383.07804 182.56966,24.54342"
+       id="path23392-3-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 218.57697,216.3463 c 52.81475,48.2629 47.39798,94.8913 2.87323,125.9699"
+       id="path23418-7-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 218.31619,216.2285 c 14.14112,11.723 34.85845,36.4915 69.58835,38.3299"
+       id="path23418-8-2-5"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="opacity:1;fill:#c8c8c8;fill-opacity:1;stroke:none;stroke-width:1.28299999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path4832-6-9-7"
+       sodipodi:type="arc"
+       sodipodi:cx="198.35762"
+       sodipodi:cy="196.45343"
+       sodipodi:rx="30.075119"
+       sodipodi:ry="28.746017"
+       sodipodi:start="1.899435"
+       sodipodi:end="1.8877132"
+       d="m 188.65073,223.66104 a 30.075119,28.746017 0 0 1 -18.78701,-36.40576 30.075119,28.746017 0 0 1 38.03379,-18.06336 30.075119,28.746017 0 0 1 19.00992,36.29988 30.075119,28.746017 0 0 1 -37.92237,18.27612"
+       sodipodi:open="true" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4136-1-4-02-7-2-7-7-2"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;line-height:0.01%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="matrix(0.73038526,0,0,1,-159.2302,105.832)"><flowRegion
+         id="flowRegion4138-9-1-7-6-5-8-9-7"><rect
+           id="rect4140-3-6-6-8-0-6-2-0"
+           width="502.85715"
+           height="128.57143"
+           x="237.14285"
+           y="69.808769"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:22.49961472px;line-height:93.99999976%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle" /></flowRegion><flowPara
+         id="flowPara4901-5"
+         style="font-size:22.49961472px;line-height:0.94">Top</flowPara><flowPara
+         id="flowPara4903-7"
+         style="font-size:22.49961472px;line-height:0.94">Node</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4136-1-4-9"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;line-height:0.01%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(277.43879,42.304898)"><flowRegion
+         id="flowRegion4138-9-1-40"><rect
+           id="rect4140-3-6-65"
+           width="502.85715"
+           height="128.57143"
+           x="237.14285"
+           y="69.808769"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:30px;line-height:125%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start" /></flowRegion><flowPara
+         id="flowPara4253-87"
+         style="font-size:30px;line-height:1.25">Cards</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4136-1-4-0-1"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;line-height:0.01%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(-20.816143,42.304898)"><flowRegion
+         id="flowRegion4138-9-1-3-69"><rect
+           id="rect4140-3-6-7-4"
+           width="502.85715"
+           height="128.57143"
+           x="237.14285"
+           y="69.808769"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:30px;line-height:125%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start" /></flowRegion><flowPara
+         id="flowPara4352-7"
+         style="font-size:30px;line-height:1.25">Graph</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4136-1-4-5-6"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;line-height:0.01%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="matrix(0.95891109,0,0,1,-89.635804,368.14618)"
+       inkscape:export-filename="/home/chad/code/legiongis/arches-docs/docs/images/graph-forms.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><flowRegion
+         id="flowRegion4138-9-1-4-5"><rect
+           id="rect4140-3-6-66-6"
+           width="277.87198"
+           height="28.729858"
+           x="228.55655"
+           y="75.364609"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:12.00000095px;line-height:125%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start" /></flowRegion><flowPara
+         id="flowPara4306-6"
+         style="font-size:12.00000095px;line-height:1.25">Note: Though it is not shown in this example, a node group may be used in many different cards. </flowPara></flowRoot>    <g
+       id="g6171">
+      <rect
+         rx="5.8820753"
+         ry="0.38141295"
+         y="223.13992"
+         x="453.16266"
+         height="33.274094"
+         width="199.28445"
+         id="rect4170-0-9-2-32-7-50"
+         style="opacity:1;fill:#c8c8c8;fill-opacity:1;stroke:none;stroke-width:1.28299999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <rect
+         rx="5.8820753"
+         ry="0.38141295"
+         y="277.62006"
+         x="453.04257"
+         height="33.274094"
+         width="199.28445"
+         id="rect4170-0-9-2-32-7-5-4"
+         style="opacity:1;fill:#c8c8c8;fill-opacity:1;stroke:none;stroke-width:1.28299999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    </g>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4136-1-4-02-7-1"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;line-height:0.01%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(292.20818,107.61288)"><flowRegion
+         id="flowRegion4138-9-1-7-6-5"><rect
+           id="rect4140-3-6-6-8-2"
+           width="502.85715"
+           height="128.57143"
+           x="237.14285"
+           y="69.808769"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start" /></flowRegion><flowPara
+         id="flowPara4506-21"
+         style="font-size:22.5px;line-height:1.25">Card</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4136-1-4-02-7-0-7"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;line-height:0.01%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(231.87035,158.03838)"><flowRegion
+         id="flowRegion4138-9-1-7-6-7-4"><rect
+           id="rect4140-3-6-6-8-9-62"
+           width="502.85715"
+           height="128.57143"
+           x="237.14285"
+           y="69.808769"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:20px;line-height:100%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start" /></flowRegion><flowPara
+         id="flowPara4532-3"
+         style="font-size:20px;line-height:1">Data Input Widget</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4136-1-4-02-7-0-9-7-2"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;line-height:0.01%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(231.56905,212.98758)"><flowRegion
+         id="flowRegion4138-9-1-7-6-7-4-0-2"><rect
+           id="rect4140-3-6-6-8-9-2-4-8"
+           width="502.85715"
+           height="128.57143"
+           x="237.14285"
+           y="69.808769"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:20px;line-height:100%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start" /></flowRegion><flowPara
+         id="flowPara4532-5-6-6"
+         style="font-size:20px;line-height:1">Data Input Widget</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4136-1-4-9-6"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;line-height:0.01%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(501.23504,42.304898)"><flowRegion
+         id="flowRegion4138-9-1-40-7"><rect
+           id="rect4140-3-6-65-5"
+           width="502.85715"
+           height="128.57143"
+           x="237.14285"
+           y="69.808769"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:30px;line-height:125%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start" /></flowRegion><flowPara
+         id="flowPara4253-87-3"
+         style="font-size:30px;line-height:1.25">Card Components</flowPara></flowRoot>    <rect
+       style="opacity:1;fill:#dcdcdc;fill-opacity:1;stroke:#ff0000;stroke-width:1.28299999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:3.8490001, 3.8490001;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4170-0-9-2-32-95-6"
+       width="244.70264"
+       height="157.55983"
+       x="738.85919"
+       y="165.73769"
+       ry="1.8060702"
+       rx="7.2226367" />
+    <g
+       id="g6118"
+       transform="translate(-9.8092804,16.188759)">
+      <rect
+         rx="5.8820753"
+         ry="0.75224364"
+         y="218.01578"
+         x="771.37756"
+         height="65.625"
+         width="199.28445"
+         id="rect4170-0-9-2-32-7-50-2"
+         style="opacity:1;fill:#c8c8c8;fill-opacity:1;stroke:none;stroke-width:1.80180669;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <flowRoot
+         transform="translate(552.24924,169.19968)"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;line-height:0.01%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot4136-1-4-02-7-0-7-9"
+         xml:space="preserve"><flowRegion
+           id="flowRegion4138-9-1-7-6-7-4-3"><rect
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:20px;line-height:100%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start"
+             y="69.808769"
+             x="237.14285"
+             height="128.57143"
+             width="502.85715"
+             id="rect4140-3-6-6-8-9-62-6" /></flowRegion><flowPara
+           id="flowPara6108"
+           style="font-size:20px;line-height:1">(UI Configuration)</flowPara><flowPara
+           id="flowPara2209"
+           style="font-size:20px;line-height:1" /></flowRoot>    </g>
+    <rect
+       style="opacity:1;fill:#dcdcdc;fill-opacity:1;stroke:#ff0000;stroke-width:1.28299999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:3.849, 3.849;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4170-0-9-2-32-9-0-9"
+       width="244.70264"
+       height="107.05219"
+       x="738.85919"
+       y="348.06464"
+       ry="1.2271135"
+       rx="7.2226367" />
+    <rect
+       style="opacity:1;fill:#c8c8c8;fill-opacity:1;stroke:none;stroke-width:1.28299999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4170-0-9-2-32-7-7-4-2"
+       width="199.28445"
+       height="33.274094"
+       x="761.5683"
+       y="400.25824"
+       ry="0.38141295"
+       rx="5.8820753" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4136-1-4-02-7-5-2-0"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;line-height:0.01%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(536.66985,289.08394)"><flowRegion
+         id="flowRegion4138-9-1-7-6-6-25-2"><rect
+           id="rect4140-3-6-6-8-8-9-3"
+           width="502.85715"
+           height="128.57143"
+           x="237.14285"
+           y="69.808769"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start" /></flowRegion><flowPara
+         id="flowPara4506-2-8-7"
+         style="font-size:22.5px;line-height:1.25">Card Component</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4136-1-4-02-7-0-0-0-5"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;line-height:0.01%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(542.43996,335.15674)"><flowRegion
+         id="flowRegion4138-9-1-7-6-7-5-1-9"><rect
+           id="rect4140-3-6-6-8-9-1-41-2"
+           width="502.85715"
+           height="128.57143"
+           x="237.14285"
+           y="69.808769"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:20px;line-height:100%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start" /></flowRegion><flowPara
+         style="font-size:20px;line-height:1"
+         id="flowPara6152">(UI Configuration)</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4136-1-4-02-7-1-1"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;line-height:0.01%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(536.66985,107.61288)"><flowRegion
+         id="flowRegion4138-9-1-7-6-5-2"><rect
+           id="rect4140-3-6-6-8-2-7"
+           width="502.85715"
+           height="128.57143"
+           x="237.14285"
+           y="69.808769"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:'Adobe Fan Heiti Std';-inkscape-font-specification:'Adobe Fan Heiti Std, Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start" /></flowRegion><flowPara
+         id="flowPara4506-21-0"
+         style="font-size:22.5px;line-height:1.25">Card Component</flowPara></flowRoot>    <path
+       style="fill:none;stroke:#ff0000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 675.57896,279.51247 62.50319,1.89403"
+       id="path6199"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#ff0000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 675.72146,407.25462 62.50319,1.89403"
+       id="path6199-6"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>
