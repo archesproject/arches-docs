@@ -35,8 +35,8 @@ itself (not illustrated above).
 .. note::
 
    In the UI you will see a distinction between "Resource Models" and
-   "Branches", but underneath these are both made from `Graph
-   <#graphmodel>`_ instances. The primary difference between the two
+   "Branches", but underneath these are both made from instances of the `Graph model
+   <#graphmodel>`_. The primary difference between the two
    is the ``isresource`` property, which is set to ``True`` for a
    Resource Model.
 
