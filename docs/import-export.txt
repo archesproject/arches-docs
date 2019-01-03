@@ -262,26 +262,29 @@ You would then need to use ``81dd62d2-6701-4195-b74b-8057456bba4b`` instead of `
 Shapefile Import
 ================
 
-Uploading a shapefile to Arches is very similar to uploading a csv file with a few exceptions. The same rules apply to rich text, concept data, grouped data, and contiguousness. And, like csv import, shapefile import requires a mapping file.
+.. code-block:: bash
 
-The shapefile must contain a field with a unique identifier for each resource named 'ResourceID'.
+    python manage.py packages -o import_business_data -s 'path_to_shapefile' -c 'path_to_mapping_file' [-ow {'overwrite'|'append'}]
 
-The shapefile must be in WGS 84 (EPSG:4326) decimal degrees.
+Uploading a shapefile to Arches is very similar to uploading a CSV file with a few exceptions. The same rules apply to rich text, concept data, grouped data, and contiguousness. And, like CSV import, shapefile import requires a mapping file. Note that in this mapping file, the node you wish to map the geometry to must have a ``file_field_name`` value of 'geom'.
 
-The shapefile must consist of at least a .shp, .dbf, .shx, and .prj file. It may be zipped or unzipped.
+Other Requirements:
 
-Dates in a shapefile can be in Esri Shapefile date format, Arches will convert them to the appropriate date format.
+* The shapefile must contain a field with a unique identifier for each resource named 'ResourceID'.
+* The shapefile must be in WGS 84 (EPSG:4326) decimal degrees.
+* The shapefile must consist of at least a .shp, .dbf, .shx, and .prj file. It may be zipped or unzipped.
+* Dates in a shapefile can be in ESRI Shapefile date format, Arches will convert them to the appropriate date format. They can also be strings stored in YYYY-MM-DD format.
 
-In your mapping file, the node you wish to map the geometry to must have a ``file_field_name`` value of 'geom'.
-
-To import a shapefile use the same command as csv import, simply point to your shapefile instead of your CSV file. See: :ref:`Import business data`
-
-**Note:** More complex geometries may encounter a ``mapping_parser_exception`` error. This error occurs when a geometry is not valid in elasticsearch. To resolve this, first make sure your geometry is valid using ArcMap, QGIS, or PostGIS. Next, you can modify the precision of your geometry to 5 decimals or you can simplify your geometry using the QGIS simplify geometry geoprocessing tool, or the PostGIS st_snaptogrid function.
+.. note:: More complex geometries may encounter a ``mapping_parser_exception`` error. This error occurs when a geometry is not valid in elasticsearch. To resolve this, first make sure your geometry is valid using ArcMap, QGIS, or PostGIS. Next, you can modify the precision of your geometry to 5 decimals or you can simplify your geometry using the QGIS simplify geometry geoprocessing tool, or the PostGIS st_snaptogrid function.
 
 JSON Import
 ===========
 
-JSON import of business data is primarily intended for transferring business data between arches instances. Because of this it's especially user-friendly to create or interpret, but doing so is not impossible.
+.. code-block:: bash
+
+    python manage.py packages -o import_business_data -s 'path_to_json' [-ow {'overwrite'|'append'}]
+
+JSON import of business data is primarily intended for transferring business data between arches instances. Because of this it's not especially user-friendly to create or interpret the JSON data format, but doing so is not impossible.
 
 First, there are at least two ways you can familiarize yourself with the format. The system settings in an Arches package is stored in this json format, you can open one of those up and take a look. Perhaps a better way in your case is to create some business data via the ui in your instance of arches and export it to the json format using the business data export command defined here :ref:`Export Commands`. This can act as a template json for data creation. For the rest of this section it may be helpful to have one of these files open to make it easier to follow along.
 
