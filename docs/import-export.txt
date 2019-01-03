@@ -506,13 +506,31 @@ All the resources referenced in the .relations CSV need to already be in your da
 Exporting Arches Data
 =====================
 
-Currently all export must happen through the command line interface.
-Alternatively, users with database access have the option of writing a resource view, adding the view to a GIS client, and exporting data from there. Export commands are listed in :ref:`Export Commands`.
+All file-based business exports must happen through the command line interface. The output format can either be JSON (the best way to do a full dump of your Arches database) or CSV (a more curated way to export a specific subset of data). To use Arches data in other systems or export shapefiles, users will have to begin by creating a new resource database view (see below).
+
+Writing Business Data Files
+---------------------------
+
+The output format can either be JSON (the best way to do a full dump of your Arches database) or CSV (a more curated way to export a specific subset of data). 
+
+To export JSON, use::
+
+    python manage.py packages -o export_business_data -d 'path_to_destination_directory' -f 'json' -g 'resource_model_uuid'
+    
+Note that you'll have to provide the UUID for the Resource Model whose resources you want to export. The easiest way to find this UUID is by looking at the browser url while editing the Resource Model in the Arches Designer UI.
+
+To export CSV, use::
+
+    python manage.py packages -o export_business_data -d 'path_to_destination_directory' -f 'csv' -c 'path_to_mapping_file'
+    
+When exporting to CSV, you need to use a :ref:`Mapping File`, which will determine the content of your CSV (which nodes are exported, etc.). Add the ``--single-file`` argument to export your grouped data to the same CSV file as the rest of your data.
+
+More about these export commands can be found in :ref:`Export Commands`.
 
 Resource Database Views
 -----------------------
 
-To export to tabular formats such as shapefile, it is necessary to flatten the graph structure of your resources. One way to do this is to create a database view of your resource models. Arches does not do this automatically because there are many ways to design a flattened table depending on your needs.
+To export to spatial formats such as shapefile, it is necessary to flatten the graph structure of your resources. One way to do this is to create a database view of your resource models. Arches does not do this automatically because there are many ways to design a flattened table depending on your needs.
 
 You can add any number of database views representing a given resource model either for export, or to connect directly to a GIS client such as QGIS or ArcGIS. When writing a view to support shapefile export be sure that your view does not violate any shapefile restrictions. For example, shapefile field names are limited to 10 characters with no special characters and text fields cannot store more than 255 characters.
 
