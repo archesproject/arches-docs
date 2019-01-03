@@ -39,7 +39,7 @@ Import Value Formats
 
     **Examples - CSV:** ``POINT (-82.53973 29.658642)`` ``MULTIPOLYGON (((-81.435 26.130, -81.425 26.124, -81.415 26.137, -81.435 26.130)))``
     
-    In JSON, include the entire definition of a `GeoJSON Feature Collection <http://wiki.geojson.org/GeoJSON_draft_version_6#FeatureCollection>`_ (the ``properties`` and ``id`` attributes can be empty). Use `geojson.io <https://geojson.io>`_ and `geojsonlint.com <https://geojsonlint.com>`_ for testing.
+    In JSON, include the entire definition of a `GeoJSON Feature Collection <http://wiki.geojson.org/GeoJSON_draft_version_6#FeatureCollection>`_ (the ``properties`` and ``id`` attributes can be empty). Use `geojson.io <http://geojson.io>`_ and `geojsonlint.com <http://geojsonlint.com>`_ for testing.
     
     **Example - JSON:**
     
