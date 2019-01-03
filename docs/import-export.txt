@@ -4,6 +4,114 @@ Resource Import/Export
 
 *Currently, all data import and export operations happen through the Arches command line interface.*
 
+Importing Data
+==============
+
+Arches provides methods for importing data in a few different formats. Generally, you are placing the values you want to import into a structured file. The form that each value takes, depends on the data type of its target node.
+
+Be aware that the graph-based structure of Resource Models in Arches means that your data must be carefully prepared before import, to ensure that branches, groupings, and cardinality is maintained. The method for doing this is determined by which file format you decide to use. Additionally, the data type of the target node for each value in your file will dictate that value's format.
+
+Import Value Formats
+--------------------
+
+* ``string``
+    In CSV, must be quoted only if the value contains a comma.
+    
+    **Examples:** ``Smith Cottage`` ``"Behold, the Forevertron."`` ``<p>This is a rich text description that contains HTML tags.</p>``
+    
+* ``number``
+    Integers or floats; never use quotes or comma separators.
+    
+    **Examples:** ``42`` ``-465`` ``17322.464453``
+    
+* ``date``
+    YYYY-MM-DD, no quotes.
+    
+    **Examples:** ``1305-10-31`` ``1986-02-02``
+
+* ``edtf``
+    Must be a valid `Extended Date Time Format <https://www.loc.gov/standards/datetime/pre-submission.html>`_ string.
+    
+    **Examples:** ``"2010-10"`` ``"-y10000"``
+    
+* ``geojson-feature-collection``
+    In CSV, must be `WKT <https://en.wikipedia.org/wiki/Well-known_text>`_.
+
+    **Examples - CSV:** ``POINT (-82.53973 29.658642)`` ``MULTIPOLYGON (((-81.435 26.130, -81.425 26.124, -81.415 26.137, -81.435 26.130)))``
+    
+    In JSON, include the entire definition of a `GeoJSON Feature Collection <http://wiki.geojson.org/GeoJSON_draft_version_6#FeatureCollection>`_ (the ``properties`` and ``id`` attributes can be empty). Use `geojson.io <https://geojson.io>`_ and `geojsonlint.com <https://geojsonlint.com>`_ for testing.
+    
+    **Example - JSON:**
+    
+    .. code::
+        
+        "features": [
+                {
+                    "geometry": {
+                        "coordinates": [
+                            -82.53973, 
+                            29.658642
+                        ], 
+                        "type": "Point"
+                    }, 
+                    "id": "<arbitrary id>", 
+                    "properties": {}, 
+                    "type": "Feature"
+                }
+            ], 
+            "type": "FeatureCollection"
+        }
+
+* ``concept``
+    
+    In CSV/SHP, if the values in your concept collection are `unique` you can use the label (prefLabel) for a concept. If not, you will get an error during import and you must use UUIDs instead of labels (if this happens, see `Concepts File`_ below). If a prefLabel has a comma in it, it must be triple-quoted: ``"""Shingles, original"""``.
+    
+    **Examples - CSV/SHP:** ``Slate`` ``"""Shingles, original"""``
+    
+    In JSON, you must use a concept's UUID.
+
+* ``concept-list``
+
+    In CSV/SHP, must be a single-quoted list of prefLabels (or UUIDs if necessary). If a prefLabel contains a comma, then that prefLabel must have double-quotes: ``"Slate,""Shingles, original"",Thatch"``.
+    
+    **Examples - CSV/SHP:** ``"Slate,Thatch"`` ``Brick``
+    
+    In JSON, a list of UUIDs must be used. If only one value is present, it must still be placed within brackets.
+    
+    **Examples - JSON:** ``["d11630fa-c5a4-49b8-832c-5976e0044bca"]`` ``["651c59b0-ff30-11e8-9975-94659cf754d0","cdcc206d-f80d-4cc3-8685-40e8949158f8"]``
+    
+* ``domain-value`` 
+    
+    A string that matches a valid domain value for this node, single-quoted if it contains a comma.
+
+* ``domain-value-list``
+    
+    A single-quoted list of strings that match valid domain values for this node. Follow quoting guidelines for ``concept-list`` if any of the values contain commas.
+
+* ``file-list``
+    
+    In CSV/SHP, must be a relative path to the file that should be uploaded.
+    
+    In JSON, a full definition of the file-list data looks like this, though some of these attributes, like ``lastModified`` and ``size`` can be omitted::
+
+        [
+            {
+                "accepted": true, 
+                "file_id": "6dec83cf-ff30-11e8-b6ca-94659cf754d0", 
+                "height": null, 
+                "index": 0, 
+                "lastModified": 1528907664.6177075, 
+                "name": "Photo_Tung_Lung_Fort_Drainage_Pipes_northeast_interior_corner_1.JPG", 
+                "size": 3041261, 
+                "status": "uploaded", 
+                "type": "image/jpeg", 
+                "url": "/files/uploadedfiles/Photo_Tung_Lung_Fort_Drainage_Pipes_northeast_interior_corner_1.JPG", 
+                "width": null
+            }
+        ]
+
+    The file should already exist in the proper uploadedfiles directory before the JSON file is imported.
+
 Importing a CSV
 ===============
 
@@ -80,20 +188,6 @@ Depending on your Resource Model's graph structure, some attributes will be hand
 *CSV with three resources, one of which has two groups of* ``name`` *and* ``name_type`` *attributes. Note that "Primary" and "Historic" are the prefLabels for two different concepts in the RDM.*
 
 You must have values for any required nodes in your resource models.
-
-Value Formats
--------------
-
-The ``data_type`` attribute in the `mapping file`_ will help you determine what the format of the value(s) in the column for a given node must be.
-
-* ``string`` - Strings need not be single-quoted **unless** they contain a comma or contain HTML tags (as in the case strings display/collected with the rich text editor widget).
-* ``number`` - Numbers don't need quotes.
-* ``date`` - All dates must be formatted as YYYY-MM-DD. Dates that are not four digits must be zero padded (01-02-1999). No quotes.
-* ``geojson-feature-collection`` - All geometry must be formatted in `"well-known text" (WKT) <https://en.wikipedia.org/wiki/Well-known_text>`_, and all coordinates stored as WGS 84 (EPSG:4326) decimal degrees. Multi geometries must be single-quoted.
-* ``concept`` - If the values in your concept collection are `unique` you can use the label (prefLabel) for a concept. If not, you will get an error during import and you must use UUIDs instead of labels (if this happens, see `Concepts File`_ below). If a prefLabel has a comma in it, it must be triple-quoted: ``"""Shingles, original"""``.
-* ``concept-list`` - This must be a single-quoted list of prefLabels (or UUIDs if necessary): ``"Slate,Thatch"``. If a prefLabel contains a comma, then that prefLabel must have double-quotes: ``"Slate,""Shingles, original"",Thatch"``.
-* ``domain-value`` - A string that matches a valid domain value for this node, single-quoted if it contains a comma.
-* ``domain-value-list`` - A single-quoted list of strings that match valid domain values for this node. Follow quoting guidelines for ``concept-list`` if any of the values contain commas.
 
 .. note:: If you are using MS Excel to create your CSV files, double-quotes will automatically be added to any cell value that contains a comma.
 
