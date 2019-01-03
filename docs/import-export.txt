@@ -246,7 +246,9 @@ But first a description of the general structure of a single tile::
 * ``data`` - json structure of a node group including the nodeid and data populating that node. For example::
 
         {
-            "<uuid for building name node>":"Smith Cottage"
+            "data": {
+                "<uuid for building name node>": "Smith Cottage"
+            }
         }
 
 The tile object is tied to a resource model in two ways: 1) through the nodegroup_id 2) in the data object where nodeids are used as keys for the business data itself.
@@ -265,7 +267,7 @@ Now for a detailed look at the actual contents of ``tiles``. Note that below we 
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": null,
-            "data" {
+            "data": {
                 "nodeid": "some data",
                 "nodeid": "some other data"
             }
@@ -286,7 +288,7 @@ n: There are multiple instances of this nodegroup/card in a resource::
             "nodegroupid": "<uuid from resource model">,
             "sortorder": 0,
             "parenttile_id": null,
-            "data" {
+            "data": {
                 "nodeid": "some data",
                 "nodeid": "some other data"
             }
@@ -297,7 +299,7 @@ n: There are multiple instances of this nodegroup/card in a resource::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": null,
-            "data" {
+            "data": {
                 "nodeid": "more data",
                 "nodeid": "more other data"
             }
@@ -316,7 +318,7 @@ n: There are multiple instances of this nodegroup/card in a resource::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": null,
-            "data" {}
+            "data": {}
         },
         {
             "tileid": "X",
@@ -324,7 +326,7 @@ n: There are multiple instances of this nodegroup/card in a resource::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": "A",
-            "data" {
+            "data": {
                 "nodeid": "data",
                 "nodeid": "other data"
             }
@@ -343,7 +345,7 @@ n: There are multiple instances of this nodegroup/card in a resource::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": null,
-            "data" {}
+            "data": {}
         },
         {
             "tileid": "X",
@@ -351,7 +353,7 @@ n: There are multiple instances of this nodegroup/card in a resource::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": "A",
-            "data" {
+            "data": {
                 "nodeid": "data",
                 "nodeid": "other data"
             }
@@ -362,7 +364,7 @@ n: There are multiple instances of this nodegroup/card in a resource::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": "A",
-            "data" {
+            "data": {
                 "nodeid": "more data",
                 "nodeid": "more other data"
             }
@@ -381,7 +383,7 @@ n-1: Many parent nodegroups/cards each with one child nodegroup/card::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": null,
-            "data" {}
+            "data": {}
         },
         {
             "tileid": "X",
@@ -389,7 +391,7 @@ n-1: Many parent nodegroups/cards each with one child nodegroup/card::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": "A",
-            "data" {
+            "data": {
                 "nodeid": "data",
                 "nodeid": "other data"
             }
@@ -400,7 +402,7 @@ n-1: Many parent nodegroups/cards each with one child nodegroup/card::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": null,
-            "data" {}
+            "data": {}
         },
         {
             "tileid": "Y",
@@ -408,7 +410,7 @@ n-1: Many parent nodegroups/cards each with one child nodegroup/card::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": "B",
-            "data" {
+            "data": {
                 "nodeid": "more data",
                 "nodeid": "more other data"
             }
@@ -427,7 +429,7 @@ n-n: Many parent nodegroups/cards containing many child nodegroups/cards::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": null,
-            "data" {}
+            "data": {}
         },
         {
             "tileid": "X",
@@ -435,7 +437,7 @@ n-n: Many parent nodegroups/cards containing many child nodegroups/cards::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": "A",
-            "data" {
+            "data": {
                 "nodeid": "data",
                 "nodeid": "other data"
             }
@@ -443,10 +445,10 @@ n-n: Many parent nodegroups/cards containing many child nodegroups/cards::
         {
             "tileid": "B",
             "resourceinstance_id": "<uuid from resourceinstance.resourceinstanceid>",
-            "nodegroupid":  uuid from resource model,
+            "nodegroupid":  "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": null,
-            "data" {}
+            "data": {}
         },
         {
             "tileid": "Y",
@@ -454,7 +456,7 @@ n-n: Many parent nodegroups/cards containing many child nodegroups/cards::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": "B",
-            "data" {
+            "data": {
                 "nodeid": "more data",
                 "nodeid": "more other data"
             }
@@ -465,9 +467,9 @@ n-n: Many parent nodegroups/cards containing many child nodegroups/cards::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": "B",
-            "data" {
+            "data": {
                 "nodeid": "even more data",
-                "nodeid": even "more other data"
+                "nodeid": "even more other data"
             }
         }
     ]
