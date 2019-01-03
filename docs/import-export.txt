@@ -115,7 +115,9 @@ Import Value Formats
 Importing a CSV
 ===============
 
-To do a bulk import of resources to your Arches database, you must create a correctly formatted CSV (comma-separated values) file. We recommend MS Excel or Open Office for this task. More advanced users will likely find a custom scripting effort to be worthwhile.
+One method of bulk loading data into Arches is to create a CSV (comma separated values) file. We recommend using MS Excel or Open Office for this task. More advanced users will likely find a custom scripting effort to be worthwhile.
+
+.. note:: Your CSV should be encoded into UTF-8. `These steps <https://help.surveygizmo.com/help/encode-an-excel-file-to-utf-8-or-utf-16>`_ will help you if you are using MS Excel.
 
 The workflow for creating a CSV should be something like this:
 
@@ -124,8 +126,6 @@ The workflow for creating a CSV should be something like this:
 #. Modify the mapping file to reference your CSV
 #. Populate the CSV with your data
 #. Import the CSV using the :ref:`Import business data` command.
-
-.. note:: Your CSV should be encoded into UTF-8. `These steps <https://help.surveygizmo.com/help/encode-an-excel-file-to-utf-8-or-utf-16>`_ will help you if you are using MS Excel.
 
 CSV File Requirements
 ---------------------
