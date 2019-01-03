@@ -169,15 +169,8 @@ Import business data
 
 See :ref:`Importing a CSV` for CSV formatting requirements
 
-Additional Shapefile Requirements
----------------------------------
-* Your geometry node mapping must have a file_field_name value of 'geom'
-* Shapefile needs to be in wgs84
-* Shapefile can be zipped or unzipped
-
-
-Import resource to resource relations.
---------------------------------------
+Import resource to resource relations
+-------------------------------------
 .. code-block:: bash
 
     python manage.py packages -o import_business_data_relations -s 'path_to_relations_file'

@@ -4,10 +4,120 @@ Resource Import/Export
 
 *Currently, all data import and export operations happen through the Arches command line interface.*
 
+Importing Data
+==============
+
+Arches provides methods for importing data in a few different formats. Generally, you are placing the values you want to import into a structured file. The form that each value takes, depends on the data type of its target node.
+
+Be aware that the graph-based structure of Resource Models in Arches means that your data must be carefully prepared before import, to ensure that branches, groupings, and cardinality is maintained. The method for doing this is determined by which file format you decide to use. Additionally, the data type of the target node for each value in your file will dictate that value's format.
+
+Import Value Formats
+--------------------
+
+* ``string``
+    In CSV, must be quoted only if the value contains a comma.
+    
+    **Examples:** ``Smith Cottage`` ``"Behold, the Forevertron."`` ``<p>This is a rich text description that contains HTML tags.</p>``
+    
+* ``number``
+    Integers or floats; never use quotes or comma separators.
+    
+    **Examples:** ``42`` ``-465`` ``17322.464453``
+    
+* ``date``
+    YYYY-MM-DD, no quotes.
+    
+    **Examples:** ``1305-10-31`` ``1986-02-02``
+
+* ``edtf``
+    Must be a valid `Extended Date Time Format <https://www.loc.gov/standards/datetime/pre-submission.html>`_ string.
+    
+    **Examples:** ``"2010-10"`` ``"-y10000"``
+    
+* ``geojson-feature-collection``
+    In CSV, must be `WKT <https://en.wikipedia.org/wiki/Well-known_text>`_.
+
+    **Examples - CSV:** ``POINT (-82.53973 29.658642)`` ``MULTIPOLYGON (((-81.435 26.130, -81.425 26.124, -81.415 26.137, -81.435 26.130)))``
+    
+    In JSON, include the entire definition of a `GeoJSON Feature Collection <http://wiki.geojson.org/GeoJSON_draft_version_6#FeatureCollection>`_ (the ``properties`` and ``id`` attributes can be empty). Use `geojson.io <https://geojson.io>`_ and `geojsonlint.com <https://geojsonlint.com>`_ for testing.
+    
+    **Example - JSON:**
+    
+    .. code::
+        
+        "features": [
+                {
+                    "geometry": {
+                        "coordinates": [
+                            -82.53973, 
+                            29.658642
+                        ], 
+                        "type": "Point"
+                    }, 
+                    "id": "<arbitrary id>", 
+                    "properties": {}, 
+                    "type": "Feature"
+                }
+            ], 
+            "type": "FeatureCollection"
+        }
+
+* ``concept``
+    
+    In CSV/SHP, if the values in your concept collection are `unique` you can use the label (prefLabel) for a concept. If not, you will get an error during import and you must use UUIDs instead of labels (if this happens, see `Concepts File`_ below). If a prefLabel has a comma in it, it must be triple-quoted: ``"""Shingles, original"""``.
+    
+    **Examples - CSV/SHP:** ``Slate`` ``"""Shingles, original"""``
+    
+    In JSON, you must use a concept's UUID.
+
+* ``concept-list``
+
+    In CSV/SHP, must be a single-quoted list of prefLabels (or UUIDs if necessary). If a prefLabel contains a comma, then that prefLabel must have double-quotes: ``"Slate,""Shingles, original"",Thatch"``.
+    
+    **Examples - CSV/SHP:** ``"Slate,Thatch"`` ``Brick``
+    
+    In JSON, a list of UUIDs must be used. If only one value is present, it must still be placed within brackets.
+    
+    **Examples - JSON:** ``["d11630fa-c5a4-49b8-832c-5976e0044bca"]`` ``["651c59b0-ff30-11e8-9975-94659cf754d0","cdcc206d-f80d-4cc3-8685-40e8949158f8"]``
+    
+* ``domain-value`` 
+    
+    A string that matches a valid domain value for this node, single-quoted if it contains a comma.
+
+* ``domain-value-list``
+    
+    A single-quoted list of strings that match valid domain values for this node. Follow quoting guidelines for ``concept-list`` if any of the values contain commas.
+
+* ``file-list``
+    
+    In CSV/SHP, must be a relative path to the file that should be uploaded.
+    
+    In JSON, a full definition of the file-list data looks like this, though some of these attributes, like ``lastModified`` and ``size`` can be omitted::
+
+        [
+            {
+                "accepted": true, 
+                "file_id": "6dec83cf-ff30-11e8-b6ca-94659cf754d0", 
+                "height": null, 
+                "index": 0, 
+                "lastModified": 1528907664.6177075, 
+                "name": "Photo_Tung_Lung_Fort_Drainage_Pipes_northeast_interior_corner_1.JPG", 
+                "size": 3041261, 
+                "status": "uploaded", 
+                "type": "image/jpeg", 
+                "url": "/files/uploadedfiles/Photo_Tung_Lung_Fort_Drainage_Pipes_northeast_interior_corner_1.JPG", 
+                "width": null
+            }
+        ]
+
+    The file should already exist in the proper uploadedfiles directory before the JSON file is imported.
+
 Importing a CSV
 ===============
 
-To do a bulk import of resources to your Arches database, you must create a correctly formatted CSV (comma-separated values) file. We recommend MS Excel or Open Office for this task. More advanced users will likely find a custom scripting effort to be worthwhile.
+One method of bulk loading data into Arches is to create a CSV (comma separated values) file. We recommend using MS Excel or Open Office for this task. More advanced users will likely find a custom scripting effort to be worthwhile.
+
+.. note:: Your CSV should be encoded into UTF-8. `These steps <https://help.surveygizmo.com/help/encode-an-excel-file-to-utf-8-or-utf-16>`_ will help you if you are using MS Excel.
 
 The workflow for creating a CSV should be something like this:
 
@@ -16,8 +126,6 @@ The workflow for creating a CSV should be something like this:
 #. Modify the mapping file to reference your CSV
 #. Populate the CSV with your data
 #. Import the CSV using the :ref:`Import business data` command.
-
-.. note:: Your CSV should be encoded into UTF-8. `These steps <https://help.surveygizmo.com/help/encode-an-excel-file-to-utf-8-or-utf-16>`_ will help you if you are using MS Excel.
 
 CSV File Requirements
 ---------------------
@@ -80,20 +188,6 @@ Depending on your Resource Model's graph structure, some attributes will be hand
 *CSV with three resources, one of which has two groups of* ``name`` *and* ``name_type`` *attributes. Note that "Primary" and "Historic" are the prefLabels for two different concepts in the RDM.*
 
 You must have values for any required nodes in your resource models.
-
-Value Formats
--------------
-
-The ``data_type`` attribute in the `mapping file`_ will help you determine what the format of the value(s) in the column for a given node must be.
-
-* ``string`` - Strings need not be single-quoted **unless** they contain a comma or contain HTML tags (as in the case strings display/collected with the rich text editor widget).
-* ``number`` - Numbers don't need quotes.
-* ``date`` - All dates must be formatted as YYYY-MM-DD. Dates that are not four digits must be zero padded (01-02-1999). No quotes.
-* ``geojson-feature-collection`` - All geometry must be formatted in `"well-known text" (WKT) <https://en.wikipedia.org/wiki/Well-known_text>`_, and all coordinates stored as WGS 84 (EPSG:4326) decimal degrees. Multi geometries must be single-quoted.
-* ``concept`` - If the values in your concept collection are `unique` you can use the label (prefLabel) for a concept. If not, you will get an error during import and you must use UUIDs instead of labels (if this happens, see `Concepts File`_ below). If a prefLabel has a comma in it, it must be triple-quoted: ``"""Shingles, original"""``.
-* ``concept-list`` - This must be a single-quoted list of prefLabels (or UUIDs if necessary): ``"Slate,Thatch"``. If a prefLabel contains a comma, then that prefLabel must have double-quotes: ``"Slate,""Shingles, original"",Thatch"``.
-* ``domain-value`` - A string that matches a valid domain value for this node, single-quoted if it contains a comma.
-* ``domain-value-list`` - A single-quoted list of strings that match valid domain values for this node. Follow quoting guidelines for ``concept-list`` if any of the values contain commas.
 
 .. note:: If you are using MS Excel to create your CSV files, double-quotes will automatically be added to any cell value that contains a comma.
 
@@ -168,26 +262,29 @@ You would then need to use ``81dd62d2-6701-4195-b74b-8057456bba4b`` instead of `
 Shapefile Import
 ================
 
-Uploading a shapefile to Arches is very similar to uploading a csv file with a few exceptions. The same rules apply to rich text, concept data, grouped data, and contiguousness. And, like csv import, shapefile import requires a mapping file.
+.. code-block:: bash
 
-The shapefile must contain a field with a unique identifier for each resource named 'ResourceID'.
+    python manage.py packages -o import_business_data -s 'path_to_shapefile' -c 'path_to_mapping_file' [-ow {'overwrite'|'append'}]
 
-The shapefile must be in WGS 84 (EPSG:4326) decimal degrees.
+Uploading a shapefile to Arches is very similar to uploading a CSV file with a few exceptions. The same rules apply to rich text, concept data, grouped data, and contiguousness. And, like CSV import, shapefile import requires a mapping file. Note that in this mapping file, the node you wish to map the geometry to must have a ``file_field_name`` value of 'geom'.
 
-The shapefile must consist of at least a .shp, .dbf, .shx, and .prj file. It may be zipped or unzipped.
+Other Requirements:
 
-Dates in a shapefile can be in Esri Shapefile date format, Arches will convert them to the appropriate date format.
+* The shapefile must contain a field with a unique identifier for each resource named 'ResourceID'.
+* The shapefile must be in WGS 84 (EPSG:4326) decimal degrees.
+* The shapefile must consist of at least a .shp, .dbf, .shx, and .prj file. It may be zipped or unzipped.
+* Dates in a shapefile can be in ESRI Shapefile date format, Arches will convert them to the appropriate date format. They can also be strings stored in YYYY-MM-DD format.
 
-In your mapping file, the node you wish to map the geometry to must have a ``file_field_name`` value of 'geom'.
-
-To import a shapefile use the same command as csv import, simply point to your shapefile instead of your CSV file. See: :ref:`Import business data`
-
-**Note:** More complex geometries may encounter a ``mapping_parser_exception`` error. This error occurs when a geometry is not valid in elasticsearch. To resolve this, first make sure your geometry is valid using ArcMap, QGIS, or PostGIS. Next, you can modify the precision of your geometry to 5 decimals or you can simplify your geometry using the QGIS simplify geometry geoprocessing tool, or the PostGIS st_snaptogrid function.
+.. note:: More complex geometries may encounter a ``mapping_parser_exception`` error. This error occurs when a geometry is not valid in elasticsearch. To resolve this, first make sure your geometry is valid using ArcMap, QGIS, or PostGIS. Next, you can modify the precision of your geometry to 5 decimals or you can simplify your geometry using the QGIS simplify geometry geoprocessing tool, or the PostGIS st_snaptogrid function.
 
 JSON Import
 ===========
 
-JSON import of business data is primarily intended for transferring business data between arches instances. Because of this it's especially user-friendly to create or interpret, but doing so is not impossible.
+.. code-block:: bash
+
+    python manage.py packages -o import_business_data -s 'path_to_json' [-ow {'overwrite'|'append'}]
+
+JSON import of business data is primarily intended for transferring business data between arches instances. Because of this it's not especially user-friendly to create or interpret the JSON data format, but doing so is not impossible.
 
 First, there are at least two ways you can familiarize yourself with the format. The system settings in an Arches package is stored in this json format, you can open one of those up and take a look. Perhaps a better way in your case is to create some business data via the ui in your instance of arches and export it to the json format using the business data export command defined here :ref:`Export Commands`. This can act as a template json for data creation. For the rest of this section it may be helpful to have one of these files open to make it easier to follow along.
 
@@ -246,7 +343,9 @@ But first a description of the general structure of a single tile::
 * ``data`` - json structure of a node group including the nodeid and data populating that node. For example::
 
         {
-            "<uuid for building name node>":"Smith Cottage"
+            "data": {
+                "<uuid for building name node>": "Smith Cottage"
+            }
         }
 
 The tile object is tied to a resource model in two ways: 1) through the nodegroup_id 2) in the data object where nodeids are used as keys for the business data itself.
@@ -265,7 +364,7 @@ Now for a detailed look at the actual contents of ``tiles``. Note that below we 
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": null,
-            "data" {
+            "data": {
                 "nodeid": "some data",
                 "nodeid": "some other data"
             }
@@ -286,7 +385,7 @@ n: There are multiple instances of this nodegroup/card in a resource::
             "nodegroupid": "<uuid from resource model">,
             "sortorder": 0,
             "parenttile_id": null,
-            "data" {
+            "data": {
                 "nodeid": "some data",
                 "nodeid": "some other data"
             }
@@ -297,7 +396,7 @@ n: There are multiple instances of this nodegroup/card in a resource::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": null,
-            "data" {
+            "data": {
                 "nodeid": "more data",
                 "nodeid": "more other data"
             }
@@ -316,7 +415,7 @@ n: There are multiple instances of this nodegroup/card in a resource::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": null,
-            "data" {}
+            "data": {}
         },
         {
             "tileid": "X",
@@ -324,7 +423,7 @@ n: There are multiple instances of this nodegroup/card in a resource::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": "A",
-            "data" {
+            "data": {
                 "nodeid": "data",
                 "nodeid": "other data"
             }
@@ -343,7 +442,7 @@ n: There are multiple instances of this nodegroup/card in a resource::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": null,
-            "data" {}
+            "data": {}
         },
         {
             "tileid": "X",
@@ -351,7 +450,7 @@ n: There are multiple instances of this nodegroup/card in a resource::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": "A",
-            "data" {
+            "data": {
                 "nodeid": "data",
                 "nodeid": "other data"
             }
@@ -362,7 +461,7 @@ n: There are multiple instances of this nodegroup/card in a resource::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": "A",
-            "data" {
+            "data": {
                 "nodeid": "more data",
                 "nodeid": "more other data"
             }
@@ -381,7 +480,7 @@ n-1: Many parent nodegroups/cards each with one child nodegroup/card::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": null,
-            "data" {}
+            "data": {}
         },
         {
             "tileid": "X",
@@ -389,7 +488,7 @@ n-1: Many parent nodegroups/cards each with one child nodegroup/card::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": "A",
-            "data" {
+            "data": {
                 "nodeid": "data",
                 "nodeid": "other data"
             }
@@ -400,7 +499,7 @@ n-1: Many parent nodegroups/cards each with one child nodegroup/card::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": null,
-            "data" {}
+            "data": {}
         },
         {
             "tileid": "Y",
@@ -408,7 +507,7 @@ n-1: Many parent nodegroups/cards each with one child nodegroup/card::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": "B",
-            "data" {
+            "data": {
                 "nodeid": "more data",
                 "nodeid": "more other data"
             }
@@ -427,7 +526,7 @@ n-n: Many parent nodegroups/cards containing many child nodegroups/cards::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": null,
-            "data" {}
+            "data": {}
         },
         {
             "tileid": "X",
@@ -435,7 +534,7 @@ n-n: Many parent nodegroups/cards containing many child nodegroups/cards::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": "A",
-            "data" {
+            "data": {
                 "nodeid": "data",
                 "nodeid": "other data"
             }
@@ -443,10 +542,10 @@ n-n: Many parent nodegroups/cards containing many child nodegroups/cards::
         {
             "tileid": "B",
             "resourceinstance_id": "<uuid from resourceinstance.resourceinstanceid>",
-            "nodegroupid":  uuid from resource model,
+            "nodegroupid":  "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": null,
-            "data" {}
+            "data": {}
         },
         {
             "tileid": "Y",
@@ -454,7 +553,7 @@ n-n: Many parent nodegroups/cards containing many child nodegroups/cards::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": "B",
-            "data" {
+            "data": {
                 "nodeid": "more data",
                 "nodeid": "more other data"
             }
@@ -465,9 +564,9 @@ n-n: Many parent nodegroups/cards containing many child nodegroups/cards::
             "nodegroupid": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": "B",
-            "data" {
+            "data": {
                 "nodeid": "even more data",
-                "nodeid": even "more other data"
+                "nodeid": "even more other data"
             }
         }
     ]
@@ -506,13 +605,31 @@ All the resources referenced in the .relations CSV need to already be in your da
 Exporting Arches Data
 =====================
 
-Currently all export must happen through the command line interface.
-Alternatively, users with database access have the option of writing a resource view, adding the view to a GIS client, and exporting data from there. Export commands are listed in :ref:`Export Commands`.
+All file-based business exports must happen through the command line interface. The output format can either be JSON (the best way to do a full dump of your Arches database) or CSV (a more curated way to export a specific subset of data). To use Arches data in other systems or export shapefiles, users will have to begin by creating a new resource database view (see below).
+
+Writing Business Data Files
+---------------------------
+
+The output format can either be JSON (the best way to do a full dump of your Arches database) or CSV (a more curated way to export a specific subset of data). 
+
+To export JSON, use::
+
+    python manage.py packages -o export_business_data -d 'path_to_destination_directory' -f 'json' -g 'resource_model_uuid'
+    
+Note that you'll have to provide the UUID for the Resource Model whose resources you want to export. The easiest way to find this UUID is by looking at the browser url while editing the Resource Model in the Arches Designer UI.
+
+To export CSV, use::
+
+    python manage.py packages -o export_business_data -d 'path_to_destination_directory' -f 'csv' -c 'path_to_mapping_file'
+    
+When exporting to CSV, you need to use a :ref:`Mapping File`, which will determine the content of your CSV (which nodes are exported, etc.). Add the ``--single-file`` argument to export your grouped data to the same CSV file as the rest of your data.
+
+More about these export commands can be found in :ref:`Export Commands`.
 
 Resource Database Views
 -----------------------
 
-To export to tabular formats such as shapefile, it is necessary to flatten the graph structure of your resources. One way to do this is to create a database view of your resource models. Arches does not do this automatically because there are many ways to design a flattened table depending on your needs.
+To export to spatial formats such as shapefile, it is necessary to flatten the graph structure of your resources. One way to do this is to create a database view of your resource models. Arches does not do this automatically because there are many ways to design a flattened table depending on your needs.
 
 You can add any number of database views representing a given resource model either for export, or to connect directly to a GIS client such as QGIS or ArcGIS. When writing a view to support shapefile export be sure that your view does not violate any shapefile restrictions. For example, shapefile field names are limited to 10 characters with no special characters and text fields cannot store more than 255 characters.
 
