@@ -6,7 +6,7 @@ Creating Resources
 Resource Manager
 ````````````````````````````
 
-You may create new Resources only if you have access to the Resource Manager page. From there, you will begin by choosing which Resource Model you would like to use. Note that a Resource Model must have its status set to **active** and must have **at least one menu** added it in order for it to be used.
+You may create new Resources only if you have access to the Resource Manager page. From there, you will begin by choosing which Resource Model you would like to use. Note that a Resource Model must have its status set to **active** and must have **at least one menu** added to it in order for it to be used.
 
 .. image:: images/Resource-Manager.png
 
