@@ -11,9 +11,11 @@ Let's begin with a brief primer on some of the core concepts upon which Arches i
 
 **Resource Models** - When creating new Resources, a data entry user must decide which Resource Model to use, determining what information is collected for the Resource. Think of different Resource Models as categories of records in your database -- "Buildings" vs. "Archaeological Sites" vs. "Cemeteries", for example. Every Arches database must have at least one Resource Model.
 
-**Branches** - Think of Branches as "partial" Resource Models that can be aggregated to form a "full" Resource Model. They function as resuable building blocks, allowing you to avoid having to manually recreate complex structures in multiple Resource Models.
+**Branches** - Branches are tools for transport of complex node structures from one Resource Model to another. This allows you to avoid manually recreating the same "branches" in multiple Resource Models.
 
-.. important:: Both **Resource Models** and **Branches** are sometimes referred to generically as "graphs". This is because their underlying architecture is identical, Resource Models just have more properties and capabilities attached to them.
+.. note:: Both **Resource Models** and **Branches** are sometimes referred to generically as "graphs". This is because their underlying architecture is identical, Resource Models just have more properties and capabilities attached to them.
+
+.. important:: The Arches Designer is used for altering the record-keeping structure of your database; it does not alter the physical `data model <data-model.html>`_.
 
 Arches Designer
 ===============
@@ -22,29 +24,31 @@ The Arches Designer is where you export, import, duplicate, modify, and create y
 
 .. image:: images/arches-desinger.png
 
-If you don't see Resource Models or Branches listed in your Arches Designer, you may want to consider `loading a package <command-line-reference.html#loading-a-package-into-a-project>`_. Alternatively, you can directly import individual Resource Model files through **Add ...**.
+If you don't see any Resource Models listed in your Arches Designer, you may want to consider `loading a package <command-line-reference.html#loading-a-package-into-a-project>`_. Alternatively, you can directly import individual Resource Model files through **Add ...**.
 
-To edit a Resource Model or Branch, click on it or click **Manage ... > Manage Graph** and you'll be brought to the Graph Designer.
+To edit a Resource Model, click on it or click **Manage ...** > **Manage Graph** and you'll be brought to the Graph Designer.
 
 .. image:: images/select-graph.png
 
 Graph Designer
 ==============
 
-Almost all aspects of a Resource Model and Branch design are handled in the Graph Designer. The exception is Functions, which are only relevant to Resource Models and are handled in the separate Function Manager.
+Almost all aspects of Resource Model and Branch design are handled in the Graph Designer. The exception is Functions, which are handled in the separate Function Manager.
 
-The Graph Designer comprises three tabs, the `Graph Tab`_, `Cards Tab`_, and `Permissions Tab`_. Each tab is used to configure a different aspect of the Resource Model or Branch: In the Graph Tab you design the node structure, in the Cards Tab you configure the user interface (card) for each nodegroup, and in the Permissions Tab you are able to assign detailed permission levels to each card. The basic workflow for using the Graph Designer is to proceed through the tabs in that same order.
+The Graph Designer comprises three tabs, the `Graph Tab`_, `Cards Tab`_, and `Permissions Tab`_. Each tab is used to configure a different aspect of the Resource Model: In the Graph Tab you design the node structure, in the Cards Tab you configure the user interface (card) for each nodegroup, and in the Permissions Tab you are able to assign detailed permission levels to each card. The general workflow for using the Graph Designer is to proceed through the tabs in that same order.
 
 Graph Tab
 ---------
 
-The Graph Tab is where you build the actual graph, the structured set of nodes and nodegroups, which is the core of a Resource Model or Branch. As noted above, sometimes Resource Models and Branches are generically referred to as "graphs".
+The Graph Tab is where you build the actual graph, a structured set of nodes and nodegroups, which is the core of a Resource Model or Branch. As noted above, sometimes Resource Models and Branches are generically referred to as "graphs", and this may seem confusing at first, but you'll come to see that it is an appropriate nickname.
 
 .. figure:: images/graph-designer-graph-tab.png
 
    Screenshot of the Graph Tab in the Graph Designer, showing an "Actor" Resource Model.
 
-In practice, constructing the graph means adding nodes (or existing Branches) to the Graph Tree, which appears on the left side of the page when the Graph Tab is activated. When you add a new node, you set many different settings for that node, like datatype, in the main panel of the page. 
+In practice, constructing the graph means adding nodes (or existing Branches) to the Graph Tree, which appears on the left side of the page when the Graph Tab is activated. When you add a new node, you set many different settings for that node, like datatype, in the main panel of the page.
+
+During the graph construction process, you are able to create a new Branch from any portion of your graph. This is useful if you have completed a large section of the graph, and want to reuse it later in another Resource Model.
 
 .. note:: If you are building a graph that uses an ontology, the ontology rules will automatically be enforced during this graph construction process.
 
