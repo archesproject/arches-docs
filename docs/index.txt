@@ -22,10 +22,10 @@ Arches Documentation
     :caption: Using Arches
     :maxdepth: 2
 
-    managing-resources
+    designing-the-database
+    ontologies-in-arches
     creating-resources
     managing-map-layers
-    ontologies-in-arches
     rdm
 
 .. toctree::
