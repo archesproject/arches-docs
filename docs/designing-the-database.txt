@@ -1,0 +1,80 @@
+######################
+Designing the Database
+######################
+
+Arches Database Theory
+======================
+
+Let's begin with a brief primer on some of the core concepts upon which Arches is constructed.
+
+**Resources** - Resources are what we call database records. If you are using Arches to create an inventory of historic buildings, each one of those buildings will be recorded as a "resource". This terminology is used throughout the app.
+
+**Resource Models** - When creating new Resources, a data entry user must decide which Resource Model to use, determining what information is collected for the Resource. Think of different Resource Models as categories of records in your database -- "Buildings" vs. "Archaeological Sites" vs. "Cemeteries", for example. Every Arches database must have at least one Resource Model.
+
+**Branches** - Think of Branches as "partial" Resource Models that can be aggregated to form a "full" Resource Model. They function as resuable building blocks, allowing you to avoid having to manually recreate complex structures in multiple Resource Models.
+
+.. important:: Both **Resource Models** and **Branches** are sometimes referred to generically as "graphs". This is because their underlying architecture is identical, Resource Models just have more properties and capabilities attached to them.
+
+Arches Designer
+===============
+
+The Arches Designer is where you export, import, duplicate, modify, and create your Resource Models and Branches. Any user who is part of the Graph Editor group will have access to the Arches Designer.
+
+.. image:: images/arches-desinger.png
+
+If you don't see Resource Models or Branches listed in your Arches Designer, you may want to consider `loading a package <command-line-reference.html#loading-a-package-into-a-project>`_. Alternatively, you can directly import individual Resource Model files through **Add ...**.
+
+To edit a Resource Model or Branch, click on it or click **Manage ... > Manage Graph** and you'll be brought to the Graph Designer.
+
+.. image:: images/select-graph.png
+
+Graph Designer
+==============
+
+Almost all aspects of a Resource Model and Branch design are handled in the Graph Designer. The exception is Functions, which are only relevant to Resource Models and are handled in the separate Function Manager.
+
+The Graph Designer comprises three tabs, the `Graph Tab`_, `Cards Tab`_, and `Permissions Tab`_. Each tab is used to configure a different aspect of the Resource Model or Branch: In the Graph Tab you design the node structure, in the Cards Tab you configure the user interface (card) for each nodegroup, and in the Permissions Tab you are able to assign detailed permission levels to each card. The basic workflow for using the Graph Designer is to proceed through the tabs in that same order.
+
+Graph Tab
+---------
+
+The Graph Tab is where you build the actual graph, the structured set of nodes and nodegroups, which is the core of a Resource Model or Branch. As noted above, sometimes Resource Models and Branches are generically referred to as "graphs".
+
+.. figure:: images/graph-designer-graph-tab.png
+
+   Screenshot of the Graph Tab in the Graph Designer, showing an "Actor" Resource Model.
+
+In practice, constructing the graph means adding nodes (or existing Branches) to the Graph Tree, which appears on the left side of the page when the Graph Tab is activated. When you add a new node, you set many different settings for that node, like datatype, in the main panel of the page. 
+
+.. note:: If you are building a graph that uses an ontology, the ontology rules will automatically be enforced during this graph construction process.
+
+Along the way, you can use the preview button to display the graph in a more graph-like manner. This view will be familiar to users of Arches going back to version 3.0.
+
+.. figure:: images/graph-designer-graph-tab-preview.png
+
+   Screenshot of the Graph Tab in the Graph Designer, showing the graph in preview mode.
+
+Cards Tab
+---------
+
+Once you have added nodes to the graph, you can switch to the Cards Tab to begin refining the user interface. This is where you determine how users will enter data for these nodes, and what the public-facing "resource report" will look like. As you can see, the graph tree is replaced with a "card tree", which is very similar to what users will see when they begin creating a resource using this Resource Model. However, here you are able to select each widget in the card tree, and configure it with the Widget Manager on the right-hand of the page.
+
+.. figure:: images/graph-designer-card-tab.png
+
+   Screenshot of the Cards Tab in the Graph Designer, showing an "Actor" Resource Model.
+
+Permissions Tab
+---------------
+
+Arches allows you to define permissions at the card level, so in the Permissions Tab you'll see the card tree, just as in the Cards tab. However, you will only be able to select entire cards, not individual nodes.
+
+.. figure:: images/graph-designer-permissions-tab.png
+
+   Screenshot of the Permissions Tab in the Graph Designer, showing an "Actor" Resource Model.
+
+Once you have selected one or more cards, you can select a user or user group and then assign one of the following permissions levels:
+
+:Delete: Allows users to delete instances of this nodegroup. Note, this is not the same as being allowed to delete an entire resource, permissions for which are not handled here.
+:No Access: Disallows users from seeing or editing instances of this nodegroup. Use this permission level to hide sensitive data from non-authenticated users (the public).
+:Read: Allows users to see this nodegroup's card. If disallowed, the card/nodegroup will be hidden from the map and resource reports.
+:Create/Update: Allows users to create or edit instances of this nodegroup. This provides the ability to let users edit some information about a resource, while be restricted from editing other information.
