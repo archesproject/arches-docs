@@ -61,11 +61,17 @@ Along the way, you can use the preview button to display the graph in a more gra
 Cards Tab
 ---------
 
-Once you have added nodes to the graph, you can switch to the Cards Tab to begin refining the user interface. This is where you determine how users will enter data for these nodes, and what the public-facing "resource report" will look like. As you can see, the graph tree is replaced with a "card tree", which is very similar to what users will see when they begin creating a resource using this Resource Model. However, here you are able to select each widget in the card tree, and configure it with the Widget Manager on the right-hand of the page.
+Once you have added nodes to the graph, you can switch to the Cards Tab to begin refining the user interface. As you can see, the graph tree is replaced with a "card tree", which is very similar to what users will see when they begin creating a resource using this Resource Model. 
 
 .. figure:: images/graph-designer-card-tab.png
 
    Screenshot of the Cards Tab in the Graph Designer, showing an "Actor" Resource Model.
+
+The top of the card tree is the root of the Resource Model, and you'll select it to configure the public-facing resource report. Below this, you'll see a list of cards in the Resource Model, some of which may be nested within others. There will be a card in the card tree for every nodegroup in the graph tree. Finally, within each card you'll see one or more widgets. These correspond to nodes in the graph that collect business data. In the image above, the Appellation widget is selected.
+
+When you select a card or a widget, you will see the Card Manager or Widget Manager appear on the right-hand side of the page. This is where you will update settings like labels, placeholder text, tooltips, etc. The middle of the page shows a preview of how a data entry user will experience the card.
+
+.. tip:: While working with the Cards Tab, you may need to go back and change a node in the Graph Tab. Be aware that though you may expect node changes in the Graph Tab to cascade to widget configurations in the Cards Tab, this does not always happen. Be sure to double-check your work!
 
 Permissions Tab
 ---------------
