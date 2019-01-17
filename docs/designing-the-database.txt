@@ -13,7 +13,7 @@ Let's begin with a brief primer on some of the core concepts upon which Arches i
 
 **Branches** - Branches are tools for transport of complex node structures from one Resource Model to another. This allows you to avoid manually recreating the same "branches" in multiple Resource Models.
 
-.. note:: Both **Resource Models** and **Branches** are sometimes referred to generically as "graphs". This is because their underlying architecture is identical, Resource Models just have more properties and capabilities attached to them.
+.. note:: Both **Resource Models** and **Branches** are sometimes referred to generically as "graphs". This is because their underlying architecture is a graph. However, as you'll see, they play completely different roles in Arches.
 
 .. important:: The Arches Designer is used for altering the record-keeping structure of your database; it does not alter the physical `data model <data-model.html>`_.
 
