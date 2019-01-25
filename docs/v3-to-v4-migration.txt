@@ -1,0 +1,350 @@
+﻿############################
+Migrating Data From v3 to v4
+############################
+
+.. sidebar:: Terminology Note
+
+    In v3 we had "resource graphs", while in v4 we call these "Resource Models". Conceptually though, they are the same, so we'll be referring to them here as "v3 graphs" and "v4 graphs"/"Resource Models", respectively.
+
+Upgrading your Arches installation can be a daunting prospect, as a significant backend redesign was implemented in v4. We have developed the following documentation (and the code to support it) to guide you through the process.
+
+We have taken special care to accommodate those who have used the v3 Arches-HIP graphs, as we expect them to be the largest audience for this workflow. However, we have developed it to work for any v3 deployment, even though that makes the process more complex. Please follow the order of the steps below carefully, as we have tried to lay them out in a manner that will work for both groups of people.
+
+.. admonition:: Foreshadowing
+
+    Unless you are an Arches-HIP User, **you must create your own v4 Resource Models** (`Migration Step 5 <build-the-v4-resource-models>`_). This migration process does not attempt to create them based on your old v3 graphs. There are a number of reasons for this, but most simply, v4 graphs have different constraints and support different datatypes and structures than those in v3. In other words, your v4 database will be better off with graphs that have been created natively, not translated from v3.
+
+v4 Preparation
+==============
+
+1. Install Arches and Make a Project
+------------------------------------
+    
+You can name your project whatever you want, but throughout this document we'll refer to it as ``my_project``.
+
+.. seealso::
+
+    Refer to `Installation <installation.html>`_ and `Projects and Packages <projects-and-packages.html>`_.
+    
+At any point in this process you can customize the templates and images in your project. We also recommend adding a Mapbox key so you can use the map for visual checks during the migration.
+
+By the end of this step you should be able to run the Django devserver from your project, and view it in a browser at localhost:8000.
+
+v3 Preparation
+==============
+
+You must extract some content from your v3 deployment before beginning the migration process.
+
+1. Export the v3 business data.
+-------------------------------
+
+In your v3 command line run::
+
+    python manage.py packages -o export_resources -d v3fullexport.json
+
+You will get a console update during the process, which could take a few minutes. The result will be two files:
+
++ ``v3fullexport.json`` -- these are the resources
++ ``v3fullexport.relations`` -- these are the resource-to-resource relationships
+
+Place these files somewhere easy to access.
+
+2. Export the v3 reference data.
+--------------------------------
+
+In a browser, go to your v3 RDM and export the "Arches" scheme.
+
+1. Click **Tools** and choose **Export Scheme**.
+2. In the dialog, choose the "Arches" scheme.
+3. Click **Export** and you'll be taken to a browser page showing the contents of the scheme in XML format.
+4. Right-click anywhere on the page and choose **Save as...** or **Save page as...**.
+5. Name your file "v3reference_data.xml", and place it somewhere easy to access.
+
+.. warning:: 
+
+    You are only able to migrate one scheme. If your v3 dropdown lists are composed of concepts from two different schemes (i.e. you added another scheme alongside "Arches", added concepts to it, and then added those concepts to dropdown lists) you'll need to manually consolidate these schemes into one before exporting.
+    
+    **Dropdown Lists themselves are not migrated, they are recreated in v4 based on Top Concepts.**
+
+3. Acquire the v3 resource graph ``_nodes.csv`` files.
+------------------------------------------------------
+
+You should be able to find these in your original ``source_data/resource_graphs`` directory, whose contents should be a ``_edges.csv`` and ``_nodes.csv`` for every resource graph in your database. We only want the ``_nodes.csv`` files.
+
+You can also export these directly from v3 with this command::
+
+    python manage.py packages -o export_graphs -d path/to/temp/directory
+
+Place these files somewhere easy to access.
+
+.. admonition:: Arches-HIP Users
+
+    Disregard this step, your ``_nodes.csv`` files will be provided for you.
+    
+4. Transfer all v3 uploaded media files.
+----------------------------------------
+
+You must move all of the media files that have been uploaded to your v3 deployment to your v4 project.
+
+By default, the directory in your new v4 project should be called ``my_project/my_project/uploadedfiles``. If this directory doesn't exist, create it, and move all of the v3 media into it.
+
+.. admonition:: AWS S3 and Azure Users
+
+    You can potentially use the same storage bucket, and just point your v4 project at it. Just make sure your content is in a folder called ``uploadedfiles``. **In theory this should work, but we haven't tested it.**
+
+Migrating the Data
+==================
+
+The object of the following workflow is to produce a fully-functioning v4 package that is populated with the contents of your original v3 Arches database. The process is a combination of shell commands and basic file manipulation. **All of the commands below must be run from within your v4 project.**
+
+Experienced developers should be able to use some of these steps individually to accomplish discrete tasks, but we generally recommend following this workflow as a whole.
+
+1. Create a new package
+-----------------------
+
+.. code-block:: shell
+
+    python manage.py packages -o create_package -d pkg
+    
+.. admonition:: Arches-HIP Users
+
+    Instead of creating a package here, you must use this one that we have prepared: `arches-v4-hip-pkg <https://github.com/legiongis/arches-v4-hip-pkg>`_. You can download, unzip, and place it in your project, or clone a local copy like this::
+
+        git clone https://github.com/legiongis/arches-v4-hip-pkg pkg
+
+The result should be a new package within your project named ``pkg``::
+
+    my_project/
+    └─ manage.py
+    └─ my_project/
+    └─ pkg/
+
+Now go into your project's ``my_project/my_project/settings.py`` file and add this new line somewhere after the ``APP_ROOT`` line::
+
+    PACKAGE_DIR = os.path.join(os.path.dirname(APP_ROOT),'pkg')
+
+.. note:: You can actually name your new package whatever you want, and place it wherever you want, as long as ``PACKAGE_DIR`` holds the path to it. You can even leave out this setting entirely if you pass ``--target path/to/package`` to all of the ``v3`` commands below.
+
+.. admonition:: Arches-HIP Users
+
+    Now skip to `step 3 <move-your-v3-data-into-the-package>`_.
+    
+2. Prepare your package.
+------------------------
+
+.. code-block:: shell
+
+    python manage.py v3 start-migration
+
+This will create some new directories and content in your package::
+    
+    pkg/
+      └─ reference_data/
+          └─ v3topconcept_lookup.json
+      └─ v3data/
+          └─ business_data/
+          └─ graph_data/
+          └─ reference_data/
+
+3. Move your v3 data into the package.
+--------------------------------------
+
+Move ``v3fullexport.json``/``v3fullexport.relations`` from `v3 Preparation Step 1 <export-the-v3-business-data>`_ into ``v3data/business_data``.
+
+Move ``v3reference_data.xml`` from `v3 Preparation Step 2 <export-the-v3-reference-data>`_ into ``v3data/reference_data``.
+
+Move the ``_nodes.csv`` files from `v3 Preparation Step 3 <acquire-the-v3-resource-graph-nodes-csv-files>`_ into ``v3data/graph_data``.
+
+.. admonition:: Arches-HIP Users
+    
+    Your ``_nodes.csv`` files should already be in place for you.
+
+Your package should now look like this::
+
+    pkg/
+      └─ v3data/
+          └─ business_data/
+              └─ v3fullexport.json
+              └─ v3fullexport.relations
+          └─ graph_data/
+              └─ RESOURCE_GRAPH.Exx_nodes.csv
+              └─ etc.
+          └─ reference_data/
+              └─ v3reference_data.xml
+          └─ rm_configs.json
+
+4. Convert your v3 reference data.
+----------------------------------
+
+Run:
+
+.. code-block:: shell
+
+    python manage.py v3 convert-v3-skos --import
+
+New v4 reference data files will be created as shown below, and the ``--import`` flag will automatically load them into your database.
+
+.. code-block:: shell
+
+    pkg/
+      └─ reference_data/
+          └─ collections/
+              └─ collections.xml
+          └─ concepts/
+              └─ thesaurus.xml
+          └─ v3topconcept_lookup.json # already existed, but it's been updated
+
+.. admonition:: Arches-HIP Users
+
+    Now skip to `step 7 <write-the-v4-resource-json>`_.
+
+5. Build the v4 Resource Models.
+--------------------------------
+
+Now that the v3 reference data has been loaded, you are ready to create the v4 Resource Models. Generally, we would expect the v4 graphs to look like their v3 analogs, but we have built in quite a bit of wiggle room:
+
+    * The graph names can differ
+    * The node names can differ
+    * The graph structure can differ
+
+However, there must still be a one-to-one relationship between v3 and v4 graphs.
+
+When it comes to node datatypes, the translation from v3 to v4 is pretty straight-forward.
+
+.. table:: Datatype Translation -- v3 to v4
+   :widths: auto
+
+   ====================  ==================================
+     v3 businesstable      v4 datatype
+   ====================  ==================================
+   ``strings``           ``string``
+   ``dates``             ``date`` or ``edtf``
+   ``geometries``        ``geojson-feature-collection``
+   ``domains``           ``concept`` - if single value per v3 branch
+   ``domains``           ``concept-list`` - if multiple values per v3 branch were allowed
+   ====================  ==================================
+
+.. important::
+
+    When you set a v4 node to ``concept`` or ``concept-list``, you will need to select which collection to use. This is why it's best to have migrated and loaded your RDM scheme (step 4 above) before making the Resource Models.
+
+.. seealso::
+    
+    Refer to `Designing the Database <designing-the-database.html>`_ for help on this task. Within the Arches Designer itself, click |help-btn| for detailed help on each page.
+
+----
+
+Once you have built all of the Resource Models, **export them into your package**. You can do this one-by-one from the Arches Designer interface, or use::
+
+    python manage.py packages -o export_graphs -d pkg/graphs/resource_models -g "all"
+
+.. warning::
+
+    If you have made any Branches, using the ``-g "all"`` argument will export them as well, which you don't want. You'll have to remove them from ``pkg/graph/resource_models`` and/or move them into ``pkg/graph/branches`` before moving on.
+    
+By the end of this step, you should have one JSON file per Resource Model in ``pkg/graphs/resource_models``.
+
+6. Generate the node lookup files.
+----------------------------------
+
+Begin by running::
+
+    python manage.py v3 generate-rm-configs
+
+which will create ``v3data/rm_configs.json``. This file will be used to link the name of your v4 Resource Models with the names of their corresponding v3 graphs, as well as point to the files that link each node. Initially its content will look like::
+
+    {
+        "Activity": {
+            "v3_entitytypeid": "<fill out manually>", 
+            "v3_nodes_csv": "run 'python manage.py v3 generate-lookups", 
+            "v3_v4_node_lookup": "run 'python manage.py v3 generate-lookups"
+        }
+    }
+
+where ``"Activity"`` is the name of a v4 Resource Model. As the file says, you must now fill out the ``v3_entitytypeid`` value for all items. Typically, this will look something like ``"ACTIVITY.E7"``--upper-case with a CRM class appended to it.
+
+Now, also as the file says, run::
+
+    python manage.py v3 generate-lookups
+    
+and you'll see the rest of the values get filled out.
+
+----
+
+There will now be more CSV files in the ``v3data/graph_data`` directory. There is one per v3 graph, and they are used to match the names of v3 node names (column one), with v4 node names (column two). All of the v3 nodes will be listed for you, but **you have to fill out the v4 node names manually**, using your new Resource Models for reference. A portion of a filled out file could look like:
+
+.. table:: ACTIVITY.E7_v4_lookup.csv
+   :widths: auto
+
+   ====================  ================
+     v3_node              v4_node
+   ====================  ================
+   ACTIVITY_TYPE.E55     Activity Type
+   ADDRESS_TYPE.E55      Address Type
+   etc...                etc...
+   ====================  ================
+
+Finally, you can use::
+
+    python manage.py v3 test-lookups
+
+to check your work. Once this test passes, you can move on.
+
+7. Write the v4 resource JSON.
+------------------------------
+
+Now you are ready to convert and import your v3 data::
+
+    python manage.py v3 write-v4-json
+    
+This command will create new v4 resource JSON files in ``pkg/business_data``, one per Resource Model. You'll be provided with easy copy/paste commands to load the files if you want, or you can add ``-i/--import`` to the command to load the resources directly.
+
+.. admonition:: Arches-HIP Users
+
+    Before trying to import your newly created v4 resource JSON for the first time, run::
+    
+        python manage.py packages -o load_package -s /full/path/to/my_project/pkg/
+    
+    which will ensure that your reference data and Resource Models are loaded before the business data gets imported.
+
+To help you debug any errors you encounter, and generally give you more control over this command, we've provided a number of optional arguments.
+
+-i, --import
+        Directly imports the resources after the JSON file is created.
+-m, --resource-models
+        List the names of resource models to process, by default all are used.
+-n, --number
+        Limits the number of resources to load.
+--exclude
+        List of resource ids (uuids) to exclude from the write process.
+--verbose
+        Enables verbose printing during the process. Not recommended for large operations.
+
+To give an example:
+
+.. code-block:: shell
+
+    python manage.py v3 write-v4-json -m "Activity" -n 100 -i --exclude 08b68d46-c202-458a-bf11-bc7a1dd5b2ef
+
+will write only the first 100 "Activity" resources to v4 JSON (even if there are more Resource Models in your package), excluding a single resource whose id is ``08b68d46-c202-458a-bf11-bc7a1dd5b2ef``, and will then immediately import these resources into your database.
+
+.. tip::
+
+    During this process, it may be useful to use::
+    
+        python manage.py resources -o remove_resources -y
+        
+    to erase all existing resources in your database and start from scratch.
+    
+
+8. Write the v4 resource relations file.
+----------------------------------------
+
+Once you have all of your resources loaded in your database, you can import the resource-to-resource relations from v3. Use::
+
+    python manage.py v3 write-v4-relations
+    
+to write the file, and add ``-i/--import`` to directly import them. You will likely get errors if you try to import them but have not loaded all of your resources.
+
+.. |help-btn| image:: images/in-app-help-icon.png
+  :align: middle
