@@ -1,0 +1,73 @@
+###############################
+Preparation - Exporting v3 Data
+###############################
+
+You must extract some content from your v3 deployment before beginning the migration process.
+
+1. Export the v3 business data.
+-------------------------------
+
+In your v3 command line run::
+
+    python manage.py packages -o export_resources -d v3fullexport.json
+
+You will get a console update during the process, which could take a few minutes. The result will be two files:
+
++ ``v3fullexport.json`` -- these are the resources
++ ``v3fullexport.relations`` -- these are the resource-to-resource relationships
+
+Place these files somewhere easy to access.
+
+2. Export the v3 reference data.
+--------------------------------
+
+In a browser, go to your v3 RDM and export the "Arches" scheme.
+
+1. Click **Tools** and choose **Export Scheme**.
+2. In the dialog, choose the "Arches" scheme.
+3. Click **Export** and you'll be taken to a browser page showing the contents of the scheme in XML format.
+4. Right-click anywhere on the page and choose **Save as...** or **Save page as...**.
+5. Name your file "v3reference_data.xml", and place it somewhere easy to access.
+
+.. warning:: 
+
+    You are only able to migrate one scheme. If your v3 dropdown lists are composed of concepts from two different schemes (i.e. you added another scheme alongside "Arches", added concepts to it, and then added those concepts to dropdown lists) you'll need to manually consolidate these schemes into one before exporting.
+    
+    **Dropdown Lists themselves are not migrated, they are recreated in v4 based on Top Concepts.**
+
+3. Acquire the v3 resource graph ``_nodes.csv`` files.
+------------------------------------------------------
+
+You should be able to find these in your original ``source_data/resource_graphs`` directory, whose contents should be a ``_edges.csv`` and ``_nodes.csv`` for every resource graph in your database. We only want the ``_nodes.csv`` files.
+
+You can also export these directly from v3 with this command::
+
+    python manage.py packages -o export_graphs -d path/to/temp/directory
+
+Place these files somewhere easy to access.
+
+.. admonition:: Arches-HIP Users
+
+    Disregard this step, your ``_nodes.csv`` files will be provided for you.
+    
+4. Transfer all v3 uploaded media files.
+----------------------------------------
+
+You must move all of the media files that have been uploaded to your v3 deployment to your v4 project.
+
+By default, the directory in your new v4 project should be called ``my_project/my_project/uploadedfiles``. If this directory doesn't exist, create it, and move all of the v3 media into it.
+
+.. admonition:: AWS S3 and Azure Users
+
+    You can potentially use the same storage bucket, and just point your v4 project at it. Just make sure your content is in a folder called ``uploadedfiles``. **In theory this should work, but we haven't tested it.**
+    
+----
+
+**Proceed to...**
+
+.. toctree::
+    :caption: Migrating Your Data
+    :maxdepth: 1
+
+    migrate-hip-app
+    migrate-other-app
