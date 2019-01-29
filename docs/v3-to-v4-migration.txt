@@ -1,0 +1,38 @@
+﻿############################
+Migrating Data from v3 to v4
+############################
+
+.. sidebar:: Terminology Note
+
+    In v3 we had "resource graphs", while in v4 we call these "Resource Models". Conceptually they are the same. We'll be referring to them here as "v3 graphs" and "v4 graphs"/"Resource Models", respectively.
+
+Upgrading your Arches installation is a complex process, as a significant backend redesign was implemented in v4. We have developed the following documentation (and the code to support it) to guide you through the process. You will be performing a combination of shell commands and basic file manipulation. 
+
+Before migrating data, you'll need to install Arches 4 and make a new project. You can name your project whatever you want, but throughout this documentation we'll refer to it as ``my_project``. You can customize the templates and images in your project any time (before or after migrating the data). We recommend adding a Mapbox key so you can use the map for visual checks during the migration.
+
+.. seealso::
+
+    Refer to `Installation <installation.html>`_ and `Projects and Packages <projects-and-packages.html>`_.
+
+Before moving on, you should be able to run the Django devserver from your project, and view it in a browser at http://localhost:8000.
+
+Once you are ready, you can move on to exporting all of your legacy data from v3.
+
+.. toctree::
+    :caption: Exporting Your Data from v3
+    :maxdepth: 2
+
+    exporting-v3-data
+
+After you have all the v3 data exported, you are ready to follow the appropriate workflow for your deployment.
+
+.. sidebar:: Which workflow should I use?
+
+    If your v3 deployment of Arches was based on Arches-HIP, and you did not modify any of the graphs (but you did customize the RDM content), you can use the Arches-HIP Workflow. If you did modify some of the graph nodes (change their names, etc.), you can probably still use that workflow, but you'll need to edit the ``v3data/graph_data/...nodes_lookup.csv`` file for that graph.
+    
+.. toctree::
+    :caption: Migrating Your Data
+    :maxdepth: 2
+
+    migrate-hip-app
+    migrate-other-app

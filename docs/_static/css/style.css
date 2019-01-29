@@ -1,3 +1,15 @@
 .wy-menu-vertical .caption-text {
     color:white;
 }
+
+.admonition-arches-hip-users {
+    background-color: #FFD7D7 !important;
+}
+
+.admonition-arches-hip-users .highlight {
+    background-color: #FCFCFC !important;
+}
+
+.admonition-arches-hip-users .admonition-title {
+    background-color: #C4161C !important;
+}

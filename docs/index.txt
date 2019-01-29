@@ -40,9 +40,9 @@ Arches Documentation
     functions-widgets-datatypes
     creating-new-map-layers
     data-model
+    v3-to-v4-migration
     import-export
     settings-beyond-the-ui
-
 
 .. toctree::
     :caption: Reference
