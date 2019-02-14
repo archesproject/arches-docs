@@ -1,0 +1,89 @@
+#############################
+Introduction to Arches Mobile
+#############################
+
+Arches Mobile allows you and your team to collect data in the field on mobile
+devices, and synch it back to your main Arches database. Database admins facilitate this process by designing "mobile surveys" in the main Arches web application, which define who can participate, what kind of data will be collected, where the survey will take place, and for how long. Users can then connect to the web application, download the survey, and begin data collection.
+
+Get the App
+===========
+
+Search for "Arches" in your mobile device's app store, or use these links.
+
+.. image:: images/arches-mobile/apple-app-store.png
+    :height: 50px
+
+.. image:: images/arches-mobile/google-play-badge.png
+    :height: 50px
+
+######################
+Arches Mobile Workflow
+######################
+
+.. figure::  images/arches-mobile/app-workflow.png
+
+    Left to right: Overview of the Arches Mobile workflow
+
+Connect to an Arches Application
+================================
+
+Begin by connecting to an existing Arches web app. You'll use credentials provided to you by the database administrator. Be sure to use the entire application URL.
+
+.. image::  images/arches-mobile/0-add-arches-application.png
+    :height: 400px
+    :align: center
+
+You can create and maintain connections to as many Arches applications as you want.
+
+.. image::  images/arches-mobile/1-Arches-Endpoints.png
+    :height: 400px
+    :align: center
+
+Download a Project
+==================
+
+Once connected to an Arches application, you'll be provided a list of Projects. These are all of the mobile surveys to which you have been granted access. Choose a project, and download it to begin working.
+
+.. figure:: images/arches-mobile/2-Projects.png
+    :height: 400px
+    :align: center
+    
+    This user has access to five different projects, but has only downloaded the one at the bottom of the list.
+
+Managing Projects
+-----------------
+
+You can keep your project screen clean by leaving projects if you will no longer be participating (you can rejoin later) or by deleting projects from your device. If you have not synched your data, it will be completely lost when you delete a project.
+    
+.. admonition:: Inactive Projects
+    
+    You may see a project marked as "Inactive". This means an administrator has temporarily deactivated it, and you will not be able to access it until it's been reactivated.
+
+Collecting Data
+===============
+
+.. admonition:: This section still in progress
+
+    in development
+
+Once you have downloaded a project, you can enter it to begin collecting data. There are two ways to create data:
+
+draft content: When you begin to edit data in a mobile survey project, you can either make new resources, or edit existing resources from the main Arches database. If you did not receive any resources with the survey when you first downloaded it, that means the admin who designed the survey did not intend for you to have any.
+
+The actual process of entering data is straight forward, and you can select resource instances from a list view or from a map view. In the list view, a resource instance's background will go from grey to white once an edit has been made to it.
+
+    
+.. important:: You cannot delete existing resource instances through the mobile app.
+
+Synch Data to Arches Application
+================================
+    
+When you have finished collecting data, either creating new resources or editing existing ones, you will synch your local edits to the web Arches deployment. In fact, you can do this at any time, and as often as you want.
+
+.. figure:: images/arches-mobile/6-Project-Synch.png
+    :height: 350px
+    :align: center
+    
+    From the project list in your app, use "Refresh" in a project's settings to synch your local changes to the web application.
+
+.. important:: Synching your data is a one-way operation; you will not receive updates from the web Arches database.

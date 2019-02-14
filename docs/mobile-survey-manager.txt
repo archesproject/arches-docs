@@ -1,0 +1,35 @@
+#####################
+Mobile Survey Manager
+#####################
+
+In order to collect data in the field through the Arches Mobile app, a system
+admin must first design a "Mobile Survey", using the Mobile Survey Manager. A
+mobile survey is defined by a number of parameters, and you can have as many
+active mobile surveys as you need.
+
+To design a survey, you should be first consider these questions:
+
++ Who?
+    Which of your Arches database users will be participating? You can choose
+    individual users, or groups of users.
++ What?
+    For which of your resource models do you need to collect data? You can set
+    a survey to only collect data specific resource models, or for all of them.
+    Also, will users be creating new resources, or updating existing ones? Or
+    both?
++ Where?
+    Will your users have a data cell connection? Will they need to work offline?
+    Arches Mobile works in both cases, but an offline workflow has some extra
+    considerations.
++ When?
+    Each mobile survey has a duration during which data collection is allowed.
+
+.. seealso::
+    If you haven't already, we recommend you read our `Introduction to Arches Mobile <using-arches-mobile.html>`_
+    before you go on to create your first mobile survey.
+
+.. image::  images/arches-mobile/admin-to-archesweb.png
+
+```````````````````````
+Creating Mobile Surveys
+```````````````````````
