@@ -27,13 +27,13 @@ Arches Documentation
     creating-resources
     managing-map-layers
     rdm
-    mobile-survey-manager
+    arches-collector-manager
 
 .. toctree::
-    :caption: Using Arches-Mobile
+    :caption: Using Arches Collector
     :maxdepth: 2
 
-    using-arches-mobile
+    using-arches-collector
 
 .. toctree::
     :caption: Developing With Arches
