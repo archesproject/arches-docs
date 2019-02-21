@@ -141,15 +141,31 @@ OAuth 2.0 is a simple and secure authentication mechanism. It allows application
 Registering an application with Arches
 --------------------------------------
 
-To create an OAuth client for testing go to the url below and create a application using the image below as an example.  Then use the client id when generating a :ref:`OAuth token <auth>`.
+To allow others to connect to your Arches instance, including Arches Collector users, you must create an OAuth client id and place it in your `settings.py` file.
+
+#. Go to
 
     .. code-block:: none
 
-        http://localhost:8000/o/applications/
-    
+        http://<yourdomain:port>/o/applications/
+        
+#. Create a new application
+#. Fill out the form with a **Name** of your choosing, and set **Client type** and **Authorization grant type** as shown in the image below.
+
     .. image:: images/oauth-create-client.png
 
+#. Copy the **Client id** and submit the form (you can access this id at any time).
+#. In your Arches project's ``settings.py`` or ``settings_local.py`` file, set or add this variable
 
+    .. code-block:: none
+    
+        MOBILE_OAUTH_CLIENT_ID = "<your new Client id>"
+
+.. important::
+    
+    + Only make one application, though you are technically allowed to make more.
+    + An application is "owned" by whichever user created it, and will not be visible to other users.
+        
 .. _auth:
 
 .. http:post:: /o/token
