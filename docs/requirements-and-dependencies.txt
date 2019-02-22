@@ -32,6 +32,9 @@ Software Dependencies
 * **JDK** http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 * **Elasticsearch 5.2.1**
     - To learn more about how Arches works with ElasticSearch, please read :ref:`Using Arches To Install Elasticsearch`. We recommend waiting until *after* you have Arches installed to deal with Elasticsearch.
+* **CouchDB 2.x** https://docs.couchdb.org/en/stable/install/index.html
+    - CouchDB is used to sync mobile data collection projects with your main database. `If you never plan to use the Arches Collector app, you can skip this dependency.`
+    - Arches will connect to CouchDB with default credentials. However, in production you must make a new CouchDB admin after installation, and then update ``COUCHDB_URL = 'http://admin:admin@localhost:5984`` in ``settings.py`` accordingly.
 
 ------------------
 
