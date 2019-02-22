@@ -624,8 +624,8 @@ Resources
         HTTP/1.0 200 OK
 
 
-Projects
-========
+Mobile Projects
+===============
 
 .. http:get:: /mobileprojects  
 
