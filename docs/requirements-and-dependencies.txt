@@ -18,10 +18,6 @@ To begin development or make a test installation of Arches, you will need the fo
     + In development, it's possible to force ElasticSearch to run with only 1GB of memory, see `Note 1 <arches-and-elasticsearch.html#notes>`_
     + In production, you may want to increase your memory, and allow ElasticSearch to use `up to 32GB of memory <https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html#compressed_oops>`_.
 
-.. warning::
-
-   Please note that Arches v4 is only fully supported in Chrome.
-
 Software Dependencies
 =====================
 
@@ -44,7 +40,7 @@ The installation process for each component listed may differ based on your oper
 Installing Dependencies on Linux
 --------------------------------
 
-You can find fully scripted dependency installations for both Ubuntu and CentOS `here <https://github.com/archesproject/arches/tree/master/arches/install>`_.
+You can find fully scripted dependency installation for Ubuntu `here <https://github.com/archesproject/arches/tree/master/arches/install>`_.
 
 .. _WindowsInstallation:
 
@@ -74,10 +70,12 @@ Once installed, find Java on your operating system. It will be somewhere like ``
 
 **Elasticsearch** - Take care of this after you have Arches fully installed. Use the command recommended in :ref:`Using Arches to Install Elasticsearch`.
 
+**CouchDB** - https://docs.couchdb.org/en/stable/install/index.html
+
 Installing Dependencies on macOS
 --------------------------------
 
-Please see `this gist <https://gist.github.com/jmunowitch/35eb1d20a0b9cbf86f4b0eb4b167d43a>`_ for the easiest way to install all dependencies on macOS. Running this script in full will create an installation of Arches based on the current repo, but you can use pieces of it for individual dependencies as well.
+Please see `this gist <https://gist.github.com/jmunowitch/35eb1d20a0b9cbf86f4b0eb4b167d43a>`_ for the easiest way to install all dependencies (besides `CouchDB <https://docs.couchdb.org/en/stable/install/index.html>`_ on macOS. Running this script in full will create an installation of Arches based on the current repo, but you can use pieces of it for individual dependencies as well.
 
 Further notes:
 
