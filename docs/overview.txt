@@ -2,11 +2,6 @@
 Overview
 ########
 
-Documentation Overview
-======================
-
-This is the official documentation for Arches. It should provide you with background information on Arches, how to install it, and a good overview of its capabilities. While you are using Arches, be aware that much of the content here is also available by clicking the "?" symbol in the top-right corner of any page. If you are a developer interested in customizing or contributing to Arches, you should also visit our `GitHub wiki <https://github.com/archesproject/arches/wiki>`_ for our developer documentation.
-
 What is Arches?
 ===============
 
@@ -41,7 +36,7 @@ To promote consistent data creation, update, and indexing workflows, Arches impl
 
     v2.0  March, 2014: Improved upload of digital files, assorted bug fixes
 
-    v1.0 October, 2013: Initial Release
+    v1.0  October, 2013: Initial Release
 
 **License**
 
@@ -52,14 +47,17 @@ Who is Arches for?
 
 Arches is primarily intended for software developers who need to build flexible web applications and wish to hide the complexities of ontologies, thesauri, and geospatial data management from their users.
 
-The Arches framework is largely invisible to end users; Arches applications are responsible for defining resource graphs and implementing data entry, data presentation, and data reporting workflows.
+Documentation Overview
+======================
 
-One major exception to this rule is the Reference Data Manager (RDM). The RDM is a core component of the Arches framework and can support the creation and curation of thesauri without the need to implement an Arches application.
+This is the official documentation for Arches. It should provide you with background information on Arches, how to install it, and a good overview of its capabilities. While you are using Arches, be aware that much of the content here is also available by clicking the "?" symbol in the top-right corner of any page.
+
+**Improve Our Documentation!** If you find errors, have suggestions, or want to make a contribution, these docs are managed in the `archesproject/arches-docs <https://github.com/archesproject/arches-docs>`_ repo.
 
 Contributing To Arches
 ======================
 
-Arches is open source software, which means that with your help it will continue to evolve and improve. Contributions to the project can take a few different forms:
+Arches is open source software, which means that with your help it will continue to evolve and improve.
 
-+ **Translations** We are always hoping to bring Arches to new audiences around the world. Please post on the `Arches forum <https://groups.google.com/d/forum/archesproject?hl=en>`_ if you are interested in contributing a translation.
 + **Bug Reports and Code Contribution** If you find issues with the Arches interface or code, or have the means to contribute code to fix existing issues, please begin by reading our guidelines for `Contributing to Arches <https://github.com/archesproject/arches/blob/master/CONTRIBUTING.md>`_.
++ **Translations** We are always hoping to bring Arches to new audiences around the world. Please post on the `Arches forum <https://groups.google.com/d/forum/archesproject?hl=en>`_ if you are interested in contributing a translation.
