@@ -73,9 +73,9 @@ So, for example, these are equivelent requests
     
     .. code-block:: none
 
-        curl -H "X-ARCHES-FORMAT: json-ld" http://localhost:8000/surveys
+        curl -H "X-ARCHES-FORMAT: json-ld" http://localhost:8000/mobileprojects
 
-        curl http://localhost:8000/surveys?format=json-ld
+        curl http://localhost:8000/mobileprojects?format=json-ld
 
 If both a custom header and querystring with the same name are provided, then the querystring parameter takes precedence.  
 
@@ -83,7 +83,7 @@ If both a custom header and querystring with the same name are provided, then th
 
     .. code-block:: none
 
-        curl -H "X-ARCHES-FORMAT: json-ld" http://localhost:8000/surveys?format=html
+        curl -H "X-ARCHES-FORMAT: json-ld" http://localhost:8000/mobileprojects?format=html
 
 .. note:: Querystring parameters are case sensitive.  Behind the scenes, custom header parameters are converted to lower case querystring parameters.  
 
@@ -91,7 +91,7 @@ If both a custom header and querystring with the same name are provided, then th
     
     .. code-block:: none
 
-        http://localhost:8000/surveys?format=html&FORMAT=json&Format=xml
+        http://localhost:8000/mobileprojects?format=html&FORMAT=json&Format=xml
 
 
 Authentication
@@ -624,21 +624,21 @@ Resources
         HTTP/1.0 200 OK
 
 
-Surveys
-=======
+Projects
+========
 
-.. http:get:: /surveys  
+.. http:get:: /mobileprojects  
 
-    get a list of surveys/projects that a user has been invited to participate in
+    get a list of mobile data collection projects that a user has been invited to participate in
 
 
     **Example request**:
 
     .. code-block:: none
 
-        curl -H "Authorization: Bearer {token}" -X GET http://localhost:8000/surveys
+        curl -H "Authorization: Bearer {token}" -X GET http://localhost:8000/mobileprojects
 
-        curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NjYwYmQifQ.-xN_h82PHVTCMA9vdoHrcZxH-x5mb11y1537t3rGzcM" -X GET http://localhost:8000/surveys
+        curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NjYwYmQifQ.-xN_h82PHVTCMA9vdoHrcZxH-x5mb11y1537t3rGzcM" -X GET http://localhost:8000/mobileprojects
 
 
     **Example response**:
@@ -660,14 +660,14 @@ Surveys
                     "download": false, 
                     "resources": []
                 }, 
-                "description": "A description of this survey", 
+                "description": "A description of this project.", 
                 "enddate": "2018-03-16", 
                 "groups": [
                     6
                 ], 
                 "id": "e3d95999-2323-11e8-894b-14109fd34195", 
                 "lasteditedby_id": 1, 
-                "name": "Forbidden Survey", 
+                "name": "Forbidden Project", 
                 "startdate": "2018-03-04", 
                 "tilecache": "", 
                 "users": [
