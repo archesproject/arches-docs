@@ -48,8 +48,7 @@ Use the following to get the latest stable release of Arches::
 
 5. Create a new Arches Project
 ------------------------------
-
-Now that Arches is installed, you can make a Project. This is where you will make all of the customizations and branding that will make one installation of Arches different from the next. The name of your project should only be lowercase, and should use underscores instead of spaces or hyphens. The example below uses `my_project`.
+Now that Arches is installed, you can make a Project. This is where you will make all of the customizations and branding that will make one installation of Arches different from the next. The name of your project should only be lowercase, and should use underscores instead of spaces or hyphens. The example below uses `my_project`. You can add ``--directory path/to/dir`` to change the directory your new project will be created in.
 
 Linux and macOS::
 
@@ -59,17 +58,14 @@ Windows::
 
     python ENV\Scripts\arches-project create my_project
 
-
-.. note:: You can use the option ``[{-d|--directory} <directory_name>]`` to change the directory your new project will be created in.
-
-
+.. note:: At this level, "projects" are completely different from the mobile data collection "projects" that are mentioned elsewhere in this documentation.
 
 6. Update settings_local.py
 ---------------------------
 
 Before you continue, you may need to open ``my_project\my_project\settings_local.py`` and change some environment-specific settings.
 
-* Depending on your Postgres/PostGIS installation, you may need to uncomment the DATABASES section and change the username and password, as well as the name of your PostGIS template database. If you will have multiple Arches projects using the same database, make sure to change the database name here as well.
+* Depending on your Postgres/PostGIS installation, you may need to uncomment the DATABASES section and change the username and password, as well as the name of your PostGIS template database. If you will have multiple Arches projects using the same Postgres server, make sure to change the database name here as well.
 
 * On Windows, you must specify the path to your GDAL library. Add the following line. Be sure to adjust the path as necessary for your GDAL installation, and note the *forward* slashes::
 
@@ -99,9 +95,9 @@ To confirm things are working, run::
 
     python manage.py runserver
 
-and navigate to ``localhost:8000`` in Chrome.
+and navigate to ``localhost:8000`` in a browser.
 
-The default login credentials are 'admin' for both username and password. To change this password and create new users, navigate to `localhost:8000/admin`.
+The default login credentials are 'admin' for both username and password. To change this password and create new users, navigate to ``localhost:8000/admin``.
 
 Next steps...
 -------------
@@ -109,6 +105,8 @@ Next steps...
 Now that you have Arches installed and a Project created, you are ready to begin.
 
 * Modify some :doc:`Initial Configuration </initial-configuration>` settings
+
+* In order to allow API access to your instance, to support the use of the Arches Collector mobile app, you must :ref:`register an Arches application <Registering an application with Arches>`.
 
 * Read more about :doc:`Projects and Packages </projects-and-packages>`
 
