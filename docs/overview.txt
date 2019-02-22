@@ -33,6 +33,8 @@ To promote consistent data creation, update, and indexing workflows, Arches impl
 
 **Version History**
 
+    v4.4  February, 2019: Release of :doc:`Arches Collector <using-arches-collector>` mobile data collection app
+
     v4.0  July, 2017: Significant site redesign, addition of graph creation UI, system settings UI, internal tileserver (TileStache), updated dependencies (MapBox GL, ElasticSearch 5.2, Yarn)
 
     v3.0  April, 2015: Updated architecture, inclusion of the Reference Data Manager, updated dependencies (ElasticSearch, OpenLayers, Knockout)
