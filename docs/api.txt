@@ -141,9 +141,9 @@ OAuth 2.0 is a simple and secure authentication mechanism. It allows application
 Registering an application with Arches
 --------------------------------------
 
-To allow others to connect to your Arches instance, including Arches Collector users, you must create an OAuth client id and place it in your `settings.py` file.
+To allow others to connect to your Arches instance, including Arches Collector users, you must create an OAuth client id and add it to your settings.
 
-#. Go to
+#. In a browser go to
 
     .. code-block:: none
 
@@ -160,6 +160,7 @@ To allow others to connect to your Arches instance, including Arches Collector u
     .. code-block:: none
     
         MOBILE_OAUTH_CLIENT_ID = "<your new Client id>"
+#. That's all! Arches Collector users will now be able to connect to your Arches instance using their own credentials.
 
 .. important::
     
