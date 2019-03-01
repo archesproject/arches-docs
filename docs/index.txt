@@ -27,6 +27,13 @@ Arches Documentation
     creating-resources
     managing-map-layers
     rdm
+    arches-collector-manager
+
+.. toctree::
+    :caption: Using Arches Collector
+    :maxdepth: 2
+
+    using-arches-collector
 
 .. toctree::
     :caption: Developing With Arches

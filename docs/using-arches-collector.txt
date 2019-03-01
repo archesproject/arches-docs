@@ -1,0 +1,92 @@
+################################
+Introduction to Arches Collector
+################################
+
+.. 
+    These images are commented out until the download links are available.
+    .. image:: images/arches-mobile/apple-app-store.png
+        :height: 50px
+        :target: update with link when available
+
+    .. image:: images/arches-mobile/google-play-badge.png
+        :height: 50px
+        :target: update with link when available
+
+Arches Collector is a mobile app that allows you and your team to collect heritage data in the field, and sync it back to your main Arches instance. Database administrators facilitate this process by designing "projects" in the Arches instance, which define who can participate, what kind of data will be collected, where the project will take place, and for how long. Approved users can then connect to your Arches instance, download the project, and collect data, and sync it back to the database.
+
+.. figure::  images/arches-mobile/app-workflow.png
+
+    Left to right: Overview of the Arches Collector workflow
+
+#########################
+Arches Collector Workflow
+#########################
+
+Connect to an Arches Instance
+================================
+
+Begin by connecting to an existing Arches instance. This is a deployment of Arches that you can also view on the web. You'll use credentials provided to you by the database administrator. Be sure to use the entire URL.
+
+.. image::  images/arches-mobile/0-add-arches-application.png
+    :height: 400px
+    :align: center
+
+You can create and maintain connections to as many Arches instances as you want.
+
+.. image::  images/arches-mobile/1-Arches-Endpoints.png
+    :height: 400px
+    :align: center
+
+Download a Project
+==================
+
+Once connected to an Arches application, you'll be provided a list of projects. These are all of the mobile data collection projects to which you have been granted access. Choose a one, and download it to begin working.
+
+.. figure:: images/arches-mobile/2-Projects.png
+    :height: 400px
+    :align: center
+    
+    This user has access to five different projects, but has only downloaded the one at the bottom of the list.
+
+Managing Projects
+-----------------
+
+You can keep your project screen clean by leaving projects if you will no longer be participating (you can rejoin later), or by deleting projects from your device. If you have not synced your data, it will be completely lost when you delete a project.
+    
+.. admonition:: Inactive Projects
+    
+    You may see a project marked as "Inactive". This means an administrator has temporarily deactivated it, and you will not be able to access it until it's been reactivated.
+
+Collecting Data
+===============
+
+.. admonition:: This section still in progress
+
+    in development
+
+Once you have downloaded a project, you can enter it to begin collecting data. There are two ways to create data:
+
+draft content: When you begin to edit data in a project, you can either make new resources, or edit existing resources from the main Arches database. If you did not receive any resources with the survey when you first downloaded it, that means the admin who designed the survey did not intend for you to have any.
+
+The actual process of entering data is straight forward, and you can select resource instances from a list view or from a map view. In the list view, a resource instance's background will go from grey to white once an edit has been made to it.
+
+    
+.. important:: You cannot delete existing resource instances through the mobile app.
+
+Syncing Data
+============
+    
+When you have finished collecting data, either creating new resources or editing existing ones, you will synch your local edits to the web Arches deployment. In fact, you can do this at any time, and as often as you want.
+
+.. figure:: images/arches-mobile/6-Project-Synch.png
+    :height: 350px
+    :align: center
+    
+    From the project list in your app, use "Sync" in a project's settings to sync your local changes to the web application.
+
+When you sync your the project on your mobile device, this is what happens:
+
++ All local changes will be pushed to the Arches instance.
++ All local will be made available to all other participants in the same project.
++ You will download any data changes that other project participants have synced.
++ You will **not** download changes that have been made to resources directly in the Arches instance since the project was first activated.

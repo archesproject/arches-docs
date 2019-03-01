@@ -7,6 +7,8 @@ Projects
 
 Arches Projects facilitate all of the customizations that you will need to make one installation of Arches different from the next. You can update html to modify web page branding, and add functions, datatypes, and widgets to introduce new functionality. A project sits outside of your virtual environment, and can thus be transferred to any other system where Arches is installed.
 
+To create a project, see :ref:`step 5 <5. Create a new Arches Project>` of the installation guide.
+
 The general structure of a new Arches project is:::
 
 	my_project/
@@ -19,7 +21,9 @@ The general structure of a new Arches project is:::
 	      └─ templates/
 	      └─ widgets/
 
-*Note that not all files are shown*
+*Not all files are shown*
+
+.. important:: At this level, "projects" are completely different from the mobile data collection "projects" that are mentioned elsewhere in this documentation.
 
 settings.py
 ^^^^^^^^^^^^

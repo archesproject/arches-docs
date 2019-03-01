@@ -73,9 +73,9 @@ So, for example, these are equivelent requests
     
     .. code-block:: none
 
-        curl -H "X-ARCHES-FORMAT: json-ld" http://localhost:8000/surveys
+        curl -H "X-ARCHES-FORMAT: json-ld" http://localhost:8000/mobileprojects
 
-        curl http://localhost:8000/surveys?format=json-ld
+        curl http://localhost:8000/mobileprojects?format=json-ld
 
 If both a custom header and querystring with the same name are provided, then the querystring parameter takes precedence.  
 
@@ -83,7 +83,7 @@ If both a custom header and querystring with the same name are provided, then th
 
     .. code-block:: none
 
-        curl -H "X-ARCHES-FORMAT: json-ld" http://localhost:8000/surveys?format=html
+        curl -H "X-ARCHES-FORMAT: json-ld" http://localhost:8000/mobileprojects?format=html
 
 .. note:: Querystring parameters are case sensitive.  Behind the scenes, custom header parameters are converted to lower case querystring parameters.  
 
@@ -91,7 +91,7 @@ If both a custom header and querystring with the same name are provided, then th
     
     .. code-block:: none
 
-        http://localhost:8000/surveys?format=html&FORMAT=json&Format=xml
+        http://localhost:8000/mobileprojects?format=html&FORMAT=json&Format=xml
 
 
 Authentication
@@ -141,15 +141,32 @@ OAuth 2.0 is a simple and secure authentication mechanism. It allows application
 Registering an application with Arches
 --------------------------------------
 
-To create an OAuth client for testing go to the url below and create a application using the image below as an example.  Then use the client id when generating a :ref:`OAuth token <auth>`.
+To allow others to connect to your Arches instance, including Arches Collector users, you must create an OAuth client id and add it to your settings.
+
+#. In a browser go to
 
     .. code-block:: none
 
-        http://localhost:8000/o/applications/
-    
+        http://<yourdomain:port>/o/applications/
+        
+#. Create a new application
+#. Fill out the form with a **Name** of your choosing, and set **Client type** and **Authorization grant type** as shown in the image below.
+
     .. image:: images/oauth-create-client.png
 
+#. Copy the **Client id** and submit the form (you can access this id at any time).
+#. In your Arches project's ``settings.py`` or ``settings_local.py`` file, set or add this variable
 
+    .. code-block:: none
+    
+        MOBILE_OAUTH_CLIENT_ID = "<your new Client id>"
+#. That's all! Arches Collector users will now be able to connect to your Arches instance using their own credentials.
+
+.. important::
+    
+    + Only make one application, though you are technically allowed to make more.
+    + An application is "owned" by whichever user created it, and will not be visible to other users.
+        
 .. _auth:
 
 .. http:post:: /o/token
@@ -607,21 +624,21 @@ Resources
         HTTP/1.0 200 OK
 
 
-Surveys
-=======
+Mobile Projects
+===============
 
-.. http:get:: /surveys  
+.. http:get:: /mobileprojects  
 
-    get a list of surveys/projects that a user has been invited to participate in
+    get a list of mobile data collection projects that a user has been invited to participate in
 
 
     **Example request**:
 
     .. code-block:: none
 
-        curl -H "Authorization: Bearer {token}" -X GET http://localhost:8000/surveys
+        curl -H "Authorization: Bearer {token}" -X GET http://localhost:8000/mobileprojects
 
-        curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NjYwYmQifQ.-xN_h82PHVTCMA9vdoHrcZxH-x5mb11y1537t3rGzcM" -X GET http://localhost:8000/surveys
+        curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NjYwYmQifQ.-xN_h82PHVTCMA9vdoHrcZxH-x5mb11y1537t3rGzcM" -X GET http://localhost:8000/mobileprojects
 
 
     **Example response**:
@@ -643,14 +660,14 @@ Surveys
                     "download": false, 
                     "resources": []
                 }, 
-                "description": "A description of this survey", 
+                "description": "A description of this project.", 
                 "enddate": "2018-03-16", 
                 "groups": [
                     6
                 ], 
                 "id": "e3d95999-2323-11e8-894b-14109fd34195", 
                 "lasteditedby_id": 1, 
-                "name": "Forbidden Survey", 
+                "name": "Forbidden Project", 
                 "startdate": "2018-03-04", 
                 "tilecache": "", 
                 "users": [
