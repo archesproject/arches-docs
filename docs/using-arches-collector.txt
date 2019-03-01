@@ -60,17 +60,10 @@ You can keep your project screen clean by leaving projects if you will no longer
 Collecting Data
 ===============
 
-.. admonition:: This section still in progress
-
-    in development
-
-Once you have downloaded a project, you can enter it to begin collecting data. There are two ways to create data:
-
-draft content: When you begin to edit data in a project, you can either make new resources, or edit existing resources from the main Arches database. If you did not receive any resources with the survey when you first downloaded it, that means the admin who designed the survey did not intend for you to have any.
-
-The actual process of entering data is straight forward, and you can select resource instances from a list view or from a map view. In the list view, a resource instance's background will go from grey to white once an edit has been made to it.
-
+.. admonition:: This section still in development
     
+    coming soon!
+
 .. important:: You cannot delete existing resource instances through the mobile app.
 
 Syncing Data
