@@ -1,20 +1,20 @@
-#####################
-Mobile Survey Manager
-#####################
+########################
+Arches Collector Manager
+########################
 
-In order to collect data in the field through the Arches Mobile app, a system
-admin must first design a "Mobile Survey", using the Mobile Survey Manager. A
-mobile survey is defined by a number of parameters, and you can have as many
-active mobile surveys as you need.
+In order to collect data in the field with the Arches Collector app, a system
+admin must first design a "Project", using the Arches Collector Manager. A
+project is defined by a number of parameters, and a single Arches instance can
+can have as many active (or inactive) projects as you need.
 
-To design a survey, you should be first consider these questions:
+To design a project, you should be first consider these questions:
 
 + Who?
     Which of your Arches database users will be participating? You can choose
     individual users, or groups of users.
 + What?
     For which of your resource models do you need to collect data? You can set
-    a survey to only collect data specific resource models, or for all of them.
+    a project to only collect data specific resource models, or for all of them.
     Also, will users be creating new resources, or updating existing ones? Or
     both?
 + Where?
@@ -25,11 +25,9 @@ To design a survey, you should be first consider these questions:
     Each mobile survey has a duration during which data collection is allowed.
 
 .. seealso::
-    If you haven't already, we recommend you read our `Introduction to Arches Mobile <using-arches-mobile.html>`_
-    before you go on to create your first mobile survey.
+    If you haven't already, we recommend you read about `Arches Collector <using-arches-collector.html>`_
+    before you create your first project.
 
-.. image::  images/arches-mobile/admin-to-archesweb.png
+..
 
-```````````````````````
-Creating Mobile Surveys
-```````````````````````
+    .. image::  images/arches-mobile/admin-to-archesweb.png
