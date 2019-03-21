@@ -430,10 +430,10 @@ Data Model Graph Visualization
 
 Arches Models Only
 
-.. image:: images/arches-models-v4.3.1.svg
-   :target: _images/arches-models-v4.3.1.svg
+.. image:: images/datamodel-arches-4.4.1-032119.svg
+   :target: _images/datamodel-arches-4.4.1-032119.svg
 
 Full Data Model
 
-.. image:: images/full-data-model-v4.3.1.svg
-   :target: _images/full-data-model-v4.3.1.svg
+.. image:: images/datamodel-full-4.4.1-032119.svg
+   :target: _images/datamodel-full-4.4.1-032119.svg
