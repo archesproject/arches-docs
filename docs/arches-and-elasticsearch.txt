@@ -52,12 +52,26 @@ on any operating system. You should get a JSON response that includes "You Know,
 
 For more information about running the service (and all things Elasticsearch), please visit the official `Elasticsearch documentation <https://www.elastic.co/guide/en/elasticsearch/guide/current/running-elasticsearch.html>`_.
 
-Notes
------
-.. note::
+.. important::
    1. By default, Elasticsearch 5.2.1 uses 2GB of memory (RAM). For basic development purposes, we have found it to run well enough on 1GB. Use ``ES_JAVA_OPTS="-Xms1g -Xmx1g" ./bin/elasticsearch -d`` to set the memory allotment on startup (`read more <https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html>`_). You can use the same command to give **more** memory to Elasticsearch in a production setting.
 
    2. Some users have reported getting this error right after starting Elasticsearch: ``org.elasticsearch.bootstrap.StartupException: java.lang.IllegalStateException: No match found``. Upgrading to 5.2.2 seems to fix this problem, as described in `this issue <https://github.com/elastic/elasticsearch/issues/23218>`_.
+
+
+Reindexing The Database
+=======================
+
+At some point, you may need to reindex the entire database. This can be helpful if a bulk load failed halfway through, or if you need to point your database at a different Elasticsearch installation. In the command line run::
+
+    python manage.py es index_database
+
+Be warned that this process can take a long time if you have a lot of resources in your database. Also, if you are in ``DEBUG`` mode it can cause your server to run out of memory (`more info <command-line-reference.html#reindex-the-database>`_).
+
+If the ``es index_database`` operation doesn't solve your issue, you can try this series of commands::
+
+    python manage.py es delete_indexes
+    python manage.py es setup_indexes
+    python manage.py es index_database
 
 
 Using An Independent Elasticsearch Installation
