@@ -91,7 +91,8 @@ just be::
 ElasticSearch Management
 ========================
 
-**install elasticsearch**
+install elasticsearch
+---------------------
 
 .. code-block:: bash
 
@@ -105,11 +106,25 @@ Installs ElasticSearch into the indicated location. If no destination
 is provided, ElasticSearch is placed in the app root directory. Read
 [[Installing and Running Elasticsearch]] for more.
 
-**run elasticsearch**
+run elasticsearch
+-----------------
 
 .. code-block:: bash
 
    path/to/elasticsearch-5.2.1/bin/elasticsearch
+
+reindex the database
+--------------------
+
+.. code-block:: bash
+
+    python manage.py es index_database
+    
+.. important::
+    Memory usage will continuously increase during indexing, if you do not have
+    ``DEBUG = False``. This is because Django will store all db queries in
+    memory, and a lot of them happen during indexing. Be wary of this when indexing
+    a large database, or on servers with small memory provisions.
 
 Import Commands
 ===============
