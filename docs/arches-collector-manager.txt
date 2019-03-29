@@ -5,7 +5,7 @@ Arches Collector Manager
 What Are Arches Collector Projects?
 ===================================
 
-Using the `Arches Collector <using-arches-collector>`_ mobile app to crowdsource data
+Using the :ref:`Arches Collector <Introduction to Arches Collector>` mobile app to crowdsource data
 is dependent on the creation of Projects, by a database administrator, in the
 Arches Collector Manager. Each Project is a discrete collection effort comprising the following:
 
@@ -76,6 +76,16 @@ to your database, the project summary page will tell your how long the project h
 how many resources have been collected, how many have connected to it, and more.
 
 .. image::  images/project-summary.jpg
+
+Creating an Offline Basemap
+===========================
+
+Projects allow for the inclusion of an `MBTiles <https://docs.mapbox.com/help/glossary/mbtiles/>`_ file to serve as a basemap while data collectors are outide of wifi/cell network range. This file will be downloaded and stored on an Arches Collector users' device *the first time that "offline maps" are activated* in a project, not upon the initial download. Therefore, users should activate this map in the project before going into the field.
+
+You can also obtain high quality and inexpensive tiles from sites such as https://openmaptiles.com. To create an MBTiles file with your own geospatial data, you can use a free account at `Mapbox.com <https://mapbox.com>`_, or desktop software like `TileMill <https://tilemill-project.github.io/tilemill/>`_. 
+
+.. note::
+    Large files will require longer downloads and more storage space on mobile devices. 
 
 .. |acm-icon| image:: images/acm-icon.jpg
   :align: middle
