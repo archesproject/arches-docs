@@ -2,6 +2,8 @@
 Introduction to Arches Collector
 ################################
 
+*Download links for the app are coming soon!*
+
 .. 
     These images are commented out until the download links are available.
     .. image:: images/arches-mobile/apple-app-store.png
@@ -23,7 +25,7 @@ Arches Collector Workflow
     Left to right: Overview of the Arches Collector workflow
 
 Connect to an Arches Instance 
-=========================================
+=============================
 
 Begin by connecting to an existing Arches instance. This is a deployment of Arches that you can also view on the web. You'll use credentials provided to you by the database administrator.
 
@@ -56,7 +58,7 @@ Once you have downloaded a project, you can enter it and begin collecting data.
 
 .. admonition:: Inactive Projects
     
-    A project marked as "Inactive" means it has been temporarily deactivated by an administrator, and you will not be able to access it until it's been reactivated.
+    A project marked as "Inactive" means that no new users can download it. If you have already downloaded a project that is now marked inactive, you can continue to work with it as before.
 
 Download the Offline Map
 ------------------------
