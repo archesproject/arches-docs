@@ -2,32 +2,83 @@
 Arches Collector Manager
 ########################
 
-In order to collect data in the field with the Arches Collector app, a system
-admin must first design a "Project", using the Arches Collector Manager. A
-project is defined by a number of parameters, and a single Arches instance can
-can have as many active (or inactive) projects as you need.
+What Are Arches Collector Projects?
+===================================
 
-To design a project, you should be first consider these questions:
+Using the `Arches Collector <using-arches-collector>`_ mobile app to crowdsource data
+is dependent on the creation of Projects, by a database administrator, in the
+Arches Collector Manager. Each Project is a discrete collection effort comprising the following:
 
-+ Who?
-    Which of your Arches database users will be participating? You can choose
-    individual users, or groups of users.
-+ What?
-    For which of your resource models do you need to collect data? You can set
-    a project to only collect data specific resource models, or for all of them.
-    Also, will users be creating new resources, or updating existing ones? Or
-    both?
-+ Where?
-    Will your users have a data cell connection? Will they need to work offline?
-    Arches Mobile works in both cases, but an offline workflow has some extra
-    considerations.
-+ When?
-    Each mobile survey has a duration during which data collection is allowed.
++ Specific users or groups of users who are allowed to participate
++ Start and end dates to define when users are allowed to participate
++ A selection of which Resource Models will be used, and more precisely, which cards from within those Resource Models will be used
++ A set of existing resources from your database, to which users may add more data or just use as reference (based on card-level permissions)
++ An optional MBTiles file to provide a basemap for users working outside of wifi/cell network range
+
+To facilitate a wide array of simultaneous data collection efforts, an administator can create 
+multiple projects, all targeting different users and a different type of data collection.
 
 .. seealso::
-    If you haven't already, we recommend you read about `Arches Collector <using-arches-collector.html>`_
-    before you create your first project.
+    To learn more about how data collection users will participate in Projects, please see :ref:`Arches Collector Workflow`.
 
-..
+Arches Collector Manager Overview
+=================================
 
-    .. image::  images/arches-mobile/admin-to-archesweb.png
+.. important::
+    To access the Arches Collector Manager, you must be in the Mobile Project Administrator group
+    or have superuser status.
+
+To get to the Arches Collector Manager, use the |acm-icon| icon in the left-hand nav bar, or 
+go directly to ``/collector_manager``. Before you have created any projects, the interface
+will look like this:
+
+.. image::  images/acm-empty.png
+
+As you begin to add more and more projects, the interface will resemble the Arches Designer,
+with Projects taking the place of Resource Models:
+
+.. image::  images/acm-full.jpg
+
+Creating Projects in the Arches Collector Manager
+=================================================
+
+Use |new-project-btn| to begin creating a new project, and you'll be brought to the summary 
+page:
+
+.. image::  images/start-new-project.jpg
+
+Now, using the navigation tree in the left-hand panel, you will set all of your project parameters.
+Detailed information about each parameter is available in the in-app help:
+
+.. image:: images/open-help-project.gif
+
+When you have filled out all the parameters, you will see in the project summary that all Project
+Requirements have been met. You are now ready to activate the Project.
+
+.. warning::
+    Once a Project has been activated for the first time, its parameters are saved to an intermediate
+    database, and they cannot be changed. Therefore, it's wise to double-check everything before the
+    initial activation.
+    
+.. image:: images/activate-mobile-project.gif
+
+Great! Now that you have activated your project, any data collection user that you assigned to it
+will be able to download it through the Arches Collector app and begin collecting data.
+
+.. important::
+    If Arches Collector users are unable to connect to your Arches instance, you may need to
+    :ref:`register an Arches application <Registering an application with Arches>`.
+
+----
+
+After you have activated the project and data collectors have used it to add resources
+to your database, the project summary page will tell your how long the project has been active,
+how many resources have been collected, how many have connected to it, and more.
+
+.. image::  images/project-summary.jpg
+
+.. |acm-icon| image:: images/acm-icon.jpg
+  :align: middle
+
+.. |new-project-btn| image:: images/new-project-btn.jpg
+  :align: middle
