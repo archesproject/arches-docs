@@ -14,7 +14,18 @@ Introduction to Arches Collector
         :height: 50px
         :target: update with link when available
 
-Arches Collector is a mobile app that allows you and your team to collect heritage data in the field, and sync it back to your main Arches instance. Database administrators facilitate this process by designing "projects" in the Arches instance, which define who can participate, what kind of data will be collected, where the project will take place, and for how long. Approved users can then connect to your Arches instance, download the project, and collect data, and sync it back to the database.
+Arches Collector is a mobile app that allows you and your team to collect heritage data in the field, and sync it back to your main Arches instance. Database administrators facilitate this process by designing "projects" in the Arches instance, which define who can participate, what kind of data will be collected, where the project will take place, and for how long. Approved users can then connect to the Arches instance, download the project, and collect data, and sync it back to the database.
+
+General App Navigation
+======================
+
+Arches Collector is set up in a three-tiered hierarchical structure. Menu options throughout the app are context-sentitive based on the level within which you are working.
+
+**> Arches Instance Level** - You will connect to one or more Arches Instances.
+
+**>> Project Level** - Once connected to an Arches instance, you'll download and enter a project from that instance.
+
+**>>> Resource Level** - Within a project, you'll be working with individual resources to create and edit data.
 
 #########################
 Arches Collector Workflow
