@@ -345,6 +345,8 @@ Managing Functions, DataTypes, Widgets, and Card Components
 
 To learn how to build new Functions, DataTypes, or Widgets, please see
 ref:`Creating New Functions, Widgets, Card Components, and DataTypes`.
+**Note that when importing Widgets and associated DataTypes, Widgets
+must be registered first.**
 
 function commands
 -----------------
