@@ -2,167 +2,180 @@
 Serving Arches with Apache
 ##########################
 
-When you are putting your Arches app in production, you'll need to serve it with a webserver. The following is a guide using Apache as an example, split into two sections:
+.. sidebar:: Further Reference
+
+    + `Django Documentation <https://docs.djangoproject.com/en/2.1/howto/deployment/wsgi/modwsgi/#how-to-use-django-with-apache-and-mod-wsgi>`_
+    + `How to Run Django with mod_wsgi and Apache with a virtualenv Python environment on a Debian VPS (Digital Ocean) <https://www.digitalocean.com/community/tutorials/how-to-run-django-with-mod_wsgi-and-apache-with-a-virtualenv-python-environment-on-a-debian-vps>`_
+    + `Using mod_wsgi when developing Django sites (Graham Dumpleton) <http://blog.dscpl.com.au/2008/12/using-modwsgi-when-developing-django.html>`_
+
+
+When you are putting your Arches project in production, you'll need to serve it with a webserver. The following is a guide using Apache as an example, split into two sections:
 
 + :ref:`Setup Apache`
 
 + :ref:`Handling Static Files`
 
-For reference:
-
-+ `Django Documentation <https://docs.djangoproject.com/en/2.1/howto/deployment/wsgi/modwsgi/#how-to-use-django-with-apache-and-mod-wsgi>`_
-+ `How to Run Django with mod_wsgi and Apache with a virtualenv Python environment on a Debian VPS (Digital Ocean) <https://www.digitalocean.com/community/tutorials/how-to-run-django-with-mod_wsgi-and-apache-with-a-virtualenv-python-environment-on-a-debian-vps>`_
-+ `Using mod_wsgi when developing Django sites (Graham Dumpleton) <http://blog.dscpl.com.au/2008/12/using-modwsgi-when-developing-django.html>`_
-
 Setup Apache
 ============
 
-During development, it's easiest to use the Django webserver to view progress on your app. However, once you are ready to put the app into production, you'll have to use a more efficient webserver like Apache or nginx.
+During development, it's easiest to use the Django webserver to view your Arches installation. However, once you are ready to put the project into production, you'll have to use a more efficient webserver like Apache or nginx.
 
 We have the most experience using Apache, which is very easy to install and configure. The following instructions work for Ubuntu 14.04, minor changes may be necessary for a different OS.
 
 1. Get apache2 and mod_wsgi
 
-.. code-block:: bash
+    .. code-block:: bash
 
-   $ sudo apt-get install apache2
-
-   $ sudo apt-get install libapache2-mod-wsgi
-
-
-2. In order to properly configure Apache, we must:
-
-+ Create a python daemon process
-
-+ Set the path to your app's wsgi.py file and reference to the python daemon process created above
-
-+ Give Apache access to the main app directory
-
-All of these tasks are handled by adding a block of code to Apache's `../sites-enabled/000-default.conf` file. Use this command to open the file
-
-.. code-block:: bash
-
-   $ sudo nano /etc/apache2/sites-enabled/000-default.conf
+       $ sudo apt-get install apache2
+       $ sudo apt-get install libapache2-mod-wsgi
 
 
-and in the appropriate ``<VirtualHost>`` stanza (``<VirtualHost *:80>`` in the most basic configuration) paste the following code, changing directory and file paths where necessary: ::
+2. Create the Python process
+    
+    In order to properly configure Apache, we must:
+
+    + Create a python daemon process
+
+    + Set the path to your project's wsgi.py file and reference to the python daemon process created above
+
+    + Give Apache access to the main project directory
+
+    All of these tasks are handled by adding a block of code to Apache's `../sites-enabled/000-default.conf` file. Use this command to open the file
+
+    .. code-block:: bash
+
+       $ sudo nano /etc/apache2/sites-enabled/000-default.conf
 
 
-  WSGIDaemonProcess arches python-path=/home/ubuntu/Projects/arches/arches:/home/ubuntu/Projects/ENV/lib/python2.7/site-packages
-
-  WSGIScriptAlias / /home/ubuntu/Projects/arches/arches/wsgi.py process-group=arches
-
-  <Directory /home/ubuntu/Projects/arches>
-     Options Indexes FollowSymLinks
-     AllowOverride None
-     Require all granted
-  </Directory>
-
-Use `ctrl+x` to save the file.
-
-You may find it helpful to read the `Official Django Documentation <https://docs.djangoproject.com/en/2.1/howto/deployment/wsgi/modwsgi/#how-to-use-django-with-apache-and-mod-wsgi>`_ on serving Django apps with Apache and mod_wscgi.
-
-3. Now we must give the Apache write-permission in a few locations. Do that by first changing the permissions of the necessary files and directories, and second by setting the Apache user as the group. Note that the Apache user on Ubuntu is `www-data` (used in the example below), and on CentOS it is `httpd`.
+    and paste the following code into the ``<VirtualHost *:80>`` stanza, changing directory and file paths where necessary::
 
 
-.. code-block:: bash
+      WSGIDaemonProcess arches python-path=/home/ubuntu/Projects/my_project:/home/ubuntu/Projects/ENV/lib/python2.7/site-packages
+      WSGIScriptAlias / /home/ubuntu/Projects/my_project/my_project/wsgi.py process-group=arches
 
-   $ sudo chmod 664 /home/ubuntu/Projects/arches/arches/arches.log
+      <Directory /home/ubuntu/Projects/my_project>
+         Options Indexes FollowSymLinks
+         AllowOverride None
+         Require all granted
+      </Directory>
 
-   $ sudo chgrp www-data /home/ubuntu/Projects/arches/arches/arches.log
+    Use `ctrl+x` to save the file.
 
-   $ sudo chmod 775 /home/ubuntu/Projects/arches/arches
+    You may find it helpful to read the `Official Django Documentation <https://docs.djangoproject.com/en/2.1/howto/deployment/wsgi/modwsgi/#how-to-use-django-with-apache-and-mod-wsgi>`_ on serving Django apps with Apache and mod_wscgi.
 
-   $ sudo chgrp www-data /home/ubuntu/Projects/arches/arches
+3. Set file system permissions for Apache
+    
+    Now we must give Apache write-permission in a few locations. We'll do that by first changing the permissions of the necessary files and directories, and second by setting the Apache user as the group.
+
+    .. code-block:: bash
+
+       $ sudo chmod 775 /home/ubuntu/Projects/my_project/my_project
+       $ sudo chgrp www-data /home/ubuntu/Projects/my_project/my_project
+       $ sudo chmod 664 /home/ubuntu/Projects/my_project/my_project/arches.log
+       $ sudo chgrp www-data /home/ubuntu/Projects/my_project/my_project/arches.log
+       
+    .. note::
+    
+        On Ubuntu the Apache user is ``www-data`` (used in the example below), but on CentOS it is ``httpd``.
+
+    These commands should give Apache sufficient permissions to create and modify the arches/uploadedfiles directory (where user uploads are stored by default) and the arches/tileserver directory where Tilestache caches tiles that it renders.
+
+    .. note::
+        Please post to the `Arches forum <https://groups.google.com/forum>`_ if you find that more permissions need to be modified, or that these directions can be simplified further.
+
+4. Restart Apache.
+
+    **Ubuntu**
+
+    .. code-block:: bash
+
+       $ sudo service apache2 restart
+
+    **CentOS**
+
+    .. code-block:: bash
+
+       $ sudo /sbin/service httpd restart
 
 
-These commands should give Apache sufficient permissions to create and modify the arches/uploadedfiles directory (where user uploads are stored by default) and the arches/tileserver directory where Tilestache caches tiles that it renders.
+    You should now be able to view your app from any web browser by navigating directly to your IP address (you don't need to run the Django dev server now).
 
-Please post to the `Arches forum <https://groups.google.com/forum>`_ if you find that more permissions need to be modified, or these directions can be simplified further.
+    .. important::
+        With Apache serving Arches, any changes to a ``.py`` file will not be reflected until you restart Apache:
 
-4. Finally, restart Apache.
-
-**Ubuntu**
-
-.. code-block:: bash
-
-   $ sudo service apache2 restart
-
-**CentOS**
-
-.. code-block:: bash
-
-   $ sudo /sbin/service httpd restart
-
-
-You should now be able to view your app from any web browser by navigating directly to your IP address (you don't need to run the Django dev server now).
-
-Note that with Apache serving your app, any changes to a .py file will not be reflected in the app until you restart Apache (use the command shown above). If you want to avoid this manual restart/reload step, the following resources will get you started:
-
-`Using mod_wsgi when developing Django sites <http://blog.dscpl.com.au/2008/12/using-modwsgi-when-developing-django.html>`_
-
-`mod_wsgi: Reloading Source Code <https://modwsgi.readthedocs.io/en/develop/user-guides/reloading-source-code.html>`_
-
-If you are still in development and just want to use Apache instead of the Django server (and keep getting the lengthy Django error messages instead of a 500 page), you can rejoice and stop here. Otherwise, continue on...
+If you are still in development and just want to use Apache instead of the Django server (and keep getting the lengthy Django error messages instead of a 500 page), you can stop here. Otherwise, you'll need to continue on to handle your app's static files.
 
 Handling Static Files
 =======================
 
 
-There are two cases in which you need to follow these directions to handle static files (js, css and images):
+There are two cases in which you need to follow these directions to handle static files (js, css, and images):
 
  * You are going to set ``DEBUG = False``, at which point Django will no longer serve them, or
- * You are leaving ``DEBUG = True`` but are developing and serving your app from a non-root location, say www.example.com/arches4 instead of www.example.com.
+ * You are leaving ``DEBUG = True`` but are developing and serving your project from a non-root location, say www.example.com/arches4 instead of www.example.com.
 
-1. Create a new directory to hold the static files. Place this within your app, adjacent to the ``models`` and ``templates`` directories.
+1. Create static files directory
 
-.. code-block:: bash
+    This directory can be placed anywhere. In the example below we are putting it inside of your project.
 
-   $ sudo mkdir /home/ubuntu/Projects/arches/arches/static
+    .. code-block:: bash
 
-
-2. Now open your ``settings.py`` (or ``settings_local.py`` file), and add these lines to it: ::
-
-     STATIC_ROOT = os.path.join(PACKAGE_ROOT, 'static')
-
-     STATIC_URL = "/static/"
+       $ mkdir /home/ubuntu/Projects/my_project/my_project/static
 
 
-This will point Django to your new static directory, and also tell it how to create a URL that points to that directory.
+2. Configure your Arches project settings
 
-3. From within the directory that holds your ``manage.py`` file, run this command:
+    Now open your ``settings.py`` (or ``settings_local.py``) file, and add these lines to it.
 
-.. code-block:: bash
+    .. code-block:: bash
 
-   $ python manage.py collectstatic
+        STATIC_ROOT = os.path.join(PACKAGE_ROOT, 'static')
+
+        STATIC_URL = "/static/"
+
+    This will point Django to your new static directory, and also tell it how to create a URL that points to that directory.
+
+3. Collect the static files
+
+    With your virtual environment activated, enter your project's top directory and run this command:
+
+    .. code-block:: bash
+
+       $ python manage.py collectstatic
+
+    Watch as all of your static files (including those that come standard with Django) are copied to the new directory. Now we are ready to tell Apache where to find them.
+    
+    .. important::
+
+        With Apache serving your app you must run ``python manage.py collectstatic`` any time you make any changes to static files.
+
+4. Configure Apache settings
+
+    Use
+    
+    .. code-block:: bash
+
+       $ sudo nano /etc/apache2/sites-enabled/000-default.conf
+
+    to edit the default Apache configuration file. Find your ``<VirtualHost *:80>`` stanza with some familiar code in it. Below the original code you added, paste this block, changing paths as necessary.
+    
+    .. code-block:: bash
+
+        Alias /static/ /home/ubuntu/Projects/my_project/my_project/static/
+
+        <Directory /home/ubuntu/Projects/my_project/my_project/static>
+            Options Indexes FollowSymLinks
+            AllowOverride None
+            Require all granted
+        </Directory>p
 
 
-Watch as all of your static files (including those that come standard with Django) are copied to the new directory. Now we are ready to tell Apache where to find them.
+    The ``Alias`` line tells Apache where to look when Django sends it the ``/static/`` URL, and the subsequent block allows Apache access to your newly created static directory.
 
-4. Use
+4. Restart Apache.
 
-.. code-block:: bash
+    .. code-block:: bash
 
-   $ sudo nano /etc/apache2/sites-enabled/000-default.conf
-
-
-to open the same configuration file as you modified above. Find your ``<VirtualHost>`` stanza with some familiar code in it. Below the original code you added, paste this block, changing paths as necessary. ::
-
-  Alias /static/ /home/ubuntu/Projects/arches/arches/static/
-
-  <Directory /home/ubuntu/Projects/arches/arches/static>
-      Options Indexes FollowSymLinks
-      AllowOverride None
-      Require all granted
-  </Directory>p
+       $ sudo service apache2 restart
 
 
-The ``Alias`` line tells Apache where to look when Django sends it the ``/static/`` URL, and the subsequent block allows Apache access to your newly created static directory.
-
-4. Finally, restart Apache.
-
-.. code-block:: bash
-
-   $ sudo service apache2 restart
-
-.. IMPORTANT:: You must now run ``python manage.py collectstatic`` *any time* you make any changes to static files (.js, .css, or images).
