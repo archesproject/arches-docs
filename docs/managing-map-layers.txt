@@ -31,9 +31,13 @@ Caching tiles will improve the speed of map rendering by storing tiles locally a
 Basemaps and Overlays
 `````````````````````
 
-A Basemap will always be present in your map. Arches comes with a few default basemaps, but advanced users are able to add more (see below).
+A Basemap will always be present in your map. Arches comes with a few default basemaps, but advanced users can configure and add more.
 
-Overlays are the best way to incorporate map layers from external sources. On the search map, a user is able to activate as many overlays as desired simultaneously. Users can also change the transparency of overlays. Note that Search Results and Search Markers are automatically added to the search map as overlays, and can be customized separately. New overlays can be added in the same manner as new basemaps (see below).
+Overlays are the best way to incorporate map layers from external sources. On the search map, a user is able to activate as many overlays as desired simultaneously. Users can also change the transparency of overlays. New overlays can be added in the same manner as new basemaps.
+
+.. admonition:: Adding New Basemaps or Overlays
+    
+    If you are a developer interested in creating new map layers (which could be new visualizations of resources or new basemaps and overlays), please see :ref:`creating_new_map_layers_reference`.
 
 Styling
 ```````
@@ -46,5 +50,3 @@ Settings
 * Layer name - Enter a name to identify this basemap.
 * Default search map - For basemaps, you can designate one to be the default. For overlays, you can choose whether a layer appears on the in the search map by default. Note that in the search map itself you can change the order of overlays.
 * Layer icon - Associate an icon with this layer
-
-If you are a developer interested in creating new map layers, please see :ref:`creating_new_map_layers_reference`.
