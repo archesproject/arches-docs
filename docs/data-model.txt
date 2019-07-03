@@ -428,12 +428,14 @@ Used to validate data entered into ``widgets``
 Data Model Graph Visualization
 ******************************
 
-Arches Models Only
+.. figure:: images/datamodel-arches-4.4.1-032119.svg
+    :height: 100px
+    :align: center
 
-.. image:: images/datamodel-arches-4.4.1-032119.svg
-   :target: ../_images/datamodel-arches-4.4.1-032119.svg
+    Data model showing only Arches models.
 
-Full Data Model
+.. figure:: images/datamodel-full-4.4.1-032119.svg
+    :height: 100px
+    :align: center
 
-.. image:: images/datamodel-full-4.4.1-032119.svg
-   :target: _images/datamodel-full-4.4.1-032119.svg
+    Full data model.
