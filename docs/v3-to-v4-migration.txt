@@ -12,7 +12,7 @@ Before migrating data, you'll need to install Arches 4 and make a new project. Y
 
 .. seealso::
 
-    Refer to `Installation <installation.html>`_ and `Projects and Packages <projects-and-packages.html>`_.
+    Refer to :ref:`Installation` and :ref:`Projects and Packages`.
 
 Before moving on, you should be able to run the Django devserver from your project, and view it in a browser at http://localhost:8000.
 

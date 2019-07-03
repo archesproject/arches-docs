@@ -72,19 +72,19 @@ their more succinct "controller" name.
 
    ``ResourceInstance`` breaks the implicit naming convention above
    because the term "Resource Model" refers to a specific Arches
-   construct, as explained `above <#resource-model-overview>`_.
+   construct, as explained in the :ref:`Resource Model Overview` above.
 
 ****************
 Graph Definition
 ****************
 
-A Graph is a collection of `NodeGroups <#nodegroup>`_, `Nodes
-<#node>`_, and `Edges <#edge>`_ which connect the Nodes.
+A Graph is a collection of :ref:`NodeGroups <nodegroup>`, :ref:`Nodes
+<node>`, and :ref:`Edges <edge>` which connect the Nodes.
 
 .. note::
 
    This definition does not include UI models and attributes, which
-   are discussed `below <#ui-component-models>`_
+   are discussed :ref:`below <ui component models>`.
 
 In the Arches data model, Nodes represent their graph data structure
 namesakes, sometimes called `vertices`. A Node does the work of
@@ -104,7 +104,7 @@ contain a ``Name Type.E55`` Node. This way, a Graph with this
 NodeGroup may store Names with multiple "types", always collecting the
 information together.
 
-NodeGroups are used to create `Cards <#cardmodel>`_, and this is done
+NodeGroups are used to create :ref:`Cards <cardmodel>`, and this is done
 based on the ``cardinality`` property. Therefore, not every NodeGroup
 will be used to create a Card, which allows NodeGroups to exist within
 other NodeGroups. The ``parentnodegroup`` property is used to record
@@ -358,10 +358,10 @@ resource instances. Generally, the process works like this:
    define what information will be gathered for a given resource
    model.
 
-#. A resource's `Cards <#cardmodel>`_ and are tied to specific
-   NodeGroups and define which input `Widgets <#widget>`_ will be used
-   to gather values for each Node in that NodeGroup. `Card Components
-   <#cardcomponent>`_ are used to render the cards in various contexts
+#. A resource's :ref:`Cards <cardmodel>` and are tied to specific
+   NodeGroups and define which input :ref:`Widgets <widget>` will be used
+   to gather values for each Node in that NodeGroup. :ref:`Card Components
+   <card component>` are used to render the cards in various contexts
    in the Arches UI.
 
 
@@ -431,7 +431,7 @@ Data Model Graph Visualization
 Arches Models Only
 
 .. image:: images/datamodel-arches-4.4.1-032119.svg
-   :target: _images/datamodel-arches-4.4.1-032119.svg
+   :target: ../_images/datamodel-arches-4.4.1-032119.svg
 
 Full Data Model
 

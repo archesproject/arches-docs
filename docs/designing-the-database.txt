@@ -15,7 +15,7 @@ Let's begin with a brief primer on some of the core concepts upon which Arches i
 
 .. note:: Both **Resource Models** and **Branches** are sometimes referred to generically as "graphs". This is because their underlying architecture is a graph. However, as you'll see, they play completely different roles in Arches.
 
-.. important:: The Arches Designer is used for altering the record-keeping structure of your database; it does not alter the physical `data model <data-model.html>`_.
+.. important:: The Arches Designer is used for altering the record-keeping structure of your database; it does not alter the physical :ref:`data model`.
 
 Arches Designer
 ===============
@@ -24,7 +24,7 @@ The Arches Designer is where you export, import, duplicate, modify, and create y
 
 .. image:: images/arches-desinger.png
 
-If you don't see any Resource Models listed in your Arches Designer, you may want to consider `loading a package <command-line-reference.html#loading-a-package-into-a-project>`_. Alternatively, you can directly import individual Resource Model files through **Add ...**.
+If you don't see any Resource Models listed in your Arches Designer, you may want to consider :ref:`loading a package <loading a package into a project>`. Alternatively, you can directly import individual Resource Model files through **Add ...**.
 
 To edit a Resource Model, click on it or click **Manage ...** > **Manage Graph** and you'll be brought to the Graph Designer.
 

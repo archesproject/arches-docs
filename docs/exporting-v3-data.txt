@@ -4,8 +4,8 @@ Preparation - Exporting v3 Data
 
 You must extract some content from your v3 deployment before beginning the migration process.
 
-1. Export the v3 business data.
--------------------------------
+Export the v3 business data
+---------------------------
 
 In your v3 command line run::
 
@@ -18,8 +18,8 @@ You will get a console update during the process, which could take a few minutes
 
 Place these files somewhere easy to access.
 
-2. Export the v3 reference data.
---------------------------------
+Export the v3 reference data
+----------------------------
 
 In a browser, go to your v3 RDM and export the "Arches" scheme.
 
@@ -35,8 +35,8 @@ In a browser, go to your v3 RDM and export the "Arches" scheme.
     
     **Dropdown Lists themselves are not migrated, they are recreated in v4 based on Top Concepts.**
 
-3. Acquire the v3 resource graph ``_nodes.csv`` files.
-------------------------------------------------------
+Acquire the v3 resource graph _nodes.csv files
+----------------------------------------------
 
 You should be able to find these in your original ``source_data/resource_graphs`` directory, whose contents should be a ``_edges.csv`` and ``_nodes.csv`` for every resource graph in your database. We only want the ``_nodes.csv`` files.
 
@@ -50,8 +50,8 @@ Place these files somewhere easy to access.
 
     Disregard this step, your ``_nodes.csv`` files will be provided for you.
     
-4. Transfer all v3 uploaded media files.
-----------------------------------------
+Transfer all v3 uploaded media files
+------------------------------------
 
 You must move all of the media files that have been uploaded to your v3 deployment to your v4 project.
 
