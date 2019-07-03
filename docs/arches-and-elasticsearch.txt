@@ -65,7 +65,7 @@ At some point, you may need to reindex the entire database. This can be helpful 
 
     python manage.py es index_database
 
-Be warned that this process can take a long time if you have a lot of resources in your database. Also, if you are in ``DEBUG`` mode it can cause your server to run out of memory (`more info <command-line-reference.html#reindex-the-database>`_).
+Be warned that this process can take a long time if you have a lot of resources in your database. Also, if you are in ``DEBUG`` mode it can cause your server to run out of memory (see :ref:`reindex the database`).
 
 If the ``es index_database`` operation doesn't solve your issue, you can try this series of commands::
 

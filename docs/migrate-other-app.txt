@@ -46,11 +46,11 @@ This will create some new directories and content in your package::
 3. Move your v3 data into the package.
 --------------------------------------
 
-Move ``v3fullexport.json``/``v3fullexport.relations`` from `v3 Preparation Step 1 <export-the-v3-business-data>`_ into ``v3data/business_data``.
+Move ``v3fullexport.json``/``v3fullexport.relations`` from :ref:`v3 Preparation Step 2 <Export the v3 Business Data>` into ``v3data/business_data``.
 
-Move ``v3reference_data.xml`` from `v3 Preparation Step 2 <export-the-v3-reference-data>`_ into ``v3data/reference_data``.
+Move ``v3reference_data.xml`` from :ref:`v3 Preparation Step 2 <export the v3 reference data>` into ``v3data/reference_data``.
 
-Move the ``_nodes.csv`` files from `v3 Preparation Step 3 <acquire-the-v3-resource-graph-nodes-csv-files>`_ into ``v3data/graph_data``.
+Move the ``_nodes.csv`` files from :ref:`v3 Preparation Step 3 <acquire the v3 resource graph _nodes.csv files>` into ``v3data/graph_data``.
 
 Your package should now look like this::
 
@@ -121,7 +121,7 @@ When it comes to node datatypes, the translation from v3 to v4 is pretty straigh
 
 .. seealso::
     
-    Refer to `Designing the Database <designing-the-database.html>`_ for help on this task. Within the Arches Designer itself, click |help-btn| for detailed help on each page.
+    Refer to :ref:`Designing the Database` for help on this task. Within the Arches Designer itself, click |help-btn| for detailed help on each page.
 
 ----
 

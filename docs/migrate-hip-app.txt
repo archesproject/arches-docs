@@ -29,9 +29,9 @@ Now go into your project's ``my_project/my_project/settings.py`` file and add th
 2. Move your v3 data into the package.
 --------------------------------------
 
-Move ``v3fullexport.json`` and ``v3fullexport.relations`` from `v3 Preparation Step 1 <export-the-v3-business-data>`_ into ``v3data/business_data``.
+Move ``v3fullexport.json`` and ``v3fullexport.relations`` from :ref:`v3 Preparation Step 1 <export the v3 business data>` into ``v3data/business_data``.
 
-Move ``v3reference_data.xml`` from `v3 Preparation Step 2 <export-the-v3-reference-data>`_ into ``v3data/reference_data``.
+Move ``v3reference_data.xml`` from :ref:`v3 Preparation Step 2 <export the v3 reference data>` into ``v3data/reference_data``.
 
 Your package should now look like this::
 
