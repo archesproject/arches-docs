@@ -2,14 +2,20 @@
 Preparation - Exporting v3 Data
 ###############################
 
-You must extract some content from your v3 deployment before beginning the migration process.
+Before you begin, you must update your **v3 app** with some improved export commands.
+
++ Download and unzip [arches3-export-utils](https://github.com/legiongis/arches3-export-utils/archive/master.zip)
++ Copy the "management" directory into your v3 app alongside the ``settings.py`` file.
++ Run ``python manage.py v3v4 --help`` to make sure the new commands have been been installed.
+
+Now you are ready to begin exporting your data from v3.
 
 Export the v3 business data
 ---------------------------
 
 In your v3 command line run::
 
-    python manage.py packages -o export_resources -d v3fullexport.json
+    python manage.py v3v4 -o export-resources -f JSON
 
 You will get a console update during the process, which could take a few minutes. The result will be two files:
 
