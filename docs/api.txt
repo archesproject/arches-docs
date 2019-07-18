@@ -624,6 +624,177 @@ Resources
         HTTP/1.0 200 OK
 
 
+Activity Stream
+===============
+
+.. http:get:: /history/
+
+    gets a JSON-LD representation of the collection that comprises the changes made (Create, Update, Delete) to Arches resources.
+
+    :reqheader Authorization: OAuth token for user authentication, see :ref:`/o/token <auth>`
+
+    **Example request**:
+
+    .. code-block:: none
+
+        curl -X GET http://localhost:8000/history/
+
+    **Example response**:
+
+    .. code-block:: http
+    
+        HTTP/1.0 200 OK
+        Content-Type: application/json
+
+        {
+            "@context": "https://www.w3.org/ns/activitystreams",
+            "type": "OrderedCollection",
+            "id": "http://localhost:8000/history/",
+            "totalItems": 7,
+            "first": {
+                "type": "OrderedCollectionPage",
+                "id": "http://localhost:8000/history/1"
+            },
+            "last": {
+                "type": "OrderedCollectionPage",
+                "id": "http://localhost:8000/history/1"
+            }
+        }
+
+
+.. http:get:: /history/{int: page number}
+
+    gets a single 'OrderedCollectionPage' JSON-LD representation for a given page number 
+
+    :reqheader Authorization: OAuth token for user authentication, see :ref:`/o/token <auth>`
+
+    **Example request**:
+
+    .. code-block:: none
+
+        curl -H "Authorization: Bearer {token}" -X GET http://localhost:8000/history/{page number}
+
+        curl -H "Authorization: Bearer zo41Q1IMgAW30xOroiCUxjv3yci8Os" -X GET http://localhost:8000/history/1
+
+    **Example json response**:
+
+    .. code-block:: http
+    
+        HTTP/1.0 200 OK
+        Content-Type: application/json
+
+        {
+            "@context": "https://www.w3.org/ns/activitystreams",
+            "type": "OrderedCollectionPage",
+            "id": "http://localhost:8000/history/1",
+            "partOf": {
+                "totalItems": 7,
+                "type": "OrderedCollection",
+                "id": "http://localhost:8000/history/"
+            },
+            "orderedItems": [
+                {
+                    "endTime": "2019-06-20T17:38:56Z",
+                    "type": "Create",
+                    "actor": {
+                        "url": "http://localhost:8000/user/1",
+                        "tag": null,
+                        "type": "Person",
+                        "name": ", "
+                    },
+                    "object": {
+                        "url": "http://localhost:8000/resources/47b179f0-9382-11e9-b0f5-0242ac120003",
+                        "type": "http://www.cidoc-crm.org/cidoc-crm/E33_Linguistic_Object"
+                    }
+                },
+                {
+                    "endTime": "2019-06-20T17:38:57Z",
+                    "type": "Update",
+                    "actor": {
+                        "url": "http://localhost:8000/user/1",
+                        "tag": "admin",
+                        "type": "Person",
+                        "name": ", "
+                    },
+                    "object": {
+                        "url": "http://localhost:8000/resources/47b179f0-9382-11e9-b0f5-0242ac120003",
+                        "type": "http://www.cidoc-crm.org/cidoc-crm/E33_Linguistic_Object"
+                    }
+                },
+                {
+                    "endTime": "2019-06-20T17:39:04Z",
+                    "type": "Update",
+                    "actor": {
+                        "url": "http://localhost:8000/user/1",
+                        "tag": "admin",
+                        "type": "Person",
+                        "name": ", "
+                    },
+                    "object": {
+                        "url": "http://localhost:8000/resources/47b179f0-9382-11e9-b0f5-0242ac120003",
+                        "type": "http://www.cidoc-crm.org/cidoc-crm/E33_Linguistic_Object"
+                    }
+                },
+                {
+                    "endTime": "2019-06-20T17:39:13Z",
+                    "type": "Create",
+                    "actor": {
+                        "url": "http://localhost:8000/user/1",
+                        "tag": null,
+                        "type": "Person",
+                        "name": ", "
+                    },
+                    "object": {
+                        "url": "http://localhost:8000/resources/514796f2-9382-11e9-9e60-0242ac120003",
+                        "type": "http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object"
+                    }
+                },
+                {
+                    "endTime": "2019-06-20T17:39:13Z",
+                    "type": "Update",
+                    "actor": {
+                        "url": "http://localhost:8000/user/1",
+                        "tag": "admin",
+                        "type": "Person",
+                        "name": ", "
+                    },
+                    "object": {
+                        "url": "http://localhost:8000/resources/514796f2-9382-11e9-9e60-0242ac120003",
+                        "type": "http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object"
+                    }
+                },
+                {
+                    "endTime": "2019-06-20T17:39:15Z",
+                    "type": "Update",
+                    "actor": {
+                        "url": "http://localhost:8000/user/1",
+                        "tag": "admin",
+                        "type": "Person",
+                        "name": ", "
+                    },
+                    "object": {
+                        "url": "http://localhost:8000/resources/47b179f0-9382-11e9-b0f5-0242ac120003",
+                        "type": "http://www.cidoc-crm.org/cidoc-crm/E33_Linguistic_Object"
+                    }
+                },
+                {
+                    "endTime": "2019-06-20T17:39:24Z",
+                    "type": "Update",
+                    "actor": {
+                        "url": "http://localhost:8000/user/1",
+                        "tag": "admin",
+                        "type": "Person",
+                        "name": ", "
+                    },
+                    "object": {
+                        "url": "http://localhost:8000/resources/47b179f0-9382-11e9-b0f5-0242ac120003",
+                        "type": "http://www.cidoc-crm.org/cidoc-crm/E33_Linguistic_Object"
+                    }
+                }
+            ]
+        }
+
+
 Mobile Projects
 ===============
 
