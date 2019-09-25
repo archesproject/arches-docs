@@ -1,6 +1,6 @@
-#############
-Full Workflow
-#############
+###################
+Custom App Workflow
+###################
 
 Experienced developers should be able to use some of these steps individually to accomplish discrete tasks, but we generally recommend following this workflow as a whole.
 
@@ -24,7 +24,7 @@ Now go into your project's ``my_project/my_project/settings.py`` file and add th
 
     PACKAGE_DIR = os.path.join(os.path.dirname(APP_ROOT),'pkg')
 
-.. note:: You can actually name your new package whatever you want, and place it wherever you want, as long as ``PACKAGE_DIR`` holds the path to it. You can even leave out this setting entirely if you pass ``--target path/to/package`` to all of the ``v3`` commands below.
+.. note:: You can actually name your new package whatever you want, and place it wherever you want, as long as ``PACKAGE_DIR`` holds the path to it. You can even omit ``PACKAGE_DIR`` entirely if you pass ``--target path/to/package`` to all of the ``v3`` commands below.
 
 2. Prepare your package.
 ------------------------
@@ -43,16 +43,25 @@ This will create some new directories and content in your package::
           └─ graph_data/
           └─ reference_data/
 
-3. Move your v3 data into the package.
---------------------------------------
+3. Move your exported v3 data into the package.
+-----------------------------------------------
 
-Move ``v3fullexport.json``/``v3fullexport.relations`` from :ref:`v3 Preparation Step 2 <Export the v3 Business Data>` into ``v3data/business_data``.
+Move ``v3fullexport.json`` from :ref:`Export v3 Business Data` into ``v3data/business_data``.
 
-Move ``v3reference_data.xml`` from :ref:`v3 Preparation Step 2 <export the v3 reference data>` into ``v3data/reference_data``.
+Move ``v3fullexport.relations`` from :ref:`Export v3 Resource Relations` into ``v3data/business_data``.
 
-Move the ``_nodes.csv`` files from :ref:`v3 Preparation Step 3 <acquire the v3 resource graph _nodes.csv files>` into ``v3data/graph_data``.
+Move ``v3reference_data.xml`` from :ref:`Export v3 Reference Data` into ``v3data/reference_data``.
 
-Your package should now look like this::
+4. Move the v3 resource graph _nodes.csv files from v3 into your package.
+-------------------------------------------------------------------------
+
+In your Arches v3 deployment, you should be able to find these files in your original ``source_data/resource_graphs`` directory, whose contents should be a ``_edges.csv`` and ``_nodes.csv`` for every resource graph in your database. We only want the ``_nodes.csv`` files.
+
+Move the ``_nodes.csv`` files into ``v3data/graph_data``.
+
+----
+
+After completing steps 3 and 4, your v4 package should look like this::
 
     pkg/
       └─ v3data/
@@ -60,13 +69,13 @@ Your package should now look like this::
               └─ v3fullexport.json
               └─ v3fullexport.relations
           └─ graph_data/
-              └─ RESOURCE_GRAPH.Exx_nodes.csv
+              └─ RESOURCE_GRAPH_NAME.Exx_nodes.csv
               └─ etc.
           └─ reference_data/
               └─ v3reference_data.xml
           └─ rm_configs.json
 
-4. Convert your v3 reference data.
+5. Convert your v3 reference data.
 ----------------------------------
 
 Run:
@@ -87,18 +96,18 @@ New v4 reference data files will be created as shown below, and the ``--import``
               └─ thesaurus.xml
           └─ v3topconcept_lookup.json # already existed, but it's been updated
 
-5. Build the v4 Resource Models.
+6. Build the v4 Resource Models.
 --------------------------------
 
-Now that the v3 reference data has been loaded, you are ready to create the v4 Resource Models. This migration process does not attempt to create them based on your old v3 graphs. There are a number of reasons for this, but most simply, v4 graphs have different constraints and support different datatypes and structures than those in v3. In other words, your v4 database will be better off with graphs that have been created natively, not translated from v3.
+Now that the v3 reference data has been converted and loaded, you are ready to create the v4 Resource Models. This migration process does not attempt to create them based on your old v3 graphs. There are a number of reasons for this, but most simply, v4 graphs have different constraints and support different datatypes and structures than those in v3. In other words, your v4 database will be better off with graphs that have been created natively, not translated from v3.
 
 Generally, we would expect the v4 graphs to look like their v3 analogs, but we have built in quite a bit of wiggle room:
 
     * The graph names can differ
     * The node names can differ
-    * The graph structure can differ
+    * The graph structure can differ (though maintaining the same general branching structure is advisable)
 
-However, there must still be a one-to-one relationship between v3 and v4 graphs.
+However, there must still be a one-to-one relationship between v3 and v4 graphs and their nodes.
 
 When it comes to node datatypes, the translation from v3 to v4 is pretty straight-forward.
 
@@ -117,7 +126,7 @@ When it comes to node datatypes, the translation from v3 to v4 is pretty straigh
 
 .. important::
 
-    When you set a v4 node to ``concept`` or ``concept-list``, you will need to select which collection to use. This is why it's best to have migrated and loaded your RDM scheme (step 4 above) before making the Resource Models.
+    When you set a v4 node to ``concept`` or ``concept-list``, you will need to select which collection to use. This is why it's best to have migrated and loaded your RDM scheme (step 5 above) before making the Resource Models.
 
 .. seealso::
     
@@ -135,7 +144,7 @@ Once you have built all of the Resource Models, **export them into your package*
     
 By the end of this step, you should have one JSON file per Resource Model in ``pkg/graphs/resource_models``.
 
-6. Generate and populate the node lookup files.
+7. Generate and populate the node lookup files.
 -----------------------------------------------
 
 Begin by running::
@@ -181,7 +190,7 @@ Finally, you can use::
 
 to check your work. Once this test passes, you can move on.
 
-7. Write the v4 resource JSON.
+8. Write the v4 resource JSON.
 ------------------------------
 
 Now you are ready to convert and import your v3 data::
@@ -220,7 +229,7 @@ will write only the first 100 "Activity" resources to v4 JSON (even if there are
     to erase all existing resources in your database and start from scratch.
     
 
-8. Write the v4 resource relations file.
+9. Write the v4 resource relations file.
 ----------------------------------------
 
 Once you have all of your resources loaded in your database, you can import the resource-to-resource relations from v3. Use::
@@ -229,10 +238,10 @@ Once you have all of your resources loaded in your database, you can import the 
     
 to write the file, and add ``-i/--import`` to directly import them. You will likely get errors if you try to import them but have not loaded all of your resources.
 
-9. Load the entire package.
-----------------------------------------
+10. Load the entire package (optional)
+--------------------------------------
 
-Though you may have been loading the individual pieces of the package along the way, the final step should be a full reload of the package. **The following command will erase your whole database and load it with the reference data, Resource Models, and resources you have just created.**
+Though you may have been loading the individual pieces of the package along the way, the final step could be a full reload of the package. This would ensure that you have created a coherent result that can be loaded into any Arches v4 installation. **The following command will erase your whole database (including users/passwords, map layers, etc.) and recreate it with the reference data, Resource Models, and resources you have just created.**
 
 .. code-block:: shell
 
