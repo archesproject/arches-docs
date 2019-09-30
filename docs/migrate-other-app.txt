@@ -26,6 +26,22 @@ Now go into your project's ``my_project/my_project/settings.py`` file and add th
 
 .. note:: You can actually name your new package whatever you want, and place it wherever you want, as long as ``PACKAGE_DIR`` holds the path to it. You can even omit ``PACKAGE_DIR`` entirely if you pass ``--target path/to/package`` to all of the ``v3`` commands below.
 
+Finally, load this package into your project::
+
+    python manage.py packages -o load_package -s pkg -db true
+
+.. important:: 
+    We recommend using the ``-db true`` flag here, which will completely erase your v4 project database 
+    and create a fresh installation. If you have already added a lot of new user logins to your v4 project,
+    these will be lost. If you have already added settings to your project like a MapBox API key, for example, 
+    follow these steps to retain them `before` running the command with ``-db true``:
+    
+    + In your v4 project, run ``python manage.py packages -o save_system_settings``
+    + Find the newly created file ``my_project/my_project/system_settings/System_Settings.json`` and move it into ``my_project/pkg/system_settings``.
+    + When you do run the load package command, say "y" to the prompt about overwriting project settings (they will be imported from this new settings file).
+
+Before moving on you should be able to view your project in a browser and login with the default ``admin/admin`` credentials.
+
 2. Prepare your package.
 ------------------------
 
@@ -46,11 +62,11 @@ This will create some new directories and content in your package::
 3. Move your exported v3 data into the package.
 -----------------------------------------------
 
-Move ``v3fullexport.json`` from :ref:`Export v3 Business Data` into ``v3data/business_data``.
+Move ``v3resources-all-<date>.json`` from :ref:`Export v3 Business Data` into ``v3data/business_data``. This file name could be slightly different for you (or you may have multiple files) based on how you ran the v3 export.
 
-Move ``v3fullexport.relations`` from :ref:`Export v3 Resource Relations` into ``v3data/business_data``.
+Move ``v3relations-all-<date>.csv`` from :ref:`Export v3 Resource Relations` into ``v3data/business_data``.
 
-Move ``v3reference_data.xml`` from :ref:`Export v3 Reference Data` into ``v3data/reference_data``.
+Move ``v3scheme-arches-<date>.xml`` from :ref:`Export v3 Reference Data` into ``v3data/reference_data``.
 
 4. Move the v3 resource graph _nodes.csv files from v3 into your package.
 -------------------------------------------------------------------------
@@ -66,35 +82,19 @@ After completing steps 3 and 4, your v4 package should look like this::
     pkg/
       └─ v3data/
           └─ business_data/
-              └─ v3fullexport.json
-              └─ v3fullexport.relations
+              └─ v3resources-all-<date>.json
+              └─ v3relations-all-<date>.csv
           └─ graph_data/
               └─ RESOURCE_GRAPH_NAME.Exx_nodes.csv
               └─ etc.
           └─ reference_data/
-              └─ v3reference_data.xml
+              └─ v3scheme-arches-<date>.xml
           └─ rm_configs.json
 
-5. Convert your v3 reference data.
+5. Convert the v3 reference data.
 ----------------------------------
 
-Run:
-
-.. code-block:: shell
-
-    python manage.py v3 convert-v3-skos --import
-
-New v4 reference data files will be created as shown below, and the ``--import`` flag will automatically load them into your database.
-
-.. code-block:: shell
-
-    pkg/
-      └─ reference_data/
-          └─ collections/
-              └─ collections.xml
-          └─ concepts/
-              └─ thesaurus.xml
-          └─ v3topconcept_lookup.json # already existed, but it's been updated
+See :ref:`Arches-HIP workflow Step 3 <3. Convert the v3 reference data.>`, and return to this page when you've finished.
 
 6. Build the v4 Resource Models.
 --------------------------------
@@ -190,62 +190,22 @@ Finally, you can use::
 
 to check your work. Once this test passes, you can move on.
 
-8. Write the v4 resource JSON.
-------------------------------
+8. Convert the v3 JSON/JSONL business data
+------------------------------------------
 
-Now you are ready to convert and import your v3 data::
-
-    python manage.py v3 write-v4-json
-    
-This command will create new v4 resource JSON files in ``pkg/business_data``, one per Resource Model. You'll be provided with easy copy/paste commands to load the files if you want, or you can add ``-i/--import`` to the command to load the resources directly.
-
-To help you debug any errors you encounter, and generally give you more control over this command, we've provided a number of optional arguments.
-
--i, --import
-        Directly imports the resources after the JSON file is created.
--m, --resource-models
-        List the names of resource models to process, by default all are used.
--n, --number
-        Limits the number of resources to load.
---exclude
-        List of resource ids (uuids) to exclude from the write process.
---verbose
-        Enables verbose printing during the process. Not recommended for large operations.
-
-To give an example:
-
-.. code-block:: shell
-
-    python manage.py v3 write-v4-json -m "Activity" -n 100 -i --exclude 08b68d46-c202-458a-bf11-bc7a1dd5b2ef
-
-will write only the first 100 "Activity" resources to v4 JSON (even if there are more Resource Models in your package), excluding a single resource whose id is ``08b68d46-c202-458a-bf11-bc7a1dd5b2ef``, and will then immediately import these resources into your database.
-
-.. tip::
-
-    During this process, it may be useful to use::
-    
-        python manage.py resources -o remove_resources -y
-        
-    to erase all existing resources in your database and start from scratch.
-    
+See :ref:`Arches-HIP workflow Step 4 <4. Convert the v3 JSON/JSONL business data.>`. (You can continue
+using that workflow until you are finished with the migration.)
 
 9. Write the v4 resource relations file.
 ----------------------------------------
 
-Once you have all of your resources loaded in your database, you can import the resource-to-resource relations from v3. Use::
-
-    python manage.py v3 write-v4-relations
-    
-to write the file, and add ``-i/--import`` to directly import them. You will likely get errors if you try to import them but have not loaded all of your resources.
+See :ref:`Arches-HIP workflow Step 5 <5. Convert the v3 resource relations.>`. (You can continue
+using that workflow until you are finished with the migration.)
 
 10. Load the entire package (optional)
 --------------------------------------
 
-Though you may have been loading the individual pieces of the package along the way, the final step could be a full reload of the package. This would ensure that you have created a coherent result that can be loaded into any Arches v4 installation. **The following command will erase your whole database (including users/passwords, map layers, etc.) and recreate it with the reference data, Resource Models, and resources you have just created.**
-
-.. code-block:: shell
-
-    python manage.py packages -o load_package -s "/full/path/to/my_project/pkg" --db true
+See :ref:`Arches-HIP workflow Step 6 <6. Load the entire package.>`.
 
 .. |help-btn| image:: images/in-app-help-icon.png
   :align: middle
