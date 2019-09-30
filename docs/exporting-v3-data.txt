@@ -56,7 +56,7 @@ By default, the directory in your new v4 project should be called ``my_project/m
 
 .. admonition:: AWS S3 and Azure Users
 
-    You can potentially use the same storage bucket, and just point your v4 project at it. Just make sure your content is in a folder called ``uploadedfiles``. **In theory this should work, but we haven't tested it.**
+    You should be able to continue using the same storage bucket, and just point your v4 project at it. Just make sure your content is in a folder called ``uploadedfiles``. **In theory this should work, but we haven't tested it.**
     
 ----
 

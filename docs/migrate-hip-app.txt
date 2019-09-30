@@ -5,47 +5,72 @@ Arches-HIP Workflow
 1. Download the prepared v4 HIP package.
 ----------------------------------------
 
-The package is located here: `github.com/legiongis/arches-v4-hip-pkg <https://github.com/legiongis/arches-v4-hip-pkg>`_.
+Download `arches-v4-hip-pkg-master.zip <https://github.com/legiongis/arches-v4-hip-pkg/archive/master.zip>`_
+(`source <https://github.com/legiongis/arches-v4-hip-pkg/>`_).
 
-You can download it from Github, then unzip, rename, and place it in your project, or use this command to clone it locally:
-
-.. code-block:: shell
-
-    git clone https://github.com/legiongis/arches-v4-hip-pkg pkg
-
-The result should be a new package within your project named ``pkg``::
+Unzip this directory and place it in your project. The result should look like this::
 
     my_project/
     └─ manage.py
     └─ my_project/
-    └─ pkg/
+    └─ arches-v4-hip-pkg-master/
+        └─ business_data/
+        └─ extensions/
+        └─ (etc.)
 
-Now go into your project's ``my_project/my_project/settings.py`` file and add this new line somewhere after the ``APP_ROOT`` line::
+If you want, you can rename the directory. For this tutorial, we will rename it 
+from ``arches-v4-hip-pkg-master`` to simply ``pkg``. Really, you can name it whatever you want.
+
+Now go into your project's ``my_project/my_project/settings.py`` file and add this new line, which points
+to this new package, somewhere after the ``APP_ROOT`` line::
 
     PACKAGE_DIR = os.path.join(os.path.dirname(APP_ROOT),'pkg')
 
-.. note:: You can actually name your new package whatever you want, and place it wherever you want, as long as ``PACKAGE_DIR`` holds the path to it. You can even leave out this setting entirely if you pass ``--target path/to/package`` to all of the ``v3`` commands below.
+.. note:: 
+    You can actually place the package wherever you want, as long as ``PACKAGE_DIR`` 
+    holds the path to it. You can even leave out this setting entirely if you pass ``--target path/to/package``
+    to all of the ``v3`` commands that are used later in this process.
+
+Finally, load this package into your project::
+
+    python manage.py packages -o load_package -s pkg -db true
+
+.. important:: 
+    We recommend using the ``-db true`` flag here, which will completely erase your v4 project database 
+    and create a fresh installation. If you have already added a lot of new user logins to your v4 project,
+    these will be lost. If you have already added settings to your project like a MapBox API key, for example, 
+    follow these steps to retain them `before` running the command with ``-db true``:
+    
+    + In your v4 project, run ``python manage.py packages -o save_system_settings``
+    + Find the newly created file ``my_project/my_project/system_settings/System_Settings.json`` and move it into ``my_project/pkg/system_settings``.
+    + When you do run the load package command, say "y" to the prompt about overwriting project settings (they will be imported from this new settings file).
+
+Before moving on you should be able to view your project in a browser, login with the default ``admin/admin`` credentials,
+and go to the Arches Designer to confirm that you have all six Arches-HIP Resource Models loaded. There should be no
+resources in your database yet.
 
 2. Move your v3 data into the package.
 --------------------------------------
 
-Move ``v3fullexport.json`` and ``v3fullexport.relations`` from :ref:`v3 Preparation Step 1 <export the v3 business data>` into ``v3data/business_data``.
+Move ``v3scheme-arches-<date>.xml`` from :ref:`Export v3 Reference Data` into ``v3data/reference_data``.
 
-Move ``v3reference_data.xml`` from :ref:`v3 Preparation Step 2 <export the v3 reference data>` into ``v3data/reference_data``.
+Move ``v3resources-all-<date>.json`` from :ref:`Export v3 Business Data` into ``v3data/business_data``. This file name could be slightly different for you (or you may have multiple files) based on how you ran the v3 export.
+
+Move ``v3relations-all-<date>.csv`` from :ref:`Export v3 Resource Relations` into ``v3data/business_data``.
 
 Your package should now look like this::
 
     pkg/
       └─ v3data/
           └─ business_data/
-              └─ v3fullexport.json
-              └─ v3fullexport.relations
+              └─ v3resources-all-<date>.json
+              └─ v3relations-all-<date>.csv
           └─ graph_data/
           └─ reference_data/
-              └─ v3reference_data.xml
+              └─ v3scheme-arches-<date>.xml
           └─ rm_configs.json
 
-3. Convert your v3 reference data.
+3. Convert the v3 reference data.
 ----------------------------------
 
 Run:
@@ -68,65 +93,78 @@ New v4 reference data files will be created as shown below.
 
 You can also add the ``-i/--import`` flag to automatically load the reference data into your database.
 
-.. tip::
-
-    At this time you may as well load your package. This will prepare your database with the Resource Models and reference data, and get you ready for the final two steps::
-    
-        python manage.py packages -o load_package -s "full/path/to/my_project/pkg/"
-
-4. Write the v4 resource JSON.
-------------------------------
+4. Convert the v3 JSON/JSONL business data.
+-------------------------------------------
 
 Now you are ready to convert and import your v3 data::
 
     python manage.py v3 write-v4-json
     
-This command will create new v4 resource JSON files in ``pkg/business_data``, one per Resource Model. You'll be provided with easy copy/paste commands to load the files if you want, or you can add ``-i/--import`` to the command to load the resources directly.
+This command will create new v4 resource JSON/JSONL files in ``pkg/business_data``, one per Resource Model.
+You'll be provided with easy copy/paste commands to load the files if you want, or you can add ``-i/--import``
+to the command to load the resources immediately.
 
-To help you debug any errors you encounter, and generally give you more control over this command, we've provided a number of optional arguments.
+To help you debug any errors you encounter, and generally give you more control over this command, we've provided a
+number of optional arguments.
 
 -i, --import
-        Directly imports the resources after the JSON file is created.
+        Directly imports the resources after the v4 JSON/JSONL file is created.
 -m, --resource-models
         List the names of resource models to process, by default all are used.
 -n, --number
-        Limits the number of resources to load.
+        Limits the number of resources to load: ``-n 10`` will only load the first 10 resources of each resource model.
 --exclude
         List of resource ids (uuids) to exclude from the write process.
+--only
+        Specify one or more resource ids to process. All other resources will be ignored.
+--skipfilecheck
+        Skip the check for uploaded image files that are referenced in v3 business data. Only applicable if you are converting resources with images attached to them.
 --verbose
-        Enables verbose printing during the process. Not recommended for large operations.
+        Enables verbose printing during the process. Generally not recommended, it's `very` verbose.
 
-To give an example:
+To give a couple examples:
 
 .. code-block:: shell
 
     python manage.py v3 write-v4-json -m "Activity" -n 100 -i --exclude 08b68d46-c202-458a-bf11-bc7a1dd5b2ef
 
-will write only the first 100 "Activity" resources to v4 JSON (even if there are more Resource Models in your package), excluding a single resource whose id is ``08b68d46-c202-458a-bf11-bc7a1dd5b2ef``, and will then immediately import these resources into your database.
+will only write the first 100 "Activity" resources to v4 JSON (even if there are more Resource Models in your package), excluding a single resource whose id is ``08b68d46-c202-458a-bf11-bc7a1dd5b2ef``, and will then immediately import these resources into your database.
+
+.. code-block:: shell
+
+    python manage.py v3 write-v4-json --only 08b68d46-c202-458a-bf11-bc7a1dd5b2ef 53348d46-1202-458a-bcab-fe6c7a2223cc
+
+will only write the two resources matching the provided uuids.
 
 .. tip::
 
     During this process, it may be useful to use::
     
-        python manage.py resources -o remove_resources -y
+        python manage.py resources -o remove_resources
         
     to erase all existing resources in your database and start from scratch.
     
 
-5. Write the v4 resource relations file.
-----------------------------------------
+5. Convert the v3 resource relations.
+-------------------------------------
 
-Once you have all of your resources loaded in your database, you can import the resource-to-resource relations from v3. Use::
+Once you have all of your resources loaded in your database, you can import the resource relations from v3. Use::
 
     python manage.py v3 write-v4-relations
     
-to write the file, and add ``-i/--import`` to directly import them. You will likely get errors if you try to import them but have not loaded all of your resources.
+to write the file, and add ``-i/--import`` to directly import them. You will likely get errors if you try to
+import resource relations but have not loaded all of your business data.
 
 6. Load the entire package.
-----------------------------------------
+---------------------------
 
-Though you may have been loading the individual pieces of the package along the way, the final step should be a full reload of the package. **The following command will erase your whole database and load it with the reference data, Resource Models, and resources you have just created.**
+Though you may have been loading the individual pieces of the package along the way, the final step should be a
+full reload of the package.
 
 .. code-block:: shell
 
-    python manage.py packages -o load_package -s "/full/path/to/my_project/pkg" --db true
+    python manage.py packages -o load_package -s "/full/path/to/my_project/pkg"
+
+You can now treat this package just as you would any other v4 package, by adding custom functions, map layers, etc.
+You can also safely remove the ``v3data`` directory if you wish, as those files will no longer be used (generally it
+is good to retain that sort of data somewhere though).
