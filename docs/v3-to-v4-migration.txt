@@ -4,35 +4,72 @@ Migrating Data from v3 to v4
 
 .. sidebar:: Terminology Note
 
-    In v3 we had "resource graphs", while in v4 we call these "Resource Models". Conceptually they are the same. We'll be referring to them here as "v3 graphs" and "v4 graphs"/"Resource Models", respectively.
+    In v3 we had "resource graphs", while in v4 we call these "Resource Models". Conceptually they are the same. We'll be referring to them here as "v3 graphs" and "Resource Models", respectively.
 
 Upgrading your Arches installation is a complex process, as a significant backend redesign was implemented in v4. We have developed the following documentation (and the code to support it) to guide you through the process. You will be performing a combination of shell commands and basic file manipulation. 
 
-Before migrating data, you'll need to install Arches 4 and make a new project. You can name your project whatever you want, but throughout this documentation we'll refer to it as ``my_project``. You can customize the templates and images in your project any time (before or after migrating the data). We recommend adding a Mapbox key so you can use the map for visual checks during the migration.
+Before migrating data, you'll need to install Arches 4 and make a new project. You can name your project whatever you want, but throughout this documentation we'll refer to it as ``my_project``. You can customize the templates and images in your project any time (before or after migrating the data). We recommend adding a Mapbox key right away so you can use the map for visual checks during the migration.
 
 .. seealso::
 
-    Refer to :ref:`Installation` and :ref:`Projects and Packages`.
+    Refer to :ref:`Installation` and :ref:`Projects and Packages` for more about how to create an Arches 4 project.
 
-Before moving on, you should be able to run the Django devserver from your project, and view it in a browser at http://localhost:8000.
+Before moving on, you must be able to run the Django devserver from your v4 project, and view it in a browser at http://localhost:8000.
 
-Once you are ready, you can move on to exporting all of your legacy data from v3.
+Once you are ready, you can begin the migration process. The overall form of the process goes like this:
+
++ Export data from existing v3 Arches installation
++ Create a v4 package (Arches-HIP users: this is already done for you)
++ Place the v3 data into the Package directories
++ Run commands to convert the v3 data to v4 data
++ Load the package into any v4 project
+
+We have further documented this workflow with two step-by-step guides: one for v3 users who are using Arches-HIP, and one for those who have created custom packages. You'll find these guides below.
+
+---------------------------
+Exporting Your Data From v3
+---------------------------
+
+Before migrating to v4, you must export all of your data from v3. Before you begin, however, you'll need to install some enhanced commands into your v3 app. This is a simple process:
+
+#. Download and unzip `arches3-export-utils-master.zip <https://github.com/legiongis/arches3-export-utils/archive/master.zip>`_ (`source <https://github.com/legiongis/arches3-export-utils>`_)
+#. Copy the "management" directory into your v3 app alongside the ``settings.py`` file.
+#. In your v3 environment, run ``python manage.py v3v4 --help`` to make sure the new commands have been been installed.
+
+.. warning::
+    Be sure to backup your v3 database before beginning the export process.
+
+Now you are ready to begin exporting your data from v3. Follow these steps:
 
 .. toctree::
-    :caption: Exporting Your Data from v3
     :maxdepth: 2
 
     exporting-v3-data
 
 After you have all the v3 data exported, you are ready to follow the appropriate workflow for your deployment.
 
-.. sidebar:: Which workflow should I use?
+-------------------
+Migrating Your Data
+-------------------
 
-    If your v3 deployment of Arches was based on Arches-HIP, and you did not modify any of the graphs (but you did customize the RDM content), you can use the Arches-HIP Workflow. If you did modify some of the graph nodes (change their names, etc.), you can probably still use that workflow, but you'll need to edit the ``v3data/graph_data/...nodes_lookup.csv`` file for that graph.
-    
+The workflow you must use for the migration depends on the nature of your v3 deployment.
+
+Arches-HIP App
+--------------
+
+If your v3 deployment of Arches was based on **Arches-HIP**, and you did not modify any of the graphs (beyond perhaps changing node names) you can use the Arches-HIP Workflow. If you have changed the RDM content that's fine, it will be preserved through the migration.
+
 .. toctree::
-    :caption: Migrating Your Data
     :maxdepth: 2
 
     migrate-hip-app
+
+App With Custom Graphs
+----------------------
+
+If you have a v3 deployment with custom resource graphs, you'll need to use the following workflow. Be aware, you'll need to remake your custom resource graphs in v4 (as "Resource Models"). This is listed as Step 6 below.
+
+.. toctree::
+    :maxdepth: 2
+
     migrate-other-app

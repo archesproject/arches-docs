@@ -1,33 +1,45 @@
-###############################
-Preparation - Exporting v3 Data
-###############################
-
-You must extract some content from your v3 deployment before beginning the migration process.
-
-Export the v3 business data
----------------------------
+Export v3 Business Data
+-----------------------
 
 In your v3 command line run::
 
-    python manage.py packages -o export_resources -d v3fullexport.json
+    python manage.py v3v4 -o export-resources --format JSON
 
-You will get a console update during the process, which could take a few minutes. The result will be two files:
+You will get a console update during the process, which could take a few minutes. The result will be one file:
 
-+ ``v3fullexport.json`` -- these are the resources
-+ ``v3fullexport.relations`` -- these are the resource-to-resource relationships
++ ``v3resources-all-<date>.json``
 
-Place these files somewhere easy to access.
+Place the file(s) somewhere easy to access.
 
-Export the v3 reference data
+.. important::
+
+    If you have a very large database (maybe 25k+ resources), we recommend using ``--format JSONL``. This will create a `JSON Lines <http://jsonlines.org/>`_ file, which requires minimal memory resources. Exporting the entire database to a single JSON file can crash servers without enough memory. For even more control over the export, add ``--split`` to the command above. One JSON/JSONL file will be created **per resource type**. This is extremely helpful for debugging migration issues.
+
+Export v3 Resource Relations
 ----------------------------
 
-In a browser, go to your v3 RDM and export the "Arches" scheme.
+In your v3 command line run::
 
-1. Click **Tools** and choose **Export Scheme**.
-2. In the dialog, choose the "Arches" scheme.
-3. Click **Export** and you'll be taken to a browser page showing the contents of the scheme in XML format.
-4. Right-click anywhere on the page and choose **Save as...** or **Save page as...**.
-5. Name your file "v3reference_data.xml", and place it somewhere easy to access.
+    python manage.py v3v4 -o export-relations
+
+You will get a console update during the process, which could take a few minutes. The result will be one file:
+
++ ``v3relations-all-<date>.csv``
+
+Place the file somewhere easy to access.
+
+Export v3 Reference Data
+------------------------
+
+In your v3 command line run::
+
+    python manage.py v3v4 -o export-skos --name Arches
+
+The result will be one file:
+
++ ``v3scheme-arches-<date>.xml``
+
+Place the file somewhere easy to access. This is the "Arches" scheme from your RDM, which is, typically, where your entire concept set will exist. If you are using a different concept scheme, subsitute its name for "Arches" in the command above.
 
 .. warning:: 
 
@@ -35,21 +47,6 @@ In a browser, go to your v3 RDM and export the "Arches" scheme.
     
     **Dropdown Lists themselves are not migrated, they are recreated in v4 based on Top Concepts.**
 
-Acquire the v3 resource graph _nodes.csv files
-----------------------------------------------
-
-You should be able to find these in your original ``source_data/resource_graphs`` directory, whose contents should be a ``_edges.csv`` and ``_nodes.csv`` for every resource graph in your database. We only want the ``_nodes.csv`` files.
-
-You can also export these directly from v3 with this command::
-
-    python manage.py packages -o export_graphs -d path/to/temp/directory
-
-Place these files somewhere easy to access.
-
-.. admonition:: Arches-HIP Users
-
-    Disregard this step, your ``_nodes.csv`` files will be provided for you.
-    
 Transfer all v3 uploaded media files
 ------------------------------------
 
@@ -59,15 +56,8 @@ By default, the directory in your new v4 project should be called ``my_project/m
 
 .. admonition:: AWS S3 and Azure Users
 
-    You can potentially use the same storage bucket, and just point your v4 project at it. Just make sure your content is in a folder called ``uploadedfiles``. **In theory this should work, but we haven't tested it.**
+    You should be able to continue using the same storage bucket, and just point your v4 project at it. Just make sure your content is in a folder called ``uploadedfiles``. **In theory this should work, but we haven't tested it.**
     
 ----
 
-**Proceed to...**
-
-.. toctree::
-    :caption: Migrating Your Data
-    :maxdepth: 1
-
-    migrate-hip-app
-    migrate-other-app
+Now that you have exported all of the data you need from your v3 deployment, head back to :ref:`Migrating Your Data`.
