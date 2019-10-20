@@ -5,7 +5,7 @@ Installing Arches
 Installation
 ============
 
-Once you have all the dependencies taken care of you are ready to install Arches.
+Once you have all the dependencies taken care of (and Elasticsearch is running) you are ready to install Arches.
 
 .. note:: If you are a developer hoping to contribute to the Arches project, please check out :ref:`Creating a Development Environment`.
 
@@ -72,8 +72,6 @@ Before you continue, you may need to open ``my_project\my_project\settings_local
         GDAL_LIBRARY_PATH = "C:/OSGeo4W64/bin/gdal201.dll"
 
 * See Arches System Settings for a full rundown of how settings are handled in Arches.
-
-.. note:: At this point you must :doc:`install ElasticSearch <arches-and-elasticsearch>` and make sure it is running before continuing.
 
 7. Setup the database
 ---------------------
