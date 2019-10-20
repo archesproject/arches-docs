@@ -78,9 +78,9 @@ your project creates and uses. For example::
 
 will result in these indices in your Elasticsearch instance::
 
-    myproject_resource
-    myproject_resource_relations
-    myproject_strings
+    my_project_resource
+    my_project_resource_relations
+    my_project_strings
     
 This allows multiple projects to use the same Elasticsearch instance without sharing any data
 (which can be very economical).
