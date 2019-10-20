@@ -5,82 +5,45 @@ Requirements/Dependencies
 System Requirements
 ===================
 
-Arches works on Linux, Windows, or macOS, but some of its dependencies may be more difficult to install on certain operating systems. Most enterprise-level installations of Arches have been created on Linux servers.
+Arches works on Linux, Windows, or macOS. Most production implementations use Linux servers.
 
-To begin development or make a test installation of Arches, you will need the following:
+To begin development or make a test installation of Arches, you will need the following **minimum** resources:
 
-+ **2GB disk space**
-    + ~1.5GB for all dependencies and 600mb for Arches.
-    + In production, the amount of disk space you need will depend on the number of resources in your database, specifically uploaded images or media files.
-
-+ **4GB memory (RAM)**
-    + This recommendation is based on the fact that ElasticSearch requires 2GB to run, and as per `official ElasticSearch documentation <https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html#_give_less_than_half_your_memory_to_lucene>`_ no more than half of your system's memory should be dedicated to ElasticSearch.
-    + In development, it's possible to force ElasticSearch to run with only 1GB of memory, see :ref:`Running Elasticsearch`.
-    + In production, you may want to increase your memory, and allow ElasticSearch to use `up to 32GB of memory <https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html#compressed_oops>`_.
+:Disk Space: - **2GB** for all dependencies and Arches.
+    - **8GB** to store uploaded files, database backups, etc.
+    - Depending on how many uploaded files (images, 3d models, etc) you will have, you may need **much** more disk space. We advise an early evaulation of how much space you *think* you'll need, and then provision twice as much just to be safe...
+:Memory (RAM):  - **4GB**
+    - This recommendation is based on the fact that ElasticSearch requires 2GB to run, and as per `official ElasticSearch documentation <https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html#_give_less_than_half_your_memory_to_lucene>`_ no more than half of your system's memory should be dedicated to ElasticSearch.
+    - In production, you may want to increase your memory, and allow ElasticSearch to use `up to 32GB <https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html#compressed_oops>`_.
 
 Software Dependencies
 =====================
 
-* **PostgreSQL 9.6 with PostGIS 2.3** (see below)
-* **GDAL > 1.11.5** and **GEOS** (see below)
-* **Python 2.7** https://www.python.org/downloads/
+**Linux/Unix** `Installation scripts <https://github.com/archesproject/arches/tree/master/arches/install>`_. These do not install Elasticsearch (see below).
 
-    .. note:: Python 2.7.9 and later comes with pip, however, with < 2.7.9, you will need to get pip from here: https://pip.pypa.io/en/latest/installing.html. We also recommend upgrading pip with this command ``python -m pip install --upgrade pip``.
+**macOS** `Development installation script <https://gist.github.com/jmunowitch/35eb1d20a0b9cbf86f4b0eb4b167d43a>`_. Running this script in full will create an installation of Arches based on the current repo, but you can use pieces of it for individual dependencies as well.
 
-* **Yarn** https://yarnpkg.com/lang/en/docs/install/ (requires NodeJS/npm)
-* **Mapnik 2.2** http://mapnik.org/pages/downloads.html. *Windows users, see below*.
-* **JDK** http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
-* **Elasticsearch 5.x**
-    - To learn more about how Arches works with ElasticSearch, please read :ref:`Using Arches To Install Elasticsearch`. We recommend waiting until *after* you have Arches installed to deal with Elasticsearch.
-* **CouchDB 2.x** https://docs.couchdb.org/en/stable/install/index.html
-    - CouchDB is used to sync mobile data collection projects with your main database. `If you never plan to use the Arches Collector app, you can skip this dependency.`
+To familiarize yourself with the components and learn some important details, please
+read the notes below. Where necessary, Windows installation notes are included as well.
+
+:Python 2.7: - Installation: https://www.python.org/downloads/
+    - Python 2.7.9 and later comes with pip, however, with < 2.7.9, you will need to get pip from here: https://pip.pypa.io/en/latest/installing.html.
+    - We also recommend upgrading pip with this command ``python -m pip install --upgrade pip``.
+    - **Windows** You must choose 32-bit or 64-bit Python based on your system architecture.
+    - **macOS** Use `Postgres.app <http://postgresapp.com>`_.
+:PostgreSQL 9.6 with PostGIS 2.3: - **Windows** Use the `EnterpriseDB installers <https://www.postgresql.org/download/windows/>`_, and use Stack Builder (included) to get PostGIS. After installation, add the following to your system's ``PATH`` environment variable: ``C:\Program Files\PostgreSQL\9.6\bin``. Make sure you write down the password that you assign to the ``postgres`` user.
+:Elasticsearch 5: - Installers: https://www.elastic.co/downloads/past-releases/elasticsearch-5-6-16
+    - Elasticsearch is integral to Arches and can be installed and configured many ways.
+      For more information, see :ref:`Arches and Elasticsearch`.
+:JDK: - `Only required to support a local installation of Elasticsearch`
+    - **Windows** Use `this installer <http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html>`_. Once installed, find Java on your operating system, it will be somewhere like ``C:\Program Files\Java\jdk*.*.*_**``. Now take that full path, and add it to the ``JAVA_HOME`` system environment variable.
+:GDAL > 1.11.5 and GEOS: - **Windows** Use the `OSGeo4W installer <https://trac.osgeo.org/osgeo4w/>`_, and choose to install the GDAL package (you don't need QGIS or GRASS). After installation, add ``C:\OSGeo4W64\bin`` to your system's ``PATH`` environment variable.
+    - **macOS** Use version 3.6.1 (3.6.2 has caused trouble).
+:Yarn: - Installation: https://yarnpkg.com/lang/en/docs/install
+    - **Windows** Use the .msi installer in the link above, but first install `Node.js <https://nodejs.org/>`_.
+:Mapnik 2.2: - Installation: http://mapnik.org/pages/downloads.html
+    - **Windows** No 64-bit Mapnik is available, so do not install Mapnik (Arches will not be greatly affected).
+:CouchDB 2.x: - Installation: https://docs.couchdb.org/en/stable/install/index.html
+    - `Only required to support Arches Collector Mobile app.`
+    - CouchDB is used to sync mobile data collection projects with your main database. 
     - Arches will connect to CouchDB with default credentials. However, in production you must make a new CouchDB admin after installation, and then update ``COUCHDB_URL = 'http://admin:admin@localhost:5984`` in ``settings.py`` accordingly.
-
-------------------
-
-The installation process for each component listed may differ based on your operating system, so please check below for more info.
-
-Installing Dependencies on Linux
---------------------------------
-
-You can find fully scripted dependency installation for Ubuntu `here <https://github.com/archesproject/arches/tree/master/arches/install>`_.
-
-.. _WindowsInstallation:
-
-Installing Dependencies on Windows
-----------------------------------
-
-Be aware that you must install 32-bit or 64-bit versions of all dependencies based on your Windows system's architecture. In our experience, the following installation order should work well.
-
-**PostgreSQL 9.6 with PostGIS 2.3** - Use the `EnterpriseDB installers <https://www.postgresql.org/download/windows/>`_, and use Stack Builder (included) to get PostGIS. After installation, add the following to your system's PATH environment variable: ``C:\Program Files\PostgreSQL\9.6\bin``.
-
-.. important:: Remember to note the password that you set for the default ``postgres`` user, as you will need to put it in ``settings.py`` later.
-
-**GDAL and GEOS** - Use the OSgeo4W installer found here: https://trac.osgeo.org/osgeo4w/, and choose to install the GDAL package (you don't need to install QGIS or GRASS). After installation, add the following to your system's PATH environment variable: ``C:\OSGeo4W64\bin``.
-
-**Yarn** - Requires NodeJS/npm. Installation instructions here: https://yarnpkg.com/lang/en/docs/install/
-
-**Mapnik** - *If you are on 64-bit Windows you will not be able to install Mapnik; the Python bindings are not compatible.* Arches is fully functional without Mapnik, but some of the extra map overlay capabilities are lost. Specifically, if you are adding a Tilestache layer as a map overlay, you will not be able to use any of the Mapnik-based providers as described in this section of the `Tilestache documentation <http://tilestache.org/doc/#providers>`_.
-
-**JDK** - Use the installers found here: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html.
-Once installed, find Java on your operating system. It will be somewhere like ``C:\Program Files\Java\jdk*.*.*_**``. Now take that full path, and add it to the JAVA_HOME system environment variable.
-
-**Python 2.7** - We recommend using 2.7.13, found here: https://www.python.org/downloads/ You must choose 32-bit or 64-bit Python depending on your operating system architecture.
-
-**pip** - Python 2.7.13 comes with pip already, but we do recommend upgrading pip::
-
-    python -m pip install --upgrade pip
-
-**Elasticsearch** - Take care of this after you have Arches fully installed. Use the command recommended in :ref:`Using Arches to Install Elasticsearch`.
-
-**CouchDB** - https://docs.couchdb.org/en/stable/install/index.html
-
-Installing Dependencies on macOS
---------------------------------
-
-Please see `this gist <https://gist.github.com/jmunowitch/35eb1d20a0b9cbf86f4b0eb4b167d43a>`_ for the easiest way to install all dependencies (besides `CouchDB <https://docs.couchdb.org/en/stable/install/index.html>`_ on macOS. Running this script in full will create an installation of Arches based on the current repo, but you can use pieces of it for individual dependencies as well.
-
-Further notes:
-
-* **PostgreSQL 9.6 with PostGIS 2.3** - Use `Postgres.app <http://postgresapp.com>`_.
-* **GEOS** - Use version 3.6.1 (3.6.2 has caused trouble on macOS).
