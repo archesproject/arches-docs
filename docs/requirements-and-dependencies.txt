@@ -32,7 +32,6 @@ read the notes below. Where necessary, Windows installation notes are included a
     - **Windows** You must choose 32-bit or 64-bit Python based on your system architecture.
     - **macOS** Use `Postgres.app <http://postgresapp.com>`_.
 :PostgreSQL 9.6 with PostGIS 2.3: - **Windows** Use the `EnterpriseDB installers <https://www.postgresql.org/download/windows/>`_, and use Stack Builder (included) to get PostGIS. After installation, add the following to your system's ``PATH`` environment variable: ``C:\Program Files\PostgreSQL\9.6\bin``. Make sure you write down the password that you assign to the ``postgres`` user.
-    - Please see :ref:`Preparing Postgres` below.
 :Elasticsearch 5: - Installers: https://www.elastic.co/downloads/past-releases/elasticsearch-5-6-16
     - Elasticsearch is integral to Arches and can be installed and configured many ways.
       For more information, see :ref:`Arches and Elasticsearch`.
