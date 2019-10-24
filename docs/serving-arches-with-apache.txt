@@ -31,7 +31,7 @@ We have the most experience using Apache, which is very easy to install and conf
 
 
 2. Create the Python process
-    
+
     In order to properly configure Apache, we must:
 
     + Create a python daemon process
@@ -61,10 +61,10 @@ We have the most experience using Apache, which is very easy to install and conf
 
     Use `ctrl+x` to save the file.
 
-    You may find it helpful to read the `Official Django Documentation <https://docs.djangoproject.com/en/2.1/howto/deployment/wsgi/modwsgi/#how-to-use-django-with-apache-and-mod-wsgi>`_ on serving Django apps with Apache and mod_wscgi.
+    You may find it helpful to read the `Official Django Documentation <https://docs.djangoproject.com/en/2.1/howto/deployment/wsgi/modwsgi/#how-to-use-django-with-apache-and-mod-wsgi>`_ on serving Django apps with Apache and mod_wsgi.
 
 3. Set file system permissions for Apache
-    
+
     Now we must give Apache write-permission in a few locations. We'll do that by first changing the permissions of the necessary files and directories, and second by setting the Apache user as the group.
 
     .. code-block:: bash
@@ -73,9 +73,9 @@ We have the most experience using Apache, which is very easy to install and conf
        $ sudo chgrp www-data /home/ubuntu/Projects/my_project/my_project
        $ sudo chmod 664 /home/ubuntu/Projects/my_project/my_project/arches.log
        $ sudo chgrp www-data /home/ubuntu/Projects/my_project/my_project/arches.log
-       
+
     .. note::
-    
+
         On Ubuntu the Apache user is ``www-data`` (used in the example below), but on CentOS it is ``httpd``.
 
     These commands should give Apache sufficient permissions to create and modify the arches/uploadedfiles directory (where user uploads are stored by default) and the arches/tileserver directory where Tilestache caches tiles that it renders.
@@ -144,7 +144,7 @@ There are two cases in which you need to follow these directions to handle stati
        $ python manage.py collectstatic
 
     Watch as all of your static files (including those that come standard with Django) are copied to the new directory. Now we are ready to tell Apache where to find them.
-    
+
     .. important::
 
         With Apache serving your app you must run ``python manage.py collectstatic`` any time you make any changes to static files.
@@ -152,13 +152,13 @@ There are two cases in which you need to follow these directions to handle stati
 4. Configure Apache settings
 
     Use
-    
+
     .. code-block:: bash
 
        $ sudo nano /etc/apache2/sites-enabled/000-default.conf
 
     to edit the default Apache configuration file. Find your ``<VirtualHost *:80>`` stanza with some familiar code in it. Below the original code you added, paste this block, changing paths as necessary.
-    
+
     .. code-block:: bash
 
         Alias /static/ /home/ubuntu/Projects/my_project/my_project/static/
@@ -177,5 +177,3 @@ There are two cases in which you need to follow these directions to handle stati
     .. code-block:: bash
 
        $ sudo service apache2 restart
-
-
