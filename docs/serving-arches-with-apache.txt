@@ -59,6 +59,11 @@ We have the most experience using Apache, which is very easy to install and conf
          Require all granted
       </Directory>
 
+
+    If you intend to allow users to sync data from Arches Collector you will also need to include the following directive::
+
+      WSGIPassAuthorization on
+
     Use `ctrl+x` to save the file.
 
     You may find it helpful to read the `Official Django Documentation <https://docs.djangoproject.com/en/2.1/howto/deployment/wsgi/modwsgi/#how-to-use-django-with-apache-and-mod-wsgi>`_ on serving Django apps with Apache and mod_wsgi.
