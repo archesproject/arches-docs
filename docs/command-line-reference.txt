@@ -91,28 +91,6 @@ just be::
 ElasticSearch Management
 ========================
 
-install elasticsearch
----------------------
-
-.. code-block:: bash
-
-    python manage.py es install [-d path_to_destination_directory]
-
--d
-        (optional) Path to directory in which ElasticSearch should be
-        installed. Default is the root of your project.
-
-Installs ElasticSearch into the indicated location. If no destination
-is provided, ElasticSearch is placed in the app root directory. Read
-[[Installing and Running Elasticsearch]] for more.
-
-run elasticsearch
------------------
-
-.. code-block:: bash
-
-   path/to/elasticsearch-5.2.1/bin/elasticsearch
-
 reindex the database
 --------------------
 

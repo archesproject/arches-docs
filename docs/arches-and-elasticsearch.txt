@@ -6,34 +6,24 @@ Installing and Running Elasticsearch
 ====================================
 
 The quickest way to install Elasticsearch is to download and unzip one of the `compressed installers 
-for the proper version <https://www.elastic.co/downloads/past-releases/elasticsearch-5-6-16>`_.
+for the proper version <https://www.elastic.co/downloads/past-releases/elasticsearch-7-4-1>`_.
 
 To start the service from the command line, use
 
 .. code-block:: shell
 
-   path/to/elasticsearch-5.6.16/bin/elasticsearch
+   {path-to-elasticsearch}/bin/elasticsearch
 
 To run as a daemon process, add ``-d`` to that command.
 
-On Windows you can just double-click the ``path\to\elasticsearch-5.6.16\bin\elasticsearch.bat``
+On Windows you can just double-click the ``{path-to-elasticsearch}\bin\elasticsearch.bat``
 batch file to run the process in a new console.
 
-----
+.. note:: To run the process in a new terminal you can double-click the ``elasticsearch.bat`` file found in ``{path-to-elasticsearch}\bin``. To properly set up Elasticsearch as a background service on Windows, `check out this documentation <https://www.elastic.co/guide/en/elasticsearch/reference/7.4/windows.html>`_
 
-Another way to install Elasticsearch is to use a command that comes with Arches::
+---------------------------------------------------------
 
-    python manage.py es install
-
-Elasticsearch will be installed in the root folder. You can specify an alternate destination for the installation by using the ``-d`` argument. For example::
-
-    python manage.py es install -d C:\Projects
-
-will result in a new directory ``C:\Projects\elasticsearch-5.2.1`` from which you'll be able to run Elasticsearch as described above.
-
-----
-
-To make sure Elasticsearch is running, use
+To make sure Elasticsearch is running correctly, use
 
 .. code-block:: bash
 
@@ -46,46 +36,8 @@ For more information, please visit the official `Elasticsearch documentation <ht
 .. important::
    1. By default, Elasticsearch uses 2GB of memory (RAM). For basic development purposes, we have found it to run well enough on 1GB. Use ``ES_JAVA_OPTS="-Xms1g -Xmx1g" ./bin/elasticsearch -d`` to set the memory allotment on startup (`read more <https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html>`_). You can use the same command to give **more** memory to Elasticsearch in a production setting.
 
-   2. Some users have reported getting this error right after starting Elasticsearch: ``org.elasticsearch.bootstrap.StartupException: java.lang.IllegalStateException: No match found``. Upgrading to 5.2.2 seems to fix this problem, as described in `this issue <https://github.com/elastic/elasticsearch/issues/23218>`_.
 
-Connection Settings
-===================
-
-To connect Arches to Elasticsearch (once you have it running), make sure these two ``settings.py``
-variables have been updated if necessary (defaults shown below assume that you have Elasticsearch running
-locally on port 9200)::
-
-    ELASTICSEARCH_HTTP_PORT = 9200
-    ELASTICSEARCH_HOSTS = [{'host': 'localhost', 'port': ELASTICSEARCH_HTTP_PORT}]
-    
-If you are not running Elasticsearch locally, but on a remote server on a
-non-standard port, these settings could look like::
-
-    ELASTICSEARCH_HTTP_PORT = 9400
-    ELASTICSEARCH_HOSTS = [{'host': 'my-es.domain.com', 'port': ELASTICSEARCH_HTTP_PORT}]
-
-In this case, the my-es.domain.com server will need to allow connections via port 9400 from
-your Arches instance IP address.
-    
-Elasticsearch Index Prefix Setting
-==================================
-
-In ``settings.py`` you'll find the variable ``ELASTICSEARCH_PREFIX``. By default it is the
-name of your project, and this prefix is prepended to all of the Elasticsearch indices that
-your project creates and uses. For example::
-
-    ELASTICSEARCH_PREFIX = 'my_project'
-
-will result in these indices in your Elasticsearch instance::
-
-    my_project_resource
-    my_project_resource_relations
-    my_project_strings
-    
-This allows multiple projects to use the same Elasticsearch instance without sharing any data
-(which can be very economical).
-
-Reindexing the Database
+Reindexing The Database
 =======================
 
 You may need to reindex the entire database now and then. This can be helpful if a bulk load
