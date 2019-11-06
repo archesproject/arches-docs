@@ -849,3 +849,104 @@ Mobile Projects
 
 
     :reqheader Authorization: JWT (JSON web token) for user authentication, see :ref:`/auth/get_token <auth>`
+
+
+GeoJSON
+=========
+
+.. http:get:: /geojson
+
+    returns a GeoJSON representation of resource instance data
+    
+    NOTE: when not using the "use_uuid_names" parameter, field names will use the export field name provided for a given node (via the Graph Designer).
+    If the export field name is not defined, the API will attempt to create a suitable field name from the node name.
+    Property names that clash as a result of the above, or shortening via "field_name_length" will have their values joined together.
+    
+    WARNING: including primary names has a big impact on performance and is best defered to an additional request
+
+    :query resourceid: optional resource instance UUID to filter feature data on
+    :query nodeid: optional node UUID to filter feature data on
+    :query tileid: optional tile UUID to filter feature data on
+    :query nodegroups: optional comma delimited list of nodegroup UUIDs from which to include tile data as properties.
+    :query precision: number of decimal places returned in coordinate values. defaults to 9
+    :query field_name_length: optional number to limit property field length to
+    :query use_uuid_names: include this parameter to return tile property names as node UUIDs.
+    :query include_primary_name: include this parameter to include resource instance primary names in feature properties.
+    :query use_display_values: include this parameter to return tile values processed to be human readable
+    :query include_geojson_link: include this parameter to include a link to this specific feature in its properties fit for reuse later
+    :query indent: optional number of spaces with which to indent the JSON return (ie "pretty print")
+
+    **Example request**:
+
+    .. code-block:: none
+
+        curl -X GET http://localhost:8000/geojson?nodegroups=nodegroups=8d41e4ab-a250-11e9-87d1-00224800b26d,8d41e4c0-a250-11e9-a7e3-00224800b26d&nodeid=8d41e4d6-a250-11e9-accd-00224800b26d&use_display_values=true&indent=2
+
+
+    **Example response**:
+
+    .. code-block:: http
+    
+        HTTP/1.0 200 OK
+        Content-Type: application/json
+        {
+            "features": [{
+                "geometry": {
+                    "coordinates": [
+                        -0.09160837,
+                        51.529378348
+                    ],
+                    "type": "Point"
+                },
+                "id": 1,
+                "properties": {
+                    "application_type": "Enquiry",
+                    "consultation_status": "Dormant",
+                    "consultation_type": "Post-Application",
+                    "development_type": "Mixed Use",
+                    "name": "Consultation for 93 Mendota Alley",
+                    "resourceinstanceid": "aa7ecf38-ab81-4e08-bb74-cfdd1e339ea2",
+                    "tileid": "4e4d8fe8-3ee9-4ddc-9613-fffc1511bd58"
+                },
+                "type": "Feature"
+            }, {
+                "geometry": {
+                    "coordinates": [
+                        -0.090902277,
+                        51.533642427
+                    ],
+                    "type": "Point"
+                },
+                "id": 2,
+                "properties": {
+                    "application_type": "Listed Building Consent",
+                    "consultation_status": "Completed",
+                    "consultation_type": "Condition Application",
+                    "development_type": "Land restoration",
+                    "name": "Consultation for 57359 Fieldstone Way",
+                    "resourceinstanceid": "2cf195f8-805b-4f97-9133-cbd94bf5a01f",
+                    "tileid": "6e3009d4-4022-4510-8e42-504b5bc20b74"
+                },
+                "type": "Feature"
+            }, {
+                "geometry": {
+                    "coordinates": [
+                        -0.088202575,
+                        51.533347841
+                    ],
+                    "type": "Point"
+                },
+                "id": 3,
+                "properties": {
+                    "application_type": "Listed Building Consent",
+                    "consultation_status": "Aborted",
+                    "consultation_type": "Post-Application",
+                    "development_type": "Road construction",
+                    "name": "Consultation for 3660 Kim Court",
+                    "resourceinstanceid": "eefa863a-53e4-404a-89b4-6213b46b2b55",
+                    "tileid": "99395221-dd7f-4a06-8d87-5f5703501ab5"
+                },
+                "type": "Feature"
+            }],
+            "type": "FeatureCollection"
+        }
