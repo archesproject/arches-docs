@@ -868,7 +868,7 @@ GeoJSON
     :query nodeid: optional node UUID to filter feature data on
     :query tileid: optional tile UUID to filter feature data on
     :query nodegroups: optional comma delimited list of nodegroup UUIDs from which to include tile data as properties.
-    :query precision: number of decimal places returned in coordinate values. defaults to 9
+    :query precision: number of decimal places returned in coordinate values; used to constrain resultant data volume. defaults to 9
     :query field_name_length: optional number to limit property field length to
     :query use_uuid_names: include this parameter to return tile property names as node UUIDs.
     :query include_primary_name: include this parameter to include resource instance primary names in feature properties.
@@ -880,7 +880,7 @@ GeoJSON
 
     .. code-block:: none
 
-        curl -X GET http://localhost:8000/geojson?nodegroups=nodegroups=8d41e4ab-a250-11e9-87d1-00224800b26d,8d41e4c0-a250-11e9-a7e3-00224800b26d&nodeid=8d41e4d6-a250-11e9-accd-00224800b26d&use_display_values=true&indent=2
+        curl -X GET http://localhost:8000/geojson?nodegroups=8d41e4ab-a250-11e9-87d1-00224800b26d,8d41e4c0-a250-11e9-a7e3-00224800b26d&nodeid=8d41e4d6-a250-11e9-accd-00224800b26d&use_display_values=true&indent=2
 
 
     **Example response**:
