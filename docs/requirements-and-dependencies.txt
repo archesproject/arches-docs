@@ -33,7 +33,7 @@ read the notes below. Where necessary, Windows installation notes are included a
 :PostgreSQL 12 with PostGIS 3: 
     - **macOS** Use `Postgres.app <http://postgresapp.com>`_.
     - **Windows** Use the `EnterpriseDB installers <https://www.postgresql.org/download/windows/>`_, and use Stack Builder (included) to get PostGIS. After installation, add the following to your system's ``PATH`` environment variable: ``C:\Program Files\PostgreSQL\12\bin``. Make sure you write down the password that you assign to the ``postgres`` user.
-:Elasticsearch 7: - Installers: https://www.elastic.co/downloads/past-releases/elasticsearch-5-6-16
+:Elasticsearch 7.4: - Installers: https://www.elastic.co/downloads/past-releases/elasticsearch-7-4-0
     - Elasticsearch is integral to Arches and can be installed and configured many ways.
       For more information, see :ref:`Arches and Elasticsearch`.
 :JDK: - `Only required to support a local installation of Elasticsearch`
