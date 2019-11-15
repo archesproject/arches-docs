@@ -26,12 +26,13 @@ Software Dependencies
 To familiarize yourself with the components and learn some important details, please
 read the notes below. Where necessary, Windows installation notes are included as well.
 
-:Python 2.7: - Installation: https://www.python.org/downloads/
-    - Python 2.7.9 and later comes with pip, however, with < 2.7.9, you will need to get pip from here: https://pip.pypa.io/en/latest/installing.html.
-    - We also recommend upgrading pip with this command ``python -m pip install --upgrade pip``.
+:Python 3.7: - Installation: https://www.python.org/downloads/
+    - Python 3.7 and later comes with pip
     - **Windows** You must choose 32-bit or 64-bit Python based on your system architecture.
+    - **macOS** This guide works well if you wish to install via `brew`: https://docs.python-guide.org/starting/install3/osx/
+:PostgreSQL 12 with PostGIS 3: 
     - **macOS** Use `Postgres.app <http://postgresapp.com>`_.
-:PostgreSQL 9.6 with PostGIS 2.3: - **Windows** Use the `EnterpriseDB installers <https://www.postgresql.org/download/windows/>`_, and use Stack Builder (included) to get PostGIS. After installation, add the following to your system's ``PATH`` environment variable: ``C:\Program Files\PostgreSQL\9.6\bin``. Make sure you write down the password that you assign to the ``postgres`` user.
+    - **Windows** Use the `EnterpriseDB installers <https://www.postgresql.org/download/windows/>`_, and use Stack Builder (included) to get PostGIS. After installation, add the following to your system's ``PATH`` environment variable: ``C:\Program Files\PostgreSQL\12\bin``. Make sure you write down the password that you assign to the ``postgres`` user.
 :Elasticsearch 7: - Installers: https://www.elastic.co/downloads/past-releases/elasticsearch-5-6-16
     - Elasticsearch is integral to Arches and can be installed and configured many ways.
       For more information, see :ref:`Arches and Elasticsearch`.
@@ -41,8 +42,6 @@ read the notes below. Where necessary, Windows installation notes are included a
     - **macOS** Use version 3.6.1 (3.6.2 has caused trouble).
 :Yarn: - Installation: https://yarnpkg.com/lang/en/docs/install
     - **Windows** Use the .msi installer in the link above, but first install `Node.js <https://nodejs.org/>`_.
-:Mapnik 2.2: - Installation: http://mapnik.org/pages/downloads.html
-    - **Windows** No 64-bit Mapnik is available, so do not install Mapnik (Arches will not be greatly affected).
 :CouchDB 2.x: - Installation: https://docs.couchdb.org/en/stable/install/index.html
     - `Only required to support Arches Collector Mobile app.`
     - CouchDB is used to sync mobile data collection projects with your main database. 
