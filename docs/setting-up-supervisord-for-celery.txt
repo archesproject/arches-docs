@@ -2,9 +2,11 @@
 Setting up Supervisord for Celery
 #################################
 
-When implementing celery on a production instance it may be preferable to delegate supervisord to manage celery workers and celery beats. The following is a guide; be advised you can change any of the file names, destinations, or permissions to suit your needs.
+When implementing celery on a production instance it may be preferable to delegate supervisord to manage celery workers and celery beats. The following is a guide **for a linux-based** OS; be advised you can change any of the file names, destinations, or permissions to suit your needs.
+
 
 1. Supervisor can be installed using ``pip``: ``pip install supervisor``.
+
 
 2. In the core arches repo, in `arches/install/supervisor_celery_setup <https://github.com/archesproject/arches/tree/master/arches/install/supervisor_celery_setup>`_ there exist example files for supervisor, celeryd, and celerybeat. We recommend copying them into the following directory structure:
 
@@ -16,27 +18,37 @@ When implementing celery on a production instance it may be preferable to delega
         |    |-- my_proj_name-celeryd.conf
         |    |-- my_proj_name-celerybeat.conf
 
+
 3. In the content of the files as well as the filenames themselves, replace the values of the following placeholders:
+ 
  * ``/absolute/path/to/virtualenv/`` - absolute path to your python3 virtualenv
  * ``[app]`` - replace this with the value of ``ELASTICSEARCH_PREFIX`` in your project’s ``settings.py`` file
  * ``/absolute/path/to/my_proj`` - absolute path to your arches project
  * ``my_proj_name`` - name of your project
     
+
 4. Note that you can change the value for ``user`` in the ``-supervisord.conf`` file to a designated user to run supervisord.
 
-5. Before proceeding, you will want to make sure your that whichever user you designate to run supervisor has the appropriate permissions for the following files:
+
+5. Before proceeding, you will want to make sure that whichever user you designate to run supervisor has the appropriate permissions for the following files:
+ 
  * ``/var/log/supervisor/supervisord.log``
  * ``/var/log/celery/worker.log``
  * ``/var/log/celery/beat.log``
  * ``/var/run/supervisord.pid``
 
+
 6. Download and install RabbitMQ: https://www.rabbitmq.com/download.html
+
 
 7. Once successfully installed (and verified that it has been added to your PATH), start running it with the command ``rabbitmq-server``. For a convenient option, this can be run in a screen. Note that rabbitmq should be run prior to running supervisord.
 
+
 8. Run ``supervisord -c /etc/supervisor/my_proj_name-supervisord.conf`` to start the supervisord which will start celery workers for your tasks.
 
+
 9. To stop your supervisord process, run ``unlink /tmp/supervisor.sock``.
+
 
 More information:
  * Supervisord documentation: http://supervisord.org/
