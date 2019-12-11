@@ -17,6 +17,7 @@ Arches Documentation
     installation
     initial-configuration
     projects-and-packages
+    task-management
 
 .. toctree::
     :caption: Using Arches

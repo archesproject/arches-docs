@@ -1,3 +1,5 @@
+.. _setting-up-supervisord-for-celery:
+
 #################################
 Setting up Supervisord for Celery
 #################################
@@ -10,28 +12,28 @@ When implementing celery on a production instance it may be preferable to delega
 
 2. In the core arches repo, in `arches/install/supervisor_celery_setup <https://github.com/archesproject/arches/tree/master/arches/install/supervisor_celery_setup>`_ there exist example files for supervisor, celeryd, and celerybeat. We recommend copying them into the following directory structure:
 
-    .. code-block:: bash 
-        
+    .. code-block:: bash
+
         /etc/supervisor/
         |-- my_proj_name-supervisord.conf
-        |-- conf.d/     
+        |-- conf.d/
         |    |-- my_proj_name-celeryd.conf
         |    |-- my_proj_name-celerybeat.conf
 
 
 3. In the content of the files as well as the filenames themselves, replace the values of the following placeholders:
- 
+
  * ``/absolute/path/to/virtualenv/`` - absolute path to your python3 virtualenv
  * ``[app]`` - replace this with the value of ``ELASTICSEARCH_PREFIX`` in your project’s ``settings.py`` file
  * ``/absolute/path/to/my_proj`` - absolute path to your arches project
  * ``my_proj_name`` - name of your project
-    
+
 
 4. Note that you can change the value for ``user`` in the ``-supervisord.conf`` file to a designated user to run supervisord.
 
 
 5. Before proceeding, you will want to make sure that whichever user you designate to run supervisor has the appropriate permissions for the following files:
- 
+
  * ``/var/log/supervisor/supervisord.log``
  * ``/var/log/celery/worker.log``
  * ``/var/log/celery/beat.log``
