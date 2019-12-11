@@ -6,9 +6,10 @@ When implementing celery on a production instance it may be preferable to delega
 
 1. Supervisor can be installed using ``pip``: ``pip install supervisor``.
 
-2. In the core arches repo, in `arches/install/supervisor_celery_setup<https://github.com/archesproject/arches/tree/master/arches/install/supervisor_celery_setup>_` there exist example files for supervisor, celeryd, and celerybeat. We recommend copying them into the following directory structure:
+2. In the core arches repo, in `arches/install/supervisor_celery_setup <https://github.com/archesproject/arches/tree/master/arches/install/supervisor_celery_setup>`_ there exist example files for supervisor, celeryd, and celerybeat. We recommend copying them into the following directory structure:
 
     .. code-block:: bash 
+        
         /etc/supervisor/
         |-- my_proj_name-supervisord.conf
         |-- conf.d/     
