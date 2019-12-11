@@ -58,3 +58,4 @@ Arches Documentation
     Appendix A: Arches HIP <arches-hip-contents>
     Appendix B: Glossary <glossary>
     Appendix C: Serving Arches with Apache <serving-arches-with-apache>
+    Appendix D: Setting Up Supervisord For Celery <setting-up-supervisord-for-celery>
