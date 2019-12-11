@@ -6,18 +6,18 @@ When implementing celery on a production instance it may be preferable to delega
 
 1. Supervisor can be installed using ``pip``: ``pip install supervisor``.
 
-2. In the core arches repo, in ``arches/install/supervisor_celery_setup`` there exist example files for supervisor, celeryd, and celerybeat. We recommend copying them into the following directory structure:
+2. In the core arches repo, in `arches/install/supervisor_celery_setup<https://github.com/archesproject/arches/tree/master/arches/install/supervisor_celery_setup>_` there exist example files for supervisor, celeryd, and celerybeat. We recommend copying them into the following directory structure:
 
-.. code-block:: bash 
-    /etc/supervisor/
-    |-- my_proj_name-supervisord.conf
-    |-- conf.d/     
-    |    |-- my_proj_name-celeryd.conf
-    |    |-- my_proj_name-celerybeat.conf
+    .. code-block:: bash 
+        /etc/supervisor/
+        |-- my_proj_name-supervisord.conf
+        |-- conf.d/     
+        |    |-- my_proj_name-celeryd.conf
+        |    |-- my_proj_name-celerybeat.conf
 
 3. In the content of the files as well as the filenames themselves, replace the values of the following placeholders:
  * ``/absolute/path/to/virtualenv/`` - absolute path to your python3 virtualenv
- * ``[app]`` - replace this with the value of ELASTICSEARCH_PREFIX in your project’s settings.py file
+ * ``[app]`` - replace this with the value of ``ELASTICSEARCH_PREFIX`` in your project’s ``settings.py`` file
  * ``/absolute/path/to/my_proj`` - absolute path to your arches project
  * ``my_proj_name`` - name of your project
     
