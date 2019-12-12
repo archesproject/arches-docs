@@ -97,7 +97,7 @@ reindex the database
 .. code-block:: bash
 
     python manage.py es index_database
-    
+
 .. important::
     Memory usage will continuously increase during indexing, if you do not have
     ``DEBUG = False``. This is because Django will store all db queries in
@@ -416,34 +416,6 @@ MapBox
 
 -j  The path to the Mapbox JSON file
 -n  The name of the Mapbox layer
-
-
-Tileserver
-----------
-
-.. code-block:: bash
-
-   python manage.py packages -o add_tileserver_layer -t /path/to/tileserver_config.json -n "New [Mapnik] Tileserver Layer" [-m /path/to/mapnik_config.xml] [{-b|--is_basemap}] [{-i|--layer_icon} 'icon_class'}]
-
--j  The path to the Tileserver JSON file
--n  The name of the Tileserver layer
--m  (Optional) The path to the Mapnik XML file
-
-.. code-block:: bash
-
-   python manage.py packages -o delete_tile_server_layer -n <layer-name>
-
-Deletes the Tileserver layer with the specified name.
-
-
-Common Options
---------------
-
--i, --layer_icon
-    (Optional) The FontAwesome icon class to use for a Tileserver
-    layer. Default: 'fa fa-globe'
--b, --is_basemap
-    (Optional) Add this option to make the layer a basemap.
 
 
 Other Useful Django Commands
