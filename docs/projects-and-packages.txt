@@ -35,7 +35,7 @@ templates
 
 This directory holds HTML templates that you can modify to customize the branding and general appearance of your project.
 
-datatypes, fuctions, and widgets
+datatypes, functions, and widgets
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 These directories will store the custom datatypes, functions, and widgets that you can create for the project. Developers interested in pursuing these customizations should start with `this customization documentation <https://github.com/archesproject/arches/wiki/Creating-New-Functions%2C-DataTypes%2C-and-Widgets>`_.
@@ -155,7 +155,7 @@ The `create_package` command will help you get started by generating the folder 
         SKOS collection .xml files
     system_settings
         The system settings file for your project
-        
+
     \* map layer configuration
         By default mapbox-style layers will be loaded with the name property found in the layer's style.json file. The default name for tile server layers will be the basename of the layer's xml file. For both mapbox-style and tile server layers the default icon-class will be `fa fa-globe`. To customize the name and icon-class, simply add a meta.json file to the layer's directory with the following object:
 
@@ -169,7 +169,7 @@ The `create_package` command will help you get started by generating the folder 
 #. It is not necessary to populate every directory with data. Only add those files that you would like to share.
 
     Once you've added the necessary files to your package, simply compress it as a zip file or push it to a github repository and it's ready to be loaded.
-    
+
 Configuring a Package
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -177,10 +177,10 @@ Two different files are used to define custom settings for your package.
 
 - ``package_settings.py``
     The django settings relevant to your project not managed in system settings. For example, you may want to include your time wheel configuration and your analysis SRID settings in this file so that users do not have add these settings manually to their own settings file after loading your package. **This file is copied into your project when the package is loaded.**
-    
+
 - ``package_config.json``
     This file allows you to configure other parts of the data loading process. For example, the order in which the business data files are loaded. Contents of this file may look like
-    
+
     .. code-block:: json
 
           {
