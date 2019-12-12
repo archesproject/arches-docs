@@ -298,25 +298,16 @@ search export).
 Ontology Commands
 =================
 
-load an ontology or ontology extension
---------------------------------------
+load an ontology
+----------------
 
 .. code-block:: bash
 
-    python manage.py load_ontology [-s <path to ontology>] [-x <path to extension>] [-r/--reload] [-vn <version number>]
+    python manage.py load_ontology [-s <path to ontology directory>]
 
 -s
-        Path to new ontology xml file to load
--x
-        Path to ontology extension xml file to load. You'll be
-        prompted to choose which existing ontology you would like to
-        extend.
--vn
-        If loading a new ontology or adding an extension, you must
-        supply a version number.
--r
-        Reload ontology. You'll be prompted to choose which ontology
-        to reload.
+        Path to new ontology directory to load
+
 
 Managing Functions, DataTypes, Widgets, and Card Components
 ===========================================================
