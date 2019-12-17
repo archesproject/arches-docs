@@ -489,6 +489,9 @@ new DataType.
         create a Map Layer based on the DataType, and also for
         caching. If you're developing such a DataType, set this to
         True.
+:issearchable:
+        **Optional** Determines if the datatype participates in advanced search.
+        The default is false.
 
 .. important::
 
