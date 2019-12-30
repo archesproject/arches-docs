@@ -19,7 +19,7 @@ To begin development or make a test installation of Arches, you will need the fo
 Software Dependencies
 =====================
 
-**Linux/Unix** `Installation scripts <https://github.com/archesproject/arches/tree/master/arches/install>`_. These do not install Elasticsearch (see below).
+**Linux/Unix** `Installation scripts <https://github.com/archesproject/arches/tree/stable/4.4.3/arches/install>`_. These do not install Elasticsearch (see below).
 
 **macOS** `Development installation script <https://gist.github.com/jmunowitch/35eb1d20a0b9cbf86f4b0eb4b167d43a>`_. Running this script in full will create an installation of Arches based on the current repo, but you can use pieces of it for individual dependencies as well.
 
