@@ -66,6 +66,12 @@ If you are a member of the Resource Editor group, all of your edits--either crea
 Related Resources
 ````````````````````````````
 
+.. warning::
+
+    Managing generic relationships as described below is still an available feature in Arches. However, **this feature will soon be deprecated** in a future release. 
+    Users are strongly encouraged to use the `resource-instance` datatype to manage relationships between resource instances.
+    The ability to visualize connections across `resource-instance` datatype nodes will accompany the deprecation of the generic resource relationship. 
+
 From the Resource Editor you can also access the Related Resources Editor, which is used to create a relationship between this resource and another in your databas. To do so, open the editor, find the resource, and click Add. Your Resource Model will need to be configured to allow relations with the target Resource Model. If relations are not allowed, resources in the dropdown menu will not be selectable.
 
 After a relation has been created, you can further refine its properties, such as what type of relation it is, how long it lasted, etc. While viewing the relation in grid mode, begin by selecting the relation in the table. You will see the "Delete Selected" button appear. Next click "relation properties", enter the information, and don't forget to "Save" when finished.
