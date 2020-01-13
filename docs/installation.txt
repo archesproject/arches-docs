@@ -42,9 +42,7 @@ When you activate your virtual environment, your command prompt will be prefixed
 
 Use the following to get the latest stable release of Arches::
 
-    pip install arches --no-binary :all:
-
-.. warning:: Running a pip installation without the ``--no-binary :all:`` argument will install ``arches`` in your virtual environment, but will not install all of the separate python packages that you need. This will cause you to not be able to proceed with the following steps.
+    pip install arches
 
 5. Create a new Arches Project
 ------------------------------
@@ -82,7 +80,7 @@ To begin working with your Project, first enter it::
 
 and then (with ElasticSearch running) run::
 
-    python manage.py packages -o setup_db
+    python manage.py setup_db
 
 .. note:: You may be prompted to enter a password for the ``postgres`` user, depending on your OS and how you installed Postgres/Postgis. Generally, our installation scripts set this password to ``postgis``.
 
