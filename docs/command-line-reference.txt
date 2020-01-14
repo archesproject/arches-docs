@@ -104,6 +104,15 @@ reindex the database
     memory, and a lot of them happen during indexing. Be wary of this when indexing
     a large database, or on servers with small memory provisions.
 
+register a custom index
+-----------------------
+
+.. code-block:: bash
+
+    python manage.py es add_index --name {index name}
+
+See :ref:`Adding a Custom Index`
+
 Import Commands
 ===============
 
