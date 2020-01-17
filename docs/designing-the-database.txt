@@ -93,7 +93,7 @@ The "CSS Classes" enables a user to enter space-separated class names (e.g. card
   The **Map Card** enables more customization for nodes of type ``geojson-collection``. It has optional settings to start the map at a specific LatLng center and default zoom level. It can also import a particular map source layer of data into the UI. This might be useful if the user entering new geometry would benefit from having other resource data for reference in the map. To add a `map source
   <https://docs.mapbox.com/mapbox-gl-js/style-spec/#sources>`_
   or `source_layer
-  <https://docs.mapbox.com/mapbox-gl-js/style-spec/#layer-source-layer>_` simply type its name (no quotes).
+  <https://docs.mapbox.com/mapbox-gl-js/style-spec/#layer-source-layer>`_ simply type its name (no quotes).
 
   .. figure:: images/mapcard.png 
     :width: 250
