@@ -20,6 +20,7 @@ Software Dependencies
 =====================
 
 Full dependency installation on Ubuntu 18.04: `ubuntu_setup.sh <https://raw.githubusercontent.com/archesproject/arches/master/arches/install/ubuntu_setup.sh>`_
+Note that for some linux distributions, you may have to call ``bash ubuntu.sh`` as the shell version declared in the ``.sh`` file may be ignored by your OS.
 
 To familiarize yourself with the components and learn some important details, please
 read the notes below. Where necessary, OS-specific installation notes are included as well.
