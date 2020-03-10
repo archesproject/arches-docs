@@ -117,7 +117,7 @@ Handling Static Files
 There are two cases in which you need to follow these directions to handle static files (js, css, and images):
 
  * You are going to set ``DEBUG = False``, at which point Django will no longer serve them, or
- * You are leaving ``DEBUG = True`` but are developing and serving your project from a non-root location, say www.example.com/arches4 instead of www.example.com.
+ * You are leaving ``DEBUG = True`` but are developing and serving your project from a non-root location, say www.example.com/arches5 instead of www.example.com.
 
 1. Create static files directory
 
