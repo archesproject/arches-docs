@@ -676,8 +676,8 @@ looking a lot like this sample:
 
 
 
-Commands
---------
+Card Commands
+-------------
 
 To register your Card Component, use this command:
 
@@ -744,8 +744,8 @@ looking a lot like this sample:
 :sortorder: **Required** The order in which your plugin will be listed if there are multiple plugins
 
 
-Commands
---------
+Plugin Commands
+---------------
 
 To register your Plugin, use this command:
 

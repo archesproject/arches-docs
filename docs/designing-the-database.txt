@@ -73,10 +73,10 @@ When you select a card or a widget, you will see the Card Manager or Widget Mana
 
 .. tip:: While working with the Cards Tab, you may need to go back and change a node in the Graph Tab. Be aware that though you may expect node changes in the Graph Tab to cascade to widget configurations in the Cards Tab, this does not always happen. Be sure to double-check your work!
 
-Card Components
----------------
+Card Type
+---------
 
-The UI of a card can be configured using a card component. Note that when you click a node in the card tree, , the "Card Configuration" panel on the right-hand side of the screen will show the card component in a dropdown called "Card Type".
+The UI of a card can be configured using a card component. Note that when you click a node in the card tree, the "Card Configuration" panel on the right-hand side of the screen will show the card component in a dropdown called "Card Type".
 
 .. figure:: images/card_component.png
 
@@ -84,29 +84,31 @@ The UI of a card can be configured using a card component. Note that when you cl
 
 The "CSS Classes" enables a user to enter space-separated class names (e.g. card-empty-class card-incomplete-class) that correspond to class names defined by a developer in ``package.css``. While card components can be created from scratch, arches (v5 on) comes with a few out of the box:
 
-- Grouping Card
-  ^^^^^^^^^^^^^
-  The **Grouping Card** groups multiple cards into a single user interface (UI). One card acts as the root of the group by changing its "Card Type" to "Grouping Card" and then assigning "sibling" cards to it (in the last field of the Card Configuration section). While arches makes it easy to edit an existing card to include other nodes, the grouping card might be useful for cases where resource instances already exist for a model thus preventing you from editing the cards but you still want to group different cards together.
+Grouping Card
+^^^^^^^^^^^^^
+The **Grouping Card** groups multiple cards into a single user interface (UI). One card acts as the root of the group by changing its "Card Type" to "Grouping Card" and then assigning "sibling" cards to it (in the last field of the Card Configuration section). While arches makes it easy to edit an existing card to include other nodes, the grouping card might be useful for cases where resource instances already exist for a model thus preventing you from editing the cards but you still want to group different cards together.
 
-- Map Card
-  ^^^^^^^^
-  The **Map Card** enables more customization for nodes of type ``geojson-collection``. It has optional settings to start the map at a specific LatLng center and default zoom level. It can also import a particular map source layer of data into the UI. This might be useful if the user entering new geometry would benefit from having other resource data for reference in the map. To add a `map source
-  <https://docs.mapbox.com/mapbox-gl-js/style-spec/#sources>`_
-  or `source_layer
-  <https://docs.mapbox.com/mapbox-gl-js/style-spec/#layer-source-layer>`_ simply type its name (no quotes).
 
-  .. figure:: images/mapcard.png 
-    :width: 250
+Map Card
+^^^^^^^^
+The **Map Card** enables more customization for nodes of type ``geojson-collection``. It has optional settings to start the map at a specific LatLng center and default zoom level. It can also import a particular map source layer of data into the UI. This might be useful if the user entering new geometry would benefit from having other resource data for reference in the map. To add a `map source
+<https://docs.mapbox.com/mapbox-gl-js/style-spec/#sources>`_
+or `source_layer
+<https://docs.mapbox.com/mapbox-gl-js/style-spec/#layer-source-layer>`_ simply type its name (no quotes).
 
-    Screenshot of card configuration panel, highlighting the fields: "Select drawings map source" and "Select drawings map source layer".
+.. figure:: images/mapcard.png 
+   :width: 250
 
-- Related Resources Map Card
-  ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  The **Related Resources Map Card** enables a more rich user experience for nodes of type ``related-resource``. Like the Map Card, map layer data representing resources can be added to a map UI such that the user can navigate geographically to select a related resource instead of paging through the dropdown list of relatable resources (however the dropdown still works normally in this card component). This card component is very useful if a user knows primarily knows the geographic context of a resource (like what neighborhood it's in) instead of its name. The steps to add such map data are the same as in the Map Card configuration panel.
+   Screenshot of card configuration panel, highlighting the fields: "Select drawings map source" and "Select drawings map source layer".
 
-  .. figure:: images/related_resources_mapcard.png
 
-    Screenshot of a card using related resources map card, showing a selected resource in the map, polygon outlined in purple to show selection, and the resource instance's name selected in the dropdown widget to the right of the map.
+Related Resources Map Card
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+The **Related Resources Map Card** enables a more rich user experience for nodes of type ``related-resource``. Like the Map Card, map layer data representing resources can be added to a map UI such that the user can navigate geographically to select a related resource instead of paging through the dropdown list of relatable resources (however the dropdown still works normally in this card component). This card component is very useful if a user knows primarily knows the geographic context of a resource (like what neighborhood it's in) instead of its name. The steps to add such map data are the same as in the Map Card configuration panel.
+
+.. figure:: images/related_resources_mapcard.png
+
+   Screenshot of a card using related resources map card, showing a selected resource in the map, polygon outlined in purple to show selection, and the resource instance's name selected in the dropdown widget to the right of the map.
 
 
 Permissions Tab
