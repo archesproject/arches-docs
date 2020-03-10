@@ -55,6 +55,7 @@ If the ``es index_database`` operation doesn't solve your issue, you can try thi
     python manage.py es setup_indexes
     python manage.py es index_database
 
+
 Using Multiple Nodes
 ====================
 
@@ -104,3 +105,36 @@ if you only have one).
     Here's some `background <http://chrissimpson.co.uk/elasticsearch-yellow-cluster-status-explained.html>`_
     and a `stack overflow question <https://stackoverflow.com/questions/35717790/how-to-add-a-new-node-to-my-elasticsearch-cluster>`_
     with instructions for adding a node.
+
+
+Adding a Custom Index
+=====================
+
+Arches allows you to create a custom index of resource data for your specific use case (for use in Kibana for example).
+
+To add a new custom index create a new python module and add to it a class that inherits from **arches.app.search.base_index.BaseIndex** and implements the **prepare_index** and **get_documents_to_index** methods.
+
+Example custom index:
+
+.. code:: python
+
+    from arches.app.search.base_index import BaseIndex
+
+    class SampleIndex(BaseIndex):
+        def prepare_index(self):
+            self.index_metadata = {"mappings": {"_doc": {"properties": {"tile_count": {"type": "keyword"}, "graph_id": {"type": "keyword"}}}}}
+            super(SampleIndex, self).prepare_index()
+
+        def get_documents_to_index(self, resourceinstance, tiles):
+            return ({"tile_count": len(tiles), "graph_id": resourceinstance.graph_id}, str(resourceinstance.resourceinstanceid))
+
+add this to your settings_local.py file
+
+.. code:: python
+
+    ELASTICSEARCH_CUSTOM_INDEXES = [{
+        'module': '{path to file with SampleIndex class}.SampleIndex',
+        'name': 'my_new_custom_index' <-- follow ES index naming rules, use this name to register in Elasticsearch
+    }]
+
+Register your index in Elasticsearch: see :ref:`register a custom index`

@@ -94,8 +94,14 @@ ElasticSearch Management
 reindex the database
 --------------------
 
+Note that commands using ``python manage.py es [command]`` require ElasticSearch to be running.
+
+While the single command ``python manage.py es index_database`` will reindex the database, to do a "clean" reindex we recommend the following sequence of commands:
+
 .. code-block:: bash
 
+    python manage.py es delete_indexes
+    python manage.py es setup_indexes
     python manage.py es index_database
 
 .. important::
@@ -103,6 +109,15 @@ reindex the database
     ``DEBUG = False``. This is because Django will store all db queries in
     memory, and a lot of them happen during indexing. Be wary of this when indexing
     a large database, or on servers with small memory provisions.
+
+register a custom index
+-----------------------
+
+.. code-block:: bash
+
+    python manage.py es add_index --name {index name}
+
+See :ref:`Adding a Custom Index`
 
 Import Commands
 ===============
