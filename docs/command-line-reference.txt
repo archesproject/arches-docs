@@ -86,7 +86,7 @@ the url to a github repo archive that contains a package. For example,
 loading the v4 sample package from where it resides in github would
 just be::
 
-    python manage.py packages -o load_package -s https://github.com/archesproject/arches4-example-pkg/archive/master.zip
+    python manage.py packages -o load_package -s https://github.com/archesproject/arches-example-pkg/archive/master.zip
 
 ElasticSearch Management
 ========================

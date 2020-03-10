@@ -112,7 +112,7 @@ Now that you have Arches installed and a Project created, you are ready to begin
 
     .. code:: bash
 
-        python manage.py packages -o load_package -s https://github.com/archesproject/arches4-example-pkg/archive/master.zip -db true
+        python manage.py packages -o load_package -s https://github.com/archesproject/arches-example-pkg/archive/master.zip -db true
 
     This example package has a full set of Resource Models, Branches, and Concepts that are generally based on the original :ref:`Arches HIP Contents`.
 
