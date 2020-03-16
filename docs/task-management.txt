@@ -65,6 +65,13 @@ directory with your virtual environment activated and and run:
     python manage.py celery start
 
 
+Note that in the event of celery errors which do not clearly indicate what is breaking or preventing your tasks from succeeding, we recommend running the following command instead for the purpose of debugging and isolating any unhandled exceptions:
+
+.. code-block:: bash
+
+    celery -A [app_name] worker --loglevel=warning
+
+
 Once the worker is running you should be able check your database and see you task result output with the following
 query:
 
