@@ -82,6 +82,20 @@ Replace the `ROOT_DIR` with the pathway to the folder where you want the directo
 
     ROOT_DIR = os.path.join('projects','my_project')
 
+Be sure that your web server has permissions to your media directory. If you are using Apache on Ubuntu, you can simply assign your uploads directory to the www-data group. For example::
+
+    $ sudo chgrp www-data projects/my_project/uploadedfiles
+
+
+If you want to ensure that all media file access requires authentication, you can set RESTRICT_MEDIA_ACCESS to True.
+Be aware that in doing so, all media file requests will be served by Django rather than Apache. This will adversely impact performace when serving large files or during periods of high traffic.
+
+If restricting media access, you can specifiy in the PERMITTED_MEDIA_GROUPS setting which groups should have access to media files::
+
+    RESTRICT_MEDIA_ACCESS to True
+    PERMITTED_MEDIA_GROUPS = ["Resource Editor"]
+
+
 Permissions Settings
 --------------------
 
