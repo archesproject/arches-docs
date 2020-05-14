@@ -60,3 +60,4 @@ Arches Documentation
     Appendix B: Glossary <glossary>
     Appendix C: Serving Arches with Apache <serving-arches-with-apache>
     Appendix D: Setting Up Supervisord For Celery <setting-up-supervisord-for-celery>
+    Appendix E: Managing and Hosting IIIF <managing-and-hosting-iiif>

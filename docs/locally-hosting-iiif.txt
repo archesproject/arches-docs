@@ -1,0 +1,39 @@
+.. manging-and-hosting-iiif:
+
+#################################
+Managing and Hosting IIIF Servers
+#################################
+
+Arches is configured to use Cantaloupe if you want to host images via the IIIF presentation API.
+
+Setting Up Cantaloupe
+=====================
+
+1. Follow `these instructions<https://iiif.github.io/training/intro-to-iiif/INSTALLING_CANTALOUPE.html>`_ to download and configure Cantaloupe anywhere on your system, then proceed to run it (using the ``java`` command).
+2a. (For local hosting) In a browser, navigate to the admin url (see link above) and click "Resolver" in the left-hand panel, then click "FilesystemResolver". "Lookup Strategy" should be set to "Basic". Set "Path Prefix" to the absolute path to the "cantaloupe" directory in your project. For example on Mac, it might be: "/Users/myusername/Projects/arches-for-science-prj/afs/cantaloupe/". 
+2b. (For remote hosting) [Still in development]
+3. Click "Save".
+
+
+Creating IIIF Manifests
+=======================
+
+A IIIF manifest will be created when triggered by the arches function called "File to IIIF". 
+
+1. Navigate to the graph designer and select the resource model you wish to associate with the source imagery linked to a IIIF manifest. In the arches-for-science-prj example, this might be the "Digital Resource" Model.
+
+2. In the Function Manager, select the "File to IIIF" function and choose a card of datatype: File-List. Save changes.
+
+When a resource is edited and a tile saved to that card on that model, if the file is an image type (i.e. a ``.tiff``, ``.tif``, ``.jpg``, ``.jpeg``, or ``.png``) a record in the iiif_manifests table in the database will be created pointing to a manifest ``.json`` file that will render the image file from cantaloupe into the IIIF Viewer card (see below).
+
+
+IIIF Viewer
+===========
+
+To make use of IIIF imagery, a resource model must have a semantic node configured to use the "IIIF Card" selected for "Card Type". When creating a tile for this card in the resource editor, the user will first be prompted to select a IIIF Manifest from a dropdown list. You should see any IIIF Manifests created from the above process labeled using the display name from its parent resource instance.
+
+
+More information:
+ * General information on using IIIF: https://iiif.github.io/training/intro-to-iiif/
+ * IIIF Presentation API Documentation: https://iiif.io/api/presentation/2.1/
+ * IIIF Image API Documentation: https://iiif.io/api/image/2.1/
