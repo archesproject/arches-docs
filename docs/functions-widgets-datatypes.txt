@@ -227,7 +227,7 @@ First, list the names of functions you already have registered:
 
 Now you can register your new function with
 
-    ``(ENV)$ python manage.py fn register-source <path to your function's .py file>``
+    ``(ENV)$ python manage.py fn register --source <path to your function's .py file>``
 
 For example:
 
