@@ -1,4 +1,4 @@
-.. manging-and-hosting-iiif:
+.. managing-and-hosting-iiif:
 
 #################################
 Managing and Hosting IIIF Servers
