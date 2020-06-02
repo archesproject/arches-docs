@@ -875,7 +875,7 @@ GeoJSON
     :query use_display_values: include this parameter to return tile values processed to be human readable
     :query include_geojson_link: include this parameter to include a link to this specific feature in its properties fit for reuse later
     :query indent: optional number of spaces with which to indent the JSON return (ie "pretty print")
-    :query geometry_type: optional geometry type name to filter features on
+    :query type: optional geometry type name to filter features on
     :query limit: optional number of tiles to process; used to page data. NOTE: as paging is per tile, the count of features in the response may differ from this limit value
     :query page: optional number of page (starting with 1) to return; used in conjunction with "limit"
 
