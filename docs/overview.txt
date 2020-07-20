@@ -9,7 +9,7 @@ Arches is a web-based, geospatial information system for cultural heritage inven
 
 Arches allows administrators to create their own database schema, and manage their own thesauri, while end users can search, explore and download the resources directly. In this way Arches is not only a robust and easy to use inventory system, it is also a perfect way to publish and disseminate your organization's cultural heritage information.
 
-Arches is a web framework built on Dango and is designed to make it easier to build applications that need:
+Arches is a web framework built on Django and is designed to make it easier to build applications that need:
 
     * **Geospatial data management** and geoprocessing like a GIS (Geograhic Information System) offers, but with a much more flexible approach for modeling the geometries associated with a resource.
     * the ability to **import arbitrary data schema** in the form of graphs as a means of defining the set of attributes that describe data resources
