@@ -1,4 +1,4 @@
-Sphinx==1.7.0
+Sphinx==3.2.1
 sphinx_rtd_theme
 sphinxcontrib-httpdomain
 requests[security]
