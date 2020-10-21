@@ -58,6 +58,7 @@ Arches Documentation
 
     serving-arches-with-apache
     setting-up-supervisord-for-celery
+    backing-up-the-database
 
 .. toctree::
     :caption: Reference (to be removed)
