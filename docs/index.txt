@@ -53,11 +53,19 @@ Arches Documentation
     task-management
 
 .. toctree::
-    :caption: Reference
+    :caption: Running Arches in Production
+    :maxdepth: 2
+
+    serving-arches-with-apache
+    setting-up-supervisord-for-celery
+
+.. toctree::
+    :caption: Reference (to be removed)
     :maxdepth: 2
 
     Appendix A: Arches HIP <arches-hip-contents>
     Appendix B: Glossary <glossary>
+    Appendix E: Managing and Hosting IIIF <managing-and-hosting-iiif>
+..
     Appendix C: Serving Arches with Apache <serving-arches-with-apache>
     Appendix D: Setting Up Supervisord For Celery <setting-up-supervisord-for-celery>
-    Appendix E: Managing and Hosting IIIF <managing-and-hosting-iiif>
