@@ -17,7 +17,6 @@ Arches Documentation
     installation
     initial-configuration
     projects-and-packages
-    task-management
 
 .. toctree::
     :caption: Using Arches
@@ -51,6 +50,7 @@ Arches Documentation
     v3-to-v4-migration
     import-export
     settings-beyond-the-ui
+    task-management
 
 .. toctree::
     :caption: Reference

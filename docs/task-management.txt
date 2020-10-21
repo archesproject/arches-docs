@@ -5,9 +5,8 @@ Task Management
 Dependencies
 ============
 
-Task management using Celery is available in Arches if you have a message broker available.  The Celery documentation
-provides information on available `brokers <https://www.loc.gov/standards/datetime/pre-submission.html>`_
-
+Task management using Celery is available in Arches if you have a message broker like RabbitMQ or Redis. The Celery documentation
+provides information on `broker installation <https://docs.celeryproject.org/en/stable/getting-started/first-steps-with-celery.html#choosing-a-broker>`_.
 
 Configuration
 =============
@@ -15,6 +14,8 @@ Configuration
 Once you have your broker available, you will need to configure your settings. You will find this in your project's
 settings.py file. Each setting that begins with the CELERY prefix will be used as a celery config, so you can configure
 celery by adding the configs you need
+
+.. code-block:: python
 
     CELERY_BROKER_URL = 'amqp://guest:guest@localhost'
     CELERY_RESULT_BACKEND = 'django-db'  # Use 'django-cache' if you want to use your cache as your backend

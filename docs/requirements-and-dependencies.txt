@@ -29,22 +29,27 @@ read the notes below. Where necessary, OS-specific installation notes are includ
     - Python 3.7 and later comes with pip
     - **Windows** You must choose 32-bit or 64-bit Python based on your system architecture.
     - **macOS** This guide works well if you wish to install via `brew`: https://docs.python-guide.org/starting/install3/osx/
-:PostgreSQL 12 with PostGIS 3: 
+:PostgreSQL 12 with PostGIS 3:
     - **macOS** Use `Postgres.app <http://postgresapp.com>`_.
     - **Windows** Use the `EnterpriseDB installers <https://www.postgresql.org/download/windows/>`_, and use Stack Builder (included) to get PostGIS. After installation, add the following to your system's ``PATH`` environment variable: ``C:\Program Files\PostgreSQL\12\bin``. Make sure you write down the password that you assign to the ``postgres`` user.
 :Elasticsearch 7.4: - Installers: https://www.elastic.co/downloads/past-releases/elasticsearch-7-4-0
     - Elasticsearch is integral to Arches and can be installed and configured many ways.
       For more information, see :ref:`Arches and Elasticsearch`.
 :JDK 8: - `Only required to support a local installation of Elasticsearch`
-    - `Installers <http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html>`_. 
+    - `Installers <http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html>`_.
     - **Windows** Once installed, find Java on your operating system, it will be somewhere like ``C:\Program Files\Java\jdk*.*.*_**``. Now take that full path, and add it to the ``JAVA_HOME`` system environment variable.
 :GDAL > 1.11.5: - **Windows** Use the `OSGeo4W installer <https://trac.osgeo.org/osgeo4w/>`_, and choose to install the GDAL package (you don't need QGIS or GRASS). After installation, add ``C:\OSGeo4W64\bin`` to your system's ``PATH`` environment variable.
     - **macOS** Use version 3.6.1 (3.6.2 has caused trouble).
 :Yarn: - Installation: https://yarnpkg.com/lang/en/docs/install
     - **Windows** Use the .msi installer in the link above, but first install `Node.js <https://nodejs.org/>`_.
 
-If you plan to use the Arches Collector Mobile app, you must also install CouchDB.
+If you plan to use the Arches Collector Mobile app, you must install CouchDB.
 
 :CouchDB 2.x: - Installation: https://docs.couchdb.org/en/stable/install/index.html
-    - CouchDB is used to sync mobile data collection projects with your main database. 
+    - CouchDB is used to sync mobile data collection projects with your main database.
     - Arches will connect to CouchDB with default credentials. However, in production you must make a new CouchDB admin after installation, and then update ``COUCHDB_URL = 'http://admin:admin@localhost:5984`` in ``settings.py`` accordingly.
+
+To support long-running task management, like large user downloads, you must install a Celery broker like RabbitMQ or Redis:
+
+:Brokers: - Options: https://docs.celeryproject.org/en/stable/getting-started/first-steps-with-celery.html#choosing-a-broker
+    - Once you have a broker installed, read more about :ref:`Task Management` in Arches.
