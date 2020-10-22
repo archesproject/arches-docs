@@ -1,0 +1,16 @@
+######################
+Managing Permissions
+######################
+
+User Permissions in the Django UI
+---------------------------------
+
+
+Resource Instance permissions
+-----------------------------
+See :ref:`Permissions Tab` for more information.
+
+
+Resource Instance Permissions
+-----------------------------
+New for 5.1

@@ -58,10 +58,11 @@ Along the way, you can use the preview button to display the graph in a more gra
 
    Screenshot of the Graph Tab in the Graph Designer, showing the graph in preview mode.
 
+
 Cards Tab
 ---------
 
-Once you have added nodes to the graph, you can switch to the Cards Tab to begin refining the user interface. As you can see, the graph tree is replaced with a "card tree", which is very similar to what users will see when they begin creating a resource using this Resource Model. 
+Once you have added nodes to the graph, you can switch to the Cards Tab to begin refining the user interface. As you can see, the graph tree is replaced with a "card tree", which is very similar to what users will see when they begin creating a resource using this Resource Model.
 
 .. figure:: images/graph-designer-card-tab.png
 
@@ -96,7 +97,7 @@ The **Map Card** enables more customization for nodes of type ``geojson-collecti
 or `source_layer
 <https://docs.mapbox.com/mapbox-gl-js/style-spec/#layer-source-layer>`_ simply type its name (no quotes).
 
-.. figure:: images/mapcard.png 
+.. figure:: images/mapcard.png
    :width: 250
 
    Screenshot of card configuration panel, highlighting the fields: "Select drawings map source" and "Select drawings map source layer".
@@ -104,7 +105,7 @@ or `source_layer
 
 Related Resources Map Card
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
-The **Related Resources Map Card** enables a more rich user experience for nodes of type ``related-resource``. Like the Map Card, map layer data representing resources can be added to a map UI such that the user can navigate geographically to select a related resource instead of paging through the dropdown list of relatable resources (however the dropdown still works normally in this card component). This card component is very useful if a user knows primarily knows the geographic context of a resource (like what neighborhood it's in) instead of its name. The steps to add such map data are the same as in the Map Card configuration panel.
+The **Related Resources Map Card** enables a more rich user experience for nodes of type ``related-resource``. Like the Map Card, map layer data representing resources can be added to a map UI such that the user can navigate geographically to select a related resource instead of paging through the dropdown list of relatable resources (however the dropdown still works normally in this card component). This card component is very useful if a user knows the geographic context of a resource (like what neighborhood it's in) instead of its name. The steps to add such map data are the same as in the Map Card configuration panel.
 
 .. figure:: images/related_resources_mapcard.png
 
