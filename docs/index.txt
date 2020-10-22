@@ -20,15 +20,23 @@ Arches Documentation
     task-management
 
 .. toctree::
-    :caption: Using Arches
+    :caption: Administering
     :maxdepth: 2
 
     designing-the-database
     ontologies-in-arches
-    creating-resources
     managing-map-layers
     rdm
+    managing-permissions
     arches-collector-manager
+
+
+.. toctree::
+    :caption: Using Arches
+    :maxdepth: 2
+
+    creating-resources
+
 
 .. toctree::
     :caption: Using Arches Collector
