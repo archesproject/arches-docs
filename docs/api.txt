@@ -2,9 +2,9 @@
 API
 ===
 
-.. THE FOLLOWING IS AN EXAMPLE 
+.. THE FOLLOWING IS AN EXAMPLE
 
-.. see https://sphinxcontrib-httpdomain.readthedocs.io/en/stable/ 
+.. see https://sphinxcontrib-httpdomain.readthedocs.io/en/stable/
 .. for api specific directives
 
 .. .. http:get:: /users/(int:user_id)/posts/(tag)
@@ -42,7 +42,7 @@ API
             }
         ]
 
-    :form example: an example formdata parameter   
+    :form example: an example formdata parameter
 
     :query sort: one of ``hit``, ``created-at``
     :query offset: offset number. default is 0
@@ -60,24 +60,24 @@ API
 General Notes
 =============
 
-Arches allows any parameters to be passed in via custom HTTP headers OR via the querystring.  
-All requests to secure services require users to pass a "Bearer" token in the authentication header 
+Arches allows any parameters to be passed in via custom HTTP headers OR via the querystring.
+All requests to secure services require users to pass a "Bearer" token in the authentication header
 
 To use a an HTTP header to pass in a parameter use the form:
-    
+
     .. code-block:: none
 
         HTTP-X-ARCHES-{upper case parameter name}.
 
 So, for example, these are equivelent requests
-    
+
     .. code-block:: none
 
         curl -H "X-ARCHES-FORMAT: json-ld" http://localhost:8000/mobileprojects
 
         curl http://localhost:8000/mobileprojects?format=json-ld
 
-If both a custom header and querystring with the same name are provided, then the querystring parameter takes precedence.  
+If both a custom header and querystring with the same name are provided, then the querystring parameter takes precedence.
 
     In the following example "html" will be used as the value for the "format" parameter.
 
@@ -85,10 +85,10 @@ If both a custom header and querystring with the same name are provided, then th
 
         curl -H "X-ARCHES-FORMAT: json-ld" http://localhost:8000/mobileprojects?format=html
 
-.. note:: Querystring parameters are case sensitive.  Behind the scenes, custom header parameters are converted to lower case querystring parameters.  
+.. note:: Querystring parameters are case sensitive.  Behind the scenes, custom header parameters are converted to lower case querystring parameters.
 
     In the following example there are 3 different parameters ("format", "FORMAT", and "Format") with 3 different values ("html", "json", and "xml") respectively
-    
+
     .. code-block:: none
 
         http://localhost:8000/mobileprojects?format=html&FORMAT=json&Format=xml
@@ -113,7 +113,7 @@ Authentication
         **Example response**:
 
         .. code-block:: http
-        
+
             HTTP/1.0 200 OK
             Content-Type: text/plain
 
@@ -134,57 +134,26 @@ Authentication
 
 Most Arches API endpoints require an OAuth access token.
 
-OAuth 2.0 is a simple and secure authentication mechanism. It allows applications to acquire an access token for Arches via a quick redirect to the Arches site. Once an application has an access token, it can access a user's resources on Arches. Authentication with OAuth can be accomplished in the following steps:
+OAuth 2.0 is a simple and secure authentication mechanism. It allows applications to acquire an access token for Arches via a quick redirect to the Arches site. Once an application has an access token, it can access a user's resources on Arches. Authentication with OAuth can be accomplished by :ref:`Registering an OAuth Application`.
 
-.. _auth_client:
-
-Registering an application with Arches
---------------------------------------
-
-To allow others to connect to your Arches instance, including Arches Collector users, you must create an OAuth client id and add it to your settings.
-
-#. In a browser go to
-
-    .. code-block:: none
-
-        http://<yourdomain:port>/o/applications/
-        
-#. Create a new application
-#. Fill out the form with a **Name** of your choosing, and set **Client type** and **Authorization grant type** as shown in the image below.
-
-    .. image:: images/oauth-create-client.png
-
-#. Copy the **Client id** and submit the form (you can access this id at any time).
-#. In your Arches project's ``settings.py`` or ``settings_local.py`` file, set or add this variable
-
-    .. code-block:: none
-    
-        MOBILE_OAUTH_CLIENT_ID = "<your new Client id>"
-#. That's all! Arches Collector users will now be able to connect to your Arches instance using their own credentials.
-
-.. important::
-    
-    + Only make one application, though you are technically allowed to make more.
-    + An application is "owned" by whichever user created it, and will not be visible to other users.
-        
 .. _auth:
 
 .. http:post:: /o/token
 
     gets an OAuth token given a username, password, and client id
 
-    .. note:: You should only make this call once and store the returned token securely. You should not make this call per request or at any other high-frequency interval. 
+    .. note:: You should only make this call once and store the returned token securely. You should not make this call per request or at any other high-frequency interval.
 
-        This token is to be used with clients registered with the "Resource Owner Password Credentials Grant" type 
-        see :ref:`Registering an application with Arches <auth_client>` for more information on registering an application 
-        
+        This token is to be used with clients registered with the "Resource Owner Password Credentials Grant" type
+        see :ref:`Registering an OAuth Application` for more information on registering an application
+
         For additional information see https://tools.ietf.org/html/rfc6749#section-4.3
 
 
     :form username: a users username (or email)
     :form password: a users password
     :form grant_type: "password"
-    :form client_id: the registered applications client id, see :ref:`Registering an application with Arches <auth_client>`
+    :form client_id: the registered applications client id, see :ref:`Registering an OAuth Application`
     :statuscode 401: there's no user or the user has been deactivated, or the client id is invalid
 
 
@@ -198,15 +167,15 @@ To allow others to connect to your Arches instance, including Arches Collector u
     **Example response**:
 
     .. code-block:: http
-    
+
         HTTP/1.1 200 OK
         Content-Type: application/json
 
         {
-            "access_token": "TS3pE2bEXRCAkRls4IGKCVVa0Zv6FE", 
-            "token_type": "Bearer", 
-            "expires_in": 36000, 
-            "refresh_token": "y3rzXKf8dXdb25ayMMVIligTkqEKr0", 
+            "access_token": "TS3pE2bEXRCAkRls4IGKCVVa0Zv6FE",
+            "token_type": "Bearer",
+            "expires_in": 36000,
+            "refresh_token": "y3rzXKf8dXdb25ayMMVIligTkqEKr0",
             "scope": "read write"
         }
 
@@ -217,13 +186,13 @@ To allow others to connect to your Arches instance, including Arches Collector u
 
         HTTP/1.1 401 Unauthorized
         Content-Type: application/json
-        
+
 
         {"error_description": "Invalid credentials given.", "error": "invalid_grant"}
 
 
 
-    returned when an invalid client id is supplied, or the registerd client is not "public" or the 
+    returned when an invalid client id is supplied, or the registerd client is not "public" or the
     grant type used to register the client isn't "Resource Owner Password Credentials Grant"
 
     .. code-block:: http
@@ -246,7 +215,7 @@ Concepts
     :query includesubconcepts: option to include sub concepts in the return
     :query includeparentconcepts: option to include parent concepts in the return
     :query includerelatedconcepts: option to include related concepts in the return
-    :query depthlimit: limit the number of subconcept layers to return if includesubconcepts is true 
+    :query depthlimit: limit the number of subconcept layers to return if includesubconcepts is true
     :query lang: show suboncept results with specified language first
     :reqheader Authorization: oAuth token for user authentication, see :ref:`/o/token <auth>`
 
@@ -262,7 +231,7 @@ Concepts
     **Example json response**:
 
     .. code-block:: http
-    
+
         HTTP/1.0 200 OK
         Content-Type: application/json
 
@@ -379,7 +348,7 @@ Resources
     **Example response**:
 
     .. code-block:: http
-    
+
         HTTP/1.0 200 OK
         Content-Type: application/json
 
@@ -428,7 +397,7 @@ Resources
     **Example json response**:
 
     .. code-block:: http
-    
+
         HTTP/1.0 200 OK
         Content-Type: application/json
 
@@ -559,7 +528,7 @@ Resources
     **Example json response**:
 
     .. code-block:: http
-    
+
         HTTP/1.0 200 OK
         Content-Type: application/json
 
@@ -620,7 +589,7 @@ Resources
     **Example response**:
 
     .. code-block:: http
-    
+
         HTTP/1.0 200 OK
 
 
@@ -642,7 +611,7 @@ Activity Stream
     **Example response**:
 
     .. code-block:: http
-    
+
         HTTP/1.0 200 OK
         Content-Type: application/json
 
@@ -664,7 +633,7 @@ Activity Stream
 
 .. http:get:: /history/{int: page number}
 
-    gets a single 'OrderedCollectionPage' JSON-LD representation for a given page number 
+    gets a single 'OrderedCollectionPage' JSON-LD representation for a given page number
 
     :reqheader Authorization: OAuth token for user authentication, see :ref:`/o/token <auth>`
 
@@ -679,7 +648,7 @@ Activity Stream
     **Example json response**:
 
     .. code-block:: http
-    
+
         HTTP/1.0 200 OK
         Content-Type: application/json
 
@@ -798,7 +767,7 @@ Activity Stream
 Mobile Projects
 ===============
 
-.. http:get:: /mobileprojects  
+.. http:get:: /mobileprojects
 
     get a list of mobile data collection projects that a user has been invited to participate in
 
@@ -815,32 +784,32 @@ Mobile Projects
     **Example response**:
 
     .. code-block:: http
-    
+
         HTTP/1.0 200 OK
         Content-Type: application/json
 
         [
             {
-                "active": true, 
-                "bounds": "MULTIPOLYGON EMPTY", 
-                "cards": [], 
-                "createdby_id": 1, 
+                "active": true,
+                "bounds": "MULTIPOLYGON EMPTY",
+                "cards": [],
+                "createdby_id": 1,
                 "datadownloadconfig": {
-                    "count": 1000, 
-                    "custom": null, 
-                    "download": false, 
+                    "count": 1000,
+                    "custom": null,
+                    "download": false,
                     "resources": []
-                }, 
-                "description": "A description of this project.", 
-                "enddate": "2018-03-16", 
+                },
+                "description": "A description of this project.",
+                "enddate": "2018-03-16",
                 "groups": [
                     6
-                ], 
-                "id": "e3d95999-2323-11e8-894b-14109fd34195", 
-                "lasteditedby_id": 1, 
-                "name": "Forbidden Project", 
-                "startdate": "2018-03-04", 
-                "tilecache": "", 
+                ],
+                "id": "e3d95999-2323-11e8-894b-14109fd34195",
+                "lasteditedby_id": 1,
+                "name": "Forbidden Project",
+                "startdate": "2018-03-04",
+                "tilecache": "",
                 "users": [
                     1
                 ]
@@ -857,11 +826,11 @@ GeoJSON
 .. http:get:: /geojson
 
     returns a GeoJSON representation of resource instance data; this will include metadata properties when using paging for "_page" (number) and "_lastPage" (boolean).  Returned features will include integer ids that are only assured to be unique per request.
-    
+
     NOTE: when not using the "use_uuid_names" parameter, field names will use the export field name provided for a given node (via the Graph Designer).
     If the export field name is not defined, the API will attempt to create a suitable field name from the node name.
     Property names that clash as a result of the above, or shortening via "field_name_length" will have their values joined together.
-    
+
     WARNING: including primary names has a big impact on performance and is best defered to an additional request
 
     :query resourceid: optional comma delimited list of resource instance UUIDs to filter feature data on
@@ -889,13 +858,13 @@ GeoJSON
     **Example response**:
 
     .. code-block:: http
-    
+
         HTTP/1.0 200 OK
         Content-Type: application/json
 
         {
             "_lastPage": false,
-            "_page": 1, 
+            "_page": 1,
             "features": [{
                 "geometry": {
                     "coordinates": [

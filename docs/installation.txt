@@ -27,7 +27,7 @@ On some linux distributions, if the python version is less than 3.7, entering th
 3. Activate the virtual environment
 -----------------------------------
 
-Note that when calling ``source`` to activate your ``ENV``, you'll likely need to type the relative path to it. 
+Note that when calling ``source`` to activate your ``ENV``, you'll likely need to type the relative path to it.
 
 Linux and macOS::
 
@@ -104,7 +104,7 @@ Now that you have Arches installed and a Project created, you are ready to begin
 
 * Modify some :doc:`Initial Configuration </initial-configuration>` settings
 
-* In order to allow API access to your instance, to support the use of the Arches Collector mobile app, you must :ref:`register an Arches application <Registering an application with Arches>`.
+* In order to allow API access to your instance, to support the use of the Arches Collector mobile app, you must :ref:`register an Arches application <Registering an OAuth Application>`.
 
 * Read more about :doc:`Projects and Packages </projects-and-packages>`
 

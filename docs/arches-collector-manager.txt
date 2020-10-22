@@ -15,7 +15,7 @@ Arches Collector Manager. Each Project is a discrete collection effort comprisin
 + A set of existing resources from your database, to which users may add more data or just use as reference (based on card-level permissions)
 + An optional MBTiles file to provide a basemap for users working outside of wifi/cell network range
 
-To facilitate a wide array of simultaneous data collection efforts, an administator can create 
+To facilitate a wide array of simultaneous data collection efforts, an administator can create
 multiple projects, all targeting different users and a different type of data collection.
 
 .. seealso::
@@ -28,7 +28,7 @@ Arches Collector Manager Overview
     To access the Arches Collector Manager, you must be in the Mobile Project Administrator group
     or have superuser status.
 
-To get to the Arches Collector Manager, use the |acm-icon| icon in the left-hand nav bar, or 
+To get to the Arches Collector Manager, use the |acm-icon| icon in the left-hand nav bar, or
 go directly to ``/collector_manager``. Before you have created any projects, the interface
 will look like this:
 
@@ -42,7 +42,7 @@ with Projects taking the place of Resource Models:
 Creating Projects in the Arches Collector Manager
 =================================================
 
-Use |new-project-btn| to begin creating a new project, and you'll be brought to the summary 
+Use |new-project-btn| to begin creating a new project, and you'll be brought to the summary
 page:
 
 .. image::  images/start-new-project.jpg
@@ -59,15 +59,15 @@ Requirements have been met. You are now ready to activate the Project.
     Once a Project has been activated for the first time, its parameters are saved to an intermediate
     database, and they cannot be changed. Therefore, it's wise to double-check everything before the
     initial activation.
-    
+
 .. image:: images/activate-mobile-project.gif
 
 Great! Now that you have activated your project, any data collection user that you assigned to it
 will be able to download it through the Arches Collector app and begin collecting data.
 
 .. important::
-    If Arches Collector users are unable to connect to your Arches instance, you may need to
-    :ref:`register an Arches application <Registering an application with Arches>`.
+    Before continuing with Arches Collector make sure you have followed the steps in
+    :ref:`Registering an OAuth Application`.
 
 ----
 
@@ -82,10 +82,10 @@ Creating an Offline Basemap
 
 Projects allow for the inclusion of an `MBTiles <https://docs.mapbox.com/help/glossary/mbtiles/>`_ file to serve as a basemap while data collectors are outide of wifi/cell network range. This file will be downloaded and stored on an Arches Collector users' device *the first time that "offline maps" are activated* in a project, not upon the initial download. Therefore, users should activate this map in the project before going into the field.
 
-You can also obtain high quality and inexpensive tiles from sites such as https://openmaptiles.com. To create an MBTiles file with your own geospatial data, you can use a free account at `Mapbox.com <https://mapbox.com>`_, or desktop software like `TileMill <https://tilemill-project.github.io/tilemill/>`_. 
+You can also obtain high quality and inexpensive tiles from sites such as https://openmaptiles.com. To create an MBTiles file with your own geospatial data, you can use a free account at `Mapbox.com <https://mapbox.com>`_, or desktop software like `TileMill <https://tilemill-project.github.io/tilemill/>`_.
 
 .. note::
-    Large files will require longer downloads and more storage space on mobile devices. 
+    Large files will require longer downloads and more storage space on mobile devices.
 
 .. |acm-icon| image:: images/acm-icon.jpg
   :align: middle
