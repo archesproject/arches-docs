@@ -1,6 +1,10 @@
 ########################################################################
-Creating New Functions, Widgets, Card Components, DataTypes, and Plugins
+Creating Custom Components
 ########################################################################
+
+***********************
+About Custom Components
+***********************
 
 `Functions`_, `Widgets`_, `Card Components`_, `DataTypes`_, and `Plugins` have
 overlapping functionality and architecture. These constructs are used
@@ -708,8 +712,8 @@ Plugins
 *******
 
 Plugins allow a developer to create an independent page in Arches that is accessible from the main navigation menu.
-For example, you may need a customized way of visulize your resource data. A plugin would enable you to design such an interface. 
-Plugins, like widgets and card components rely only on front-end code. Ajax queries, generally calls to the API, must be used to access any server side data. 
+For example, you may need a customized way of visualize your resource data. A plugin would enable you to design such an interface.
+Plugins, like widgets and card components rely only on front-end code. Ajax queries, generally calls to the API, must be used to access any server side data.
 
 Registering your Plugin
 ===============================
@@ -767,3 +771,9 @@ Arches with:
 .. code-block:: bash
 
     python manage.py plugin update --source /Documents/projects/mynewproject/mynewproject/plugins/sample-plugin.json
+
+**************
+Search Filters
+**************
+
+https://github.com/archesproject/arches-docs/issues/222
