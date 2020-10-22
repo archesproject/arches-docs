@@ -55,6 +55,7 @@ Arches Documentation
     integrating-arches-with-arcgis
     settings-beyond-the-ui
     task-management
+    managing-and-hosting-iiif
     using-arches-offline
     adding-javascript-dependencies
 

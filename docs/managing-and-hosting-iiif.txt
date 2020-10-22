@@ -9,21 +9,18 @@ Arches is configured to use Cantaloupe if you want to host images made available
 Setting Up Cantaloupe
 =====================
 
-1. Follow [these instructions](https://iiif.github.io/training/intro-to-iiif/INSTALLING_CANTALOUPE.html) to download and configure Cantaloupe anywhere on your system, then proceed to run it (using the ``java`` command).
+1. Follow `these instructions <https://iiif.github.io/training/intro-to-iiif/INSTALLING_CANTALOUPE.html>`_ to download and configure Cantaloupe anywhere on your system, then proceed to run it (using the ``java`` command).
 
 2. (For local hosting) In a browser, navigate to the admin url (see link above) and click "Resolver" in the left-hand panel, then click "FilesystemResolver". "Lookup Strategy" should be set to "Basic". Set "Path Prefix" to the absolute path to the "cantaloupe" directory in your project. For example on Mac, it might be: "/Users/myusername/Projects/arches-for-science-prj/afs/cantaloupe/".
 
 3. Click "Save".
 
-
 .. note:: Remote hosting of Cantaloupe or the manifest.json files is still in development.
-
-
 
 Creating IIIF Manifests
 =======================
 
-A IIIF manifest will be created when triggered by the arches function called "File to IIIF". 
+A IIIF manifest will be created when triggered by the arches function called "File to IIIF".
 
 1. Navigate to the graph designer and select the resource model you wish to associate with the source imagery linked to a IIIF manifest. In the arches-for-science-prj example, this might be the "Digital Resource" Model.
 
