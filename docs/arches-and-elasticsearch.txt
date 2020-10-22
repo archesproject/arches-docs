@@ -5,7 +5,7 @@ Arches and Elasticsearch
 Installing and Running Elasticsearch
 ====================================
 
-The quickest way to install Elasticsearch is to download and unzip one of the `compressed installers 
+The quickest way to install Elasticsearch is to download and unzip one of the `compressed installers
 for the proper version <https://www.elastic.co/downloads/past-releases/elasticsearch-7-4-1>`_.
 
 To start the service from the command line, use
@@ -36,6 +36,10 @@ For more information, please visit the official `Elasticsearch documentation <ht
 .. important::
    1. By default, Elasticsearch uses 2GB of memory (RAM). For basic development purposes, we have found it to run well enough on 1GB. Use ``ES_JAVA_OPTS="-Xms1g -Xmx1g" ./bin/elasticsearch -d`` to set the memory allotment on startup (`read more <https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html>`_). You can use the same command to give **more** memory to Elasticsearch in a production setting.
 
+Using the Kibana Dashboard
+==========================
+
+https://github.com/archesproject/arches-docs/issues/217
 
 Reindexing The Database
 =======================
@@ -97,7 +101,7 @@ node and the indices will be replicated between the two.
 
 Nothing about your project's ``settings.py`` should change; Arches need only connect
 to the original Elasticsearch instance as before. However, you'll see now in the console output
-that the cluster health will be ``[GREEN]`` when you have two nodes running (it's ``[YELLOW]`` 
+that the cluster health will be ``[GREEN]`` when you have two nodes running (it's ``[YELLOW]``
 if you only have one).
 
 .. seealso::
