@@ -45,12 +45,18 @@ Arches Documentation
     command-line-reference
     creating-a-development-environment
     functions-widgets-datatypes
+    creating-resource-reports
+    creating-workflows
     creating-new-map-layers
+    localizing-arches
     data-model
     v3-to-v4-migration
     import-export
+    integrating-arches-with-arcgis
     settings-beyond-the-ui
     task-management
+    using-arches-offline
+    adding-javascript-dependencies
 
 .. toctree::
     :caption: Running Arches in Production
