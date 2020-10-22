@@ -10,13 +10,19 @@ Arches Documentation
     release-process
 
 .. toctree::
-    :caption: Installation and Configuration
+    :caption: Installing
     :maxdepth: 2
 
     requirements-and-dependencies
     installation
     initial-configuration
     projects-and-packages
+
+.. toctree::
+    :caption: Configuring
+    :maxdepth: 2
+
+    configuring-arches
 
 .. toctree::
     :caption: Using Arches
@@ -39,7 +45,6 @@ Arches Documentation
     :caption: Developing With Arches
     :maxdepth: 2
 
-    additional-configuration
     arches-and-elasticsearch
     api
     command-line-reference

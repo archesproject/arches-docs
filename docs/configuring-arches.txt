@@ -1,9 +1,6 @@
-########################
-Additional Configuration
-########################
-
+###################
 Password Validators
-===================
+###################
 
 By default, Arches requires that passwords meet the following criteria:
 
@@ -48,8 +45,9 @@ To change the **minimum length of a password**, change the `min_length`:code: pr
 
 Advanced users can override or add new validators by creating their own validation classes as explained in `Django's password validation documentation <https://docs.djangoproject.com/en/1.11/topics/auth/passwords/#module-django.contrib.auth.password_validation/>`_.
 
+########################
 Time Wheel Configuration
-========================
+########################
 
 By default Arches will bin your data in the search page time wheel based on your data's temporal distribution. This enables Arches to bin your data efficiently. If your data spans over 1000 years, the bins will be by millennium, half-millennium and century. If your data spans less than a thousand years, your data will be binned by millennium, century, and decade.
 
