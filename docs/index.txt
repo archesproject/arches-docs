@@ -59,7 +59,6 @@ Arches Documentation
     creating-a-development-environment
     functions-widgets-datatypes
     creating-resource-reports
-    creating-workflows
     creating-new-map-layers
     localizing-arches
     data-model
