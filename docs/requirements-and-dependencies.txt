@@ -45,9 +45,10 @@ read the notes below. Where necessary, OS-specific installation notes are includ
 
 If you plan to use the Arches Collector Mobile app, you must install CouchDB.
 
-:CouchDB 2.x: - Installation: https://docs.couchdb.org/en/stable/install/index.html
+:CouchDB 2.x:
+    - Please see :ref:`Arches Collector Checklist` for detailed installation notes.
+    - `Official documentation <https://docs.couchdb.org/en/stable/>`_
     - CouchDB is used to sync mobile data collection projects with your main database.
-    - Arches will connect to CouchDB with default credentials. However, in production you must make a new CouchDB admin after installation, and then update ``COUCHDB_URL = 'http://admin:admin@localhost:5984`` in ``settings.py`` accordingly.
 
 To support long-running task management, like large user downloads, you must install a Celery broker like RabbitMQ or Redis:
 
