@@ -19,8 +19,10 @@ To begin development or make a test installation of Arches, you will need the fo
 Software Dependencies
 =====================
 
-Full dependency installation on Ubuntu 18.04: `ubuntu_setup.sh <https://raw.githubusercontent.com/archesproject/arches/master/arches/install/ubuntu_setup.sh>`_
-Note that for some linux distributions, you may have to call ``bash ubuntu.sh`` as the shell version declared in the ``.sh`` file may be ignored by your OS.
+Full dependency installation on Ubuntu 18.04, note :ref:`extra CouchDB instructions <Arches Collector Checklist>`::
+
+    wget https://raw.githubusercontent.com/archesproject/arches/stable/5.1.x/arches/install/ubuntu_setup.sh>`_
+    source ./ubuntu_setup.sh
 
 To familiarize yourself with the components and learn some important details, please
 read the notes below. Where necessary, OS-specific installation notes are included as well.
