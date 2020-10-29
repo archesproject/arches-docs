@@ -2,15 +2,16 @@
 Managing Permissions
 ######################
 
+Permissions allow you to tailor the user experience by letting you control which data a user or group can view, edit, or delete.
+
 User Permissions in the Django UI
 ---------------------------------
+https://github.com/archesproject/arches-docs/issues/98
 
-
-Resource Instance permissions
+Resource Model permissions
 -----------------------------
-See :ref:`Permissions Tab` for more information.
-
+Permissions are applied to each card and by default, the guest user (aka anonymous user) has read privileges to all data. If you have data you do not want to share with all users, follow these directions when designing your database: :ref:`Permissions Tab`.
 
 Resource Instance Permissions
 -----------------------------
-New for 5.1
+https://github.com/archesproject/arches-docs/issues/218
