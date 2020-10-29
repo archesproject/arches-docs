@@ -1,13 +1,13 @@
-#####################
-Projects and Packages
-#####################
+######################
+Understanding Projects
+######################
 
-Projects
---------
+Arches Projects facilitate all of the customizations that you will need to make one installation of Arches different from the next. You can update HTML or CSS to modify web page branding, and add functions, datatypes, and widgets to introduce new functionality. A project sits outside of your virtual environment, and can thus be transferred to any other system where Arches is installed.
 
-Arches Projects facilitate all of the customizations that you will need to make one installation of Arches different from the next. You can update html to modify web page branding, and add functions, datatypes, and widgets to introduce new functionality. A project sits outside of your virtual environment, and can thus be transferred to any other system where Arches is installed.
+To create a project, see :ref:`Creating a new Arches Project` in the installation guide.
 
-To create a project, see :ref:`step 5 <5. Create a new Arches Project>` of the installation guide.
+Project Structure
+-----------------
 
 The general structure of a new Arches project is:::
 
@@ -40,20 +40,21 @@ datatypes, functions, and widgets
 
 These directories will store the custom datatypes, functions, and widgets that you can create for the project. Developers interested in pursuing these customizations should start with `this customization documentation <https://github.com/archesproject/arches/wiki/Creating-New-Functions%2C-DataTypes%2C-and-Widgets>`_.
 
-Packages
---------
+######################
+Understanding Packages
+######################
 
-A package is an external collection of arches data (resource models, business data, concepts, collections) and customization files (widgets, datatypes, functions, system settings) that you can load into an arches project.
+A package is an external collection of Arches data (resource models, business data, concepts, collections) and customization files (widgets, datatypes, functions, system settings) that you can load into an Arches project.
 
 
 Loading a Package
-^^^^^^^^^^^^^^^^^
+-----------------
 
 To load a package simply run the load_package command using your \*project's manage.py file:
 
 .. code-block:: bash
 
-    python manage.py packages -o load_package -s https://github.com/package/archive/branch.zip -db true
+    python manage.py packages -o load_package -s https://github.com/package/archive/branch.zip -db
 
 
 -db    `true` to run setup_db to rebuild your database. default = 'false'
@@ -63,6 +64,7 @@ To load a package simply run the load_package command using your \*project's man
 -o     operation name
 -y     accept defaults (will overwrite existing branches and system settings with those in the package)
 -bulk  uses `bulk_save` methods which run faster but don't call an object's regular `save` method
+-dev	 loads three test users
 
 If you do not pass the `-db True` to the load_package command, your database will not be recreated. If you already have resource models and branches with the same id as those you are importing, you will be prompted to confirm whether you would like to keep or overwrite each model or branch.
 
@@ -104,7 +106,7 @@ If you are a developer running the latest arches you probably want to create a p
 
 
 Creating a New Package
-^^^^^^^^^^^^^^^^^^^^^^
+----------------------
 
 If you want to create additional projects with the same data or share your data with others that need to create similar projects, you probably want to create a package.
 
@@ -171,7 +173,7 @@ The `create_package` command will help you get started by generating the folder 
     Once you've added the necessary files to your package, simply compress it as a zip file or push it to a github repository and it's ready to be loaded.
 
 Configuring a Package
-^^^^^^^^^^^^^^^^^^^^^
+---------------------
 
 Two different files are used to define custom settings for your package.
 
@@ -199,7 +201,7 @@ Two different files are used to define custom settings for your package.
 
 
 Updating an Existing Package
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------
 
 If you make changes to the resource models in your project you may want to update your package with those changes. You can do that with the `update_package` command:
 
