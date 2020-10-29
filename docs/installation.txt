@@ -1,125 +1,178 @@
-﻿#################
-Installing Arches
-#################
+﻿######################
+Installing Core Arches
+######################
 
-Installation
-============
+.. seealso::
 
-Once you have all the dependencies taken care of (and Elasticsearch is running) you are ready to install Arches.
+    If you plan to extend or contribute to Arches, please see :ref:`Creating a Development Environment`.
 
-.. note:: If you are a developer hoping to contribute to the Arches project, please check out :ref:`Creating a Development Environment`.
+.. seealso::
 
-1. Create and enter a new directory called Projects
----------------------------------------------------
+    We have an in-progress `Docker install <https://github.com/archesproject/arches/tree/master/docker>`_, and would love help improving it.
 
-.. code:: bash
+Create a Virtual Environment
+----------------------------
 
-    mkdir Projects && cd Projects
+.. sidebar:: Virtual Environment Reference
 
-2. Create a virtual environment called ENV
-------------------------------------------
-On some linux distributions, if the python version is less than 3.7, entering the following command may yield an error but it should alert you to any depdencies you may need to install, after which you'll be able to run this command.
+    + `Python documentation <https://docs.python.org/3.7/tutorial/venv.html>`_
 
-.. code:: bash
+You need a **Python 3.7+** virtual environment. :ref:`Skip ahead <Install Arches with pip>` if you have already created and activated one. If you are unfamiliar with
+virtual environments, we recommend a look at the `Python documentation <https://docs.python.org/3.7/tutorial/venv.html>`_. Use the commands below for a quick start.
 
-    python -m venv /path/to/new/ENV
+**Create a virtual environment (will be a new directory called ENV)**::
 
-3. Activate the virtual environment
------------------------------------
+    python3 -m venv ENV
 
-Note that when calling ``source`` to activate your ``ENV``, you'll likely need to type the relative path to it.
+.. note::
 
-Linux and macOS::
+  On some linux distributions, if the python version is less than 3.7, entering the following command may yield an error but it should alert you to any dependencies you may need to install, after which you'll be able to run this command.
+
+**Activate the virtual environment**
+
+The following are relative paths to an ``activate`` script within ENV.
+
+*Linux and macOS*::
 
     source ENV/bin/activate
 
-Windows::
+*Windows*::
 
-    ENV\Scripts\activate
+    ENV\Scripts\activate.bat``
 
-When you activate your virtual environment, your command prompt will be prefixed with ``(ENV)``. If you need to deactivate it for any reason, run ``deactivate``.
+.. note::
 
-4. Install Arches into your virtual environment
------------------------------------------------
+  After you activate your virtual environment, your command prompt will be prefixed with ``(ENV)``. From here on the documentation will assume you have your virtual environment activated. Run ``deactivate`` if you need to deactivate the virtual environment.
+
+**Test the Python version in ENV**::
+
+    python
+
+This will run the Python interpreter and tell you what version is in use. If you don't
+see at least 3.7, check your original Python installation, delete the entire ``ENV``
+directory, and create a new virtual environment. Use ``exit()`` or ``ctrl+C`` to
+leave the interpreter.
+
+With your virtual environment activated, you are ready to continue.
+
+Install Arches with pip
+------------------------
 
 Use the following to get the latest stable release of Arches::
 
     pip install arches
 
-5. Create a new Arches Project
-------------------------------
-Now that Arches is installed, you can make a Project. This is where you will make all of the customizations and branding that will make one installation of Arches different from the next. The name of your project should only be lowercase, and should use underscores instead of spaces or hyphens. The example below uses `my_project`. You can add ``--directory path/to/dir`` to change the directory your new project will be created in.
+:ref:`Common Errors`
 
-Linux and macOS::
+#############################
+Creating a New Arches Project
+#############################
+
+A Project holds branding and customizations that make one installation of Arches different from the next. The name of your project must be **lowercase** and use **underscores** instead of spaces or hyphens. The example below uses ``my_project``.
+
+Create a Project
+----------------
+
+*Linux and macOS*::
 
     arches-project create my_project
 
-Windows::
+*Windows*::
 
     python ENV\Scripts\arches-project create my_project
 
-.. note:: At this level, "projects" are completely different from the mobile data collection "projects" that are mentioned elsewhere in this documentation.
+:ref:`Common Errors`
 
-6. Update settings_local.py
----------------------------
+.. note::
 
-Before you continue, you may need to open ``my_project\my_project\settings_local.py`` and change some environment-specific settings.
+    You can add ``--directory path/to/dir`` to change the directory your new project will be created in.
 
-* Depending on your Postgres/PostGIS installation, you may need to uncomment the DATABASES section and change the username and password, as well as the name of your PostGIS template database. If you will have multiple Arches projects using the same Postgres server, make sure to change the database name here as well.
+.. warning::
 
-* On Windows, you must specify the path to your GDAL library. Add the following line. Be sure to adjust the path as necessary for your GDAL installation, and note the *forward* slashes::
+    On Windows, open ``my_project\my_project\settings_local.py`` and add the following line::
 
         GDAL_LIBRARY_PATH = "C:/OSGeo4W64/bin/gdal201.dll"
 
-* See Arches System Settings for a full rundown of how settings are handled in Arches.
+    Be sure to adjust the path as necessary for your GDAL installation, and note the *forward* slashes.
 
-7. Setup the database
----------------------
+Setup the Database
+-------------------
 
-To begin working with your Project, first enter it::
+First, enter the project directory::
 
     cd my_project
 
-and then (with ElasticSearch running) run::
+and then run::
 
     python manage.py setup_db
 
-.. note:: You may be prompted to enter a password for the ``postgres`` user, depending on your OS and how you installed Postgres/Postgis. Generally, our installation scripts set this password to ``postgis``.
+.. note:: You may be prompted to enter a password for the ``postgres`` user. Generally, our installation scripts set this password to ``postgis``, however you may have set a different password during your own Postgres/PostGIS installation.
 
-8. Run the development server
+:ref:`Common Errors`
+
+View the Project in a Browser
 -----------------------------
 
-To confirm things are working, run::
+To view your project, run the Django development server::
 
     python manage.py runserver
 
-and navigate to ``localhost:8000`` in a browser.
+and navigate to ``localhost:8000`` in a browser. Use ``ctrl+C`` to stop the server.
 
-The default login credentials are 'admin' for both username and password. To change this password and create new users, navigate to ``localhost:8000/admin``.
+Configure the Map Settings
+--------------------------
 
-Next steps...
--------------
+The first thing everyone wants to do is look at the map, so let's set this up first.
 
-Now that you have Arches installed and a Project created, you are ready to begin.
+1. Go to Mapbox.com and create a free account.
+2. Find your default API key (starts with ``pk.``) and copy it.
+3. Now go to ``localhost:8000/settings``.
+4. Login with the default credentials: **username**: ``admin`` **password**: ``admin``
+5. Find the **Default Map Settings**, and enter your *Mapbox API* Key there.
+6. Feel free to use the ``?`` in the top-right corner of the page to learn about all of the other settings, and change any that you like (heed warning below).
+7. Save the settings.
+8. Navigate to ``localhost:8000/search`` to make sure the basemap appears.
 
-* Modify some :doc:`Initial Configuration </initial-configuration>` settings
+.. note::
 
-* In order to allow API access to your instance, to support the use of the Arches Collector mobile app, you must :ref:`register an Arches application <Registering an OAuth Application>`.
+    We recommend exporting these settings by running ``python manage.py packages -o save_system_settings``.
+    This will create a JSON file in your project, which will be used if you ever need
+    to setup your database again.
+
+.. warning::
+
+    If you create a new **Project Extent**, you should also update the **Search Results Grid** settings,
+    otherwise you could get a JSON error in the search page. To be on the safe side, choose
+    a high *Hexagon Size* combined with a low *Hexagon Grid Precision*.
+
+Load a Package
+--------------
+
+An Arches "package" is an external container for database definitions (graphs, concept schemes),
+custom extensions (including functions, widgets, datatypes) and even data (resources).
+Packages are installed into projects, and can be used to share schema between installations.
+
+To get started, load this sample package::
+
+    python manage.py packages -o load_package -s https://github.com/archesproject/arches-example-pkg/archive/master.zip -db
+
+Go to ``localhost:8000/graph`` to see 6 Resource Models that you can now use. You can also create new Resource models from scratch.
+
+Go to ``localhost:8000/resource`` to begin creating resources based on one of these resource models.
+
+Go to ``localhost:8000/search`` to find and inspect resources that you have created.
+
+You can add ``-dev`` to the load_package command to create a few test user accounts.
+
+What Next?
+----------
+
+* To use the Arches Collector mobile app with your project, see :ref:`Arches Collector Checklist`
 
 * Read more about :doc:`Projects and Packages </projects-and-packages>`
 
-* For a quick start that will create an example database schema in your new Arches project (and allow you to begin recording data right away), you can **load a sample package** with the following command
-
-    .. code:: bash
-
-        python manage.py packages -o load_package -s https://github.com/archesproject/arches-example-pkg/archive/master.zip -db true
-
-    This example package has a full set of Resource Models, Branches, and Concepts that are generally based on the original :ref:`Arches HIP Contents`.
-
-    .. note:: If you get an "invalid package source" error, please download the zipfile (use the url in the command) and run the same command pointing to the location of the downloaded zipfile.
-
-General Troubleshooting
-=======================
+Common Errors
+=============
 
 * On macOS, If you get this error
 
