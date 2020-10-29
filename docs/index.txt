@@ -35,13 +35,13 @@ Arches Documentation
     managing-permissions
     arches-collector-manager
 
-
 .. toctree::
     :caption: Using Arches
     :maxdepth: 2
 
     creating-resources
-
+    deleting-resources
+    searching
 
 .. toctree::
     :caption: Using Arches Collector

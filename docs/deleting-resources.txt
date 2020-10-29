@@ -1,0 +1,5 @@
+##################
+Deleting Resources
+##################
+
+https://github.com/archesproject/arches-docs/issues/224
