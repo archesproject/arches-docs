@@ -13,3 +13,11 @@
 .admonition-arches-hip-users .admonition-title {
     background-color: #C4161C !important;
 }
+
+.seealso {
+  background: #deffb5 !important;
+}
+
+.seealso .admonition-title {
+  background: #74a833 !important;
+}
