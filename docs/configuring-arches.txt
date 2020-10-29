@@ -134,3 +134,69 @@ The CACHE_BY_USER keys are user names and their corresponding value is the durat
 For example, if I wanted to cache the time wheel for the admin user for 5 minutes, I would change the CACHE_BY_USER setting to::
 
     `CACHE_BY_USER = {'anonymous': 3600  * 24, 'admin': 300}`
+
+##########################
+Arches Collector Checklist
+##########################
+
+The following steps must be completed to enable an Arches Collector connection
+with your Arches instance.
+
+1. Install CouchDB
+
+    Arches uses CouchDB 2.x, though the current version of CouchDB is 3.x. If
+    you already have 3.x installed, use ``sudo apt-get --purge remove couchdb`` to start
+    over. Then:
+
+    .. code-block::
+
+        # only if you haven't already done this
+        wget --quiet -O - https://couchdb.apache.org/repo/bintray-pubkey.asc | sudo apt-key add -
+        sudo add-apt-repository "deb https://apache.bintray.com/couchdb-deb $(lsb_release -sc) main"
+        sudo apt-get update
+
+        # necessary to find the older release
+        sudo apt-cache policy couchdb
+        sudo apt-get update
+
+    this will list all available versions — make note of the latest version 2
+    and then install it:
+
+    .. code-block::
+
+        sudo apt-get install couchdb=2.3.1~bionic
+
+    For the quickest installation configuration, choose `standalone`, `127.0.0.1`, and pick
+    your password.
+
+    Test the installation with ``curl http://admin:[your password]@127.0.0.1:5984``,
+    the response should contain the correct version number.
+
+    Finally, add this line to ``settings.py`` or ``settings_local.py``:
+
+    .. code-block::
+
+        COUCHDB_URL = 'http://admin:[your password]@127.0.0.1:5984'
+
+    At this point you should be ready to move on, but see the
+    `official CouchDB setup documentation <https://docs.couchdb.org/en/stable/setup/index.html>`_
+    for more information.
+
+2. :ref:`Registering an OAuth Application`
+
+    This includes copying the Client ID and placing it in your ``settings.py`` or ``settings_local.py`` file.
+
+    .. code-block::
+
+        MOBILE_OAUTH_CLIENT_ID = "<your new Client id>"
+
+3. Update your Apache config file
+
+    You must add the following line to your VirtualHost:
+
+    .. code-block::
+
+        WSGIPassAuthorization on
+
+Restart Apache for all of these steps to take effect. You should now be able to
+use the :ref:`Arches Collector Manager` to create new projects.
