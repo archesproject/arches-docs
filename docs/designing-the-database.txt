@@ -83,7 +83,9 @@ The UI of a card can be configured using a card component. Note that when you cl
 
     Screenshot of the card manager user interface, highlighting "Card Type" dropdown in the top-right corner.
 
-The "CSS Classes" enables a user to enter space-separated class names (e.g. card-empty-class card-incomplete-class) that correspond to class names defined by a developer in ``package.css``. While card components can be created from scratch, arches (v5 on) comes with a few out of the box:
+The "CSS Classes" input box enables a user to enter space-separated class names (e.g. ``card-empty-class`` ``card-incomplete-class``) that correspond to class names defined by a developer in ``package.css``.
+
+While card components can be created from scratch, Arches (v5 on) comes with a few out of the box:
 
 Grouping Card
 ^^^^^^^^^^^^^
