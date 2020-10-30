@@ -21,6 +21,7 @@ Arches Documentation
     :caption: Configuring
     :maxdepth: 2
 
+    arches-system-settings
     initial-configuration
     configuring-arches
 
