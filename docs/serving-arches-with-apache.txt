@@ -182,3 +182,21 @@ There are two cases in which you need to follow these directions to handle stati
     .. code-block:: bash
 
        $ sudo service apache2 restart
+
+Handling Uploaded Media
+=======================
+
+*in progress*
+
+The media directory identifies the destination directory of uploaded files. To do so, add the following lines of code to your project's ``settings.py`` file::
+
+     # Absolute filesystem path to the directory that will hold user-uploaded files.
+     MEDIA_ROOT =  os.path.join(ROOT_DIR)
+
+     # URL that handles the media served from MEDIA_ROOT, used for managing stored files.
+     # It must end in a slash if set to a non-empty value.
+     MEDIA_URL = '/files/'
+
+ Replace the `ROOT_DIR` with the pathway to the folder where you want the directory to be created. For example::
+
+     ROOT_DIR = os.path.join('projects','my_project')
