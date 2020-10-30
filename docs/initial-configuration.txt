@@ -29,24 +29,3 @@ To configure what group new users are put into, add the following lines of code 
     USER_SIGNUP_GROUP = 'Crowdsource Editor'
 
 If you would like to change which group new users are added to, replace 'Crowdsource Editor' with the group you would like to use.
-
-#####################
-Permissions Settings-
-#####################
-
-*to be removed and placed in Administering section*
-
-Permissions allow you to tailor the user experience by letting you control which data a user or group can view and edit. Permissions are applied to each card and by default, the guest users (aka anonymous user) has read privileges to all data.
-If you have data you do not want to share with all users, simply perform the following steps in the Arches UI:
-
-1. Navigate to the 'Resource Models' tab of the **Arches Designer**
-2. Select a resource model and click on the **Manage button**. This will trigger a drop-down menu with a few different managers; select the **Permissions Manager**.
-3. Be sure to select a user or group within the Group Library and then select a card from the Card Library.
-4. Choose which permissions to grant the user.
-
-    - `No Access` will deny the user from viewing or editing data in that card.
-    - `Read` permissions allow the user/group to see the data presented in that card, but not edit it.
-    - `Create/Update` allows the user/group to view and edit the data in that card, as well as create new data.
-    - `Delete` permissions allow the user to delete data from the database.
-
-5. Click on the **Apply Permissions** button.
