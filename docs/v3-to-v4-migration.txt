@@ -6,13 +6,13 @@ Migrating Data from v3 to v4
 
     In v3 we had "resource graphs", while in v4 we call these "Resource Models". Conceptually they are the same. We'll be referring to them here as "v3 graphs" and "Resource Models", respectively.
 
-Upgrading your Arches installation is a complex process, as a significant backend redesign was implemented in v4. We have developed the following documentation (and the code to support it) to guide you through the process. You will be performing a combination of shell commands and basic file manipulation. 
+Upgrading your Arches installation is a complex process, as a significant backend redesign was implemented in v4. We have developed the following documentation (and the code to support it) to guide you through the process. You will be performing a combination of shell commands and basic file manipulation.
 
 Before migrating data, you'll need to install Arches 4 and make a new project. You can name your project whatever you want, but throughout this documentation we'll refer to it as ``my_project``. You can customize the templates and images in your project any time (before or after migrating the data). We recommend adding a Mapbox key right away so you can use the map for visual checks during the migration.
 
 .. seealso::
 
-    Refer to :ref:`Installation` and :ref:`Projects and Packages` for more about how to create an Arches 4 project.
+    Refer to the main :doc:`installation guide </installation>` for more about how to create an Arches 4 project.
 
 Before moving on, you must be able to run the Django devserver from your v4 project, and view it in a browser at http://localhost:8000.
 

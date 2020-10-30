@@ -112,7 +112,7 @@ Now that you have a command line in front of you, the next few steps should be v
 Install Arches and on your EC2 Instance
 ---------------------------------------
 
-Once you have the dependencies installed, see :ref:`Installing Arches`.
+Once you have the dependencies installed, see :doc:`Installing Arches </installation>`.
 
 As noted, you should end up with this directory structure::
 
