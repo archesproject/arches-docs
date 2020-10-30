@@ -54,19 +54,21 @@ Arches Documentation
     :caption: Developing With Arches
     :maxdepth: 2
 
-    arches-and-elasticsearch
-    api
-    command-line-reference
     creating-a-development-environment
-    functions-widgets-datatypes
+    arches-and-elasticsearch
+    data-model
+    command-line-reference
+
+    api
+    import-export
+    v3-migration
+    integrating-arches-with-arcgis
+
+    creating-custom-components
     creating-resource-reports
     creating-new-map-layers
+
     localizing-arches
-    data-model
-    v3-to-v4-migration
-    import-export
-    integrating-arches-with-arcgis
-    settings-beyond-the-ui
     task-management
     managing-and-hosting-iiif
     using-arches-offline
