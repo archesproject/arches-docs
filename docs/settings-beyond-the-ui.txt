@@ -40,3 +40,138 @@ in favor of::
     from django.conf import settings
 
 This is to ensure that UI settings are implemented properly. If you are using settings outside of a UI context you will need to follow the import statement with ``settings.update_from_db()``.
+
+Password Validators
+-------------------
+
+By default, Arches requires that passwords meet the following criteria:
+
+- Have at least one numeric and one alphabetic character
+- Contain at least one special character
+- Have a minimum length of 9 characters
+- Have at least one upper and one lower case character
+
+Admins can change these requirements by configuring the `AUTH_PASSWORD_VALIDATORS`:code: setting in their projects **settings_local.py** file. Below is the default validator setting:
+
+.. code-block:: python
+
+    AUTH_PASSWORD_VALIDATORS = [
+        {
+            'NAME': 'arches.app.utils.password_validation.NumericPasswordValidator', #Passwords cannot be entirely numeric
+        },
+        {
+            'NAME': 'arches.app.utils.password_validation.SpecialCharacterValidator', #Passwords must contain special characters
+            'OPTIONS': {
+                'special_characters': ('!','@','#',')','(','*','&','^','%','$'),
+            }
+        },
+        {
+            'NAME': 'arches.app.utils.password_validation.HasNumericCharacterValidator', #Passwords must contain 1 or more numbers
+        },
+        {
+            'NAME': 'arches.app.utils.password_validation.HasUpperAndLowerCaseValidator', #Passwords must contain upper and lower characters
+        },
+        {
+            'NAME': 'arches.app.utils.password_validation.MinLengthValidator', #Passwords must meet minimum length requirement
+            'OPTIONS': {
+                'min_length': 9,
+            }
+        },
+    ]
+
+To **remove a password validator** in Arches, you can simply remove a validator from the list of `AUTH_PASSWORD_VALIDATORS`:code:.
+
+To modify the list of **required special characters**, simply edit the list of characters in the `special_characters`:code: option in the `SpecialCharacterValidator` validator.
+
+To change the **minimum length of a password**, change the `min_length`:code: property in the `MinLengthValidator`:code: validator.
+
+Advanced users can override or add new validators by creating their own validation classes as explained in `Django's password validation documentation <https://docs.djangoproject.com/en/1.11/topics/auth/passwords/#module-django.contrib.auth.password_validation/>`_.
+
+Time Wheel Configuration
+------------------------
+
+By default Arches will bin your data in the search page time wheel based on your data's temporal distribution. This enables Arches to bin your data efficiently. If your data spans over 1000 years, the bins will be by millennium, half-millennium and century. If your data spans less than a thousand years, your data will be binned by millennium, century, and decade.
+
+You may decide, however, that the bins do not reflect your data very well, and in that case you can manually define your time wheel configuration by editing the TIMEWHEEL_DATE_TIERS setting.
+
+Here is an example of a custom time wheel::
+
+    TIMEWHEEL_DATE_TIERS = {
+    "name": "Millennium",
+    "interval": 1000,
+    "root": True,
+    "child": {
+            "name": "Century",
+            "interval": 100,
+            "range": {"min": 1500, "max": 2000},
+            "child": {
+                "name": "Decade",
+                "interval": 10,
+                "range": {"min": 1750, "max": 2000}
+            }
+        }
+    }
+
+Each tier, ('Millennium', 'Century', 'Decade' are each tiers) will be reflected as ring in the time wheel.
+Properties:
+
+    - "name" - The name that will appear in the description of the selected period
+    - "interval" - The number of years in each bin. For example, if your data spans 3000 years, and your interval is 1000, you will get three bins in that tier.
+    - "root" - This applies only to the root of the config and should not be modified.
+    - "child" - Adding a child will add an additional tier to your time wheel. You can nest as deeply as you like, but the higher the resolution of your time wheel, the longer it will take to generate the wheel.
+    - "range" - A range is optional, but including one will restrict the bins to only those within the range.
+
+If you do need to represent decades or years in your time wheel and this impacts performance, you can cache the time wheel for users that may load the search page frequently. To do so, you just need to activate caching for your project.
+If you have Memcached running at the following location `127.0.0.1:11211` then the time wheel will automatically be cached for the 'anonymous' user. If not you can update the CACHES setting of your project::
+
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+            'LOCATION': os.path.join(APP_ROOT, 'tmp', 'djangocache'),
+            'OPTIONS': {
+                'MAX_ENTRIES': 1000
+            }
+        }
+    }
+
+This will cache the time wheel to your project's directory. There are other ways to define your cache that you may want to use. You can read more about those options in `Django's cache documentation <https://docs.djangoproject.com/en/1.11/topics/cache/>`_.
+
+By default the time wheel will only be cached for 'anonymous' user for 24 hours. To add other users or to change the cache duration, you will need to modify this setting::
+
+    `CACHE_BY_USER = {'anonymous': 3600  * 24}`
+
+The CACHE_BY_USER keys are user names and their corresponding value is the duration (in seconds) of the cache for that user.
+For example, if I wanted to cache the time wheel for the admin user for 5 minutes, I would change the CACHE_BY_USER setting to::
+
+    `CACHE_BY_USER = {'anonymous': 3600  * 24, 'admin': 300}`
+
+
+Configuring Captcha
+-------------------
+
+Setting up your captcha will help protect your production from spam and other unwanted bots. To set up your production with captcha, first `register your captcha <https://www.google.com/recaptcha/intro/v3beta.html>`_ and then add the captcha keys to your project's settings.py. Do this by adding the following::
+
+    RECAPTCHA_PUBLIC_KEY = 'x'
+    RECAPTCHA_PRIVATE_KEY = 'x'
+
+Replace the x's with your captcha keys.
+
+Enabling User Sign-up
+---------------------
+
+To enable users to sign up through the Arches UI, you will have to add the following lines of code to your project's settings.py::
+
+    EMAIL_USE_TLS = True
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST_USER = 'xxxx@xxx.com'
+    EMAIL_HOST_PASSWORD = 'xxxxxxx'
+    EMAIL_PORT = 587
+
+Update the EMAIL_HOST_USER and EMAIL_HOST_PASSWORD with the correct email credentials and save the file. It is possible that this may not be enough to support your production of Arches. In that case, there's more information on setting up an email backend on the `Django site <https://docs.djangoproject.com/en/1.11/topics/email/#smtp-backend>`_.
+
+To configure what group new users are put into, add the following lines of code to your project's settings.py::
+
+    # group to assign users who self sign up via the web ui
+    USER_SIGNUP_GROUP = 'Crowdsource Editor'
+
+If you would like to change which group new users are added to, replace 'Crowdsource Editor' with the group you would like to use.

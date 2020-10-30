@@ -21,6 +21,9 @@ multiple projects, all targeting different users and a different type of data co
 .. seealso::
     To learn more about how data collection users will participate in Projects, please see :ref:`Arches Collector Workflow`.
 
+.. important::
+    Before you can use the Arches Collector app, you must make sure to complete the :doc:`Arches Collector Checklist </arches-collector-checklist>`
+
 Arches Collector Manager Overview
 =================================
 
@@ -64,10 +67,6 @@ Requirements have been met. You are now ready to activate the Project.
 
 Great! Now that you have activated your project, any data collection user that you assigned to it
 will be able to download it through the Arches Collector app and begin collecting data.
-
-.. important::
-    Before continuing with Arches Collector make sure you have followed the steps in
-    :ref:`Registering an OAuth Application`.
 
 ----
 

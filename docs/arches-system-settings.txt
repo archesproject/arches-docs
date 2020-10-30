@@ -2,10 +2,21 @@
 Arches System Settings
 ######################
 
-These are the settings found at ``http://localhost:8000/settings``.
+Changing the Admin Password
+---------------------------
 
-System Settings
-----------------
+The first item of business when preparing your production of Arches is to change the Admin user's password. You cannot change the Admin user's password in the Arches UI because the Admin account is not associated with an email. Instead you'll need to use the Django admin page:
+
+1. Login as admin to Arches or in the Django admin (``http://localhost:8000/admin/``)
+2. Navigate to the Django admin user page ``http://localhost:8000/admin/auth/user/``.
+3. In the upper right of the page select ``CHANGE PASSWORD`` and follow the steps to update the password.
+
+.. image:: images/change-admin-pwd.png
+
+System Settings Interface
+-------------------------
+
+These are the settings found at ``http://localhost:8000/settings``.
 
 *Default Application Settings*
 

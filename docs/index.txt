@@ -22,8 +22,8 @@ Arches Documentation
     :maxdepth: 2
 
     arches-system-settings
-    initial-configuration
-    configuring-arches
+    settings-beyond-the-ui
+    arches-collector-checklist
 
 .. toctree::
     :caption: Administering
