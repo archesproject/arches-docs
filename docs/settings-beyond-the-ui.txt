@@ -4,24 +4,27 @@ Settings - Beyond the UI
 
 In reality, many more settings are used than are exposed in the UI. The best place to see all available settings is in the `main arches repo <https://github.com/archesproject/arches/blob/master/arches/settings.py>`_.
 
-Additionally, settings can be defined in many different places. Here is the full inheritance pattern for a typical Arches project:
+Settings Inheritance
+--------------------
 
-- arches/settings.py
+Settings can be defined in many different places. Here is the full inheritance pattern for a typical Arches project:
+
+- ``arches/settings.py``
     If you installed Arches through pypi (``pip install arches``) this file will be deep in your virtual environment, and you shouldn't touch it.
 
     ↓  `values here can be superceded by...`  ↓
 
-- my_project/my_project/settings.py
+- ``my_project/my_project/settings.py``
     Settings here define backend information specific to your app. For example, this is where you would add new references to template context processors.
 
     ↓  `values here can be superceded by...`  ↓
 
-- my_project/my_project/package_settings.py
+- ``my_project/my_project/package_settings.py`` (optional)
     Settings here define backend information specific to the package loaded to your app. You do not need to create or modify this file as it will be loaded when you load a package. However, you may want to edit this file if your intent is to design or modify a package.
 
     ↓  `values here can be superceded by...`  ↓
 
-- my_project/my_project/settings_local.py (optional)
+- ``my_project/my_project/settings_local.py`` (optional)
     Typically kept out of version control, a settings_local.py file is used for 1) sensitive information like db credentials or keys and 2) environment-specific settings, like paths needed for production configuration.
 
     ↓  `values here can be superceded by...`  ↓
