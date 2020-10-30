@@ -172,7 +172,7 @@ What Next?
 * Read more about :doc:`Projects and Packages </projects-and-packages>`
 
 Common Errors
-=============
+-------------
 
 * On macOS, If you get this error
 
