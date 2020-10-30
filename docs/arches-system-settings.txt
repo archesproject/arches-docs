@@ -2,37 +2,17 @@
 Arches System Settings
 ######################
 
-Changing the Admin Password
----------------------------
+.. seealso::
 
-The first item of business when preparing your production of Arches is to change the Admin user's password. You cannot change the Admin user's password in the Arches UI because the Admin account is not associated with an email. Instead you'll need to use the Django admin page:
+    This section covers configuration settings that are managed through a browser. You will likely need to update other :ref:`settings that are defined elsewhere <Settings - Beyond the UI>`.
 
-1. Login as admin to Arches or in the Django admin (``http://localhost:8000/admin/``)
-2. Navigate to the Django admin user page ``http://localhost:8000/admin/auth/user/``.
-3. In the upper right of the page select ``CHANGE PASSWORD`` and follow the steps to update the password.
-
-.. image:: images/change-admin-pwd.png
-
-System Settings Interface
--------------------------
+Arches System Settings Interface
+--------------------------------
 
 These are the settings found at ``http://localhost:8000/settings``.
 
-*Default Application Settings*
-
-+ **Application Name** - Name of your Arches app, to be displayed in the browser title bar and elsewhere.
-+ **Default Data Import/Export User** - Name to associate with data that is imported into the system.
-
-*Web Analytics*
-
-If you have made a Google Analytics Key to track your app's traffic, enter it here.
-
-*Thesaurus Service Providers*
-
-Advanced users may create more SPAQRL endpoints and register them here. These endpoints will be available in the RDM and allow you to import thesaurus entries from external sources.
-
-Map Settings
--------------
+Default Map Settings
+====================
 
 *Mapbox API*
 
@@ -56,21 +36,24 @@ Arches aggregates search results and displays them as hexagons. You will need to
 
 .. warning:: A large project area combined with a small hexagon size and/or high precision will take a very long time to load, and can crash your browser. We suggest changing these settings in small increments to find the best combination for your project.
 
-Basic Search Settings
-----------------------
+System Data Settings
+====================
 
-Set the default search results behavior. This is also where you will define the max number of resources per export operation.
+*Default Application Names*
 
-Temporal Search Settings
-------------------------
++ **Application Name** - Name of your Arches app, to be displayed in the browser title bar and elsewhere.
++ **Default Data Import/Export Name** - Name to associate with data that is imported into the system.
 
-Arches creates a Time Wheel based on the resources in your database, to allow for quick temporal visualization and queries. A few aspects of this temporal search are defined here.
+*Web Analytics*
 
-+ **Color Ramp** - Currently unused (saved for future implementation). The color ramp for the time wheel. For further reference, check out the `d3 API reference <https://github.com/d3/d3-3.x-api-reference/blob/master/Ordinal-Scales.md>`_.
-+ **Time wheel configuration** - Currently unused (saved for future implementation).  You can, however, modify the time wheel configuration using the advanced settings, :ref:`Time Wheel Configuration`.
+If you have made a Google Analytics Key to track your app's traffic, enter it here.
+
+*Thesaurus Service Providers*
+
+Advanced users may create more SPAQRL endpoints and register them here. These endpoints will be available in the RDM and allow you to import thesaurus entries from external sources.
 
 Saved Searches
-----------------
+==============
 
 Arches allows you save a search and present it as convenience for your users. Saved Searches appear as search options in the main Search page. Creating a Saved Search is a three-step process.
 
@@ -78,11 +61,35 @@ Arches allows you save a search and present it as convenience for your users. Sa
 #. **Copy the URL** - In your browser address bar, copy the *entire* URL. This will be a long string that defines each of the search filters created in step 1.
 #. **Create the Saved Search** - Finally, head back to this page and fill out the settings that you see at left. You can also upload an image that will be shown along with your Search Search.
 
-Maintaining UI-Defined Settings
--------------------------------
+Settings Basic Search
+=====================
+
+Set the default search results behavior. This is also where you will define the max number of resources per export operation.
+
+Temporal Search Settings
+========================
+
+Arches creates a Time Wheel based on the resources in your database, to allow for quick temporal visualization and queries. A few aspects of this temporal search are defined here.
+
++ **Color Ramp** - Currently unused (saved for future implementation). The color ramp for the time wheel. For further reference, check out the `d3 API reference <https://github.com/d3/d3-3.x-api-reference/blob/master/Ordinal-Scales.md>`_.
++ **Time wheel configuration** - Currently unused (saved for future implementation).  You can, however, modify the time wheel configuration using the advanced settings, :ref:`Time Wheel Configuration`.
+
+Maintaining Arches System Settings
+----------------------------------
 
 Because these settings are stored in the database, as opposed to a ``settings.py`` file, if you drop and recreate your database, you will lose them and need to re-enter them by hand. To avoid this, you should run this command *after* you have finished configuring settings through the UI::
 
     python manage.py packages -o save_system_settings [-d arches/db/system_settings]
 
 A file named "System_Settings.json" will be saved to the directory indicated. If no directory is indicated the file will be saved to settings.SYSTEM_SETTINGS_LOCAL_PATH, which is ``my_project/my_project/system_settings/`` by default. This same path is used to import settings when a new package is loaded into your project.
+
+Changing the Admin Password
+---------------------------
+
+The first item of business when preparing your production of Arches is to change the Admin user's password. You cannot change the Admin user's password in the Arches UI because the Admin account is not associated with an email. Instead you'll need to use the Django admin page:
+
+1. Login as admin to Arches or in the Django admin (``http://localhost:8000/admin/``)
+2. Navigate to the Django admin user page ``http://localhost:8000/admin/auth/user/``.
+3. In the upper right of the page select ``CHANGE PASSWORD`` and follow the steps to update the password.
+
+.. image:: images/change-admin-pwd.png
