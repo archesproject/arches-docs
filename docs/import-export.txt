@@ -137,7 +137,7 @@ The first column in the CSV must be named ``ResourceID``. ResourceID is a user-g
 ResourceIDs must be unique among all resources imported, not just within each csv, for this reason we suggest using UUIDs.
 
 +-------------+---------------------+--------------------+--------------------+
-| Resource ID | attribute 1         |  attribute 2       | attribute 3        |
+| ResourceID | attribute 1         |  attribute 2       | attribute 3        |
 +=============+=====================+====================+====================+
 | 1           | attr. 1 value       | attr. 2 value      | attr. 3 value      |
 +-------------+---------------------+--------------------+--------------------+
@@ -158,7 +158,7 @@ Or, in a raw format (if you open the file in a text editor), the CSV should look
 Multiple lines may be used to add multiple attributes to a single resource. You must make sure these lines are contiguous, and every line must have a ResourceID. Other cells are optional.
 
 +-------------+---------------------+--------------------------+--------------------+
-| Resource ID | attribute 1         |  attribute 2             | attribute 3        |
+| ResourceID | attribute 1         |  attribute 2             | attribute 3        |
 +=============+=====================+==========================+====================+
 | 1           | attr. 1 value       | attr. 2 value            | attr. 3 value      |
 +-------------+---------------------+--------------------------+--------------------+
@@ -174,7 +174,7 @@ Multiple lines may be used to add multiple attributes to a single resource. You 
 Depending on your Resource Model's graph structure, some attributes will be handled as "groups". For example, ``Name`` and ``Name Type`` attributes would be a group. Attributes that are grouped must be on the same row. However, a single row can have many different groups of attributes in it, but there may be only one of each group type per row. (e.g. you cannot have two names and two name types in one row).
 
 +-------------+--------------------------+--------------------+---------------------------+
-| Resource ID |  name                    | name_type          | description               |
+| ResourceID |  name                    | name_type          | description               |
 +=============+==========================+====================+===========================+
 | 1           | Yucca House              | Primary            | "this house, built in..." |
 +-------------+--------------------------+--------------------+---------------------------+
