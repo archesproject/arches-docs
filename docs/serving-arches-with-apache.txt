@@ -5,198 +5,195 @@ Serving Arches with Apache
 .. sidebar:: Further Reference
 
     + `Django Documentation <https://docs.djangoproject.com/en/2.1/howto/deployment/wsgi/modwsgi/#how-to-use-django-with-apache-and-mod-wsgi>`_
-    + `How to Run Django with mod_wsgi and Apache with a virtualenv Python environment on a Debian VPS (Digital Ocean) <https://www.digitalocean.com/community/tutorials/how-to-run-django-with-mod_wsgi-and-apache-with-a-virtualenv-python-environment-on-a-debian-vps>`_
-    + `Using mod_wsgi when developing Django sites (Graham Dumpleton) <http://blog.dscpl.com.au/2008/12/using-modwsgi-when-developing-django.html>`_
-
-
-When you are putting your Arches project in production, you'll need to serve it with a webserver. The following is a guide using Apache as an example, split into two sections:
-
-+ :ref:`Setup Apache`
-
-+ :ref:`Handling Static Files`
-
-Setup Apache
-============
 
 During development, it's easiest to use the Django webserver to view your Arches installation. However, once you are ready to put the project into production, you'll have to use a more efficient webserver like Apache or nginx.
 
-We have the most experience using Apache, which is very easy to install and configure. The following instructions work for Ubuntu 14.04, minor changes may be necessary for a different OS.
+The following is a guide using Apache as an example, split into two sections:
 
-1. Get apache2 and mod_wsgi
++ :ref:`Configure Apache`
+
++ :ref:`Prepare the Arches Project`
+
+If you want to use nginx + uWSGI instead of Apache + mod_wsgi, `this tutorial <https://www.bogotobogo.com/python/Django/Python_Django_tutorial_serving_Django_App_with_uWSGI_and_Nginx.php>`_
+should get you started.
+
+Configure Apache
+================
+
+The following instructions work for Ubuntu 16.04+, minor changes may be necessary for a different OS. This is a very basic Apache configuration, and more fine tuning
+will benefit your production installation.
+
+1. Install Apache.
 
     .. code-block:: bash
 
        $ sudo apt-get install apache2
-       $ sudo apt-get install libapache2-mod-wsgi
 
-
-2. Create the Python process
-
-    In order to properly configure Apache, we must:
-
-    + Create a python daemon process
-
-    + Set the path to your project's wsgi.py file and reference to the python daemon process created above
-
-    + Give Apache access to the main project directory
-
-    All of these tasks are handled by adding a block of code to Apache's `../sites-enabled/000-default.conf` file. Use this command to open the file
+2. Install ``mod_wsgi`` into your Arches virtual environment.
 
     .. code-block:: bash
 
-       $ sudo nano /etc/apache2/sites-enabled/000-default.conf
+        $ source /home/ubuntu/Projects/ENV/bin/activate
+        (ENV)$ pip install mod_wsgi
 
-
-    and paste the following code into the ``<VirtualHost *:80>`` stanza, changing directory and file paths where necessary::
-
-
-      WSGIDaemonProcess arches python-path=/home/ubuntu/Projects/my_project:/home/ubuntu/Projects/ENV/lib/python2.7/site-packages
-      WSGIScriptAlias / /home/ubuntu/Projects/my_project/my_project/wsgi.py process-group=arches
-
-      <Directory /home/ubuntu/Projects/my_project>
-         Options Indexes FollowSymLinks
-         AllowOverride None
-         Require all granted
-      </Directory>
-
-
-    If you intend to allow users to sync data from Arches Collector you will also need to include the following directive::
-
-      WSGIPassAuthorization on
-
-    Use `ctrl+x` to save the file.
-
-    You may find it helpful to read the `Official Django Documentation <https://docs.djangoproject.com/en/2.1/howto/deployment/wsgi/modwsgi/#how-to-use-django-with-apache-and-mod-wsgi>`_ on serving Django apps with Apache and mod_wsgi.
-
-3. Set file system permissions for Apache
-
-    Now we must give Apache write-permission in a few locations. We'll do that by first changing the permissions of the necessary files and directories, and second by setting the Apache user as the group.
+3. Generate the link path to ``mod_wsgi``.
 
     .. code-block:: bash
 
-       $ sudo chmod 775 /home/ubuntu/Projects/my_project/my_project
-       $ sudo chgrp www-data /home/ubuntu/Projects/my_project/my_project
-       $ sudo chmod 664 /home/ubuntu/Projects/my_project/my_project/arches.log
-       $ sudo chgrp www-data /home/ubuntu/Projects/my_project/my_project/arches.log
+        (ENV)$ mod_wsgi-express module-config
+
+    This command will produce two lines that look like
+
+    .. code-block:: bash
+
+        LoadModule wsgi_module "/srv/ENV/lib/python3.7/site-packages/mod_wsgi/server/mod_wsgi-py37.cpython-37m-x86_64-linux-gnu.so"
+        WSGIPythonHome "/srv/ENV"
+
+    Copy these two lines, you will use them in the next step.
+
+4.  Create a new Apache .conf file
+
+    Here is a basic Apache configuration for Arches. If using a domain
+    like ``heritage-inventory.org``, name this file ``heritage-inventory.org.conf``,
+    otherwise, use something simple like ``arches-default.conf``.
+
+    The paths below are based on an example project in ``/home/ubuntu/Projects/my_project``.
+
+    .. code-block::
+
+        sudo nano /etc/apache2/sites-available/arches-default.conf
+
+    Complete new file contents::
+
+        # Paste the text generated by 'mod_wsgi-express module-config' here,
+        # *before* the VirtualHost is defined.
+        LoadModule wsgi_module "/home/ubuntu/Projects/ENV/lib/python3.7/site-packages/mod_wsgi/server/mod_wsgi-py37.cpython-37m-x86_64-linux-gnu.so"
+        WSGIPythonHome "/home/ubuntu/Projects/ENV"
+
+        <VirtualHost *:80>
+
+            WSGIDaemonProcess arches python-path=/home/ubuntu/Projects/my_project
+            WSGIScriptAlias / /home/ubuntu/Projects/my_project/my_project/wsgi.py process-group=arches
+
+            # Necessary to support Arches Collector
+            WSGIPassAuthorization on
+
+            ## Uncomment the ServerName directive and fill it with your domain
+            ## or subdomain if/when you have your DNS records configured.
+            # ServerName heritage-inventory.org
+
+            <Directory /home/ubuntu/Projects/my_project/>
+                Require all granted
+            </Directory>
+
+            # This section tells Apache where to find static files. This example uses
+            # STATIC_URL = '/media/' and STATIC_ROOT = os.path.join(APP_ROOT, 'static')
+            # NOTE: omit this section if you are using S3 to serve static files.
+            Alias /media/ /home/ubuntu/Projects/my_project/my_project/static/
+            <Directory /home/ubuntu/Projects/my_project/my_project/static/>
+                Require all granted
+            </Directory>
+
+            # This section tells Apache where to find uploaded files. This example uses
+            # MEDIA_URL = '/files/' and MEDIA_ROOT = os.path.join(APP_ROOT)
+            # NOTE: omit this section if you are using S3 for uploaded media
+            Alias /files/uploadedfiles/ /home/ubuntu/Projects/my_project/my_project/uploadedfiles/
+            <Directory /home/ubuntu/Projects/my_project/my_project/uploadedfiles/>
+                Require all granted
+            </Directory>
+
+            ServerAdmin webmaster@localhost
+            DocumentRoot /var/www/html
+
+            # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+            # error, crit, alert, emerg.
+            # It is also possible to configure the loglevel for particular
+            # modules, e.g.
+            #LogLevel info ssl:warn
+            # Recommend changing these file names if you have multiple arches
+            # installations on the same server.
+            ErrorLog /var/log/apache2/error-arches.log
+            CustomLog /var/log/apache2/access-arches.log combined
+
+        </VirtualHost>
+
+5. Disable the default Apache conf, and enable the new one.
+
+    .. code-block::
+
+        $ sudo a2dissite 000-default
+        $ sudo a2ensite arches-default
+        $ sudo service apache2 reload
+
+    Replace ``arches-default`` with the name of your new .conf file if needed.
+
+At this point, you can try accessing your Arches installation in a browser, but
+you're likely to get some kind of file permissions error. Continue to the next section.
+
+.. important::
+    With Apache serving Arches, any changes to a ``.py`` file (like ``settings.py``)
+    will not be reflected until you reload Apache.
+
+Prepare the Arches Project
+==========================
+
+1. Set all file and directory permissions.
+
+    Apache runs as the user ``www-data``, and this user must have write access to
+    some portions of your Arches project.
 
     .. note::
 
-        On Ubuntu the Apache user is ``www-data`` (used in the example below), but on CentOS it is ``httpd``.
+        On CentOS, Apache runs as is ``httpd``, so substitute that for ``www-data`` herein.
 
-    These commands should give Apache sufficient permissions to create and modify the arches/uploadedfiles directory (where user uploads are stored by default) and the arches/tileserver directory where Tilestache caches tiles that it renders.
+    The ``arches.log`` file...
+
+    .. code-block:: bash
+
+        $ sudo chmod 664 /home/ubuntu/Projects/my_project/my_project/arches.log
+        $ sudo chgrp www-data /home/ubuntu/Projects/my_project/my_project/arches.log
+
+    The ``uploadedfiles`` directory...
+
+    .. code-block:: bash
+
+        $ sudo chmod 775 /home/ubuntu/Projects/my_project/my_project/uploadedfiles
+        $ sudo chgrp www-data /home/ubuntu/Projects/my_project/my_project/uploadedfiles
+
+    Or, if either ``arches.log`` or ``uploadedfiles`` doesn't yet exist, you can
+    just allow ``www-data`` to create them at a later point by giving write access
+    to your project directory.
+
+    .. code-block:: bash
+
+        $ sudo chmod 775 /home/ubuntu/Projects/my_project/my_project
+        $ sudo chgrp www-data /home/ubuntu/Projects/my_project/my_project
+
+    You should now be able to access your Arches installation in a browser, but
+    there is one more important step.
+
+2. Run ``collectstatic``.
+
+    This Django command places `all` of the static files (CSS, JavaScript, etc.)
+    used in Arches into a single location that a webserver can find. By default,
+    they are placed in ``my_project/my_project/static``, based on ``STATIC_ROOT``.
 
     .. note::
-        Please post to the `Arches forum <https://groups.google.com/forum>`_ if you find that more permissions need to be modified, or that these directions can be simplified further.
 
-4. Restart Apache.
+        You can change ``STATIC_ROOT`` all you want, but be sure to update the
+        Alias and Directory info in the Apache conf accordingly.
 
-    **Ubuntu**
+    .. code-block::
 
-    .. code-block:: bash
+        (ENV)$ python manage.py collectstatic
 
-       $ sudo service apache2 restart
-
-    **CentOS**
-
-    .. code-block:: bash
-
-       $ sudo /sbin/service httpd restart
-
-
-    You should now be able to view your app from any web browser by navigating directly to your IP address (you don't need to run the Django dev server now).
-
-    .. important::
-        With Apache serving Arches, any changes to a ``.py`` file will not be reflected until you restart Apache:
-
-If you are still in development and just want to use Apache instead of the Django server (and keep getting the lengthy Django error messages instead of a 500 page), you can stop here. Otherwise, you'll need to continue on to handle your app's static files.
-
-Handling Static Files
-=======================
-
-
-There are two cases in which you need to follow these directions to handle static files (js, css, and images):
-
- * You are going to set ``DEBUG = False``, at which point Django will no longer serve them, or
- * You are leaving ``DEBUG = True`` but are developing and serving your project from a non-root location, say www.example.com/arches5 instead of www.example.com.
-
-1. Create static files directory
-
-    This directory can be placed anywhere. In the example below we are putting it inside of your project.
-
-    .. code-block:: bash
-
-       $ mkdir /home/ubuntu/Projects/my_project/my_project/static
-
-
-2. Configure your Arches project settings
-
-    Now open your ``settings.py`` (or ``settings_local.py``) file, and add these lines to it.
-
-    .. code-block:: bash
-
-        STATIC_ROOT = os.path.join(PACKAGE_ROOT, 'static')
-
-        STATIC_URL = "/static/"
-
-    This will point Django to your new static directory, and also tell it how to create a URL that points to that directory.
-
-3. Collect the static files
-
-    With your virtual environment activated, enter your project's top directory and run this command:
-
-    .. code-block:: bash
-
-       $ python manage.py collectstatic
-
-    Watch as all of your static files (including those that come standard with Django) are copied to the new directory. Now we are ready to tell Apache where to find them.
+    The first time this runs it will take a little while (~20k files), and may
+    show errors/warnings that you can safely ignore.
 
     .. important::
 
-        With Apache serving your app you must run ``python manage.py collectstatic`` any time you make any changes to static files.
+        from now on, any time you change a CSS, JavaScript, or other static
+        asset you must rerun this command.
 
-4. Configure Apache settings
-
-    Use
-
-    .. code-block:: bash
-
-       $ sudo nano /etc/apache2/sites-enabled/000-default.conf
-
-    to edit the default Apache configuration file. Find your ``<VirtualHost *:80>`` stanza with some familiar code in it. Below the original code you added, paste this block, changing paths as necessary.
-
-    .. code-block:: bash
-
-        Alias /static/ /home/ubuntu/Projects/my_project/my_project/static/
-
-        <Directory /home/ubuntu/Projects/my_project/my_project/static>
-            Options Indexes FollowSymLinks
-            AllowOverride None
-            Require all granted
-        </Directory>p
-
-
-    The ``Alias`` line tells Apache where to look when Django sends it the ``/static/`` URL, and the subsequent block allows Apache access to your newly created static directory.
-
-4. Restart Apache.
-
-    .. code-block:: bash
-
-       $ sudo service apache2 restart
-
-Handling Uploaded Media
-=======================
-
-*in progress*
-
-The media directory identifies the destination directory of uploaded files. To do so, add the following lines of code to your project's ``settings.py`` file::
-
-     # Absolute filesystem path to the directory that will hold user-uploaded files.
-     MEDIA_ROOT =  os.path.join(ROOT_DIR)
-
-     # URL that handles the media served from MEDIA_ROOT, used for managing stored files.
-     # It must end in a slash if set to a non-empty value.
-     MEDIA_URL = '/files/'
-
- Replace the `ROOT_DIR` with the pathway to the folder where you want the directory to be created. For example::
-
-     ROOT_DIR = os.path.join('projects','my_project')
+You should now be able to view your Arches installation in a browser without
+any issues.
