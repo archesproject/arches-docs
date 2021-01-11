@@ -16,96 +16,96 @@ Import Value Formats
 
 * ``string``
     In CSV, must be quoted only if the value contains a comma.
-    
+
     **Examples:** ``Smith Cottage`` ``"Behold, the Forevertron."`` ``<p>This is a rich text description that contains HTML tags.</p>``
-    
+
 * ``number``
     Integers or floats; never use quotes or comma separators.
-    
+
     **Examples:** ``42`` ``-465`` ``17322.464453``
-    
+
 * ``date``
     YYYY-MM-DD, no quotes.
-    
+
     **Examples:** ``1305-10-31`` ``1986-02-02``
 
 * ``edtf``
     Must be a valid `Extended Date Time Format <https://www.loc.gov/standards/datetime/pre-submission.html>`_ string.
-    
+
     **Examples:** ``"2010-10"`` ``"-y10000"``
-    
+
 * ``geojson-feature-collection``
     In CSV, must be `WKT <https://en.wikipedia.org/wiki/Well-known_text>`_.
 
     **Examples - CSV:** ``POINT (-82.53973 29.658642)`` ``MULTIPOLYGON (((-81.435 26.130, -81.425 26.124, -81.415 26.137, -81.435 26.130)))``
-    
+
     In JSON, include the entire definition of a `GeoJSON Feature Collection <http://wiki.geojson.org/GeoJSON_draft_version_6#FeatureCollection>`_ (the ``properties`` and ``id`` attributes can be empty). Use `geojson.io <http://geojson.io>`_ and `geojsonlint.com <http://geojsonlint.com>`_ for testing.
-    
+
     **Example - JSON:**
-    
+
     .. code::
-        
+
         "features": [
                 {
                     "geometry": {
                         "coordinates": [
-                            -82.53973, 
+                            -82.53973,
                             29.658642
-                        ], 
+                        ],
                         "type": "Point"
-                    }, 
-                    "id": "<arbitrary id>", 
-                    "properties": {}, 
+                    },
+                    "id": "<arbitrary id>",
+                    "properties": {},
                     "type": "Feature"
                 }
-            ], 
+            ],
             "type": "FeatureCollection"
         }
 
 * ``concept``
-    
+
     In CSV/SHP, if the values in your concept collection are `unique` you can use the label (prefLabel) for a concept. If not, you will get an error during import and you must use UUIDs instead of labels (if this happens, see `Concepts File`_ below). If a prefLabel has a comma in it, it must be triple-quoted: ``"""Shingles, original"""``.
-    
+
     **Examples - CSV/SHP:** ``Slate`` ``"""Shingles, original"""``
-    
+
     In JSON, you must use a concept's UUID.
 
 * ``concept-list``
 
     In CSV/SHP, must be a single-quoted list of prefLabels (or UUIDs if necessary). If a prefLabel contains a comma, then that prefLabel must have double-quotes: ``"Slate,""Shingles, original"",Thatch"``.
-    
+
     **Examples - CSV/SHP:** ``"Slate,Thatch"`` ``Brick``
-    
+
     In JSON, a list of UUIDs must be used. If only one value is present, it must still be placed within brackets.
-    
+
     **Examples - JSON:** ``["d11630fa-c5a4-49b8-832c-5976e0044bca"]`` ``["651c59b0-ff30-11e8-9975-94659cf754d0","cdcc206d-f80d-4cc3-8685-40e8949158f8"]``
-    
-* ``domain-value`` 
-    
+
+* ``domain-value``
+
     A string that matches a valid domain value for this node, single-quoted if it contains a comma.
 
 * ``domain-value-list``
-    
+
     A single-quoted list of strings that match valid domain values for this node. Follow quoting guidelines for ``concept-list`` if any of the values contain commas.
 
 * ``file-list``
-    
+
     In CSV/SHP, must be a relative path to the file that should be uploaded.
-    
+
     In JSON, a full definition of the file-list data looks like this, though some of these attributes, like ``lastModified`` and ``size`` can be omitted::
 
         [
             {
-                "accepted": true, 
-                "file_id": "6dec83cf-ff30-11e8-b6ca-94659cf754d0", 
-                "height": null, 
-                "index": 0, 
-                "lastModified": 1528907664.6177075, 
-                "name": "Photo_Tung_Lung_Fort_Drainage_Pipes_northeast_interior_corner_1.JPG", 
-                "size": 3041261, 
-                "status": "uploaded", 
-                "type": "image/jpeg", 
-                "url": "/files/uploadedfiles/Photo_Tung_Lung_Fort_Drainage_Pipes_northeast_interior_corner_1.JPG", 
+                "accepted": true,
+                "file_id": "6dec83cf-ff30-11e8-b6ca-94659cf754d0",
+                "height": null,
+                "index": 0,
+                "lastModified": 1528907664.6177075,
+                "name": "Photo_Tung_Lung_Fort_Drainage_Pipes_northeast_interior_corner_1.JPG",
+                "size": 3041261,
+                "status": "uploaded",
+                "type": "image/jpeg",
+                "url": "/files/uploadedfiles/Photo_Tung_Lung_Fort_Drainage_Pipes_northeast_interior_corner_1.JPG",
                 "width": null
             }
         ]
@@ -137,7 +137,7 @@ The first column in the CSV must be named ``ResourceID``. ResourceID is a user-g
 ResourceIDs must be unique among all resources imported, not just within each csv, for this reason we suggest using UUIDs.
 
 +-------------+---------------------+--------------------+--------------------+
-| ResourceID | attribute 1         |  attribute 2       | attribute 3        |
+| ResourceID  | attribute 1         |  attribute 2       | attribute 3        |
 +=============+=====================+====================+====================+
 | 1           | attr. 1 value       | attr. 2 value      | attr. 3 value      |
 +-------------+---------------------+--------------------+--------------------+
@@ -158,7 +158,7 @@ Or, in a raw format (if you open the file in a text editor), the CSV should look
 Multiple lines may be used to add multiple attributes to a single resource. You must make sure these lines are contiguous, and every line must have a ResourceID. Other cells are optional.
 
 +-------------+---------------------+--------------------------+--------------------+
-| ResourceID | attribute 1         |  attribute 2             | attribute 3        |
+| ResourceID  | attribute 1         |  attribute 2             | attribute 3        |
 +=============+=====================+==========================+====================+
 | 1           | attr. 1 value       | attr. 2 value            | attr. 3 value      |
 +-------------+---------------------+--------------------------+--------------------+
@@ -174,7 +174,7 @@ Multiple lines may be used to add multiple attributes to a single resource. You 
 Depending on your Resource Model's graph structure, some attributes will be handled as "groups". For example, ``Name`` and ``Name Type`` attributes would be a group. Attributes that are grouped must be on the same row. However, a single row can have many different groups of attributes in it, but there may be only one of each group type per row. (e.g. you cannot have two names and two name types in one row).
 
 +-------------+--------------------------+--------------------+---------------------------+
-| ResourceID |  name                    | name_type          | description               |
+| ResourceID  |  name                    | name_type          | description               |
 +=============+==========================+====================+===========================+
 | 1           | Yucca House              | Primary            | "this house, built in..." |
 +-------------+--------------------------+--------------------+---------------------------+
@@ -574,7 +574,7 @@ n-n: Many parent nodegroups/cards containing many child nodegroups/cards::
 Importing Resource Relations
 ============================
 
-It is possible to batch import Resource Relations (also referred to as "resource-to-resource relationships"). To do so, create a `.relations` file (a CSV-formatted file with a 
+It is possible to batch import Resource Relations (also referred to as "resource-to-resource relationships"). To do so, create a `.relations` file (a CSV-formatted file with a
 ``.relations`` extension). The header of the file should be as follows:
 
 .. code-block:: text
@@ -610,18 +610,18 @@ All file-based business exports must happen through the command line interface. 
 Writing Business Data Files
 ---------------------------
 
-The output format can either be JSON (the best way to do a full dump of your Arches database) or CSV (a more curated way to export a specific subset of data). 
+The output format can either be JSON (the best way to do a full dump of your Arches database) or CSV (a more curated way to export a specific subset of data).
 
 To export JSON, use::
 
     python manage.py packages -o export_business_data -d 'path_to_destination_directory' -f 'json' -g 'resource_model_uuid'
-    
+
 Note that you'll have to provide the UUID for the Resource Model whose resources you want to export. The easiest way to find this UUID is by looking at the browser url while editing the Resource Model in the Arches Designer UI.
 
 To export CSV, use::
 
     python manage.py packages -o export_business_data -d 'path_to_destination_directory' -f 'csv' -c 'path_to_mapping_file'
-    
+
 When exporting to CSV, you need to use a :ref:`Mapping File`, which will determine the content of your CSV (which nodes are exported, etc.). Add the ``--single-file`` argument to export your grouped data to the same CSV file as the rest of your data.
 
 More about these export commands can be found in :ref:`Export Commands`.
