@@ -1,4 +1,4 @@
-﻿======================
+======================
 Resource Import/Export
 ======================
 
@@ -622,7 +622,7 @@ To export CSV, use::
 
     python manage.py packages -o export_business_data -d 'path_to_destination_directory' -f 'csv' -c 'path_to_mapping_file'
     
-When exporting to CSV, you need to use a :ref:`Mapping File`, which will determine the content of your CSV (which nodes are exported, etc.). Add the ``--single-file`` argument to export your grouped data to the same CSV file as the rest of your data.
+When exporting to CSV, you need to use a :ref:`Mapping File`, which will determine the content of your CSV (which nodes are exported, etc.). Add the ``--single_file`` argument to export your grouped data to the same CSV file as the rest of your data.
 
 More about these export commands can be found in :ref:`Export Commands`.
 
