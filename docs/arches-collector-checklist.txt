@@ -85,3 +85,10 @@ If you are using Apache as a webserver, you must add the following line to your 
 
 Restart Apache for all of these steps to take effect. You should now be able to
 use the :ref:`Arches Collector Manager` to create new projects.
+
+Configure a Celery Broker
+-------------------------
+
+To support sync operations between the mobile app and your Arches database,
+Celery must be supplied with a message broker. Please see :ref:`Task Management`
+for how to set this up.
