@@ -1,6 +1,6 @@
-####################
-Arches Accessibility
-####################
+#############
+Accessibility
+#############
 
 Contents
 ========
