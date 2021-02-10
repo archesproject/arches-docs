@@ -184,7 +184,7 @@ Arches uses the javascript library called Bootstrap which enables the content to
 
 This can easily be tested in a browser such as Chrome or Firefox which have built in developer tools for viewing at different devices or screen widths. Of course the ultimate test would be to use an actual device to see what happens in the real world, for this level of testing I would recommend Browserstack which has access to many different physical devices and browsers.
 
-It's also good practise to ensure that web pages operate the same using different web browsers, for example some things may not work correctly in Safari or Chrome but everything seems fine in Firefox.
+It's also good practice to ensure that web pages operate the same using different web browsers, for example some things may not work correctly in Safari or Chrome but everything seems fine in Firefox.
 
 HTML Validation
 ---------------
