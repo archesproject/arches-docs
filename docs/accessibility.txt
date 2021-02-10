@@ -8,7 +8,7 @@ Contents
 * `Summary`_
 * `Tools Used`_
 * `Key Points`_
-    * `Colour Contrast`_
+    * `Color Contrast`_
     * `Form Fields`_
     * `Headings`_
     * `Links`_
@@ -26,7 +26,7 @@ It is important that Arches is developed with inclusivity in mind by making it a
 
 In a number of regions, organisations are required to ensure that any software they use, or provide as a service, is accessible for users with disabilities. To this end, any UI development within Arches must take measures to conform to the guidance set out in the WCAG 2.1 requirements. This will allow Arches to be more easily adopted by such organisations and provide benefits to a wider audience.
 
-The following information details the minimum steps required adhere to WCAG accessibility guidelines. Although the remit has been to adhere to AA standards, wherever possible AAA has been reached for issues such as colour contrast.
+The following information details the minimum steps required adhere to WCAG accessibility guidelines. Although the remit has been to adhere to AA standards, wherever possible AAA has been reached for issues such as color contrast.
 
 Here's a link to all the `WCAG 2.1 requirements <https://www.w3.org/TR/WCAG21/#requirements-for-wcag-2-1>`_
 
@@ -51,14 +51,14 @@ Key Points
 
 Although many files have been worked on for the many different requirements, there have been some frequently identified issues. Here are the commonly found problems:
 
-Colour Contrast
----------------
+Color Contrast
+--------------
 
 .. note:: Tools used: `Wave`_ / `Contrast checker`_
 
 Using a combination of the Wave browser extension and the Contrast Checker website mentioned above, you can identify what elements on a page that need changing, for example, from the Arches v5 demo site, take the "Resource Type" button on the search page:
 
-It has a background colour ``#579DDB`` and a foreground colour ``#FFFFFF`` - this fails the contrast test. You can use the contrast checker to test how things look when you lighten or darken either the background or foreground. In this instance, using the slider, lets darken the background colour to be ``#1E5A8F`` instead, which passes WCAG AAA.
+It has a background color ``#579DDB`` and a foreground color ``#FFFFFF`` - this fails the contrast test. You can use the contrast checker to test how things look when you lighten or darken either the background or foreground. In this instance, using the slider, lets darken the background color to be ``#1E5A8F`` instead, which passes WCAG AAA.
 
 Form Fields
 -----------
