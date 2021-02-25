@@ -20,7 +20,7 @@ should get you started.
 Configure Apache
 ================
 
-The following instructions work for Ubuntu 16.04+, minor changes may be necessary for a different OS. This is a very basic Apache configuration, and more fine tuning
+The following instructions work for Ubuntu 16.04 - 18.04, see notes for Ubunutu 20.04; minor changes may be necessary for a different OS. This is a very basic Apache configuration, and more fine tuning
 will benefit your production installation.
 
 1. Install Apache.
@@ -29,14 +29,16 @@ will benefit your production installation.
 
        $ sudo apt-get install apache2
 
-2. Install ``mod_wsgi`` into your Arches virtual environment.
+2. Install ``mod_wsgi`` 
+
+    - For deployments on Ubuntu 16.04 - 18.04 you can ``pip`` install ``mod_wsgi`` into your Arches virtual environment.
 
     .. code-block:: bash
 
         $ source /home/ubuntu/Projects/ENV/bin/activate
         (ENV)$ pip install mod_wsgi
 
-3. Generate the link path to ``mod_wsgi``.
+    Generate the link path to ``mod_wsgi``.
 
     .. code-block:: bash
 
@@ -51,7 +53,16 @@ will benefit your production installation.
 
     Copy these two lines, you will use them in the next step.
 
-4.  Create a new Apache .conf file
+    - For deployments on ubunutu 20.04+, ``mod-wsgi`` may not be installable via ``pip`` and ``apt`` can be used:
+
+    .. code-block:: bash
+        $ sudo apt install libapache2-mod-wsgi-py3 apache2-dev python3-dev
+
+    Note that the version of Python 3 installed at the system-level may need to match the version used to create the virtual environment pointed to in the config.
+    For example, if ``libapache2-mod-wsgi-py3`` is compiled against Python 3.8, use Python 3.8 for your virtual environment.
+    Installing ``mod-wsgi`` this way means you will not need to load it as a module in the config file.
+
+3.  Create a new Apache .conf file
 
     Here is a basic Apache configuration for Arches. If using a domain
     like ``heritage-inventory.org``, name this file ``heritage-inventory.org.conf``,
@@ -117,7 +128,7 @@ will benefit your production installation.
 
         </VirtualHost>
 
-5. Disable the default Apache conf, and enable the new one.
+4. Disable the default Apache conf, and enable the new one.
 
     .. code-block::
 
