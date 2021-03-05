@@ -20,7 +20,7 @@ should get you started.
 Configure Apache
 ================
 
-The following instructions work for Ubuntu 16.04 - 18.04, see notes for Ubunutu 20.04; minor changes may be necessary for a different OS. This is a very basic Apache configuration, and more fine tuning
+The following instructions work for Ubuntu 16.04 - 20.04; minor changes may be necessary for a different OS. This is a very basic Apache configuration, and more fine tuning
 will benefit your production installation.
 
 1. Install Apache.
@@ -31,7 +31,7 @@ will benefit your production installation.
 
 2. Install ``mod_wsgi`` 
 
-    - For deployments on Ubuntu 16.04 - 18.04 you can ``pip`` install ``mod_wsgi`` into your Arches virtual environment.
+    - You can ``pip`` install ``mod_wsgi`` into your Arches virtual environment however you may need to have installed a python-dev package specific to your version of python3, for ex: ``apt-get install python3.8-dev``.
 
     .. code-block:: bash
 
@@ -53,7 +53,7 @@ will benefit your production installation.
 
     Copy these two lines, you will use them in the next step.
 
-    - For deployments on ubunutu 20.04+, ``mod-wsgi`` may not be installable via ``pip`` and ``apt`` can be used:
+    - As an alternative to ``pip`` installing ``mod-wsgi`` you can use ``apt`` to install at the system-level:
 
     .. code-block:: bash
         $ sudo apt install libapache2-mod-wsgi-py3 apache2-dev python3-dev
