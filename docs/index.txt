@@ -54,6 +54,7 @@ Arches Documentation
     :caption: Developing With Arches
     :maxdepth: 2
 
+    accessibility
     creating-a-development-environment
     arches-and-elasticsearch
     data-model
