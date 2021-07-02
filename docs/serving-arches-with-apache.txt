@@ -210,6 +210,13 @@ Prepare the Arches Project
 
     The first time this runs it will take a little while (~20k files), and may
     show errors/warnings that you can safely ignore.
+    
+    Finally, make sure Apache has write access to this static directory because 
+    `django-compressor` needs to update the `CACHE` contents inside it:
+    
+    .. code-block::
+    
+        $ sudo chgrp www-data /home/ubuntu/Projects/my_project/my_project/static
 
     .. important::
 
