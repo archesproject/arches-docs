@@ -44,6 +44,7 @@ read the notes below. Where necessary, OS-specific installation notes are includ
 If you plan to use the Arches Collector Mobile app, you must install CouchDB.
 
 :CouchDB 2.x:
+    - Ubuntu 20 users must install CouchDB 2.x `with Docker <https://docs.couchdb.org/en/stable/install/docker.html>`_.
     - Please see :ref:`Arches Collector Checklist` for detailed installation notes.
     - `Official documentation <https://docs.couchdb.org/en/stable/>`_
     - CouchDB is used to sync mobile data collection projects with your main database.
