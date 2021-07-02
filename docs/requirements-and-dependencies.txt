@@ -37,8 +37,7 @@ read the notes below. Where necessary, OS-specific installation notes are includ
 :Elasticsearch 7.4: - Installers: https://www.elastic.co/downloads/past-releases/elasticsearch-7-4-0
     - Elasticsearch is integral to Arches and can be installed and configured many ways.
       For more information, see :ref:`Arches and Elasticsearch`.
-:GDAL > 1.11.5: - **Windows** Use the `OSGeo4W installer <https://trac.osgeo.org/osgeo4w/>`_, and choose to install the GDAL package (you don't need QGIS or GRASS). After installation, add ``C:\OSGeo4W64\bin`` to your system's ``PATH`` environment variable.
-    - **macOS** Use version 3.6.1 (3.6.2 has caused trouble).
+:GDAL > 2.2.x: - **Windows** Use the `OSGeo4W installer <https://trac.osgeo.org/osgeo4w/>`_, and choose to install the GDAL package (you don't need QGIS or GRASS). After installation, add ``C:\OSGeo4W64\bin`` to your system's ``PATH`` environment variable.
 :Yarn: - Installation: https://yarnpkg.com/lang/en/docs/install
     - **Windows** Use the .msi installer in the link above, but first install `Node.js <https://nodejs.org/>`_.
 
