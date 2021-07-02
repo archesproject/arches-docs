@@ -31,19 +31,24 @@ will benefit your production installation.
 
 2. Install ``mod_wsgi`` 
 
-    There are two ways to install ``mod_wsgi``.
-   
-    **Installing mod_wsgi directly into your Python virtual environment**
+    There are two ways to install ``mod_wsgi``. Both of the require you to start by installing the Apache and Python development headers.
+    
+    .. code-block:: bash
+    
+        $ sudo apt install apache2-dev python3-dev
+    
+    .. note::
 
-    You can use ``pip`` to install ``mod_wsgi`` into your virtual environment, though you will need to install Apache and Python development headers first as shown below.
+        You may need to install the Python dev package specific to your Python version, e.g. ``python3.8-dev``.
+    
+    Now follow one of the following two options:
+   
+    **Install mod_wsgi directly into your Python virtual environment**
 
     .. code-block:: bash
 
-        $ sudo apt install apache2-dev python3-dev
         $ source /home/ubuntu/Projects/ENV/bin/activate
         (ENV)$ pip install mod_wsgi
-    
-    *It's possible you may need to install the Python dev package specific to your Python version, e.g. ``python3.8-dev``.*
 
     Generate the link path to ``mod_wsgi``.
 
@@ -55,18 +60,18 @@ will benefit your production installation.
 
     .. code-block:: bash
 
-        LoadModule wsgi_module "/srv/ENV/lib/python3.7/site-packages/mod_wsgi/server/mod_wsgi-py37.cpython-37m-x86_64-linux-gnu.so"
-        WSGIPythonHome "/srv/ENV"
+        LoadModule wsgi_module "<your venv path>/lib/python3.7/site-packages/mod_wsgi/server/mod_wsgi-py37.cpython-37m-x86_64-linux-gnu.so"
+        WSGIPythonHome "<your venv path>"
 
-    Copy these two lines, you will use them in the next step.
+    Copy these two lines, you will use them in step 3.
     
-    **Installing mod_wsgi directly system-wide**
+    **Install mod_wsgi system-wide**
 
-    You can use ``apt`` to install at the system-level:
+    Alternatively, you can use ``apt`` to install at the system level:
 
     .. code-block:: bash
     
-        $ sudo apt install libapache2-mod-wsgi-py3 apache2-dev python3-dev
+        $ sudo apt install libapache2-mod-wsgi-py3
 
     Note that the version of Python 3 installed at the system-level may need to match the version used to create the virtual environment pointed to in the config.
     For example, if ``libapache2-mod-wsgi-py3`` is compiled against Python 3.8, use Python 3.8 for your virtual environment.
@@ -216,6 +221,7 @@ Prepare the Arches Project
     
     .. code-block::
     
+        $ sudo chmod 775 /home/ubuntu/Projects/my_project/my_project/static
         $ sudo chgrp www-data /home/ubuntu/Projects/my_project/my_project/static
 
     .. important::
