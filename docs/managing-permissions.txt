@@ -2,7 +2,19 @@
 Managing Permissions
 ######################
 
-Permissions allow you to tailor the user experience by letting you control which data a user or group can view, edit, or delete.
+Permissions in Arches are handled on a few different levels.
+
+* `Managing Users and Groups in Django Admin`_
+
+  *Determine who can access what parts of Arches using the built-in Django admin interface.*
+
+* `Resource Model Permissions`_
+
+  *Determine which Users and Groups can read/edit/delete specific portions of a Resources Model.*
+
+* `Resource Instance Permissions`_
+
+  *Grant access to specific Resource instances on a per-User and/or per-Groups basis.*
 
 Managing Users and Groups in Django Admin
 -----------------------------------------
@@ -80,9 +92,10 @@ a member of as many different groups as needed.
 Feel free to make new groups as needed, but do not remove any of those listed above. Groups are also used in
 other aspects of permissions as described below.
 
-Resource Model permissions
+Resource Model Permissions
 -----------------------------
-Permissions are applied to each card and by default, the guest user (aka anonymous user) has read privileges to all data. If you have data you do not want to share with all users, follow these directions when designing your database: :ref:`Permissions Tab`.
+Permissions are applied to each card and by default, the guest user (aka anonymous user) has read privileges to all data.
+If you have data you do not want to share with all users, follow these directions when designing your database: :ref:`Permissions Tab`.
 
 Resource Instance Permissions
 -----------------------------
