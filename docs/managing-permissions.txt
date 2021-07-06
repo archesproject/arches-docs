@@ -4,9 +4,81 @@ Managing Permissions
 
 Permissions allow you to tailor the user experience by letting you control which data a user or group can view, edit, or delete.
 
-User Permissions in the Django UI
----------------------------------
-https://github.com/archesproject/arches-docs/issues/98
+Managing Users and Groups in Django Admin
+-----------------------------------------
+
+Arches is a complex platform, and some users must be able to access specific areas of the application while being restricted from others.
+This level of access is handled by adding Users to certain Groups through the Django admin interface.
+
+.. note::
+  You can access the Django admin at ``localhost:8000/admin``, the default admin credentials are ``admin/admin``,
+  which must be changed in production. **Any user with "staff" status can access the Django admin panel.**
+
+Once logged into the admin panel, you'll see this at the top of the page:
+
+.. figure:: images/django-admin1.png
+    :width: 100%
+    :align: center
+
+    Arches site administration in Django admin panel.
+
+Click **Users** to see a list of all your Arches users. Selecting a user will yield a generic
+profile page like this:
+
+.. figure:: images/django-admin2.png
+    :width: 100%
+    :align: center
+
+    User's admin profile
+
+In the "Permissions" section here there are three fields.
+
+:Active: This account is active and the user can log in. Unchecking this box allows you to retain a user account while disallowing them from accessing Arches.
+:Staff status: This user can access (and make changes within) the Django admin panel.
+:Superuser status: This user has full access to the entire Arches platform, and is considered a member of every Group.
+
+Next, you'll see where you can assign the user to different Groups. Arches comes with many default
+different groups, and each one gives its members access to different parts of the application. A user can be
+a member of as many different groups as needed.
+
+:Graph Editor:
+  :Use Case: For creating and testing branches and models.
+  :Access Privileges: Create/design graphs, branches, functions, and RDM. Add/edit business data with Resource Editor privileges. Unable to access system settings or mobile projects.
+
+:Resource Editor:
+  :Use Case: Ability to add/edit/delete provisional data more liberally than a Crowdsource Editor user.
+  :Access Privileges: Add/edit/delete resources.
+
+:RDM Administrator:
+  :Use Case: Add/edit/manage RDM concepts
+  :Access Privileges: Full access to the RDM - no access to the rest of Arches.
+
+:Application Administrator:
+  :Use Case: Control over Django admin page... can add/edit/delete users and user groups within Django admin console
+  :Access Privileges: Has Django superuser status (see above) which gives it full access to Arches.
+
+:System Administrator:
+  :Use Case: Changing data stored in the system settings graph.
+  :Access Privileges: Ability to access/edit data in Arches System Settings.
+
+:Mobile Project Administrator:
+  :Use Case: For creating, configuring, and removing mobile projects
+  :Access Privileges: Full access to the Arches Collector Manager.
+
+:Crowdsource Editor:
+  :Use Case: Creation of provisional data from an untrusted source. Default group user is assigned to when first added to the system via e-mail sign-up.
+  :Access Privileges: Add/edit/delete resources your own provisional data tiles
+
+:Guest:
+  :Use Case: Read-only access for anonymous users (non-authenticated users are automatically in this group)
+  :Access Privileges: Read-only access to all business data
+
+:Resource Reviewer:
+  :Use Case: Review provisional data and promote it to authoritative
+  :Access Privileges: Add/Edit authoritative business data. Ability to promote provisional data to authoritative.
+
+Feel free to make new groups as needed, but do not remove any of those listed above. Groups are also used in
+other aspects of permissions as described below.
 
 Resource Model permissions
 -----------------------------
