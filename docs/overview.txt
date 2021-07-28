@@ -24,9 +24,14 @@ Arches provides core services for creating, reading, updating, and deleting reso
 
 To promote consistent data creation, update, and indexing workflows, Arches implements a Reference Data Manager (RDM) that can manage thesauri. The RDM allows users with the appropriate privileges to update thesaurus entries in a manner compliant with SKOS (http://www.w3.org/2004/02/skos/) and assign the concepts within a thesaurus with data entry forms.
 
-**Arches User and Developer forum:** https://groups.google.com/d/forum/archesproject?hl=en
+**Arches User and Developer forum:** https://community.archesproject.org/
 
 **Version History**
+(full version information: https://www.archesproject.org/roadmap/)
+
+    v5.1  October, 2020: IIIF Image Supprt, Dashboards, Improved JSON-LD, Instance-level permissions
+
+    v5.0  January, 2020: Technology upgrades (Python 3.7, Django 2.3, Postgres 12.0/PostGIS 3.0, Elasticsearch 7.4), Workflows, Task Manager
 
     v4.4  February, 2019: Release of :doc:`Arches Collector <using-arches-collector>` mobile data collection app
 
@@ -60,4 +65,4 @@ Contributing To Arches
 Arches is open source software, which means that with your help it will continue to evolve and improve.
 
 + **Bug Reports and Code Contribution** If you find issues with the Arches interface or code, or have the means to contribute code to fix existing issues, please begin by reading our guidelines for `Contributing to Arches <https://github.com/archesproject/arches/blob/master/CONTRIBUTING.md>`_.
-+ **Translations** We are always hoping to bring Arches to new audiences around the world. Please post on the `Arches forum <https://groups.google.com/d/forum/archesproject?hl=en>`_ if you are interested in contributing a translation.
++ **Translations** We are always hoping to bring Arches to new audiences around the world. Please post on the `Arches forum <https://community.archesproject.org/`_ if you are interested in contributing a translation.
