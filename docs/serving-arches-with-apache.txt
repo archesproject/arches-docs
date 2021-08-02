@@ -56,6 +56,7 @@ will benefit your production installation.
     - As an alternative to ``pip`` installing ``mod-wsgi`` you can use ``apt`` to install at the system-level:
 
     .. code-block:: bash
+
         $ sudo apt install libapache2-mod-wsgi-py3 apache2-dev python3-dev
 
     Note that the version of Python 3 installed at the system-level may need to match the version used to create the virtual environment pointed to in the config.
