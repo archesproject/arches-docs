@@ -47,48 +47,44 @@ The structure of each resources object is as below:
 
 Some id and display information is directly accessible from the object, such as the ``displayname`` and ``displaydescription``. The rest of the resource data is contained in the ``resource`` dictionary as a "disambiguated" version of the resource. 
 
-The dict uses the branch/card/node names as the keys and values are then either readable value or another dict containing nodes.  The structure is based on the graph rather than the cards. The ``@value`` is used when a node contains a value and is also the parent of other nodes.
+The dict uses the branch/card/node names as the keys, with the ``@display_value`` key containing the presentation value for that node. There are other values included in the dicts that can be used to add richer functionality if needed.
 
 .. note::
 
-   This structure closely matches the JSON produced when looking at a resource when specifying the ``format=json``
+   This structure closely matches the JSON produced when looking at a resource when specifying the ``format=json&v=beta``
 
    .. code-block:: bash
 
-      curl http://localhost:8000/resources/<resourceinstanceid>?format=json
+      curl http://localhost:8000/resources/<resourceinstanceid>?format=json&v=beta
+
+   Ensure that you use the ``v=beta`` parameter as the functionality is using this version of the data formatting.
    
 
 .. code-block:: JSON
 
    "resource": {
-      "Activity Descriptions": [{
-               "Activity Description": "Excavation by Department Of Greater London Archaeology, April to May 1990, found a large 'soft spot' which was either a quarry ditch or was dug for dumping waste. Also uncovered features of 20th century date relating to a building called Green Acres.",
-               "Activity Description Type": {
-                  "@value": "Full",
-                  "Activity Description Metatype": ""
-               }
-         }
-      ],
-      "Activity Names": [{
-               "Activity Name": "Open Area Excavation at Lichfield Gardens",
-               "Activity Name Currency": {
-                  "@value": "Current",
-                  "Activity Name Currency Metatype": ""
+       "Descriptions": [{
+               "Description": {
+                   "@display_value": "Amendment date:none"
                },
-               "Activity Name Type": {
-                  "@value": "",
-                  "Activity Name Metatype": ""
+               "Description Language": {
+                   "Description Language Metatype": null
                },
-               "Activity Name Use Type": {
-                  "@value": "Primary",
-                  "Activity Name Use Metatype": ""
+               "Description Type": {
+                   "@display_value": "Notes",
+                   "Description Metatype": null,
+                   "concept_id": "f1cbae8f-0090-47dc-8252-ee533a2deb29",
+                   "language_id": "en",
+                   "value": "Notes",
+                   "valueid": "daa4cddc-8636-4842-b836-eb2e10aabe18",
+                   "valuetype_id": "prefLabel"
                }
-         }
-      ],
-      "Activity Timespan": {},
-      "Location Data": [],
-      "Record_Status_Assignment": {},
-      "System Reference Numbers": {}
+           }
+       ],
+       "Designation and Protection Assignment": [],
+       "Heritage Area Names": [],
+       "Location Data": {},
+       "System Reference Numbers": {}
    }
 
 Custom Template Filters
@@ -102,7 +98,7 @@ To solve this, two new template filters were added to ``arches/arches/templateta
 
 **has_key**
 
-   You can use `has_key` as part of an `if` tag to check if there is a key in the object. If you try to access the object without checking then it may error should the key not be present.
+You can use `has_key` as part of an `if` tag to check if there is a key in the object. If you try to access the object without checking then it may error should the key not be present.
 
    .. code-block:: HTML
 
@@ -112,25 +108,48 @@ To solve this, two new template filters were added to ``arches/arches/templateta
 
 **val_from_key**
 
-   This function allows you to retrieve a value from a key that is not Django templating compliant. These can be chained to access nested dictionaries (careful that you a sure the nested dictionary exists).
+This function allows you to retrieve a value from a key that is not Django templating compliant. These can be chained to access nested dictionaries (careful that you a sure the nested dictionary exists).
 
    .. code-block:: HTML
 
-      <h2>{{ asset_names|val_from_key:"Asset Name" }}</h2>
+      <h2>{{ asset_names|val_from_key:"Asset Name"|val_from_key:"@display_value" }}</h2>
+
+**json_to_obj**
+
+This function can be used in the rare instance where the value is JSON and you need to convert that to a dict or list in order to access the values.
+
+.. code-block:: HTML
+
+   <a href="{{ external_source|val_from_key:"URL"|val_from_key:"@display_value"|json_to_obj|val_from_key:'url' }}" target="_blank">Document Link</a>
 
 **example** combining ``has_key`` and ``val_from_key``.
 
 .. code-block:: HTML
 
    {% if asset_names|has_key:"Asset Name Use Type" %}
-      <h2>{{ asset_names|val_from_key:"Asset Name" }}</h2>
+      <h2>{{ asset_names|val_from_key:"Asset Name"|val_from_key:"@display_value" }}</h2>
    {% endif %}
 
 **example** of using chained filters to access nested values
 
 .. code-block:: HTML
 
-   <strong>Primary Reference Number: </strong>{{ resource_data|val_from_key:"System Reference Numbers"|val_from_key:"PrimaryReferenceNumber"|val_from_key:"Primary Reference Number" }}
+   <strong>Primary Reference Number: </strong>{{ resource_data|val_from_key:"System Reference Numbers"|val_from_key:"PrimaryReferenceNumber"|val_from_key:"Primary Reference Number"|val_from_key:"@display_value" }}
+
+
+**example** transforming a url dataype value into a dict for use within a data table call
+
+.. code-block:: HTML
+
+   <div class="rcell" data-title="URL">
+      {% with exref|val_from_key:"URL"|val_from_key:"@display_value"|json_to_obj as URL_Dict %}
+         {% if URL_Dict|has_key:"url" and URL_Dict|has_key:"url_label" %}
+            <a href="{{ URL_Dict|val_from_key:'url' }}">{{ URL_Dict|val_from_key:'url_label' }}</a>
+         {% else %}
+            <br />
+         {% endif %}
+      {% endwith %}
+   </div>
 
 Basic Template
 ==============
@@ -183,14 +202,14 @@ Below show examples of how you can fetch specific data out of the resource objec
          {% if resource_data|has_key:"Heritage Asset Names" %}
             {% for n in resource_data|val_from_key:"Heritage Asset Names" %}
                {% if n|has_key:"Asset Name Use Type" %}
-                  {% if n|val_from_key:"Asset Name Use Type"|val_from_key:"@value" == "Primary" %}
-                     <h2>{{ n|val_from_key:"Asset Name" }}</h2>
+                  {% if n|val_from_key:"Asset Name Use Type"|val_from_key:"@display_value" == "Primary" %}
+                     <h2>{{ n|val_from_key:"Asset Name"|val_from_key:"@display_value" }}</h2>
                   {% endif %}
                {% endif %}
             {% endfor %}
          {% endif%}
          <p>
-            <strong>Primary Reference Number: </strong>{{ resource_data|val_from_key:"System Reference Numbers"|val_from_key:"PrimaryReferenceNumber"|val_from_key:"Primary Reference Number" }}<br>
+            <strong>Primary Reference Number: </strong>{{ resource_data|val_from_key:"System Reference Numbers"|val_from_key:"PrimaryReferenceNumber"|val_from_key:"Primary Reference Number"|val_from_key:"@display_value" }}<br>
          </p>
       </blockquote>
    </section>
@@ -234,14 +253,14 @@ Below is an example that includes sections that build tables and group elements 
                   {% if resource_data|has_key:"Heritage Asset Names" %}
                   {% for n in resource_data|val_from_key:"Heritage Asset Names" %}
                      {% if n|has_key:"Asset Name Use Type" %}
-                     {% if n|val_from_key:"Asset Name Use Type"|val_from_key:"@value" == "Primary" %}
-                        <h2>{{ n|val_from_key:"Asset Name" }}</h2>
+                     {% if n|val_from_key:"Asset Name Use Type"|val_from_key:"@display_value" == "Primary" %}
+                        <h2>{{ n|val_from_key:"Asset Name"|val_from_key:"@display_value" }}</h2>
                      {% endif %}
                      {% endif %}
                   {% endfor %}
                   {% endif%}
-                  <p><strong>Primary Reference Number: </strong>{{ resource_data|val_from_key:"System Reference Numbers"|val_from_key:"PrimaryReferenceNumber"|val_from_key:"Primary Reference Number" }}<br>
-                     <strong>ResourceID: </strong>{{ resource_datainstanceid }}
+                  <p><strong>Primary Reference Number: </strong>{{ resource_data|val_from_key:"System Reference Numbers"|val_from_key:"PrimaryReferenceNumber"|val_from_key:"Primary Reference Number"|val_from_key:"@display_value" }}<br>
+                     <strong>ResourceID: </strong>{{ resource_data.resourceinstanceid }}
                   </p>
                </blockquote>
             </section>
@@ -253,7 +272,7 @@ Below is an example that includes sections that build tables and group elements 
                         <div>
                            <h3>OSGB Reference</h3>
                            <p>{% if resource_data|val_from_key:"Location Data"|has_key:"National Grid References" %}
-                              {{ resource_data|val_from_key:"Location Data"|val_from_key:"National Grid References"|val_from_key:"National Grid Reference" }}
+                              {{ resource_data|val_from_key:"Location Data"|val_from_key:"National Grid References"|val_from_key:"National Grid Reference"|val_from_key:"@display_value" }}
                               {% endif %}
                            </p>
                         </div>
@@ -264,10 +283,10 @@ Below is an example that includes sections that build tables and group elements 
                            <div>
                               <h3>Named Location</h3>
                               <p>{% if resource_data|val_from_key:"Location Data"|has_key:"Addresses" %}
-                           {% for address in resource_data|val_from_key:"Location Data"|val_from_key:"Addresses" %}
+                           {% for address in resource_data|val_from_key:"Location Data"|val_from_key:"Addresses"|val_from_key:"@display_value" %}
                               {% if address|has_key:"Address Status" %}
-                              {% if address|val_from_key:"Address Status"|val_from_key:"@value" == "Primary" %}
-                                 {{ address|val_from_key:"Full Address" }}
+                              {% if address|val_from_key:"Address Status"|val_from_key:"@display_value" == "Primary" %}
+                                 {{ address|val_from_key:"Full Address"|val_from_key:"@display_value" }}
                               {% endif %}
                               {% endif %}
                            {% endfor %}
@@ -283,7 +302,7 @@ Below is an example that includes sections that build tables and group elements 
                               <h3>Localities/Administrative Areas</h3>
                            <p>{% if resource_data|val_from_key:"Location Data"|has_key:"Localities/Administrative Areas" %}
                            {% for area in resource_data|val_from_key:"Location Data"|val_from_key:"Localities/Administrative Areas" %}
-                              <b>{{ area|val_from_key:"Area Type"|val_from_key:"@value" }}:</b> {{ area|val_from_key:"Area Names"|val_from_key:"Area Name" }}
+                              <b>{{ area|val_from_key:"Area Type"|val_from_key:"@value" }}:</b> {{ area|val_from_key:"Area Names"|val_from_key:"Area Name"|val_from_key:"@display_value" }}
                            {% endfor %}
                            {% endif %}
                            </p>
@@ -300,8 +319,8 @@ Below is an example that includes sections that build tables and group elements 
                   {% if resource_data|has_key:"Descriptions" %}
                   <div class="keeptogether">
                      {% for desc in resource_data|val_from_key:"Descriptions" %}
-                     <h3>{{ desc|val_from_key:"Description Type"|val_from_key:"@value" }}</h3>
-                     <p>{{ desc|val_from_key:"Description" }}</p>
+                     <h3>{{ desc|val_from_key:"Description Type"|val_from_key:"@display_value" }}</h3>
+                     <p>{{ desc|val_from_key:"Description"|val_from_key:"@display_value" }}</p>
                      {% endfor %}
                   </div>
                   {% endif %}
@@ -316,13 +335,13 @@ Below is an example that includes sections that build tables and group elements 
                         </div>
                         {% for src in resource_data|val_from_key:"External Cross References" %}
                         <div class="rrow">
-                           <div class="rcell" data-title="Number">{{ src|val_from_key:"External Cross Reference Number" }}</div>
+                           <div class="rcell" data-title="Number">{{ src|val_from_key:"External Cross Reference Number"|val_from_key:"@display_value" }}</div>
                            <div class="rcell" data-title="Description">
                               {% if src|has_key:"External Cross Reference Notes" %}
-                              {{ src|val_from_key:"External Cross Reference Notes"|val_from_key:"External Cross Reference Description" }}
+                              {{ src|val_from_key:"External Cross Reference Notes"|val_from_key:"External Cross Reference Description"|val_from_key:"@display_value" }}
                               {% endif %}
                               </div>
-                           <div class="rcell" data-title="Source">{{ src|val_from_key:"External Cross Reference Source" }}</div>
+                           <div class="rcell" data-title="Source">{{ src|val_from_key:"External Cross Reference Source"|val_from_key:"@display_value" }}</div>
                         </div>
                         {% endfor %}
                      </div>
