@@ -2,17 +2,34 @@
 Implementing SSL
 ################
 
-Secure Sockets Layer (SSL) enables the server to establish an encrypted link with its clients. This is more secure than using unencrypted communication. To implement SSL you will need a digital certificate which can be signed either by you or by a Certificate Authority. For more information about the SSL certificates please see `this article <https://www.kaspersky.com/resource-center/definitions/what-is-a-ssl-certificate>`. 
+Secure Sockets Layer (SSL) enables the server to establish an encrypted link with its clients. This is more secure than using unencrypted communication. To implement SSL you will need a digital certificate which can be signed either by you or by a certificate authority. For more information about the SSL certificates please see `this article <https://www.kaspersky.com/resource-center/definitions/what-is-a-ssl-certificate>`_ . 
 
 Implementing SSL on your server can be divided to two stages:
 
-1. Obtaining the SSL certificate.
+1. Obtaining a SSL certificate.
 2. Configuring the webserver.
 
+***************************
+Obtaining a SSL certificate
+***************************
+SSL certificate can be singed either by you using your own private key or by a certificate authority. Each choices has its own prerequisites and consequences. 
 
+
+Self singed
+===========
+A good guide about how to implement this using OpenSSL on Ubuntu 20.04 can be found `here <https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-apache-in-ubuntu-20-04>`_.
 
 .. note::
-    This section follows after the :ref:`Serving Arches with Apache` 
+    This option allows you to implement SSL using your server's IP address without a domain name. However, when accessing the website using any modern browser the connection will be marked as not private.
+
+.. image :: images/connection-not-private.png
+    :target: _images/connection-not-private.png 
+
+Signed by Let's encrypt
+=======================
+
+
+
 
  
 
