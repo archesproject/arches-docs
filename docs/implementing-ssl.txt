@@ -6,16 +6,16 @@ Secure Sockets Layer (SSL) enables the server to establish an encrypted link wit
 
 Implementing SSL on your server can be divided to two stages:
 
-1. Obtaining a SSL certificate.
-2. Configuring the webserver.
++ :ref:`Obtaining a SSL certificate`
++ :ref:`Configuring the webserver`
 
-***************************
+
 Obtaining a SSL certificate
 ***************************
-SSL certificate can be singed either by you using your own private key or by a certificate authority. Each choices has its own prerequisites and consequences. 
+SSL certificate can be signed either by you using your own private key or by a certificate authority. Each choices has its own prerequisites and consequences. 
 
 
-Self singed
+Self signed
 ===========
 A good guide about how to implement this using OpenSSL on Ubuntu 20.04 can be found `here <https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-apache-in-ubuntu-20-04>`_.
 
@@ -28,13 +28,18 @@ A good guide about how to implement this using OpenSSL on Ubuntu 20.04 can be fo
 Signed by Let's encrypt
 =======================
 
+`Let's Encrypt <https://letsencrypt.org/>`_ *is a non-profit certificate authority run by Internet Security Research Group that provides X.509 certificates for Transport Layer Security encryption at no charge.*. You can obtain a certificate from other certificate authorities too. Please keep in mind that some authorities require a fee for their services. 
+
+.. note::
+    For this option you will need a domain name to use for your website
+
+Install certbot
+---------------
+certbot is a tool that helps you obtain a certificate from Let's encrypt. `The official installation instructions for apache running on Ubuntu 20.04 can be found here <https://certbot.eff.org/lets-encrypt/ubuntufocal-apache>`_
 
 
-
- 
-
-
-Install cerbot
---------------
+Configuring the webserver
+*************************
+the 
 
 placeholder for https://github.com/archesproject/arches-docs/issues/110
