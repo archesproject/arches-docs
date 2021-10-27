@@ -2,4 +2,22 @@
 Implementing SSL
 ################
 
+Secure Sockets Layer (SSL) enables the server to establish an encrypted link with its clients. This is more secure than using unencrypted communication. To implement SSL you will need a digital certificate which can be signed either by you or by a Certificate Authority. For more information about the SSL certificates please see `this article <https://www.kaspersky.com/resource-center/definitions/what-is-a-ssl-certificate>`. 
+
+Implementing SSL on your server can be divided to two stages:
+
+1. Obtaining the SSL certificate.
+2. Configuring the webserver.
+
+
+
+.. note::
+    This section follows after the :ref:`Serving Arches with Apache` 
+
+ 
+
+
+Install cerbot
+--------------
+
 placeholder for https://github.com/archesproject/arches-docs/issues/110
