@@ -87,3 +87,10 @@ Before proceeding, you should either alter the ``settings.py`` file in your proj
     updated code, you should run ``yarn install`` and ``python manage.py
     migrate`` to fully update your local install. These commands should be run
     from within ``/arches``.
+
+Running Tests
+=============
+
+Tests must be run from core Arches. Enter ``arches/`` and then use::
+
+    python manage.py test tests --pattern="*.py" --settings="tests.test_settings"
