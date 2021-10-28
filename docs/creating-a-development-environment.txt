@@ -4,7 +4,7 @@ Creating a Development Environment
 
 The following is our recommedation for creating an Arches environment that works well for developers. The first thing to consider is the general structure that will be in place, presumably all in the same directory:
 
-+ ``/ENV`` - A virtual environment, we'll name it ``ENV``. This should be built from Python 2.7.x, and you should make sure pip is up-to-date. `python -m pip install --upgrade pip`
++ ``/ENV`` - A virtual environment, we'll name it ``ENV``. This should be built from Python 3.7+, and you should make sure pip is up-to-date. `python -m pip install --upgrade pip`
 
 + ``/arches`` - The local clone of your fork of the `archesproject/arches <https://github.com/archesproject/arches>`_ repo, which gets installed into your virtual environment. Often, this part of the code is referred to as "core Arches".
 
@@ -15,18 +15,20 @@ The following is our recommedation for creating an Arches environment that works
 Setting Everything Up
 =====================
 
-#. Make sure all dependencies are installed. You may also have external services in mind for some of the Arches dependencies, like a remote Postgres/Postgis or ElasticSearch installation. In that case you'll those credentials eventually, but not immediately. You'll also need ``git`` installed locally.
+#. Install all :ref:`software dependencies <Software Dependencies>`, as well as `Git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`_.
 
-#. Make a new virtual environment built from Python 2.7.x and activate it.
+    .. note::
 
-    .. code-block:: bash
+        You may also be planning to use externally hosted components, like a remote Postgres/PostGIS or Elasticsearch installation. In that case make sure you have the connection information handy.
 
-        virtualenv ENV
+#. Make a new virtual environment and activate it.
+
+    *Linux and macOS*::
+
+        python3 -m venv ENV
         source ENV/bin/activate
 
-    or, to activate on Windows:
-
-    .. code-block:: bash
+    *Windows*::
 
         ENV\Scripts\activate
 
@@ -48,11 +50,11 @@ Setting Everything Up
 
 #. Create the new project you will be working on. In this project you'll make all of the necessary changes to your templates, define all of your settings.py variables, run ``manage.py``, etc. This is also where all your ``yarn`` components will be installed.
 
-    .. code-block:: bash
+    *Linux and macOS*::
 
         (ENV)$ arches-project create my_project
 
-    or on Windows::
+    *Windows*::
 
         (ENV)\> ENV\Scripts\python.exe ENV\Scripts\arches-project create my_project
 
@@ -65,8 +67,6 @@ Setting Everything Up
 
         (ENV)$ cd my_project
         (ENV)$ python manage.py packages -o create_package -d ../my_package
-
-    on Windows remember to change the forward slashes to backward slashes.
 
 ----
 
