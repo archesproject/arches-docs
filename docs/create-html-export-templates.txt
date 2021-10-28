@@ -40,7 +40,9 @@ The structure of each resources object is as below:
       "graph_id": "b9e0701e-5463-11e9-b5f5-000d3ab1e588",
       "legacyid": "06eb7a47-baf7-4c79-aeab-2ffabe2502ea",
       "map_popup": "<Activity Descriptions>",
-      "resource": {"...": "..."},
+      "resource": {
+         "...": "..."
+      },
       "resourceinstanceid": "06eb7a47-baf7-4c79-aeab-2ffabe2502ea"
    }
 
@@ -60,7 +62,7 @@ The dict uses the branch/card/node names as the keys, with the ``@display_value`
    Ensure that you use the ``v=beta`` parameter as the functionality is using this version of the data formatting.
    
 
-.. code-block:: JSON
+.. code-block:: javascript
 
    "resource": {
        "Descriptions": [{
@@ -100,19 +102,19 @@ To solve this, two new template filters were added to ``arches/arches/templateta
 
 You can use `has_key` as part of an `if` tag to check if there is a key in the object. If you try to access the object without checking then it may error should the key not be present.
 
-   .. code-block:: HTML
+.. code-block:: HTML
 
-      {% if asset_names|has_key:"Asset Name Use Type" %}
-         {# you can access without error asset_names["Asset Name Use Type"] #}
-      {% endif %}
+   {% if asset_names|has_key:"Asset Name Use Type" %}
+      {# you can access without error asset_names["Asset Name Use Type"] #}
+   {% endif %}
 
 **val_from_key**
 
 This function allows you to retrieve a value from a key that is not Django templating compliant. These can be chained to access nested dictionaries (careful that you a sure the nested dictionary exists).
 
-   .. code-block:: HTML
+.. code-block:: HTML
 
-      <h2>{{ asset_names|val_from_key:"Asset Name"|val_from_key:"@display_value" }}</h2>
+   <h2>{{ asset_names|val_from_key:"Asset Name"|val_from_key:"@display_value" }}</h2>
 
 **json_to_obj**
 
@@ -120,7 +122,7 @@ This function can be used in the rare instance where the value is JSON and you n
 
 .. code-block:: HTML
 
-   <a href="{{ external_source|val_from_key:"URL"|val_from_key:"@display_value"|json_to_obj|val_from_key:'url' }}" target="_blank">Document Link</a>
+   <a href="{{ external_source|val_from_key:'URL'|val_from_key:'@display_value'|json_to_obj|val_from_key:'url' }}" target="_blank">Document Link</a>
 
 **example** combining ``has_key`` and ``val_from_key``.
 
@@ -222,7 +224,7 @@ Below is an example that includes sections that build tables and group elements 
 
 .. note::
 
-   Use ``div class="keeptogether"></div>`` blocks around tables and other iterated sections to force the styling to keep things on the same page where possible when printing.
+   Use ``<div class="keeptogether"></div>`` blocks around tables and other iterated sections to force the styling to keep things on the same page where possible when printing.
 
 .. code-block:: HTML
 
