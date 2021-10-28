@@ -68,6 +68,7 @@ Arches Documentation
     creating-custom-components
     creating-resource-reports
     creating-new-map-layers
+    create-html-export-templates
 
     localizing-arches
     task-management
