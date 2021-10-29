@@ -38,7 +38,7 @@ This directory holds HTML templates that you can modify to customize the brandin
 datatypes, functions, and widgets
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-These directories will store the custom datatypes, functions, and widgets that you can create for the project. Developers interested in pursuing these customizations should start with `this customization documentation <https://github.com/archesproject/arches/wiki/Creating-New-Functions%2C-DataTypes%2C-and-Widgets>`_.
+These directories will store the custom datatypes, functions, and widgets that you can create for the project. Developers interested in pursuing these customizations should start with :ref:`Creating Custom Components`.
 
 ######################
 Understanding Packages
