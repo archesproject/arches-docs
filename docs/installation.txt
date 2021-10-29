@@ -15,14 +15,15 @@ Create a Virtual Environment
 
 .. sidebar:: Virtual Environment Reference
 
-    + `Python documentation <https://docs.python.org/3.7/tutorial/venv.html>`_
+    If you are unfamiliar with virtual environments, please take a look at the `Python documentation <https://docs.python.org/3.7/tutorial/venv.html>`_ before continuing.
 
-You need a **Python 3.7+** virtual environment. :ref:`Skip ahead <Install Arches with pip>` if you have already created and activated one. If you are unfamiliar with
-virtual environments, we recommend a look at the `Python documentation <https://docs.python.org/3.7/tutorial/venv.html>`_. Use the commands below for a quick start.
+You need a **Python 3.7+** virtual environment. :ref:`Skip ahead <Install Arches with pip>` if you have already created and activated one. Otherwise, use the commands below for a quick start.
 
-**Create a virtual environment (will be a new directory called ENV)**::
+**Create a virtual environment**::
 
     python3 -m venv ENV
+
+This will generate a new directory called ``ENV``.
 
 .. note::
 
@@ -38,7 +39,7 @@ The following are relative paths to an ``activate`` script within ENV.
 
 *Windows*::
 
-    ENV\Scripts\activate.bat``
+    ENV\Scripts\activate.bat
 
 .. note::
 
@@ -53,7 +54,11 @@ see at least 3.7, check your original Python installation, delete the entire ``E
 directory, and create a new virtual environment. Use ``exit()`` or ``ctrl+C`` to
 leave the interpreter.
 
-With your virtual environment activated, you are ready to continue.
+**Upgrade pip**
+
+A recommended step, though not always strictly necessary::
+
+    python -m pip install --upgrade pip
 
 Install Arches with pip
 ------------------------
