@@ -92,7 +92,7 @@ Given that there is a header (of any level) somewhere in the documentation that 
     Arches Collector Workflow
     -------------------------
 
-#### Example 1
+#### Example 1 - Display the header name itself
 
 - reStructured Text
 
@@ -102,7 +102,7 @@ Given that there is a header (of any level) somewhere in the documentation that 
 
     See [Arches Collector Workflow](https://arches.readthedocs.io/en/stable/using-arches-collector/#arches-collector-workflow) for more information.
 
-#### Example 2
+#### Example 2 - Display arbitrary text
 
 - reStructured Text
 
@@ -145,4 +145,4 @@ and while this works on a local build, it does not work when published in RTD (h
 `#006b19` ![#006b19](https://via.placeholder.com/30/006b19/ffffff?text=4.4)
 `#005a15` ![#005a15](https://via.placeholder.com/30/005a15/ffffff?text=5.0)
 `#00480e` ![#00480e](https://via.placeholder.com/30/00480e/ffffff?text=5.1)
-`#003f0a` ![#003f0a](https://via.placeholder.com/30/003f0a/ffffff?text=+)
+`#003f0a` ![#003f0a](https://via.placeholder.com/30/003f0a/ffffff?text=6.0)
