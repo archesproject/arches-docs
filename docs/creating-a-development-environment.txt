@@ -46,7 +46,7 @@ Core Arches
         (ENV)arches/$ git fetch
         (ENV)arches/$ git checkout stable/6.0.0
     
-    will give you the stable branch for the 6.0.0 release. If you want to use the latest 
+    will give you the stable branch for the 6.0.0 release.
 
 #. Install the local core Arches
 
