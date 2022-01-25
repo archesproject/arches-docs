@@ -1,5 +1,0 @@
-##############################
-Adding Javascript Dependencies
-##############################
-
-https://github.com/archesproject/arches-docs/issues/61
