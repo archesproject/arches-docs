@@ -2,6 +2,8 @@
 
 This repo holds the official Arches documentation, published at https://arches.readthedocs.io. It uses reStructuredText, built with Sphinx.
 
+> Note: Historically we have used the **.txt** extension, but we are slowly moving to using **.rst** so that GitHub will render nice previews (see [#255](https://github.com/archesproject/arches-docs/issues/255)). If you are creating new documentation, please use **.rst**.
+
 ## reporting an issue
 
 If you find a problem with the documentation, or feel that something is lacking, first look through the [existing issues](https://github.com/archesproject/arches-docs/issues) in this repo to see if someone has already reported the problem, and then add your input to the ticket (at least a thumbs up!). If no ticket exists for the problem, please [create a new one](https://github.com/archesproject/arches-docs/issues/new) and add as much detail as possible.
@@ -10,9 +12,9 @@ If you find a problem with the documentation, or feel that something is lacking,
 
 We welcome content contributions. Please begin by forking this repo. To contribute you will make changes to your fork, and then make pull requests to ask that those changes be incorporated here.
 
-You can edit your fork either directly in Github (good for very small or non-complex edits) or by cloning and building the documentation locally (necessary for substantial edits).
+You can edit your fork either [directly in Github](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files) (good for very small or non-complex edits) or by cloning and building the documentation locally (necessary for substantial edits).
 
-In either case, you'll need to consider whether your documentation contribution should be for the **current stable release** of Arches, for a **new/unreleased feature**, or for both. Because of our branch versioning system (see below), your answer will require slightly different workflows. If you are new to Github, and the answer is "both", then just follow the steps for new/unreleased features below, and we'll help you figure the rest out.
+In either case, you'll need to consider whether your documentation contribution should be for the **current stable release** of Arches, for a **new/unreleased feature**, or for **both**. Because of our branch versioning system (see below), your answer will require slightly different workflows. If you are new to Github, and the answer is **both**, then please follow the steps for new/unreleased features below, and we'll help you figure the rest out.
 
 - **To document new/unreleased features (arches.readthedocs.io/en/latest)**
 
@@ -58,28 +60,37 @@ Any documentation for unreleased features should be committed to `master`. Any d
     
 ## making a local build
 
-+ to install
++ install
 
   first create and activate a python virtual environment. then:
 
       git clone https://github.com/<your gh username>/arches-docs
       cd arches-docs
       pip install -r requirements.txt
-    
-+ to build
+
++ build with auto-refresh (recommended)
+
+      sphinx-autobuild docs docs/_build/html
+
+    + view at `http://127.0.0.1:8000`
+
+        Whenever a file is changed the docs will automatically be rebuilt and the browser will be refreshed.
+
++ build manually
 
       cd docs
       make html
-    
-+ to view, open `docs/_build/html/index.html` in a browser
+      cd _build/html
+      python -m http.server
 
-+ to build a non-master version, checkout the appropriate branch
+    + view at `http://127.0.0.1:8000`
+
++ to build a non-master version, just checkout the appropriate branch
 
       git fetch --all
       git branch 4.1.1 origin/4.1.1
-      make html
-    
-    you may want to delete the `_build` directory between builds of different versions, or if big changes have been made
+
+> Note: You may want to delete the `_build` directory between builds of different versions, or if big changes have been made.
 
 ## patterns to follow when writing
 
