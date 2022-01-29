@@ -94,11 +94,13 @@ Registering your report:
 
 Finally, in the Arches Graph Designer interface, navigate to the "Cards" tab of the resource model this report is for, click the root/top node in the card tree (is the name of the graph/resource model) in the left-hand side. On the far-right you will see a heading "Report Configuration". Select your custom report from the dropdown labeled "Template", and save changes. 
 
-Troubleshooting Tips:
+**Troubleshooting Tips**
+
 - Ensure that all references to a component name are consistent. 
 - Ensure that references to a template (``.htm`` file) are consistent.
 - Ensure your report exists in your database by checking the "report_templates" table.
 
-Further Interest:
+**Further Interest**
+
 Because templates often call other templates, e.g. the default report template for a resource instance in turn calls the default card component template, it may be of interest to either override or create a custom component for cards which get rendered within resource reports.
 
