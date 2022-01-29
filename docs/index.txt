@@ -57,7 +57,6 @@ Arches Documentation
     creating-extensions
     creating-new-map-layers
     create-html-export-templates
-    managing-javascript-dependencies
 
 .. toctree::
     :caption: For Developers
