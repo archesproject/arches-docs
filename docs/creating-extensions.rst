@@ -26,8 +26,8 @@ Types of Extensions
 - :doc:`Search Filters <extensions/search-filters>`
     - Use these to add extra search capabilities to the interface, or to inject extra filters behind the scenes.
 - :doc:`Widgets <extensions/widgets>`
-    - an example formdata parameter
-- :doc:`Workflows <extensions/resource-reports>`
+    - Widgets allow you to customize how data entered into Arches, and how that data is presented to the public.
+- :doc:`Workflows <extensions/workflows>`
     - Workflows are a special type of Plugin that allow you to abstract the data entry process away from the default graph tree interface into a step-through set of pages.
 
 Extension Architecture

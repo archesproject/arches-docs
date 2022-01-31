@@ -2,7 +2,7 @@
 Workflows
 #########
 
-Workflows are a type of :ref:`Plugin` that can simplify the data entry process. A workflow is composed of one or more cards from a resource model, placing them in a step-through set of forms. This provides users the ability to create new resource instances without having to traverse card-by-card through the resource model tree.
+Workflows are a type of :doc:`Plugin <plugins>` that can simplify the data entry process. A workflow is composed of one or more cards from a resource model, placing them in a step-through set of forms. This provides users the ability to create new resource instances without having to traverse card-by-card through the resource model tree.
 
 Workflows can be complex too, facilitating the creation of many different inter-related resource instances simultaneously. We'll use a very simple example here, however, to show how a workflow can be used to extract just a few cards from a large resource model to facilitate a "quick create" task that is easy for users to complete.
 
@@ -22,10 +22,10 @@ In other words, instead of using this interface to create a new resource:
 
     A simple workflow abstracts data entry away from the card tree into forms.
 
-Creating a Workflow
-===================
+Creating a Workflow - the Basics
+================================
 
-A very basic workflow will be presented here, based on the `arches-example-pkg <https://github.com/archesproject/arches-example-pkg>`_ resource model called "Heritage Resource Model". This resource model has many cards, but we will make a workflow that pulls just three of these cards out--Name/Name Type, Resource Type Classification, and Keyword.
+A very simple workflow will be presented here, based on the `arches-example-pkg <https://github.com/archesproject/arches-example-pkg>`_ resource model called "Heritage Resource Model". This resource model has many cards, but we will make a workflow that pulls just three of these cards out--Name/Name Type, Resource Type Classification, and Keyword.
 
 Workflows follow the standard extension pattern: an HTML/JS component and a JSON config. For this example, we have::
 
@@ -45,7 +45,7 @@ The JSON configuration looks like this:
 
 The majority of the work is done by the creation of the workflow steps.
 
-.. note:: Rundown of this file's structure coming soon.
+.. note:: Detailed description of this file's structure coming soon.
 
 .. literalinclude:: ../examples/quick-resource-create-workflow.js
     :language: javascript
