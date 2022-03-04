@@ -1,0 +1,12 @@
+{
+    "pluginid": "59b9a9cb-1654-43a6-abb7-7e4ca4c5bfea",
+    "name": "Quick Create Resource",
+    "icon": "fa fa-check",
+    "component": "views/components/plugins/quick-resource-create-workflow",
+    "componentname": "quick-resource-create-workflow",
+    "config": {
+        "show": true
+    },
+    "slug": "quick-resource-create-workflow",
+    "sortorder": 0
+}

@@ -51,30 +51,30 @@ Arches Documentation
     using-arches-collector
 
 .. toctree::
-    :caption: Developing With Arches
+    :caption: Extending Arches
     :maxdepth: 2
 
-    accessibility
-    creating-a-development-environment
-    arches-and-elasticsearch
-    data-model
-    command-line-reference
-
-    api
-    import-export
-    v3-migration
-    integrating-arches-with-arcgis
-
-    creating-custom-components
-    creating-resource-reports
+    creating-extensions
     creating-new-map-layers
     create-html-export-templates
 
+.. toctree::
+    :caption: For Developers
+    :maxdepth: 2
+
+    accessibility
+    arches-and-elasticsearch
+    api
+    command-line-reference
+    creating-a-development-environment
+    data-model
+    integrating-arches-with-arcgis
     localizing-arches
-    task-management
     managing-and-hosting-iiif
+    v3-migration
+    import-export
+    task-management
     using-arches-offline
-    adding-javascript-dependencies
 
 .. toctree::
     :caption: Running Arches in Production

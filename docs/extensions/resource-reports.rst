@@ -1,6 +1,6 @@
-#########################
-Creating Resource Reports
-#########################
+################
+Resource Reports
+################
 
 Arches enables projects to have custom reports on a per-resource model basis. Below is a guide to create and implement a custom resource report.
 
@@ -45,7 +45,7 @@ Sample report ``.js`` file:
 
 Sample report ``.htm`` file (note that extending the core arches default report is optional. See core arches default report for reference on overriding specific tagged sections, e.g. "{% block header %}".):
 
-.. code-block:: bash
+.. code-block:: html
 
         {% extends "views/report-templates/default.htm" %}
         {% load i18n %}
@@ -88,16 +88,19 @@ Before registering your report, ensure that named references to the various repo
 
 Registering your report:
 
-.. code-block:: bash
+.. code-block::
 
-        (venv) $ python manage.py report register -s ./my_proj/reports/custom_report.json
+        (ENV) $ python manage.py report register -s ./my_proj/reports/custom_report.json
 
 Finally, in the Arches Graph Designer interface, navigate to the "Cards" tab of the resource model this report is for, click the root/top node in the card tree (is the name of the graph/resource model) in the left-hand side. On the far-right you will see a heading "Report Configuration". Select your custom report from the dropdown labeled "Template", and save changes. 
 
-Troubleshooting Tips:
+**Troubleshooting Tips**
+
 - Ensure that all references to a component name are consistent. 
 - Ensure that references to a template (``.htm`` file) are consistent.
 - Ensure your report exists in your database by checking the "report_templates" table.
 
-Further Interest:
+**Further Interest**
+
 Because templates often call other templates, e.g. the default report template for a resource instance in turn calls the default card component template, it may be of interest to either override or create a custom component for cards which get rendered within resource reports.
+
