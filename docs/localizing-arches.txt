@@ -2,4 +2,73 @@
 Localizing Arches
 #################
 
-https://github.com/archesproject/arches-docs/issues/210
+If you want to support localization in your Arches instance, you'll first need to do the following:
+
+1. Update your settings.py file by adding this import statement at the top:
+
+.. code-block:: python
+
+    from django.utils.translation import gettext_lazy as _
+
+2. Next copy the MIDDLEWARE setting to your project's settings.py file.  If it's already in your settings.py file, be sure to uncomment ```"django.middleware.locale.LocaleMiddleware"```
+
+.. code-block:: python
+
+    MIDDLEWARE = [
+        # 'debug_toolbar.middleware.DebugToolbarMiddleware',
+        "corsheaders.middleware.CorsMiddleware",
+        "django.middleware.security.SecurityMiddleware",
+        "django.contrib.sessions.middleware.SessionMiddleware",
+        #'arches.app.utils.middleware.TokenMiddleware',
+        "django.middleware.locale.LocaleMiddleware",
+        "django.middleware.common.CommonMiddleware",
+        "django.middleware.csrf.CsrfViewMiddleware",
+        "arches.app.utils.middleware.ModifyAuthorizationHeader",
+        "oauth2_provider.middleware.OAuth2TokenMiddleware",
+        "django.contrib.auth.middleware.AuthenticationMiddleware",
+        "django.contrib.messages.middleware.MessageMiddleware",
+        # "django.middleware.clickjacking.XFrameOptionsMiddleware",
+        "arches.app.utils.middleware.SetAnonymousUser",
+    ]
+
+3. Next add the LANGUAGE_CODE, LANGUAGES, and SHOW_LANGUAGE_SWITCH to your projects's settings.py file and update them to reflect your project's requirements:
+
+.. code-block:: python
+
+    # default language of the application
+    # language code needs to be all lower case with the form:
+    # {langcode}-{regioncode} eg: en, en-gb ....
+    # a list of language codes can be found here http://www.i18nguy.com/unicode/language-identifiers.html
+    LANGUAGE_CODE = "en"
+    # list of languages to display in the language switcher, 
+    # if left empty or with a single entry then the switch won't be displayed
+    # language codes need to be all lower case with the form:
+    # {langcode}-{regioncode} eg: en, en-gb ....
+    # a list of language codes can be found here http://www.i18nguy.com/unicode/language-identifiers.html
+    LANGUAGES = [
+    ('de', _('German')),
+    ('en', _('English')),
+    ('en-gb', _('British English')),
+    ('es', _('Spanish')),
+    ]
+    # override this to permenantly display/hide the language switcher
+    SHOW_LANGUAGE_SWITCH = len(LANGUAGES) > 1
+
+4. Now add this import statement to the top of your urls.py file:
+
+.. code-block:: python
+
+    from django.conf.urls.i18n import i18n_patterns
+    
+5. Finally add the following code to the end of your urls.py file:
+
+.. code-block:: python
+
+    if settings.SHOW_LANGUAGE_SWITCH is True:
+        urlpatterns = i18n_patterns(*urlpatterns)
+
+----
+
+Once the system is prepared for localization, the next steps involve generating a Django message file or .po file which will contain all available translation strings in Arches and how they should be translated in any given language.
+
+For more information, see `Localization: how to create language files <https://docs.djangoproject.com/en/4.0/topics/i18n/translation/#localization-how-to-create-language-files>`_ in the Django documentation.
