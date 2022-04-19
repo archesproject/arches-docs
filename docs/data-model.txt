@@ -2,9 +2,22 @@
 Data Model
 ##########
 
+.. figure:: images/arches-data-model-2022-04-18.png
+    :width: 100%
+    :align: center
+
+    Arches data model.
+
+.. figure:: images/full-data-model-2022-04-18.png
+    :width: 100%
+    :align: center
+
+    Full model of all apps.
+
 ***********************
 Resource Model Overview
 ***********************
+
 
 Resources in an Arches database are separated into distinct Resource
 Models designed to represent a kind of physical real-world resource,
@@ -422,20 +435,3 @@ Used to validate data entered into ``widgets``
 
 .. literalinclude:: examples/arches/ddatatype.py
    :language: python
-
-
-******************************
-Data Model Graph Visualization
-******************************
-
-.. figure:: images/datamodel-arches-4.4.1-032119.svg
-    :height: 100px
-    :align: center
-
-    Data model showing only Arches models.
-
-.. figure:: images/datamodel-full-4.4.1-032119.svg
-    :height: 100px
-    :align: center
-
-    Full data model.
