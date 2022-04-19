@@ -19,7 +19,7 @@ Types of Extensions
 
         .. code-block:: text
 
-            my_project/cards/my-card.json                               <-- Registration config
+            my_project/cards/my-card.json                        <-- Registration config
             my_project/media/js/views/components/cards/my-card.js       <-- UI component
             my_project/templates/views/components/cards/my-card.htm     <-- UI component
 - :doc:`Datatypes <extensions/datatypes>`
@@ -28,16 +28,16 @@ Types of Extensions
 
         .. code-block:: text
 
-            my_project/dataypes/my_datatype.py                          <-- Main logic (and registration config)
-            my_project/media/js/views/dataypes/my-datatype.js           <-- UI component
-            my_project/templates/views/dataypes/widgets/my-datatype.htm <-- UI component
+            my_project/dataypes/my_datatype.py   <-- Main logic (and registration config)
+            my_project/media/js/views/dataypes/my-datatype.js            <-- UI component
+            my_project/templates/views/dataypes/widgets/my-datatype.htm  <-- UI component
 - :doc:`Functions <extensions/functions>`
     - Can be triggered whenever a tile is saved, providing a framework for the introduction of Python code into day-to-day operations.
     - **Structure**
 
         .. code-block:: text
 
-            my_project/functions/my_function.py                             <-- Main logic (and registration config)
+            my_project/functions/my_function.py     <-- Main logic (and registration config)
             my_project/media/js/views/functions/my-function.js              <-- UI component
             my_project/templates/views/functions/widgets/my-function.htm    <-- UI component
 - :doc:`Plugins <extensions/plugins>`
@@ -46,7 +46,7 @@ Types of Extensions
 
         .. code-block:: text
 
-            my_project/plugins/my-plugin.json                           <-- Registration config
+            my_project/plugins/my-plugin.json                    <-- Registration config
             my_project/media/js/views/components/plugins/my-plugin.js   <-- UI component
             my_project/templates/views/components/plugins/my-plugin.htm <-- UI component
 - :doc:`Resource Reports <extensions/resource-reports>`
@@ -55,7 +55,7 @@ Types of Extensions
 
         .. code-block:: text
 
-            my_project/reports/my-report.json                                       <-- Registration config
+            my_project/reports/my-report.json                                <-- Registration config
             my_project/media/js/views/components/report-templates/my-report.js      <-- UI component
             my_project/templates/views/components/report-templates/my-report.htm    <-- UI component
 - :doc:`Search Filters <extensions/search-filters>`
@@ -64,33 +64,38 @@ Types of Extensions
 
         .. code-block:: text
 
-            my_project/search/my_filter.py                              <-- Main logic (and registration config)
+            my_project/search/my_filter.py      <-- Main logic (and registration config)
             my_project/media/js/views/components/search/my-filter.js    <-- UI component
             my_project/templates/views/components/search/my-filter.htm  <-- UI component
-            my_project/cards/my-new-card.json
 - :doc:`Widgets <extensions/widgets>`
     - Widgets allow you to customize how data entered into Arches, and how that data is presented to the public.
     - **Structure**
 
         .. code-block:: text
 
-            my_project/widgets/my-widget.json                           <-- Registration config
+            my_project/widgets/my-widget.json                    <-- Registration config
             my_project/media/js/views/components/widgets/my-widget.js   <-- UI component
             my_project/templates/views/components/widgets/my-widget.htm <-- UI component
 - :doc:`Workflows <extensions/workflows>`
     - Workflows are a special type of Plugin that allow you to abstract the data entry process away from the default graph tree interface into a step-through set of pages.
-    - **Structure**
+    - **Basic Structure**
 
         .. code-block:: text
 
-            my_project/plugins/my-workflow.json                             <-- Registration config
-            my_project/media/js/views/components/plugins/my-workflow.js     <-- UI component
-            my_project/templates/views/components/plugins/my-workflow.htm   <-- UI component
+            my_project/plugins/my-workflow.json                           <-- Registration config
+            my_project/media/js/views/components/plugins/my-workflow.js     <-- Main UI component
+            my_project/templates/views/components/plugins/my-workflow.htm   <-- Main UI component
+    - **Custom Step Components**
+
+        .. code-block:: text
+
+            my_project/media/js/views/components/workflows/my-workflow-component.js     <-- Step component
+            my_project/templates/views/components/workflows/my-workflow-component.htm   <-- Step component
 
 Extension Architecture
 ======================
 
-Though there is some variation across extension types, Arches does use a common architecture pattern to construct extensions. Generally speaking, the user interface for the extension exists in a new **component** (JS/HTML), and any backend code (if applicable) will be in a **module** (Python). Initial configuration details will be stored in **json**.
+Though there is some variation across extension types, Arches does use a common architecture pattern to construct extensions. Generally speaking, the user interface for the extension exists in a new **component** (JS/HTML), and any backend code (if applicable) will be in a **module** (Python). Initial configuration details will be stored in **json**, either in a standalone file or at the top of a module.
 
 A component
 -----------
@@ -99,8 +104,8 @@ All extensions are expected to have some sort of user interface, and this is cre
 
 These files must live here (using a widget as an example)::
 
-    /myproject/myproject/media/js/views/components/widgets/custom-widget.js 
-    /myproject/myproject/templates/views/components/widgets/custom-widget.htm
+    my_project/media/js/views/components/widgets/custom-widget.js 
+    my_project/templates/views/components/widgets/custom-widget.htm
 
 A JSON configuration file
 -------------------------
@@ -109,16 +114,16 @@ A ``.json`` file will store a set of initial configuration details about the ext
 
 These files typically live here::
 
-    /myproject/myproject/widgets/custom-widget.json
+    my_project/widgets/custom-widget.json
 
 A module
 --------
 
 A few extension types, like Functions, are written in Python. For these, a ``.py`` module must be supplied. Instead of a JSON configuration file, initial configs are stored at the beginning of the module in a dictionary named ``details``.
 
-Their location follows the same pattern as JSON configuration files::
+A module's location follows the same pattern as JSON configuration files::
 
-    /myproject/myproject/datatypes/custom_function.py
+    my_project/datatypes/custom_function.py
 
 Extension Data Models
 ---------------------
@@ -161,7 +166,7 @@ This means that when you run ``yarn install`` on this file, all dependencies fro
 
 **To add a new package**, you just need to run ``yarn add <package name>`` in your project. This will install the new package and update your ``package.json`` file accordingly.
 
-For example, to add `OpenLayers <https://openlayers.org>`_, use ``yarn add ol``. Your ``package.json`` will now look something like:
+For example, to add `OpenLayers <https://openlayers.org>`_, enter the ``my_project`` directory and run ``yarn add ol``. Your ``package.json`` will now look something like:
 
 .. code-block:: json
 
