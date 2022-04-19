@@ -15,25 +15,82 @@ Types of Extensions
 
 - :doc:`Card Components <extensions/card-components>`
     - Used to create modular data entry and data display units that can be nested arbitrarily in the UI. Creating a custom card component can provide a more complex UI.
+    - **Structure**
+
+        .. code-block:: text
+
+            my_project/cards/my-card.json                               <-- Registration config
+            my_project/media/js/views/components/cards/my-card.js       <-- UI component
+            my_project/templates/views/components/cards/my-card.htm     <-- UI component
 - :doc:`Datatypes <extensions/datatypes>`
     - Allows you to store new types of data in Arches, and attach custom logic (like save operations or storage techniques) to that datatype.
+    - **Structure**
+
+        .. code-block:: text
+
+            my_project/dataypes/my_datatype.py                          <-- Main logic (and registration config)
+            my_project/media/js/views/dataypes/my-datatype.js           <-- UI component
+            my_project/templates/views/dataypes/widgets/my-datatype.htm <-- UI component
 - :doc:`Functions <extensions/functions>`
     - Can be triggered whenever a tile is saved, providing a framework for the introduction of Python code into day-to-day operations.
+    - **Structure**
+
+        .. code-block:: text
+
+            my_project/functions/my_function.py                             <-- Main logic (and registration config)
+            my_project/media/js/views/functions/my-function.js              <-- UI component
+            my_project/templates/views/functions/widgets/my-function.htm    <-- UI component
 - :doc:`Plugins <extensions/plugins>`
     - Provides a generic framework for adding new web pages to your project.
+    - **Structure**
+
+        .. code-block:: text
+
+            my_project/plugins/my-plugin.json                           <-- Registration config
+            my_project/media/js/views/components/plugins/my-plugin.js   <-- UI component
+            my_project/templates/views/components/plugins/my-plugin.htm <-- UI component
 - :doc:`Resource Reports <extensions/resource-reports>`
     - Can be customized to augment the way a resource instance is presented to the site users and the public.
+    - **Structure**
+
+        .. code-block:: text
+
+            my_project/reports/my-report.json                                       <-- Registration config
+            my_project/media/js/views/components/report-templates/my-report.js      <-- UI component
+            my_project/templates/views/components/report-templates/my-report.htm    <-- UI component
 - :doc:`Search Filters <extensions/search-filters>`
     - Use these to add extra search capabilities to the interface, or to inject extra filters behind the scenes.
+    - **Structure**
+
+        .. code-block:: text
+
+            my_project/search/my_filter.py                              <-- Main logic (and registration config)
+            my_project/media/js/views/components/search/my-filter.js    <-- UI component
+            my_project/templates/views/components/search/my-filter.htm  <-- UI component
+            my_project/cards/my-new-card.json
 - :doc:`Widgets <extensions/widgets>`
     - Widgets allow you to customize how data entered into Arches, and how that data is presented to the public.
+    - **Structure**
+
+        .. code-block:: text
+
+            my_project/widgets/my-widget.json                           <-- Registration config
+            my_project/media/js/views/components/widgets/my-widget.js   <-- UI component
+            my_project/templates/views/components/widgets/my-widget.htm <-- UI component
 - :doc:`Workflows <extensions/workflows>`
     - Workflows are a special type of Plugin that allow you to abstract the data entry process away from the default graph tree interface into a step-through set of pages.
+    - **Structure**
+
+        .. code-block:: text
+
+            my_project/plugins/my-workflow.json                             <-- Registration config
+            my_project/media/js/views/components/plugins/my-workflow.js     <-- UI component
+            my_project/templates/views/components/plugins/my-workflow.htm   <-- UI component
 
 Extension Architecture
 ======================
 
-Though there is some variation across extension types, some common architecture patterns are used, and understanding these patterns will greatly help the development process.
+Though there is some variation across extension types, Arches does use a common architecture pattern to construct extensions. Generally speaking, the user interface for the extension exists in a new **component** (JS/HTML), and any backend code (if applicable) will be in a **module** (Python). Initial configuration details will be stored in **json**.
 
 A component
 -----------
@@ -63,6 +120,16 @@ Their location follows the same pattern as JSON configuration files::
 
     /myproject/myproject/datatypes/custom_function.py
 
+Extension Data Models
+---------------------
+
+The backend models for each extension type are shown below.
+
+.. figure:: images/extension-model-2022-04-18.png
+    :width: 100%
+    :align: center
+
+    Each extension type is stored in a database table for its kind. *Workflows* are techinally *Plugins* so there is no separate table for them.
 
 Managing Extensions
 ===================
