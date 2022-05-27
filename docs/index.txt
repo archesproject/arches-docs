@@ -35,6 +35,7 @@ Arches Documentation
     rdm
     managing-permissions
     arches-collector-manager
+    spatial-views
 
 .. toctree::
     :caption: Using Arches
