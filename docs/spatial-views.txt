@@ -1,5 +1,5 @@
 #######################
-(Preview) Spatial Views
+Spatial Views (preview)
 #######################
 
 .. warning:: This feature is in preview and therefore is not feature complete or may have some bugs.
@@ -42,13 +42,17 @@ Geometrynodeid
 
 Ismixedgeometrytype
         Boolean value that indicates whether the geometry of the spatial view is a 
-        mix of different geometry types. default value is `false`. This is ideal where
+        mix of different geometry types. This is ideal where
         the spatial view will be used by a vector tile service. 
+
+        Default value is `false`.
 
 Attributenodes
         A JSON object that contains a list of attribute object defining the UUIDs of
         the nodes that comprise the attributes of the spatial view and a text description
         of that attribute for metadata.
+
+        .. note:: The name of the attributes are automatically generated from the node name using Postgresql a compliant format.
 
         .. code-block:: JSON
     
@@ -86,13 +90,15 @@ Attributenodes
 Isactive
         Boolean value that indicates whether the spatial view is available. When set to
         `false` the spatial view is removed from the database, but allows the definition
-        to remain. Setting to `true` recreates the spatial view in the database. default 
-        value is `true`.
+        to remain. Setting to `true` recreates the spatial view in the database.
+        
+        Default is `true`.
 
 Creating your first spatial view
 ================================
 
 Django Admin
+------------
 
         1. Logging in as a superuser, navigate to ``/admin/models/spatialview`` and click the ``ADD SPATIAL VIEW +`` button.
         2. Complete the spatial view details and click the ``Save`` button.
@@ -103,6 +109,7 @@ Django Admin
             :align: center
 
 SQL Insert
+----------
 
         You can load the spatial view definition into the database using the following SQL:
 
@@ -172,14 +179,17 @@ Using the spatial views
 To use the spatial views in your client application or datasource for a service, you will need to configure that client
 to connect to the database using the following credentials:
 
-    * *host*: the hostname of the database server
-    * *port*: the port of the database server
-    * *database*: the name of the database
+    * *host*: the hostname of the arches database server
+    * *port*: the port of the arches database server
+    * *database*: the name of the arches database
     * *user*: arches_spatial_views
     * *password*: arches_spatial_views
 
+If you are using a client that requires views to geometry type specific (for example ArcGIS), ensure that you have set `Ismixedgeometrytype` to false.
+
 .. important:: Currently it is not possible to use the user/groups permissions to restrict access. 
         You will need to manually create specific database users and assign them to the spatial views.
+
 
 Example Usage
 =============
