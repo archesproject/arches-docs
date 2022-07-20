@@ -604,90 +604,138 @@ All the resources referenced in the .relations CSV need to already be in your da
 SQL Import
 ==========
 
-Arches provides database functions that are meant to assist with the loading, updating and querying of Arches business data via SQL.
+Arches provides database functions that are meant to assist with the loading, updating and querying of Arches business data via SQL. This strategy is especially useful if you are migrating an existing SQL database into Arches.
 
 SQL import is more flexible and faster than loading via CSV, however it requires some SQL skills to write scripts to interact with these data.
 
 The core functions that arches provides allow for flexible, on-demand creation of view entities that create relational database entities representing Arches graph schema in the form of database views.  These database views can be queried using SQL, including `INSERT`, `UPDATE`, and `DELETE` operations.
 
-**View creation functions:**
+View creation functions
+-----------------------
 
-    **__arches_create_nodegroup_view**
+``__arches_create_nodegroup_view``
+``````````````````````````````````
 
-        Creates a view representing a specific nodegroup in the Arches graph schema.  The resultant view can be queried using SQL including `INSERT`, `UPDATE`, and `DELETE` operations.  If no view name is provided, then the function will attempt to create a view with the name of the nodegroup's root node processed to be suitable for a database entity name (for example, spaces replaced with underscores).
+Creates a view representing a specific nodegroup in the Arches graph schema.  The resultant view can be queried using SQL including `INSERT`, `UPDATE`, and `DELETE` operations.  If no view name is provided, then the function will attempt to create a view with the name of the nodegroup's root node processed to be suitable for a database entity name (for example, spaces replaced with underscores).
 
-        **Arguments**
+**Arguments**
 
-        :group_id: *uuid* - the UUID of the nodegroup for which a view will be created.
-        :view_name: *text* (optional) - the name to be used for the view being created, defaults to null
-        :schema_name: *text* (optional) - the name of the schema to which the new view will be added, defaults to 'public'
-        :parent_name: *text* (optional) - name used for column containing the parent tile id, defaults to 'parenttileid'
+:group_id: *uuid* - the UUID of the nodegroup for which a view will be created.
+:view_name: *text* (optional) - the name to be used for the view being created, defaults to null
+:schema_name: *text* (optional) - the name of the schema to which the new view will be added, defaults to 'public'
+:parent_name: *text* (optional) - name used for column containing the parent tile id, defaults to 'parenttileid'
 
-        **Returns**
-        
-        :returns: *text* - message indicating success and name of the view created.
+**Returns**
 
-    **__arches_create_branch_views**
+:returns: *text* - message indicating success and name of the view created.
 
-        Creates a series of views (using the above __arches_create_nodegroup_view function) representing a specific nodegroup and all of its child nodegroups (recursively) in the Arches graph schema.
+``__arches_create_branch_views``
+````````````````````````````````
 
-        **Arguments**
+Creates a series of views (using the above __arches_create_nodegroup_view function) representing a specific nodegroup and all of its child nodegroups (recursively) in the Arches graph schema.
 
-        :group_id: *uuid* - the UUID of the nodegroup for which views will be created recursively.
-        :schema_name: *text* (optional) - the name of the schema to which the new views will be added, defaults to 'public'
+**Arguments**
 
-        **Returns**
-        
-        :returns: *text* - message indicating success.
+:group_id: *uuid* - the UUID of the nodegroup for which views will be created recursively.
+:schema_name: *text* (optional) - the name of the schema to which the new views will be added, defaults to 'public'
 
-    **__arches_create_resource_model_views**
+**Returns**
 
-        (Drops if it exists and) creates a schema and a view representing the instances of a specific resource model and series of views (using the above __arches_create_nodegroup_view function) for each of its nodegroups in the Arches graph schema.  If no schema name is provided, then the function will attempt to create a schema with the name of resource model processed to be suitable for a database entity name (for example, spaces replaced with underscores).
+:returns: *text* - message indicating success.
 
-        **Arguments**
+``__arches_create_resource_model_views``
+````````````````````````````````````````
 
-        :model_id: *uuid* - the UUID of the resource model for which views will be created.
-        :schema_name: *text* (optional) - the name of the schema to which the new views will be added, defaults to null
+(Drops if it exists and) creates a schema and a view representing the instances of a specific resource model and series of views (using the above __arches_create_nodegroup_view function) for each of its nodegroups in the Arches graph schema.  If no schema name is provided, then the function will attempt to create a schema with the name of resource model processed to be suitable for a database entity name (for example, spaces replaced with underscores).
 
-        **Returns**
-        
-        :returns: *text* - message indicating success and the name of the schema created.
+**Arguments**
+
+:model_id: *uuid* - the UUID of the resource model for which views will be created.
+:schema_name: *text* (optional) - the name of the schema to which the new views will be added, defaults to null
+
+**Returns**
+
+:returns: *text* - message indicating success and the name of the schema created.
+
+Helper functions
+----------------
 
 In addition to the functions that create views, the helper functions are also available to assist in the creation of tile data using the created views.
 
-**Helper functions:**
+``__arches_get_node_id_for_view_column``
+````````````````````````````````````````
 
-    **__arches_get_node_id_for_view_column**
+Returns the node id for a given view column.  This is useful for subsequently looking up additional information about a column/node in the Arches graph schema, for example, creating a lookup table of concepts for a particular column/node.
 
-        Returns the node id for a given view column.  This is useful for subsequently looking up additional information about a column/node in the Arches graph schema, for example, creating a lookup table of concepts for a particular column/node.
+**Arguments**
 
-        **Arguments**
+:schema_name: *text* - the name of the schema that contains the view of interest
+:view_name: *text* - the name of the view of interest
+:column_name: *text* - the name of the column of interest
 
-        :schema_name: *text* - the name of the schema that contains the view of interest
-        :view_name: *text* - the name of the view of interest
-        :column_name: *text* - the name of the column of interest
+**Returns**
 
-        **Returns**
-        
-        :returns: *uuid* - the node id for the column of interest
+:returns: *uuid* - the node id for the column of interest
 
-    **__arches_get_labels_for_concept_node**
+``__arches_get_labels_for_concept_node``
+````````````````````````````````````````
 
-        Creates a lookup table of concepts for a particular column/node.
+Creates a lookup table of concepts for a particular column/node.
 
-        **Arguments**
+**Arguments**
 
-        :node_id: *uuid* - the UUID for a node in the Arches graph schema for which a lookup table of concepts will be created
-        :language_id: *text* (optional) - the language id for which to return a lookup of concept values, defaults to 'en'
+:node_id: *uuid* - the UUID for a node in the Arches graph schema for which a lookup table of concepts will be created
+:language_id: *text* (optional) - the language id for which to return a lookup of concept values, defaults to 'en'
 
-        **Returns**
-        
-        :returns: *table* - the lookup table of concepts for the column/node of interest.  the resultant table's schema is:
+**Returns**
 
-            :depth: *int* - the depth of the concept values in the concept hierarchy
-            :valueid: *uuid* - the value record's primary key
-            :value: *text* - the value itself (the concept's label)
-            :conceptid: *uuid* - the concept record's primary key
+:returns: *table* - the lookup table of concepts for the column/node of interest.  the resultant table's schema is:
+
+:depth: *int* - the depth of the concept values in the concept hierarchy
+:valueid: *uuid* - the value record's primary key
+:value: *text* - the value itself (the concept's label)
+:conceptid: *uuid* - the concept record's primary key
+
+Example Usage
+-------------
+
+For a hypothetical example, consider a table in your legacy database called ``buildings`` with a ``name`` and ``resourceid`` columns. The following could be used to migrate the rows into new Arches resource instances.
+
+Let's assume we have a Resource Model called "Architectural Resource", and it has two nodes, "Name" and "Name Type", under a single semantic node "Names".
+
+Use the ``__arches_create_resource_model_views`` function (see above) to create a new schema for each active Resource Model.
+
+.. code-block:: sql
+
+    SELECT __arches_create_resource_model_views(graphid) FROM graphs
+        WHERE isactive = true
+        AND name != 'Arches System Settings';
+
+In our case, the result will be a new schema called ``architectural_resource`` and a table called ``names`` (named for the node furthest up the hierarchy in the nodegroup, in this case, a semantic node).
+
+Directly inserting our records into the new Arches view will look something like this:
+
+.. code-block:: sql
+
+    INSERT INTO architectural_resource.names (
+        name,
+        name_type,
+        resourceinstanceid,
+        transactionid
+    ) select 
+        name,
+        "Primary",
+        resourceid,
+        transactionid
+    from legacy_db.buildings;
+
+.. note::
+
+    In this case, "Primary" is being given to every name type, because your legacy database did not have more than one name per resource.
+
+.. todo::
+
+    A second table may need to be populated here too, to register the instances themselves.
 
 Exporting Arches Data
 =====================
