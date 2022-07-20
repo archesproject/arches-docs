@@ -2,6 +2,10 @@
 Two-factor Authentication
 ######################
 
+.. attention::
+
+  Two-factor authentication is in development and will not be available until the Arches 7 release.
+
 Two-factor authentication is an extra layer of security designed to ensure that you're the only person who can access your Arches account, even if someone knows your password.
 
 * `How Two-factor Authentication Works`_
@@ -12,7 +16,7 @@ Two-factor authentication is an extra layer of security designed to ensure that 
 
   *The specific mechanisms Arches uses for two-factor authentication, and how to enable two-factor authentication for your Arches application.*
 
-* `Setting up Two-factor Authentication for Arches User Accounts`_
+* `Setting up Two-factor Authentication for User Accounts`_
 
   *How to set up two-factor authentication as an Arches user.*
 
