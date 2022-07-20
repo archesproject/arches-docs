@@ -4,38 +4,49 @@
 Managing and Hosting IIIF Servers
 #################################
 
-Arches is configured to use Cantaloupe if you want to host images made available via the IIIF presentation API.
+Arches is configured to use Cantaloupe if you want to host images made available via the IIIF presentation API. Below is a simplified setup guide. The full Cantaloupe setup documentation is `here <https://cantaloupe-project.github.io/manual/4.1/getting-started.html>`_
 
 Setting Up Cantaloupe
 =====================
 
-1. Follow `these instructions <https://iiif.github.io/training/intro-to-iiif/INSTALLING_CANTALOUPE.html>`_ to download and configure Cantaloupe anywhere on your system, then proceed to run it (using the ``java`` command).
+1. Download and extract/unzip the cantaloupe source code from among `these releases <https://github.com/cantaloupe-project/cantaloupe/releases>`_ . We recommend the latest release of version 4.
 
-2. (For local hosting) In a browser, navigate to the admin url (see link above) and click "Resolver" in the left-hand panel, then click "FilesystemResolver". "Lookup Strategy" should be set to "Basic". Set "Path Prefix" to the absolute path to the "cantaloupe" directory in your project. For example on Mac, it might be: "/Users/myusername/Projects/arches-for-science-prj/afs/cantaloupe/".
+2. In a directory containing all the contents of the downloaded source code, make a copy of ``cantaloupe.properties.sample`` and name it ``cantaloupe.properties``. When hosting images locally (relative to your arches project), change the value for argument: ``FilesystemSource.BasicLookupStrategy.path_prefix`` to the asbolute path of wherever your uploaded files are located. On ubuntu for example: ``/home/ubuntu/project/project/uploadedfiles/``. "Lookup Strategy" should already be set to "BasicLookupStrategy".
+.. note:: Other strategies (such as delegation) can be configured depending on your desired implementation.
 
-3. Click "Save".
+3. Ensure that the argument ``CANTALOUPE_DIR`` in your project's ``settings.py`` file is ``os.path.join(APP_ROOT, "uploadedfiles")`` if your project's uploadedfiles directory is where images will be stored, otherwise point to the appropriate location.
 
-.. note:: Remote hosting of Cantaloupe or the manifest.json files is still in development.
+4. Run the Cantaloupe server (either using the ``java`` command or some service or process manager; see the `"Running" section <https://cantaloupe-project.github.io/manual/4.1/getting-started.html#Running>`_ of Cantaloupe docs)
 
-Creating IIIF Manifests
+.. note:: Remote hosting of Cantaloupe server, the manifest.json files, and image files are all still in development.
+
+Creating IIIF Manifests / Image Services
 =======================
 
-A IIIF manifest will be created when triggered by the arches function called "File to IIIF".
+The IIIF Manifests each represent a collection of at least one image (called a "canvas"). It is called an Image "Service" because the cantaloupe server enables the user to zoom and dynamically view the image.
 
-1. Navigate to the graph designer and select the resource model you wish to associate with the source imagery linked to a IIIF manifest. In the arches-for-science-prj example, this might be the "Digital Resource" Model.
+Navigate to the Image Service Manager in the Arches UI and select at least one image to create a new service. If you do not see the icon for Image Service Manager in the left-hand navbar, you may need to update the entry in the Plugins table of your database like so::
+    
+    sudo -u postgres psql -d [test_project] -c “update plugins set config = '{"show":true}' where name = 'Image Service Manager';”
 
-2. In the Function Manager, select the "File to IIIF" function and choose a card of datatype: File-List. Save changes.
-
+Now that an Image Service (referred to as a "Manifest") exists, it will be available for any user to create Annotation data. You can edit this Image Service in the Image Service Manager to upload additional image files or add metadata.
 When a resource is edited and a tile saved to that card on that model, if the file is an image type (i.e. a ``.tiff``, ``.tif``, ``.jpg``, ``.jpeg``, or ``.png``) a record in the iiif_manifests table in the database will be created pointing to a manifest ``.json`` file that will render the image file from cantaloupe into the IIIF Viewer card (see below).
 
 
-IIIF Viewer
+IIIF Viewer / Annotation data
 ===========
 
-To make use of IIIF imagery, a resource model must have a semantic node configured to use the "IIIF Card" selected for "Card Type". When creating a tile for this card in the resource editor, the user will first be prompted to select a IIIF Manifest from a dropdown list. You should see any IIIF Manifests created from the above process labeled using the display name from its parent resource instance.
+1. To make use of IIIF imagery, a resource model must have a semantic node configured to use the "IIIF Card" selected for "Card Type". 
+
+2. Inside this card/nodegroup, add a child node and select "annotation" datatype. To include other data along with this annotation, (e.g. text, date, or related resources) create sibling nodes of those datatypes, ensuring they are still the children of the semantic node designated with the "IIIF Card". 
+
+3. When creating a tile for this card in the resource editor, the user will first be prompted to select a IIIF Manifest from a dropdown list. You should see any IIIF Manifests created from the above process.
+
+.. note:: A single tile for a IIIF card could contain multiple features (point, line, polygon) as part of the annotation data, but commonly you would also want nodes of other datatypes (for ex: string) grouped into this IIIF card; thus to make multiple tiles with different values on the same resource instance, you need to check "Allow Multiple Values" on the IIIF card in the Card Manager.
 
 
 More information:
- * General information on using IIIF: https://iiif.github.io/training/intro-to-iiif/
+ * General information on using IIIF (Cantaloupe version 3 only, but still useful): https://iiif.github.io/training/intro-to-iiif/
+ * Cantaloupe Documentation: https://cantaloupe-project.github.io/manual/4.1/getting-started.html
  * IIIF Presentation API Documentation: https://iiif.io/api/presentation/2.1/
  * IIIF Image API Documentation: https://iiif.io/api/image/2.1/
