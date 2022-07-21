@@ -2,6 +2,15 @@
 Localizing Arches
 #################
 
+.. seealso::
+
+    There is more localization content that should ultimately be combined with this page - see `#279 <https://github.com/archesproject/arches-docs/issues/279>`_.
+
+    .. toctree::
+        :maxdepth: 1
+        
+        localizing-arches-ag
+
 If you want to support localization in your Arches instance, you'll first need to do the following:
 
 1. Update your settings.py file by adding this import statement at the top:
