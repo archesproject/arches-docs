@@ -17,6 +17,8 @@ Let's begin with a brief primer on some of the core concepts upon which Arches i
 
 .. important:: The Arches Designer is used for altering the record-keeping structure of your database; it does not alter the physical :ref:`data model`.
 
+.. warning:: If you need to have multiple versions of the same graph, perhaps multiple people are designing it or you need to retain earlier iterations while continuing to add nodes, you must Clone the graph. If a graph is renamed, exported, and imported, it will still overwrite the original, because the unique ID will remain unchanged.
+
 Arches Designer
 ===============
 
