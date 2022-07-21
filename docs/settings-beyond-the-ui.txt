@@ -2,7 +2,7 @@
 Settings - Beyond the UI
 ########################
 
-In reality, many more settings are used than are exposed in the UI. The best place to see all available settings is in the `main arches repo <https://github.com/archesproject/arches/blob/master/arches/settings.py>`_.
+In reality, many more settings are used than are exposed in the UI. To see **all settings** look in the `core Arches settings.py file <https://github.com/archesproject/arches/blob/master/arches/settings.py>`_ (we try to leave comments on each one). The way these settings are cascaded through the app, and where they can be overwritten as needed, is described below.
 
 Settings Inheritance
 --------------------
