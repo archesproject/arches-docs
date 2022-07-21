@@ -16,6 +16,10 @@ Permissions in Arches are handled on a few different levels.
 
   *Grant access to specific Resource instances on a per-User and/or per-Groups basis.*
 
+* `Media Permissions`_
+
+  *Restrict access to site media.*
+
 Managing Users and Groups in Django Admin
 -----------------------------------------
 
@@ -100,3 +104,14 @@ If you have data you do not want to share with all users, follow these direction
 Resource Instance Permissions
 -----------------------------
 https://github.com/archesproject/arches-docs/issues/218
+
+Media Permissions
+-----------------
+
+If you want to ensure that all media file (uploaded photographs, etc.) access requires authentication, you can set RESTRICT_MEDIA_ACCESS to True.
+
+Be aware that in doing so, all media file requests will be served by Django rather than Apache. This will adversely impact performace when serving large files or during periods of high traffic.
+
+In ``settings_local.py`` add this line::
+
+    RESTRICT_MEDIA_ACCESS = True

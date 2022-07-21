@@ -11,8 +11,11 @@ Setting Up Cantaloupe
 
 1. Download and extract/unzip the cantaloupe source code from among `these releases <https://github.com/cantaloupe-project/cantaloupe/releases>`_ . We recommend the latest release of version 4.
 
-2. In a directory containing all the contents of the downloaded source code, make a copy of ``cantaloupe.properties.sample`` and name it ``cantaloupe.properties``. When hosting images locally (relative to your arches project), change the value for argument: ``FilesystemSource.BasicLookupStrategy.path_prefix`` to the asbolute path of wherever your uploaded files are located. On ubuntu for example: ``/home/ubuntu/project/project/uploadedfiles/``. "Lookup Strategy" should already be set to "BasicLookupStrategy".
-.. note:: Other strategies (such as delegation) can be configured depending on your desired implementation.
+2. In a directory containing all the contents of the downloaded source code, make a copy of ``cantaloupe.properties.sample`` and name it ``cantaloupe.properties``. When hosting images locally (relative to your arches project), change the value for argument: ``FilesystemSource.BasicLookupStrategy.path_prefix`` to the asbolute path of wherever your uploaded files are located, for example ``/home/ubuntu/project/project/uploadedfiles/``. 
+
+  "Lookup Strategy" should already be set to "BasicLookupStrategy".
+
+  .. note:: Other strategies (such as delegation) can be configured depending on your desired implementation.
 
 3. Ensure that the argument ``CANTALOUPE_DIR`` in your project's ``settings.py`` file is ``os.path.join(APP_ROOT, "uploadedfiles")`` if your project's uploadedfiles directory is where images will be stored, otherwise point to the appropriate location.
 
@@ -21,7 +24,7 @@ Setting Up Cantaloupe
 .. note:: Remote hosting of Cantaloupe server, the manifest.json files, and image files are all still in development.
 
 Creating IIIF Manifests / Image Services
-=======================
+========================================
 
 The IIIF Manifests each represent a collection of at least one image (called a "canvas"). It is called an Image "Service" because the cantaloupe server enables the user to zoom and dynamically view the image.
 
@@ -34,7 +37,7 @@ When a resource is edited and a tile saved to that card on that model, if the fi
 
 
 IIIF Viewer / Annotation data
-===========
+=============================
 
 1. To make use of IIIF imagery, a resource model must have a semantic node configured to use the "IIIF Card" selected for "Card Type". 
 

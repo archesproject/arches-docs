@@ -52,8 +52,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Arches'
-copyright = u'2021, Getty Conservation Institute'
-author = u'Farallon Geographics, Legion GIS, Coherit Associates'
+copyright = u'2022, Getty Conservation Institute'
+author = u'Legion GIS, Farallon Geographics, Coherit Associates'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
