@@ -150,7 +150,7 @@ The properties of a component config are as follows:
 :uniqueInstanceName:
     An id by which this component can be referenced. *This value must be unique across all other component configs in the step.*
 :tilesManaged:
-    This must be ``'none'``, ``'one'``, or ``'multi'``, and it determines how many new tiles will be created with this component. Even if the card has a cardinality > 1 in the resource model, setting ``'one'`` here will still disallow multiple values from being created.
+    This must be ``'none'``, ``'one'``, or ``'many'``, and it determines how many new tiles will be created with this component. Even if the card has a cardinality > 1 in the resource model, setting ``'one'`` here will still disallow multiple values from being created.
 :parameters:
     These parameters will be passed to the component. Typically, in the first step you will only use ``graphid`` (for the resource model) and ``nodegroupid`` (to determine which nodegroup/card to show). Later steps will also need to be passed the ``resourceid`` which is pulled from the first step. *Keep in mind that custom step components may require extra parameters.*
 
