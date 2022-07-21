@@ -24,7 +24,7 @@ Setting Up Cantaloupe
 .. note:: Remote hosting of Cantaloupe server, the manifest.json files, and image files are all still in development.
 
 Creating IIIF Manifests / Image Services
-=======================
+========================================
 
 The IIIF Manifests each represent a collection of at least one image (called a "canvas"). It is called an Image "Service" because the cantaloupe server enables the user to zoom and dynamically view the image.
 
@@ -37,7 +37,7 @@ When a resource is edited and a tile saved to that card on that model, if the fi
 
 
 IIIF Viewer / Annotation data
-===========
+=============================
 
 1. To make use of IIIF imagery, a resource model must have a semantic node configured to use the "IIIF Card" selected for "Card Type". 
 
