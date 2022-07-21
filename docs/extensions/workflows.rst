@@ -265,3 +265,10 @@ Registering your Workflow
 ==============================
 
 After placing your workflow files in the proper directories within your project, you are ready to register it. See :ref:`Plugin Commands` for more information.
+
+Accessing the Workflow
+======================
+
+If the Workflow (or any other Plugin) is registered but is not visible, an administrator must grant access to it via the Django admin panel on a per-user or per-group basis.
+
+Navigate to ``localhost:8000/admin`` and login, and locate profiles for the user(s) or group(s) that should be able to access the Workflow. Find the "User/Group permissions" section, scroll to your workflow, and add the "view" privilege. Click "SAVE" to finish.
