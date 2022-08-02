@@ -31,7 +31,7 @@ If you want to support localization in your Arches instance, you'll first need t
         "arches.app.utils.middleware.SetAnonymousUser",
     ]
 
-3. Next add the LANGUAGE_CODE, LANGUAGES, and SHOW_LANGUAGE_SWITCH to your projects's settings.py file and update them to reflect your project's requirements:
+3. Next add the LANGUAGE_CODE, LANGUAGES, and SHOW_LANGUAGE_SWITCH to your project's settings.py file and update them to reflect your project's requirements:
 
 .. code-block:: python
 
@@ -73,8 +73,7 @@ Once the system is prepared for localization, the next steps involve generating 
 
 For more information, see `Localization: how to create language files <https://docs.djangoproject.com/en/4.0/topics/i18n/translation/#localization-how-to-create-language-files>`_ in the Django documentation.
 
-There are some example commands to make and load PO files in the core arches settings file that can be found `here <https://github.com/archesproject/arches/blob/dev/7.0.x/arches/settings.py#L193>`.  If loading a new PO file, simply
-replace the existing po file and run compilemessages.
+There are some example commands to make and load PO files in the core arches settings file that can be found `here <https://github.com/archesproject/arches/blob/dev/7.0.x/arches/settings.py#L193>`_. If loading a new PO file, simply replace the existing po file and run compilemessages.
 
 **************************************
 Localizing Graph Strings within Arches
@@ -84,17 +83,16 @@ You can also export strings from your arches graphs for localization using the f
 
 .. code-block:: bash
 
-    manage.py i18n makemessages
+    python manage.py i18n makemessages
 
 You can import them with the following command
 
 .. code-block:: bash
 
-    manage.py i18n loadmessages
+    python manage.py i18n loadmessages
 
 This will attempt to load the graph translation files (graph.po files) for every language specified
 in the LANGUAGES array from settings.py.
-
 
 ************************************************
 Setting up Localized Languages for Business Data
@@ -118,19 +116,19 @@ Once this is complete, text widgets should be able to write data in the desired 
 RDF Imports and Exports
 ***********************
 
-Business data can be exported in RDF format.  The directionality of the string data will be lost as 
-the RDF specification does not include directionality.  There is an 
+Business data can be exported in RDF format. The directionality of the string data will be lost as 
+the RDF specification does not include directionality. There is an 
 `active attempt <https://w3c.github.io/rdf-dir-literal/>`_ to include direction within the 
-RDF specification.  
+RDF specification.
 
 ***********************
 CSV Exports and Imports
 ***********************
 
-It is possible to import and export localized business data through CSV format.  There is a --language
-switch that will limit the languages that will be exported (all languages are exported by default).  
+It is possible to import and export localized business data through CSV format. There is a ``--language``
+switch that will limit the languages that will be exported (all languages are exported by default). 
 However, if attempting to re-import a limited subset of languages through the csv importer, entire 
-string objects will be overwritten by the subset.  For example, if a string node has values for 
+string objects will be overwritten by the subset. For example, if a string node has values for 
 English, Spanish, and French, the subset of languages can be limited by specifying
 
 .. code-block:: bash
@@ -138,6 +136,6 @@ English, Spanish, and French, the subset of languages can be limited by specifyi
     --languages en,es
 
 If attempting to import the resulting csv, any values that were pre-existing for French would be 
-overwritten in "overwrite" mode or added as a separate tile in "append" mode.  There is currently
-no way to merge these values.  If the intention is to re-import the csv values later, export all
-languages.   
+overwritten in "overwrite" mode or added as a separate tile in "append" mode. There is currently
+no way to merge these values. If the intention is to re-import the csv values later, export all
+languages.
