@@ -11,109 +11,209 @@ Arches provides methods for importing data in a few different formats. Generally
 
 Be aware that the graph-based structure of Resource Models in Arches means that your data must be carefully prepared before import, to ensure that branches, groupings, and cardinality is maintained. The method for doing this is determined by which file format you decide to use. Additionally, the data type of the target node for each value in your file will dictate that value's format.
 
-Import Value Formats
---------------------
+Datatype Formats
+================
 
-* ``string``
-    In CSV, must be quoted only if the value contains a comma.
+Nodes in your target resource model will have a specific datatype defined for each one (see :ref:`Core Arches Datatypes`), and it is very important that you format your input data accordingly. Below is a list of all core datatypes and how they should look in your import files.
 
-    **Examples:** ``Smith Cottage`` ``"Behold, the Forevertron."`` ``<p>This is a rich text description that contains HTML tags.</p>``
+string
+------
 
-* ``number``
-    Integers or floats; never use quotes or comma separators.
+Strings can be simple text or include HTML tags (whether or not HTML is rendered depends on the card and widget configuration)::
 
-    **Examples:** ``42`` ``-465`` ``17322.464453``
+    Smith Cottage
+    <p>This is a rich text description that contains <strong>HTML</strong> tags.</p>
 
-* ``date``
-    YYYY-MM-DD, no quotes.
+In CSV, strings must be quoted only if they contain a comma::
 
-    **Examples:** ``1305-10-31`` ``1986-02-02``
+    "Behold, the Forevertron."
 
-* ``edtf``
-    Must be a valid `Extended Date Time Format <https://www.loc.gov/standards/datetime/pre-submission.html>`_ string.
+number
+------
 
-    **Examples:** ``"2010-10"`` ``"-y10000"``
+Integers or floats; never use quotes or comma separators::
 
-* ``geojson-feature-collection``
-    In CSV, must be `WKT <https://en.wikipedia.org/wiki/Well-known_text>`_.
+    42
+    -465
+    17322.464453
 
-    **Examples - CSV:** ``POINT (-82.53973 29.658642)`` ``MULTIPOLYGON (((-81.435 26.130, -81.425 26.124, -81.415 26.137, -81.435 26.130)))``
+date
+----
 
-    In JSON, include the entire definition of a `GeoJSON Feature Collection <http://wiki.geojson.org/GeoJSON_draft_version_6#FeatureCollection>`_ (the ``properties`` and ``id`` attributes can be empty). Use `geojson.io <http://geojson.io>`_ and `geojsonlint.com <http://geojsonlint.com>`_ for testing.
+Format must be YYYY-MM-DD, no quotes::
 
-    **Example - JSON:**
+    1305-10-31
+    1986-02-02
 
-    .. code::
 
-        "features": [
-                {
-                    "geometry": {
-                        "coordinates": [
-                            -82.53973,
-                            29.658642
-                        ],
-                        "type": "Point"
-                    },
-                    "id": "<arbitrary id>",
-                    "properties": {},
-                    "type": "Feature"
-                }
-            ],
-            "type": "FeatureCollection"
-        }
+edtf
+----
 
-* ``concept``
+Must be a valid `Extended Date Time Format <https://www.loc.gov/standards/datetime/pre-submission.html>`_ string::
 
-    In CSV/SHP, if the values in your concept collection are `unique` you can use the label (prefLabel) for a concept. If not, you will get an error during import and you must use UUIDs instead of labels (if this happens, see `Concepts File`_ below). If a prefLabel has a comma in it, it must be triple-quoted: ``"""Shingles, original"""``.
+    "2010-10"
+    "-y10000"
 
-    **Examples - CSV/SHP:** ``Slate`` ``"""Shingles, original"""``
+geojson-feature-collection
+--------------------------
 
-    In JSON, you must use a concept's UUID.
+In CSV, use the `Well-Known Text (WKT) <https://en.wikipedia.org/wiki/Well-known_text>`_ format::
 
-* ``concept-list``
+    POINT (-82.53973 29.658642)
+    MULTIPOLYGON (((-81.435 26.130, -81.425 26.124, -81.415 26.137, -81.435 26.130)))
 
-    In CSV/SHP, must be a single-quoted list of prefLabels (or UUIDs if necessary). If a prefLabel contains a comma, then that prefLabel must have double-quotes: ``"Slate,""Shingles, original"",Thatch"``.
+In JSON, include the entire definition of a `GeoJSON Feature Collection <http://wiki.geojson.org/GeoJSON_draft_version_6#FeatureCollection>`_ (the ``properties`` and ``id`` attributes can be empty). Use `geojson.io <http://geojson.io>`_ and `geojsonlint.com <http://geojsonlint.com>`_ for testing::
 
-    **Examples - CSV/SHP:** ``"Slate,Thatch"`` ``Brick``
-
-    In JSON, a list of UUIDs must be used. If only one value is present, it must still be placed within brackets.
-
-    **Examples - JSON:** ``["d11630fa-c5a4-49b8-832c-5976e0044bca"]`` ``["651c59b0-ff30-11e8-9975-94659cf754d0","cdcc206d-f80d-4cc3-8685-40e8949158f8"]``
-
-* ``domain-value``
-
-    A string that matches a valid domain value for this node, single-quoted if it contains a comma.
-
-* ``domain-value-list``
-
-    A single-quoted list of strings that match valid domain values for this node. Follow quoting guidelines for ``concept-list`` if any of the values contain commas.
-
-* ``file-list``
-
-    In CSV/SHP, must be a relative path to the file that should be uploaded.
-
-    In JSON, a full definition of the file-list data looks like this, though some of these attributes, like ``lastModified`` and ``size`` can be omitted::
-
-        [
+    "features": [
             {
-                "accepted": true,
-                "file_id": "6dec83cf-ff30-11e8-b6ca-94659cf754d0",
-                "height": null,
-                "index": 0,
-                "lastModified": 1528907664.6177075,
-                "name": "Photo_Tung_Lung_Fort_Drainage_Pipes_northeast_interior_corner_1.JPG",
-                "size": 3041261,
-                "status": "uploaded",
-                "type": "image/jpeg",
-                "url": "/files/uploadedfiles/Photo_Tung_Lung_Fort_Drainage_Pipes_northeast_interior_corner_1.JPG",
-                "width": null
+                "geometry": {
+                    "coordinates": [
+                        -82.53973,
+                        29.658642
+                    ],
+                    "type": "Point"
+                },
+                "id": "",
+                "properties": {},
+                "type": "Feature"
             }
-        ]
+        ],
+        "type": "FeatureCollection"
+    }
 
-    The file should already exist in the proper uploadedfiles directory before the JSON file is imported.
+concept
+-------
 
-Importing a CSV
-===============
+In CSV/SHP, if the values in your concept collection are `unique` you can use the label (prefLabel) for a concept. If not, you will get an error during import and you must use UUIDs instead of labels (if this happens, see `Concepts File`_ below)::
+
+    Slate
+    2995daea-d6d3-11e8-9eb1-0242ac150004
+
+If a prefLabel has a comma in it, it must be **triple-quoted**::
+
+    """Shingles, original"""
+
+In JSON, you must use a concept's UUID::
+
+    2995daea-d6d3-11e8-9eb1-0242ac150004
+
+concept-list
+------------
+
+In CSV/SHP, must be a single-quoted list of prefLabels (or UUIDs if necessary)::
+
+    Brick
+    "Slate,Thatch"
+    "651c59b0-ff30-11e8-9975-94659cf754d0,cdcc206d-f80d-4cc3-8685-40e8949158f8"
+
+If a prefLabel contains a comma, then that prefLabel must be **double-quoted**::
+
+    "Slate,""Shingles, original"",Thatch"
+
+In JSON, a list of UUIDs must be used. If only one value is present, it must still be placed within brackets::
+
+    ["d11630fa-c5a4-49b8-832c-5976e0044bca"]
+    ["651c59b0-ff30-11e8-9975-94659cf754d0","cdcc206d-f80d-4cc3-8685-40e8949158f8"]
+
+domain-value
+------------
+
+A string that matches a valid domain value for this node, single-quoted if it contains a comma::
+
+    Yes
+    "Started, in progress"
+
+domain-value-list
+-----------------
+
+A single-quoted list of strings that match valid domain values for this node. Follow quoting guidelines for :ref:`concept-list` if any values contain commas::
+
+    "Red,Blue,Green"
+
+file-list
+---------
+
+In CSV/SHP, simply use the file name, or a single-quoted list of file names::
+
+    BuildingPicture.jpg
+
+See the note below about where to prepopulate this file on your server, if you are not uploading it through the package load operation.
+
+In JSON, you must include a more robust definition of the file that looks like this (and remember, this must be a list, even if you only have one file per node)::
+
+    [
+        {
+            "accepted": true,
+            "file_id": "6304033b-2f42-4bfd-86a5-5e2a941d95f1",
+            "name": "BuildingPicture.jpg",
+            "renderer": "5e05aa2e-5db0-4922-8938-b4d2b7919733",
+            "status": "uploaded",
+            "type": "image/jpeg",
+            "url": "/files/6304033b-2f42-4bfd-86a5-5e2a941d95f1"
+        }
+    ]
+
+You should be able to generate this content by doing the following:
+
+1. Pregenerate a new UUID for each file
+2. Place this UUID in the ``file_id`` property, and also use it in the ``url`` property as shown above.
+3. Select a renderer from ``settings.RENDERERS`` (see `settings.py <https://github.com/archesproject/arches/blob/stable/6.1.0/arches/settings.py#L664>`_) and use its id for the ``renderer`` property. At the time of this writing, use ``5e05aa2e-5db0-4922-8938-b4d2b7919733`` for images (jpg, png, etc.) and ``09dec059-1ee8-4fbd-85dd-c0ab0428aa94`` for PDFs.
+4. Set the ``type`` as appropriate--``image/jpeg``, ``image/png``, ``application/pdf``, etc.
+
+.. note::
+
+    The file(s) should already exist in the ``uploadedfiles/`` directory prior to loading the resource, but technically can be added later as well. This directory should be located `within` your ``MEDIA_ROOT`` location. For example, by default, Arches sets ``MEDIA_ROOT = os.path.join(ROOT_DIR)``. This means you should find (or create if it doesn't exist) ``my_project/uploadedfiles``, alongside ``manage.py``.
+
+resource-instance
+-----------------
+
+In CSV/SHP, use the UUID of the target resource, single-quoted with commas for multiple instances::
+
+    b2f2f91f-2881-11ed-ad39-e746f226a47a
+
+In JSON, you must provide a slightly larger data structure to define the relationship. Luckily, the extra properties can be left blank and the import process should handle them as necessary::
+
+    {
+        "inverseOntologyProperty": "",
+        "ontologyProperty": "",
+        "resourceId": "b2f2f91f-2881-11ed-ad39-e746f226a47a",
+        "resourceXresourceId": ""
+    }
+
+resource-instance-list
+----------------------
+
+Same as above, following standard list quoted in the CSV::
+
+
+    "b2f2f91f-2881-11ed-ad39-e746f226a47a,b94455a2-a8ed-4d3d-919a-ae91493d6606"
+
+and brackets in JSON::
+
+    [
+        {
+            "inverseOntologyProperty": "",
+            "ontologyProperty": "",
+            "resourceId": "b2f2f91f-2881-11ed-ad39-e746f226a47a",
+            "resourceXresourceId": ""
+        },
+        {
+            "inverseOntologyProperty": "",
+            "ontologyProperty": "",
+            "resourceId": "b94455a2-a8ed-4d3d-919a-ae91493d6606",
+            "resourceXresourceId": ""
+        }
+    ]
+
+url
+---
+
+Same as :ref:`string` formatting. Validation will run to ensure the value is a proper URL::
+
+    https://www.nps.gov/subjects/nationalregister/index.htm
+
+CSV Import
+==========
 
 One method of bulk loading data into Arches is to create a CSV (comma separated values) file. We recommend using MS Excel or Open Office for this task. More advanced users will likely find a custom scripting effort to be worthwhile.
 
