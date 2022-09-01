@@ -15,6 +15,7 @@
 import sys
 import os
 import shlex
+import datetime
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -52,7 +53,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Arches'
-copyright = u'2022, Getty Conservation Institute'
+copyright_year = datetime.date.today().strftime("%Y")
+copyright = f"{copyright_year}, Getty Conservation Institute"
 author = u'Legion GIS, Farallon Geographics, Coherit Associates'
 
 # The version info for the project you're documenting, acts as replacement for
