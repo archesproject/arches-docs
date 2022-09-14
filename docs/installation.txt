@@ -115,14 +115,24 @@ and then run::
 
 :ref:`Common Errors`
 
+Build a Frontend Asset Bundle
+-----------------------------
+
+In your current terminal, run the Django development server::
+    python manage.py runserver
+    
+Then, in a second terminal, navigate to the root directory of the project ( you should be on the same level as `package.json`) and build a frontend asset bundle::
+    cd my_project/myproject
+    yarn build_development
+    
+.. note::
+
+    ``yarn build_development`` creates a static frontend asset bundle. Any changes made to frontend files (eg. ``.js``) will not be viewable until the asset bundle is rebuilt. run ``yarn build_development`` again to update the asset bundle, or run ``yarn start`` to run an asset bundler server that will detect changes to frontend files and rebuild the bundle appropriately.
+
 View the Project in a Browser
 -----------------------------
 
-To view your project, run the Django development server::
-
-    python manage.py runserver
-
-and navigate to ``localhost:8000`` in a browser. Use ``ctrl+C`` to stop the server.
+Navigate to ``localhost:8000`` in a browser. Use ``ctrl+C`` to stop the server.
 
 Configure the Map Settings
 --------------------------
