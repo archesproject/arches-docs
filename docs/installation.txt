@@ -119,9 +119,11 @@ Build a Frontend Asset Bundle
 -----------------------------
 
 In your current terminal, run the Django development server::
+
     python manage.py runserver
     
 Then, in a second terminal, navigate to the root directory of the project ( you should be on the same level as `package.json`) and build a frontend asset bundle::
+
     cd my_project/myproject
     yarn build_development
     
