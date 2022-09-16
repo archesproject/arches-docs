@@ -167,11 +167,18 @@ You should be able to generate this content by doing the following:
 resource-instance
 -----------------
 
-In CSV/SHP, use the UUID of the target resource, single-quoted with commas for multiple instances::
+In CSV/SHP, the format consists of a version of the JSON data structure::
 
-    b2f2f91f-2881-11ed-ad39-e746f226a47a
+    "[{'resourceId': '3d5a80df-4bcb-4ea0-bbaf-327ea0f41b31', 'ontologyProperty': 'http://www.cidoc-crm.org/cidoc-crm/L54i_is_same-as', 'resourceXresourceId': '', 'inverseOntologyProperty': 'http://www.cidoc-crm.org/cidoc-crm/L54i_is_same-as'}]"
 
-In JSON, you must provide a slightly larger data structure to define the relationship. Luckily, the extra properties can be left blank and the import process should handle them as necessary::
+Where:
+
+* ``resourceId`` is the target resource-instance ResourceID
+* ``ontologyProperty`` is the URL of the ontology property that defines the relationship to the target resource-instance and can be left blank
+* ``resourceXresourceId`` can be left blank and the system will assign a UUID for this relationship
+* ``inverseOntologyProperty`` is the URL of the ontology property that defines the inverse of the relationship referenced under ``ontologyProperty`` and can be left blank
+
+In JSON, the format is as follows::
 
     {
         "inverseOntologyProperty": "",
@@ -183,12 +190,12 @@ In JSON, you must provide a slightly larger data structure to define the relatio
 resource-instance-list
 ----------------------
 
-Same as above, following standard list quoted in the CSV::
+Same as above, except repeating each resource-instance within the square brackets (i.e. "[{first resource-instance},{second resource-instance}]" )::
 
 
-    "b2f2f91f-2881-11ed-ad39-e746f226a47a,b94455a2-a8ed-4d3d-919a-ae91493d6606"
+    "[{'resourceId': '3d5a80df-4bcb-4ea0-bbaf-327ea0f41b31', 'ontologyProperty': 'http://www.cidoc-crm.org/cidoc-crm/L54i_is_same-as', 'resourceXresourceId': '', 'inverseOntologyProperty': 'http://www.cidoc-crm.org/cidoc-crm/L54i_is_same-as'},{'resourceId': 'ce1efa88-d68e-44e3-95fa-3abb2cb433e9', 'ontologyProperty': 'http://www.cidoc-crm.org/cidoc-crm/L54i_is_same-as', 'resourceXresourceId': '', 'inverseOntologyProperty': 'http://www.cidoc-crm.org/cidoc-crm/L54i_is_same-as'}]"
 
-and brackets in JSON::
+In JSON::
 
     [
         {
