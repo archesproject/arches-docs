@@ -32,6 +32,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "arches.settings")
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'sphinx.ext.todo',
     'sphinx.ext.autosectionlabel',
     'sphinxcontrib.httpdomain',
 ]
