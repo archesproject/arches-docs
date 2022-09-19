@@ -1,6 +1,6 @@
-######################
+#########################
 Two-factor Authentication
-######################
+#########################
 
 .. attention::
 
@@ -21,7 +21,7 @@ Two-factor authentication is an extra layer of security designed to ensure that 
   *How to set up two-factor authentication as an Arches user.*
 
 How Two-factor Authentication Works
------------------------------------------
+-----------------------------------
 Two-factor Authentication is the technical term for the process of requiring a user to verify their identity in two unique ways before they are granted access to the system. 
 Users typically rely on authentication systems that require them to provide a unique identifier such as an email address or username and a correct password to gain access to the system.
 Two-factor Authentication extends this by adding an additional step that requires the user to enter a one-time dynamically generated token that has been delivered through a secondary method that presumably only the user has access to.
@@ -31,7 +31,8 @@ Two-factor Authentication gives the user and system administrator a peace of min
 the account cannot be accessed without also knowing the dynamically generated one-time password.
 
 Enabling Two-factor Authentication in Arches
------------------------------
+--------------------------------------------
+
 There are two configurable settings, ``ENABLE_TWO_FACTOR_AUTHENTICATION`` and ``FORCE_TWO_FACTOR_AUTHENTICATION`. Each accepts a value of ``True`` or ``False``.
 
 * ``ENABLE_TWO_FACTOR_AUTHENTICATION`` - Allows users to enable two-factor authentication via their ``UserProfile``, and redirects login of users that have enabled two-factor authentication to secondary credentials page.
@@ -42,7 +43,8 @@ There are two configurable settings, ``ENABLE_TWO_FACTOR_AUTHENTICATION`` and ``
 
 
 Setting up Two-factor Authentication for User Accounts
------------------------------
+------------------------------------------------------
+
 If ``ENABLE_TWO_FACTOR_AUTHENTICATION`` or ``FORCE_TWO_FACTOR_AUTHENTICATION`` have been enabled in your Arches application, users can check the status of their accounts in the User Profile page.
 
 .. figure:: images/two-factor-authentication-user-profile.png
