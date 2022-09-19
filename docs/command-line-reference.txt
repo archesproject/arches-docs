@@ -175,7 +175,7 @@ Import business data
         collections for nodes that do not have an assigned collection.
 
 
-See :ref:`Importing a CSV` for CSV formatting requirements
+.. seealso:: See :ref:`CSV Import` for CSV formatting requirements.
 
 Import resource to resource relations
 -------------------------------------
