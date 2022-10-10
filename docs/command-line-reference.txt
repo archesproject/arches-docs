@@ -61,9 +61,7 @@ creating (or recreating) the database
 
 .. code-block:: bash
 
-    python manage.py packages -o setup_db
-
--o  ``packages`` operation, in this case ``setup_db``
+    python manage.py setup_db
 
 Deletes and recreates the database, as defined by
 ``settings.DATABASES['default']``. Likewise, **this command will
@@ -74,16 +72,16 @@ loading a package into a project
 
 .. code-block:: bash
 
-    python manage.py packages -o load_package -s source_of_package [-db true]
+    python manage.py packages -o load_package -s source_of_package [-db]
 
 -db
-        Add this argument with the value ``true`` to force the destruction
+        Add this boolean argument to force the destruction
         and recreation of your database before loading the package.
 
 The source (``-s``) of a package can be either a path to a local
 directory, the location of a local zipfile containing a package, or
 the url to a github repo archive that contains a package. For example,
-loading the v4 sample package from where it resides in github would
+loading the sample package from where it resides in github would
 just be::
 
     python manage.py packages -o load_package -s https://github.com/archesproject/arches-example-pkg/archive/master.zip
