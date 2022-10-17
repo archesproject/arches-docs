@@ -19,15 +19,9 @@ To begin development or make a test installation of Arches, you will need the fo
 Software Dependencies
 =====================
 
-Full dependency installation on Ubuntu 18.04, note :ref:`extra CouchDB instructions <Arches Collector Checklist>`::
+Arches requires the following software packages to be installed and available. Ubuntu Linux users see below for an installation script.
 
-    wget https://raw.githubusercontent.com/archesproject/arches/stable/5.1.x/arches/install/ubuntu_setup.sh>`_
-    source ./ubuntu_setup.sh
-
-To familiarize yourself with the components and learn some important details, please
-read the notes below. Where necessary, OS-specific installation notes are included as well.
-
-:Python 3.7: - Installation: https://www.python.org/downloads/
+:Python >= 3.7: - Installation: https://www.python.org/downloads/
     - Python 3.7 and later comes with pip
     - **Windows** You must choose 32-bit or 64-bit Python based on your system architecture.
     - **macOS** This guide works well if you wish to install via `brew`: https://docs.python-guide.org/starting/install3/osx/
@@ -41,15 +35,19 @@ read the notes below. Where necessary, OS-specific installation notes are includ
 :Yarn: - Installation: https://yarnpkg.com/lang/en/docs/install
     - **Windows** Use the .msi installer in the link above, but first install `Node.js <https://nodejs.org/>`_.
 
-If you plan to use the Arches Collector Mobile app, you must install CouchDB.
-
-:CouchDB 2.x:
-    - Ubuntu 20 users must install CouchDB 2.x `with Docker <https://docs.couchdb.org/en/stable/install/docker.html>`_.
-    - Please see :ref:`Arches Collector Checklist` for detailed installation notes.
-    - `Official documentation <https://docs.couchdb.org/en/stable/>`_
-    - CouchDB is used to sync mobile data collection projects with your main database.
-
 To support long-running task management, like large user downloads, you must install a Celery broker like RabbitMQ or Redis:
 
 :Brokers: - Options: https://docs.celeryproject.org/en/stable/getting-started/first-steps-with-celery.html#choosing-a-broker
     - Once you have a broker installed, read more about :ref:`Task Management` in Arches.
+
+Scripted Dependency Installation
+--------------------------------
+
+For Ubuntu we maintain an `ubuntu_setup.sh <https://raw.githubusercontent.com/archesproject/arches/stable/7.1.0/arches/install/ubuntu_setup.sh>`_ script to install dependencies. It works for 18.04 and 20.04, and preliminary testing shows it be compatible with 22.04 as well.
+
+.. code-block:: bash
+
+    wget https://raw.githubusercontent.com/archesproject/arches/stable/7.1.0/arches/install/ubuntu_setup.sh
+    source ./ubuntu_setup.sh
+
+You will be prompted before each dependency is installed, or use ``yes | source ./ubuntu_setup.sh`` to install all components (Postgres/PostGIS, Node/Yarn, and ElasticSearch).
