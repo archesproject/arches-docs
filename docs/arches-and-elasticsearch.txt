@@ -2,24 +2,63 @@
 Arches and Elasticsearch
 ########################
 
-Installing and Running Elasticsearch
-====================================
+Arches uses `Elasticsearch <https://www.elastic.co/elasticsearch/>`_ as its search engine. A handful of ``settings.py`` variables point your Arches project to an Elasticsearch installation, in which your indexes will be created. An ``ELASTICSEARCH_PREFIX`` string is prepended to all of your project's indexes, meaning that a single Elasticsearch installation can be used by multiple projects.
 
-The quickest way to install Elasticsearch is to download and unzip one of the `compressed installers
-for the proper version <https://www.elastic.co/downloads/past-releases/elasticsearch-7-4-1>`_.
+One important thing to remember: **Elasticsearch indexes are replicable derivatives of your Arches database**, meaning that they can safely be dropped and recreated at any time. Similarly, if you need to change or upgrade your Elasticsearch setup, you need only update some settings and then reindex your database.
 
-To start the service from the command line, use
+You can install Elasticsearch locally alongside Arches--read on for how to do that. You can also use managed Elasticsearch solutions by cloud providers like `AWS <https://aws.amazon.com/what-is/elasticsearch/>`_.
+
+Installing Elasticsearch
+========================
+
+The easiest way to install Elasticsearch is to download and unpack their archived releases. Archives are available at ``https://www.elastic.co/downloads/past-releases/elasticsearch-{release number}``, e.g. https://www.elastic.co/downloads/past-releases/elasticsearch-8-5-1. 
+
+Download the release for your OS and architecture and then unpack/unzip it. For example, installing 8.5.1 on Ubuntu Linux looks like:
+
+.. code-block:: shell
+
+    wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.5.1-linux-x86_64.tar.gz
+    tar -zxvf elasticsearch-8.5.1-linux-x86_64.tar.gz
+
+A full installation is now in ``./elasticsearch-8.5.1``, which you can start by running ``./elasticsearch-8.5.1/bin/elasticsearch`` (see below).
+
+On Windows you will need the Windows release which is a ZIP archive, but the process is basically the same.
+
+Development Configuration
+=========================
+
+Elasticsearch 8 introduced new security features. While you are working with Arches locally, i.e. during development, you can safely disable these features. *Do not disable security features in production.*
+
+Make two changes:
+
+1. In your config file, find ``xpack.security.enabled = true`` and set it to ``xpack.security.enabled = false``. Now start/restart Elasticsearch (see below).
+
+    The config file is typically found at ``{path-to-elasticsearch}\config\elasticsearch.yml``. If you installed the Debian package, you'll find it at ``/etc/elasticsearch/elasticsearch.yml``.
+
+2. In your Arches project's ``settings.py`` or ``settings_local.py``, add
+
+    .. code-block:: python
+
+        ELASTICSEARCH_HOSTS = [{“scheme”: “http”, “host”: “localhost”, “port”: ELASTICSEARCH_HTTP_PORT}]
+
+    This overwrites the default ``ELASTICSEARCH_HOSTS`` variable, which has the scheme set to ``https``.
+
+Running Elasticsearch
+=====================
+
+**Linux/macOS**:
+
+After unpacking the archive, use
 
 .. code-block:: shell
 
    {path-to-elasticsearch}/bin/elasticsearch
 
-To run as a daemon process, add ``-d`` to that command.
+To rum in the background, add ``-d`` to that command. To stop the background process, use ``ps aux | grep elasticsearch`` to get the process id, and then ``sudo kill <process id> -9``.
 
-On Windows you can just double-click the ``{path-to-elasticsearch}\bin\elasticsearch.bat``
-batch file to run the process in a new console.
+**Windows**:
 
-.. note:: To run the process in a new terminal you can double-click the ``elasticsearch.bat`` file found in ``{path-to-elasticsearch}\bin``. To properly set up Elasticsearch as a background service on Windows, `check out this documentation <https://www.elastic.co/guide/en/elasticsearch/reference/7.4/windows.html>`_
+On Windows, double-click the ``{path-to-elasticsearch}\bin\elasticsearch.bat`` batch file to run the process in a new console window.
 
 ---------------------------------------------------------
 
@@ -36,6 +75,9 @@ For more information, please visit the official `Elasticsearch documentation <ht
 .. important::
    1. By default, Elasticsearch uses 2GB of memory (RAM). For basic development purposes, we have found it to run well enough on 1GB. Use ``ES_JAVA_OPTS="-Xms1g -Xmx1g" ./bin/elasticsearch -d`` to set the memory allotment on startup (`read more <https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html>`_). You can use the same command to give **more** memory to Elasticsearch in a production setting.
 
+.. important::
+    If you get an empty response from ``curl localhost:9200``, this is likely because Elasticsearch security features are not probably set up, see :ref:`Development Configuration` above.
+
 Using the Kibana Dashboard
 ==========================
 
@@ -46,19 +88,11 @@ Reindexing The Database
 
 You may need to reindex the entire database now and then. This can be helpful if a bulk load
 failed halfway through, or if you need to point your database at a different Elasticsearch installation.
-In the command line run::
-
-    python manage.py es index_database
 
 Be warned that this process can take a long time if you have a lot of resources in your database.
-Also, if you are in ``DEBUG`` mode it can cause your server to run out of memory (see :ref:`reindex the database`).
+Also, if you are in ``DEBUG`` mode it can cause your server to run out of memory.
 
-If the ``es index_database`` operation doesn't solve your issue, you can try this series of commands::
-
-    python manage.py es delete_indexes
-    python manage.py es setup_indexes
-    python manage.py es index_database
-
+See :ref:`reindex the database` for the commands needed for reindexing.
 
 Using Multiple Nodes
 ====================
