@@ -21,6 +21,7 @@ Arches Documentation
     :caption: Configuring
     :maxdepth: 2
 
+    define-resource-descriptors
     arches-system-settings
     settings-beyond-the-ui
     arches-collector-checklist
