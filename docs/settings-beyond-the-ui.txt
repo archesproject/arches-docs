@@ -193,8 +193,8 @@ Once your application is set up with the provider, you can configure Arches to u
     EXTERNAL_OAUTH_CONFIGURATION = {
         # these groups will be assigned to oAuth authenticated users on their first login
         "default_user_groups": ["Resource Editor"],
-        # users who enter an email address with this domain will be authenticated through external oAuth
-        "user_domain": "archesproject.org",
+        # users who enter an email address with one of these domains will be authenticated through external oAuth
+        "user_domains": ["archesproject.org"],
         # claim to be used to assign arches username from
         "uid_claim": "preferred_username",
         # application ID and secret assigned to your arches application
