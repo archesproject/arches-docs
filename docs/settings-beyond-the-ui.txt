@@ -178,3 +178,34 @@ To configure what group new users are put into, add the following lines of code 
     USER_SIGNUP_GROUP = 'Crowdsource Editor'
 
 If you would like to change which group new users are added to, replace 'Crowdsource Editor' with the group you would like to use.
+
+Using SSO with an external oAuth provider
+-----------------------------------------
+
+Users can be routed through an external oAuth provider for authentication based on their email's domain.
+
+Your arches application will need to use SSL and be configured with an application ID from your provider.  This application ID will need to be configured with a redirect URL to your Arches application at auth/eoauth_cb, for example: https://qa.archesproject.org/auth/eoauth_cb
+
+Once your application is set up with the provider, you can configure Arches to use it by updating EXTERNAL_OAUTH_CONFIGURATION, for example using an Azure AD tenant could look something like this:
+
+.. code-block:: python
+
+    EXTERNAL_OAUTH_CONFIGURATION = {
+        # these groups will be assigned to oAuth authenticated users on their first login
+        "default_user_groups": ["Resource Editor"],
+        # users who enter an email address with this domain will be authenticated through external oAuth
+        "user_domain": "archesproject.org",
+        # claim to be used to assign arches username from
+        "uid_claim": "preferred_username",
+        # application ID and secret assigned to your arches application
+        "app_id": "my_app_id",
+        "app_secret": "my_app_secret",
+        # provider scopes must at least give Arches access to openid, email and profile
+        "scopes": ["User.Read", "email", "profile", "openid", "offline_access"],
+        # authorization, token and jwks URIs must be configured for your provider
+        "authorization_endpoint": "https://login.microsoftonline.com/my_tenant_id/oauth2/v2.0/authorize",
+        "token_endpoint": "https://login.microsoftonline.com/my_tenant_id/oauth2/v2.0/token",
+        "jwks_uri": "https://login.microsoftonline.com/my_tenant_id/discovery/v2.0/keys"
+        # enforces token validation on authentication, AVOID setting this to False
+        "validate_id_token": True,
+    }
