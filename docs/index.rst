@@ -12,6 +12,7 @@ See the sections in the primary sidebar and below to explore.
 
     introduction/index
     installing/index
+    releases
 
 .. toctree::
     :caption: For Arches Users
