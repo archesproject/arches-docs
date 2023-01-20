@@ -130,7 +130,7 @@ Extension Data Models
 
 The backend models for each extension type are shown below.
 
-.. figure:: ../images/extension-model-2022-04-18.png
+.. figure:: ../../images/extension-model-2022-04-18.png
     :width: 100%
     :align: center
 

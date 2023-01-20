@@ -1,30 +1,40 @@
-==========
-Developing
-==========
+==============
+For Developers
+==============
 
-These sections show off various features and styles of this theme.
-They should help you understand how this theme behaves and how others are using it.
-See the sections in the primary sidebar and below to explore.
+Introductory text can go here (no current content equivalent).
 
 .. toctree::
-    :caption: For Developers
-    :maxdepth: 2
+    :caption: Getting Started
+    :maxdepth: 1
 
-    accessibility
+    creating-a-development-environment
     arches-and-elasticsearch
+
+.. toctree::
+    :caption: Reference Guide
+    :maxdepth: 1
+
     api
     command-line-reference
-    creating-a-development-environment
     data-model
+    import-export
+
+.. toctree::
+    :caption: Extending Arches
+    :maxdepth: 2
+
+    extending/index
+
+.. toctree::
+    :caption: Advanced
+    :maxdepth: 1
+
+    accessibility
     integrating-arches-with-arcgis
     localizing-arches
     managing-and-hosting-iiif
-    import-export
-    task-management
-    using-arches-offline
-
-.. toctree::
-    :caption: Migration from v3
-    :maxdepth: 2
-
     migrating-from-v3/index
+    task-management
+    two-factor-authentication
+    using-arches-offline

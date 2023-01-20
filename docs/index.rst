@@ -1,10 +1,11 @@
-========
-home
-========
+====================
+Arches Documentation
+====================
 
-These sections show off various features and styles of this theme.
-They should help you understand how this theme behaves and how others are using it.
-See the sections in the primary sidebar and below to explore.
+.. note::    
+    In order to improve navigation and management we are trying out a new documentation theme, which involves a bit of restructuring. Please let us know what you think `on the community forum <https://community.archesproject.org/>`_, or head back to the `stable docs <https://arches.readthedocs.io>`_.
+
+Welcome to the Arches official documentation site.
 
 .. toctree::
     :caption: Getting Started
@@ -23,10 +24,9 @@ See the sections in the primary sidebar and below to explore.
     user-guide/index
 
 .. toctree::
-    :caption: For Arches Developers
-    :maxdepth: 1
+    :caption: For Developers
+    :maxdepth: 2
 
-    extending/index
     developing/index
 
 .. toctree::

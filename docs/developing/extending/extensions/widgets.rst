@@ -30,7 +30,7 @@ Configuring your Widget
 
 To start, here is a sample Widget JSON file:
 
-.. literalinclude:: ../../examples/sample-widget.json
+.. literalinclude:: ../../../examples/sample-widget.json
    :language: json
 
 The most important field here is the ``datatype`` field. This controls
@@ -56,7 +56,7 @@ controls how data from your Widget is presented in a Report.
 
 Here is an example:
 
-.. literalinclude:: ../../examples/sample-widget.htm
+.. literalinclude:: ../../../examples/sample-widget.htm
    :language: htmldjango
 
 To pull it all together, you'll need to write a complementary
@@ -67,7 +67,7 @@ component with a ``viewModel`` corresponding to your Widget's ``view``
 
 Here is an example, continuing with our ``sample-widget``:
 
-.. literalinclude:: ../../examples/sample-widget.js
+.. literalinclude:: ../../../examples/sample-widget.js
    :language: JavaScript
 
 Registering your Widget

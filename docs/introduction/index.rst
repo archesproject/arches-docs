@@ -2,9 +2,7 @@
 Introduction
 ============
 
-These sections show off various features and styles of this theme.
-They should help you understand how this theme behaves and how others are using it.
-See the sections in the primary sidebar and below to explore.
+Introductory text can go here (no current content equivalent).
 
 .. toctree::
     :caption: Introduction

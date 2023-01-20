@@ -1,10 +1,8 @@
-============
-Configuring
-============
+=====================
+Initial Configuration
+=====================
 
-These sections show off various features and styles of this theme.
-They should help you understand how this theme behaves and how others are using it.
-See the sections in the primary sidebar and below to explore.
+You will have to complete some further configurations once you have Arches up and running.
 
 .. toctree::
     :caption: Configuring

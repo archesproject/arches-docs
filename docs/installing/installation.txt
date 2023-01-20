@@ -184,8 +184,6 @@ You can add ``-dev`` to the load_package command to create a few test user accou
 What Next?
 ----------
 
-* To use the Arches Collector mobile app with your project, see :ref:`Arches Collector Checklist`
-
 * Read more about :ref:`Projects and Packages <Understanding Projects>`
 
 Common Errors

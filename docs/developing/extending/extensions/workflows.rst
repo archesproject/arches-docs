@@ -6,7 +6,7 @@ Workflows are a type of :doc:`Plugin <plugins>` that can simplify the data entry
 
 In other words, instead of using this interface to create a new resource:
 
-.. figure:: ../../images/full-editor.jpg
+.. figure:: ../../../images/full-editor.jpg
     :width: 100%
     :align: center
 
@@ -14,7 +14,7 @@ In other words, instead of using this interface to create a new resource:
 
 ...a workflow can pare down the data entry interface to look something like this:
 
-.. figure:: ../../images/quick-workflow-example.jpg
+.. figure:: ../../../images/quick-workflow-example.jpg
     :width: 100%
     :align: center
 
@@ -50,7 +50,7 @@ Registration JSON
 
 Because Workflows are just Plugins, their registration configurations are constructed the same. See :ref:`Registering your Plugin` for more about how to create the JSON file. For our purposes, it will look like this:
 
-.. literalinclude:: ../../examples/quick-resource-create-workflow.json
+.. literalinclude:: ../../../examples/quick-resource-create-workflow.json
     :language: json
 
 Main UI Component
@@ -58,7 +58,7 @@ Main UI Component
 
 The HTML for this component ``quick-resource-create-workflow.htm`` can be exceptionally simple (just two lines):
 
-.. literalinclude:: ../../examples/quick-resource-create-workflow.htm
+.. literalinclude:: ../../../examples/quick-resource-create-workflow.htm
     :language: htmldjango
 
 The workflow's behavior is defined in ``quick-resource-create-workflow.js``. You'll begin with the boilerplate content below. Note that: 
@@ -240,7 +240,7 @@ Full Example Workflow
 
 Putting it all together, our main workflow component looks like this:
 
-.. literalinclude:: ../../examples/quick-resource-create-workflow.js
+.. literalinclude:: ../../../examples/quick-resource-create-workflow.js
     :language: javascript
 
 Step Components

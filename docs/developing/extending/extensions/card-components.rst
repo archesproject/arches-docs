@@ -47,13 +47,13 @@ information.
 
 Here's the template for the default Card Component:
 
-.. literalinclude:: ../../examples/default-card.htm
+.. literalinclude:: ../../../examples/default-card.htm
    :language: htmldjango
 
 
 And here's the Knockout file:
 
-.. literalinclude:: ../../examples/default-card.js
+.. literalinclude:: ../../../examples/default-card.js
    :language: javascript
 
 
@@ -65,7 +65,7 @@ To register your Component, you'll need a JSON configuration file
 looking a lot like this sample:
 
 
-.. literalinclude:: ../../examples/new-card-component.json
+.. literalinclude:: ../../../examples/new-card-component.json
    :language: json
 
 :componentid:
