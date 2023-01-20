@@ -53,7 +53,7 @@ page:
 Now, using the navigation tree in the left-hand panel, you will set all of your project parameters.
 Detailed information about each parameter is available in the in-app help:
 
-.. image:: images/open-help-project.gif
+.. image:: ../images/open-help-project.gif
 
 When you have filled out all the parameters, you will see in the project summary that all Project
 Requirements have been met. You are now ready to activate the Project.
@@ -63,7 +63,7 @@ Requirements have been met. You are now ready to activate the Project.
     database, and they cannot be changed. Therefore, it's wise to double-check everything before the
     initial activation.
 
-.. image:: images/activate-mobile-project.gif
+.. image:: ../images/activate-mobile-project.gif
 
 Great! Now that you have activated your project, any data collection user that you assigned to it
 will be able to download it through the Arches Collector app and begin collecting data.

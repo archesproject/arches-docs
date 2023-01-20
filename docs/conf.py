@@ -72,7 +72,7 @@ release = '7.x.x'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = 'en'
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
@@ -82,7 +82,7 @@ language = None
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = ['_build']
+exclude_patterns = ['_build', "_deprecated"]
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
@@ -116,12 +116,38 @@ todo_include_todos = True
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-# html_theme = 'default'
+html_theme = "pydata_sphinx_theme"
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
-#html_theme_options = {}
+html_theme_options = {
+  "github_url": "https://github.com/archesproject/arches-docs",
+  "header_links_before_dropdown": 3,
+  "show_toc_level": 1,
+#   "navbar_center": ["version-switcher", "section1"],
+  "icon_links": [
+        {
+            "name": "Arches Community Forum",
+            "url": "https://community.archesproject.org",
+            # Icon class (if "type": "fontawesome"), or path to local image (if "type": "local")
+            "icon": "fa-solid fa-users",
+            "type": "fontawesome",
+        },
+        {
+            "name": "Arches Project Home",
+            "url": "https://archesproject.org",
+            # Icon class (if "type": "fontawesome"), or path to local image (if "type": "local")
+            "icon": "fa-solid fa-home",
+            "type": "fontawesome",
+        }
+   ],
+   "logo": {
+        "text": "",
+        "image_dark": "images/Arches-Logo_TM.png",
+        "alt_text": "Arches Documentation",
+    },
+}
 
 # Add any paths that contain custom themes here, relative to this directory.
 #html_theme_path = []
@@ -129,12 +155,12 @@ todo_include_todos = True
 # USING THIS THEME LOCALLY
 # https://github.com/snide/sphinx_rtd_theme#using-this-theme-locally-then-building-on-read-the-docs
 # on_rtd is whether we are on readthedocs.org, this line of code grabbed from docs.readthedocs.org
-on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
+# on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 
-if not on_rtd:
-    import sphinx_rtd_theme
-    html_theme = 'sphinx_rtd_theme'
-    html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+# if not on_rtd:
+#     import sphinx_rtd_theme
+#     html_theme = 'sphinx_rtd_theme'
+#     html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
@@ -207,7 +233,7 @@ html_static_path = ['_static']
 # Sphinx supports the following languages:
 #   'da', 'de', 'en', 'es', 'fi', 'fr', 'hu', 'it', 'ja'
 #   'nl', 'no', 'pt', 'ro', 'ru', 'sv', 'tr'
-#html_search_language = 'en'
+html_search_language = 'en'
 
 # A dictionary with options for the search language support, empty by default.
 # Now only 'ja' uses this config value

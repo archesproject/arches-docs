@@ -47,7 +47,7 @@ Setting up Two-factor Authentication for User Accounts
 
 If ``ENABLE_TWO_FACTOR_AUTHENTICATION`` or ``FORCE_TWO_FACTOR_AUTHENTICATION`` have been enabled in your Arches application, users can check the status of their accounts in the User Profile page.
 
-.. figure:: images/two-factor-authentication-user-profile.png
+.. figure:: ../images/two-factor-authentication-user-profile.png
     :width: 100%
     :align: center
 
@@ -55,7 +55,7 @@ If ``ENABLE_TWO_FACTOR_AUTHENTICATION`` or ``FORCE_TWO_FACTOR_AUTHENTICATION`` h
 
 From User Profile Edit page, Users can send an email to their registered email address containing instructions and a link to set up two-factor authentication.
 
-.. figure:: images/two-factor-authentication-send-email-from-profile.png
+.. figure:: ../images/two-factor-authentication-send-email-from-profile.png
     :width: 100%
     :align: center
 
@@ -68,7 +68,7 @@ From User Profile Edit page, Users can send an email to their registered email a
 
 Following the email link, the user will navigate to the two-factor authentication settings page.
 
-.. figure:: images/two-factor-authentication-settings.png
+.. figure:: ../images/two-factor-authentication-settings.png
     :width: 100%
     :align: center
 
@@ -76,7 +76,7 @@ Following the email link, the user will navigate to the two-factor authenticatio
 
 From this page, Users can generate a QR code to be scanned with an external authentication application, or a secret key to be entered manually. This secret is used to generate time-based authentication tokens.
 
-.. figure:: images/two-factor-authentication-qr-code.png
+.. figure:: ../images/two-factor-authentication-qr-code.png
     :width: 100%
     :align: center
 
@@ -84,7 +84,7 @@ From this page, Users can generate a QR code to be scanned with an external auth
 
 Once the user has enabled two-factor authentication, or if ``FORCE_TWO_FACTOR_AUTHENTICATION`` has been enabled at the system level, the user will be presented with an additional step in the login process. Once the six-digit authentication code has been entered, the User will be logged in.
 
-.. figure:: images/two-factor-authentication-login.png
+.. figure:: ../images/two-factor-authentication-login.png
     :width: 100%
     :align: center
 

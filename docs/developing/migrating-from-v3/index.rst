@@ -14,7 +14,7 @@ Before migrating data, you'll need to :ref:`install core Arches <Installing Core
 
 .. seealso::
 
-    Please see the main :doc:`installation guide </installation>`.
+    Please see the main :doc:`installation guide </installing/installation>`.
 
 Before moving on, you must be able to run the Django development and view your project in a browser at ``http://localhost:8000``.
 

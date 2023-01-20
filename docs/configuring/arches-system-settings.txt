@@ -92,4 +92,4 @@ The first item of business when preparing your production of Arches is to change
 2. Navigate to the Django admin user page ``http://localhost:8000/admin/auth/user/``.
 3. In the upper right of the page select ``CHANGE PASSWORD`` and follow the steps to update the password.
 
-.. image:: images/change-admin-pwd.png
+.. image:: ../images/change-admin-pwd.png

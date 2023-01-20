@@ -2,13 +2,13 @@
 Data Model
 ##########
 
-.. figure:: images/arches-data-model-2022-04-18.png
+.. figure:: ../images/arches-data-model-2022-04-18.png
     :width: 100%
     :align: center
 
     Arches data model.
 
-.. figure:: images/full-data-model-2022-04-18.png
+.. figure:: ../images/full-data-model-2022-04-18.png
     :width: 100%
     :align: center
 
@@ -37,7 +37,7 @@ elements in Arches:
 The relationships among these components and their dependencies are
 visualized below:
 
-.. image :: images/resource-model.png
+.. image :: ../images/resource-model.png
    :target: _images/resource-model.png
 
 The Arches logical model has been developed to support this modular
@@ -131,33 +131,33 @@ see :ref:`here <Functions>`.
 GraphModel
 ==========
 
-.. literalinclude:: examples/arches/graphmodel.py
+.. literalinclude:: ../examples/arches/graphmodel.py
    :language: python
 
 Node
 ====
 
-.. literalinclude:: examples/arches/node.py
+.. literalinclude:: ../examples/arches/node.py
    :language: python
 
 NodeGroup
 =========
 
-.. literalinclude:: examples/arches/nodegroup.py
+.. literalinclude:: ../examples/arches/nodegroup.py
    :language: python
 
 
 Edge
 ====
 
-.. literalinclude:: examples/arches/edge.py
+.. literalinclude:: ../examples/arches/edge.py
    :language: python
 
 
 Function
 ========
 
-.. literalinclude:: examples/arches/function.py
+.. literalinclude:: ../examples/arches/function.py
    :language: python
 
 
@@ -219,14 +219,14 @@ new ontology.
 Ontology
 ========
 
-.. literalinclude:: examples/arches/ontology.py
+.. literalinclude:: ../examples/arches/ontology.py
    :language: python
 
 
 OntologyClass
 =============
 
-.. literalinclude:: examples/arches/ontologyclass.py
+.. literalinclude:: ../examples/arches/ontologyclass.py
    :language: python
 
 **********
@@ -252,20 +252,20 @@ as `Relation`_ instances.
 Concept
 =======
 
-.. literalinclude:: examples/arches/concept.py
+.. literalinclude:: ../examples/arches/concept.py
    :language: python
 
 
 Relation
 ========
 
-.. literalinclude:: examples/arches/relation.py
+.. literalinclude:: ../examples/arches/relation.py
    :language: python
 
 Value
 =====
 
-.. literalinclude:: examples/arches/value.py
+.. literalinclude:: ../examples/arches/value.py
    :language: python
 
 *************
@@ -331,21 +331,21 @@ instances.
 ResourceInstance
 ================
 
-.. literalinclude:: examples/arches/resourceinstance.py
+.. literalinclude:: ../examples/arches/resourceinstance.py
    :language: python
 
 
 TileModel
 =========
 
-.. literalinclude:: examples/arches/tilemodel.py
+.. literalinclude:: ../examples/arches/tilemodel.py
    :language: python
 
 
 ResourceXResource
 =================
 
-.. literalinclude:: examples/arches/resourcexresource.py
+.. literalinclude:: ../examples/arches/resourcexresource.py
    :language: python
 
 
@@ -355,7 +355,7 @@ Edit Log
 A change in a Tile's contents, which is the result of any resource
 edits, is recorded as an instance of the EditLog model.
 
-.. literalinclude:: examples/arches/editlog.py
+.. literalinclude:: ../examples/arches/editlog.py
    :language: python
 
 *******************
@@ -378,7 +378,7 @@ resource instances. Generally, the process works like this:
    in the Arches UI.
 
 
-.. image:: images/graph-cards.png
+.. image:: ../images/graph-cards.png
    :target: _images/graph-cards.png
 
 
@@ -402,7 +402,7 @@ both read-only and data entry contexts.
 CardModel
 =========
 
-.. literalinclude:: examples/arches/cardmodel.py
+.. literalinclude:: ../examples/arches/cardmodel.py
    :language: python
 
 
@@ -411,7 +411,7 @@ Card Component
 
 A Card Component renders a Card.
 
-.. literalinclude:: examples/arches/cardcomponent.py
+.. literalinclude:: ../examples/arches/cardcomponent.py
    :language: python
 
 Field description:
@@ -425,7 +425,7 @@ Field description:
 Widget
 ======
 
-.. literalinclude:: examples/arches/widget.py
+.. literalinclude:: ../examples/arches/widget.py
    :language: python
 
 
@@ -433,5 +433,5 @@ DDataType
 =========
 Used to validate data entered into ``widgets``
 
-.. literalinclude:: examples/arches/ddatatype.py
+.. literalinclude:: ../examples/arches/ddatatype.py
    :language: python

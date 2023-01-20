@@ -29,7 +29,7 @@ In your Project, these files must be placed accordingly:
 To begin, let's examine the ``sample-datatype`` included with Arches:
 
 
-.. literalinclude:: ../examples/sample_datatype.py
+.. literalinclude:: ../../examples/sample_datatype.py
    :language: python
    :linenos:
 
@@ -49,7 +49,7 @@ You can get a pretty good idea of what methods you need to implement
 by looking at the ``BaseDataType`` class in the Arches source code
 located at ``arches/app/datatypes/base.py`` and below:
 
-.. literalinclude:: ../examples/base.py
+.. literalinclude:: ../../examples/base.py
    :language: python
    :linenos:
 
@@ -102,7 +102,7 @@ Configuring your DataType
 You'll need to populate the ``details`` dictionary to configure your
 new DataType.
 
-.. literalinclude:: ../examples/sample_datatype.py
+.. literalinclude:: ../../examples/sample_datatype.py
    :language: python
    :lines: 7-17
 
@@ -167,7 +167,7 @@ your Python file's ``details`` dictionary for ``configcomponent``.
 Pulling it all together, here's the JavaScript portion of Arches'
 ``date`` DataType.
 
-.. literalinclude:: ../examples/date.js
+.. literalinclude:: ../../examples/date.js
    :language: javascript
 
 
@@ -180,7 +180,7 @@ conditionally rendered by Knockout.js if the search view is
 active. Here's the one from the ``boolean`` datatype:
 
 
-.. literalinclude:: ../examples/boolean.htm
+.. literalinclude:: ../../examples/boolean.htm
    :language: htmldjango
    :lines: 2-10
 
@@ -193,7 +193,7 @@ Arches' built-in ``date`` DataType does not use the Django template
 a more sophisticated example of the component logic needed:
 
 
-.. literalinclude:: ../examples/date.htm
+.. literalinclude:: ../../examples/date.htm
    :language: django
 
 
@@ -217,13 +217,13 @@ Arches' ``boolean`` DataType has the following ``defaultconfig``:
 
 You can see the corresponding data bindings in the Django template:
 
-.. literalinclude:: ../examples/boolean.htm
+.. literalinclude:: ../../examples/boolean.htm
    :language: htmldjango
    :lines: 12-25
 
 And finally, here is the ``boolean`` DataType's JavaScript file in its entirety:
 
-.. literalinclude:: ../examples/boolean.js
+.. literalinclude:: ../../examples/boolean.js
    :language: javascript
 
 Registering your DataType

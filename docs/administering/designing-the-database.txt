@@ -24,13 +24,13 @@ Arches Designer
 
 The Arches Designer is where you export, import, duplicate, modify, and create your Resource Models and Branches. Any user who is part of the Graph Editor group will have access to the Arches Designer.
 
-.. image:: images/arches-desinger.png
+.. image:: ../images/arches-desinger.png
 
 If you don't see any Resource Models listed in your Arches Designer, you may want to consider :ref:`loading a package <loading a package into a project>`. Alternatively, you can directly import individual Resource Model files through **Add ...**.
 
 To edit a Resource Model, click on it or click **Manage ...** > **Manage Graph** and you'll be brought to the Graph Designer.
 
-.. image:: images/select-graph.png
+.. image:: ../images/select-graph.png
 
 Graph Designer
 ==============
@@ -44,7 +44,7 @@ Graph Tab
 
 The Graph Tab is where you build the actual graph, a structured set of nodes and nodegroups, which is the core of a Resource Model or Branch. As noted above, sometimes Resource Models and Branches are generically referred to as "graphs", and this may seem confusing at first, but you'll come to see that it is an appropriate nickname.
 
-.. figure:: images/graph-designer-graph-tab.png
+.. figure:: ../images/graph-designer-graph-tab.png
 
    Screenshot of the Graph Tab in the Graph Designer, showing an "Actor" Resource Model.
 
@@ -56,7 +56,7 @@ During the graph construction process, you are able to create a new Branch from 
 
 Along the way, you can use the preview button to display the graph in a more graph-like manner. This view will be familiar to users of Arches going back to version 3.0.
 
-.. figure:: images/graph-designer-graph-tab-preview.png
+.. figure:: ../images/graph-designer-graph-tab-preview.png
 
    Screenshot of the Graph Tab in the Graph Designer, showing the graph in preview mode.
 
@@ -88,7 +88,7 @@ Cards Tab
 
 Once you have added nodes to the graph, you can switch to the Cards Tab to begin refining the user interface. As you can see, the graph tree is replaced with a "card tree", which is very similar to what users will see when they begin creating a resource using this Resource Model.
 
-.. figure:: images/graph-designer-card-tab.png
+.. figure:: ../images/graph-designer-card-tab.png
 
    Screenshot of the Cards Tab in the Graph Designer, showing an "Actor" Resource Model.
 
@@ -103,7 +103,7 @@ Card Type
 
 The UI of a card can be configured using a card component. Note that when you click a node in the card tree, the "Card Configuration" panel on the right-hand side of the screen will show the card component in a dropdown called "Card Type".
 
-.. figure:: images/card_component.png
+.. figure:: ../images/card_component.png
 
     Screenshot of the card manager user interface, highlighting "Card Type" dropdown in the top-right corner.
 
@@ -123,7 +123,7 @@ The **Map Card** enables more customization for nodes of type ``geojson-collecti
 or `source_layer
 <https://docs.mapbox.com/mapbox-gl-js/style-spec/#layer-source-layer>`_ simply type its name (no quotes).
 
-.. figure:: images/mapcard.png
+.. figure:: ../images/mapcard.png
    :width: 250
 
    Screenshot of card configuration panel, highlighting the fields: "Select drawings map source" and "Select drawings map source layer".
@@ -133,7 +133,7 @@ Related Resources Map Card
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 The **Related Resources Map Card** enables a more rich user experience for nodes of type ``related-resource``. Like the Map Card, map layer data representing resources can be added to a map UI such that the user can navigate geographically to select a related resource instead of paging through the dropdown list of relatable resources (however the dropdown still works normally in this card component). This card component is very useful if a user knows the geographic context of a resource (like what neighborhood it's in) instead of its name. The steps to add such map data are the same as in the Map Card configuration panel.
 
-.. figure:: images/related_resources_mapcard.png
+.. figure:: ../images/related_resources_mapcard.png
 
    Screenshot of a card using related resources map card, showing a selected resource in the map, polygon outlined in purple to show selection, and the resource instance's name selected in the dropdown widget to the right of the map.
 
@@ -143,7 +143,7 @@ Permissions Tab
 
 Arches allows you to define permissions at the card level, so in the Permissions Tab you'll see the card tree, just as in the Cards tab. However, you will only be able to select entire cards, not individual nodes.
 
-.. figure:: images/graph-designer-permissions-tab.png
+.. figure:: ../images/graph-designer-permissions-tab.png
 
    Screenshot of the Permissions Tab in the Graph Designer, showing an "Actor" Resource Model.
 

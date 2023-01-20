@@ -22,7 +22,7 @@ A good guide about how to implement this using OpenSSL on Ubuntu 20.04 can be fo
 .. note::
     This option allows you to implement SSL using your server's IP address without a domain name. However, when accessing the website using any modern browser the connection will be marked as not private.
 
-.. image :: images/connection-not-private.png
+.. image :: ../images/connection-not-private.png
     :target: _images/connection-not-private.png 
 
 Signed by Let's encrypt

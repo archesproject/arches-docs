@@ -13,7 +13,7 @@ To register your Plugin, you'll need a JSON configuration file
 looking a lot like this sample:
 
 
-.. literalinclude:: ../examples/sample-plugin.json
+.. literalinclude:: ../../examples/sample-plugin.json
    :language: json
 
 

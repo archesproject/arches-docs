@@ -207,5 +207,5 @@ using that workflow until you are finished with the migration.)
 
 See :ref:`Arches-HIP workflow Step 6 <6. Load the entire package.>`.
 
-.. |help-btn| image:: images/in-app-help-icon.png
+.. |help-btn| image:: ../../images/in-app-help-icon.png
   :align: middle

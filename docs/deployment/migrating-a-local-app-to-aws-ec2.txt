@@ -32,7 +32,7 @@ Create an EC2 Instance
 
 From your AWS account console, navigate to the EC2 section. You should get to a screen that looks something like this:
 
-.. figure:: images/ec2-dash.png
+.. figure:: ../images/ec2-dash.png
     :width: 100%
     :align: center
 
@@ -86,7 +86,7 @@ Now go back to AWS, and look at the status of your server instance. By now, it p
 4. Click OK to trust the certificate, and login to your server as the AWS default user `ubuntu`.
 5. If everything goes well you should be greeted with a screen like this:
 
-.. figure:: images/ubuntu-welcome.png
+.. figure:: ../images/ubuntu-welcome.png
     :width: 100%
     :align: center
 

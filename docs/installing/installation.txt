@@ -186,7 +186,7 @@ What Next?
 
 * To use the Arches Collector mobile app with your project, see :ref:`Arches Collector Checklist`
 
-* Read more about :doc:`Projects and Packages </projects-and-packages>`
+* Read more about :ref:`Projects and Packages <Understanding Projects>`
 
 Common Errors
 -------------

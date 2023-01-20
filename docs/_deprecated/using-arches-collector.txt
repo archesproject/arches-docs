@@ -2,11 +2,11 @@
 Introduction to Arches Collector
 ################################
 
-.. image:: images/arches-mobile/apple-app-store.png
+.. image:: ../images/arches-mobile/apple-app-store.png
     :height: 50px
     :target: https://apps.apple.com/us/app/arches-collector/id1377842164
 
-.. image:: images/arches-mobile/google-play-badge.png
+.. image:: ../images/arches-mobile/google-play-badge.png
     :height: 50px
     :target: https://play.google.com/store/apps/details?id=org.archesproject.archescollector
 
@@ -55,7 +55,7 @@ Download a Project
 
 Upon entering an Arches instance, you will see a list of projects. These are all of the mobile data collection projects to which you have been granted access. Choose a one, and download it to begin working.
 
-.. figure:: images/arches-mobile/all-projects-in-instance.png
+.. figure:: ../images/arches-mobile/all-projects-in-instance.png
     :height: 400px
     :align: center
 
@@ -78,7 +78,7 @@ In some cases, you may expect to collect data outside of wifi/cellular network r
 
 From the list of projects, open the settings menu for a project and flip the "Use offline maps" switch.
 
-.. figure:: images/arches-mobile/activate-offline-map.png
+.. figure:: ../images/arches-mobile/activate-offline-map.png
     :height: 400px
     :align: center
 
@@ -94,7 +94,7 @@ There are four main screens within a project, and you can switch between them by
 
 **NEW** - Choose a resource model to create a new resource.
 
-.. figure:: images/arches-mobile/new-resource-tab.png
+.. figure:: ../images/arches-mobile/new-resource-tab.png
     :height: 400px
     :align: center
 
@@ -108,7 +108,7 @@ From here you will create new resources.
 + Existing Resources that were downloaded as part of the project
 + New resources created and synced by other members of this project (you must sync your own project to get these resources)
 
-.. figure:: images/arches-mobile/resources-review.png
+.. figure:: ../images/arches-mobile/resources-review.png
     :height: 400px
     :align: center
 
@@ -118,7 +118,7 @@ From here you can select a resource to edit or view its report.
 
 **MAP** - A map view showing all of the resources in your project that have location data. The basemap is defined in the project configuration. See :ref:`Download the Offline Map` if you expect to be collecting data beyond wifi/cellular network range.
 
-.. figure:: images/arches-mobile/map.png
+.. figure:: ../images/arches-mobile/map.png
     :height: 400px
     :align: center
 
@@ -128,7 +128,7 @@ From here you can select a resource to edit.
 
 **SUMMARY** - A project-level summary.
 
-.. figure:: images/arches-mobile/project-summary.png
+.. figure:: ../images/arches-mobile/project-summary.png
     :height: 400px
     :align: center
 
@@ -137,25 +137,25 @@ Creating Records
 
 New resources are made from the **NEW** screen, where you will choose a resource model to use for the new resource. In the following example, a new "Heritage Asset - Monument" resource will be created.
 
-.. figure:: images/arches-mobile/new-resource-tab.png
+.. figure:: ../images/arches-mobile/new-resource-tab.png
     :height: 400px
     :align: center
 
 Beginning to create a new resource, you'll see all of the cards (or "records") that can be added to the resource.
 
-.. figure:: images/arches-mobile/new-resource-set1.png
+.. figure:: ../images/arches-mobile/new-resource-set1.png
     :height: 400px
     :align: center
 
     In the images above, the "Monument Asset Name" card is selected in order to create a new name for the resource.
 
-.. figure:: images/arches-mobile/add-resource-name-2.png
+.. figure:: ../images/arches-mobile/add-resource-name-2.png
     :height: 400px
     :align: center
 
     An Asset Name and Name Type are entered. Because all changes are automatically saved, the display name is updated as soon as this name is entered. Note that this happens because the Define Resource Descriptors function has been properly configured in the Resource Model by the database administrator.
 
-.. figure:: images/arches-mobile/new-resource-set2.png
+.. figure:: ../images/arches-mobile/new-resource-set2.png
     :height: 400px
     :align: center
 
@@ -165,7 +165,7 @@ Beginning to create a new resource, you'll see all of the cards (or "records") t
 
 While the example above shows text and dropdown entries, other types of data will have different input methods.
 
-.. figure:: images/arches-mobile/add-resource-location.png
+.. figure:: ../images/arches-mobile/add-resource-location.png
     :height: 400px
     :align: center
 
@@ -176,7 +176,7 @@ Editing Records
 
 From the **REVIEW** screen of a project, you can select resources to edit them. In this example "The Eliza Jane" will be selected.
 
-.. figure:: images/arches-mobile/resources-review.png
+.. figure:: ../images/arches-mobile/resources-review.png
     :height: 400px
     :align: center
 
@@ -184,7 +184,7 @@ From the **REVIEW** screen of a project, you can select resources to edit them. 
 
 When you've selected a resource you'll be brought to its RESOURCE REPORT: a summary of all the records that have been added to it. As shown below, you can edit any existing record (as long as you have the proper permissions).
 
-.. figure:: images/arches-mobile/resource-edit-measurement.png
+.. figure:: ../images/arches-mobile/resource-edit-measurement.png
     :height: 400px
     :align: center
 
@@ -211,7 +211,7 @@ Additionally, some changes occur to the resources you have created in your proje
 
 You can sync a project from within the project itself:
 
-.. figure:: images/arches-mobile/project-menu-edit.png
+.. figure:: ../images/arches-mobile/project-menu-edit.png
     :height: 350px
     :align: center
 
@@ -219,7 +219,7 @@ You can sync a project from within the project itself:
 
 Or you can sync from the main project list page:
 
-.. figure:: images/arches-mobile/sync-from-project-list.png
+.. figure:: ../images/arches-mobile/sync-from-project-list.png
     :height: 350px
     :align: center
 

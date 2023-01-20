@@ -78,7 +78,7 @@ To allow others to connect to your Arches instance, including Arches Collector u
 #. Create a new application
 #. Fill out the form with a **Name** of your choosing, and set **Client type** and **Authorization grant type** as shown in the image below.
 
-    .. image:: images/oauth-create-client.png
+    .. image:: ../images/oauth-create-client.png
 
 #. Copy the **Client id** and submit the form (you can access this id at any time).
 #. In your Arches project's ``settings.py`` or ``settings_local.py`` file, set or add this variable

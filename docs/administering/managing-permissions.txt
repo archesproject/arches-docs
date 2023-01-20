@@ -32,7 +32,7 @@ This level of access is handled by adding Users to certain Groups through the Dj
 
 Once logged into the admin panel, you'll see this at the top of the page:
 
-.. figure:: images/django-admin1.png
+.. figure:: ../images/django-admin1.png
     :width: 100%
     :align: center
 
@@ -41,7 +41,7 @@ Once logged into the admin panel, you'll see this at the top of the page:
 Click **Users** to see a list of all your Arches users. Selecting a user will yield a generic
 profile page like this:
 
-.. figure:: images/django-admin2.png
+.. figure:: ../images/django-admin2.png
     :width: 100%
     :align: center
 
