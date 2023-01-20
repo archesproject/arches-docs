@@ -1,4 +1,4 @@
-"Sphinx<6" # latest pydata theme (0.12.0) is not compatible with Sphinx > 6
+Sphinx<6 # latest pydata theme (0.12.0) is not compatible with Sphinx > 6
 pydata-sphinx-theme==0.12.0
 readthedocs-sphinx-ext==2.1.4
 sphinxcontrib-httpdomain
