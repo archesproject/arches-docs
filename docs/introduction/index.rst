@@ -10,3 +10,4 @@ Introductory text can go here (no current content equivalent).
 
     overview
     release-process
+    releases

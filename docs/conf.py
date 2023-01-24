@@ -123,7 +123,7 @@ html_theme = "pydata_sphinx_theme"
 # documentation.
 html_theme_options = {
   "github_url": "https://github.com/archesproject/arches-docs",
-  "header_links_before_dropdown": 3,
+  "header_links_before_dropdown": 4,
   "show_toc_level": 1,
 #   "navbar_center": ["version-switcher", "section1"],
   "icon_links": [

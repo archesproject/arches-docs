@@ -13,7 +13,6 @@ Welcome to the Arches official documentation site.
 
     introduction/index
     installing/index
-    releases
 
 .. toctree::
     :caption: For Arches Users
@@ -25,7 +24,7 @@ Welcome to the Arches official documentation site.
 
 .. toctree::
     :caption: For Developers
-    :maxdepth: 2
+    :maxdepth: 1
 
     developing/index
 
