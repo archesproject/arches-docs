@@ -12,6 +12,7 @@ Welcome to the Arches official documentation site.
     :maxdepth: 1
 
     introduction/index
+    introduction/releases
     installing/index
 
 .. toctree::

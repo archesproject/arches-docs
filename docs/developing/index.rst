@@ -1,6 +1,6 @@
-==============
-For Developers
-==============
+======================
+Developing with Arches
+======================
 
 Introductory text can go here (no current content equivalent).
 
