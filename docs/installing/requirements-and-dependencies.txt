@@ -14,7 +14,8 @@ To begin development or make a test installation of Arches, you will need the fo
     - Depending on how many uploaded files (images, 3d models, etc) you will have, you may need **much** more disk space. We advise an early evaulation of how much space you *think* you'll need, and then provision twice as much just to be safe...
 :Memory (RAM):  - **4GB**
     - This recommendation is based on the fact that ElasticSearch requires 2GB to run, and as per `official ElasticSearch documentation <https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html#_give_less_than_half_your_memory_to_lucene>`_ no more than half of your system's memory should be dedicated to ElasticSearch.
-    - In production, you may want to increase your memory, and allow ElasticSearch to use `up to 32GB <https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html#compressed_oops>`_.
+    - In production, you very likely need to increase your memory. In building the production (minified) frontend asset bundle, yarn (all by itself!) will require at least 8GB to run. If you don't have enough memory, yarn will likely return an error, sometimes after several minutes or hours of processing. In production, you may also find it useful to allow ElasticSearch to use `up to 32GB <https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html#compressed_oops>`_.
+
 
 Software Dependencies
 =====================
