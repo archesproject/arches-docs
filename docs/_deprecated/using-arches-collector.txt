@@ -1,0 +1,226 @@
+################################
+Introduction to Arches Collector
+################################
+
+.. image:: ../images/arches-mobile/apple-app-store.png
+    :height: 50px
+    :target: https://apps.apple.com/us/app/arches-collector/id1377842164
+
+.. image:: ../images/arches-mobile/google-play-badge.png
+    :height: 50px
+    :target: https://play.google.com/store/apps/details?id=org.archesproject.archescollector
+
+Arches Collector is a mobile app that allows you and your team to collect heritage data in the field, and sync it back to your main Arches instance. Database administrators facilitate this process by designing "projects" in the Arches instance, which define who can participate, what kind of data will be collected, where the project will take place, and for how long. Approved users can then connect to the Arches instance, download the project, and collect data, and sync it back to the database.
+
+General App Navigation
+======================
+
+Arches Collector is set up in a three-tiered hierarchical structure. Menu options throughout the app are context-sentitive based on the level within which you are working.
+
+**> Arches Instance Level** - You will connect to one or more Arches Instances.
+
+**>> Project Level** - Once connected to an Arches instance, you'll download and enter a project from that instance.
+
+**>>> Resource Level** - Within a project, you'll be working with individual resources to create and edit data.
+
+#########################
+Arches Collector Workflow
+#########################
+
+.. figure::  images/arches-mobile/app-workflow.png
+
+    Left to right: Overview of the Arches Collector workflow
+
+Connect to an Arches Instance
+=============================
+
+Begin by connecting to an existing Arches instance. This is a deployment of Arches that you can also view on the web. You'll use credentials provided to you by the database administrator.
+
+.. figure::  images/arches-mobile/add-instance-filled-out.png
+    :height: 400px
+    :align: center
+
+    Be sure to include http:// or https:// in the URL for the Arches instance.
+
+You can create and maintain connections to as many Arches instances as you want.
+
+.. figure::  images/arches-mobile/see-all-instances.png
+    :height: 400px
+    :align: center
+
+    This user has only connected to one instance, but more connections will be shown here once they are made.
+
+Download a Project
+==================
+
+Upon entering an Arches instance, you will see a list of projects. These are all of the mobile data collection projects to which you have been granted access. Choose a one, and download it to begin working.
+
+.. figure:: ../images/arches-mobile/all-projects-in-instance.png
+    :height: 400px
+    :align: center
+
+    This user has access to three different projects in this instance, but has only downloaded the one at the top of the list.
+
+Once you have downloaded a project, you can enter it and begin collecting data.
+
+.. admonition:: Inactive Projects
+
+    A project marked as "Inactive" means that no new users can download it. If you have already downloaded a project that is now marked inactive, you can continue to work with it as before.
+
+Download the Offline Map
+------------------------
+
+In some cases, you may expect to collect data outside of wifi/cellular network range, so the database administrator will configure this project with an offline map. **This map will be downloaded the first time you activate the "Use offline maps" switch.**
+
+.. important::
+
+    Make sure you download the offline map *before* heading out into the field for the first time! We recommend doing this while connected to wifi, as the offline map file could be large.
+
+From the list of projects, open the settings menu for a project and flip the "Use offline maps" switch.
+
+.. figure:: ../images/arches-mobile/activate-offline-map.png
+    :height: 400px
+    :align: center
+
+Managing Projects
+-----------------
+
+You can keep your project screen clean by leaving projects if you will no longer be participating (you can rejoin later), or by deleting projects from your device. All unsynced data in a project will be lost upon deletion.
+
+Navigating a Project
+====================
+
+There are four main screens within a project, and you can switch between them by swiping left and right, or using the nav bar along the bottom of the screen.
+
+**NEW** - Choose a resource model to create a new resource.
+
+.. figure:: ../images/arches-mobile/new-resource-tab.png
+    :height: 400px
+    :align: center
+
+    This user is viewing a project called "CDB Historic Survey - Part 1". The project was configured with only one resource model, named "Heritage Asset - Monument".
+
+From here you will create new resources.
+
+**REVIEW** - View all of the resources in your project. This includes:
+
++ New resources you have created
++ Existing Resources that were downloaded as part of the project
++ New resources created and synced by other members of this project (you must sync your own project to get these resources)
+
+.. figure:: ../images/arches-mobile/resources-review.png
+    :height: 400px
+    :align: center
+
+    This user has a quite a few resources in the review screen. The top one has been edited (in this case, created) locally, so it has a white background. Those with grey backgrounds have not been edited locally, and were likely part of the initial project download.
+
+From here you can select a resource to edit or view its report.
+
+**MAP** - A map view showing all of the resources in your project that have location data. The basemap is defined in the project configuration. See :ref:`Download the Offline Map` if you expect to be collecting data beyond wifi/cellular network range.
+
+.. figure:: ../images/arches-mobile/map.png
+    :height: 400px
+    :align: center
+
+    Selected, a resource's name and description (if present) will be shown in a pop-up. These attributes are defined by the configuration of the resource model's "Define Resource Descriptors" function.
+
+From here you can select a resource to edit.
+
+**SUMMARY** - A project-level summary.
+
+.. figure:: ../images/arches-mobile/project-summary.png
+    :height: 400px
+    :align: center
+
+Creating Records
+================
+
+New resources are made from the **NEW** screen, where you will choose a resource model to use for the new resource. In the following example, a new "Heritage Asset - Monument" resource will be created.
+
+.. figure:: ../images/arches-mobile/new-resource-tab.png
+    :height: 400px
+    :align: center
+
+Beginning to create a new resource, you'll see all of the cards (or "records") that can be added to the resource.
+
+.. figure:: ../images/arches-mobile/new-resource-set1.png
+    :height: 400px
+    :align: center
+
+    In the images above, the "Monument Asset Name" card is selected in order to create a new name for the resource.
+
+.. figure:: ../images/arches-mobile/add-resource-name-2.png
+    :height: 400px
+    :align: center
+
+    An Asset Name and Name Type are entered. Because all changes are automatically saved, the display name is updated as soon as this name is entered. Note that this happens because the Define Resource Descriptors function has been properly configured in the Resource Model by the database administrator.
+
+.. figure:: ../images/arches-mobile/new-resource-set2.png
+    :height: 400px
+    :align: center
+
+    Use the in-app "back" button to return to the resource overview. There is now one Monument Asset Name record.
+
+----
+
+While the example above shows text and dropdown entries, other types of data will have different input methods.
+
+.. figure:: ../images/arches-mobile/add-resource-location.png
+    :height: 400px
+    :align: center
+
+    Creating location records happens through a map interface. Select the shapetype, and tap the map to create geometries. With lines and polygons, double-tap to finish the geometry.
+
+Editing Records
+===============
+
+From the **REVIEW** screen of a project, you can select resources to edit them. In this example "The Eliza Jane" will be selected.
+
+.. figure:: ../images/arches-mobile/resources-review.png
+    :height: 400px
+    :align: center
+
+    Note that this user is shown the option to delete The Eliza Jane. Once the project has been synced, deletion will no longer be an option. You will also never be allowed to delete resources that were initially downloaded with the project.
+
+When you've selected a resource you'll be brought to its RESOURCE REPORT: a summary of all the records that have been added to it. As shown below, you can edit any existing record (as long as you have the proper permissions).
+
+.. figure:: ../images/arches-mobile/resource-edit-measurement.png
+    :height: 400px
+    :align: center
+
+    Use the Edit icon to edit or add a record. You can also use the EDITOR tab to switch to the full resource record view.
+
+Syncing Data
+============
+
+When you have finished collecting data, either creating new resources or editing existing ones, you will sync your local edits to the web Arches deployment. In fact, you can do this at any time during your data collection, and as often as you want.
+
+When you sync your the project on your mobile device, this is what happens:
+
++ All local changes will be pushed to the Arches instance.
++ All local will be made available to all other participants in the same project.
++ You will download any data changes that other project participants have synced.
++ You will **not** download changes that have been made to resources directly in the Arches instance since the project was first activated.
+
+Additionally, some changes occur to the resources you have created in your project:
+
++ You will no longer be able to delete entire resources that you created locally.
++ You will no longer be able to delete resource records that you created locally.
+
+----
+
+You can sync a project from within the project itself:
+
+.. figure:: ../images/arches-mobile/project-menu-edit.png
+    :height: 350px
+    :align: center
+
+    While working in a project, use the icon in the upper right to open the menu from which you can sync, using the "Refresh survey data" button.
+
+Or you can sync from the main project list page:
+
+.. figure:: ../images/arches-mobile/sync-from-project-list.png
+    :height: 350px
+    :align: center
+
+    Use "Refresh all records in this project" from the project settings menu.

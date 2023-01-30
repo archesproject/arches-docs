@@ -1,8 +1,5 @@
-Sphinx==4.2.0
-sphinx_rtd_theme==0.5.2
-docutils==0.16
+Sphinx<6 # latest pydata theme (0.12.0) is not compatible with Sphinx > 6
+pydata-sphinx-theme==0.12.0
 readthedocs-sphinx-ext==2.1.4
 sphinxcontrib-httpdomain
 requests[security]
-
-sphinx-autobuild

@@ -1,0 +1,54 @@
+#########################
+Requirements/Dependencies
+#########################
+
+System Requirements
+===================
+
+Arches works on Linux, Windows, or macOS. Most production implementations use Linux servers.
+
+To begin development or make a test installation of Arches, you will need the following **minimum** resources:
+
+:Disk Space: - **2GB** for all dependencies and Arches.
+    - **8GB** to store uploaded files, database backups, etc.
+    - Depending on how many uploaded files (images, 3d models, etc) you will have, you may need **much** more disk space. We advise an early evaulation of how much space you *think* you'll need, and then provision twice as much just to be safe...
+:Memory (RAM):  - **4GB**
+    - This recommendation is based on the fact that ElasticSearch requires 2GB to run, and as per `official ElasticSearch documentation <https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html#_give_less_than_half_your_memory_to_lucene>`_ no more than half of your system's memory should be dedicated to ElasticSearch.
+    - In production, you very likely need to increase your memory. In building the production (minified) frontend asset bundle, yarn (all by itself!) will require at least 8GB to run. If you don't have enough memory, yarn will likely return an error, sometimes after several minutes or hours of processing. In production, you may also find it useful to allow ElasticSearch to use `up to 32GB <https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html#compressed_oops>`_.
+
+
+Software Dependencies
+=====================
+
+Arches requires the following software packages to be installed and available. Ubuntu Linux users see below for an installation script.
+
+:Python >= 3.7: - Installation: https://www.python.org/downloads/
+    - Python 3.7 and later comes with pip
+    - **Windows** You must choose 32-bit or 64-bit Python based on your system architecture.
+    - **macOS** This guide works well if you wish to install via `brew`: https://docs.python-guide.org/starting/install3/osx/
+:PostgreSQL 12 with PostGIS 3:
+    - **macOS** Use `Postgres.app <http://postgresapp.com>`_.
+    - **Windows** Use the `EnterpriseDB installers <https://www.postgresql.org/download/windows/>`_, and use Stack Builder (included) to get PostGIS. After installation, add the following to your system's ``PATH`` environment variable: ``C:\Program Files\PostgreSQL\12\bin``. Make sure you write down the password that you assign to the ``postgres`` user.
+:Elasticsearch 8: - Installers: https://www.elastic.co/downloads/past-releases/elasticsearch-8-5-1
+    - Elasticsearch is integral to Arches and can be installed and configured many ways.
+      For more information, see :ref:`Arches and Elasticsearch`.
+:GDAL >= 2.2.x: - **Windows** Use the `OSGeo4W installer <https://trac.osgeo.org/osgeo4w/>`_, and choose to install the GDAL package (you don't need QGIS or GRASS). After installation, add ``C:\OSGeo4W64\bin`` to your system's ``PATH`` environment variable.
+:Yarn: - Installation: https://yarnpkg.com/lang/en/docs/install
+    - **Windows** Use the .msi installer in the link above, but first install `Node.js <https://nodejs.org/>`_.
+
+To support long-running task management, like large user downloads, you must install a Celery broker like RabbitMQ or Redis:
+
+:Brokers: - Options: https://docs.celeryproject.org/en/stable/getting-started/first-steps-with-celery.html#choosing-a-broker
+    - Once you have a broker installed, read more about :ref:`Task Management` in Arches.
+
+Scripted Dependency Installation
+--------------------------------
+
+For Ubuntu we maintain an `ubuntu_setup.sh <https://raw.githubusercontent.com/archesproject/arches/stable/7.1.0/arches/install/ubuntu_setup.sh>`_ script to install dependencies. It works for 18.04 and 20.04, and preliminary testing shows it be compatible with 22.04 as well.
+
+.. code-block:: bash
+
+    wget https://raw.githubusercontent.com/archesproject/arches/stable/7.1.0/arches/install/ubuntu_setup.sh
+    source ./ubuntu_setup.sh
+
+You will be prompted before each dependency is installed, or use ``yes | source ./ubuntu_setup.sh`` to install all components (Postgres/PostGIS, Node/Yarn, and ElasticSearch).

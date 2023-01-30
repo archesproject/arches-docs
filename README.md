@@ -127,7 +127,7 @@ Given that there is a header (of any level) somewhere in the documentation that 
 
 If you want an image that is a hyperlink to the file itself, use a `figure` instead of an image. The figure is automatically turned into a link, **but only if a height or width attribute is set**.
 
-    .. figure:: images/datamodel-arches-4.4.1-032119.svg
+    .. figure:: ../images/datamodel-arches-4.4.1-032119.svg
         :width: 100%
         :align: center
 
@@ -135,7 +135,7 @@ If you want an image that is a hyperlink to the file itself, use a `figure` inst
 
 Previously we had used
 
-    .. image:: images/datamodel-full-4.4.1-032119.svg
+    .. image:: ../images/datamodel-full-4.4.1-032119.svg
         target: /_images/datamodel-full-4.4.1-032119.svg
     
 and while this works on a local build, it does not work when published in RTD (https://github.com/archesproject/arches-docs/issues/120).

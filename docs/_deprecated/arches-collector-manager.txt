@@ -1,0 +1,93 @@
+########################
+Arches Collector Manager
+########################
+
+What Are Arches Collector Projects?
+===================================
+
+Using the :ref:`Arches Collector <Introduction to Arches Collector>` mobile app to crowdsource data
+is dependent on the creation of Projects, by a database administrator, in the
+Arches Collector Manager. Each Project is a discrete collection effort comprising the following:
+
++ Specific users or groups of users who are allowed to participate
++ Start and end dates to define when users are allowed to participate
++ A selection of which Resource Models will be used, and more precisely, which cards from within those Resource Models will be used
++ A set of existing resources from your database, to which users may add more data or just use as reference (based on card-level permissions)
++ An optional MBTiles file to provide a basemap for users working outside of wifi/cell network range
+
+To facilitate a wide array of simultaneous data collection efforts, an administator can create
+multiple projects, all targeting different users and a different type of data collection.
+
+.. seealso::
+    To learn more about how data collection users will participate in Projects, please see :ref:`Arches Collector Workflow`.
+
+.. important::
+    Before you can use the Arches Collector app, you must make sure to complete the :doc:`Arches Collector Checklist </arches-collector-checklist>`
+
+Arches Collector Manager Overview
+=================================
+
+.. important::
+    To access the Arches Collector Manager, you must be in the Mobile Project Administrator group
+    or have superuser status.
+
+To get to the Arches Collector Manager, use the |acm-icon| icon in the left-hand nav bar, or
+go directly to ``/collector_manager``. Before you have created any projects, the interface
+will look like this:
+
+.. image::  images/acm-empty.png
+
+As you begin to add more and more projects, the interface will resemble the Arches Designer,
+with Projects taking the place of Resource Models:
+
+.. image::  images/acm-full.jpg
+
+Creating Projects in the Arches Collector Manager
+=================================================
+
+Use |new-project-btn| to begin creating a new project, and you'll be brought to the summary
+page:
+
+.. image::  images/start-new-project.jpg
+
+Now, using the navigation tree in the left-hand panel, you will set all of your project parameters.
+Detailed information about each parameter is available in the in-app help:
+
+.. image:: ../images/open-help-project.gif
+
+When you have filled out all the parameters, you will see in the project summary that all Project
+Requirements have been met. You are now ready to activate the Project.
+
+.. warning::
+    Once a Project has been activated for the first time, its parameters are saved to an intermediate
+    database, and they cannot be changed. Therefore, it's wise to double-check everything before the
+    initial activation.
+
+.. image:: ../images/activate-mobile-project.gif
+
+Great! Now that you have activated your project, any data collection user that you assigned to it
+will be able to download it through the Arches Collector app and begin collecting data.
+
+----
+
+After you have activated the project and data collectors have used it to add resources
+to your database, the project summary page will tell your how long the project has been active,
+how many resources have been collected, how many have connected to it, and more.
+
+.. image::  images/project-summary.jpg
+
+Creating an Offline Basemap
+===========================
+
+Projects allow for the inclusion of an `MBTiles <https://docs.mapbox.com/help/glossary/mbtiles/>`_ file to serve as a basemap while data collectors are outide of wifi/cell network range. This file will be downloaded and stored on an Arches Collector users' device *the first time that "offline maps" are activated* in a project, not upon the initial download. Therefore, users should activate this map in the project before going into the field.
+
+You can also obtain high quality and inexpensive tiles from sites such as https://openmaptiles.com. To create an MBTiles file with your own geospatial data, you can use a free account at `Mapbox.com <https://mapbox.com>`_, or desktop software like `TileMill <https://tilemill-project.github.io/tilemill/>`_.
+
+.. note::
+    Large files will require longer downloads and more storage space on mobile devices.
+
+.. |acm-icon| image:: images/acm-icon.jpg
+  :align: middle
+
+.. |new-project-btn| image:: images/new-project-btn.jpg
+  :align: middle

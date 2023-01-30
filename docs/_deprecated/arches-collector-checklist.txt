@@ -1,0 +1,112 @@
+##########################
+Arches Collector Checklist
+##########################
+
+The following steps must be completed to enable an Arches Collector connection
+with your Arches instance.
+
+Install CouchDB
+---------------
+
+.. note::
+
+    Ubuntu 20 users must install CouchDB 2.x `with Docker <https://docs.couchdb.org/en/stable/install/docker.html>`_.
+
+Arches uses CouchDB 2.x, though the current version of CouchDB is 3.x. If
+you already have 3.x installed, use ``sudo apt-get --purge remove couchdb`` to start
+over. Then:
+
+.. code-block::
+
+    # only if you haven't already done this
+    wget --quiet -O - https://couchdb.apache.org/repo/bintray-pubkey.asc | sudo apt-key add -
+    sudo add-apt-repository "deb https://apache.bintray.com/couchdb-deb $(lsb_release -sc) main"
+    sudo apt-get update
+
+    # necessary to find the older release
+    sudo apt-cache policy couchdb
+    sudo apt-get update
+
+this will list all available versions — make note of the latest version 2
+and then install it:
+
+.. code-block::
+
+    sudo apt-get install couchdb=2.3.1~bionic
+
+
+.. important::
+
+    It may be necessary to use this installation method instead:
+
+    .. code-block::
+
+        sudo apt update && sudo apt install -y curl apt-transport-https gnupg
+        curl https://couchdb.apache.org/repo/keys.asc | gpg --dearmor | sudo tee /usr/share/keyrings/couchdb-archive-keyring.gpg >/dev/null 2>&1
+        source /etc/os-release
+        echo "deb [signed-by=/usr/share/keyrings/couchdb-archive-keyring.gpg] https://apache.jfrog.io/artifactory/couchdb-deb/ ${VERSION_CODENAME} main" | sudo tee /etc/apt/sources.list.d/couchdb.list >/dev/null
+
+
+
+For the quickest installation configuration, choose `standalone`, `127.0.0.1`, and pick
+your password.
+
+Test the installation with ``curl http://admin:[your password]@127.0.0.1:5984``,
+the response should contain the correct version number.
+
+Finally, add this line to ``settings.py`` or ``settings_local.py``:
+
+.. code-block::
+
+    COUCHDB_URL = 'http://admin:[your password]@127.0.0.1:5984'
+
+At this point you should be ready to move on, but see the
+`official CouchDB setup documentation <https://docs.couchdb.org/en/stable/setup/index.html>`_
+for more information.
+
+Register an OAuth Application
+-----------------------------
+
+To allow others to connect to your Arches instance, including Arches Collector users, you must create an OAuth client id and add it to your settings.
+
+#. In a browser go to
+
+    .. code-block:: none
+
+        http://<yourdomain:port>/o/applications/
+
+#. Create a new application
+#. Fill out the form with a **Name** of your choosing, and set **Client type** and **Authorization grant type** as shown in the image below.
+
+    .. image:: ../images/oauth-create-client.png
+
+#. Copy the **Client id** and submit the form (you can access this id at any time).
+#. In your Arches project's ``settings.py`` or ``settings_local.py`` file, set or add this variable
+
+    .. code-block:: none
+
+        MOBILE_OAUTH_CLIENT_ID = "<your new Client id>"
+
+.. important::
+
+    + Only make one application, though you are technically allowed to make more.
+    + An application is "owned" by whichever user created it, and will not be visible to other users.
+
+Set WSGIPassAuthorization in Apache Conf
+----------------------------------------
+
+If you are using Apache as a webserver, you must add the following line to your VirtualHost:
+
+.. code-block::
+
+    WSGIPassAuthorization on
+
+Restart Apache for all of these steps to take effect. You should now be able to
+use the :ref:`Arches Collector Manager` to create new projects.
+
+Configure a Celery Broker
+-------------------------
+
+To support sync operations between the mobile app and your Arches database,
+Celery must be supplied with a message broker. Please see :ref:`Task Management`
+for how to set this up.
