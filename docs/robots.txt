@@ -1,0 +1,8 @@
+# Response to issue: https://github.com/archesproject/arches-docs/issues/297
+# See example: https://github.com/astropy/astropy/pull/7874/files
+
+User-agent: *
+Allow: /*/latest/
+Allow: /en/latest/   # Fallback for bots that don't understand wildcards
+Allow: /*/stable/
+Allow: /en/stable/   # Fallback for bots that don't understand wildcards
