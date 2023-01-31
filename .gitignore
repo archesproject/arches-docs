@@ -1,3 +1,8 @@
 docs/_build
 .vscode
 .DS_Store
+
+# Virtual env, pyenv ignores
+.venv/
+Pipfile
+Pipfile.lock
