@@ -54,6 +54,16 @@ Must be a valid `Extended Date Time Format <https://www.loc.gov/standards/dateti
     "2010-10"
     "-y10000"
 
+Arches supports level 2 of the EDTF specification. However, because of a bug in the edtf package used by Arches,
+an error will be thrown for strings like::
+
+    "../1924"
+
+As a workaround, you can use a string like::
+
+    "[../1924]"
+
+
 geojson-feature-collection
 --------------------------
 
@@ -828,7 +838,7 @@ Directly inserting our records into the new Arches view will look something like
         name_type,
         resourceinstanceid,
         transactionid
-    ) select 
+    ) select
         name,
         "Primary",
         resourceid,
