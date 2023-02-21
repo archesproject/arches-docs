@@ -828,7 +828,7 @@ Directly inserting our records into the new Arches view will look something like
         name_type,
         resourceinstanceid,
         transactionid
-    ) select 
+    ) select
         name,
         "Primary",
         resourceid,
@@ -842,6 +842,146 @@ Directly inserting our records into the new Arches view will look something like
 .. todo::
 
     A second table may need to be populated here too, to register the instances themselves.
+
+
+
+.. warning::
+
+    SQL Insert Performance Issue on Ubuntu and Related OSs
+    ------------------------------------------------------
+    This SQL method for inserting records has a known and severe performance issue for Postgres/PostGIS instances installed on Ubuntu, Debian, and Alpine operating systems. On these operating systems, a node-instance data insert of only a few thousand records may result in a database connection time out error (see issue discussion here: https://github.com/archesproject/arches/issues/9049#issuecomment-1433970369).
+
+    This issue is known to impact Arches versions 7.0, 7.1, 7.2 and 7.3. A fix for this OS related issue will likely come with Arches version 7.4. If you are using a version of Arches impacted by this issue, you can use the following workaround to vastly (perhaps 50x) improve the performance of the SQL method for inserts. Execute the following SQL *BEFORE* you run SQL inserts:
+
+
+    SQL Insert Performance Workaround
+    ---------------------------------
+
+    .. code-block:: sql
+
+        create or replace function __arches_tile_view_update() returns trigger as $$
+        declare
+            view_namespace text;
+            group_id uuid;
+            graph_id uuid;
+            parent_id uuid;
+            tile_id uuid;
+            transaction_id uuid;
+            json_data json;
+            old_json_data jsonb;
+            edit_type text;
+        begin
+            select graphid into graph_id from nodes where nodeid = group_id;
+            view_namespace = format('%s.%s', tg_table_schema, tg_table_name);
+            select obj_description(view_namespace::regclass, 'pg_class') into group_id;
+            if (TG_OP = 'DELETE') then
+                select tiledata into old_json_data from tiles where tileid = old.tileid;
+                delete from resource_x_resource where tileid = old.tileid;
+                delete from public.tiles where tileid = old.tileid;
+                insert into bulk_index_queue (resourceinstanceid, createddate)
+                    values (old.resourceinstanceid, current_timestamp) on conflict do nothing;
+                insert into edit_log (
+                    resourceclassid,
+                    resourceinstanceid,
+                    nodegroupid,
+                    tileinstanceid,
+                    edittype,
+                    oldvalue,
+                    timestamp,
+                    note,
+                    transactionid
+                ) values (
+                    graph_id,
+                    old.resourceinstanceid,
+                    group_id,
+                    old.tileid,
+                    'tile delete',
+                    old_json_data,
+                    now(),
+                    'loaded via SQL backend',
+                    public.uuid_generate_v1mc()
+                );
+                return old;
+            else
+                select __arches_get_json_data_for_view(new, tg_table_schema, tg_table_name) into json_data;
+                select __arches_get_parent_id_for_view(new, tg_table_schema, tg_table_name) into parent_id;
+                tile_id = new.tileid;
+                if (new.transactionid is null) then
+                    transaction_id = public.uuid_generate_v1mc();
+                else
+                    transaction_id = new.transactionid;
+                end if;
+
+                if (TG_OP = 'UPDATE') then
+                    select tiledata into old_json_data from tiles where tileid = tile_id;
+                    edit_type = 'tile edit';
+                    if (transaction_id = old.transactionid) then
+                        transaction_id = public.uuid_generate_v1mc();
+                    end if;
+                    update public.tiles
+                    set tiledata = json_data,
+                        nodegroupid = group_id,
+                        parenttileid = parent_id,
+                        resourceinstanceid = new.resourceinstanceid
+                    where tileid = new.tileid;
+                elsif (TG_OP = 'INSERT') then
+                    old_json_data = null;
+                    edit_type = 'tile create';
+                    if tile_id is null then
+                        tile_id = public.uuid_generate_v1mc();
+                    end if;
+                    insert into public.tiles(
+                        tileid,
+                        tiledata,
+                        nodegroupid,
+                        parenttileid,
+                        resourceinstanceid
+                    ) values (
+                        tile_id,
+                        json_data,
+                        group_id,
+                        parent_id,
+                        new.resourceinstanceid
+                    );
+                end if;
+                perform __arches_refresh_tile_resource_relationships(tile_id);
+                insert into bulk_index_queue (resourceinstanceid, createddate)
+                    values (new.resourceinstanceid, current_timestamp) on conflict do nothing;
+                insert into edit_log (
+                    resourceclassid,
+                    resourceinstanceid,
+                    nodegroupid,
+                    tileinstanceid,
+                    edittype,
+                    newvalue,
+                    oldvalue,
+                    timestamp,
+                    note,
+                    transactionid
+                ) values (
+                    graph_id,
+                    new.resourceinstanceid,
+                    group_id,
+                    tile_id,
+                    edit_type,
+                    json_data::jsonb,
+                    old_json_data,
+                    now(),
+                    'loaded via SQL backend',
+                    transaction_id
+                );
+                return new;
+            end if;
+            end;
+        $$ language plpgsql;
+
+    As part of this workaround, *after* you make any bulk updates or inserts to geometries, you'll need execute the following:
+
+    .. code-block:: sql
+
+        select * from refresh_geojson_geometries();
+
+
 
 Exporting Arches Data
 =====================
