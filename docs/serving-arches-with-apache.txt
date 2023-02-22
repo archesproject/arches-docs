@@ -29,20 +29,20 @@ will benefit your production installation.
 
        $ sudo apt-get install apache2
 
-2. Install ``mod_wsgi`` 
+2. Install ``mod_wsgi``
 
     There are two ways to install ``mod_wsgi``. Both of the require you to start by installing the Apache and Python development headers.
-    
+
     .. code-block:: bash
-    
+
         $ sudo apt install apache2-dev python3-dev
-    
+
     .. note::
 
         You may need to install the Python dev package specific to your Python version, e.g. ``python3.8-dev``.
-    
+
     Now follow one of the following two options:
-   
+
     **Install mod_wsgi directly into your Python virtual environment**
 
     .. code-block:: bash
@@ -64,13 +64,13 @@ will benefit your production installation.
         WSGIPythonHome "<your venv path>"
 
     Copy these two lines, you will use them in step 3.
-    
+
     **Install mod_wsgi system-wide**
 
     Alternatively, you can use ``apt`` to install at the system level:
 
     .. code-block:: bash
-    
+
         $ sudo apt install libapache2-mod-wsgi-py3
 
     Note that the version of Python 3 installed at the system-level may need to match the version used to create the virtual environment pointed to in the config.
@@ -91,13 +91,14 @@ will benefit your production installation.
 
     Complete new file contents::
 
-        # If you have mod_wsgi installed in your python virtual environment, paste the text generated 
+        # If you have mod_wsgi installed in your python virtual environment, paste the text generated
         # by 'mod_wsgi-express module-config' here, *before* the VirtualHost is defined.
         LoadModule wsgi_module "/home/ubuntu/Projects/ENV/lib/python3.7/site-packages/mod_wsgi/server/mod_wsgi-py37.cpython-37m-x86_64-linux-gnu.so"
         WSGIPythonHome "/home/ubuntu/Projects/ENV"
 
         <VirtualHost *:80>
 
+            WSGIApplicationGroup %{GLOBAL}
             WSGIDaemonProcess arches python-path=/home/ubuntu/Projects/my_project
             WSGIScriptAlias / /home/ubuntu/Projects/my_project/my_project/wsgi.py process-group=arches
 
@@ -215,12 +216,12 @@ Prepare the Arches Project
 
     The first time this runs it will take a little while (~20k files), and may
     show errors/warnings that you can safely ignore.
-    
-    Finally, make sure Apache has write access to this static directory because 
+
+    Finally, make sure Apache has write access to this static directory because
     `django-compressor` needs to update the `CACHE` contents inside it:
-    
+
     .. code-block::
-    
+
         $ sudo chmod 775 /home/ubuntu/Projects/my_project/my_project/static
         $ sudo chgrp www-data /home/ubuntu/Projects/my_project/my_project/static
 
