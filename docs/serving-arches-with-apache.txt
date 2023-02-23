@@ -102,7 +102,7 @@ will benefit your production installation.
             WSGIDaemonProcess arches python-path=/home/ubuntu/Projects/my_project
             WSGIScriptAlias / /home/ubuntu/Projects/my_project/my_project/wsgi.py process-group=arches
 
-            # Necessary to support Arches Collector
+            # May be necessary to support integration with possible 3rd party mobile apps
             WSGIPassAuthorization on
 
             ## Uncomment the ServerName directive and fill it with your domain
