@@ -41,14 +41,6 @@ read the notes below. Where necessary, OS-specific installation notes are includ
 :Yarn: - Installation: https://yarnpkg.com/lang/en/docs/install
     - **Windows** Use the .msi installer in the link above, but first install `Node.js <https://nodejs.org/>`_.
 
-If you plan to use the Arches Collector Mobile app, you must install CouchDB.
-
-:CouchDB 2.x:
-    - Ubuntu 20 users must install CouchDB 2.x `with Docker <https://docs.couchdb.org/en/stable/install/docker.html>`_.
-    - Please see :ref:`Arches Collector Checklist` for detailed installation notes.
-    - `Official documentation <https://docs.couchdb.org/en/stable/>`_
-    - CouchDB is used to sync mobile data collection projects with your main database.
-
 To support long-running task management, like large user downloads, you must install a Celery broker like RabbitMQ or Redis:
 
 :Brokers: - Options: https://docs.celeryproject.org/en/stable/getting-started/first-steps-with-celery.html#choosing-a-broker
