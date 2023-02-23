@@ -24,7 +24,6 @@ Arches Documentation
     define-resource-descriptors
     arches-system-settings
     settings-beyond-the-ui
-    arches-collector-checklist
 
 .. toctree::
     :caption: Administering
@@ -36,7 +35,6 @@ Arches Documentation
     rdm
     managing-permissions
     two-factor-authentication
-    arches-collector-manager
     spatial-views
 
 .. toctree::
@@ -46,12 +44,6 @@ Arches Documentation
     creating-resources
     deleting-resources
     searching
-
-.. toctree::
-    :caption: Using Arches Collector
-    :maxdepth: 2
-
-    using-arches-collector
 
 .. toctree::
     :caption: Extending Arches
