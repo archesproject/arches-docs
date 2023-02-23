@@ -2,6 +2,13 @@
 Arches Collector Checklist
 ##########################
 
+.. warning::
+
+    Arches Collector has been deprecated and **does not** function with Arches v7.x and higher. For
+    more information about the deprecation of Arches Collector and future plans for mobile-apps,
+    please refer to <https://community.archesproject.org/t/arches-collector-update/1580>.
+
+
 The following steps must be completed to enable an Arches Collector connection
 with your Arches instance.
 
