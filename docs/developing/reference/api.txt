@@ -96,7 +96,7 @@ If both a custom header and querystring with the same name are provided, then th
 Register an OAuth Application
 =============================
 
-To allow others to connect to your Arches instance, including Arches Collector users, you must create an OAuth client id and add it to your settings.
+To allow others to connect to your Arches instance, you must create an OAuth client id and add it to your settings.
 
 #. In a browser go to
 
