@@ -33,7 +33,7 @@ To promote consistent data creation, update, and indexing workflows, Arches impl
 
     v5.0  January, 2020: Technology upgrades (Python 3.7, Django 2.3, Postgres 12.0/PostGIS 3.0, Elasticsearch 7.4), Workflows, Task Manager
 
-    v4.4  February, 2019: Release of Arches Collector mobile data collection app
+    v4.4  February, 2019: Release of Collector (now deprecated with v7.0 and later) mobile data
 
     v4.0  July, 2017: Significant site redesign, addition of graph creation UI, system settings UI, internal tileserver (TileStache), updated dependencies (MapBox GL, ElasticSearch 5.2, Yarn)
 
