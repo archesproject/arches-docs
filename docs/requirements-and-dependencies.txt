@@ -31,15 +31,17 @@ read the notes below. Where necessary, OS-specific installation notes are includ
     - Python 3.7 and later comes with pip
     - **Windows** You must choose 32-bit or 64-bit Python based on your system architecture.
     - **macOS** This guide works well if you wish to install via `brew`: https://docs.python-guide.org/starting/install3/osx/
-:PostgreSQL 12 with PostGIS 3:
+:PostgreSQL >= 12 with PostGIS 3:
     - **macOS** Use `Postgres.app <http://postgresapp.com>`_.
     - **Windows** Use the `EnterpriseDB installers <https://www.postgresql.org/download/windows/>`_, and use Stack Builder (included) to get PostGIS. After installation, add the following to your system's ``PATH`` environment variable: ``C:\Program Files\PostgreSQL\12\bin``. Make sure you write down the password that you assign to the ``postgres`` user.
 :Elasticsearch 7.4: - Installers: https://www.elastic.co/downloads/past-releases/elasticsearch-7-4-0
     - Elasticsearch is integral to Arches and can be installed and configured many ways.
       For more information, see :ref:`Arches and Elasticsearch`.
 :GDAL >= 2.2.x: - **Windows** Use the `OSGeo4W installer <https://trac.osgeo.org/osgeo4w/>`_, and choose to install the GDAL package (you don't need QGIS or GRASS). After installation, add ``C:\OSGeo4W64\bin`` to your system's ``PATH`` environment variable.
-:Yarn: - Installation: https://yarnpkg.com/lang/en/docs/install
-    - **Windows** Use the .msi installer in the link above, but first install `Node.js <https://nodejs.org/>`_.
+:Node.js 16.x (recommended): - Installation: https://nodejs.org/ (choose the installer appropriate to your operating system).
+    - NOTE: Arches may not be compatible with later versions of Node.js (after 16) `(see discussion) <https://community.archesproject.org/t/newbie-v7-install-experience-some-hints-and-tips/1782>`_.
+:Yarn: - Installation: https://yarnpkg.com/getting-started/install
+    - NOTE: As described in the link above, you will install Yarn via the `Node.js <https://nodejs.org/>`_ package manager. Yarn installation via Node.js package management should be consistent across different operating systems.
 
 To support long-running task management, like large user downloads, you must install a Celery broker like RabbitMQ or Redis:
 
