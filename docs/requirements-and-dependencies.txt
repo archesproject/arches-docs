@@ -34,8 +34,8 @@ Arches requires the following software packages to be installed and available. U
 :GDAL >= 2.2.x: - **Windows** Use the `OSGeo4W installer <https://trac.osgeo.org/osgeo4w/>`_, and choose to install the GDAL package (you don't need QGIS or GRASS). After installation, add ``C:\OSGeo4W64\bin`` to your system's ``PATH`` environment variable.
 :Node.js 16.x (recommended): - Installation: https://nodejs.org/ (choose the installer appropriate to your operating system).
     - NOTE: Arches may not be compatible with later versions of Node.js (after 16) `(see discussion) <https://community.archesproject.org/t/newbie-v7-install-experience-some-hints-and-tips/1782>`_.
-:Yarn >= 1.22: - Installation: https://yarnpkg.com/getting-started/install
-    - NOTE: As described in the link above, you will install Yarn via the `Node.js <https://nodejs.org/>`_ package manager. Yarn installation via Node.js package management should be consistent across different operating systems.
+:Yarn >= 1.22, < 2: - Installation: https://yarnpkg.com/getting-started/install
+    - NOTE: As described in the link above, you will typically install Yarn via the `Node.js <https://nodejs.org/>`_ package manager. Yarn installation via Node.js package management should be consistent across different operating systems. One can also instal Yarn via `apt` on Linux operating systems.
 
 To support long-running task management, like large user downloads, you must install a Celery broker like RabbitMQ or Redis:
 
