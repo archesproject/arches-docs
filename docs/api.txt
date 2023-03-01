@@ -210,12 +210,14 @@ General Expectations Requesting JSON
 =========
 
 .. note::
-    **Include an indent parameter**
+    **Include a format parameter**
 
-    In general, when making a request to `GET` JSON representations of data, you *MUST* include the parameter
-    `indent` with an integer value in your request URL. Requests without this parameter may fail with a
-    server-side (500) error. For example, `http://somehost.com/resources/{uuid:resource id}?format=json&indent=2` will
-    work while `http://somehost.com/resources/{uuid:resource id}?format=json` will fail. `(See discussion) <https://community.archesproject.org/t/typeerror-on-resources-resource-id-endpoint/1855/3>`_
+    In general, when making an API request to `GET` representations of data (in Arches JSON or JSON-LD), 
+    you *MUST* include the parameter `format` with an integer value in your request URL. Requests 
+    without this parameter may fail with a server-side (500) error. For example,
+    `http://somehost.com/resources/{uuid:resource id}?format=json&indent=2` will
+    work while `http://somehost.com/resources/{uuid:resource id}` will fail. 
+    `(See discussion) <https://community.archesproject.org/t/typeerror-on-resources-resource-id-endpoint/1855/3>`_
 
 
 Concepts
