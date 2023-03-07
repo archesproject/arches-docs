@@ -212,9 +212,11 @@ General Expectations Requesting JSON
 .. note::
     **Include a format parameter**
 
-    In general, when making an API request to `GET` representations of data (in Arches JSON or JSON-LD), 
-    you *MUST* include the parameter `format` with an integer value in your request URL. Requests 
-    without this parameter may fail with a server-side (500) error. For example,
+    If you use the API to make a `GET` request for a resource, Arches will default to the `json-ld` representation
+    format unless you specify otherwise using the `format` parameter in your request URL. Be aware that the
+    `json-ld` format requires use of one or more ontologies for your resource model. Requests for resource
+    instances without ontology modeling may fail with a server-side (500) error. If you are not using an ontology
+    you need to request data in the `json` or `arches-json` format. For example, without an ontology, 
     `http://somehost.com/resources/{uuid:resource id}?format=json&indent=2` will
     work while `http://somehost.com/resources/{uuid:resource id}` will fail. 
     `(See discussion) <https://community.archesproject.org/t/typeerror-on-resources-resource-id-endpoint/1855/3>`_
