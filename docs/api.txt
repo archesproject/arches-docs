@@ -206,12 +206,11 @@ OAuth 2.0 is a simple and secure authentication mechanism. It allows application
         {"error": "invalid_client"}
 
 
-General Expectations Requesting JSON
+General Expectations Requesting JSON-LD
 =========
 
 .. note::
-    **Include a format parameter**
-
+    
     If you use the API to make a `GET` request for a resource, Arches will default to the `json-ld` representation
     format unless you specify otherwise using the `format` parameter in your request URL. Be aware that the
     `json-ld` format requires use of one or more ontologies for your resource model. Requests for resource
