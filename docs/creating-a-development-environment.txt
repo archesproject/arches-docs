@@ -45,7 +45,7 @@ Core Arches
 
         (ENV)arches/$ git fetch
         (ENV)arches/$ git checkout stable/6.0.0
-    
+
     will give you the stable branch for the 6.0.0 release.
 
 #. Install the local core Arches
@@ -58,7 +58,7 @@ Core Arches
         (ENV)arches/$ pip install -r arches/install/requirements.txt
         (ENV)arches/$ pip install -r arches/install/requirements_dev.txt
         (ENV)arches/$ cd ..
-    
+
     .. note::
 
         If you later switch to a new git branch, you may need to rerun ``pip install -r requirements.txt``, as the Python dependencies do change over the course of Arches releases.
@@ -66,7 +66,7 @@ Core Arches
 The Project
 -----------
 
-You can now head to :ref:`Creating a New Arches Project` to proceed through the project creation and database setup steps. 
+You can now head to :ref:`Creating a New Arches Project` to proceed through the project creation and database setup steps.
 
 Additionally, we recommend that you turn the new project into a git repo, which aids development and deployment. Keep in mind:
 
@@ -88,7 +88,7 @@ In your project you can overwrite core Arches functionality in many ways. In gen
 CSS (basic)
 -----------
 
-To overwrite existing (or add your own) style rules, create ``project.css`` in your project's media directory like this: ``my_project/my_project/media/css/project.css`` and place style content in there. By default, these rules are linked in the base Arches UI templates. To use these same rules on the splash page, add
+To overwrite existing (or add your own) style rules, create ``project.css`` in your project's media directory like this: ``my_project/my_project/static/css/project.css`` and place style content in there. By default, these rules are linked in the base Arches UI templates. To use these same rules on the splash page, add
 
 .. code-block:: HTML
 
