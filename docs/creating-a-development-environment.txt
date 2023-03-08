@@ -88,13 +88,24 @@ In your project you can overwrite core Arches functionality in many ways. In gen
 CSS (basic)
 -----------
 
-To overwrite existing (or add your own) style rules, create ``project.css`` in your project's media directory like this: ``my_project/my_project/static/css/project.css`` and place style content in there. By default, these rules are linked in the base Arches UI templates. To use these same rules on the splash page, add
+To overwrite existing (or add your own) style rules, create ``project.css`` in your project's media directory like this: ``my_project/my_project/media/css/project.css`` and place style content in there. By default, these rules are linked in the base Arches UI templates. To use these same rules on the splash page, add
 
 .. code-block:: HTML
 
     <link href="{% static 'css/project.css' %}" rel="stylesheet">
 
 to the bottom of the ``<head>`` tag in ``my_project/my_project/templates/index.htm``.
+
+
+.. note::
+
+    You may need to pay special attention to the location of your ``static`` directory. When you are serving your static files through Apache or Nginx, you need to run `python manage.py collectstatic` to copy all static assets into a single location. This location will often
+    be named something like ``static`` or ``static_root``.
+
+    If you already collected static files into a static directory, and then you make changes to project.css and other files in that static
+    directory, you will see those changes reflected in your site. However, if you later run `python manage.py collectstatic`, then your changes will be overwritten by whatever files are stored in ``media/css/``.
+
+
 
 Templates (.htm) and JS (.js) (intermediate)
 --------------------------------------------
