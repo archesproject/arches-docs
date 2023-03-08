@@ -103,7 +103,7 @@ to the bottom of the ``<head>`` tag in ``my_project/my_project/templates/index.h
     be named something like ``static`` or ``static_root``.
 
     If you already collected static files into a static directory, and then you make changes to project.css and other files in that static
-    directory, you will see those changes reflected in your site. However, if you later run `python manage.py collectstatic`, then your changes will be overwritten by whatever files are stored in ``media/css/``.
+    directory, you will see those changes reflected in your site. However, if you later run `python manage.py collectstatic`, then your changes will be overwritten by whatever files are stored in ``my_project/my_project/media/css/``.
 
 
 
