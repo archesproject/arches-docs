@@ -45,7 +45,7 @@ Core Arches
 
         (ENV)arches/$ git fetch
         (ENV)arches/$ git checkout stable/6.0.0
-    
+
     will give you the stable branch for the 6.0.0 release.
 
 #. Install the local core Arches
@@ -58,7 +58,7 @@ Core Arches
         (ENV)arches/$ pip install -r arches/install/requirements.txt
         (ENV)arches/$ pip install -r arches/install/requirements_dev.txt
         (ENV)arches/$ cd ..
-    
+
     .. note::
 
         If you later switch to a new git branch, you may need to rerun ``pip install -r requirements.txt``, as the Python dependencies do change over the course of Arches releases.
@@ -66,7 +66,7 @@ Core Arches
 The Project
 -----------
 
-You can now head to :ref:`Creating a New Arches Project` to proceed through the project creation and database setup steps. 
+You can now head to :ref:`Creating a New Arches Project` to proceed through the project creation and database setup steps.
 
 Additionally, we recommend that you turn the new project into a git repo, which aids development and deployment. Keep in mind:
 
@@ -95,6 +95,17 @@ To overwrite existing (or add your own) style rules, create ``project.css`` in y
     <link href="{% static 'css/project.css' %}" rel="stylesheet">
 
 to the bottom of the ``<head>`` tag in ``my_project/my_project/templates/index.htm``.
+
+
+.. note::
+
+    You may need to pay special attention to the location of your ``static`` directory. When you are serving your static files through Apache or Nginx, you need to run `python manage.py collectstatic` to copy all static assets into a single location. This location will often
+    be named something like ``static`` or ``static_root``.
+
+    If you already collected static files into a static directory, and then you make changes to project.css and other files in that static
+    directory, you will see those changes reflected in your site. However, if you later run `python manage.py collectstatic`, then your changes will be overwritten by whatever files are stored in ``my_project/my_project/media/css/``. Read more about `collectstatic` in the context of production deployments of Arches :ref:`Serving Arches with Apache`.
+
+
 
 Templates (.htm) and JS (.js) (intermediate)
 --------------------------------------------
