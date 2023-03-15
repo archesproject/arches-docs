@@ -4,7 +4,25 @@
 Setting up Supervisord for Celery
 #################################
 
-When implementing celery on a production instance it may be preferable to delegate supervisord to manage celery workers and celery beats. The following is a guide **for a linux-based** OS; be advised you can change any of the file names, destinations, or permissions to suit your needs.
+Arches uses Celery (https://docs.celeryq.dev/en/stable/getting-started/introduction.html), a Python framework for setting up and managing task queues. Using Celery,
+Arches can delegate certain tasks with long execution times to separate processes. In a production deployment, this can enable Arches to delegate big jobs to a
+queue so that requests to the Arches application do not lead to timeout or other errors.
+
+This documentation discusses how to enable Celery task management using Supervisord (http://supervisord.org/). Essentially, Supervisord automatically monitors and controls Celery workers, checking to make sure they are operating, and restarting them if they fail.
+
+
+When Do I Need Supervisor and Celery?
+=====================================
+Arches *does not require* Supervisord and Celery to run in "production" mode (with ``DEBUG=False`` in `settings.py`). Arches instances managing smaller amounts of data may not need Supervisord and Celery. The deployment scenarios where you *should* consider using Supervisord and Celery include:
+
+ * Supervisord and Celery will be required if you want to enable export / bulk download of more than 2000 resource instances.
+ * Supervisord and Celery will be required to enable the Bulk Data Manager plugin to function. (Note: by default, Arches installs this plugin in hidden state.)
+
+
+
+Supervisor and Celery Installation and Configuration
+====================================================
+The following is a guide **for a linux-based** OS; be advised you can change any of the file names, destinations, or permissions to suit your needs.
 
 
 1. Supervisor can be installed using ``pip``: ``pip install supervisor``.
@@ -49,7 +67,24 @@ When implementing celery on a production instance it may be preferable to delega
 8. Run ``supervisord -c /etc/supervisor/my_proj_name-supervisord.conf`` to start the supervisord which will start celery workers for your tasks.
 
 
-9. To stop your supervisord process, run ``unlink /tmp/supervisor.sock``.
+9. To check and stop your supervisord process, please review the following:
+
+    a. To check on the status of celery (workers): ``supervisorctl -c /etc/supervisor/my_project-supervisor.conf status``
+    b. To restart celery workers: ``supervisorctl -c /etc/supervisor/my_project-supervisor.conf restart celery``
+    c. To stop celery workers: ``supervisorctl -c /etc/supervisor/my_project-supervisor.conf stop celery``
+    d. To shut down supervisord (and the celery processes it controls): ``unlink /tmp/supervisor.sock``
+
+
+Known Issue with Arches Celery Configurations Celerybeat:
+    The default configuration files in the `conf.d` directory discussed above have need updating. Version 5 and later of celery has a revised order of arguments in using celery commands (see: https://github.com/archesproject/arches/issues/9202).
+
+    * The corrected syntax (celery >=5x) for the command at the top of `my_proj_name-celeryd.conf` looks like:
+      ``/usr/local/bin/celery -A my_proj_name.celery worker --loglevel=INFO``
+
+    * The corrected syntax (celery >=5x) for the command at the top of `my_proj_name-celerybeat.conf` looks like:
+      ``/usr/local/bin/celery -A my_proj_name.celery beat --schedule=/tmp/celerybeat-schedule --loglevel=INFO --pidfile=/tmp/celerybeat.pid``
+
+    After fixing the command syntax, the celery worker will likely function. However, you may still have trouble getting celery beat to work (https://github.com/archesproject/arches/issues/9243). Celery beat schedules periodic tasks (much like a `crontab` in a Linux operating system) using a Python implementation. In many cases, you may not need celery beat and may notice no trouble. However, if you have workarounds or fixes, please let us know!
 
 
 More information:
