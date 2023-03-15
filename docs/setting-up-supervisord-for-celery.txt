@@ -25,7 +25,7 @@ Supervisor and Celery Installation and Configuration
 The following is a guide **for a linux-based** OS; be advised you can change any of the file names, destinations, or permissions to suit your needs.
 
 
-1. Supervisor can be installed using ``pip``: ``pip install supervisor``.
+1. Supervisor can be installed using in your Arches virtual environment with ``pip``: ``pip install supervisor``.
 
 
 2. In the core arches repo, in `arches/install/supervisor_celery_setup <https://github.com/archesproject/arches/tree/master/arches/install/supervisor_celery_setup>`_ there exist example files for supervisor, celeryd, and celerybeat. We recommend copying them into the following directory structure:
@@ -61,7 +61,7 @@ The following is a guide **for a linux-based** OS; be advised you can change any
 6. Download and install RabbitMQ: https://www.rabbitmq.com/download.html
 
 
-7. Once successfully installed (and verified that it has been added to your PATH), start running it with the command ``rabbitmq-server``. For a convenient option, this can be run in a screen. Note that rabbitmq should be run prior to running supervisord.
+7. Once successfully installed (and verified that it has been added to your PATH), start running it with the command ``rabbitmq-server``. For a convenient option, this can be run in a screen. Note that rabbitmq should be run prior to running supervisord. If you choose, you can use Redis as a "broker" instead of RabbitMQ (see below).
 
 
 8. Run ``supervisord -c /etc/supervisor/my_proj_name-supervisord.conf`` to start the supervisord which will start celery workers for your tasks.
@@ -75,18 +75,31 @@ The following is a guide **for a linux-based** OS; be advised you can change any
     d. To shut down supervisord (and the celery processes it controls): ``unlink /tmp/supervisor.sock``
 
 
-Known Issue with Arches Celery Configurations Celerybeat:
-    The default configuration files in the `conf.d` directory discussed above have need updating. Version 5 and later of celery has a revised order of arguments in using celery commands (see: https://github.com/archesproject/arches/issues/9202).
+Setting up Redis Instead of RabbitMQ
+    Redis can serve as an alternative to RabbitMQ, but it lacks official Windows support. If you are not deploying Arches on Windows, you can use Redis as follows:
 
-    * The corrected syntax (celery >=5x) for the command at the top of `my_proj_name-celeryd.conf` looks like:
-      ``/usr/local/bin/celery -A my_proj_name.celery worker --loglevel=INFO``
+    1. Follow the above directions (steps 1 to 5) for setting up supervisored, celery, and their configurations.
+    2. Install Redis (see: https://redis.io/docs/getting-started/)
+    3. Install the Python interface to Redis into your Arches virtual environment with ``pip``: ``pip install redis``
+    4. Configure the `CELERY_BROKER_URL` (in `settings.py` or overwritten in `settings_local.py`): ``CELERY_BROKER_URL = "redis://@localhost:6379/0"``
+    5. Activate Redis: ``redis-server``
+    6. Run ``supervisord -c /etc/supervisor/my_proj_name-supervisord.conf`` to start the supervisord and celery workers
+    7. Start Arches
 
-    * The corrected syntax (celery >=5x) for the command at the top of `my_proj_name-celerybeat.conf` looks like:
-      ``/usr/local/bin/celery -A my_proj_name.celery beat --schedule=/tmp/celerybeat-schedule --loglevel=INFO --pidfile=/tmp/celerybeat.pid``
+Known Issue with Arches Celery Configurations and Celery Beat:
+    The default configuration files in the `conf.d` directory discussed above need updating. Version 5 and later of celery has a revised order of arguments in using celery commands (see: https://github.com/archesproject/arches/issues/9202).
 
-    After fixing the command syntax, the celery worker will likely function. However, you may still have trouble getting celery beat to work (https://github.com/archesproject/arches/issues/9243). Celery beat schedules periodic tasks (much like a `crontab` in a Linux operating system) using a Python implementation. In many cases, you may not need celery beat and may notice no trouble. However, if you have workarounds or fixes, please let us know!
+    * The corrected syntax (celery >= v5x) for the command at the top of `my_proj_name-celeryd.conf` looks like:
+      ``/absolute/path/to/virtualenv/bin/celery -A my_proj_name.celery worker --loglevel=INFO``
+
+    * The corrected syntax (celery >= v5x) for the command at the top of `my_proj_name-celerybeat.conf` looks like (all in one line):
+      ``/absolute/path/to/virtualenv/bin/celery -A my_proj_name.celery beat --schedule=/tmp/celerybeat-schedule`` ``--loglevel=INFO --pidfile=/tmp/celerybeat.pid``
+
+    After fixing the command syntax, the celery worker should function. However, you may still have trouble getting celery beat to work (https://github.com/archesproject/arches/issues/9243). Celery beat schedules periodic tasks (much like a `crontab` in a Linux operating system) using a Python implementation. In many cases, you may not need celery beat and Arches will function without problems. However, if you have workarounds or fixes, please let us know!
 
 
 More information:
  * Supervisord documentation: http://supervisord.org/
  * Celery sample files for supervisord: https://github.com/celery/celery/tree/master/extra/supervisord
+ * Redis: https://redis.io/
+ * Redis (Python interface): https://pypi.org/project/redis/
