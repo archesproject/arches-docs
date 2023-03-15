@@ -11,7 +11,7 @@ queue so that requests to the Arches application do not lead to timeout or other
 This documentation discusses how to enable Celery task management using Supervisord (http://supervisord.org/). Essentially, Supervisord automatically monitors and controls Celery workers, checking to make sure they are operating, and restarting them if they fail.
 
 
-When Do I Need Supervisor and Celery?
+When Do I Need Supervisord and Celery?
 =====================================
 Arches *does not require* Supervisord and Celery to run in "production" mode (with ``DEBUG=False`` in `settings.py`). Arches instances managing smaller amounts of data may not need Supervisord and Celery. The deployment scenarios where you *should* consider using Supervisord and Celery include:
 
