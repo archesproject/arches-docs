@@ -96,7 +96,7 @@ Known Issue with Arches Celery Configurations and Celery Beat:
       ``/absolute/path/to/virtualenv/bin/celery -A my_proj_name.celery beat``
       ``--schedule=/tmp/celerybeat-schedule --loglevel=INFO --pidfile=/tmp/celerybeat.pid``
 
-    After fixing the command syntax, the celery worker should function. However, you may still have trouble getting celery beat to work (https://github.com/archesproject/arches/issues/9243). Celery beat schedules periodic tasks (much like a `crontab` in a Linux operating system) using a Python implementation. In many cases, you may not need celery beat and Arches will function without problems. However, if you have workarounds or fixes, please let us know!
+    After fixing the command syntax, the celery worker should function. However, you may still have trouble getting celery beat to work (https://github.com/archesproject/arches/issues/9243). Celery beat schedules periodic tasks (much like a `crontab` in a Linux operating system) using a Python implementation. In many cases, Arches will function without (evident) problems even if celery beat does not work. However, if you have workarounds or fixes, please let us know!
 
 
 More information:
