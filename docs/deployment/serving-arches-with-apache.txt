@@ -1,24 +1,27 @@
-##########################
-Serving Arches with Apache
-##########################
+###################################
+Serving Arches with Apache or Nginx
+###################################
 
 .. sidebar:: Further Reference
 
-    + `Django Documentation <https://docs.djangoproject.com/en/2.1/howto/deployment/wsgi/modwsgi/#how-to-use-django-with-apache-and-mod-wsgi>`_
+    + `Django Documentation <https://docs.djangoproject.com/en/3.2/howto/deployment/wsgi/modwsgi/#how-to-use-django-with-apache-and-mod-wsgi>`_
 
-During development, it's easiest to use the Django webserver to view your Arches installation. However, once you are ready to put the project into production, you'll have to use a more efficient webserver like Apache or nginx.
+During development, it's easiest to use the Django webserver to view your Arches installation. However, once you are ready to put the project into production, you'll have to use a more efficient, robust, and secure webserver like Apache or Nginx.
 
-The following is a guide using Apache as an example, split into two sections:
+The following guide first two sections describes how to use Apache. The next section provides some guidance on using Nginx:
 
 + :ref:`Configure Apache`
 
-+ :ref:`Prepare the Arches Project`
++ :ref:`Prepare the Arches Project for Apache`
 
-If you want to use nginx + uWSGI instead of Apache + mod_wsgi, `this tutorial <https://www.bogotobogo.com/python/Django/Python_Django_tutorial_serving_Django_App_with_uWSGI_and_Nginx.php>`_
++ :ref:`Configure Nginx`
+
+
 should get you started.
 
 Configure Apache
 ================
+
 
 The following instructions work for Ubuntu 16.04 - 20.04; minor changes may be necessary for a different OS. This is a very basic Apache configuration, and more fine tuning
 will benefit your production installation.
@@ -161,8 +164,8 @@ you're likely to get some kind of file permissions error. Continue to the next s
     With Apache serving Arches, any changes to a ``.py`` file (like ``settings.py``)
     will not be reflected until you reload Apache.
 
-Prepare the Arches Project
-==========================
+Prepare the Arches Project for Apache
+=====================================
 
 1. Set all file and directory permissions.
 
@@ -232,3 +235,144 @@ Prepare the Arches Project
 
 You should now be able to view your Arches installation in a browser without
 any issues.
+
+
+
+Configure Nginx
+===============
+
+Many Django applications use the open source Nginx application as a proxy server. If you want to use nginx + uWSGI instead of Apache + mod_wsgi, you should start with `this tutorial <https://uwsgi-docs.readthedocs.io/en/latest/tutorials/Django_and_nginx.html>`_ . You can also use Nginx with Gunicorn (an increasingly popular way to securely run a Django application). To use Nginx and Gunicorn, please start with `this tutorial <https://realpython.com/django-nginx-gunicorn/#putting-your-site-online-with-django-gunicorn-and-nginx>`_.
+
+
+If you're using Gunicorn, don't forget to first install it into the Python virtual environment you are using for Arches:
+
+.. code-block:: bash
+
+    $ # install gunicorn into your Arches virtual environment
+    $ pip install gunicorn
+
+
+As is the case with Apache, Nginx will need appropriate permissions to serve static files. Every time you run `collectstatic`, you may change the file permissions, and you may need to rerun the following:
+
+.. code-block:: bash
+
+    $ sudo chmod 755 /home/ubuntu/Projects/my_project/my_project/static
+    $ sudo chgrp nginx /home/ubuntu/Projects/my_project/my_project/static
+
+
+It's sometimes useful to have an example configuration to help get you started. This Nginx configuration can be used as a guide.
+
+.. note::
+
+    The configuration provided below asks Nginx to compress text files (css, javascript, etc). This may help to noticeably improve performance for the Arches user interface.
+
+
+.. code-block:: nginx
+
+    server_names_hash_bucket_size 64;
+    proxy_headers_hash_bucket_size 512;
+    server_names_hash_max_size 512;
+    large_client_header_buffers 8 64k;
+    proxy_read_timeout 3600;
+    proxy_connect_timeout 3600;
+
+    # Connect to the Arches Django app running with Gunicorn.
+    upstream django {
+        server localhost:8000;
+    }
+
+    # The not encrypted plain HTTP config
+    server {
+        listen 80;
+        charset utf-8;
+        server_name my-arches-project.org www.my-arches-project.org;
+
+        location ^~ /.well-known/acme-challenge/ {
+            default_type "text/plain";
+            autoindex on;
+            allow all;
+            root /var/www/certbot/$host;
+        }
+
+        access_log /logs/nginx/access.log;
+        error_log /logs/nginx/error.log;
+        proxy_read_timeout 3600;
+
+        proxy_set_header  X-Forwarded-Protocol  $scheme;
+        gzip on;
+        gzip_disable "msie6";
+        gzip_vary on;
+        gzip_proxied any;
+        gzip_comp_level 6;
+        gzip_buffers 16 8k;
+        gzip_http_version 1.1;
+        gzip_types text/plain text/css application/json application/ld+json
+    application/geo+json text/xml application/xml application/xml+rss
+    text/javascript application/javascript text/html;
+
+        # Redirect to use HTTPS
+        location / {
+            return 301 https://$host$request_uri;
+        }
+    }
+
+    # The encrypted HTTPS config
+    server {
+        listen       443 ssl;
+
+        server_name my-arches-project.org www.my-arches-project.org;
+        access_log /logs/nginx/ssl_access.log;
+        error_log /logs/nginx/ssl_error.log;
+
+        proxy_set_header  X-Forwarded-Protocol  $scheme;
+        proxy_read_timeout 3600;
+
+        ssl_certificate /etc/your-ssl-path/fullchain.pem;
+        ssl_certificate_key /etc/your-ssl-path/privkey.pem;
+
+        # NOTE! These other config files are not documented here
+        include /etc/nginx/options-ssl-nginx.conf;
+        ssl_dhparam /etc/nginx/sites/ssl/ssl-dhparams.pem;
+        include /etc/nginx/hsts.conf;
+
+        # Ask Nginx to use gzip compression to send javascript, css, etc.
+        gzip on;
+        gzip_disable "msie6";
+        gzip_vary on;
+        gzip_proxied any;
+        gzip_comp_level 6;
+        gzip_buffers 16 8k;
+        gzip_http_version 1.1;
+        gzip_types text/plain text/css application/json application/ld+json
+    application/geo+json text/xml application/xml application/xml+rss
+    text/javascript application/javascript text/html;
+
+        location ^~ /.well-known/acme-challenge/ {
+            default_type "text/plain";
+            autoindex on;
+            allow all;
+            root /var/www/certbot/$host;
+        }
+
+        # For the 'alias', use the correct path to the location where Arches
+        # puts static files after 'collectstatic'. Like Apache (see above)
+        # Nginx will also need permissions to serve the static files.
+        location  /static/ {
+            autoindex on;
+            allow all;
+            alias  /path_to_arches_static_files_after_collectstatic/;
+            include  /etc/nginx/mime.types;
+        }
+
+        location @proxy_to_django {
+            proxy_pass http://django;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+            proxy_redirect off;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Host $server_name;
+        }
+    }
