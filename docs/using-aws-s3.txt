@@ -124,7 +124,7 @@ app.  Before beginning, you will need to have set up and logged into your AWS ac
 
     .. code-block::
 
-      (ENV) $: pip install boto3 django-storages
+      (ENV) $: pip install boto3==1.26 django-storages==1.13
 
 4. Update `settings.py`
 
