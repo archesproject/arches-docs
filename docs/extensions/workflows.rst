@@ -61,7 +61,7 @@ The HTML for this component ``quick-resource-create-workflow.htm`` can be except
 .. literalinclude:: ../examples/quick-resource-create-workflow.htm
     :language: htmldjango
 
-The workflow's behavior is defined in ``quick-resource-create-workflow.js``. You'll begin with the boilerplate content below. Note that: 
+The workflow's behavior is defined in ``quick-resource-create-workflow.js``. You'll begin with the boilerplate content below. Note that:
 
 - The file name, registered component name, and ``this.componentName`` must all match.
 - The ``stepConfig`` attribute will hold the full list of configurations for each step of the workflow.
@@ -73,10 +73,11 @@ The workflow's behavior is defined in ``quick-resource-create-workflow.js``. You
         'jquery',
         'arches',
         'viewmodels/workflow',
+        'viewmodels/workflow-step',
         'templates/views/components/plugins/quick-resource-create-workflow.htm',
         // DEFINE EXTRA STEP COMPONENTS HERE AS NEEDED
         'views/components/workflows/final-step'
-    ], function(ko, $, arches, Workflow, WorkflowTemplate) {
+    ], function(ko, $, arches, Workflow, WorkflowStep, defaultWorkflowTemplate) {
         return ko.components.register('quick-resource-create-workflow', {
             viewModel: function(params) {
                 this.componentName = 'quick-resource-create-workflow';
@@ -86,7 +87,7 @@ The workflow's behavior is defined in ``quick-resource-create-workflow.js``. You
                 ];
                 Workflow.apply(this, [params]);
             },
-            template: WorkflowTemplate
+            template: defaultWorkflowTemplate
         });
     });
 
@@ -139,7 +140,7 @@ A workflow step can have one or more ``layoutSections``, each of which contains 
         {
             componentConfigs: [
                 // INSERT COMPONENT CONFIGS HERE
-            ], 
+            ],
         }
     ]
 
@@ -191,7 +192,7 @@ In the second step of our example workflow, where the user will enter a keyword 
     }
 
 To break this ``resourceid`` entry down:
-    
+
     - ``'set-basic-info'`` is the **name** of the step from which we are pulling the id (see our first step above)
     - ``'resource-name'`` is the **uniqueInstanceName** of the component config in which the tile was created
     - ``0`` is the first tile object
@@ -213,7 +214,7 @@ The final step of our example workflow looks like this:
         layoutSections: [
             {
                 componentConfigs: [
-                    { 
+                    {
                         componentName: 'final-step',
                         uniqueInstanceName: 'create-resource-final',
                         tilesManaged: 'none',
@@ -221,7 +222,7 @@ The final step of our example workflow looks like this:
                             resourceid: "['set-basic-info']['resource-name'][0]['resourceInstanceId']",
                         },
                     },
-                ], 
+                ],
             },
         ],
     }
@@ -260,7 +261,7 @@ Here are some examples of workflows that use custom step components you can look
     - Now, look for that component name in the following two places:
         - `Arches HER Step Components (JS) <https://github.com/archesproject/arches-her/tree/master/arches_her/media/js/views/components/workflows>`_
         - `Arches HER Step Components (HMTL) <https://github.com/archesproject/arches-her/tree/master/arches_her/templates/views/components/workflows>`_
-    
+
 
 Registering your Workflow
 ==============================

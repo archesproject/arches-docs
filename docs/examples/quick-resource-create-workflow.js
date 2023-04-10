@@ -3,8 +3,10 @@ define([
     'jquery',
     'arches',
     'viewmodels/workflow',
+    'viewmodels/workflow-step',
+    'templates/views/components/plugins/quick-resource-create-workflow.htm',
     'views/components/workflows/final-step'
-], function(ko, $, arches, Workflow) {
+], function(ko, $, arches, Workflow, WorkflowStep, defaultWorkflowTemplate){
     return ko.components.register('quick-resource-create-workflow', {
         viewModel: function(params) {
             this.componentName = 'quick-resource-create-workflow';
@@ -31,7 +33,7 @@ define([
                                         nodegroupid: '574b58a3-e747-11e6-84a6-026d961c88e6',
                                     },
                                 },
-                            ], 
+                            ],
                         },
                         {
                             componentConfigs: [
@@ -44,7 +46,7 @@ define([
                                         nodegroupid: '620aac67-e747-11e6-84a6-026d961c88e6',
                                     },
                                 },
-                            ], 
+                            ],
                         },
                     ]
                 },
@@ -69,7 +71,7 @@ define([
                                         resourceid: "['set-basic-info']['resource-name'][0]['resourceInstanceId']",
                                     },
                                 },
-                            ], 
+                            ],
                         },
                     ],
                 },
@@ -80,7 +82,7 @@ define([
                     layoutSections: [
                         {
                             componentConfigs: [
-                                { 
+                                {
                                     componentName: 'final-step',
                                     uniqueInstanceName: 'create-resource-final',
                                     tilesManaged: 'none',
@@ -88,13 +90,13 @@ define([
                                         resourceid: "['set-basic-info']['resource-name'][0]['resourceInstanceId']",
                                     },
                                 },
-                            ], 
+                            ],
                         },
                     ],
                 }
             ];
             Workflow.apply(this, [params]);
         },
-        template: { require: 'text!templates/views/components/plugins/quick-resource-create-workflow.htm' }
+        template: defaultWorkflowTemplate
     });
 });
