@@ -17,7 +17,7 @@ Docker is a platform that allows you to package, distribute, and run application
     Containers allow a developer to package up an application with all of the parts
     it needs, such as libraries and other dependencies, and ship it all out as one package. By doing so, the developer can be assured that the application will run on any other Linux machine regardless of any customized settings that machine might have that could differ from the machine used for writing and testing the code.
 
-
+We recommend that you gain some understanding about how Docker works as well as some basic proficiency with using Docker before attempting to deploy Arches user Docker. These tutorials can introduce you to the basics of using Docker: https://docker-curriculum.com/ or https://www.howtogeek.com/733522/docker-for-beginners-everything-you-need-to-know/
 
 This document will guide you through the process of using Docker to install Arches on your system. Even if you do not want to use Docker to deploy Arches, the review of Arches Docker setups can still provide a useful guide to see how various dependencies and configurations fit together.
 
