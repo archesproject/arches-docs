@@ -1,0 +1,35 @@
+########################
+Installation with Docker
+########################
+
+Why Use Docker?
+===============
+
+Docker is a platform that allows you to package, distribute, and run applications in containers. By using Docker, you can install Arches on any system that supports Docker. This helps insulate you from worries about how the operating system or other specifics of your host system impact dependencies and configurations. Some of the benefits of using Docker include:
+
+1. Isolation:
+    Docker allows developers to isolate applications from the underlying infrastructure,
+    reducing the risk of conflicts and making it easier to manage dependencies.
+2. Scalability:
+    Docker makes it easy to scale applications up or down, as containers can be started
+    and stopped quickly and easily.
+3. Portability:
+    Containers allow a developer to package up an application with all of the parts
+    it needs, such as libraries and other dependencies, and ship it all out as one package. By doing so, the developer can be assured that the application will run on any other Linux machine regardless of any customized settings that machine might have that could differ from the machine used for writing and testing the code.
+
+
+
+This document will guide you through the process of using Docker to install Arches on your system.
+
+.. IMPORTANT:: Arches currently lacks an "official" approach to installation using Docker. The examples that we discus here are drawn from various works-in-progress and community-created approaches. They should be helpful to get started with Docker and Arches, but they are not fully tested for production deployments.
+
+
+Prerequisites
+=============
+
+Before you begin, ensure that your system meets the following requirements:
+
+Docker:
+    Docker must be installed on your system. You can download Docker from the official website: https://www.docker.com/get-started
+Docker Compose:
+    Docker Compose is a tool for defining and running multi-container Docker applications. It must also be installed on your system. You can download Docker Compose from the official website: https://docs.docker.com/compose/install/
