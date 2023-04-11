@@ -36,8 +36,11 @@ Docker Compose:
 
 
 
-Example Docker Code Repositories
-================================
+Example Docker Code Repositories for Testing
+============================================
+
+The following lists Docker repositories that set up Docker containers running Arches configured for testing and development, not a production deployment.
+
 1. Arches Dependencies
     This repo (https://github.com/archesproject/arches-dependency-containers) uses Docker to provision the dependency PostgreSQL, ElasticSearch, and RabbitMQ services required by Arches. NOTE: This repo does not install Arches itself, it just provides an alternate means to install dependency services.
 
@@ -48,3 +51,12 @@ Example Docker Code Repositories
     This repo (https://github.com/archesproject/arches-her) uses Docker to deploy an instance of Arches running the package and extensions for the Arches implementation developed for Historic England (https://www.archesproject.org/arches-for-hers/). This Docker deployment is designed to run in conjunction with the Docker containers and Docker network started by the *Arches Dependency* repo discussed above.
 
 The *Arches for Science* Docker repository and the *Arches HER* Docker repository both launch instances of Arches that depend up Docker containers and the Docker network started by the *Arches Dependencies* repository. These Docker repositories can be used to "spin up" different versions of Arches and Arches dependencies. You need to launch the appropriate set of dependencies started with *Arches Dependencies* with the version of Arches you are starting in *Arches for Science* or *Arches HER*. In order to switch between versions of Arches in *Arches for Science* and *Arches HER*, use git to checkout a branch with the desired version of Arches. For example, to run *Arches for Science* using Arches 7.4, use the dev/7.4.x branch in the repo: ``git checkout dev/7.4.x``
+
+
+Example Docker Code Repositories for Production
+===============================================
+
+The following lists Docker repositories that set up Docker containers running Arches configured for production deployment. These repositories are not officially part of the Arches Project, and may not have received the same level of review and vetting as Arches Project repositories. While these are not yet fully vetted, they can be a useful starting point or guide to use Docker for production deployment of Arches:
+
+1. arches-via-docker
+    This repo (https://github.com/opencontext/arches-via-docker) uses Docker to provision containers running Arches (the most current stable version) and containers for the dependency PostgreSQL, ElasticSearch, and Redis services. It also starts an Nginx (as a proxy server) container as well as other containers to obtain and update SSL (for secure HTTPS) encryption certificates. You can use this repo directly or use it as a guide to see how to Arches can be configured for "production" deployments.
