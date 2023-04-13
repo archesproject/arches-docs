@@ -8,7 +8,7 @@ Serving Arches with Apache or Nginx
 
 During development, it's easiest to use the Django webserver to view your Arches installation. However, once you are ready to put the project into production, you'll have to use a more efficient, robust, and secure webserver like Apache or Nginx.
 
-The following guide first two sections describes how to use Apache. The next section provides some guidance on using Nginx:
+Use of Apache or Nginx involves many considerations in common, including set-up of SSL certificates for HTTPS, set-up and permissions of static assets, and running the Arches Django application with a WSGI server. The following guide first two sections describes how to use Apache. The next section focuses on using Nginx:
 
 + :ref:`Configure Apache`
 
@@ -17,7 +17,6 @@ The following guide first two sections describes how to use Apache. The next sec
 + :ref:`Configure Nginx`
 
 
-should get you started.
 
 Configure Apache
 ================

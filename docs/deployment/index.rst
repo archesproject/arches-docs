@@ -11,7 +11,7 @@ See the sections in the primary sidebar and below to explore.
     :maxdepth: 2
 
     arches-in-production
-    serving-arches-with-apache
+    serving-arches-with-apache-nginx
     implementing-ssl
     setting-up-supervisord-for-celery
     backing-up-the-database
