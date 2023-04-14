@@ -2,4 +2,17 @@
 Searching
 #########
 
-https://github.com/archesproject/arches-docs/issues/225
+
+Search operators
+----------------
+The Arches search feature supports a number of operators that you can use to find and retrieve information. The following lists different operator types and their expected search behavior:
+
+    **Like**: This is a prefix based search. It will search for strings that begin with each term in the search string in any order and that there is a match for each term. It is not a "contains" search. For example, if the search term is “st bo” it will find “... stock book ...” , or “... books in stock ...”. It will *NOT* find a value with just “book” or find the value “last book” (where “last” ends in “st”).
+
+
+    **Equals**: This is a complete phrase search. It will only match full words in the exact order given. For example, if the search term is "stock book” it will find the value “Knoedler Stock Book 4”. It will *NOT* find “... books in stock ...“, or “... stocking new books ...”
+
+    **Wildcard**: This assumes the user is going to supply a search phrase exactly as they want. For example, a search for "st?ck" will find the values of “stock”, or “Stick”.
+    It will *NOT* find “The car is stuck in the woods”, because the “stuck” is surrounded by other words. If you need a "contains-like" query, then you need to supply leading and trailing asterisks. So, "\*st?ck\*" *WILL* find “The car is stuck in the woods”.
+
+In all the examples above we quote the search string for clarity. In the Arches application you wouldn’t need to put your search terms inside quotes.
