@@ -26,6 +26,8 @@ In all the examples above we quote the search string for clarity. In the Arches 
 
 Advanced Search
 ---------------
-Arches also has "Advanced Search" options that enable users to search with specific branches to find resource instances. This adds much more precision to a search. For example, if you have resource instances described by both a "Color" branch and a "Material" branch a simple search for the term “gold” may return some unwanted results. The Advanced Search allows you to specify that you want to search within the "Material" branch, so a search for the term “gold” will return resource instances described by the material "gold", not just the color "gold". The animation below illustrates use of the Advanced Search option to search within a specific branch.
+Arches also has "Advanced Search" options that enable users to search with specific branches to find resource instances. This adds much more precision to a search. For example, if you have resource instances described by both a "Color" branch and a "Material" branch a simple search for the term “gold” may return some unwanted results. The Advanced Search allows you to specify that you want to search within the "Material" branch, so a search for the term “gold” will return resource instances described by the material "gold", not just the color "gold".
+
+Advanced Search is very powerful because you can use it to combine multiple search criteria together and compose complex queries. The animation below illustrates use of the Advanced Search option to search within specific branches.
 
 .. image:: ../images/advanced-search-example.gif
