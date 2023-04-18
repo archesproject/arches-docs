@@ -2,6 +2,14 @@
 Searching
 #########
 
+Help within the Arches application
+----------------------------------
+The Arches application itself comes bundled with brief guides on the use of search features. Users can open these guides by clicking on the **?** button in the top right of the search interface. The animation below illustrates activation of the search guide.
+
+.. image:: ../images/search-help-guide.gif
+
+
+
 Term search and negation
 ------------------------
 Arches supports powerful features to search text. The text search can be used to match strings of text in any branch describing resource instances. One can also click on a search term for opposite effect, that is, to negate or exclude resource instances that match a given term. The animation below illustrates a text search to find resource instances containing the text “Iran” then a text search that excludes resource instances that contain the term “Iran”.
