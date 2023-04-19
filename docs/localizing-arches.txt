@@ -147,7 +147,7 @@ CSV Column (Field) Names Indicating Languages
 To import a CSV file with multi-lingual business data, the field names (column names) need to end with
 applicable language codes (expressed with parentheses). For example, if you wish to import
 US English, Chinese, Arabic, and Hebrew business data for a string node called *label*,
-you will your CSV file needs to include field names (column names) as follows:
+your CSV file needs to include field names (column names) as follows:
 
 +---------------+------------+------------+------------+
 | label (en-US) | label (zh) | label (ar) | label (he) |
