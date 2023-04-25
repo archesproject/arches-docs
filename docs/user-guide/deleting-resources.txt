@@ -2,4 +2,25 @@
 Deleting Resources
 ##################
 
-https://github.com/archesproject/arches-docs/issues/224
+Arches provides user interface features to delete node instances used to describe resource instances. Arches also provides user interface features to delete any single given resource instance. Finally, Arches provides a feature to delete all resource instances for a given resource model.
+
+
+Select a Resource Instance to Edit or Delete
+--------------------------------------------
+To find a resource instance that you want to delete, you can start by using the search interface (learn more here: :ref:`Searching`). Assuming you are logged in as a user with permissions to edit the resource instance of interest, you should find a link to **Edit** the resource instance in the search results. The animation below illustrates the use of search and the **Edit** link:
+
+.. image:: ../images/select-resource-instance-for-edit.gif
+
+
+Delete a Node Instance for a Resource
+-------------------------------------
+
+
+
+Delete a Resource Instance Entirely
+-----------------------------------
+
+
+
+Delete ALL Resource Instances for a Resource Model
+--------------------------------------------------
