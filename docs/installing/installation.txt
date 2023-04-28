@@ -8,7 +8,7 @@ Installing Core Arches
 
 .. seealso::
 
-    We have an in-progress `Docker install <https://github.com/archesproject/arches/tree/master/docker>`_, and would love help improving it.
+    We have an in-progress `Docker install <https://github.com/archesproject/arches/tree/master/docker>`_, and would love help improving it. You can also review some works-in-progress and community-created approaches to using Docker :ref:`Installation with Docker`
 
 Create a Virtual Environment
 ----------------------------
@@ -121,12 +121,12 @@ Build a Frontend Asset Bundle
 In your current terminal, run the Django development server::
 
     python manage.py runserver
-    
+
 Then, in a second terminal, navigate to the root directory of the project ( you should be on the same level as `package.json`) and build a frontend asset bundle::
 
     cd my_project/myproject
     yarn build_development
-    
+
 .. note::
 
     ``yarn build_development`` creates a static frontend asset bundle. Any changes made to frontend files (eg. ``.js``) will not be viewable until the asset bundle is rebuilt. run ``yarn build_development`` again to update the asset bundle, or run ``yarn start`` to run an asset bundler server that will detect changes to frontend files and rebuild the bundle appropriately.

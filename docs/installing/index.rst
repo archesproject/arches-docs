@@ -10,4 +10,5 @@ Introductory text can go here (no current content equivalent).
 
     requirements-and-dependencies
     installation
+    docker
     projects-and-packages
