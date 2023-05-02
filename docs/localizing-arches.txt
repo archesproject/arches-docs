@@ -40,7 +40,7 @@ If you want to support localization in your Arches instance, you'll first need t
     # {langcode}-{regioncode} eg: en, en-gb ....
     # a list of language codes can be found here http://www.i18nguy.com/unicode/language-identifiers.html
     LANGUAGE_CODE = "en"
-    # list of languages to display in the language switcher, 
+    # list of languages to display in the language switcher,
     # if left empty or with a single entry then the switch won't be displayed
     # language codes need to be all lower case with the form:
     # {langcode}-{regioncode} eg: en, en-gb ....
@@ -59,7 +59,7 @@ If you want to support localization in your Arches instance, you'll first need t
 .. code-block:: python
 
     from django.conf.urls.i18n import i18n_patterns
-    
+
 5. Finally add the following code to the end of your urls.py file:
 
 .. code-block:: python
@@ -99,16 +99,16 @@ Setting up Localized Languages for Business Data
 ************************************************
 
 By default, every language from the LANGUAGES array in settings.py is available for business data entry.
-To add additional languages for business data entry only, you can do the following. 
+To add additional languages for business data entry only, you can do the following.
 
 1.  Access the admin page (``http://localhost:8000/admin/``)
 2.  Choose the "Languages" table.  (``http://localhost:8000/models/language``)
 3.  Select "Add Language"
 4.  Fill in information on new language, including a default direction.
 
-Repeat this process for all new languages you wish to add. 
+Repeat this process for all new languages you wish to add.
 
-Additionally, remove any languages you do not plan on using.  
+Additionally, remove any languages you do not plan on using.
 
 Once this is complete, text widgets should be able to write data in the desired languages.
 
@@ -116,9 +116,9 @@ Once this is complete, text widgets should be able to write data in the desired 
 RDF Imports and Exports
 ***********************
 
-Business data can be exported in RDF format. The directionality of the string data will be lost as 
-the RDF specification does not include directionality. There is an 
-`active attempt <https://w3c.github.io/rdf-dir-literal/>`_ to include direction within the 
+Business data can be exported in RDF format. The directionality of the string data will be lost as
+the RDF specification does not include directionality. There is an
+`active attempt <https://w3c.github.io/rdf-dir-literal/>`_ to include direction within the
 RDF specification.
 
 ***********************
@@ -126,16 +126,29 @@ CSV Exports and Imports
 ***********************
 
 It is possible to import and export localized business data through CSV format. There is a ``--language``
-switch that will limit the languages that will be exported (all languages are exported by default). 
-However, if attempting to re-import a limited subset of languages through the csv importer, entire 
-string objects will be overwritten by the subset. For example, if a string node has values for 
+switch that will limit the languages that will be exported (all languages are exported by default).
+However, if attempting to re-import a limited subset of languages through the csv importer, entire
+string objects will be overwritten by the subset. For example, if a string node has values for
 English, Spanish, and French, the subset of languages can be limited by specifying
 
 .. code-block:: bash
 
     --languages en,es
 
-If attempting to import the resulting csv, any values that were pre-existing for French would be 
+If attempting to import the resulting csv, any values that were pre-existing for French would be
 overwritten in "overwrite" mode or added as a separate tile in "append" mode. There is currently
 no way to merge these values. If the intention is to re-import the csv values later, export all
 languages.
+
+
+CSV Column (Field) Names Indicating Languages
+----------------------------------------------
+
+To import a CSV file with multi-lingual business data, the field names (column names) need to end with
+applicable language codes (expressed with parentheses). For example, if you wish to import
+US English, Chinese, Arabic, and Hebrew business data for a string node called *label*,
+your CSV file needs to include field names (column names) as follows:
+
++---------------+------------+------------+------------+
+| label (en-US) | label (zh) | label (ar) | label (he) |
++---------------+------------+------------+------------+
