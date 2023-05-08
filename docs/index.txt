@@ -15,6 +15,7 @@ Arches Documentation
 
     requirements-and-dependencies
     installation
+    docker
     projects-and-packages
 
 .. toctree::
