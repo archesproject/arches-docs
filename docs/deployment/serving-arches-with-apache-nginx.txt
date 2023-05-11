@@ -333,6 +333,10 @@ It's sometimes useful to have an example configuration to help get you started. 
         include /etc/nginx/options-ssl-nginx.conf;
         ssl_dhparam /etc/nginx/sites/ssl/ssl-dhparams.pem;
         include /etc/nginx/hsts.conf;
+        
+        # NOTE! Be default, NGINX only allows a 1MB file upload.
+        # The following config raises this to 100MB
+        client_max_body_size 100M;
 
         # Ask Nginx to use gzip compression to send javascript, css, etc.
         gzip on;
