@@ -143,7 +143,7 @@ and while this works on a local build, it does not work when published in RTD (h
 ## resources
 
 + Arches code-base: https://github.com/archesproject/arches
-+ Arches community user forum: https://community.archesproject.org/
++ Arches community forum: https://community.archesproject.org/
 + reStructuredText primer: https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html
 
 ### release ticket label greens
