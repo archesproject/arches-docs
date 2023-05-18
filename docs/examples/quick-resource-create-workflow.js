@@ -28,7 +28,7 @@ define([
                                     tilesManaged: 'one',
                                     parameters: {
                                         graphid: '99417385-b8fa-11e6-84a5-026d961c88e6',
-                                        nodegroupid: '574b58a3-e747-11e6-84a6-026d961c88e6',
+                                        nodegroup_id: '574b58a3-e747-11e6-84a6-026d961c88e6',
                                     },
                                 },
                             ], 
@@ -41,7 +41,7 @@ define([
                                     tilesManaged: 'one',
                                     parameters: {
                                         graphid: '99417385-b8fa-11e6-84a5-026d961c88e6',
-                                        nodegroupid: '620aac67-e747-11e6-84a6-026d961c88e6',
+                                        nodegroup_id: '620aac67-e747-11e6-84a6-026d961c88e6',
                                     },
                                 },
                             ], 
@@ -65,7 +65,7 @@ define([
                                     tilesManaged: 'one',
                                     parameters: {
                                         graphid: '99417385-b8fa-11e6-84a5-026d961c88e6',
-                                        nodegroupid: '3d919f0d-e747-11e6-84a6-026d961c88e6',
+                                        nodegroup_id: '3d919f0d-e747-11e6-84a6-026d961c88e6',
                                         resourceid: "['set-basic-info']['resource-name'][0]['resourceInstanceId']",
                                     },
                                 },

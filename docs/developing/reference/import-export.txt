@@ -445,7 +445,7 @@ But first a description of the general structure of a single tile::
     {
         "tileid": "<uuid>",
         "resourceinstance_id": "<uuid>",
-        "nodegroupid": "<uuid>",
+        "nodegroup_id": "<uuid>",
         "sortorder": 0,
         "parenttile_id": "<uuid>" or null,
         "data": {. . .}
@@ -477,7 +477,7 @@ Now for a detailed look at the actual contents of ``tiles``. Note that below we 
         {
             "tileid": "A",
             "resourceinstance_id": "<uuid from resourceinstance.resourceinstanceid>",
-            "nodegroupid": "<uuid from resource model>",
+            "nodegroup_id": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": null,
             "data": {
@@ -498,7 +498,7 @@ n: There are multiple instances of this nodegroup/card in a resource::
         {
             "tileid": "A",
             "resourceinstance_id": "<uuid from resourceinstance.resourceinstanceid">,
-            "nodegroupid": "<uuid from resource model">,
+            "nodegroup_id": "<uuid from resource model">,
             "sortorder": 0,
             "parenttile_id": null,
             "data": {
@@ -509,7 +509,7 @@ n: There are multiple instances of this nodegroup/card in a resource::
             {
             "tileid": "B",
             "resourceinstance_id": "<uuid from resourceinstance.resourceinstanceid>",
-            "nodegroupid": "<uuid from resource model>",
+            "nodegroup_id": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": null,
             "data": {
@@ -528,7 +528,7 @@ n: There are multiple instances of this nodegroup/card in a resource::
         {
             "tileid": "A",
             "resourceinstance_id": "<uuid from resourceinstance.resourceinstanceid>",
-            "nodegroupid": "<uuid from resource model>",
+            "nodegroup_id": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": null,
             "data": {}
@@ -536,7 +536,7 @@ n: There are multiple instances of this nodegroup/card in a resource::
         {
             "tileid": "X",
             "resourceinstance_id": "<uuid from resourceinstance.resourceinstanceid>",
-            "nodegroupid": "<uuid from resource model>",
+            "nodegroup_id": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": "A",
             "data": {
@@ -555,7 +555,7 @@ n: There are multiple instances of this nodegroup/card in a resource::
         {
             "tileid": "A",
             "resourceinstance_id": "<uuid from resourceinstance.resourceinstanceid>",
-            "nodegroupid": "<uuid from resource model>",
+            "nodegroup_id": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": null,
             "data": {}
@@ -563,7 +563,7 @@ n: There are multiple instances of this nodegroup/card in a resource::
         {
             "tileid": "X",
             "resourceinstance_id": "<uuid from resourceinstance.resourceinstanceid>",
-            "nodegroupid": "<uuid from resource model>",
+            "nodegroup_id": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": "A",
             "data": {
@@ -574,7 +574,7 @@ n: There are multiple instances of this nodegroup/card in a resource::
         {
             "tileid": "Y",
             "resourceinstance_id": "<uuid from resourceinstance.resourceinstanceid>",
-            "nodegroupid": "<uuid from resource model>",
+            "nodegroup_id": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": "A",
             "data": {
@@ -593,7 +593,7 @@ n-1: Many parent nodegroups/cards each with one child nodegroup/card::
         {
             "tileid": "A",
             "resourceinstance_id": "<uuid from resourceinstance.resourceinstanceid>",
-            "nodegroupid": "<uuid from resource model>",
+            "nodegroup_id": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": null,
             "data": {}
@@ -601,7 +601,7 @@ n-1: Many parent nodegroups/cards each with one child nodegroup/card::
         {
             "tileid": "X",
             "resourceinstance_id": "<uuid from resourceinstance.resourceinstanceid>",
-            "nodegroupid": "<uuid from resource model>",
+            "nodegroup_id": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": "A",
             "data": {
@@ -612,7 +612,7 @@ n-1: Many parent nodegroups/cards each with one child nodegroup/card::
         {
             "tileid": "B",
             "resourceinstance_id": "<uuid from resourceinstance.resourceinstanceid>",
-            "nodegroupid": "<uuid from resource model>",
+            "nodegroup_id": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": null,
             "data": {}
@@ -620,7 +620,7 @@ n-1: Many parent nodegroups/cards each with one child nodegroup/card::
         {
             "tileid": "Y",
             "resourceinstance_id": "<uuid from resourceinstance.resourceinstanceid>",
-            "nodegroupid": "<uuid from resource model>",
+            "nodegroup_id": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": "B",
             "data": {
@@ -639,7 +639,7 @@ n-n: Many parent nodegroups/cards containing many child nodegroups/cards::
         {
             "tileid": "A",
             "resourceinstance_id": "<uuid from resourceinstance.resourceinstanceid>",
-            "nodegroupid": "<uuid from resource model>",
+            "nodegroup_id": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": null,
             "data": {}
@@ -647,7 +647,7 @@ n-n: Many parent nodegroups/cards containing many child nodegroups/cards::
         {
             "tileid": "X",
             "resourceinstance_id": "<uuid from resourceinstance.resourceinstanceid>",
-            "nodegroupid": "<uuid from resource model>",
+            "nodegroup_id": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": "A",
             "data": {
@@ -658,7 +658,7 @@ n-n: Many parent nodegroups/cards containing many child nodegroups/cards::
         {
             "tileid": "B",
             "resourceinstance_id": "<uuid from resourceinstance.resourceinstanceid>",
-            "nodegroupid":  "<uuid from resource model>",
+            "nodegroup_id":  "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": null,
             "data": {}
@@ -666,7 +666,7 @@ n-n: Many parent nodegroups/cards containing many child nodegroups/cards::
         {
             "tileid": "Y",
             "resourceinstance_id": "<uuid from resourceinstance.resourceinstanceid>",
-            "nodegroupid": "<uuid from resource model>",
+            "nodegroup_id": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": "B",
             "data": {
@@ -677,7 +677,7 @@ n-n: Many parent nodegroups/cards containing many child nodegroups/cards::
         {
             "tileid": "Z",
             "resourceinstance_id": "<uuid from resourceinstance.resourceinstanceid>",
-            "nodegroupid": "<uuid from resource model>",
+            "nodegroup_id": "<uuid from resource model>",
             "sortorder": 0,
             "parenttile_id": "B",
             "data": {
