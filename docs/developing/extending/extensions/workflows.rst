@@ -152,7 +152,7 @@ The properties of a component config are as follows:
 :tilesManaged:
     This must be ``'none'``, ``'one'``, or ``'multi'``, and it determines how many new tiles will be created with this component. Even if the card has a cardinality > 1 in the resource model, setting ``'one'`` here will still disallow multiple values from being created.
 :parameters:
-    These parameters will be passed to the component. Typically, in the first step you will only use ``graphid`` (for the resource model) and ``nodegroup_id`` (to determine which nodegroup/card to show). Later steps will also need to be passed the ``resourceid`` which is pulled from the first step. *Keep in mind that custom step components may require extra parameters.*
+    These parameters will be passed to the component. Typically, in the first step you will only use ``graphid`` (for the resource model) and ``nodegroupid`` (to determine which nodegroup/card to show). Later steps will also need to be passed the ``resourceid`` which is pulled from the first step. *Keep in mind that custom step components may require extra parameters.*
 
 .. code-block:: javascript
 
@@ -162,14 +162,14 @@ The properties of a component config are as follows:
         tilesManaged: 'one',
         parameters: {
             graphid: '99417385-b8fa-11e6-84a5-026d961c88e6',
-            nodegroup_id: '574b58a3-e747-11e6-84a6-026d961c88e6',
+            nodegroupid: '574b58a3-e747-11e6-84a6-026d961c88e6',
         }
     }
 
-In this example, ``graphid`` refers to the UUID for the Heritage Resource Model, and ``nodegroup_id`` is the UUID for the nodegroup that holds the Name and Name Type nodes.
+In this example, ``graphid`` refers to the UUID for the Heritage Resource Model, and ``nodegroupid`` is the UUID for the nodegroup that holds the Name and Name Type nodes.
 
 .. note::
-    There are a couple of ways to find the ``nodegroup_id``.
+    There are a couple of ways to find the ``nodegroupid``.
 
     1. In the Arches web UI, open the graph designer for the resource model and use your browser's dev tools to isolate the element for the nodegroup you want. The UUID will be visible in the HTML.
     2. Using the Django shell::
@@ -185,7 +185,7 @@ In the second step of our example workflow, where the user will enter a keyword 
 
     parameters: {
         graphid: '99417385-b8fa-11e6-84a5-026d961c88e6',
-        nodegroup_id: '3d919f0d-e747-11e6-84a6-026d961c88e6', // UUID for the Keyword nodegroup
+        nodegroupid: '3d919f0d-e747-11e6-84a6-026d961c88e6', // UUID for the Keyword nodegroup
         resourceid: "['set-basic-info']['resource-name'][0]['resourceInstanceId']",
     }
 
