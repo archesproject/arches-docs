@@ -110,7 +110,8 @@ metadata structure which is used to display the graph in the UI and
 collect related information together.
 
 A NodeGroup exists for every Node that collects data, and both
-contains and shares its UUID with that node. NodeGroups with more than
+contains and shares its UUID with that node (see
+:ref:`naming conventions for references <id vs id>`).  NodeGroups with more than
 one member Node are used to collect composite or semantically-related
 information. For example, a NodeGroup for a Node named ``Name.E1`` may
 contain a ``Name Type.E55`` Node. This way, a Graph with this
@@ -435,3 +436,48 @@ Used to validate data entered into ``widgets``
 
 .. literalinclude:: ../../examples/arches/ddatatype.py
    :language: python
+
+******************
+Naming Conventions
+******************
+
+``id`` vs ``_id``: ID as Primary Key vs Foreign Key
+===================================================
+
+.. Behold the irony: the actual section name starts with "id vs _id",
+   but for our Sphinx reference we need to put an underscore before
+   the first word of the target name, thus making it look like the
+   target is reversed from the section name.  That's not actually
+   what's going on, but only someone who knows both Sphinx refs and
+   the naming conventions for IDs in the Arches code, or who reads
+   this comment, would know that.
+
+.. _id vs id:
+
+Throughout the code, you will sometimes see an entity name with "id"
+appended and other times see the same name with "_id" appended.  For
+example, you'll see both ``nodegroupid`` and ``nodegroup_id``.
+
+What is the difference?
+
+The first, ``nodegroupid``, is a UUID attribute in the database and is
+the primary key for entities of type NodeGroup.
+
+The second, ``nodegroup_id``, is a foreign key attribute (thus also a
+UUID) that refers from somewhere else to a NodeGroup.  For example, a
+Tile object may have an associated NodeGroup; that NodeGroup object
+itself would be referenced as ``tile.nodegroup``, and the NodeGroup's
+UUID -- which in the context of a Tile object is a foreign key --
+would therefore be ``tile.nodegroup_id``.
+
+The reason to use ``tile.nodegroup_id``, instead of getting the
+NodeGroup's ID by going through the associated NodeGroup object with
+``tile.nodegroup.nodegroupid``, is that the latter would involve an
+extra database query to fetch the NodeGroup instance, which would be a
+waste if you don't actually need the NodeGroup itself.  When all you
+need is the NodeGroup's UUID -- perhaps because you're just going to
+pass it along to something else that only needs the UUID -- then
+there's no point fetching the entire NodeGroup when you already have
+the Tile in hand and the Tile's ``nodegroup_id`` field is a foreign
+key to the Tile's associated NodeGroup.  You might as well just get
+that foreign key, ``tile.nodegroup_id``, directly.
