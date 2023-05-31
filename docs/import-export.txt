@@ -851,7 +851,7 @@ Directly inserting our records into the new Arches view will look something like
     ------------------------------------------------------
     This SQL method for inserting records has a known and severe performance issue for Postgres/PostGIS instances installed on Ubuntu, Debian, and Alpine operating systems. On these operating systems, a node-instance data insert of only a few thousand records may result in a database connection time out error (see issue discussion here: https://github.com/archesproject/arches/issues/9049#issuecomment-1433970369).
 
-    This issue is known to impact Arches versions 7.0, 7.1, 7.2 and 7.3. A fix for this OS related issue will likely come with Arches version 7.4. If you are using a version of Arches impacted by this issue, you can use the following workaround to vastly (perhaps 50x) improve the performance of the SQL method for inserts. Execute the following SQL *BEFORE* you run SQL inserts:
+    This issue is known to impact Arches versions 7.x. A fix for this OS related issue will likely come with Arches version 7.5. If you are using a version of Arches impacted by this issue, you can use the following workaround to vastly (perhaps 50x) improve the performance of the SQL method for inserts. Execute the following SQL *BEFORE* you run SQL inserts:
 
 
     SQL Insert Performance Workaround
