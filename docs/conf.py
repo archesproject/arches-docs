@@ -62,7 +62,7 @@ author = u'Legion GIS, Farallon Geographics, Coherit Associates'
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
-# The short X.Y version.
+# The short X.Y version (example: "7.3")
 version = '7.3'
 # The full version, including alpha/beta/rc tags.
 release = '7.3.0'
