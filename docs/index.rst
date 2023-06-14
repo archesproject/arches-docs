@@ -8,7 +8,7 @@ Arches is an open-source data management platform originally developed for the c
 Welcome to the Arches official documentation site!
 ##################################################
 
-This documentation primarily aims to provide guidance with Arches installation, technical administration, management, and extensions. Because Arches sees continual improvement, please help make this documentation provides clear, accurate, and up-to-date information by filing tickets that identify issues for improvement `here on GitHub <https://github.com/archesproject/arches-docs/issues>`_.
+This documentation primarily aims to provide guidance with Arches installation, technical administration, management, localization, customization and other extensions. Because Arches sees continual improvement, please help make this documentation provides clear, accurate, and up-to-date information by filing tickets that identify issues for improvement `here on GitHub <https://github.com/archesproject/arches-docs/issues>`_.
 
 
 Documentation Topics
