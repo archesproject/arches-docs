@@ -10,7 +10,8 @@ Steps to Make Custom Relationships between Resource Instances
 You will need administrative privileges to use the RDM and edit resource models and branches. If you have such permissions, the following steps enable customization of relationships between resource instances:
 
     1) Create and define custom relationship concepts
-        In the RDM Thesauri tab, navigate to and then select the *"Arches" > "Resource To Resource Relationship Types"* concept. Under the blue "Manage" option button (right side of the screen), select *"Add Child"*. Fill out the *"Add Concept"* form to describe your new custom resource to resource relationship type. If the direction of your custom relationship matters, you should also define an inverse relationship. For example, the inverse of "contains" can be "is contained by".
+        In the RDM Thesauri tab, navigate to and then select the *"Arches" > "Resource To Resource Relationship Types"* concept. Under the blue "Manage" option button (right side of the screen), select *"Add Child"*.
+        Fill out the *"Add Concept"* form to describe your new custom resource to resource relationship type. If the direction of your custom relationship matters, you should also define an inverse relationship. For example, the inverse of "contains" can be "is contained by".
 
         .. image:: ../images/resource-to-resource-rel-create-contained.gif
 
@@ -23,3 +24,6 @@ You will need administrative privileges to use the RDM and edit resource models 
         After you finish creating custom relationships (and their inverse relations), you can now use the Arches Designer to implement the custom relationships in your resource models. To use your custom resource to resource relationships, create a branch where the "Root Node Data Type" is either a "resource-instance" or a "resource-instance-list". Once you select a resource model for use with this branch, click on the resource model label. This will open a form that will allow you to select a custom resource to resource relationship and the inverse of that relationship. After you save and publish, you will be able to use the custom resource to resource relationships as you create and edit resource instances.
 
         .. image:: ../images/resource-to-resource-rel-add-to-branch.gif
+
+
+.. note:: You can actually use any concept and collection you like (in other words, you are not restricted to the *"Resource To Resource Relationship Types"* concept). Our example use of the *"Resource To Resource Relationship Types"* concept and collection is a matter of convenience, and it probably makes sense for most users to use it unless their implementation really requires a more complex approach to defining relationships.
