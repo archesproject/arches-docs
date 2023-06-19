@@ -2,7 +2,8 @@
 Administering
 =============
 
-Introductory text example
+This section provides guidance on various aspects of database administration, data modeling,
+and permissions management.
 
 .. toctree::
     :caption: Administering
@@ -12,5 +13,6 @@ Introductory text example
     ontologies-in-arches
     managing-map-layers
     rdm
+    instance-relationships
     managing-permissions
     spatial-views
