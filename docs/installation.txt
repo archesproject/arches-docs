@@ -91,7 +91,7 @@ Create a Project
 .. note::
 
     You can add ``--directory path/to/dir`` to change the directory your new project will be created in.
-
+ 
 .. warning::
 
     On Windows, open ``my_project\my_project\settings_local.py`` and add the following line::
@@ -190,6 +190,9 @@ Common Errors
     .. error:: `ConnectionError: ConnectionError(<urllib3.connection.HTTPConnection object at 0x0000000005C6BC50>: Failed to establish a new connection: [Errno 10061] No connection could be made because the target machine actively refused it) caused by: NewConnectionError(<urllib3.connection.HTTPConnection object at 0x0000000005C6BC50>: Failed to establish a new connection: [Errno 10061] No connection could be made because the target machine actively refused it)`
 
     means Arches is not able to communicate with ElasticSearch. Most likely, ElasticSearch is just not running, so just start it up and reload the page. If you can confirm that it `is` running, make sure Arches is pointed to to correct port.
+    
+    .. note::
+    It might be necessary to reinstall ElasticSearch, and make the changes described in the :doc:`Arches and ElasticSearch </arches-and-elasticsearch>` 'Development Configuration' chapter.
 
 * Postgres password authentication error
 

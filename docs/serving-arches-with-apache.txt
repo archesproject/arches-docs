@@ -1,5 +1,5 @@
 ##########################
-Serving Arches with Apache
+Serving Arches with Apache/Nginx
 ##########################
 
 .. sidebar:: Further Reference

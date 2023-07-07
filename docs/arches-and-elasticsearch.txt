@@ -36,6 +36,26 @@ For more information, please visit the official `Elasticsearch documentation <ht
 .. important::
    1. By default, Elasticsearch uses 2GB of memory (RAM). For basic development purposes, we have found it to run well enough on 1GB. Use ``ES_JAVA_OPTS="-Xms1g -Xmx1g" ./bin/elasticsearch -d`` to set the memory allotment on startup (`read more <https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html>`_). You can use the same command to give **more** memory to Elasticsearch in a production setting.
 
+Development Configuration
+=========================
+
+While you are working with Arches locally, i.e. during development, you can safely disable these features. *Do not disable security features in production.*
+
+Make two changes:
+
+1. In your config file, find ``xpack.security.enabled = true`` and set it to ``xpack.security.enabled = false``. Now start/restart Elasticsearch (see below).
+
+    The config file is typically found at ``{path-to-elasticsearch}\config\elasticsearch.yml``. If you installed the Debian package, you'll find it at ``/etc/elasticsearch/elasticsearch.yml``.
+
+2. In your Arches project's ``settings.py`` or ``settings_local.py``, add
+
+    .. code-block:: python
+
+        ELASTICSEARCH_HOSTS = [{'scheme': 'http', 'host': 'localhost', 'port': ELASTICSEARCH_HTTP_PORT}]
+
+    This overwrites the default ``ELASTICSEARCH_HOSTS`` variable, which has the scheme set to ``https``.
+
+
 Using the Kibana Dashboard
 ==========================
 
