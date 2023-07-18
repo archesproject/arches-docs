@@ -1,0 +1,42 @@
+#################
+Bulk Data Manager
+#################
+
+As of version 7.4, Arches provides **Bulk Data Manager** user interface tools for administrators to import and update large sets of data "in bulk". These allow administrators to make changes across large sets of data, not just record by record.
+
+
+----------------------------
+Enable the Bulk Data Manager
+----------------------------
+The Bulk Data Manager is an Arches plugin (see :ref:`Plugins`). This plugin will be installed when you install Arches, but, by default, the Bulk Data Manager will be hidden.
+
+To enable use of the Bulk Data Manager, login to the :ref:`Django Admin User Interface`, click the link to "Plugins" under models, click the "Bulk Data Manager", and edit the JSON value for the attribute "Config".
+
+To enable use of the Bulk Data Manager the Config should be: ``{"show": true}``. To disable use of the Bulk Data Manager, the Config should be: ``{"show": false}``. Once you've made your change, press the "Save" button in the lower right.
+
+The image below illustrates how to enable the Bulk Data Manager:
+
+.. figure:: ../images/admin-bulk-data-manager-enable.gif
+    :width: 100%
+    :align: center
+
+    Enable the Bulk Data Manager via the Django Admin panel.
+
+
+.. note:: The Bulk Data Manager requires that you have properly installed and configured :ref:`Task Management` with Celery.
+
+
+----------------------------
+Using the Bulk Data Manager
+----------------------------
+Once you've enabled the Bulk Data Manager, Arches administrators will have access to Import, Edit, and Export functionality.
+
+.. figure:: ../images/bulk-data-manager-screen.png
+    :width: 100%
+    :align: center
+
+    Arches Bulk Data Manager plugin.
+
+
+
+.. note:: TO DO: More guidance about use of the Bulk Data Manager is forthcoming. Stay tuned!
