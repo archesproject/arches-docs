@@ -39,4 +39,21 @@ Once you've enabled the Bulk Data Manager, Arches administrators will have acces
 
 
 
-.. note:: TO DO: More guidance about use of the Bulk Data Manager is forthcoming. Stay tuned!
+
+Edit
+====
+The **Edit** tab of the Bulk Data Manager enables Arches administrators to make mass edits of string data across many resource instances. As of version 7.4.0, the current string editing options include:
+
+1. Change classes
+2. Replace Text
+3. Remove Whitespace
+
+Each editing option can be applied to selected node and languages within selected resource instances. The editing interface provides multiple options for selecting resource instances to update with a bulk edit. These options include:
+
+1. Use search url
+    One can copy and paste a URL of a search that retrieves a set of resource instances you want to edit
+
+2. Select a resource model
+    Use the dropdown list to select a resource model with resource instances that you want to edit
+
+Use the other drop down lists to select nodes for editing, change the "From" and "To" text (if you are doing a "Replace Text" edit), and get a preview of how your edit would look. To actually make the edit, press the Start button. This may take some time, especially if you are updating many resource instances. Updates also trigger re-indexing, which can also take some time.
