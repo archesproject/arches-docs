@@ -62,7 +62,7 @@ will benefit your production installation.
 
     .. code-block:: bash
 
-        LoadModule wsgi_module "<your venv path>/lib/python3.7/site-packages/mod_wsgi/server/mod_wsgi-py37.cpython-37m-x86_64-linux-gnu.so"
+        LoadModule wsgi_module "<your venv path>/lib/python3.8/site-packages/mod_wsgi/server/mod_wsgi-py37.cpython-37m-x86_64-linux-gnu.so"
         WSGIPythonHome "<your venv path>"
 
     Copy these two lines, you will use them in step 3.
@@ -95,7 +95,7 @@ will benefit your production installation.
 
         # If you have mod_wsgi installed in your python virtual environment, paste the text generated
         # by 'mod_wsgi-express module-config' here, *before* the VirtualHost is defined.
-        LoadModule wsgi_module "/home/ubuntu/Projects/ENV/lib/python3.7/site-packages/mod_wsgi/server/mod_wsgi-py37.cpython-37m-x86_64-linux-gnu.so"
+        LoadModule wsgi_module "/home/ubuntu/Projects/ENV/lib/python3.8/site-packages/mod_wsgi/server/mod_wsgi-py37.cpython-37m-x86_64-linux-gnu.so"
         WSGIPythonHome "/home/ubuntu/Projects/ENV"
 
         <VirtualHost *:80>
