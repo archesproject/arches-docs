@@ -22,7 +22,7 @@ The templates must have the name format of ``<graph id>.htm``, with the <graph i
 Templating Language
 ===================
 
-The templates are using the native Django templating engine, information of which can be found here: https://docs.djangoproject.com/en/3.2/ref/templates/language/
+The templates are using the native Django templating engine, information of which can be found here: https://docs.djangoproject.com/en/stable/ref/templates/language/
 
 
 Resources Context Data

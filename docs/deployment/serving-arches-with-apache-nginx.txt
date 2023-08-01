@@ -4,7 +4,7 @@ Serving Arches with Apache or Nginx
 
 .. sidebar:: Further Reference
 
-    + `Django Documentation <https://docs.djangoproject.com/en/3.2/howto/deployment/wsgi/modwsgi/#how-to-use-django-with-apache-and-mod-wsgi>`_
+    + `Django Documentation <https://docs.djangoproject.com/en/stable/howto/deployment/wsgi/modwsgi/#how-to-use-django-with-apache-and-mod-wsgi>`_
 
 During development, it's easiest to use the Django webserver to view your Arches installation. However, once you are ready to put the project into production, you'll have to use a more efficient, robust, and secure webserver like Apache or Nginx.
 
