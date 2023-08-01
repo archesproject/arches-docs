@@ -61,7 +61,7 @@ You can transfer all the configuration related to arches to the new virtual host
 .. code-block::
 
     ServerName yourDomainName
-    LoadModule wsgi_module "/home/ubuntu/Projects/ENV/lib/python3.7/site-packages/mod_wsgi/server/mod_wsgi-py37.cpython-37m-x86_64-linux-gnu.so"
+    LoadModule wsgi_module "/home/ubuntu/Projects/ENV/lib/python3.8/site-packages/mod_wsgi/server/mod_wsgi-py37.cpython-37m-x86_64-linux-gnu.so"
     WSGIPythonHome "/home/ubuntu/Projects/ENV"
     <VirtualHost *:80>
         ServerName yourDomainName
