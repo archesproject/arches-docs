@@ -71,7 +71,7 @@ If you want to support localization in your Arches instance, you'll first need t
 
 Once the system is prepared for localization, the next steps involve generating a Django message file or .po file which will contain all available translation strings in Arches and how they should be translated in any given language.
 
-For more information, see `Localization: how to create language files <https://docs.djangoproject.com/en/4.0/topics/i18n/translation/#localization-how-to-create-language-files>`_ in the Django documentation.
+For more information, see `Localization: how to create language files <https://docs.djangoproject.com/en/stable/topics/i18n/translation/#localization-how-to-create-language-files>`_ in the Django documentation.
 
 There are some example commands to make and load PO files in the core arches settings file that can be found `here <https://github.com/archesproject/arches/blob/dev/7.0.x/arches/settings.py#L193>`_. If loading a new PO file, simply replace the existing po file and run compilemessages.
 

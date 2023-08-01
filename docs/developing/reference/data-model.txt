@@ -66,7 +66,7 @@ Controllers
 
 Arches platform code defines base classes for some of its core data
 models, and uses `proxy models
-<https://docs.djangoproject.com/en/1.11/topics/db/models/#proxy-models>`_
+<https://docs.djangoproject.com/en/stable/topics/db/models/#proxy-models>`_
 to implement their controllers. In smaller classes, "controller" code
 is included with the data model class. This documentation primarily
 discusses the models, but controller behavior is discussed where
