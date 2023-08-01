@@ -61,7 +61,7 @@ Core Arches
     
     .. note::
 
-        If you later switch to a new git branch, you may need to rerun ``pip install -r requirements.txt``, as the Python dependencies do change over the course of Arches releases.
+        If you later switch to a new git branch, you may need to rerun ``pip install -r arches/install/requirements.txt``, as the Python dependencies do change over the course of Arches releases.
 
 The Project
 -----------
