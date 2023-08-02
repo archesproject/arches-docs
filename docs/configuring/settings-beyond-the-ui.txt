@@ -88,7 +88,7 @@ To modify the list of **required special characters**, simply edit the list of c
 
 To change the **minimum length of a password**, change the `min_length`:code: property in the `MinLengthValidator`:code: validator.
 
-Advanced users can override or add new validators by creating their own validation classes as explained in `Django's password validation documentation <https://docs.djangoproject.com/en/1.11/topics/auth/passwords/#module-django.contrib.auth.password_validation/>`_.
+Advanced users can override or add new validators by creating their own validation classes as explained in `Django's password validation documentation <https://docs.djangoproject.com/en/stable/topics/auth/passwords/#module-django.contrib.auth.password_validation/>`_.
 
 Time Wheel Configuration
 ------------------------
@@ -137,7 +137,7 @@ If you have Memcached running at the following location `127.0.0.1:11211` then t
         }
     }
 
-This will cache the time wheel to your project's directory. There are other ways to define your cache that you may want to use. You can read more about those options in `Django's cache documentation <https://docs.djangoproject.com/en/1.11/topics/cache/>`_.
+This will cache the time wheel to your project's directory. There are other ways to define your cache that you may want to use. You can read more about those options in `Django's cache documentation <https://docs.djangoproject.com/en/stable/topics/cache/>`_.
 
 By default the time wheel will only be cached for 'anonymous' user for 24 hours. To add other users or to change the cache duration, you will need to modify this setting::
 
@@ -170,7 +170,7 @@ To enable users to sign up through the Arches UI, you will have to add the follo
     EMAIL_HOST_PASSWORD = 'xxxxxxx'
     EMAIL_PORT = 587
 
-Update the EMAIL_HOST_USER and EMAIL_HOST_PASSWORD with the correct email credentials and save the file. It is possible that this may not be enough to support your production of Arches. In that case, there's more information on setting up an email backend on the `Django site <https://docs.djangoproject.com/en/1.11/topics/email/#smtp-backend>`_.
+Update the EMAIL_HOST_USER and EMAIL_HOST_PASSWORD with the correct email credentials and save the file. It is possible that this may not be enough to support your production of Arches. In that case, there's more information on setting up an email backend on the `Django site <https://docs.djangoproject.com/en/stable/topics/email/#smtp-backend>`_.
 
 To configure what group new users are put into, add the following lines of code to your project's settings.py::
 

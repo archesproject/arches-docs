@@ -6,7 +6,7 @@ The following is our recommedation for creating an Arches environment that works
 
 **Runtime Content**
 
-+ ``ENV/`` - A Python 3.7+ virtual environment (you can name this whatever you want).
++ ``ENV/`` - A Python 3.8+ virtual environment (you can name this whatever you want).
 
 + ``arches/`` - The local clone of your fork of the `archesproject/arches <https://github.com/archesproject/arches>`_ repo, this part of the code is often referred to as "core Arches."
 
@@ -28,7 +28,7 @@ Core Arches
 
         You may also be planning to use externally hosted components, like a remote Postgres/PostGIS or Elasticsearch installation. In that case make sure you have the connection information handy, you will need it in a later step.
 
-#. :ref:`Create a new Python 3.7+ virtual environment <Create a Virtual Environment>`.
+#. :ref:`Create a new Python 3.8+ virtual environment <Create a Virtual Environment>`.
 
 #. Clone the core Arches repo
 
@@ -61,7 +61,7 @@ Core Arches
     
     .. note::
 
-        If you later switch to a new git branch, you may need to rerun ``pip install -r requirements.txt``, as the Python dependencies do change over the course of Arches releases.
+        If you later switch to a new git branch, you may need to rerun ``pip install -r arches/install/requirements.txt``, as the Python dependencies do change over the course of Arches releases.
 
 The Project
 -----------
@@ -124,7 +124,7 @@ and then in your ``urls.py``, change
 .. code-block:: python
 
     urlpatterns = [
-        url(r'^', include('arches.urls')),
+        path("", include("arches.urls")),
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 to
@@ -135,8 +135,8 @@ to
 
     urlpatterns = [
         # match and return your custom view before the default Arches url can get matched.
-        url(r"^user$", MyUserManagerView.as_view(), name="user_profile_manager"),
-        url(r'^', include('arches.urls')),
+        path("user/", MyUserManagerView.as_view(), name="user_profile_manager"),
+        path("", include("arches.urls")),
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 which will cause /user to match your new view before the core Arches /user url is found. Thus, going to ``localhost:8000/user`` will still return the default Arches profile manager page, but it has been passed through your class. You can now add a ``get()`` method to your class and it will be called to return the view instead of ``arches.app.views.user.UserManagerView().get()``.

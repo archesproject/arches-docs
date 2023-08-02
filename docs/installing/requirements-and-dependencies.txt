@@ -22,8 +22,8 @@ Software Dependencies
 
 Arches requires the following software packages to be installed and available. Ubuntu Linux users see below for an installation script.
 
-:Python >= 3.7: - Installation: https://www.python.org/downloads/
-    - Python 3.7 and later comes with pip
+:Python >= 3.8: - Installation: https://www.python.org/downloads/
+    - Python 3.8 and later comes with pip
     - **Windows** You must choose 32-bit or 64-bit Python based on your system architecture.
     - **macOS** This guide works well if you wish to install via `brew`: https://docs.python-guide.org/starting/install3/osx/
 :PostgreSQL >= 12 with PostGIS 3:
@@ -46,7 +46,7 @@ To support long-running task management, like large user downloads, you must ins
 Scripted Dependency Installation
 --------------------------------
 
-For Ubuntu we maintain an `ubuntu_setup.sh <https://raw.githubusercontent.com/archesproject/arches/stable/7.1.0/arches/install/ubuntu_setup.sh>`_ script to install dependencies. It works for 18.04 and 20.04, and preliminary testing shows it be compatible with 22.04 as well.
+For Ubuntu we maintain an `ubuntu_setup.sh <https://raw.githubusercontent.com/archesproject/arches/stable/7.1.0/arches/install/ubuntu_setup.sh>`_ script to install dependencies. It works for 18.04 and 20.04, and preliminary testing shows it to be compatible with 22.04 as well.
 
 .. code-block:: bash
 

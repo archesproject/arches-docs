@@ -448,7 +448,7 @@ Run the django webserver
 Run the Django dev server. Add ``0.0.0.0:8000`` to explicitly set the
 host and port, which may be necessary when using remote servers, like
 an AWS EC2 instance. More about `runserver
-<https://docs.djangoproject.com/en/1.11/ref/django-admin/#runserver>`_.
+<https://docs.djangoproject.com/en/stable/ref/django-admin/#runserver>`_.
 
 collect static files
 --------------------
@@ -460,7 +460,7 @@ collect static files
 Collects all static files and places them in a single
 directory. Generally only necessary in production. Also allows all
 static files to be `hosted on another server
-<https://docs.djangoproject.com/en/1.11/howto/static-files/deployment/#serving-static-files-from-a-cloud-service-or-cdn>`_).
+<https://docs.djangoproject.com/en/stable/howto/static-files/deployment/#serving-static-files-from-a-cloud-service-or-cdn>`_).
 
 Django's full ``manage.py`` commands are documented `here
-<https://docs.djangoproject.com/en/1.11/ref/django-admin/#available-commands>`_.
+<https://docs.djangoproject.com/en/stable/ref/django-admin/#available-commands>`_.
