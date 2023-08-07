@@ -20,6 +20,11 @@ Permissions in Arches are handled on a few different levels.
 
   *Restrict access to site media.*
 
+* `Map Layer Permissions`_
+
+  *Restrict access to map layers.*
+
+
 Managing Users and Groups in Django Admin
 -----------------------------------------
 
@@ -101,6 +106,7 @@ Resource Instance Permissions
 -----------------------------
 https://github.com/archesproject/arches-docs/issues/218
 
+
 Media Permissions
 -----------------
 
@@ -111,3 +117,45 @@ Be aware that in doing so, all media file requests will be served by Django rath
 In ``settings_local.py`` add this line::
 
     RESTRICT_MEDIA_ACCESS = True
+
+
+Map Layer Permissions
+---------------------
+
+As of Arches version 7.4.0, you can assign different permissions to specific Arches *users* and *groups*. To manage **Map Layer Permissions**, login to the :ref:`Django Admin User Interface <django admin user interface>` and click the link to "Map layers" under models, and then click on the specific Map Layer that you'd like to update for permissions.
+
+To update permissions of a specific Map Layer, navigate to the *OBJECT PERMISSIONS* link in the upper right as illustrated below:
+
+.. figure:: ../images/arches-django-admin-map-layer-permissions-1.png
+    :width: 100%
+    :align: center
+
+    Link to the Object Permissions update form for a Map Layer in the Django Admin panel.
+
+.. note::
+  You will **ALSO** need to make sure the ``Ispublic`` flag for the Map Layer is deactivated. That flag is located lower down, well below the the link to the *OBJECT PERMISSIONS*, see below:
+
+  .. figure:: ../images/arches-django-admin-map-layer-permissions-1b.png
+      :width: 100%
+      :align: center
+
+      Location of the ``Ispublic`` flag for a Map Layer in the Django Admin panel.
+
+Once you click the *OBJECT PERMISSIONS* link, you will see a form that will let you name users (by their username) and groups, by their group name. Once you add the name for the user or group, press the "Manage user" or "Manage group" button as appropriate. See the illustration below for an example:
+
+.. figure:: ../images/arches-django-admin-map-layer-permissions-2.png
+    :width: 100%
+    :align: center
+
+    Adding a Group Name to the Object Permissions for a Map Layer in the Django Admin panel.
+
+After clicking the "Manage user" or "Manage group" button, you will reach another form where you can add or subtract specific permissions for this user (or group) and Map Layer. See the illustration below for an example:
+
+.. figure:: ../images/arches-django-admin-map-layer-permissions-3.png
+    :width: 100%
+    :align: center
+
+    Editing a group's specific permissions to a Map Layer in the Django Admin panel.
+
+
+Once you have updated the permissions, it's a good idea to test the Arches interface to make sure the permissions for the Map Layer are properly applied.
