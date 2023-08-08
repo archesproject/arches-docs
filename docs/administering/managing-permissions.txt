@@ -94,6 +94,10 @@ a member of as many different groups as needed.
   :Use Case: Review provisional data and promote it to authoritative
   :Access Privileges: Add/Edit authoritative business data. Ability to promote provisional data to authoritative.
 
+:Resource Exporter:
+  :Use Case: Control permissions to make exports of search result resource instances
+  :Access Privileges: This group was added in Arches version 7.4.0. Membership in this group is now *required* to export resource instance data from search results. By default, the ``anonymous`` user is a member of this group. If you want to disable export of resource instance data from searches for anonymous users, remove the ``anonymous`` user from this group. Similarly, you can control resource instance export privileges for other users by adding or removing them from the ``Resource Exporter`` group.
+
 Feel free to make new groups as needed, but do not remove any of those listed above. Groups are also used in
 other aspects of permissions as described below.
 
