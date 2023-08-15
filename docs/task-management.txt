@@ -65,6 +65,14 @@ directory with your virtual environment activated and and run:
 
     python manage.py celery start
 
+Users of Apple Silicon Macs may encounter ``billiard.exceptions.WorkerLostError`` following a warning
+emitted by the OS explaining it is "crashing instead" rather than unsafely calling ``fork()``. Until this
+`issue <https://github.com/celery/celery/issues/7324>`_ is resolved by ``celery``, launching like so will
+silence the errors:
+
+.. code-block:: bash
+
+    OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES python manage.py celery start
 
 Note that in the event of celery errors which do not clearly indicate what is breaking or preventing your tasks from succeeding, we recommend running the following command instead for the purpose of debugging and isolating any unhandled exceptions:
 
