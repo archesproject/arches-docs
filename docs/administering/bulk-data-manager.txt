@@ -43,31 +43,38 @@ Import
 ======
 The Bulk Data Manager has several **Import** related features to support the configuration and ingest of tabular organized data into Arches. These features presume familiarity with both the core Arches :ref:`Data Model` and the specific resource models and branches (see :ref:`Designing the Database`) used in your instance.
 
-The Bulk Data Manager import tools support imports of data stored in CSV and Excel files. The CSV and Excel importers require that data in tables (and in the case of Excel, worksheets) will be organized according to map properly to your resource models and branches. To assist in creating data properly structured for successful import, you can download an Excel workbook template for different resource models and branches.
+The Bulk Data Manager import tools support imports of data stored in CSV and Excel files. The CSV and Excel importers require that data in tables (and in the case of Excel, worksheets) will be organized according to map properly to your resource models and node structures for these resource models. To assist in creating data properly structured for successful import, you can download an Excel workbook template for a given resource model. The animation below illustrates how to export a template for an example resource model.
 
-The Arches for Science project *Dimension* branch can provide a good illustrative example. In the :ref:`Arches Designer`, the cards for the *Dimension* branch look like this:
-
-.. figure:: ../images/bulk-data-manager-example-dimension-branch-cards.png
+.. figure:: ../images/bulk-data-manager-export-template.gif
     :width: 100%
     :align: center
 
-    Arches Designer view of Dimension branch cards.
+    Bulk Data Manager export of an Excel template for the (example) "Collection or Set" resource model
 
-If you used the Bulk Data Manager to download an Excel template file for this *Dimension* branch, you would see a worksheet with shaded nodegroups and nodes that looks like this:
 
-.. figure:: ../images/bulk-data-manager-excel-template-example-dimension-branch.png
+To describe how to use the Bulk Data Manager to import data, we'll refer to the `Arches for Science <https://www.archesproject.org/arches-for-science/>`_ project *Collection or Set* resource model as an illustrative example. In the :ref:`Arches Designer`, the card for the *Name of Collection* branch of the *Collection or Set* resource model looks like this:
+
+.. figure:: ../images/arches-designer-afs-collection-or-set-name-branch.png
     :width: 100%
     :align: center
 
-    Excel template worksheet for *Dimension* branch nodegroups and nodes.
+    Arches Designer view of the *Name of Collection* card used in the *Collection or Set* resource model
+
+If you used the Bulk Data Manager to download an Excel template file for this *Collection or Set* resource model, you would see worksheets for each branch used with the resource model. The *Name of Collection* branch of the *Collection or Set* resource model has shaded nodegroups and nodes that looks like this:
+
+.. figure:: ../images/bulk-data-manager-excel-template-collection-or-set-name.png
+    :width: 100%
+    :align: center
+
+    Excel template worksheet for *Collection or Set* resource model *Name of Collection* branch nodegroups and nodes.
 
 The Excel template file also includes a worksheet called "metadata". The metadata worksheet describes the datatypes (see more: :ref:`Core Arches Datatypes`) expected by each node:
 
-.. figure:: ../images/bulk-data-manager-excel-template-example-dimension-branch-meta.png
+.. figure:: ../images/bulk-data-manager-excel-template-collection-or-set-metadata.png
     :width: 100%
     :align: center
 
-    Excel template *metadata* worksheet for datatypes used by *Dimension* branch nodes.
+    Excel template *metadata* worksheet for datatypes used by *Collection or Set* branch nodes.
 
 
 Edit
