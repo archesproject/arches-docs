@@ -495,9 +495,13 @@ Resources
             }
         }
 
-.. http:put:: /resources/{uuid:resouce instance id}
+.. http:put:: /resources/{uuid: graph id}/{uuid:resource instance id} (or) PUT /resources/{string: graph slug}/{uuid:resource instance id}
 
-    updates a single resource instance
+    .. note::
+        To get or set the slug for the graph, navigate to the root node of the :ref:`Graph Designer`.
+
+
+    Updates a single resource instance
 
     :query format: {"json-ld", "arches-json"}
     :query indent: number of spaces to indent json output
