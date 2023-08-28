@@ -490,10 +490,10 @@ Resources
 
     updates a single resource instance
 
-    :query format: {"json-ld", "arches-json"}
+    :query format: {"xml", "json", "json-ld"}
     :query indent: number of spaces to indent json output
     :reqheader Authorization: OAuth token for user authentication, see :ref:`/o/token <auth>`
-    :reqheader Accept: optional alternative to "format", {"application/json", "application/ld+json"}
+    :reqheader Accept: optional alternative to "format", {"application/xml", "application/json", "application/ld+json"}
 
     **Example request**:
 
