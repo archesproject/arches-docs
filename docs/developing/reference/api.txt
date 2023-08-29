@@ -495,10 +495,12 @@ Resources
             }
         }
 
-.. http:put:: /resources/{uuid: graph id}/{uuid:resource instance id} (or) PUT /resources/{string: graph slug}/{uuid:resource instance id}
+.. http:put:: /resources/{uuid: graph id}/{uuid:resource instance id}
 
     .. note::
-        To get or set the slug for the graph, navigate to the root node of the :ref:`Graph Designer`.
+        Instead of identifying a graph by a UUID, one can also identify a graph by by a slug identifier. 
+        To get or set the slug for the graph, navigate to the root node of the :ref:`Graph Designer`. A request using a slug identifier for a graph looks like:
+        ``PUT /resources/{string: graph slug}/{uuid:resource instance id}``
 
 
     Updates a single resource instance
@@ -512,7 +514,7 @@ Resources
 
     .. code-block:: none
 
-        curl -H "Authorization: Bearer {token}" -X PUT -d {data in json-ld format} http://localhost:8000/resources/{uuid: graph id}/{resource instance id}
+        curl -H "Authorization: Bearer {token}" -X PUT -d {data in json-ld format} http://localhost:8000/resources/{graph id}/{resource instance id}
 
         curl -H "Authorization: Bearer zo41Q1IMgAW30xOroiCUxjv3yci8Os" -X PUT \
         -d '{
