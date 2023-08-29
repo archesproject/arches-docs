@@ -512,7 +512,7 @@ Resources
 
     .. code-block:: none
 
-        curl -H "Authorization: Bearer {token}" -X PUT -d {data in json-ld format} http://localhost:8000/resources//{uuid: graph id}/{resource instance id}
+        curl -H "Authorization: Bearer {token}" -X PUT -d {data in json-ld format} http://localhost:8000/resources/{uuid: graph id}/{resource instance id}
 
         curl -H "Authorization: Bearer zo41Q1IMgAW30xOroiCUxjv3yci8Os" -X PUT \
         -d '{
