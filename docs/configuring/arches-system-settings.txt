@@ -32,7 +32,13 @@ You can define the zoom behavior of your maps by specifying max/min and default 
 
 *Search Results Grid*
 
-Arches aggregates search results and displays them as hexagons. You will need to set default parameters for the hexagon size and precision.
+Arches aggregates search results and displays them as hexagons. You will need to set default parameters for the hexagon size and precision. Aggregating search results into a hexagonal grid can greatly improve performance of the map user-interface because fewer geometric features need to be delivered to a client's browser. The Arches ElasticSearch component will also efficiently index the locations of resource instances based on the hexagon size and precision you specify here.
+
+.. figure:: ../images/system-settings-map-grind-hex.png
+    :width: 100%
+    :align: center
+
+    Arches system settings for map search results grid
 
 .. warning:: A large project area combined with a small hexagon size and/or high precision will take a very long time to load, and can crash your browser. We suggest changing these settings in small increments to find the best combination for your project.
 
