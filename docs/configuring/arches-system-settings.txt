@@ -32,13 +32,109 @@ You can define the zoom behavior of your maps by specifying max/min and default 
 
 *Search Results Grid*
 
-Arches aggregates search results and displays them as hexagons. You will need to set default parameters for the hexagon size and precision. Aggregating search results into a hexagonal grid can greatly improve performance of the map user-interface because fewer geometric features need to be delivered to a client's browser. The Arches ElasticSearch component will also efficiently index the locations of resource instances based on the hexagon size and precision you specify here.
+Arches aggregates search results and displays them as hexagons. You will need to set default parameters for the hexagon size and precision. Aggregating search results into a hexagonal grid can greatly improve performance of the map user-interface because fewer geometric features need to be delivered to a client's browser.
 
 .. figure:: ../images/system-settings-map-grind-hex.png
     :width: 100%
     :align: center
 
     Arches system settings for map search results grid
+
+The Arches Elasticsearch component indexes a geohash of location data that powers efficient aggregation of geographic locations for resource instances. However, to enable map display of search results aggregated in a hexagonal grid, you first need to add a map layer that has includes ``"source": "search-results-hex"`` in the layer definitions. You can read more about adding map layers (see :ref:`Creating New Map Layers`) or you can use SQL to insert a hex grid map layer as below:
+
+.. code-block:: sql
+
+    INSERT INTO map_layers(maplayerid, name, ispublic, searchonly, sortorder, layerdefinitions, isoverlay, icon, activated, addtomap)
+    VALUES (public.uuid_generate_v1mc(), 'Hex', true, true, 0, '[
+        {
+            "layout": {},
+            "source": "search-results-hex",
+            "filter": [
+            "==",
+            "id",
+            ""
+            ],
+            "paint": {
+            "fill-extrusion-color": "#54278f",
+            "fill-extrusion-height": {
+                "property": "doc_count",
+                "type": "exponential",
+                "stops": [
+                [
+                    0,
+                    0
+                ],
+                [
+                    500,
+                    5000
+                ]
+                ]
+            },
+            "fill-extrusion-opacity": 0.85
+            },
+            "type": "fill-extrusion",
+            "id": "search-results-hex-outline-highlighted"
+        },
+        {
+            "layout": {},
+            "source": "search-results-hex",
+            "filter": [
+            "all",
+            [
+                ">",
+                "doc_count",
+                0
+            ]
+            ],
+            "paint": {
+            "fill-extrusion-color": {
+                "property": "doc_count",
+                "stops": [
+                [
+                    1,
+                    "#f2f0f7"
+                ],
+                [
+                    5,
+                    "#cbc9e2"
+                ],
+                [
+                    10,
+                    "#9e9ac8"
+                ],
+                [
+                    20,
+                    "#756bb1"
+                ],
+                [
+                    50,
+                    "#54278f"
+                ]
+                ]
+            },
+            "fill-extrusion-height": {
+                "property": "doc_count",
+                "type": "exponential",
+                "stops": [
+                [
+                    0,
+                    0
+                ],
+                [
+                    500,
+                    5000
+                ]
+                ]
+            },
+            "fill-extrusion-opacity": 0.5
+            },
+            "type": "fill-extrusion",
+            "id": "search-results-hex"
+        }
+    ​
+    ]', true, 'ion-funnel', true, false);
+
+
 
 .. warning:: A large project area combined with a small hexagon size and/or high precision will take a very long time to load, and can crash your browser. We suggest changing these settings in small increments to find the best combination for your project.
 
