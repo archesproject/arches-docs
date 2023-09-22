@@ -143,7 +143,10 @@ app.  Before beginning, you will need to have set up and logged into your AWS ac
 
           STORAGES = {
               "default": {
-                  "BACKEND": 'storages.backends.s3boto3.S3Boto3Storage',
+                  "BACKEND": "django.core.files.storage.FileSystemStorage",
+              },
+              "staticfiles": {
+                  "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
               },
           }
           AWS_STORAGE_BUCKET_NAME = 'aws_bucket_name'
