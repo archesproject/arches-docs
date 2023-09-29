@@ -31,12 +31,12 @@ This guidance is primarily intended to provide a basic introduction for simple A
 and others use AWS to run large-scale and very complicated systems. An AWS deployment architecture may vary widely according to
 different security requirements, scales, backup strategies, maintainability needs, and uptime and performance needs.
 
-An organization should consult with AWS experts in cases where there are significant security, scale, reliability, or performance requirements. Also, this documentation focuses on initial AWS deployment. Please look elsewhere for guidance on server administration and maintenance.
+To help get you started, this documentation focuses on simple initial AWS deployments. An organization should consult with AWS experts in cases where there are significant security, scale, reliability, or performance requirements. Please look elsewhere for guidance on server administration and maintenance.
 
 
 Example Deployment Architectures
 ---------------------------------
-As noted above, you should carefully align your deployment architecture according to your specific requirements, budget, and proficiency with AWS services. This introduction illustrate just two of a wide variety of options.
+As noted above, you should carefully align your deployment architecture according to your specific requirements, budget, and proficiency with AWS services. This introduction illustrate just two of a wide variety of options:
 
 1. A Single Node Deployment (one EC2 instance)
 
@@ -50,7 +50,7 @@ As noted above, you should carefully align your deployment architecture accordin
 
 2. A Multiple Node Deployment (two EC2 instances and RDS)
 
-  If you require greater performance, you may want to consider an architecture that uses multiple EC2 instances together with other AWS service, especially the RDS service. For example, you can deploy the Elasticsearch server (an Arches dependency) on a separate EC2 instance. This avoids a scenario where the Arches core application and Elasticsearch compete for the same computing resources. Similarly, you can use the RDS service to provision a Postgres database for Arches, which again more widely distributes computation across a broader infrastructure. Using multiple EC2 instances together with the RDS service may be somewhat more expensive and may involve a bit more configuration and deployment effort, but this architecture will likely have scale and performance advantages. As described in the diagram below, (core) Arches and Elasticsearch each have their own EC2 instances, RDS provisions the Postgres database to Arches, and S3 provides storage for user uploaded files.
+  If you require greater performance, you can consider an architecture that uses multiple EC2 instances together with other AWS services, especially the RDS service. For example, you can deploy the Elasticsearch server (an Arches dependency) on a separate EC2 instance. This avoids a scenario where the Arches core application and Elasticsearch compete for the same computing resources. Similarly, you can use the RDS service to provision a Postgres database for Arches, which again more widely distributes computation across a broader infrastructure. Using multiple EC2 instances together with the RDS service may be somewhat more expensive and may involve a bit more configuration and deployment effort, but this architecture will likely have scale and performance advantages. As described in the diagram below, (core) Arches and Elasticsearch each have their own EC2 instances, RDS provisions the Postgres database to Arches, and S3 provides storage for user uploaded files.
 
   .. figure:: ../images/aws-multi-node-distributed-architecture.png
     :width: 75%
@@ -61,16 +61,16 @@ As noted above, you should carefully align your deployment architecture accordin
 
 AWS Security and Permissions Management
 ---------------------------------------
-AWS provides extremely powerful and sophisticated tools to manage permissions and security. AWS emphasizes the management of "roles" and "policies" for security. You use the IAM service to set roles and policies that grant specific permissions to individuals or services. A good security practice is to follow "the principle of least privilege". This principle ensures that entities only have the bare minimum permissions necessary to perform their tasks.
+AWS provides extremely powerful and sophisticated tools to manage permissions and security. AWS emphasizes the management of "roles" and "policies" for security. You typically use the IAM service to set roles and policies that grant specific permissions to individuals or services. A good security practice is to follow "the principle of least privilege". This principle ensures that entities only have the bare minimum permissions necessary to perform their tasks.
 
 .. note::
-  If you are managing sensitive information in Arches (or any other system) you should gain proficiency with AWS security good practices and a good understanding of network architecture. For example, if you deploy Arches on an EC2 instance on a public subnet, SSH access will be more convenient, but it will be less secure than putting the Arches EC2 instance in private subnet. The best choice of security practices and network protections will vary depending on the sensitivity of the information you manage and your operational / administrative needs.
+If you are managing sensitive information in Arches (or any other system) you should gain proficiency with AWS security good practices and a good understanding of network architecture. For example, if you deploy Arches using an EC2 instance on a public subnet, SSH access will be more convenient, but it will be less secure than putting the Arches EC2 instance in private subnet. The best choice of security practices and network protections will vary depending on the sensitivity of the information you manage and your operational / administrative needs.
 
 
 
 Moving a Localhost Arches Project to EC2
 =============
-Now that we've introduced different considerations for deploying Arches on AWS, we can move into more specifics about how to move a locally hosted Arches instance to a "Single Node Deployment" as described above.
+Now that we've introduced different considerations for deploying Arches on AWS, we can move into more specifics about how to move a locally hosted Arches instance to a "Single Node Deployment" (see the architecture described above).
 
 
 .. warning::
