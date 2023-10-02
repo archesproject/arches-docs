@@ -171,7 +171,7 @@ Now that you have a command line in front of you, the next few steps should be v
 
   .. code-block::
 
-    $ wget wget https://raw.githubusercontent.com/archesproject/arches/stable/7.4.0/arches/install/ubuntu_setup.sh
+    $ wget https://raw.githubusercontent.com/archesproject/arches/stable/7.4.0/arches/install/ubuntu_setup.sh
 
 2. Run it (this may take a few minutes)
 
@@ -179,17 +179,17 @@ Now that you have a command line in front of you, the next few steps should be v
 
     $source ./ubuntu_setup.sh
 
+
 Install Arches and on your EC2 Instance
 ---------------------------------------
+There's no hard and fast rule about where in the filesystem you should install Arches on an EC2 instance. A typical deployment scenario would be to install Arches on an Ubuntu EC2 instance. For that kind of instance, Amazon will provide SSH credentials to log in as the `ubuntu` user (with super user privileges). That means when you login via SSH to your Arches EC2 instance, you should find yourself in the ``/home/ubuntu`` directory.
 
-Once you have the dependencies installed, see :doc:`Installing Arches </installation>`.
+For sake of simplicity and consistency, we'll assume you will be installing Arches within the ``/home/ubuntu`` directory. However, you may choose an alternate location like a sub-folder of the ``/opt`` directory. The ``/opt`` directory may be more convenient if you want to make Arches easier to manage by multiple people with different user accounts.
 
-As noted, you should end up with this directory structure::
+Once you have the dependencies installed, see :ref:`Installing Core Arches`, you can copy your Arches project from your local machine to the desired location on your Arches EC2 instance. You can use Filezilla to do that, or use the command-line utility ``scp``.
 
-> /home<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;/ubuntu<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/Projects<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/ENV<br>
+
+
 
 Connect to your EC2 Instance with Filezilla
 -------------------------------------------
@@ -210,20 +210,15 @@ Next, you can use the "Quickconnect" bar:
 * Password = <leave blank> (that's what the .ppk file is for)
 * Port = 22
 
-Once connected, you'll see your server's file system on the right side, and your local file system on the left. Find your local "my_hip_app" directory, and copy the entire directory to `/opt/arches_projects`. The result should look like
+Once connected, you'll see your server's file system on the right side, and your local file system on the left. Find your local "my_hip_app" directory, and copy the entire directory to `/home/ubuntu/Projects/`. This example directory structure is consistent with related documentation explaining how to set up Apache or Nginx for use with Arches, see: :ref:`Serving Arches with Apache or Nginx`
 
-> /opt<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;/arches_projects<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/ENV<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/my_hip_app<br>
-
-Next, use this command to remove the elasticsearch installation from your new app on the server (because ElasticSearch should be _reinstalled_ on on your server)
+Next, use this command to remove the elasticsearch installation from your new app on the server (because ElasticSearch should be *installed* on on your EC2 instance).
 
   .. code-block::
 
     (ENV)$ sudo rm -r my_hip_app/my_hip_app/elasticsearch
 
-Now you can run these final commands from the `/opt/arches_projects/my_hip_app` directory to complete your app's installation on the server:
+Now you can run these final commands from the `/home/ubuntu/Projects/my_hip_app` directory to complete your app's installation on the server:
 
 1. Install ElasticSearch
 
@@ -235,7 +230,7 @@ Now you can run these final commands from the `/opt/arches_projects/my_hip_app` 
 
   .. code-block::
 
-    (ENV)$ my_hip_app/elasticsearch/elasticsearch-1.4.1/bin/elasticsearch -d
+    (ENV)$ my_hip_app/elasticsearch/elasticsearch-8.5.3/bin/elasticsearch -d
 
 
 3. Install the app
@@ -255,6 +250,18 @@ Now you can run these final commands from the `/opt/arches_projects/my_hip_app` 
 .. note::
   In this case, explicitly setting the host:port with `0:8000` ensures that the server is visible to us when we try to view it remotely.
 
-You should now be able to open any web browser and view your app by visiting your IP address like so: http://xx.xx.xx.xx:8000. Now that you have transferred your app to a remote server, its time to use a real production-capable webserver like Apache to serve it (that's how we can get rid of the :8000 at the end of the url).
+You should now be able to open any web browser and view your app by visiting your IP address like so: http://xx.xx.xx.xx:8000. Now that you have transferred your app to a remote server, its time to use a real production-capable webserver like Apache to serve it (that's how we can get rid of the :8000 at the end of the url). If you can't see Arches, check AWS networking permissions to make sure port ``8000`` is accessible. But once you've verified Arches is working, *DO NOT* leave port ``8000`` open. Leaving it open will be a security risk.
+
+Another way to check would be SSH onto your Arches EC2 instance and use curl to see if Arches is responding.
+
+.. code-block::
+  curl http:/lochalhost:8000
+
+If the above command gives you raw HTML, then Arches is functioning and responding to requests to port 8000.
 
 Keep in mind that you may need to have different values in your `settings.py` file once you have transferred it to a new operating system (GDAL_PATH, for example). To handle this, create and use a different `settings_local.py` file on each installation.
+
+
+Next Steps: Configuration with Apache or Nginx
+----------------------------------------------
+Once you've verified that you have properly installed Arches and its dependencies on your EC2 instance, it's time to configure Arches to work with either Apache or Nginx web servers. Apache or alternatively Nginx play an important role in security and performance. Configuring Apache or Nginx is a *necessary* aspect of deploying Arches in production. Please review :ref:`Serving Arches with Apache or Nginx` to learn more about production deployment of Arches.
