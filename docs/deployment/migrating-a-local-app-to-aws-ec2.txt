@@ -36,7 +36,7 @@ To help get you started, this documentation focuses on simple initial AWS deploy
 
 Example Deployment Architectures
 ---------------------------------
-As noted above, you should carefully align your deployment architecture according to your specific requirements, budget, and proficiency with AWS services. This introduction illustrate just two of a wide variety of options:
+As noted above, you should carefully align your deployment architecture according to your specific requirements, budget, and proficiency with AWS services. This introduction illustrates just two of a wide variety of architecture options:
 
 1. A Single Node Deployment (one EC2 instance)
 
