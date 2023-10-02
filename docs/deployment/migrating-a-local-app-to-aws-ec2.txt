@@ -255,7 +255,8 @@ You should now be able to open any web browser and view your app by visiting you
 Another way to check would be SSH onto your Arches EC2 instance and use curl to see if Arches is responding.
 
 .. code-block::
-  curl http:/lochalhost:8000
+
+  curl http://localhost:8000
 
 If the above command gives you raw HTML, then Arches is functioning and responding to requests to port 8000.
 
