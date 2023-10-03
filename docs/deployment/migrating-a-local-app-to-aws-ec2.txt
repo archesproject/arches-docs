@@ -40,7 +40,7 @@ As noted above, you should carefully align your deployment architecture accordin
 
 1. A Single Node Deployment (one EC2 instance)
 
-  The most simple AWS deployment architecture essentially mimics deployment of Arches that runs as a localhost on your own machine. In this architecture, the Arches application runs on a single EC2 instance `along with` the dependency Postgres database server and dependency Elasticsearch server. As described in the diagram below, the only other AWS service used outside of this one EC2 instance is S3, for storage for user uploaded files.
+  The most simple AWS deployment architecture essentially mimics deployment of Arches that runs as a localhost on your own machine. In this architecture, the Arches application runs on a single EC2 instance `along with` the dependency Postgres database server and dependency Elasticsearch server. As described in the diagram below, the only other AWS service used outside of this one EC2 instance is S3 (to configure, see: :ref:`Using AWS S3 or Other Cloud Storage` ), for storage for user uploaded files.
 
   .. figure:: ../images/aws-single-node-simple-architecture.png
     :width: 75%
@@ -50,7 +50,7 @@ As noted above, you should carefully align your deployment architecture accordin
 
 2. A Multiple Node Deployment (two EC2 instances and RDS)
 
-  If you require greater performance, you can consider an architecture that uses multiple EC2 instances together with other AWS services, especially the RDS service. For example, you can deploy the Elasticsearch server (an Arches dependency) on a separate EC2 instance. This avoids a scenario where the Arches core application and Elasticsearch compete for the same computing resources. Similarly, you can use the RDS service to provision a Postgres database for Arches, which again more widely distributes computation across a broader infrastructure. Using multiple EC2 instances together with the RDS service may be somewhat more expensive and may involve a bit more configuration and deployment effort, but this architecture will likely have scale and performance advantages. As described in the diagram below, (core) Arches and Elasticsearch each have their own EC2 instances, RDS provisions the Postgres database to Arches, and S3 provides storage for user uploaded files.
+  If you require greater performance, you can consider an architecture that uses multiple EC2 instances together with other AWS services, especially the RDS service. For example, you can deploy the Elasticsearch server (an Arches dependency) on a separate EC2 instance. This avoids a scenario where the Arches core application and Elasticsearch compete for the same computing resources. Similarly, you can use the RDS service to provision a Postgres database for Arches, which again more widely distributes computation across a broader infrastructure. Using multiple EC2 instances together with the RDS service may be somewhat more expensive and may involve a bit more configuration and deployment effort, but this architecture will likely have scale and performance advantages. As described in the diagram below, (core) Arches and Elasticsearch each have their own EC2 instances, RDS provisions the Postgres database to Arches, and S3 provides storage for user uploaded files (to configure, see: :ref:`Using AWS S3 or Other Cloud Storage` ).
 
   .. figure:: ../images/aws-multi-node-distributed-architecture.png
     :width: 75%
