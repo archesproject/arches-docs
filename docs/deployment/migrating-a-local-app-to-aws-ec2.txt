@@ -171,7 +171,7 @@ Now that you have a command line in front of you, the next few steps should be v
 
   .. code-block::
 
-    $ wget https://raw.githubusercontent.com/archesproject/arches/stable/7.4.0/arches/install/ubuntu_setup.sh
+    $ wget https://raw.githubusercontent.com/archesproject/arches/stable/7.4.2/arches/install/ubuntu_setup.sh
 
 2. Run it (this may take a few minutes)
 
