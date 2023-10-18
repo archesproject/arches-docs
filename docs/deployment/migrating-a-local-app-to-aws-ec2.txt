@@ -16,6 +16,8 @@ AWS includes dizzying array of systems and services. AWS names different computi
 
   AWS:
     Amazon Web Services
+  ALB:
+    Application Load Balancer (ALB) provides (in this context) a means to manage requests from the outside Internet before they get directed to your EC2 instance running Arches.
   EC2:
     Amazon Elastic Compute Cloud (EC2) provides virtual servers with different processing speeds, memory, hard drives, and operating systems. You can install your own software (such as Arches) on EC2 instances.
   RDS:
@@ -122,6 +124,7 @@ You now have the opportunity to customize your instance before you launch it, an
       Type             Protocol  Port Range  Source
       ================ ========= =========== ====================
       HTTP             TCP       80          Anywhere (0.0.0.0/0)
+      HTTPS            TCP       443         Anywhere (0.0.0.0/0)
       Custom TCP Rule  TCP       8000        Anywhere (0.0.0.0/0)
       SSH              TCP       22          My IP
       ================ ========= =========== ====================
@@ -167,7 +170,7 @@ Install Arches Dependencies on your EC2 Instance
 
 Now that you have a command line in front of you, the next few steps should be very familiar. Luckily, if you are coming from Windows, you'll find that installing dependencies on Ubuntu is much, much easier. Do all of the following from within the `/home/ubuntu` directory (which shows as ~ in the command prompt).
 
-1. Download the install script for dependencies (this links to the v7.4.0 dependencies install)
+1. Download the install script for dependencies (this links to the v7.4.2 dependencies install)
 
   .. code-block::
 
@@ -261,6 +264,23 @@ Another way to check would be SSH onto your Arches EC2 instance and use curl to 
 If the above command gives you raw HTML, then Arches is functioning and responding to requests to port 8000.
 
 Keep in mind that you may need to have different values in your `settings.py` file once you have transferred it to a new operating system (GDAL_PATH, for example). To handle this, create and use a different `settings_local.py` file on each installation.
+
+
+More Advanced Configurations
+----------------------------
+As noted above AWS security management can complex. It is best to consult with experts in AWS to get advice about your specific deployment scenario. Generally speaking, when implementing a "Multiple Node Deployment" (see above) architecture, you should set up a unique (and clearly named) security group for each EC2 instance and the RDS instance involved in your deployment. You can then set the minimum required "inbound" rules that allow members of each of these security groups to connect as needed. For example, an EC2 instance running ElasticSearch would have its own security group. That ElasticSearch security group would have an inbound rule that allows connections from the Arches EC2 instance security group at the desired port (the default port for client, like Arches, API calls connecting with ElasticSearch is 9200).
+
+Some additional (advanced) considerations include:
+
+1. *RDS installation of PostGIS (geo-spatial) extensions*: If you use RDS for serving an Arches database, you may want to review `official documentation <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.PostgreSQL.CommonDBATasks.PostGIS.html>`_ on how to add the required PostGIS extensions.
+
+2. *Arches Allowed Hosts*: In ``settings.py`` (sometimes set via ``settings_local.py``) you will need to add multiple items to the list of ``ALLOWED_HOSTS``. Consider the following example:
+
+.. code-block:: python
+
+  ALLOWED_HOSTS = ["my-arches-site.org", "localhost", "127.0.0.1", "ip-10-xxx-x-x.eu-west-2.compute.internal", "10.xxx.x.x", "ip-10-xxx-x-x"]
+
+In that example, "my-arches-site.org" is the public domain name. But the items "ip-10-xxx-x-x.eu-west-2.compute.internal", "10.xxx.x.x", and "ip-10-xxx-x-x" are all AWS internal network addresses for the EC2 instance where Arches is deployed. You may need all of these for Arches to work properly.
 
 
 Next Steps: Configuration with Apache or Nginx
