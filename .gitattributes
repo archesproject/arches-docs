@@ -1,0 +1,2 @@
+docs/**.txt linguist-language=reStructuredText
+docs/robots.txt linguist-language=Text
