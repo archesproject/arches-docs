@@ -112,6 +112,12 @@ This single command wraps the three following commands (each of which can be run
     when indexing large databases, or on servers with small memory provisions (you may want to temporarily
     set ``DEBUG = False``).
 
+Starting with version 7.4, you can add the ``-rd`` or ``--recalculate-descriptors`` flag to the reindex management command to force resource instance primary descriptors to be recalculated prior to reindexing. See below:
+
+.. code-block:: bash
+
+    python manage.py es reindex_database --recalculate-descriptors
+
 register a custom index
 -----------------------
 
