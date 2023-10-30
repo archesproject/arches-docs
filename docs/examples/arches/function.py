@@ -31,8 +31,8 @@ class Function(models.Model):
             if module != None:
                 break
         if import_success == False:
-            print 'Failed to import ' + mod_path
-            print import_error
+            print('Failed to import ' + mod_path)
+            print(import_error)
 
         func = getattr(module, self.classname)
         return func

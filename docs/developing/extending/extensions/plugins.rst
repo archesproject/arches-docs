@@ -30,7 +30,7 @@ looking a lot like this sample:
         **Required** The path to the component view you have
         developed. Example: ``views/components/plugins/sample-plugin``
 :componentname:
-        **Required** Set this to the last part of `component` above.
+        **Required** Set this to the last part of ``component`` above.
 :config:
         **Required** You can provide user-defined default
         configuration here. Make it a JSON dictionary of keys and

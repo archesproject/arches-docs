@@ -6,13 +6,14 @@ parser = argparse.ArgumentParser()
 parser.add_argument("input",help="path to input html file")
 args = parser.parse_args()
 
+
 def convert_html(file_path):
     cleanr = re.compile('<.*?>')
-    
+
     output = os.path.basename(file_path)
     output = output.replace(".html","-tmp.txt")
     output = output.replace(".htm","-tmp.txt")
-    
+
     with open(file_path,"rb") as opened:
         lines = opened.readlines()
         with open(output,"wb") as outfile:
@@ -29,13 +30,8 @@ def convert_html(file_path):
                 if line.rstrip() == "":
                     continue
                 outfile.write(line)
-            
-    
-    print output
-    
+
+    print(output)
+
 if __name__ == "__main__":
-    
-    
     convert_html(args.input)
-    
-    

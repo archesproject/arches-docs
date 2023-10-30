@@ -18,18 +18,18 @@ Two-factor authentication is an extra layer of security designed to ensure that 
 
 How Two-factor Authentication Works
 -----------------------------------
-Two-factor Authentication is the technical term for the process of requiring a user to verify their identity in two unique ways before they are granted access to the system. 
+Two-factor Authentication is the technical term for the process of requiring a user to verify their identity in two unique ways before they are granted access to the system.
 Users typically rely on authentication systems that require them to provide a unique identifier such as an email address or username and a correct password to gain access to the system.
 Two-factor Authentication extends this by adding an additional step that requires the user to enter a one-time dynamically generated token that has been delivered through a secondary method that presumably only the user has access to.
 This token is randomly generated and lasts a brief period of time before changing. It is based on an encrypted secret key that is stored in the application and secondary system ( eg. smartphone ).
 
-Two-factor Authentication gives the user and system administrator a peace of mind that even if the user's password is compromised, 
+Two-factor Authentication gives the user and system administrator a peace of mind that even if the user's password is compromised,
 the account cannot be accessed without also knowing the dynamically generated one-time password.
 
 Enabling Two-factor Authentication in Arches
 --------------------------------------------
 
-There are two configurable settings, ``ENABLE_TWO_FACTOR_AUTHENTICATION`` and ``FORCE_TWO_FACTOR_AUTHENTICATION`. Each accepts a value of ``True`` or ``False``.
+There are two configurable settings, ``ENABLE_TWO_FACTOR_AUTHENTICATION`` and ``FORCE_TWO_FACTOR_AUTHENTICATION``. Each accepts a value of ``True`` or ``False``.
 
 * ``ENABLE_TWO_FACTOR_AUTHENTICATION`` - Allows users to enable two-factor authentication via their ``UserProfile``, and redirects login of users that have enabled two-factor authentication to secondary credentials page.
 * ``FORCE_TWO_FACTOR_AUTHENTICATION`` - Must have ``ENABLE_TWO_FACTOR_AUTHENTICATION`` enabled. Forces all users to log in with two-factor authentication credentials.
@@ -58,7 +58,7 @@ From User Profile Edit page, Users can send an email to their registered email a
     User Profile showing two-factor authentication reset email interaction.
 
 .. note::
-  In order to continue, the User should already have access to a means of secondary authentication. 
+  In order to continue, the User should already have access to a means of secondary authentication.
   This is done with an external application, usually with `Google Authenticator <https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2>`_,
   `Authy <https://authy.com/>`_, `LastPass Authenticator <https://lastpass.com/auth/>`_, or any other authentication application.
 

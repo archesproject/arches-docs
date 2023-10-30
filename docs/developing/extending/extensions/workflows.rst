@@ -61,7 +61,7 @@ The HTML for this component ``quick-resource-create-workflow.htm`` can be except
 .. literalinclude:: ../../../examples/quick-resource-create-workflow.htm
     :language: htmldjango
 
-The workflow's behavior is defined in ``quick-resource-create-workflow.js``. You'll begin with the boilerplate content below. Note that: 
+The workflow's behavior is defined in ``quick-resource-create-workflow.js``. You'll begin with the boilerplate content below. Note that:
 
 - The file name, registered component name, and ``this.componentName`` must all match.
 - The ``stepConfig`` attribute will hold the full list of configurations for each step of the workflow.
@@ -138,7 +138,7 @@ A workflow step can have one or more ``layoutSections``, each of which contains 
         {
             componentConfigs: [
                 // INSERT COMPONENT CONFIGS HERE
-            ], 
+            ],
         }
     ]
 
@@ -190,7 +190,7 @@ In the second step of our example workflow, where the user will enter a keyword 
     }
 
 To break this ``resourceid`` entry down:
-    
+
     - ``'set-basic-info'`` is the **name** of the step from which we are pulling the id (see our first step above)
     - ``'resource-name'`` is the **uniqueInstanceName** of the component config in which the tile was created
     - ``0`` is the first tile object
@@ -212,7 +212,7 @@ The final step of our example workflow looks like this:
         layoutSections: [
             {
                 componentConfigs: [
-                    { 
+                    {
                         componentName: 'final-step',
                         uniqueInstanceName: 'create-resource-final',
                         tilesManaged: 'none',
@@ -220,7 +220,7 @@ The final step of our example workflow looks like this:
                             resourceid: "['set-basic-info']['resource-name'][0]['resourceInstanceId']",
                         },
                     },
-                ], 
+                ],
             },
         ],
     }
@@ -246,7 +246,7 @@ Putting it all together, our main workflow component looks like this:
 Step Components
 ===============
 
-You may want to create custom components for your workflow steps to handle more complex data entry tasks. These should be stored in a `workflow` directory, or grouped into subdirectories thematically. A step component can be used by any workflow, as long as it is passed the correct parameters.
+You may want to create custom components for your workflow steps to handle more complex data entry tasks. These should be stored in a ``workflow`` directory, or grouped into subdirectories thematically. A step component can be used by any workflow, as long as it is passed the correct parameters.
 
 .. important::
     If you are loading a package with a workflow in it, you will need to manually copy step component files into your project--they are not handled by the package load process.
@@ -259,10 +259,9 @@ Here are some examples of workflows that use custom step components you can look
     - Now, look for that component name in the following two places:
         - `Arches HER Step Components (JS) <https://github.com/archesproject/arches-her/tree/master/arches_her/media/js/views/components/workflows>`_
         - `Arches HER Step Components (HMTL) <https://github.com/archesproject/arches-her/tree/master/arches_her/templates/views/components/workflows>`_
-    
 
 Registering your Workflow
-==============================
+=========================
 
 After placing your workflow files in the proper directories within your project, you are ready to register it. See :ref:`Plugin Commands` for more information.
 
