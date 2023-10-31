@@ -9,7 +9,7 @@ by any client that supports PostGIS spatial views.
 
 Currently the preview only allows the spatial views to be created in Django admin by managing the Spatial Views entities.
 
-The spatial views are only able to represent the data in a flattened state, meaning that the data in nested cards are 
+The spatial views are only able to represent the data in a flattened state, meaning that the data in nested cards are
 flattened into a single comma separated attribute value, with the card sort order honoured. Therefore, it is important
 to consider how to attribute the views being created.
 
@@ -23,8 +23,8 @@ Spatialviewid
         Unique identifier for the spatial view.
 
 Schema
-        The database schema that the spatial view belongs to. `public` is used by
-        default but if another is used then it must have already been created in the database.``
+        The database schema that the spatial view belongs to. ``public`` is used by
+        default but if another is used then it must have already been created in the database.
 
 Slug
         This is will be joined with the ``Schema`` to form the name of the spatial
@@ -33,7 +33,7 @@ Slug
 
 Description
         The text that is added as a comment on the spatial view in the database
-        , which can be accessed as metadata for consuming clients where supported. 
+        , which can be accessed as metadata for consuming clients where supported.
         pg_featureserv for example will present this as the layer description.
 
 Geometrynodeid
@@ -41,11 +41,11 @@ Geometrynodeid
         of the spatial view.
 
 Ismixedgeometrytype
-        Boolean value that indicates whether the geometry of the spatial view is a 
+        Boolean value that indicates whether the geometry of the spatial view is a
         mix of different geometry types. This is ideal where
-        the spatial view will be used by a vector tile service. 
+        the spatial view will be used by a vector tile service.
 
-        Default value is `false`.
+        Default value is ``false``.
 
 Attributenodes
         A JSON object that contains a list of attribute object defining the UUIDs of
@@ -55,7 +55,7 @@ Attributenodes
         .. note:: The name of the attributes are automatically generated from the node name using Postgresql a compliant format.
 
         .. code-block:: JSON
-    
+
             [
                 {
                     "nodeid": "77e8f28d-efdc-11eb-afe4-a87eeabdefba",
@@ -83,16 +83,16 @@ Attributenodes
 
     ``nodeid``
             The UUID of the node that needs adding. This must be in the same model and the **Geometrynodeid**.
-    
+
     ``description``
             The text description of the attribute, which will be added as metadata.
 
 Isactive
         Boolean value that indicates whether the spatial view is available. When set to
-        `false` the spatial view is removed from the database, but allows the definition
-        to remain. Setting to `true` recreates the spatial view in the database.
-        
-        Default is `true`.
+        ``false`` the spatial view is removed from the database, but allows the definition
+        to remain. Setting to ``true`` recreates the spatial view in the database.
+
+        Default is ``true``.
 
 Creating your first spatial view
 ================================
@@ -185,9 +185,9 @@ to connect to the database using the following credentials:
     * *user*: arches_spatial_views
     * *password*: arches_spatial_views
 
-If you are using a client that requires views to geometry type specific (for example ArcGIS), ensure that you have set `Ismixedgeometrytype` to false.
+If you are using a client that requires views to geometry type specific (for example ArcGIS), ensure that you have set ``Ismixedgeometrytype`` to false.
 
-.. important:: Currently it is not possible to use the user/groups permissions to restrict access. 
+.. important:: Currently it is not possible to use the user/groups permissions to restrict access.
         You will need to manually create specific database users and assign them to the spatial views.
 
 

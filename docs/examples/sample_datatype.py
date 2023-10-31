@@ -58,5 +58,5 @@ class SampleDataType(BaseDataType):
                     query.filter(Exists(field="tiles.data.%s" % (str(node.pk))))
                 else:
                     query.must(match_query)
-        except KeyError, e:
+        except KeyError:
             pass

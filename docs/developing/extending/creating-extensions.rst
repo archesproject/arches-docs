@@ -104,13 +104,13 @@ All extensions are expected to have some sort of user interface, and this is cre
 
 These files must live here (using a widget as an example)::
 
-    my_project/media/js/views/components/widgets/custom-widget.js 
+    my_project/media/js/views/components/widgets/custom-widget.js
     my_project/templates/views/components/widgets/custom-widget.htm
 
 A JSON configuration file
 -------------------------
 
-A ``.json`` file will store a set of initial configuration details about the extension, which are loaded into the database when the extension is registered. `This file is only used during registration.`
+A ``.json`` file will store a set of initial configuration details about the extension, which are loaded into the database when the extension is registered. ``This file is only used during registration.``
 
 These files typically live here::
 

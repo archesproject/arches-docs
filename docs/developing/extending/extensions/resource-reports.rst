@@ -92,11 +92,11 @@ Registering your report:
 
         (ENV) $ python manage.py report register -s ./my_proj/reports/custom_report.json
 
-Finally, in the Arches Graph Designer interface, navigate to the "Cards" tab of the resource model this report is for, click the root/top node in the card tree (is the name of the graph/resource model) in the left-hand side. On the far-right you will see a heading "Report Configuration". Select your custom report from the dropdown labeled "Template", and save changes. 
+Finally, in the Arches Graph Designer interface, navigate to the "Cards" tab of the resource model this report is for, click the root/top node in the card tree (is the name of the graph/resource model) in the left-hand side. On the far-right you will see a heading "Report Configuration". Select your custom report from the dropdown labeled "Template", and save changes.
 
 **Troubleshooting Tips**
 
-- Ensure that all references to a component name are consistent. 
+- Ensure that all references to a component name are consistent.
 - Ensure that references to a template (``.htm`` file) are consistent.
 - Ensure your report exists in your database by checking the "report_templates" table.
 
