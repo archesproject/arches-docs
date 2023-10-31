@@ -1,6 +1,6 @@
-######################
+####################
 Managing Permissions
-######################
+####################
 
 Permissions in Arches are handled on a few different levels.
 

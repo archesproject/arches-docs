@@ -46,10 +46,10 @@ If you want to support localization in your Arches instance, you'll first need t
     # {langcode}-{regioncode} eg: en, en-gb ....
     # a list of language codes can be found here http://www.i18nguy.com/unicode/language-identifiers.html
     LANGUAGES = [
-    ('de', _('German')),
-    ('en', _('English')),
-    ('en-gb', _('British English')),
-    ('es', _('Spanish')),
+        ('de', ('German')),
+        ('en', ('English')),
+        ('en-gb', ('British English')),
+        ('es', ('Spanish')),
     ]
     # override this to permenantly display/hide the language switcher
     SHOW_LANGUAGE_SWITCH = len(LANGUAGES) > 1

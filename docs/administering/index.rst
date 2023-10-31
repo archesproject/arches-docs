@@ -14,5 +14,7 @@ and permissions management.
     managing-map-layers
     rdm
     instance-relationships
+    django-admin-ui
+    bulk-data-manager
     managing-permissions
     spatial-views
