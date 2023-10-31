@@ -118,11 +118,11 @@ and then run::
 Build a Frontend Asset Bundle
 -----------------------------
 
-In your current terminal, run the Django development server::
+In your current terminal, run the Django development server (with the Arches virtual environment activated)::
 
     python manage.py runserver
 
-Then, in a second terminal, navigate to the root directory of the project ( you should be on the same level as `package.json`) and build a frontend asset bundle::
+Then, in a second terminal, activate the virtual environment used by Arches. Then, navigate to the root directory of the project. ( you should be on the same level as `package.json`) and build a frontend asset bundle::
 
     cd my_project/my_project
     yarn build_development
