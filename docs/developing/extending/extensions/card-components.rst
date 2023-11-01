@@ -9,6 +9,9 @@ Component that should suit most needs, but you can also create and
 register custom Card Components to extend the front-end behavior of
 Arches.
 
+Before exploring how do make customized Cards, please review documentation
+about available :ref:`Card Types` standard with Arches.
+
 
 .. note:
 
