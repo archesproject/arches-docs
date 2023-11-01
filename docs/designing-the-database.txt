@@ -98,8 +98,8 @@ When you select a card or a widget, you will see the Card Manager or Widget Mana
 
 .. tip:: While working with the Cards Tab, you may need to go back and change a node in the Graph Tab. Be aware that though you may expect node changes in the Graph Tab to cascade to widget configurations in the Cards Tab, this does not always happen. Be sure to double-check your work!
 
-Card Type
----------
+Card Types
+----------
 
 The UI of a card can be configured using a card component. Note that when you click a node in the card tree, the "Card Configuration" panel on the right-hand side of the screen will show the card component in a dropdown called "Card Type".
 
