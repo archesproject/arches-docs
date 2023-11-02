@@ -1,4 +1,4 @@
-define(['knockout'], function (ko) {
+define(['knockout', 'datatype-config-templates/boolean.htm'], function (ko, booleanTemplate) {
     var name = 'boolean-datatype-config';
     ko.components.register(name, {
         viewModel: function(params) {
@@ -23,7 +23,7 @@ define(['knockout'], function (ko) {
                 });
             }
         },
-        template: { require: 'text!datatype-config-templates/boolean' }
+        template: booleanTemplate,
     });
     return name;
 });
