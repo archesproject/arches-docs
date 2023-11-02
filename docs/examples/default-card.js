@@ -1,4 +1,8 @@
-define(['knockout', 'bindings/scrollTo'], function(ko) {
+define([
+    'knockout',
+    'templates/views/components/cards/default.htm',
+    'bindings/scrollTo'
+], function(ko, defaultCardTemplate) {
     var viewModel = function(params) {
         this.state = params.state || 'form';
         this.preview = params.preview;
@@ -21,8 +25,6 @@ define(['knockout', 'bindings/scrollTo'], function(ko) {
     };
     return ko.components.register('default-card', {
         viewModel: viewModel,
-        template: {
-            require: 'text!templates/views/components/cards/default.htm'
-        }
+        template: defaultCardTemplate,
     });
 });

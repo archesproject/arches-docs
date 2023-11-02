@@ -1,4 +1,4 @@
-define(['knockout'], function (ko) {
+define(['knockout', 'datatype-config-templates/date.htm'], function (ko, dateTemplate) {
     var name = 'date-datatype-config';
     ko.components.register(name, {
         viewModel: function(params) {
@@ -21,7 +21,7 @@ define(['knockout'], function (ko) {
                 });
             }
         },
-        template: { require: 'text!datatype-config-templates/date' }
+        template: dateTemplate,
     });
     return name;
 });
