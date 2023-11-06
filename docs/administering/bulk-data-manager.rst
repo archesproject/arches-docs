@@ -79,18 +79,46 @@ The Excel template file also includes a worksheet called "metadata". The metadat
 
 Edit
 ====
-The **Edit** tab of the Bulk Data Manager enables Arches administrators to make mass edits of string data across many resource instances. As of version 7.4.0, the current string editing options include:
 
-1. Change classes
-2. Replace Text
-3. Remove Whitespace
+The **Edit** tab of the Bulk Data Manager enables Arches administrators to make mass edits of string data across many resource instances.
+As of version 7.5.0, the current string editing options include:
 
-Each editing option can be applied to selected node and languages within selected resource instances. The editing interface provides multiple options for selecting resource instances to update with a bulk edit. These options include:
+1. Bulk Deletion
+2. Change case (uppercase, lowercase, capitalize)
+3. Replace Text
+4. Remove Whitespace
 
-1. Use search url
-    One can copy and paste a URL of a search that retrieves a set of resource instances you want to edit
+.. figure:: ../images/bulk-data-editor.png
+    :width: 100%
+    :align: center
 
-2. Select a resource model
-    Use the dropdown list to select a resource model with resource instances that you want to edit
+Editing operations require all or some of the following options:
 
-Use the other drop down lists to select nodes for editing, change the "From" and "To" text (if you are doing a "Replace Text" edit), and get a preview of how your edit would look. To actually make the edit, press the Start button. This may take some time, especially if you are updating many resource instances. Updates also trigger re-indexing, which can also take some time.
+1. Seach URL (optional) - Defines the bounds of what resources can be edited.  Actual edited resources could be less then what the search defines (see below).
+2. Resource Model - Resource instances of the model to edit
+3. Node - The node value in each resource instance to edit
+4. Nodegroup - (Deletion only) the tile associated with the nodegroup to delete
+5. Language - The language to update in each node
+6. From and To - (Replace Text only) the text you would like to search and replace
+
+**Search URL details**
+    Copy and paste a URL of a search that retrieves a set of resource instances that you want to limit your bulk edit operation to.
+    This does not mean that those resources will actually be edited, only that resources that don't fall within that search result won't be edited.
+
+    For example, in a capitalize operation:
+        - If a search URL returns 3 records but one of them is already capitalized then only the remaining 2 uncapitalized records will be updated.
+        - If a search URL returns 3 records but the node in the model contains more then 3 records that are uncapitalized, then only the 3 records defined in your search will be updated.
+
+**Preview button**
+    Once you're satisfied with the options you've selected click the preview button to preview a
+    small set of records that match your criteria to see the before and after of the edit operation.
+
+**Start button**
+    Click the start button if you'd like to actually kick off the edit operation.  You will be taken to the Task Status tab.
+    Depending on the operation selected and the number of resources being edited, this can take some time.
+    Edit operations are placed into a work queue and at this point you can leave this page.  The Task Status
+    will update itself every 5 seconds (there is no need to refresh the page).
+
+.. figure:: ../images/bulk-data-editor-preview.png
+    :width: 100%
+    :align: center
