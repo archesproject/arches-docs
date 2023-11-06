@@ -109,10 +109,6 @@ Editing operations require all or some of the following options:
         - If a search url returns 3 records but one of them is already capitalized then only the remaining 2 uncapitalized records will be updated.
         - If a search url returns 3 records but the node in the model contains more then 3 records that are uncapitalized, then only the 3 records defined in your search will be updated.
 
-.. figure:: ../images/bulk-data-editor-preview.png
-    :width: 100%
-    :align: center
-
 **Preview button**
     Once you're satisfied with the options you've selected click the preview button to preview a 
     small set of records that match your criteria to see the before and after of the edit operation.
@@ -123,3 +119,6 @@ Editing operations require all or some of the following options:
     Edit operations are placed into a work queue and at this point you can leave this page.  The Task Status
     will update itself every 5 seconds (there is no need to refresh the page).
 
+.. figure:: ../images/bulk-data-editor-preview.png
+    :width: 100%
+    :align: center
