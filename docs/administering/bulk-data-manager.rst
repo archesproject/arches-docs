@@ -94,31 +94,32 @@ As of version 7.5.0, the current string editing options include:
 
 Editing operations require all or some of the following options:
 
-1. Seach Url (optional) - Defines the bounds of what resources can be edited.  Actual edited resources could be less then what the search defines (`see below <search url details>`_).
+1. Seach Url (optional) - Defines the bounds of what resources can be edited.  Actual edited resources could be less then what the search defines (see below).
 2. Resource Model - Resource instances of the model to edit
 3. Node - The node value in each resource instance to edit
 4. Nodegroup - (Deletion only) the tile associated with the nodegroup to delete
 5. Language - The language to update in each node
 6. From and To - (Replace Text only) the text you would like to search and replace
 
-.. _search url details:
+**Search Url details**
     Copy and paste a URL of a search that retrieves a set of resource instances that you want to limit your bulk edit operation to.
     This does not mean that those resources will actually be edited, only that resources that don't fall within that search result won't be edited.
 
     For example, in a capitalize operation:
-    - If a search url returns 3 records but one of them is already capitalized then only 2 records will be updated.
-    - If a search url returns 3 records but the node in the model contains more then 3 records that are uncapitalized, 
-    then only the 3 records defined in your search will be updated.
+        - If a search url returns 3 records but one of them is already capitalized then only the remaining 2 uncapitalized records will be updated.
+        - If a search url returns 3 records but the node in the model contains more then 3 records that are uncapitalized, then only the 3 records defined in your search will be updated.
 
 .. figure:: ../images/bulk-data-editor-preview.png
     :width: 100%
     :align: center
 
-Preview button- Once you're satisfied with the options you've selected click the preview button to preview a 
-small set of records that match your criteria to see the before and after of the edit operation.
+**Preview button**
+    Once you're satisfied with the options you've selected click the preview button to preview a 
+    small set of records that match your criteria to see the before and after of the edit operation.
 
-Start button - Click the start button if you'd like to actually kick off the edit operation.  You will be taken to the Task Status tab. 
-Depending on the operation selected and the number of resources being edited, this can take some time.
-Edit operations are placed into a work queue and at this point you can leave this page.  The Task Status
-will update itself every 5 seconds (there is no need to refresh the page).
+**Start button**
+    Click the start button if you'd like to actually kick off the edit operation.  You will be taken to the Task Status tab. 
+    Depending on the operation selected and the number of resources being edited, this can take some time.
+    Edit operations are placed into a work queue and at this point you can leave this page.  The Task Status
+    will update itself every 5 seconds (there is no need to refresh the page).
 
