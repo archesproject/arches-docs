@@ -184,7 +184,7 @@ where you'll put any forms or other UI artifacts used to configure the
 Function.
 
 Developing your Function's UI component is very similar to developing
-`Widgets`_. More specific guidelines are in progress, but for now,
+:ref:`Widgets`. More specific guidelines are in progress, but for now,
 refer to the sample code in your project's
 ``templates/views/components/functions/`` directory, and gain a little
 more insight from the ``templates/views/components/widgets/``
