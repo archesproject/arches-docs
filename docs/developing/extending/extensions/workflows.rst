@@ -73,9 +73,10 @@ The workflow's behavior is defined in ``quick-resource-create-workflow.js``. You
         'jquery',
         'arches',
         'viewmodels/workflow',
+        'templates/views/components/plugins/quick-resource-create-workflow.htm',
         // DEFINE EXTRA STEP COMPONENTS HERE AS NEEDED
         'views/components/workflows/final-step'
-    ], function(ko, $, arches, Workflow) {
+    ], function(ko, $, arches, Workflow, quickResourceCreateWorkflowTemplate) {
         return ko.components.register('quick-resource-create-workflow', {
             viewModel: function(params) {
                 this.componentName = 'quick-resource-create-workflow';
@@ -85,7 +86,7 @@ The workflow's behavior is defined in ``quick-resource-create-workflow.js``. You
                 ];
                 Workflow.apply(this, [params]);
             },
-            template: { require: 'text!templates/views/components/plugins/quick-resource-create-workflow.htm' }
+            template: quickResourceCreateWorkflowTemplate,
         });
     });
 
