@@ -2,12 +2,15 @@
 Developing with Arches
 ======================
 
-Introductory text can go here (no current content equivalent).
+Arches is very flexible and customizable. This section provides guidance on how to use APIs to integrate Arches with other information systems, enhance accessibility, build custom extensions, and modify Arches to deploy custom features beyond the capabilities of standard (uncustomized, core) Arches.
+
+If you are considering software development to customize Arches, please read the :ref:`Arches Customization Considerations` for an introduction about good practices to help make customizations easier develop, sustain and maintain.
 
 .. toctree::
     :caption: Getting Started
     :maxdepth: 2
 
+    getting-started/customization-considerations
     getting-started/creating-a-development-environment
     getting-started/arches-and-elasticsearch
 

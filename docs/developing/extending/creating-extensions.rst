@@ -1,6 +1,6 @@
-#######################
+###################
 Creating Extensions
-#######################
+###################
 
 There are a number of patterns in place to allow you to extend Arches. Extensions can be used to customize the data entry process, add custom display widgets to reports, or even define new types of data that Arches can store.
 
