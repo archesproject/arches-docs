@@ -24,6 +24,7 @@ Introductory text can go here (no current content equivalent).
     :caption: Extending Arches
     :maxdepth: 2
 
+    extending/creating-apps
     extending/creating-extensions
     extending/creating-new-map-layers
     extending/create-html-export-templates
