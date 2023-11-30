@@ -1,5 +1,6 @@
+#######################
 Export v3 Business Data
------------------------
+#######################
 
 In your v3 command line run::
 
@@ -41,10 +42,10 @@ The result will be one file:
 
 Place the file somewhere easy to access. This is the "Arches" scheme from your RDM, which is, typically, where your entire concept set will exist. If you are using a different concept scheme, subsitute its name for "Arches" in the command above.
 
-.. warning:: 
+.. warning::
 
     You are only able to migrate one scheme. If your v3 dropdown lists are composed of concepts from two different schemes (i.e. you added another scheme alongside "Arches", added concepts to it, and then added those concepts to dropdown lists) you'll need to manually consolidate these schemes into one before exporting.
-    
+
     **Dropdown Lists themselves are not migrated, they are recreated in v4 based on Top Concepts.**
 
 Transfer all v3 uploaded media files
@@ -57,7 +58,7 @@ By default, the directory in your new v4 project should be called ``my_project/m
 .. admonition:: AWS S3 and Azure Users
 
     You should be able to continue using the same storage bucket, and just point your v4 project at it. Just make sure your content is in a folder called ``uploadedfiles``. **In theory this should work, but we haven't tested it.**
-    
+
 ----
 
 Now that you have exported all of the data you need from your v3 deployment, head back to :ref:`Migrating Your Data`.
