@@ -1,8 +1,8 @@
-############################
+######################
 Arches Release Process
-############################
+######################
 
-Starting with version 4.1.0, the Arches team will begin making available both feature (minor) and patch (micro) releases on a regular basis.
+Starting with version 4.1.0, the Arches team began making available both feature (minor) and patch (micro) releases on a regular basis.
 
 ````````````````````````````
 Feature Releases
@@ -25,11 +25,3 @@ Patch releases will be incremented as such: `a.a.b, a.a.c...` with `a` represent
 Release Support
 ````````````````````````````
 We will release patches only for the latest feature release.
-
-Feature Release Schedule:
-
-    - 4.1 - User account creation, user profile management (released Jan 2018)
-        - 4.1.1 - Bug fixes (released May 2018)
-    - 4.2 - QA workflow (released June 2018)
-    - 4.3 - Relaxed graph constraint (released Oct 2018)
-    - 4.4 - Mobile workflow and plugins (anticipated late Jan 2018)

@@ -28,7 +28,7 @@ To promote consistent data creation, update, and indexing workflows, Arches impl
 
 Version History and Roadmap
 ---------------------------
-The Arches project uses `semantic versioning <https://en.wikipedia.org/wiki/Software_versioning>`_ to describe unique states of the software. Arches was initially released in October 2013 as version 1.0. Since then, Arches has had 7 major releases and many more minor releases and patch releases. For more details about the capabilities introduced in past versions and capabilities planned for future versions, please review: https://www.archesproject.org/roadmap/
+The Arches project uses `semantic versioning <https://en.wikipedia.org/wiki/Software_versioning>`_ to describe unique states of the software. Arches was initially released in October 2013 as version 1.0. Since then, Arches has had 7 major releases and many more minor releases and patch releases (see :ref:`Arches Release Process`). For more details about the capabilities introduced in past versions and capabilities planned for future versions, please review: https://www.archesproject.org/roadmap/
 
 .. important::
 
