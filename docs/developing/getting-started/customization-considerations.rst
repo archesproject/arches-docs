@@ -9,7 +9,22 @@ The practices described here will reduce costs, reduce long term maintenance and
 
 More Sustainable Pathways toward Customization
 ==============================================
-To increase the likelihood that customizations will have long term compatibility and maintainability with Arches, please follow the suggested patterns for developing Arches Extensions (see: :ref:`Creating Extensions`). Adherence to the extension design patterns helps to isolate your customizations from changes to the core of Arches. Following Arches extensions design patterns will also increase the likelihood that there will be relevant documentation and community help if the extensions need updates in the future.
+To increase the likelihood that customizations will have long term compatibility and maintainability with Arches, please use the customization patterns supported and documented by Arches. These patterns include:
+
+
+- **Extensions** (see: :ref:`Creating Extensions`)
+    - card components
+    - datatypes
+    - functions
+    - plugins
+    - reports
+    - search filters
+    - widgets
+    - workflows
+- **New map layers** (see: :ref:`Creating New Map Layers`)
+- **HTML export templates** (see: :ref:`Creating HTML Export Templates`)
+
+Adherence to the extension design patterns helps to isolate your customizations from changes to the core of Arches. Following Arches extensions design patterns will also increase the likelihood that there will be relevant documentation and community help if the extensions need updates in the future. Certain customizations are easier to maintain over time. For example, an overwritten HTML template is generally simpler to upgrade than an inherited Arches Python class or an overwritten Django view. You should factor such considerations into long term resource planning.
 
 
 Customizations Beyond Extensions
