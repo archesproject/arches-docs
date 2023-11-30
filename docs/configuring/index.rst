@@ -2,7 +2,8 @@
 Initial Configuration
 =====================
 
-You will have to complete some further configurations once you have Arches up and running.
+This section guides you through completing some additional configurations of Arches *after* you have successfully installed and launched (started) a running instance of Arches.
+
 
 .. toctree::
     :caption: Configuring
