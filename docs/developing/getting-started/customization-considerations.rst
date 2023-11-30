@@ -21,7 +21,7 @@ Managing long term sustainability and maintenance risks should be a core softwar
 
 API Based Customizations
 ========================
-The Arches :ref:`API` can be used to support customizations, especially those involving integration of Arches with other information systems. Channeling all connections between Arches and other systems through the API aligns with a design practice often described as "`Loose Coupling <https://en.wikipedia.org/wiki/Loose_coupling>`_". By strictly limiting and simplifying how core Arches interfaces with your custom module, you reduce the likelihood that changes to either core Arches or your custom module will result in cascading breakdowns. Strictly limiting and simplifying the interfaces between components also helps reduce maintenance burdens, because problems can be identified and fixed in a more focused manner.
+The Arches :ref:`API` can be used to support customizations, especially those involving integration of Arches with other information systems. Channeling all connections between Arches and other systems through the API aligns with a design practice often described as "`Loose Coupling <https://en.wikipedia.org/wiki/Loose_coupling>`_". By carefully limiting and simplifying how core Arches interfaces with external information systems, you reduce future maintenance burdens, because problems can be identified and fixed in a more focused manner.
 
 
 Strive for Graceful Degradation
