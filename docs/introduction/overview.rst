@@ -26,25 +26,13 @@ To promote consistent data creation, update, and indexing workflows, Arches impl
 
 **Arches User and Developer forum:** https://community.archesproject.org/
 
-**Version History**
-(full version information: https://www.archesproject.org/roadmap/)
+Version History and Roadmap
+---------------------------
+The Arches project uses `semantic versioning <https://en.wikipedia.org/wiki/Software_versioning>`_ to describe unique states of the software. Arches was initially released in October 2013 as version 1.0. Since then, Arches has had 7 major releases and many more minor releases and patch releases. For more details about the capabilities introduced in past versions and capabilities planned for future versions, please review: https://www.archesproject.org/roadmap/
 
-    v5.1  October, 2020: IIIF Image Supprt, Dashboards, Improved JSON-LD, Instance-level permissions
+.. important::
 
-    v5.0  January, 2020: Technology upgrades (Python 3.7, Django 2.3, Postgres 12.0/PostGIS 3.0, Elasticsearch 7.4), Workflows, Task Manager
-
-    v4.4  February, 2019: Release of Collector (now deprecated with v7.0 and later) mobile data
-
-    v4.0  July, 2017: Significant site redesign, addition of graph creation UI, system settings UI, internal tileserver (TileStache), updated dependencies (MapBox GL, ElasticSearch 5.2, Yarn)
-
-    v3.0  April, 2015: Updated architecture, inclusion of the Reference Data Manager, updated dependencies (ElasticSearch, OpenLayers, Knockout)
-
-    v2.0  March, 2014: Improved upload of digital files, assorted bug fixes
-
-    v1.0  October, 2013: Initial Release
-
-**License**
-
+    **License:**
     Arches is free software and is licensed under the terms of the GNU Affero General Public License (http://www.gnu.org/licenses/agpl-3.0.html).
 
 Who is Arches for?
