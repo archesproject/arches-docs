@@ -2,6 +2,10 @@
 Accessibility
 #############
 
+As of version 7.5, Arches can be configured to meet `WCAG <https://www.w3.org/WAI/standards-guidelines/wcag/>`_ defined **AA** level accessibility requirements for all public facing user interfaces. Please review te documentation on activating the Arches :ref:`Accessibility Mode`.
+
+Please continue reading below to understand how to better meet accessibility requirements for your customization of Arches.
+
 Contents
 ========
 
