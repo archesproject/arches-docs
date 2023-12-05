@@ -209,3 +209,26 @@ Once your application is set up with the provider, you can configure Arches to u
         # enforces token validation on authentication, AVOID setting this to False
         "validate_id_token": True,
     }
+
+
+Accessibility Mode
+------------------
+As of version 7.5, Arches can be configured to meet `WCAG <https://www.w3.org/WAI/standards-guidelines/wcag/>`_ defined **AA** level accessibility requirements for all public facing user interfaces (all content available to anonymous users without a login, including the home page, search interface, and resource reports). Improved accessibility helps to promote a more welcoming and inclusive community, and may help to meet important legal and ethical requirements, especially for institutions that serve the public.
+
+To enable the "Accessibility Mode", update your Arches project **settings.py** or **settings_local.py** file and add:
+
+.. code-block:: python
+
+    # Activate accessibility mode
+    ACCESSIBILITY_MODE = True
+
+
+Once you've saved that change, restart Arches. Arches should now display more accessible user interfaces for public facing content. The specific accessibility enhancements activated in Accessibility Mode include:
+
+- Markup to support labeling for screen readers
+- Tabbing to support natural flow through the site
+- Improved focus management especially when interacting with popup/slide out panels
+- Updated drop downs to use an accessible version
+- Updated text contrast
+- Updated html to reflow properly on smaller screen sizes or when the screen is zoomed up to 400%
+- Updated text sizes to use relative sizing
