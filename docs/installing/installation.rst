@@ -249,7 +249,7 @@ Building the frontend assets can sometimes be a source of challenge and frustrat
 
         python manage.py runserver
 
-6. Open a *new terminal* to complete th following steps.
+6. **Open a *new terminal* to complete the following steps below.**
 
 7. If you’re using a virtual environment, activate it as in step 4 above. ENV should be replaced with the name of your virtual environment.
     .. code-block:: bash
