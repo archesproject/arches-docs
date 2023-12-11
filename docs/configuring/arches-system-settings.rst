@@ -18,7 +18,7 @@ Default Map Settings
 
 Arches uses the Mapbox mapping library for map display and data creation. Arches also supports Mapbox basemaps and other services.
 
-+ **Mapbox API Key (Optional)** - By default, Arches uses some basemap web services from Mapbox. You will need to `create a free API key <"https://www.mapbox.com/help/create-api-access-token/">`_ (or "access token") for these services to be activated. Alternatively, you could remove all of the default basemaps and add your own, non-Mapbox layers.
++ **Mapbox API Key (Optional)** - By default, Arches uses some basemap web services from Mapbox. You will need to `create a free API key <https://www.mapbox.com/help/create-api-access-token/>`_ (or "access token") for these services to be activated. Alternatively, you could remove all of the default basemaps and add your own, non-Mapbox layers.
 + **Mapbox Sprites** - Path to Mapbox sprites (use default).
 + **Mapbox Glyphs** - Path to Mapbox glyphs (use default).
 
