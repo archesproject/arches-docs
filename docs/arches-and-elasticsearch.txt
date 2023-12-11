@@ -11,7 +11,7 @@ You can install Elasticsearch locally alongside Arches--read on for how to do th
 Installing Elasticsearch
 ========================
 
-The easiest way to install Elasticsearch is to download and unpack their archived releases. Archives are available at ``https://www.elastic.co/downloads/past-releases/elasticsearch-{release number}``, e.g. https://www.elastic.co/downloads/past-releases/elasticsearch-8-5-1. 
+The easiest way to install Elasticsearch is to download and unpack their archived releases. Archives are available at ``https://www.elastic.co/downloads/past-releases/elasticsearch-{release number}``, e.g. https://www.elastic.co/downloads/past-releases/elasticsearch-8-5-1.
 
 Download the release for your OS and architecture and then unpack/unzip it. For example, installing 8.5.1 on Ubuntu Linux looks like:
 
@@ -39,7 +39,7 @@ Make two changes:
 
     .. code-block:: python
 
-        ELASTICSEARCH_HOSTS = [{“scheme”: “http”, “host”: “localhost”, “port”: ELASTICSEARCH_HTTP_PORT}]
+        ELASTICSEARCH_HOSTS = [{'scheme': 'http', 'host': 'localhost', 'port': ELASTICSEARCH_HTTP_PORT}]
 
     This overwrites the default ``ELASTICSEARCH_HOSTS`` variable, which has the scheme set to ``https``.
 
