@@ -127,9 +127,16 @@ Then, in a second terminal, activate the virtual environment used by Arches (thi
     cd my_project/my_project
     yarn build_development
 
+If you have trouble with this step, see :ref:`Troubleshooting Frontend Builds` below.
+
 .. note::
 
     ``yarn build_development`` creates a static frontend asset bundle. Any changes made to frontend files (eg. ``.js``) will not be viewable until the asset bundle is rebuilt. run ``yarn build_development`` again to update the asset bundle, or run ``yarn start`` to run an asset bundler server that will detect changes to frontend files and rebuild the bundle appropriately.
+
+
+
+
+
 
 View the Project in a Browser
 -----------------------------
@@ -210,3 +217,70 @@ Common Errors
     .. note::
 
         On Windows, you can avoid having to repeatedly enter the password while running commands in the console by setting the PGPASSWORD environment variable: ``set PGPASSWORD=<your password>``.
+
+
+Troubleshooting Frontend Builds
+-------------------------------
+
+Building the frontend assets can sometimes be a source of challenge and frustration. Sometimes a "locked down" computer (with strict security configurations) may cause some trouble. If this is the case, you can try the following steps to interate toward a successful build.
+
+1. Edit your ``.yarnrc`` file to disable strict SSL.
+    To do so, navigate to your project's root directory and open the ``.yarnrc`` file in a text editor. Add the following lines to the end of the file:
+    .. code-block:: bash
+
+        cafile null
+        strict-ssl false
+
+2. **After the above edits, save the file.**
+3. Remove the ``node_modules`` folder and ``yarn.lock`` file if they exist:
+    .. code-block:: bash
+
+        cd path/to/dir/my_project/my_project
+        rm -rf node_modules
+        rm yarn.lock
+
+4. If you’re using a virtual environment, activate it. ENV should be replaced with the name of your virtual environment.
+    .. code-block:: bash
+
+        source ENV/bin/activate
+
+5. Run your Arches Django server and leave it running.
+    .. code-block:: bash
+
+        python manage.py runserver
+
+6. **Open a *new terminal* to complete the following steps below.**
+
+7. If you’re using a virtual environment, activate it as in step 4 above. ENV should be replaced with the name of your virtual environment.
+    .. code-block:: bash
+
+        source ENV/bin/activate
+
+8. Navigate to the same directory as package.json, and install the frontend dependencies:
+    .. code-block:: bash
+
+        cd path/to/dir/my_project/my_project
+        yarn install
+
+9. Once the dependencies are installed, build your static asset bundle:
+    .. code-block:: bash
+
+        yarn build_development
+
+
+    If successful, you should see a message indicating that the build was successful. A successful build should make a message looking something like this:
+
+        cacheable modules 8.62 MiB (javascript) 3.28 KiB (asset)
+        modules by path ./media/ 6.48 MiB 996 modules
+        modules by path ../../ 2.15 MiB (javascript) 3.28 KiB (asset)
+        modules by path ../../arches/arches/app/media/ 1.2 MiB (javascript) 3.28 KiB (asset) 264 modules
+        modules by path ../../arches/arches/app/templates/views/ 970 KiB 90 modules
+        ../../arches-rdm/arches_rdm/media/js/.gitkeep 1 bytes [built] [code generated]
+        ./media/js/ sync ^\.\/.*$ 207 bytes [optional] [built] [code generated]
+        ../../arches/arches/app/media/js/ sync ^\.\/.*$ 18.9 KiB [optional] [built] [code generated]
+        ../../ENV/lib/python3.10/site-packages/ sync ^\.\/.*\/media\/js\/.*$ 160 bytes [optional] [built] [code generated]
+        ../../arches-rdm/arches_rdm/media/js/ sync ^\.\/.*$ 160 bytes [optional] [built] [code generated]
+        ../../arches/arches/app/media/js/utils/ sync ^.*\/media\/js\/.*$ 160 bytes [optional] [built] [code generated]
+        ./media/node_modules/moment/locale/ sync ^\.\/.*$ 3.21 KiB [optional] [built] [code generated]
+        webpack 5.89.0 compiled successfully in 8545 ms
+        ✨  Done in 10.71s.
