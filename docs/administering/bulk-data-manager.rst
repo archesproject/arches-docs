@@ -76,6 +76,9 @@ The Excel template file also includes a worksheet called "metadata". The metadat
 
     Excel template *metadata* worksheet for datatypes used by *Collection or Set* branch nodes.
 
+.. note::
+    **Bulk Uploading Files**
+    If you want to import resource instances that include datatype "file-list" nodes, then the files associated with those nodes will need to be imported along with the Excel workbook. To do this, zip compress a folder that includes the Excel workbook to be imported along with the associated files (such as image files) named in the "file-list" nodes.
 
 Edit
 ====
@@ -122,3 +125,25 @@ Editing operations require all or some of the following options:
 .. figure:: ../images/bulk-data-editor-preview.png
     :width: 100%
     :align: center
+
+
+Export
+======
+The **Export** tab of the Bulk Data Manager enables Arches administrators to make mass exports of resource instance data. The exported data will be in Excel workbooks. You choose to export data expressed in either a "Branch" or a "Tile" structure.
+
+.. figure:: ../images/bulk-data-export.gif
+    :width: 100%
+    :align: center
+
+    Export of a resource instance data into an Excel workbook with the Branch structure
+
+If you have resource instances that include datatype "file-list" nodes, then the files associated with those nodes will be exported into a zip file.
+
+The Tile and Branch data export will export data in exactly the same formats used with the corresponding Bulk Data manager importers. This means that you can use the Bulk Data Manager to export data, make edits to the exported data, and then re-import the edited data. This can be useful for making mass edits to data that is not easily edited in the Arches user interface. The data made a available through the Export tools will also provide invaluable examples of how to express data in a manner suitable for import.
+
+
+.. figure:: ../images/bulk-data-export-branch-excel.png
+    :width: 100%
+    :align: center
+
+    Example "Branch" Excel export of resource instance data
