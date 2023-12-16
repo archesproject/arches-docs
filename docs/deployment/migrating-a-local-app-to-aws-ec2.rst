@@ -170,11 +170,11 @@ Install Arches Dependencies on your EC2 Instance
 
 Now that you have a command line in front of you, the next few steps should be very familiar. Luckily, if you are coming from Windows, you'll find that installing dependencies on Ubuntu is much, much easier. Do all of the following from within the `/home/ubuntu` directory (which shows as ~ in the command prompt).
 
-1. Download the install script for dependencies (this links to the v7.4.2 dependencies install)
+1. Download the install script for dependencies (this links to the v7.5.0 dependencies install, update the link for your specific version)
 
   .. code-block::
 
-    $ wget https://raw.githubusercontent.com/archesproject/arches/stable/7.4.2/arches/install/ubuntu_setup.sh
+    $ wget https://raw.githubusercontent.com/archesproject/arches/stable/7.5.0/arches/install/ubuntu_setup.sh
 
 2. Run it (this may take a few minutes)
 
