@@ -6,7 +6,7 @@ The following is our recommedation for creating an Arches environment that works
 
 **Runtime Content**
 
-+ ``ENV/`` - A Python 3.8+ virtual environment (you can name this whatever you want).
++ ``ENV/`` - A Python 3.10+ virtual environment (you can name this whatever you want).
 
 + ``arches/`` - The local clone of your fork of the `archesproject/arches <https://github.com/archesproject/arches>`_ repo, this part of the code is often referred to as "core Arches."
 
@@ -28,7 +28,7 @@ Core Arches
 
         You may also be planning to use externally hosted components, like a remote Postgres/PostGIS or Elasticsearch installation. In that case make sure you have the connection information handy, you will need it in a later step.
 
-#. :ref:`Create a new Python 3.8+ virtual environment <Create a Virtual Environment>`.
+#. :ref:`Create a new Python 3.10+ virtual environment <Create a Virtual Environment>`.
 
 #. Clone the core Arches repo
 
