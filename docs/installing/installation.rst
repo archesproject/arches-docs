@@ -15,9 +15,9 @@ Create a Virtual Environment
 
 .. sidebar:: Virtual Environment Reference
 
-    If you are unfamiliar with virtual environments, please take a look at the `Python documentation <https://docs.python.org/3.8/tutorial/venv.html>`_ before continuing.
+    If you are unfamiliar with virtual environments, please take a look at the `Python documentation <https://docs.python.org/3.10/tutorial/venv.html>`_ before continuing.
 
-You need a **Python 3.8+** virtual environment. :ref:`Skip ahead <Install Arches with pip>` if you have already created and activated one. Otherwise, use the commands below for a quick start.
+You need a **Python 3.10+** virtual environment. :ref:`Skip ahead <Install Arches with pip>` if you have already created and activated one. Otherwise, use the commands below for a quick start.
 
 **Create a virtual environment**::
 
@@ -27,7 +27,7 @@ This will generate a new directory called ``ENV``.
 
 .. note::
 
-  On some linux distributions, if the python version is less than 3.8, entering the following command may yield an error but it should alert you to any dependencies you may need to install, after which you'll be able to run this command.
+  On some linux distributions, if the python version is less than 3.10, entering the following command may yield an error but it should alert you to any dependencies you may need to install, after which you'll be able to run this command.
 
 **Activate the virtual environment**
 
@@ -50,7 +50,7 @@ The following are relative paths to an ``activate`` script within ENV.
     python
 
 This will run the Python interpreter and tell you what version is in use. If you don't
-see at least 3.8, check your original Python installation, delete the entire ``ENV``
+see at least 3.10, check your original Python installation, delete the entire ``ENV``
 directory, and create a new virtual environment. Use ``exit()`` or ``ctrl+C`` to
 leave the interpreter.
 
