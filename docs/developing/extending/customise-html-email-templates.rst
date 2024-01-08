@@ -23,6 +23,8 @@ The starting templates provided when you create a new project are:
 These templates are located in the following directory:
 `<project name>/templates/emails/`
 
+They overwrite the out-of-the-box templates found in the arches install directory.  If you do not wish the arches install directory versions to be overwritten then remove these templates from the project directory.
+
 They consist of static text and variables.  The variables are used to render the email with the appropriate context items.  The variables are enclosed in double curly braces, e.g. {{ variable_name }}.
 
 
@@ -50,4 +52,23 @@ In some instances, you may wish to add extra context items which are used by the
 
 The starting default EXTRA_EMAIL_CONTEXT object contains the value for Salutation and a expiration date that is based on the CELERY_SEARCH_EXPORT_EXPIRES setting.
 
-For the sake of consistency, if you are using common templated text within the template and it is used across templates while not in the standard context items, it is recommended that you add it to the EXTRA_EMAIL_CONTEXT setting.
+For the sake of consistency, if you are using common templated text across templates while not in the default context items, it is recommended that you add it to the EXTRA_EMAIL_CONTEXT setting.
+
+For example, if you have a common email address that you wish to use across all templates, you could add it to the EXTRA_EMAIL_CONTEXT setting as follows:
+
+```
+EXTRA_EMAIL_CONTEXT = {
+        "salutation": _("Hi"),
+        "expiration":(datetime.now() + timedelta(seconds=CELERY_SEARCH_EXPORT_EXPIRES)).strftime("%A, %d %B %Y"),
+        "email_address": _("xxxx@xxx.com")
+        }
+```
+
+You would then be able to use the tag {{ email_address }} to render the email address in your template(s).
+
+
+Other Considerations
+=============================
+
+You are advised, when creating customised HTML email templates, to ensure the templates are accessible.  For further information on configuring your templates to be accessible, see the :ref:`Accessibility` section.
+
