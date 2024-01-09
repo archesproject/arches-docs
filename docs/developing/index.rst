@@ -31,6 +31,7 @@ If you are considering software development to customize Arches, please read the
     extending/creating-extensions
     extending/creating-new-map-layers
     extending/create-html-export-templates
+    extending/customize-html-email-templates
 
 .. toctree::
     :caption: Advanced
