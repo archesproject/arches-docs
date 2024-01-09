@@ -48,7 +48,7 @@ When adding an image logo, you may wish to do so in Base64 encoded format to ens
 Extra Context Items
 ===================
 
-In some instances, you may wish to add extra context items which are used by the template to render the email.  These context items are stored in the EXTRA_EMAIL_CONTEXT setting within the settings.py or settings_local.py file.
+In some instances, you may wish to add extra context items which are used by the template to render the email.  These context items are stored in the ``EXTRA_EMAIL_CONTEXT`` setting within the settings.py or settings_local.py file.
 
 The starting default ``EXTRA_EMAIL_CONTEXT`` object contains the value for Salutation and a expiration date that is based on the ``CELERY_SEARCH_EXPORT_EXPIRES`` setting.
 
