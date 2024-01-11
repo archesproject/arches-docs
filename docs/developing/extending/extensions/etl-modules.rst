@@ -36,9 +36,9 @@ in the top of your ETL Modeuls's ``.py`` file:
         **Optional** A UUID4 for your ETL Module. Feel free to generate one in advance if that fits your workflow;
         if not, Arches will generate one for you.
 :name:
-        **Required** The name of your new ETL Module, visible in the icons Bulk Data Manager menu.
+        **Required** The name of your new ETL Module, visible in the icons in the Bulk Data Manager menu.
 :description:
-        **Required** The description of your new ETL Module, visible in the icons Bulk Data Manager menu.
+        **Required** The description of your new ETL Module, visible in the icons in the Bulk Data Manager menu.
 :etl_type:
         **Required** The type of your new ETL Module, currently ``import``, ``export``, and ``edit`` are supported
 :component:
@@ -49,6 +49,8 @@ in the top of your ETL Modeuls's ``.py`` file:
 :classname:
         **Required** The name of the Python class implementing your ETL Module,
         located in your module's Python file below the details.
+:modulename:
+        **Required** The name of the Python file implementing your ETL Module.
 :config:
         **Required** You can provide user-defined default configuration here.
         Make it a JSON dictionary of keys and values. An empty dictionary is acceptable.
