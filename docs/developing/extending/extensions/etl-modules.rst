@@ -7,11 +7,30 @@ Arches includes basic etl modules. The modules can be accessed in the :ref:`Bulk
 which currently supports import, export, and edit.
 A user can add a custom module, in addition to the modules inlcuded in the Arches.
 
-Registering your ETL Module
-===========================
+Creating an ETL Module
+======================
 
-To register your ETL Module, you'll need a JSON configuration ``details``
-in the top of your ETL Modeuls's ``.py`` file:
+A module comprises three separate files, which should be seen as front-end/back-end complements.
+On the front-end, you will need a component made from a Django HTML template and JavaScript pair,
+which should share the same basename.
+
+In your Project, these files must be placed accordingly:
+
+    ``/my_project/my_project/media/js/views/components/etl_modules/sample-etl-module.js``
+    ``/my_project/my_project/templates/views/components/etl_modules/sample-etl-module.htm``
+
+The third file is a Python file which contains a dictionary telling Arches some important details
+about your module, as well as its main logic.
+
+    ``/my_project/my_project/etl_modules/sample_etl_module.py``
+
+
+Defining the Function's Details
+===============================
+
+The first step in creating a ETL Module is defining the ``details``
+in the top of your Function’s ``.py`` file.
+The ``details`` is also used to register you etl module during the package loading or :ref:`on the command line <registering your etl module>`.
 
 .. code-block:: python
 
@@ -63,8 +82,44 @@ in the top of your ETL Modeuls's ``.py`` file:
 :helpsortorder:
         **Optional** The order in which the ETL Module helps will be listed in the Arches help section
 
-ETL Module Commands
--------------------
+The ``config`` field
+--------------------
+
+Though not required, typically the ``config`` will include ``bgColor`` and ``circleColor``
+that will determine the backgound and the icon colors visible in the ``Bulk Data Manager``.
+
+The additional properties can be added, if you would like to set the default values or add your user-defined configuration.
+For example, the string editors have the field ``updateLimit`` (set to 5,000 by default)
+which will limit the number of edits in a single etl process.
+
+
+Writing your ETL Module Logic
+=============================
+
+In your module's Python code, you have access to all your server-side models.
+
+The importers and editors follow the pattern of
+
+- creating the intermediary data in ``load_staging`` table as the tile-like json format
+- processing the data either before or after staging the data
+- validatating the data if necessary (and recording the errors in the ``load_errors`` table)
+- saving the data in the ``tile`` table if there are no validation errors
+- indexing the database
+
+The progress needs to be saved in ``load_event`` table,
+if you want to access the status and the information about the etl.
+
+If you want to take advantage of the pattern,
+you can start your development by extending the ``BaseImportModule`` for an importer and ``BaseBulkEditor`` for an editor,
+which will provide the basic functionality such as reverse (undo the import or edit).
+Then, you may want to write your own functions to add the new functions or overwrite the excisting ones
+such as validate, read, or write.
+
+Also, you can find the related models in ``models.py`` (``LoadStaging``, ``LoadErrors``, and ``LoadEvent``).
+
+
+Registering your ETL Module
+===========================
 
 To register your ETL Module, use this command:
 
