@@ -25,7 +25,7 @@ about your module, as well as its main logic.
     ``/my_project/my_project/etl_modules/sample_etl_module.py``
 
 
-Defining the Function's Details
+Defining the details
 ===============================
 
 The first step in creating a ETL Module is defining the ``details``
@@ -93,8 +93,8 @@ For example, the string editors have the field ``updateLimit`` (set to 5,000 by 
 which will limit the number of edits in a single etl process.
 
 
-Writing your ETL Module Logic
-=============================
+Writing your ETL Module
+=======================
 
 In your module's Python code, you have access to all your server-side models.
 
@@ -138,4 +138,4 @@ To unregister your ETL Module, you can load the changes to Arches with:
 
 .. code-block:: bash
 
-    python manage.py etl_module unregister --source /projects/my_project/my_project/etl_modules/sample_etl_module.py
+    python manage.py etl_module unregister --name Sample ETL Module
