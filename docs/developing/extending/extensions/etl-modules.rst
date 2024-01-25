@@ -105,15 +105,45 @@ The importers and editors follow the pattern of
 - validatating the data if necessary (and recording the errors in the ``load_errors`` table)
 - saving the data in the ``tile`` table if there are no validation errors
 - indexing the database
-
-The progress needs to be saved in ``load_event`` table,
-if you want to access the status and the information about the etl.
+- The progress needs to be saved in ``load_event`` table, if you want to access the status and the information about the etl.
 
 If you want to take advantage of the pattern,
 you can start your development by extending the ``BaseImportModule`` for an importer and ``BaseBulkEditor`` for an editor,
 which will provide the basic functionality such as reverse (undo the import or edit).
 Then, you may want to write your own functions to add the new functions or overwrite the excisting ones
-such as validate, read, or write.
+such as validate, read, preview, or write,
+as well as run_load_task_async and run_load_task if you would like to utilized the celery task manager.
+
+see the examples in the existing etl module such as base_data_editor.py
+
+.. code-block:: python
+
+    class BulkStringEditor(BaseBulkEditor):
+        def validate(self, request):
+            ...
+
+        def validate_inputs(self, request):
+            ...
+
+        def edit_staged_data(self, cursor, graph_id, node_id, operation, language_code, pattern, new_text):
+            ...
+
+        def get_preview_data(self, node_id, search_url, language_code, operation, old_text, case_insensitive, whole_word):
+            ...
+
+        def preview(self, request):
+            ...
+
+        def write(self, request):
+            ...
+
+        @load_data_async
+        def run_load_task_async(self, request):
+            ...
+
+        def run_load_task(self, userid, loadid, module_id, graph_id, node_id, operation, language_code, pattern, new_text, resourceids):
+            ...
+
 
 Also, you can find the related models in ``models.py`` (``LoadStaging``, ``LoadErrors``, and ``LoadEvent``).
 
