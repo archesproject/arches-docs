@@ -107,12 +107,11 @@ The importers and editors follow the pattern of
 - indexing the database
 - The progress needs to be saved in ``load_event`` table, if you want to access the status and the information about the etl.
 
-If you want to take advantage of the pattern,
-you can start your development by extending the ``BaseImportModule`` for an importer and ``BaseBulkEditor`` for an editor,
+If you want to take advantage of the pattern, you can start your development by extending 
+the ``BaseImportModule`` for an importer or ``BaseBulkEditor`` for an editor,
 which will provide the basic functionality such as reverse (undo the import or edit).
-Then, you may want to write your own functions to add the new functions or overwrite the excisting ones
-such as validate, read, preview, or write,
-as well as run_load_task_async and run_load_task if you would like to utilized the celery task manager.
+Then, you may want to write your own functions or overwrite the excisting ones
+such as validate, read, preview, or write, as well as run_load_task_async and run_load_task if you would like to utilize the celery task manager.
 
 see the examples in the existing etl module such as base_data_editor.py
 
