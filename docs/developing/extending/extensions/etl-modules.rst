@@ -2,8 +2,8 @@
 ETL Modules
 ###########
 
-The ETL Modules allow a developer to define etl processes that fit the user's business case.
-Arches includes basic etl modules. The modules can be accessed in the :ref:`Bulk Data Manager <bulk data manager>`,
+The ETL Modules allow a developer to define ETL (`extract, transform, load <https://en.wikipedia.org/wiki/Extract,_transform,_load>`_) processes that fit the user's business case.
+Arches includes basic ETL modules. The modules can be accessed in the :ref:`Bulk Data Manager <bulk data manager>`,
 which currently supports import, export, and edit.
 A user can add a custom module, in addition to the modules inlcuded in the Arches.
 
