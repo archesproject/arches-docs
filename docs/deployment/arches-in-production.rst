@@ -1,6 +1,15 @@
-#################
+
+#####################################
+Introduction to Production Deployment
+#####################################
+
+This guide will walk you through the steps necessary to deploy Arches in a production environment. This guide assumes that you have already installed Arches and have a working Arches installation. If you have not yet installed Arches, please see the :ref:`Installing Core Arches`. We recommend review of `Django's recommended checklist <https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/>`_ for production deployments in order to better understand how to deploy your Arches instances in production environments.
+
+
+
+
 Set DEBUG = False
-#################
+=================
 
 Most importantly, you should never run Arches in production with ``DEBUG = True``. Open your ``settings.py`` file (or ``settings_local.py``) and set ``DEBUG = False`` (just add that line if necessary).
 
@@ -17,9 +26,35 @@ Turning off the Django debug mode will:
     You must set up a real webserver, like Apache or Nginx, to serve your app. See :ref:`Serving Arches with Apache`.
 
 
-################################
+
+
+Add Allowed Hosts and CSRF Trusted Origins to Settings
+======================================================
+
+``ALLOWED_HOSTS`` acts as a critical safeguard against HTTP Host header attacks, ensuring that your Arches application only responds to valid hostnames. On the other hand, ``CSRF_TRUSTED_ORIGINS`` is instrumental in fortifying your application against Cross-Site Request Forgery (CSRF) attacks by specifying trusted origins for the submission of forms. Both of these settings are required for Arches to work properly in production. These settings are described in more detail in the `Django documentation <https://docs.djangoproject.com/en/5.0/ref/settings/#allowed-hosts>`_.
+
+
+1. *Allowed Hosts*: In ``settings.py`` (sometimes set via ``settings_local.py``) you will need to add multiple items to the list of ``ALLOWED_HOSTS``. Consider the following example:
+
+.. code-block:: python
+
+  ALLOWED_HOSTS = ["my-arches-site.org", "localhost", "127.0.0.1",]
+
+In that example, "my-arches-site.org" is the public domain name. But the items "localhost", "127.0.0.1" are all local network locations where Arches is deployed. You may need all of these for Arches to work properly.
+
+2. *CSRF Trusted Origins*: Django 4.0, a dependency of Arches 7.5 introduced a new setting for security purposes. In the ``settings.py`` (sometimes set via ``settings_local.py``) you will need to add multiple items to the list of ``CSRF_TRUSTED_ORIGINS``. If you don't include this, users will encounter CSRF error (403) then they attempt to login. See the `Django documentation for details <https://docs.djangoproject.com/en/5.0/releases/4.0/#csrf-trusted-origins-changes>`_. Note the following items (with the ``https://`` prefix):
+
+.. code-block:: python
+
+  CSRF_TRUSTED_ORIGINS = ["https://my-arches-site.org", "https://www.my-arches-site.org",]
+
+
+
+
+
+
 Build Production Frontend Assets
-################################
+================================
 
 In deploying Arches in production, have a choice in how you bundle frontend assets (CSS, Javascript, etc).
 
