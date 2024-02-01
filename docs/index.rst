@@ -13,8 +13,8 @@ This documentation primarily aims to provide guidance with Arches installation, 
 -----------------------------------
 
 
-Documentation Topics
-====================
+Table of Contents: Documentation Topics
+=======================================
 
 The documentation is organized into the following sections. It is recommended to start with the `Getting Started and Installation` section if you are new to Arches.
 
