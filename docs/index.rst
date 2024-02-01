@@ -13,30 +13,33 @@ This documentation primarily aims to provide guidance with Arches installation, 
 
 Documentation Topics
 --------------------
+
+The documentation is organized into the following sections. It is recommended to start with the `Getting Started and Installation` section if you are new to Arches.
+
+
 .. toctree::
-    :caption: Getting Started
-    :maxdepth: 1
+    :caption: Getting Started and Installation
+    :maxdepth: 2
 
     introduction/index
-    introduction/releases
     installing/index
 
 .. toctree::
-    :caption: For Arches Users
-    :maxdepth: 1
+    :caption: For Arches Administrators and Users
+    :maxdepth: 2
 
     configuring/index
     administering/index
     user-guide/index
 
 .. toctree::
-    :caption: For Developers
-    :maxdepth: 1
+    :caption: For Developers and Software Customization
+    :maxdepth: 2
 
     developing/index
 
 .. toctree::
-    :caption: Deploying Arches
-    :maxdepth: 1
+    :caption: Deploying Arches on Networks for Production
+    :maxdepth: 2
 
     deployment/index
