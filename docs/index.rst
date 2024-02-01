@@ -70,5 +70,3 @@ This section provides information on how to deploy Arches on a production server
     :maxdepth: 2
 
     deployment/index
-
------------------------------------
