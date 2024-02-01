@@ -35,7 +35,7 @@ This style guide for Arches is built on top of the standard Vue.js and TypeScrip
 
 Any coding style, formatting, or conventions not explicitly covered in this document should be referenced from the official Vue.js and TypeScript style guides. It's important to maintain consistency with these standard guidelines to ensure compatibility and familiarity for developers working with Vue.js and TypeScript projects.
 
-For Vue.js, you can refer to the official Vue.js style guide [here](https://vuejs.org/style-guide/). Similarly, for TypeScript, you can refer to the official TypeScript style guide [here](https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html).
+For Vue.js, you can refer to the official style guide [here](https://vuejs.org/style-guide/). Similarly, for TypeScript, you can refer to the official TypeScript style guide [here](https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html).
 
 Please consult these references for any conventions or guidelines not addressed in this style guide.
 
@@ -45,7 +45,7 @@ This style guide is a living document that evolves over time. We welcome contrib
 
 ## Integrating a Vue Component
 
-When integrating Vue-based views, plugins, or reports into the Arches framework, developers should utilize the `createVueApplication` function provided at `utils/create-vue-application`. This function is specifically designed to facilitate the integration of Vue.js components within the Arches environment, ensuring seamless compatibility and optimal performance by abstracting interactions with the i18n API and various current and future Vue plugins, such as PrimeVue.
+When integrating Vue-based views, plugins, or reports into the Arches framework, developers should utilize the `createVueApplication` function provided at `utils/create-vue-application`. This function is specifically designed to facilitate the integration of Vue components within the Arches environment, ensuring seamless compatibility and optimal performance by abstracting interactions with the i18n API and various current and future Vue plugins, such as PrimeVue.
 
 However, it's important to note that while the `createVueApplication` function is suitable for integrating most Vue-based components, widgets require different render states and are not yet supported. As such, developers should exercise caution when attempting to integrate widgets using this function. We hope to resolve this in the near future.
 
