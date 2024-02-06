@@ -77,14 +77,16 @@ Example:
 ```
 <script setup>
 import { ref } from 'vue';
-import UserProfileHeader from './UserProfileHeader.vue';
-import UserProfileBio from './UserProfileBio.vue';
-import UserProfileActions from './UserProfileActions.vue';
+import { User } from '@/types/User';
 
-const user = ref({
+import UserProfileActions from '@/UserProfileActions.vue';
+import UserProfileBio from '@/UserProfileBio.vue';
+import UserProfileHeader from '@/UserProfileHeader.vue';
+
+const user = ref<User>({
   name: 'John Doe',
   email: 'john@example.com',
-  bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+  bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
 });
 </script>
 
@@ -117,14 +119,14 @@ Example:
 - src/
     - components/
         - UserProfile/
-            - UserProfileHeader.vue
-            - UserProfileBio.vue
-            - UserProfileActions.vue
             - UserProfile.vue
+            - UserProfileActions.vue
+            - UserProfileBio.vue
+            - UserProfileHeader.vue
         - Map/
+            - Map.vue
             - MapHeader.vue
             - MapSidebar.vue
-            - Map.vue
     - views
         - UserProfileView.vue
     - reports
@@ -132,7 +134,7 @@ Example:
     - widgets
         - MapWidget.vue
 
-As Arches moves forward with integrating components from Vue into Knockout, we find it essential to adopt a non-standard directory structure to accommodate this scenario. For instance it's standard practice for most Vue applications to have a top-level `App.vue` file which has one or many child components that exist in the `components` directory. However since Arches will have multiple Vue applications running per project, possibly even per page, there must be some deliniation between these top-level components. The pattern exemplified above illustrates a way to have such deliniation while maintaining a scalable and navigatiable structure. Essentially, top-level components live in `views`, `reports`, `widgets`, etc, while their child components live in the `components` directory. The `components` subdirectories each contain a root component which is named the same as the subdirectory.
+As Arches moves forward with integrating components from Vue into Knockout, we find it essential to adopt a non-standard directory structure to accommodate this scenario. For instance it's standard practice for most Vue applications to have a top-level `App.vue` file which has one or many child components that exist in the `components` directory. However since Arches will have multiple Vue applications running per project, possibly even per page, there must be some delineation between these top-level components. The pattern exemplified above illustrates a way to have such delineation while maintaining a scalable and navigable structure. Essentially, top-level components live in `views`, `reports`, `widgets`, etc, while their child components live in the `components` directory. The `components` subdirectories each contain a root component which is named the same as the subdirectory.
 
 By utilizing this directory structure, we ensure that components from Vue can seamlessly integrate with Knockout components while maintaining clarity and organization in our codebase. 
 
@@ -174,11 +176,11 @@ We have also added the `eslint:check`, `eslint:watch`, `ts:check`, and `ts:watch
 
 During development, developers should run the TypeScript and ESLint `:watch` linters in separate processes to ensure efficient linting of the current project. By running these linters in separately, each process is dedicated to linting the current project or application. However, it's important to note that if you're running multiple projects or applications concurrently, you'll need a separate process for each project to ensure accurate linting results. 
 
-For instance, if you're developing an Arches project and an Arches application, you will now likely have six concurrent processes: The project-level Django server, the project-level webpack development server, the project-level typescript watcher, the project-level eslint watcher, the application-level typescript watcher, and the application-level eslint watcher.
+For instance, if you're developing an Arches project and an Arches application, you will now likely have six concurrent processes: The project-level Django server, the project-level webpack development server, the project-level typescript watcher, the project-level eslint watcher, the application-level typescript watcher, and the application-level eslint watcher. Alternatively you could not run the eslint watcher nor the typescript watcher, and rely on the `build_development` and `build_production` for enforcement.
 
 ### Frontend dependency declaration
 
-When adding any new frontend dependencies to your Arches project or application, it's important to declare their types in the `declarations.d.ts` file. This file serves as a central location for declaring global types and interfaces that are used across your project or application. Declaring types for frontend dependencies in `declarations.d.ts` ensures that TypeScript recognizes and understands the types provided by these modules, enabling accurate type checking and providing better IntelliSense support in your codebase. 
+When adding any new frontend dependencies to your Arches project or application, it's important to declare their types in the `declarations.d.ts` file. This file serves as a central location for declaring global types and interfaces that are used across your project or application. Declaring types for frontend dependencies in `declarations.d.ts` ensures that TypeScript recognizes and understands the types provided by these modules, enabling accurate type checking and providing better IntelliSense support in your editor. 
 
 Example:
 ```
@@ -287,7 +289,7 @@ TBD - This will be included once a testing pattern has been explored.
 
 ## Example Arches Vue Component Integration
 
-Below is an example of creating a new plugin for Arches. This example includes import patterns, TypeScript patters, internationalization, the composition API, single-file components, and Vue/Knockout integration
+Below is an example of creating a new plugin for Arches. This example includes import patterns, TypeScript patterns, internationalization, the composition API, single-file components, and Vue/Knockout integration
 
 ```
 // media/js/views/components/plugins/my-plugin.js
@@ -300,7 +302,7 @@ import MyPluginTemplate from 'templates/views/components/plugins/my-plugin.htm';
 
 ko.components.register('my-plugin', {
     viewModel: function() {
-        createVueApplication(MyPluginVueApp).then(vueApp => {
+        createVueApplication(MyPlugin).then(vueApp => {
             vueApp.mount('#my-plugin-mounting-point');
         });
     },
