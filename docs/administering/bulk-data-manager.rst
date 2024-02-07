@@ -78,7 +78,16 @@ The Excel template file also includes a worksheet called "metadata". The metadat
 
 .. note::
     **Bulk Uploading Files**
-    If you want to import resource instances that include datatype "file-list" nodes, then the files associated with those nodes will need to be imported along with the Excel workbook. To do this, zip compress a folder that includes the Excel workbook to be imported along with the associated files (such as image files) named in the "file-list" nodes.
+    If you want to import resource instances that include datatype "file-list" nodes, then the files associated with those nodes will need to be imported along with the Excel workbook. To do this, zip compress a folder that includes the Excel workbook to be imported along with the associated files (such as image files) named in the "file-list" nodes. The files (such as image files) should be in the same folder as the Excel workbook (or the import CSV). The zip file should be named the same as the Excel workbook(or the import CSV). The Bulk Data Manager will recognize the zip file and import the files along with the Excel workbook (or the import CSV). A valid zip file structure would look like this:
+
+    .. code-block:: bash
+
+        my_import.zip
+        ├── my_import.csv
+        ├── image1.jpg
+        ├── image2.jpg
+        ├── image3.jpg
+        └── image4.jpg
 
 Edit
 ====
