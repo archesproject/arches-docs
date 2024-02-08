@@ -25,8 +25,8 @@ about your module, as well as its main logic.
     ``/my_project/my_project/etl_modules/sample_etl_module.py``
 
 
-Defining the details
-===============================
+Defining the Details
+====================
 
 The first step in creating a ETL Module is defining the ``details``
 in the top of your Function’s ``.py`` file.
@@ -107,7 +107,7 @@ The importers and editors follow the pattern of
 - indexing the database
 - The progress needs to be saved in ``load_event`` table, if you want to access the status and the information about the etl.
 
-If you want to take advantage of the pattern, you can start your development by extending 
+If you want to take advantage of the pattern, you can start your development by extending
 the ``BaseImportModule`` for an importer or ``BaseBulkEditor`` for an editor,
 which will provide the basic functionality such as reverse (undo the import or edit).
 Then, you may want to write your own functions or overwrite the excisting ones
@@ -168,3 +168,18 @@ To unregister your ETL Module, you can load the changes to Arches with:
 .. code-block:: bash
 
     python manage.py etl_module unregister --name Sample ETL Module
+
+
+Examples to Get Started with ETL Modules
+========================================
+
+As is the case with other custom components in Arches, an html file and a javascript file are needed to design the user interface of your custom component. To help guide development of a custom ETL module, you can look at the files associated with the **Tile Excel Loader** that comes standard with core Arches. These are the component files for that module:
+
+* `tile-excel-importer.js <https://github.com/archesproject/arches/blob/stable/7.5.1/arches/app/media/js/views/components/etl_modules/tile-excel-importer.js>`_
+* `tile-excel-importer.htm <https://github.com/archesproject/arches/blob/stable/7.5.1/arches/app/templates/views/components/etl_modules/tile-excel-importer.htm>`_
+
+Note that the ``tile-excel-importer.js`` javascript file imports a view model called `excel-file-import.js <https://github.com/archesproject/arches/blob/stable/7.5.1/arches/app/media/js/viewmodels/excel-file-import.js>`_ where most of the logic is located.
+
+You will notice that there are calls to submit that send strings such as "read" and "write" back to the Arches server. These strings are passed back to your module's python file. In other words, calling `await self.submit('start'); <https://github.com/archesproject/arches/blob/stable/7.5.1/arches/app/media/js/viewmodels/excel-file-import.js#L114>`_ will call the corresponding start method in your module.
+
+That flexibility gives you gives one a great deal of freedom to implement custom logic in an ETL module.
