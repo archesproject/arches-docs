@@ -182,4 +182,4 @@ Note that the ``tile-excel-importer.js`` javascript file imports a view model ca
 
 You will notice that there are calls to submit that send strings such as "read" and "write" back to the Arches server. These strings are passed back to your module's python file. In other words, calling `await self.submit('start'); <https://github.com/archesproject/arches/blob/stable/7.5.1/arches/app/media/js/viewmodels/excel-file-import.js#L114>`_ will call the corresponding start method in your module.
 
-That flexibility gives you gives one a great deal of freedom to implement custom logic in your ETL module.
+That flexibility gives you gives one a great deal of freedom to implement custom logic in an ETL module.
