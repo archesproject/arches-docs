@@ -1,6 +1,6 @@
 {
     "pluginid": "b122ede7-24a6-4fc5-a3cc-f95bfa28b1cf",
-    "name": "Sample Plugin",
+    "name": {"en": "Sample Plugin"},
     "icon": "fa fa-share-alt",
     "component": "views/components/plugins/sample-plugin",
     "componentname": "sample-plugin",

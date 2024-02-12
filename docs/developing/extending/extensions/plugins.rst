@@ -4,7 +4,7 @@ Plugins
 
 Plugins allow a developer to create an independent page in Arches that is accessible from the main navigation menu.
 For example, you may need a customized way of visualizing your resource data. A plugin would enable you to design such an interface.
-Plugins, like widgets and card components rely only on front-end code. Ajax queries, generally calls to the API, must be used to access any server side data.
+Plugins, like widgets and card components rely only on front-end code. Ajax queries, generally calls to the API, must be used to access any server-side data.
 
 Registering your Plugin
 ===============================
@@ -23,7 +23,7 @@ looking a lot like this sample:
         generate one for you and print it to STDOUT when you register
         the Plugin.
 :name:
-        **Required** The name of your new Plugin, visible when a user hovers over the main navigation menu
+        **Required** The localized name of your new Plugin, visible when a user hovers over the main navigation menu
 :icon:
         **Required** The icon visible in the main navigation menu.
 :component:
