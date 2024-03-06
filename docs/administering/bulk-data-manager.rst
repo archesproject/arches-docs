@@ -10,7 +10,7 @@ Enable the Bulk Data Manager
 ----------------------------
 The Bulk Data Manager is an Arches plugin (see :ref:`Plugins`). This plugin will be installed when you install Arches, but, by default, the Bulk Data Manager will be hidden.
 
-To enable use of the Bulk Data Manager, login to the :ref:`Django Admin User Interface <django admin user interface>` and click the link to "Plugins" under models, click the "Bulk Data Manager", and edit the JSON value for the attribute "Config".
+To enable use of the Bulk Data Manager, login to the :ref:`Django Admin User Interface <django admin user interface>` and click the link to "Plugins" under models, click the "Bulk Data Manager", and edit the JSON value for the attribute "Config". To use the Bulk Data Manager, you will also need to enable Task Management (see :ref:`Task Management` and :ref:`Setting up Supervisord for Celery`).
 
 To enable use of the Bulk Data Manager the Config should be: ``{"show": true}``. To disable use of the Bulk Data Manager, the Config should be: ``{"show": false}``. Once you've made your change, press the "Save" button in the lower right.
 
@@ -156,3 +156,22 @@ The Tile and Branch data export will export data in exactly the same formats use
     :align: center
 
     Example "Branch" Excel export of resource instance data
+
+
+Deleting Stuck Tasks
+====================
+The **Bulk Data Manager** uses worker processes (see :ref:`Task Management`) to perform operations on the database. Occasionally, an operation may fail and reult in a stuck task. If you have a task that is stuck and you want to delete it, you can do so via SQL operations on the database. The relevant tables relating to tasks are ``load_event`` and ``load_staging``. Here is an example of how delete a record in the ``load_event`` table:
+
+.. code-block:: sql
+
+    -- Verify the load_event of interest exists
+    SELECT * FROM load_event WHERE loadid = 'some-load-event-uuid';
+
+Once you've verified the record exists, and this is a record you do want to delete, you can delete it with the following SQL:
+
+.. code-block:: sql
+
+    -- Now delete the load_event record
+    DELETE FROM load_event WHERE loadid = 'some-load-event-uuid';
+
+This may not immediately cause tasks to be removed from the **Bulk Data Manager** queue in the web UI, but it should clear stuck tasks.
