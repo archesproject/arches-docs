@@ -2,6 +2,8 @@
 Installing Core Arches
 ######################
 
+Most of the instructions here will focus on installation of Arches on the Ubuntu distribution of Linux. Arches can also be installed on Windows and macOS, but installation on those operating systems will likely require additional configuration and debugging. 
+
 .. seealso::
 
     If you plan to extend or contribute to Arches, please see :ref:`Creating a Development Environment`.
