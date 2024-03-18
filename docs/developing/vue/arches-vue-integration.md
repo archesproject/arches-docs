@@ -45,26 +45,26 @@ This style guide is a living document that evolves over time. We welcome contrib
 
 ## Integrating a Vue Component
 
-When integrating Vue-based views, plugins, or reports into the Arches framework, developers should utilize the `createVueApp` function provided at `utils/create-vue-application`. This function is specifically designed to facilitate the integration of Vue components within the Arches environment, ensuring seamless compatibility and optimal performance by abstracting interactions with the i18n API and various current and future Vue plugins, such as PrimeVue.
+When integrating Vue-based views, plugins, or reports into the Arches framework, developers should utilize the `createVueApplication` function provided at `utils/create-vue-application`. This function is specifically designed to facilitate the integration of Vue components within the Arches environment, ensuring seamless compatibility and optimal performance by abstracting interactions with the i18n API and various current and future Vue plugins, such as PrimeVue.
 
-However, it's important to note that while the `createVueApp` function is suitable for integrating most Vue-based components, widgets require different render states and are not yet supported. As such, developers should exercise caution when attempting to integrate widgets using this function. We hope to resolve this in the near future.
+However, it's important to note that while the `createVueApplication` function is suitable for integrating most Vue-based components, widgets require different render states and are not yet supported. As such, developers should exercise caution when attempting to integrate widgets using this function. We hope to resolve this in the near future.
 
 Example:
 
 ```
-import createVueApp from 'utils/create-vue-application';
+import createVueApplication from 'utils/create-vue-application';
 import MyVueApplication from '@/MyVueApplication.vue';
 
-createVueApp(MyVueApplication).then(vueApp => {
+createVueApplication(MyVueApplication).then(vueApp => {
     vueApp.mount('#my-vue-application-mounting-point');
 });
 ```
 
-In the provided example, the createVueApp function, imported from `utils/create-vue-application`, streamlines the integration process by handling the necessary setup and configuration steps, allowing developers to focus on building the core functionality of their Vue application.
+In the provided example, the createVueApplication function, imported from `utils/create-vue-application`, streamlines the integration process by handling the necessary setup and configuration steps, allowing developers to focus on building the core functionality of their Vue application.
 
-The `createVueApp` function takes a Vue component (`MyVueApplication` in this case) as its argument, representing the root component of the Vue application. This component encapsulates the entire application logic and user interface.
+The `createVueApplication` function takes a Vue component (`MyVueApplication` in this case) as its argument, representing the root component of the Vue application. This component encapsulates the entire application logic and user interface.
 
-Once the Vue application is created using `createVueApp`, it returns a Vue application instance (`vueApp`), which can then be further manipulated or customized as needed. In the example, the `vueApp` instance is mounted to a specific element in the DOM with the mount method, using the CSS selector `#my-vue-application-mounting-point` to identify the mounting point.
+Once the Vue application is created using `createVueApplication`, it returns a Vue application instance (`vueApp`), which can then be further manipulated or customized as needed. In the example, the `vueApp` instance is mounted to a specific element in the DOM with the mount method, using the CSS selector `#my-vue-application-mounting-point` to identify the mounting point.
 
 ## Single-Responsibility Principle and Component Decomposition
 
@@ -296,13 +296,13 @@ Below is an example of creating a new plugin for Arches. This example includes i
 
 import ko from 'knockout';
 import MyPlugin from '@/plugins/MyPlugin.vue';
-import createVueApp from 'utils/create-vue-application';
+import createVueApplication from 'utils/create-vue-application';
 import MyPluginTemplate from 'templates/views/components/plugins/my-plugin.htm';
 
 
 ko.components.register('my-plugin', {
     viewModel: function() {
-        createVueApp(MyPlugin).then(vueApp => {
+        createVueApplication(MyPlugin).then(vueApp => {
             vueApp.mount('#my-plugin-mounting-point');
         });
     },
