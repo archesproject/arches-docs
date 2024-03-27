@@ -1,6 +1,6 @@
-###########################################
-Orientation to Arches Use of the Django ORM
-###########################################
+############################
+Arches Use of the Django ORM
+############################
 
 Arches is built on Django, a powerful, popular, well-supported and well-documentant Python language web framework. This guide is intented to help guide developers already familiar with Django to better understand the Arches backend. The main focus here will center on how Arches uses the `Django Object Relational Model (ORM) <https://docs.djangoproject.com/en/5.0/topics/db/models/>`_ to power a highly configurable (and semantic, if one chooses to use ontologies) abstract :ref:`Data Model`. 
 
@@ -50,8 +50,63 @@ Using the "Add New Resource" user interface, we can add a Person resource instan
 
 
 
-4. Use a Terminal to Explore the ORM
-------------------------------------
+4. Open a Terminal to Explore the ORM
+-------------------------------------
 Now that you have used the Arches user interface to define a branch, a resource model, and have used these to create a resource instance, we can turn our attention to exploring how this information is represented in the Arches implementation of the Django ORM.
 
+Assuming you’ve activated your virtual environment for Arches, use a terminal to open a shell into the Arches Django application:
+
+.. code-block:: bash
+
+    python manage.py shell
+
+
+Your terminal should display something like this:
+
+.. code-block:: python
+
+    Python 3.11.8 (main, Mar 12 2024, 11:41:52) [GCC 12.2.0] on linux
+    Type "help", "copyright", "credits" or "license" for more information.
+    (InteractiveConsole)
+    >>>
+
+
+5. Import Arches Models and Explore the GraphModel
+--------------------------------------------------
+Now we should import some of the key Django models used by Arches to organize data. After importing these models, we can investigate how Arches represents the "Name" branch and the "Person" resource model that we already created using the user interface.
+
+.. code-block:: python
+
+    Python 3.11.8 (main, Mar 12 2024, 11:41:52) [GCC 12.2.0] on linux
+    Type "help", "copyright", "credits" or "license" for more information.
+    (InteractiveConsole)
+    >>> from arches.app.models.models import ResourceInstance, TileModel, GraphModel
+
+
+Let's first take a look at the GraphModel. The GraphModel is used to store records of both branches and resource models.
+
+
+.. code-block:: python
+
+    >>> gr_qs = GraphModel.objects.all()
+    >>> gr_qs.count()
+    3
+
+
+You'll see we have 3 objects in our queryset to select all items from the GraphModel. But we only made one branch, and one resource model! Where does the other GraphModel object come from?
+
+.. code-block:: python
+
+    >>> gr_qs = GraphModel.objects.all()
+    >>> gr_qs.count()
+    3
+
+
+To answer this question, let's investigtate further by looking at an individual object from the query set. The ``.__dict__`` outputs the object as a dict, making it easier to see the information that it contains.
+
+.. code-block:: python
+
+    >>> gr_obj = gr_qs.last()  # Get the last object in this queryset
+    >>> gr_obj.__dict__
+    
 
