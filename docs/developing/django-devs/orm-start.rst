@@ -95,13 +95,6 @@ Let's first take a look at the GraphModel. The GraphModel is used to store recor
 
 You'll see we have 3 objects in our queryset to select all items from the GraphModel. But we only made one branch, and one resource model! Where does the other GraphModel object come from?
 
-.. code-block:: python
-
-    >>> gr_qs = GraphModel.objects.all()
-    >>> gr_qs.count()
-    3
-
-
 To answer this question, let's investigtate further by looking at an individual object from the query set. The ``.__dict__`` outputs the object as a dict, making it easier to see the information that it contains.
 
 .. code-block:: python
