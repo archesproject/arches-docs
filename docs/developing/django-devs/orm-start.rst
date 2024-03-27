@@ -9,7 +9,7 @@ The Arches :ref:`Data Model` documentation provides an invaluable reference to u
 
 Exploring a (Nearly) Empty Database
 ===================================
-In this guide, we will start with a freshly installed and nearly empty Arches instance to make exploration easier. If you haven't yet installed Arches, please review and follow this :ref:`Installing` guide. We will then use the Arches Designer to set up a simple Branch and a Resource Model. 
+In this guide, we will start with a freshly installed and nearly empty Arches instance to make exploration easier. If you haven't yet installed Arches, please review and follow this :ref:`Installing` guide. To avoid permissions complications, login to your new Arches instance as an administrator (super user). We will then use the :ref:`Arches Designer` to set up a simple Branch and a Resource Model. 
 
 
 
