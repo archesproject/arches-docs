@@ -213,3 +213,91 @@ As expected, since we've only made 1 resource instance using the "Person" resaou
 
 
 
+7. Resource Instances and their Description
+-------------------------------------------
+In the example above, you'll see that the "descriptors" attribute has a dictionary keyed by different language codes (in this case 'ar', 'en', and 'he'). The descriptors attribute is used by Arches to populate information about resource instances in the user interface. In the example above, these descriptors have yet to be configured. Let's see what happens when we do configure resource instance descriptors.
+
+Use the Arches Graph designer and navigate to the Resource Models tab. Hover over the "Person" resource model until you see the "Manage" button, and select the "Manage Functions" option. You can then configure the "Display Name" to use the "Name" (Card) with two child nodes "Given Name" and "Surname" similar to below: 
+
+.. figure:: ../../images/dev/arches-designer-functions.png
+    :width: 100%
+    :align: center
+
+    Arches Designer to configure the Display Name for the "Person" resource model
+
+
+Once you have finished this, click the "Re-index" action for your changes to take effect and so the changes become evident in the Arches search. Turning back to the terminal and the Python for Arches, we can see our changes on the name descriptor are reflected in the resource instance. The first thing is to make sure our resource instance object gets updated to reflect its current state in the database. Django model instance objects have a built in ``refresh_from_db()`` method to do this:
+
+.. code-block:: python
+
+    >>> person_r_obj.refresh_from_db()
+    >>> person_r_obj.__dict__
+    {'_state': <django.db.models.base.ModelState object at 0x7f400ef5d490>, 
+    'resourceinstanceid': UUID('e9012e8c-f1cc-4ade-84ea-9b73ed8cccf9'), 
+    'graph_id': UUID('c5eba1b7-aa2e-45bd-abc1-4c64df1bc7e4'), 
+    'graph_publication_id': UUID('b338fef6-eba6-11ee-8bd0-0242ac120005'), 
+    'name': <arches.app.models.fields.i18n.I18n_String object at 0x7f400f5cf110>, 
+    'descriptors': {'ar': {'name': ',  ', 'map_popup': None, 'description': None}, 
+    'en': {'name': 'Summers,  Buffy', 'map_popup': None, 'description': None}, 
+    'he': {'name': ',  ', 'map_popup': None, 'description': None}}, 
+    'legacyid': None, 'createdtime': datetime.datetime(2024, 3, 26, 14, 46, 41, 394410), 
+    'tiles': [], 'descriptor_function': None, 
+    'serialized_graph': None, 'node_datatypes': None}
+
+
+You can see that there's a change in the 'descriptors' attribute. This is still a little hard to read. Fortunately, the Resource proxy model has some useful functions that can help us understand this object. Here's an example of using a method that comes with the Resource proxy model. Note also the name attribute (a I18n_String object) will also return the same value:
+
+.. code-block:: python
+
+    >>> person_r_obj.displayname()
+    'Summers,  Buffy'
+    >>> person_r_obj.name.__str__()
+    'Summers,  Buffy'
+
+
+Congratulations! You can now see how some Arches information configured and rendered in the browser is represented in the Django ORM used by Arches. 
+
+
+8. Resource Instances and their Tile Data
+-----------------------------------------
+Let's continue this investigation by making a TileModel queryset filtered by the resource instance in our Person model. The following makes this query set displays its count.
+
+.. code-block:: python
+
+    >>> from arches.app.models.models import TileModel
+    >>> t_qs = TileModel.objects.filter(resourceinstance=person_r_obj)
+    >>> t_qs.count()
+    1
+
+We can then explore what the one TileModel object looks like when rendered as a Python dictionary. Doing so reveals how Arches represents a resource instance's descriptive attributes as "tile data". 
+
+.. code-block:: python
+
+    >>> t_obj = t_qs[0]
+    >>> t_obj.__dict__
+    {'_state': <django.db.models.base.ModelState object at 0x7f400ee3d150>, 
+    'tileid': UUID('c7194a01-ab74-44dd-9c52-a12ded792fdc'), 
+    'resourceinstance_id': UUID('e9012e8c-f1cc-4ade-84ea-9b73ed8cccf9'), 
+    'parenttile_id': None, 
+    'data': {'a9d08578-eba6-11ee-be3e-0242ac120005': {'ar': {'value': '', 'direction': 'rtl'}, 
+    'de': {'value': '', 'direction': 'ltr'}, 'el': {'value': '', 'direction': 'ltr'}, 
+    'en': {'value': 'Buffy', 'direction': 'ltr'}, 'fr': {'value': '', 'direction': 'ltr'}, 
+    'he': {'value': '', 'direction': 'rtl'}, 'pt': {'value': '', 'direction': 'ltr'}, 
+    'ru': {'value': '', 'direction': 'ltr'}, 'zh': {'value': '', 'direction': 'ltr'}, 
+    'en-US': {'value': '', 'direction': 'ltr'}}, 
+    'a9d08604-eba6-11ee-be3e-0242ac120005': {'ar': {'value': '', 'direction': 'rtl'}, 
+    'de': {'value': '', 'direction': 'ltr'}, 'el': {'value': '', 'direction': 'ltr'}, 
+    'en': {'value': 'Summers', 'direction': 'ltr'}, 'fr': {'value': '', 'direction': 'ltr'}, 
+    'he': {'value': '', 'direction': 'rtl'}, 'pt': {'value': '', 'direction': 'ltr'}, 
+    'ru': {'value': '', 'direction': 'ltr'}, 'zh': {'value': '', 'direction': 'ltr'}, 
+    'en-US': {'value': '', 'direction': 'ltr'}}}, 
+    'nodegroup_id': UUID('a9d083d4-eba6-11ee-be3e-0242ac120005'), 
+    'sortorder': 0, 'provisionaledits': None}
+
+
+The data attribute of this TileModel object has a dictionary with a nested structure keyed first by ``nodeid`` and then by language codes (see `comments in the source code here <https://github.com/archesproject/arches/blob/stable/7.5.1/arches/app/models/models.py#L1070>`_). To learn more about how the ``nodeid`` is used in representing graphs of data, please review :ref:`Graph Definition`.
+
+
+9. Concluding the Tour
+----------------------
+As shown above, Arches uses the Django ORM to represent data in using abstract models. In order to gain mastery over Arches data modeling, there are more implementation details to understand, and these will be further described in future updates to this documentation. 
