@@ -139,7 +139,7 @@ As you can see, the value of the I18n_String object is a JSON formatted string. 
 Now we have a more clear picture of what's contained in the GraphModel queryset. The 'Arches System Settings' object was created in the process that set up the current Arches project. The two GraphModel objects that we created ('Person' and 'Name') are also present in the GraphModel queryset. The ``isresource`` attribute indicates that the 'Person' GraphModel object is a resource model. We can get an individual GraphModel object for our "Person" resource model by querying the Django ORM as so: 
 
 .. code-block:: python
-    
+
     >>> person_resource_model_obj = GraphModel.objects.get(graphid='c5eba1b7-aa2e-45bd-abc1-4c64df1bc7e4')
     >>> person_resource_model_obj.name.__str__()
     'Person'
@@ -194,7 +194,7 @@ This particular resource instance that's associated with the 'Arches System Sett
     >>> person_r_qs.count()
     1
 
-As expected, since we've only made 1 resource instance using the "Person" resaource model the ``person_r_qs`` queryset has 1 object in it. Let's a take a look at this Person resource instance:
+As expected, since we've only made 1 resource instance using the "Person" resource model the ``person_r_qs`` queryset has 1 object in it. Let's a take a look at this Person resource instance:
 
 .. code-block:: python
 
