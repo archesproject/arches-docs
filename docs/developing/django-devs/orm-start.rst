@@ -125,6 +125,7 @@ That looks a little difficult to understand especially because the name attribut
     >>> gr_obj.name.__str__()
     'Arches System Settings'
 
+
 As you can see, the value of the I18n_String object is a JSON formatted string. Language codes ("en" in this case) are used as keys to different multi-lingual strings. One can get the string value for an I18n_String object, in the default language, with ``__str__()``.  So to output a more legible overview of try GraphModel queryset, try:
 
 .. code-block:: python
@@ -138,9 +139,11 @@ As you can see, the value of the I18n_String object is a JSON formatted string. 
 Now we have a more clear picture of what's contained in the GraphModel queryset. The 'Arches System Settings' object was created in the process that set up the current Arches project. The two GraphModel objects that we created ('Person' and 'Name') are also present in the GraphModel queryset. The ``isresource`` attribute indicates that the 'Person' GraphModel object is a resource model. We can get an individual GraphModel object for our "Person" resource model by querying the Django ORM as so: 
 
 .. code-block:: python
+    
     >>> person_resource_model_obj = GraphModel.objects.get(graphid='c5eba1b7-aa2e-45bd-abc1-4c64df1bc7e4')
     >>> person_resource_model_obj.name.__str__()
     'Person'
+
 
 
 6. Resource Instances and their GraphModels
