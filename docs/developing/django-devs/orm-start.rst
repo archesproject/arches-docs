@@ -12,6 +12,10 @@ Exploring a (Nearly) Empty Database
 In this guide, we will start with a freshly installed and nearly empty Arches instance to make exploration easier. If you haven't yet installed Arches, please review and follow this :ref:`Installing` guide. To avoid permissions complications, login to your new Arches instance as an administrator (super user). We will then use the :ref:`Arches Designer` to set up a simple Branch and a Resource Model. 
 
 
+.. important::
+
+    + The UUIDs will be randomly generated and differ from these examples. You'll need to replace UUID identifiers with those present in your own Arches instance.
+
 
 1. Build a Branch
 -----------------
@@ -80,7 +84,7 @@ Now we should import some of the key Django models used by Arches to organize da
     Python 3.11.8 (main, Mar 12 2024, 11:41:52) [GCC 12.2.0] on linux
     Type "help", "copyright", "credits" or "license" for more information.
     (InteractiveConsole)
-    >>> from arches.app.models.models import ResourceInstance, TileModel, GraphModel
+    >>> from arches.app.models.models import GraphModel
 
 
 Let's first take a look at the GraphModel. The GraphModel is used to store records of both branches and resource models.
@@ -131,5 +135,81 @@ As you can see, the value of the I18n_String object is a JSON formatted string. 
     (UUID('8d7926ae-dc3d-4f77-be06-cd8a9e03b01a'), 'Name', False)]
 
 
-Now we have a more clear picture of what's contained in the GraphModel queryset. The 'Arches System Settings' object was created in the Arches installation process. The two GraphModel objects that we created ('Person' and 'Name') are also present in the GraphModel queryset. The ``isresource`` attribute indicates that the 'Person' GraphModel object is a resource model.
+Now we have a more clear picture of what's contained in the GraphModel queryset. The 'Arches System Settings' object was created in the process that set up the current Arches project. The two GraphModel objects that we created ('Person' and 'Name') are also present in the GraphModel queryset. The ``isresource`` attribute indicates that the 'Person' GraphModel object is a resource model. We can get an individual GraphModel object for our "Person" resource model by querying the Django ORM as so: 
+
+.. code-block:: python
+    >>> person_resource_model_obj = GraphModel.objects.get(graphid='c5eba1b7-aa2e-45bd-abc1-4c64df1bc7e4')
+    >>> person_resource_model_obj.name.__str__()
+    'Person'
+
+
+6. Resource Instances and their GraphModels
+-------------------------------------------
+Now that we've explored the GraphModel and I18n_String objects, let's take a look at how Arches uses the Django ORM to manage "business data". In the context of Arches, "business data" means the database records (resource instances and their descriptions) managed within an Arches instance. At this point, we're assuming you have created a "Person" resource instance as discussed in Step 3 above. To start exploring business data, start with the following:
+
+.. code-block:: python
+
+    >>> from arches.app.models.models import ResourceInstance
+    >>> from arches.app.models.resource import Resource
+
+
+In this case ``Resource`` is a proxy model (see `Django's documentation for proxy models <https://docs.djangoproject.com/en/5.0/topics/db/models/#proxy-models>`_) for ``ResourceInstance``. The proxy model ``Resource`` adds some additional Python methods to the ``ResourceInstance`` model. Most of the discussion below will focus on use of the ``Resource`` proxy model. So let's make a Resource queryset and inspect the first object within this queryset:
+
+.. code-block:: python
+
+    >>> r_qs = Resource.objects.all()
+    >>> r_obj = r_qs.first()
+    >>> r_obj.__dict__
+    {'_state': <django.db.models.base.ModelState object at 0x7f400f5f3150>, 
+    'resourceinstanceid': UUID('a106c400-260c-11e7-a604-14109fd34195'), 
+    'graph_id': UUID('ff623370-fa12-11e6-b98b-6c4008b05c4c'), 
+    'graph_publication_id': UUID('f0a0bf6a-65af-46f2-9c08-62e21a56dffb'), 
+    'name': <arches.app.models.fields.i18n.I18n_String object at 0x7f400faa7010>, 
+    'descriptors': {'ar': {'name': None, 'map_popup': None, 'description': None}, 
+    'en': {'name': None, 'map_popup': None, 'description': None}, 
+    'he': {'name': None, 'map_popup': None, 'description': None}}, 
+    'legacyid': 'a106c400-260c-11e7-a604-14109fd34195', 
+    'createdtime': datetime.datetime(2024, 3, 14, 13, 58, 48, 564559), 
+    'tiles': [], 'descriptor_function': None, 
+    'serialized_graph': None, 'node_datatypes': None}
+
+
+
+We can see right away that this Resource object has a graph_id that matches the graph_id of the 'Arches System Settings' that we explored earlier. You can see this by following the related objects as below:
+
+.. code-block:: python
+
+    >>> r_obj.graph.name.__str__()
+    'Arches System Settings'
+
+
+This particular resource instance that's associated with the 'Arches System Settings' was also created in the process that set up the current Arches project. Let's look for the resource instance from the "Person" model that we created. To do so, we can make a new Resource queryset filtering by resource instances that use the "Person" resource model. 
+
+.. code-block:: python
+
+    >>> person_r_qs = Resource.objects.filter(graph=person_resource_model_obj)
+    >>> person_r_qs.count()
+    1
+
+As expected, since we've only made 1 resource instance using the "Person" resaource model the ``person_r_qs`` queryset has 1 object in it. Let's a take a look at this Person resource instance:
+
+.. code-block:: python
+
+    >>> person_r_obj = person_r_qs[0]
+    >>> person_r_obj.graph.name.__str__()  # See the 'Person' Resource Model (GraphModel)
+    'Person'
+    >>> person_r_obj.__dict__
+    {'_state': <django.db.models.base.ModelState object at 0x7fb15ef2ad50>, 
+    'resourceinstanceid': UUID('e9012e8c-f1cc-4ade-84ea-9b73ed8cccf9'), 
+    'graph_id': UUID('c5eba1b7-aa2e-45bd-abc1-4c64df1bc7e4'), 
+    'graph_publication_id': UUID('b338fef6-eba6-11ee-8bd0-0242ac120005'), 
+    'name': <arches.app.models.fields.i18n.I18n_String object at 0x7fb15ef29f90>, 
+    'descriptors': {'ar': {'name': None, 'map_popup': None, 'description': None}, 
+    'en': {'name': None, 'map_popup': None, 'description': None}, 
+    'he': {'name': None, 'map_popup': None, 'description': None}}, 
+    'legacyid': None, 'createdtime': datetime.datetime(2024, 3, 26, 14, 46, 41, 394410), 
+    'tiles': [], 'descriptor_function': None, 
+    'serialized_graph': None, 'node_datatypes': None}
+
+
 
