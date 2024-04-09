@@ -46,6 +46,7 @@ Understanding Packages
 
 A package is an external collection of Arches data (resource models, business data, concepts, collections) and customization files (widgets, datatypes, functions, system settings) that you can load into an Arches project.
 
+	No new user starts wit loading a package!
 
 Loading a Package
 -----------------
@@ -56,17 +57,28 @@ To load a package simply run the load_package command using your \*project's man
 
     python manage.py packages -o load_package -s https://github.com/package/archive/branch.zip -db
 
-
+	Are any of these destructive?
 -db    `true` to run setup_db to rebuild your database. default = 'false'
 -ow    `overwrite` to overwrite concepts and collections. default = 'ignore'
+
 -st    `stage` to stage concepts and collections. default = 'stage'
+
+	This requires at least a link to "load to github"!
 -s     a path to a zipfile located on github or locally
+
+	Operaations?
 -o     operation name
 -y     accept defaults (will overwrite existing branches and system settings with those in the package)
+
+	What does this mean: "object's regular `save` method"?
 -bulk  uses `bulk_save` methods which run faster but don't call an object's regular `save` method
 -dev	 loads three test users
 
-If you do not pass the `-db True` to the load_package command, your database will not be recreated. If you already have resource models and branches with the same id as those you are importing, you will be prompted to confirm whether you would like to keep or overwrite each model or branch.
+	How do I decide on this?
+If you do not pass the `-db True` to the load_package command, your database will not be recreated. 
+
+	Id?
+If you already have resource models and branches with the same id as those you are importing, you will be prompted to confirm whether you would like to keep or overwrite each model or branch.
 
 If you pass the `-bulk` argument, know that any resource instances that rely on functions to dynamically create/edit tiles will not be called during package load. Additionally, some logging statements may not print to console during import of reference data. Whereas the default `save` methods create an edit in the edit history for each individual tile created, `-bulk` will instead create a single edit for all tiles, of type: "bulk_create". Resource creation will still be individually saved to edit history.
 
@@ -105,6 +117,7 @@ If you are a developer running the latest arches you probably want to create a p
             python manage.py packages -o load_package -s https://github.com/package/archive/branch.zip -db true
 
 
+	This seems like a logical start...
 Creating a New Package
 ----------------------
 
@@ -121,7 +134,10 @@ The `create_package` command will help you get started by generating the folder 
     -d    full path to the package directory you would like to create
     -o    operation name
 
-#. Below is a list of directories created by the `create_package` command and a brief description of what belongs in each. Be sure not to place files that you do not want loaded into these directories. If, for example, you have draft business_data that is not ready for loading, just add a new directory and stage your files there. Directories other than what is listed below will be ignored by the loader.
+#. Below is a list of directories created by the `create_package` command and a brief description of what belongs in each. 
+
+	Place? Like copy, or move?! 
+Be sure not to place files that you do not want loaded into these directories. If, for example, you have draft business_data that is not ready for loading, just add a new directory and stage your files there. Directories other than what is listed below will be ignored by the loader.
 
     business_data
         Resource instance .csv and corresponding .mapping files, each sharing the same base name.
@@ -177,12 +193,15 @@ Configuring a Package
 
 Two different files are used to define custom settings for your package.
 
+	Is there a model for this?
 - ``package_settings.py``
     The django settings relevant to your project not managed in system settings. For example, you may want to include your time wheel configuration and your analysis SRID settings in this file so that users do not have add these settings manually to their own settings file after loading your package. **This file is copied into your project when the package is loaded.**
 
+	Phrases like " may look like" shouldn't be in a thing called "Documentation"!
 - ``package_config.json``
     This file allows you to configure other parts of the data loading process. For example, the order in which the business data files are loaded. Contents of this file may look like
 
+	I don't know where to start with this :(
     .. code-block:: json
 
           {
