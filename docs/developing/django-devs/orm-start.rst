@@ -50,7 +50,7 @@ Using the "Add New Resource" user interface, we can add a Person resource instan
     :width: 100%
     :align: center
 
-    Adding a resorce instance
+    Adding a resource instance
 
 
 
