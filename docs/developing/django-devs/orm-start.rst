@@ -303,4 +303,4 @@ The data attribute of this TileModel object has a dictionary with a nested struc
 
 9. Concluding the Tour
 ----------------------
-As shown above, Arches uses the Django ORM to represent data in using abstract models. In order to gain mastery over Arches data modeling, there are more implementation details to understand, and these will be further described in future updates to this documentation. 
+As shown above, Arches uses the Django ORM to represent data using python models. In order to gain mastery over Arches data modeling, there are more implementation details to understand, and these will be further described in future updates to this documentation. 
