@@ -263,7 +263,7 @@ Congratulations! You can now see how some Arches information configured and rend
 
 8. Resource Instances and their Tile Data
 -----------------------------------------
-Let's continue this investigation by making a TileModel queryset filtered by the resource instance in our Person model. The following makes this query set displays its count.
+Let's continue this investigation by making a TileModel queryset filtered by the resource instance in our Person model. The following makes this query set display its count.
 
 .. code-block:: python
 
