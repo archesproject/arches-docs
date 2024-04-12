@@ -198,24 +198,6 @@ Example:
 
 ```
 
-### Referencing `this` inside Vue `<template>` tags
-
-When accessing data properties, computed properties, or methods within a Vue component's `<template>` tags, it's essential to explicitly reference `this`. This ensures that TypeScript understands the context and correctly types the data or methods. Failing to use explicit `this` references inside `<template>` tags will result in TypeScript errors.
-
-```
-<script setup lang="ts">
-const message = 'Hello, Vue!';
-
-console.log(message)  // explicit `this` is not required when referencing in <script> tags
-</script>
-
-<template>
-  <div>
-    <p>{{ this.message }}</p>
-  </div>
-</template>
-```
-
 ## Internationalization (i18n)
 
 We utilize the vue3-gettext library for internationalization (i18n) in Vue components. This library provides a convenient way to manage translations and localization within Arches.
@@ -231,7 +213,7 @@ console.log($gettext('Foo!'))
 </script>
 
 <template>
-    <h1 class="foo">{{ this.$gettext("Bar!") }}</h1>
+    <h1 class="foo">{{ $gettext("Bar!") }}</h1>
 </template>
 ```
 
@@ -271,8 +253,8 @@ const increment = () => {
 </script>
 
 <template>
-  <button @click="this.increment">Increment</button>
-  <p class="counter">Count: {{ this.count }}</p>
+  <button @click="increment">Increment</button>
+  <p class="counter">Count: {{ count }}</p>
 </template>
 
 <style scoped>
@@ -328,7 +310,7 @@ console.log($gettext('Foo!'))
 </script>
 
 <template>
-    <h1 class="foo">{{ this.$gettext("Bar!") }}</h1>
+    <h1 class="foo">{{ $gettext("Bar!") }}</h1>
 </template>
 
 <style scoped>
