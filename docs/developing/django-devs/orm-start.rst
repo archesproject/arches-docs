@@ -14,7 +14,7 @@ In this guide, we will start with a freshly installed and nearly empty Arches in
 
 .. important::
 
-    + The UUIDs will be randomly generated and differ from these examples. You'll need to replace UUID identifiers with those present in your own Arches instance.
+    + The UUIDs will be randomly generated and differ from these examples. To test this on your own Arches instance, you'll need to replace UUID identifiers with those present in your own instance.
 
 
 1. Build a Branch
@@ -99,12 +99,12 @@ Let's first take a look at the GraphModel. The GraphModel is used to store recor
 
 You'll see we have 3 objects in our queryset to select all items from the GraphModel. But we only made one branch, and one resource model! Where does the other GraphModel object come from?
 
-To answer this question, let's investigate further by looking at an individual object from the query set. The ``.__dict__`` outputs the object as a dict, making it easier to see the information that it contains.
+To answer this question, let's investigate further by looking at an individual object from the query set. The ``vars()`` method outputs the object as a dict, making it easier to see the information that it contains.
 
 .. code-block:: python
 
     >>> gr_obj = gr_qs.last()  # Get the last object in this queryset
-    >>> gr_obj.__dict__
+    >>> vars(gr_obj)
     {'_state': <django.db.models.base.ModelState object at 0x7f40110d3350>, 
     'graphid': UUID('ff623370-fa12-11e6-b98b-6c4008b05c4c'), 
     'name': <arches.app.models.fields.i18n.I18n_String object at 0x7f40110d18d0>, 
@@ -122,15 +122,15 @@ That looks a little difficult to understand especially because the name attribut
 
     >>> gr_obj.name.value
     '{"en": "Arches System Settings"}'
-    >>> gr_obj.name.__str__()
+    >>> str(gr_obj.name)
     'Arches System Settings'
 
 
-As you can see, the value of the I18n_String object is a JSON formatted string. Language codes ("en" in this case) are used as keys to different multi-lingual strings. One can get the string value for an I18n_String object, in the default language, with ``__str__()``.  So to output a more legible overview of try GraphModel queryset, try:
+As you can see, the value of the I18n_String object is a JSON formatted string. Language codes ("en" in this case) are used as keys to different multi-lingual strings. One can get the string value for an I18n_String object, in the default language, with ``str()``.  So to output a more legible overview of try GraphModel queryset, try:
 
 .. code-block:: python
 
-    >>> [(gr_obj.graphid, gr_obj.name.__str__(), gr_obj.isresource) for gr_obj in gr_qs]
+    >>> [(gr_obj.graphid, str(gr_obj.name), gr_obj.isresource) for gr_obj in gr_qs]
     [(UUID('ff623370-fa12-11e6-b98b-6c4008b05c4c'), 'Arches System Settings', True), 
     (UUID('c5eba1b7-aa2e-45bd-abc1-4c64df1bc7e4'), 'Person', True), 
     (UUID('8d7926ae-dc3d-4f77-be06-cd8a9e03b01a'), 'Name', False)]
@@ -141,7 +141,7 @@ Now we have a more clear picture of what's contained in the GraphModel queryset.
 .. code-block:: python
 
     >>> person_resource_model_obj = GraphModel.objects.get(graphid='c5eba1b7-aa2e-45bd-abc1-4c64df1bc7e4')
-    >>> person_resource_model_obj.name.__str__()
+    >>> str(person_resource_model_obj.name)
     'Person'
 
 
@@ -162,7 +162,7 @@ In this case ``Resource`` is a proxy model (see `Django's documentation for prox
 
     >>> r_qs = Resource.objects.all()
     >>> r_obj = r_qs.first()
-    >>> r_obj.__dict__
+    >>> vars(r_obj)
     {'_state': <django.db.models.base.ModelState object at 0x7f400f5f3150>, 
     'resourceinstanceid': UUID('a106c400-260c-11e7-a604-14109fd34195'), 
     'graph_id': UUID('ff623370-fa12-11e6-b98b-6c4008b05c4c'), 
@@ -182,7 +182,7 @@ We can see right away that this Resource object has a graph_id that matches the 
 
 .. code-block:: python
 
-    >>> r_obj.graph.name.__str__()
+    >>> str(r_obj.graph.name)
     'Arches System Settings'
 
 
@@ -199,9 +199,9 @@ As expected, since we've only made 1 resource instance using the "Person" resour
 .. code-block:: python
 
     >>> person_r_obj = person_r_qs[0]
-    >>> person_r_obj.graph.name.__str__()  # See the 'Person' Resource Model (GraphModel)
+    >>> str(person_r_obj.graph.name)  # See the 'Person' Resource Model (GraphModel)
     'Person'
-    >>> person_r_obj.__dict__
+    >>> vars(person_r_obj)
     {'_state': <django.db.models.base.ModelState object at 0x7fb15ef2ad50>, 
     'resourceinstanceid': UUID('e9012e8c-f1cc-4ade-84ea-9b73ed8cccf9'), 
     'graph_id': UUID('c5eba1b7-aa2e-45bd-abc1-4c64df1bc7e4'), 
@@ -234,7 +234,7 @@ Once you have finished this, click the "Re-index" action for your changes to tak
 .. code-block:: python
 
     >>> person_r_obj.refresh_from_db()
-    >>> person_r_obj.__dict__
+    >>> vars(person_r_obj)
     {'_state': <django.db.models.base.ModelState object at 0x7f400ef5d490>, 
     'resourceinstanceid': UUID('e9012e8c-f1cc-4ade-84ea-9b73ed8cccf9'), 
     'graph_id': UUID('c5eba1b7-aa2e-45bd-abc1-4c64df1bc7e4'), 
@@ -254,7 +254,7 @@ You can see that there's a change in the 'descriptors' attribute. This is still 
 
     >>> person_r_obj.displayname()
     'Summers,  Buffy'
-    >>> person_r_obj.name.__str__()
+    >>> str(person_r_obj.name)
     'Summers,  Buffy'
 
 
@@ -277,7 +277,7 @@ We can then explore what the one TileModel object looks like when rendered as a 
 .. code-block:: python
 
     >>> t_obj = t_qs[0]
-    >>> t_obj.__dict__
+    >>> vars(t_obj)
     {'_state': <django.db.models.base.ModelState object at 0x7f400ee3d150>, 
     'tileid': UUID('c7194a01-ab74-44dd-9c52-a12ded792fdc'), 
     'resourceinstance_id': UUID('e9012e8c-f1cc-4ade-84ea-9b73ed8cccf9'), 
@@ -299,6 +299,34 @@ We can then explore what the one TileModel object looks like when rendered as a 
 
 
 The data attribute of this TileModel object has a dictionary with a nested structure keyed first by ``nodeid`` and then by language codes (see `comments in the source code here <https://github.com/archesproject/arches/blob/stable/7.5.1/arches/app/models/models.py#L1070>`_). To learn more about how the ``nodeid`` is used in representing graphs of data, please review :ref:`Graph Definition`.
+
+
+One can also get tile data for an instance of the Resource proxy model by calling the ``load_tiles()`` method that's defined for that proxy model. This will populate a list (not a queryset) of Tile objects for a given resource instance. 
+
+.. code-block:: python
+
+    >>> person_r_obj.load_tiles()
+    >>> person_r_obj.tiles
+    [<TileModel: TileModel object (c7194a01-ab74-44dd-9c52-a12ded792fdc)>]
+    >>> vars(person_r_obj.tiles[0])
+    {'_state': <django.db.models.base.ModelState object at 0x7f400ee3d150>, 
+    'tileid': UUID('c7194a01-ab74-44dd-9c52-a12ded792fdc'), 
+    'resourceinstance_id': UUID('e9012e8c-f1cc-4ade-84ea-9b73ed8cccf9'), 
+    'parenttile_id': None, 
+    'data': {'a9d08578-eba6-11ee-be3e-0242ac120005': {'ar': {'value': '', 'direction': 'rtl'}, 
+    'de': {'value': '', 'direction': 'ltr'}, 'el': {'value': '', 'direction': 'ltr'}, 
+    'en': {'value': 'Buffy', 'direction': 'ltr'}, 'fr': {'value': '', 'direction': 'ltr'}, 
+    'he': {'value': '', 'direction': 'rtl'}, 'pt': {'value': '', 'direction': 'ltr'}, 
+    'ru': {'value': '', 'direction': 'ltr'}, 'zh': {'value': '', 'direction': 'ltr'}, 
+    'en-US': {'value': '', 'direction': 'ltr'}}, 
+    'a9d08604-eba6-11ee-be3e-0242ac120005': {'ar': {'value': '', 'direction': 'rtl'}, 
+    'de': {'value': '', 'direction': 'ltr'}, 'el': {'value': '', 'direction': 'ltr'}, 
+    'en': {'value': 'Summers', 'direction': 'ltr'}, 'fr': {'value': '', 'direction': 'ltr'}, 
+    'he': {'value': '', 'direction': 'rtl'}, 'pt': {'value': '', 'direction': 'ltr'}, 
+    'ru': {'value': '', 'direction': 'ltr'}, 'zh': {'value': '', 'direction': 'ltr'}, 
+    'en-US': {'value': '', 'direction': 'ltr'}}}, 
+    'nodegroup_id': UUID('a9d083d4-eba6-11ee-be3e-0242ac120005'), 
+    'sortorder': 0, 'provisionaledits': None}
 
 
 9. Concluding the Tour
