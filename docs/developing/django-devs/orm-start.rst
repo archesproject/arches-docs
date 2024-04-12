@@ -156,7 +156,7 @@ Now that we've explored the GraphModel and I18n_String objects, let's take a loo
     >>> from arches.app.models.resource import Resource
 
 
-In this case ``Resource`` is a proxy model (see `Django's documentation for proxy models <https://docs.djangoproject.com/en/5.0/topics/db/models/#proxy-models>`_) for ``ResourceInstance``. The proxy model ``Resource`` adds some additional Python methods to the ``ResourceInstance`` model. Most of the discussion below will focus on use of the ``Resource`` proxy model. So let's make a Resource queryset and inspect the first object within this queryset:
+In this case ``Resource`` is a proxy model (see `Django's documentation for proxy models <https://docs.djangoproject.com/en/stable/topics/db/models/#proxy-models>`_) for ``ResourceInstance``. The proxy model ``Resource`` adds some additional Python methods to the ``ResourceInstance`` model. Most of the discussion below will focus on use of the ``Resource`` proxy model. So let's make a Resource queryset and inspect the first object within this queryset:
 
 .. code-block:: python
 
