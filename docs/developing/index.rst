@@ -15,6 +15,12 @@ If you are considering software development to customize Arches, please read the
     getting-started/arches-and-elasticsearch
 
 .. toctree::
+    :caption: Orientation for Django Developers
+    :maxdepth: 2
+
+    django-devs/orm-start
+
+.. toctree::
     :caption: Reference Guide
     :maxdepth: 2
 
