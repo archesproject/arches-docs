@@ -35,7 +35,9 @@ Arches requires the following software packages to be installed and available. U
 :Elasticsearch 8: - Installers: https://www.elastic.co/downloads/past-releases/elasticsearch-8-5-1
     - Elasticsearch is integral to Arches and can be installed and configured many ways.
       For more information, see :ref:`Arches and Elasticsearch`.
-:GDAL >= 2.2.x: - **Windows** Use the `OSGeo4W installer <https://trac.osgeo.org/osgeo4w/>`_, and choose to install the GDAL package (you don't need QGIS or GRASS). After installation, add ``C:\OSGeo4W64\bin`` to your system's ``PATH`` environment variable.
+:GDAL >= 2.2.x: 
+    - **Windows** Use the `OSGeo4W installer <https://trac.osgeo.org/osgeo4w/>`_, and choose to install the GDAL package (you don't need QGIS or GRASS). After installation, add ``C:\OSGeo4W64\bin`` to your system's ``PATH`` environment variable.
+    - **macOS** (See :ref:`macOS and GDAL, GEOS` below)
 :Node.js 16.x (recommended): - Installation: https://nodejs.org/ (choose the installer appropriate to your operating system).
     - NOTE: Arches may not be compatible with later versions of Node.js (after 16) `(see discussion) <https://community.archesproject.org/t/newbie-v7-install-experience-some-hints-and-tips/1782>`_.
 :Yarn >= 1.22, < 2: - Recommended Installation: https://classic.yarnpkg.com/en/docs/install (One can also install Yarn via `apt` on Linux operating systems, `see example <https://github.com/archesproject/arches/blob/f06b838cf1be23471644f8528a630d65c8bff9a7/arches/install/ubuntu_setup.sh#L51>`_).
@@ -45,6 +47,26 @@ To support long-running task management, like large user downloads, you must ins
 
 :Brokers: - Options: https://docs.celeryproject.org/en/stable/getting-started/first-steps-with-celery.html#choosing-a-broker
     - Once you have a broker installed, read more about :ref:`Task Management` in Arches.
+
+
+macOS and GDAL, GEOS
+--------------------
+Satisfying GDAL and GEOS requirements for **macOS** installations can involve some additional complexity, especially if using the Apple M1 series of ARM-based system-on-a-chip (SoC) hardware. You'll need to install GDAL and GEOS in preparation for installing Python libraries that need this requirement. To install GDAL and GEOS:
+
+.. code-block:: bash
+
+    brew install gdal 
+    brew install geos
+
+Currently, GDAL version 3.8 and GEOS version 3.12 work with Arches running on macOS. Once you've completed installation of dependencies and have created an Arches project (see :ref:`Create a Project`), you will likely need to specify the paths to the GDAL and GEOS libraries in your ``settings.py`` file. Here is an example of what to add to ``settings.py`` in a macOS installation:
+
+.. code-block:: python
+
+    GDAL_LIBRARY_PATH = '/opt/homebrew/Cellar/gdal/3.8.4_3/lib/libgdal.34.3.8.4.dylib'
+    GEOS_LIBRARY_PATH = '/opt/homebrew/Cellar/geos/3.12.1/lib/libgeos_c.dylib'
+
+
+
 
 Scripted Dependency Installation
 --------------------------------
