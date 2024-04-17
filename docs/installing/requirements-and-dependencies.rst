@@ -58,13 +58,14 @@ Satisfying GDAL and GEOS requirements for **macOS** installations can involve so
     brew install gdal 
     brew install geos
 
-Currently, GDAL version 3.8 and GEOS version 3.12 work with Arches running on macOS. Once you've completed installation of dependencies and have created an Arches project (see :ref:`Create a Project`), you will likely need to specify the paths to the GDAL and GEOS libraries in your ``settings.py`` file. Here is an example of what to add to ``settings.py`` in a macOS installation:
+Currently, GDAL version 3.8 and GEOS version 3.12 work with Arches running on macOS. Once you've completed installation of dependencies and have created an Arches project (see :ref:`Create a Project`), you will likely need to specify the paths to the GDAL and GEOS libraries in your ``settings.py`` (or ``settings_local.py``) file. Here is an example of what to add to ``settings.py`` (or ``settings_local.py``) in a macOS installation:
 
 .. code-block:: python
 
     GDAL_LIBRARY_PATH = '/opt/homebrew/Cellar/gdal/3.8.4_3/lib/libgdal.34.3.8.4.dylib'
     GEOS_LIBRARY_PATH = '/opt/homebrew/Cellar/geos/3.12.1/lib/libgeos_c.dylib'
 
+Please note that the actual paths that you need to specify for ``GDAL_LIBRARY_PATH`` and ``GEOS_LIBRARY_PATH`` will vary depending on versions and the specfics of your installation of these dependencies. 
 
 
 
