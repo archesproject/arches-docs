@@ -1093,7 +1093,7 @@ Below is an example of a simple resource model view. If a resource instance has 
             AND record.tiledata->>'677f2c0f-09cc-11e7-b412-6c4008b05c4c'
             != ''
 
-#. We can then define a field be referencing that tile:
+#. We can then define a field by referencing that tile:
 
     .. code-block:: sql
 
