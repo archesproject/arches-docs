@@ -63,7 +63,7 @@ Along the way, you can use the preview button to display the graph in a more gra
 Core Arches Datatypes
 ---------------------
 
-Nodes in Arches must be configured with a "Data Type", and different datatypes store different kinds of information. For example, a **string** datatype is what you should use to store arbitrary text, like the name or description of a resource. A brief description of all datatype options in core Arches follows. Developers and extend Arches by :ref:`creating their own custom datatype <datatypes>`.
+Nodes in Arches must be configured with a "Data Type", and different datatypes store different kinds of information. For example, a **string** datatype is what you should use to store arbitrary text, like the name or description of a resource. A brief description of all datatype options in core Arches follows. Developers can extend Arches by :ref:`creating their own custom datatypes <datatypes>`.
 
 :semantic: A semantic node **does not store data**. Semantic nodes are used where necessary to make symbolic connections between other nodes, generally in order to follow ontological rules. The top node of every graph is a semantic node.
 :string: Stores a string of text. This could be something simple like a name, or more something elaborate like a descriptive paragraph with formatting and hyperlinks.
