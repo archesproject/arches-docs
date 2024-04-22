@@ -1,4 +1,4 @@
-﻿######################
+######################
 Installing Core Arches
 ######################
 
@@ -104,7 +104,7 @@ Create a Project
 
 .. warning::
 
-    On macOS, ``pip install`` will often fail because the installation of ``psycopg`` (a Postgres driver for Python) needs to access Postgres' ``pg_config`` and does so by looking in the ``PATH``. Some methods for installing Postgres on macOS will require one to manually edit their user profile to edit their ZSH configuration file (`see background <https://www.freecodecamp.org/news/how-do-zsh-configuration-files-work/>`_). You'll need to create or update your user's ``.zshrc`` as so:
+    On macOS, ``pip install`` will often fail because the installation of ``psycopg`` (a Postgres driver for Python) needs to access Postgres' ``pg_config`` and does so by looking in the ``PATH``. Some methods for installing Postgres on macOS will require one to manually edit their user profile to edit their profile configuration file e.g. ``.zprofile`` or ``.zshrc`` (`see background <https://www.freecodecamp.org/news/how-do-zsh-configuration-files-work/>`_). You'll need to create or update your user's ``.zshrc`` as so:
 
     .. code-block:: bash
 
@@ -117,7 +117,7 @@ Create a Project
         # Make sure the update to the .zshrc file takes effect
         source ~/.zshrc
 
-    In addition, a macOS installation will likely require some modifications to ``settings.py`` (or ``settings_local.py``) to specify GDAL and GEOS related paths. (See :ref:`macOS and GDAL, GEOS`)
+    In addition, a macOS installation will likely require some modifications to ``settings.py`` (or ``settings_local.py``) in your project directory to specify GDAL and GEOS related paths. (See :ref:`macOS and GDAL, GEOS`)
 
 
 Setup the Database
