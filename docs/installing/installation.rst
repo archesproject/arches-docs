@@ -1,4 +1,4 @@
-﻿######################
+######################
 Installing Core Arches
 ######################
 
@@ -103,6 +103,7 @@ Create a Project
 
     You can add ``--directory path/to/dir`` to change the directory your new project will be created in.
 
+
 .. warning::
 
     On Windows, open ``my_project\my_project\settings_local.py`` and add the following line::
@@ -110,6 +111,25 @@ Create a Project
         GDAL_LIBRARY_PATH = "C:/OSGeo4W64/bin/gdal201.dll"
 
     Be sure to adjust the path as necessary for your GDAL installation, and note the *forward* slashes.
+
+
+.. warning::
+
+    On macOS, ``pip install`` will often fail because the installation of ``psycopg`` (a Postgres driver for Python) needs to access Postgres' ``pg_config`` and does so by looking in the ``PATH``. Some methods for installing Postgres on macOS will require one to manually edit their user profile to edit their profile configuration file e.g. ``.zprofile`` or ``.zshrc`` (`see background <https://www.freecodecamp.org/news/how-do-zsh-configuration-files-work/>`_). You'll need to create or update your user's ``.zshrc`` as so:
+
+    .. code-block:: bash
+
+        # Use a text editor to create or modify your user's .zshrc file
+        nano ~/.zshrc
+
+        # Add this line to the .zshrc file, then save the update.
+        export PATH="/Applications/Postgres.app/Contents/Versions/14/bin:$PATH"
+
+        # Make sure the update to the .zshrc file takes effect
+        source ~/.zshrc
+
+    In addition, a macOS installation will likely require some modifications to ``settings.py`` (or ``settings_local.py``) in your project directory to specify GDAL and GEOS related paths. (See :ref:`macOS and GDAL, GEOS`)
+
 
 Setup the Database
 -------------------
