@@ -101,9 +101,17 @@ The default configuration files in the `conf.d` directory discussed above need u
 After fixing the command syntax, the celery worker should function. However, you may still have trouble getting celery beat to work (https://github.com/archesproject/arches/issues/9243). Celery beat schedules periodic tasks (much like a `crontab` in a Linux operating system) using a Python implementation. In many cases, Arches will function without (evident) problems even if celery beat does not work. However, if you have workarounds or fixes, please let us know!
 
 
-Cron Rebooting Start Problem and Workaround
------------------------------------------------
-You may encounter a problem if you use a @reboot cron job to starts up Supervisor as described in the docs. This may lead to connection errors because Celery can't reach RabbitMQ. One workaround that may help would be to wait a minute or two, and then rerun that same startup command. This will hopefully allow RabbitMQ enough time to be ready to accept connections with Supervisor and Celery.
+Restart ``supervisord`` on Reboot
+---------------------------------
+
+On linux-based systems you can use a cronjob to ensure that supervisor starts whenever your system is rebooted. Note that you'll need to provide the full path to the virtual environment where you installed supervisor. To ensure that supervisor starts whenever your system is rebooted, you will need to edit your crontab (`see directions for Ubuntu <https://askubuntu.com/questions/609850/what-is-the-correct-way-to-edit-a-crontab-file>`_) and add a line similar to this example:
+
+
+.. code-block:: crontab
+
+  @reboot /absolute/path/to/virtualenv/bin/supervisord -c /etc/supervisor/my_proj_name-supervisord.conf
+
+
 
 
 More information
