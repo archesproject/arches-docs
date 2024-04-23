@@ -104,11 +104,14 @@ After fixing the command syntax, the celery worker should function. However, you
 Restart ``supervisord`` on Reboot
 ---------------------------------
 
-On linux-based systems you can use a cronjob to ensure that supervisor starts whenever your system is rebooted. Note that you'll need to provide the full path to the virtual environment where you installed supervisor. For example:
+On linux-based systems you can use a cronjob to ensure that supervisor starts whenever your system is rebooted. Note that you'll need to provide the full path to the virtual environment where you installed supervisor. To ensure that supervisor starts whenever your system is rebooted, you will need to edit your crontab (`see directions for Ubuntu <https://askubuntu.com/questions/609850/what-is-the-correct-way-to-edit-a-crontab-file>`_) and add a line similar to this example:
 
-```
-@reboot /absolute/path/to/virtualenv/bin/supervisord -c /etc/supervisor/my_proj_name-supervisord.conf
-```
+
+.. code-block:: crontab
+
+  @reboot /absolute/path/to/virtualenv/bin/supervisord -c /etc/supervisor/my_proj_name-supervisord.conf
+
+
 
 
 More information
