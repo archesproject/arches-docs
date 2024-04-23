@@ -214,3 +214,11 @@ If you make changes to the resource models in your project you may want to updat
     -y    accept defaults (will overwrite existing resource models with those from your project)
 
 Bear in mind that this command will not update a package directly on Github. It will however update a package in a local directory that you have cloned from an existing package on Github or created yourself with the `create_package` command.
+
+
+Updating a Package Across Major Arches Versions
+-----------------------------------------------
+
+Arches makes software updates according to a "semantic versioning" framework of major, minor, and patch releases. You may need to upgrade a package as part of the process to upgrade Arches from one major version to the next major version. In a major version update, carefully review the Release notes (:ref:`Arches Releases`) which will provide upgrade guidance specific to a given new release. 
+
+Members of the Arches community sometimes provide additional guidance on updating packages across major version upgrades. This example `package update recipe <https://github.com/opencontext/arches-package-manage/tree/main>`_ describes steps to use Docker to upgrade a package from Arches version 6 to Arches version 7.
