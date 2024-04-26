@@ -308,6 +308,9 @@ purge edit log
     python manage.py resources clear_edit_log
 
 Removes all entries from the Arches Edit Log.
+
+create mapping files
+--------------------
 .. code-block:: bash
 
     python manage.py packages -o create_mapping_file -d 'path_to_destination_directory' -g 'comma separated graph uuids'
@@ -317,6 +320,8 @@ Removes all entries from the Arches Edit Log.
 
 This mimics the 'Create Mapping File' command from the Arches Designer UI.
 
+import mapping file
+-------------------
 .. code-block:: bash
 
     python manage.py packages -o import_mapping_file -s 'path_to_mapping_file'
