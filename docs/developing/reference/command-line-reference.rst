@@ -289,6 +289,8 @@ options.
 Other Data Management Commands
 ==============================
 
+remove resources
+----------------
 .. code-block:: bash
 
     python manage.py resources remove_resources [-g graph_id][-y]
@@ -299,6 +301,13 @@ Other Data Management Commands
 Removes all resources from your database, but leaves the all resources
 models, branches, thesauri, and collections intact.
 
+purge edit log
+--------------
+.. code-block:: bash
+
+    python manage.py resources clear_edit_log
+
+Removes all entries from the Arches Edit Log.
 .. code-block:: bash
 
     python manage.py packages -o create_mapping_file -d 'path_to_destination_directory' -g 'comma separated graph uuids'
