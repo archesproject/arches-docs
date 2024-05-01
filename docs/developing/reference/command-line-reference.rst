@@ -293,10 +293,11 @@ remove resources
 ----------------
 .. code-block:: bash
 
-    python manage.py resources remove_resources [-g graph_id][-y]
+    python manage.py resources remove_resources [-g graph_id][-y][-e]
 
 -g  A Graph UUID to remove all the resource instances of.
 -y  Forces this command to run without interactive confirmation.
+-e  Removes all records from the edit log for the resources that are removed. If a graphid is provided, only the edit log records for that graph will be removed.
 
 Removes all resources from your database, but leaves the all resources
 models, branches, thesauri, and collections intact.
@@ -305,7 +306,9 @@ purge edit log
 --------------
 .. code-block:: bash
 
-    python manage.py resources clear_edit_log
+    python manage.py resources clear_edit_log [-g graph_id]
+
+-g  A Graph UUID to filter which edit log entries are removed.
 
 Removes all entries from the Arches Edit Log.
 
