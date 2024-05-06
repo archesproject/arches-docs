@@ -321,7 +321,7 @@ create mapping files
 -d  Path to directory to place the output in.
 -g  One or more graph UUIDs to create a mapping for.
 
-This mimics the 'Create Mapping File' command from the Arches Designer UI.
+This mimics the 'Create Mapping File' command from the Arches Designer UI. See also :ref:`Mapping File` background.
 
 import mapping file
 -------------------
