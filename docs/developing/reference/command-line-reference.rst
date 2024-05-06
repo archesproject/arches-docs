@@ -289,16 +289,31 @@ options.
 Other Data Management Commands
 ==============================
 
+remove resources
+----------------
 .. code-block:: bash
 
-    python manage.py resources remove_resources [-g graph_id][-y]
+    python manage.py resources remove_resources [-g graph_id][-y][-e]
 
 -g  A Graph UUID to remove all the resource instances of.
 -y  Forces this command to run without interactive confirmation.
+-e  Removes all records from the edit log for the resources that are removed. If a graphid is provided, only the edit log records for that graph will be removed.
 
 Removes all resources from your database, but leaves the all resources
 models, branches, thesauri, and collections intact.
 
+purge edit log
+--------------
+.. code-block:: bash
+
+    python manage.py resources clear_edit_log [-g graph_id]
+
+-g  A Graph UUID to filter which edit log entries are removed.
+
+Removes all entries from the Arches Edit Log.
+
+create mapping files
+--------------------
 .. code-block:: bash
 
     python manage.py packages -o create_mapping_file -d 'path_to_destination_directory' -g 'comma separated graph uuids'
@@ -308,6 +323,8 @@ models, branches, thesauri, and collections intact.
 
 This mimics the 'Create Mapping File' command from the Arches Designer UI.
 
+import mapping file
+-------------------
 .. code-block:: bash
 
     python manage.py packages -o import_mapping_file -s 'path_to_mapping_file'
