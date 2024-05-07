@@ -47,6 +47,7 @@ Understanding Packages
 A package is an external collection of Arches data (resource models, business data, concepts, collections) and customization files (widgets, datatypes, functions, system settings) that you can load into an Arches project.
 
 
+
 Loading a Package
 -----------------
 
@@ -66,43 +67,64 @@ To load a package simply run the load_package command using your \*project's man
 -bulk  uses `bulk_save` methods which run faster but don't call an object's regular `save` method
 -dev	 loads three test users
 
-If you do not pass the `-db True` to the load_package command, your database will not be recreated. If you already have resource models and branches with the same id as those you are importing, you will be prompted to confirm whether you would like to keep or overwrite each model or branch.
 
-If you pass the `-bulk` argument, know that any resource instances that rely on functions to dynamically create/edit tiles will not be called during package load. Additionally, some logging statements may not print to console during import of reference data. Whereas the default `save` methods create an edit in the edit history for each individual tile created, `-bulk` will instead create a single edit for all tiles, of type: "bulk_create". Resource creation will still be individually saved to edit history.
+.. note:: **Destructive Arguments for load_package**
 
-.. note:: It is important to note that you cannot load a package directly into core Arches. Packages must be loaded into a project.
+    The ``db``, ``ow``, and ``y``, arguments are typically destructive. In general, these are destructive because they have the opportunity to overwrite Arches data and customizations when there are differences between the current Arches database and the package source that is being loaded.
+
+    * When supplied with the ``-db`` argument, the load_package operation will drop and recreate the database. This means any Arches data (models, business data, concepts/collections) not exported to your package in the file system will be overwritten. For instance, if you have just developed some new model ``my_new_model`` but did not export and save the model json in ``my_project/my_project/pkg/graphs/resource_models/my_new_model.json``, your changes to that resource model would be lost if you ran load_package with the ``-db`` argument.
+    * ``-db`` and ``-ow`` are not usually used together, because if you're using ``-db`` you're starting fresh and ``-ow`` is used when you have an existing Arches database in place that you're adding additional Arches data (models, concepts/collections, resources, etc).
+    * If a concept exists in the Arches database and the package from which you are loading and you use the ``-ow`` argument, the concept in the Arches database will be overwritten in favor of the concept in the package.
+    * For the ``-y`` argument, if a resource model or custom system settings exist in the package being loaded, the user will be prompted during a run of ``load_package`` to decide if they want to maintain the model or system settings currently in the Arches database or if they should be replaced by those models and system settings in the package. Providing the ``-y`` means that you can run ``load_package`` without being prompted again, but risk overwriting model or system setting changes that haven't been exported to the package.
+
+
+If you do not pass the ``-db True`` to the load_package command, your database will not be recreated. If you already have resource models and branches with the same id as those you are importing, you will be prompted to confirm whether you would like to keep or overwrite each model or branch.
+
+If you pass the ``-bulk`` argument, know that any resource instances that rely on functions to dynamically create/edit tiles will not be called during package load. Additionally, some logging statements may not print to console during import of reference data. Whereas the default `save` methods create an edit in the edit history for each individual tile created, ``-bulk`` will instead create a single edit for all tiles, of type: "bulk_create". Resource creation will still be individually saved to edit history.
+
+
+.. note:: **Where and When do I use load_package ?**
+    
+    It is important to note that you cannot load a package directly into core Arches. *Packages must be loaded into a project.*
+
+
+
+Loading a Package into the Latest Project Template
+--------------------------------------------------
 
 If you are a developer running the latest arches you probably want to create a project with a new Arches installation. This ensures that the `arches_project create` command uses the latest project templates.
 
-    #. Uninstall arches from your virtualenv
+#. Uninstall arches from your virtualenv
 
-        .. code-block:: bash
+    .. code-block:: bash
 
-            pip uninstall arches
+        pip uninstall arches
 
-    #. Navigate into arches root folder delete the `build` directory
+#. Navigate into arches root folder delete the `build` directory
 
-    #. Reinstall arches
+#. Reinstall arches
 
-        .. code-block:: bash
+    .. code-block:: bash
 
-            python setup.py install
-            python setup.py develop
+        python setup.py install
+        python setup.py develop
 
-    #. Navigate to where you want to create your new project and run:
+#. Navigate to where you want to create your new project and run:
 
-        .. code-block:: bash
+    .. code-block:: bash
 
-            arches-project create mynewproject
-
-        .. note:: You can use the option ``[{-d|--directory} <directory_name>]`` to change the directory your new project will be created in.
+        arches-project create mynewproject
 
 
-    #. Finally run the `load_package` command using the project's manage.py file.
+    .. note:: You can use the option ``[{-d|--directory} <directory_name>]`` to change the directory your new project will be created in.
 
-        .. code-block:: bash
 
-            python manage.py packages -o load_package -s https://github.com/package/archive/branch.zip -db true
+#. Finally run the `load_package` command using the project's manage.py file.
+
+    .. code-block:: bash
+
+        python manage.py packages -o load_package -s https://github.com/package/archive/branch.zip -db true
+
 
 
 Creating a New Package
@@ -222,3 +244,10 @@ Updating a Package Across Major Arches Versions
 Arches makes software updates according to a "semantic versioning" framework of major, minor, and patch releases. You may need to upgrade a package as part of the process to upgrade Arches from one major version to the next major version. In a major version update, carefully review the Release notes (:ref:`Arches Releases`) which will provide upgrade guidance specific to a given new release. 
 
 Members of the Arches community sometimes provide additional guidance on updating packages across major version upgrades. This example `package update recipe <https://github.com/opencontext/arches-package-manage/tree/main>`_ describes steps to use Docker to upgrade a package from Arches version 6 to Arches version 7.
+
+
+
+Additional Package Operations
+-----------------------------
+
+Arches provides additional command-line utilities to perform a variety of operations on packages. The :ref:`Command Line Reference` section of the documentation provides additional guidance.
