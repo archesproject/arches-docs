@@ -78,9 +78,9 @@ To load a package simply run the load_package command using your \*project's man
     * For the ``-y`` argument, if a resource model or custom system settings exist in the package being loaded, the user will be prompted during a run of ``load_package`` to decide if they want to maintain the model or system settings currently in the Arches database or if they should be replaced by those models and system settings in the package. Providing the ``-y`` means that you can run ``load_package`` without being prompted again, but risk overwriting model or system setting changes that haven't been exported to the package.
 
 
-If you do not pass the `-db True` to the load_package command, your database will not be recreated. If you already have resource models and branches with the same id as those you are importing, you will be prompted to confirm whether you would like to keep or overwrite each model or branch.
+If you do not pass the ``-db True`` to the load_package command, your database will not be recreated. If you already have resource models and branches with the same id as those you are importing, you will be prompted to confirm whether you would like to keep or overwrite each model or branch.
 
-If you pass the `-bulk` argument, know that any resource instances that rely on functions to dynamically create/edit tiles will not be called during package load. Additionally, some logging statements may not print to console during import of reference data. Whereas the default `save` methods create an edit in the edit history for each individual tile created, `-bulk` will instead create a single edit for all tiles, of type: "bulk_create". Resource creation will still be individually saved to edit history.
+If you pass the ``-bulk`` argument, know that any resource instances that rely on functions to dynamically create/edit tiles will not be called during package load. Additionally, some logging statements may not print to console during import of reference data. Whereas the default `save` methods create an edit in the edit history for each individual tile created, ``-bulk`` will instead create a single edit for all tiles, of type: "bulk_create". Resource creation will still be individually saved to edit history.
 
 
 .. note:: **Where and When do I use load_package ?**
