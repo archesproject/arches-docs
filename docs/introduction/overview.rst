@@ -38,10 +38,7 @@ The Arches project uses `semantic versioning <https://en.wikipedia.org/wiki/Soft
     **License:**
     Arches is free software and is licensed under the terms of the GNU Affero General Public License (http://www.gnu.org/licenses/agpl-3.0.html).
 
-Who is Arches for?
-==================
 
-Arches is primarily intended for software developers who need to build flexible web applications and wish to hide the complexities of ontologies, thesauri, and geospatial data management from their users.
 
 Documentation Overview
 ======================
