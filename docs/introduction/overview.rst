@@ -5,11 +5,14 @@ Overview
 What is Arches?
 ===============
 
-Arches is a web-based, geospatial information system for cultural heritage inventory and management. The platform is purpose-built for the international cultural heritage field, and it is designed to record all types of immovable heritage, including archaeological sites, buildings and other historic structures, landscapes, and heritage ensembles or districts.
+Arches is an open source software platform freely available for cultural heritage organizations to independently deploy to help them manage their cultural heritage data. Arches is freely available for organizations worldwide to install, configure, and extend in accordance with their individual needs and without restrictions on its use. Arches was originally developed for the cultural heritage field by the `Getty Conservation Institute <https://www.getty.edu/conservation>`_ and `World Monuments Fund <http://www.wmf.org/>`_. Due to the complex and varied nature of cultural heritage data, and to promote interoperability and sustainable data practices, the Arches Platform has been developed as a standards-based, comprehensive and flexible platform that supports a wide array of uses. The Arches Project has an established international community of developers, service providers, and specialists from multiple domains that collaborates, shares ideas and resources, explores solutions, and provides guidance and support.
 
-Arches allows administrators to create their own database schema, and manage their own thesauri, while end users can search, explore and download the resources directly. In this way Arches is not only a robust and easy to use inventory system, it is also a perfect way to publish and disseminate your organization's cultural heritage information.
+Core Arches Platform Capabilities
+---------------------------------
 
-Arches is a web framework built on Django and is designed to make it easier to build applications that need:
+The Arches Platform is a comprehensive solution for data management, data discovery and visualization, and project/task management.  The platform is fully integrated:  it includes a data management system to manage, define and structure data; discovery and visualization tools to search, report and visualize data (e.g. geospatial data); and project/task management tools (e.g. workflows) to manage sophisticated data editing procedures.
+
+The Arches web framework is built on Django and is designed to make it easier to build applications that need:
 
     * **Geospatial data management** and geoprocessing like a GIS (Geograhic Information System) offers, but with a much more flexible approach for modeling the geometries associated with a resource.
     * the ability to **import arbitrary data schema** in the form of graphs as a means of defining the set of attributes that describe data resources
