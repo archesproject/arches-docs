@@ -31,6 +31,12 @@ The most important method to reduce risks of data loss center on backup strategi
 * **Awareness of data security needs for backup files**: If you manage sensitive data, your backup files need to be treated securely as sensitive data.
 
 
+ElasticSearch Backups
+---------------------
+
+It is most crucial to maintain a good backup strategy for your Arches data in PostgreSQL. However, if your Arches instance manages large amounts of data, it can be time consuming to rebuild an ElasticSearch index from scratch should this index fail. In these scenarios, you may also want to maintain backups of your ElasticSearch index (see ElasticSearch's `snapshot and restore documentation <https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html>`_. Ideally, one should carefully synchronize backups (and restorations) both the Arches PostgreSQL database *and* the ElasticSearch index so that they maintain consistency. Otherwise, you may need to reindex ElasticSearch to correspond to the state of the PostgreSQL database.
+
+
 Filesystem Backups
 ------------------
 
