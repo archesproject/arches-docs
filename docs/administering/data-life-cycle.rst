@@ -31,7 +31,24 @@ Command Line Operations
 Operations via the Django ORM
 -----------------------------
 
-Python developers may want to use the Arches implementation of the Django ORM (see :ref:`Arches Use of the Django ORM`) to modify data in their Arches instance. We encourage you to develop experience and familiarity with how Arches organizes data and uses the the Django ORM first, especially before attempting modifications data used in production deployments. Naively modifying data using Python operations on the Django ORM may lead to unexpected results and corruption of your data.
+Python developers may want to use the Arches implementation of the Django ORM (see :ref:`Arches Use of the Django ORM`) to modify data in their Arches instance. We encourage you to develop experience and familiarity with how Arches organizes data and uses the the Django ORM first, especially before attempting modifications data used in production deployments. In some scenarios, modifying data using Python operations on the Django ORM may lead to unexpected results and corruption of your data.
+
+The safest approach to modifying data using Python and the Django ORM makes use of Arches' data validation and integrity logic. To leverage this logic, your Python code should make use of various proxy models (see `Django's documentation for proxy models <https://docs.djangoproject.com/en/stable/topics/db/models/#proxy-models>`_) that Arches defines. The proxy models defined by Arches often implement data validation and data integrity logic that help protect against data corruption. 
+
+You can import proxy models (with their data validation and integrity logic) as below:
+
+.. code-block:: python
+
+    from arches.app.models.card import Card
+    from arches.app.models.graph import Graph
+    from arches.app.models.resource import Resource
+    from arches.app.models.tile import Tile
+
+    # The Concept class is NOT a proxy model, but it contains lots of logic
+    # associated with Reference Data Manager concepts
+    from arches.app.models.concept import Concept
+
+
 
 
 Operations via SQL 
@@ -56,6 +73,20 @@ Arches Utilities
 
 PostgreSQL Utilities
 --------------------
+
+PostgreSQL has powerful utilities (see `Backup and Restore <https://www.postgresql.org/docs/14/backup.html>`_) to quickly export and restore databases. One can use these utilities to dump and restore Arches databases. Assuming you have an Arches project named "my_project" (and that Arches project has a database with the same name, as is the default), you can export the entire database as below:
+
+.. code-block:: bash
+
+    # Export your Arches project ('my_project') to PostgreSQL 
+    # binary export file called 'my_project.dump'  
+    pg_dump -U postgres -h localhost -F c -b my_project > 'my_project.dump'
+
+
+You'll need to modify the command above if your PostgreSQL database is on a different host, uses a different port, or if your Arches database has a different database name. Please review PostgreSQL documentation to understand the different backup and restore options and arguments available for use.
+
+
+
 
 
 Use of Cloud Comupting Database Services
