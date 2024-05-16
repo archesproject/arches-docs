@@ -24,7 +24,7 @@ Database Backups
 
 The most important method to reduce risks of data loss center on backup strategies. There are multiple methods one can use to backup Arches managed data, but the most straightforward approach for normal backups is to make use of :ref:`PostgreSQL Utilities` for database backups and restoration. Elements of good backup strategies include:
 
-* **Regular scheduling**: Databases can fail even with normal operations and regular backups can limit adverse impacts.
+* **Regular scheduling**: Databases can fail even during normal operations. Regular backups can limit adverse impacts.
 * **Backups before transitional events**: Some operations can put data at risk, so you should perform backups ahead of time.
 * **Testing of backup files**: You should check to make sure database backups can actually be restored successfully)
 * **Storage of backups in multiple locations**: You should keep backups separated from your Arches instance so that compromise or failure in one location does not also damage your backups.
