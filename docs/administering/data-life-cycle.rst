@@ -5,10 +5,49 @@ Data Lifecycle Good Practices
 Arches provides tools to support users in the management of complex data, especially in the cultural heritage sector. To use Arches successfully, organizations also need to devote time and resources to maintain Arches, the database managed by Arches, and any digital files (images, videos, 3D models, and other external files) that may also be managed by Arches.
 
 
+Data Integrity Risk Management
+==============================
+
+This section of the documentation provides some guidance about how to maintain the integrity of your Arches managed data, especially during different project lifecycle transitions. Many of the sections below describe different scenarios where one should take preventative measures to reduce risks of data loss or corruption. As is the case with any data management application, there is always some level of risk for data loss. Risk include:
+
+* Hardware failure
+* Software bugs
+* Unexpected interruptions in the execution of software operations
+* User errors
+* Administrative errors
+* Hacking or intentional vandalism
+* ...and other disasters 
 
 
-Maintaining Data Integrity
-==========================
+Database Backups
+----------------
+
+The most important method to reduce risks of data loss center on backup strategies. There are multiple methods one can use to backup Arches managed data, but the most straightforward approach for normal backups is to make use of :ref:`PostgreSQL Utilities` for database backups and restoration. Elements of good backup strategies include:
+
+* Regular scheduling
+* Backups before transitional events
+* Testing of backup files
+* Multiple, redundant copies
+* Multiple storage locations
+* Awareness of backup data security needs
+
+
+Filesystem Backups
+------------------
+
+If your Arches instance manages digital files on a file system (images, videos, 3D models, documents, etc.) you will also need strategies to backup these media assets. 
+
+
+
+Maintaining Data Integrity Through Transitions
+==============================================
+
+While there's always some risk of a problem, risk levels can change as your project goes through different transitions. There are also cases where you may need to perform special operations using the Arches user interface, SQL commands, or Python code interacting with the Django ORM that involve an element of risk to data integrity. In this section we describe some of these scenarios and recommended risk reduction strategies. 
+
+
+Version Upgrades and Migrations
+-------------------------------
+
 
 Managing Provisional Edits
 --------------------------
@@ -21,12 +60,6 @@ Bulk Data Management
 
 Changes to the Graph
 --------------------
-
-Arches UUIDs and External (or Legacy) Identifiers
--------------------------------------------------
-
-Command Line Operations
------------------------
 
 Operations via the Django ORM
 -----------------------------
@@ -80,10 +113,17 @@ PostgreSQL has powerful utilities (see `Backup and Restore <https://www.postgres
 
     # Export your Arches project ('my_project') to PostgreSQL 
     # binary export file called 'my_project.dump'  
-    pg_dump -U postgres -h localhost -F c -b my_project > 'my_project.dump'
+    pg_dump -U postgres -h localhost -F c -b my_project > 'my_project-v7-5-2-2024-05-11.dump'
 
 
 You'll need to modify the command above if your PostgreSQL database is on a different host, uses a different port, or if your Arches database has a different database name. Please review PostgreSQL documentation to understand the different backup and restore options and arguments available for use.
+
+You should carefully manage your database dump files. Different versions of Arches will have different database schemas. If you want to restore an Arches database from a dump file, you will need to restore it to an instance of Arches running the same version of Arches. In the example above, the export file "my_project-v7-5-2-2024-05-11.dump" is named to include the Arches version number so this can be matched if restoration is needed.
+
+
+
+Arches UUIDs and External (or Legacy) Identifiers
+-------------------------------------------------
 
 
 
@@ -99,15 +139,6 @@ Security and Permissions
 ------------------------
 
 
-
-Data Integrity in Version Upgrades
-==================================
-
-Issues to Consider
-------------------
-
-Migrations
-----------
 
 
 Security and Managing Sensitive Information
