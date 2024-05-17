@@ -333,7 +333,6 @@ console.log($gettext('Hello from the <script> tag!'));
 </style>
 ```
 
-Tests:
 ```js
 // src/ExampleComponent.spec.ts
 
