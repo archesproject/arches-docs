@@ -127,7 +127,7 @@ PostgreSQL has powerful utilities (see `Backup and Restore <https://www.postgres
 
 You'll need to modify the command above if your PostgreSQL database is on a different host, uses a different port, or if your Arches database has a different database name. Please review PostgreSQL documentation to understand the different backup and restore options and arguments available for use.
 
-You should carefully manage your database dump files. Different versions of Arches will have different database schemas. If you want to restore an Arches database from a dump file, you will need to restore it to an instance of Arches running the same version of Arches. In the example above, the export file "my_project-v7-5-2-2024-05-11.dump" is named to include the Arches version number so this can be matched if restoration is needed.
+You should carefully manage your database dump files. Different versions of Arches will have different database schemas and functions. If you want to restore an Arches database from a dump file, you will need to restore it to an instance of Arches running the same version of Arches. In the example above, the export file "my_project-v7-5-2-2024-05-11.dump" is named to include the Arches version number so this can be matched if restoration is needed.
 
 
 
