@@ -300,7 +300,7 @@ To ensure the reliability and functionality of our Vue components, we use `vites
 - **Modern Features**: `vitest` supports the latest JavaScript features, ensuring compatibility with contemporary development practices.
 
 ### Writing Tests
-**Ensure your tests are placed in alongside your components, and have a `.spec.ts` suffix.**
+**Ensure your tests are placed alongside your components, and have a `.spec.ts` suffix.**
 
 When writing tests for your Vue components, consider the following best practices:
 
