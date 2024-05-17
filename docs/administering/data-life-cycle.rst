@@ -31,6 +31,10 @@ The most important method to reduce risks of data loss center on backup strategi
 * **Awareness of data security needs for backup files**: If you manage sensitive data, your backup files need to be treated securely as sensitive data.
 
 
+Database backups are an important security and risk reduction method for your Arches instance. However, database backups are *not* (by themselves) a long term data archiving and preservation strategy. Long term data preservation involves other requirements, processes, and organizational supports beyond backups. See the section :ref:`Data Archiving (With External Repositories)` to learn more about the long term preservation of Arches data.
+
+
+
 ElasticSearch Backups
 ---------------------
 
