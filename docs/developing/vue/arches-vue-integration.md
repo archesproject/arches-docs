@@ -367,7 +367,7 @@ describe('ExampleComponent', () => {
 To run your tests, use the vitest command in your terminal:
 
 ```bash
-yarn run vitest
+yarn vitest
 ```
 
 **By following this documentation, you can set up and maintain comprehensive unit and component testing that catches bugs early and improves code quality. For further details, refer to the [Vitest documentation](https://vitest.dev/).**
