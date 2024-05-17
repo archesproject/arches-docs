@@ -311,7 +311,7 @@ When writing tests for your Vue components, consider the following best practice
 Here is an example of how to write your tests:
 
 ```vue
-<!-- src/MyComponent.vue -->
+<!-- src/ExampleComponent.vue -->
 
 <script setup lang="ts">
 import { useGettext } from 'vue3-gettext';
@@ -335,7 +335,7 @@ console.log($gettext('Hello from the <script> tag!'));
 
 Tests:
 ```js
-// src/MyComponent.spec.ts
+// src/ExampleComponent.spec.ts
 
 import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
