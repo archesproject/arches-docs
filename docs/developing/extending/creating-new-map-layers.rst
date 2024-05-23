@@ -19,7 +19,7 @@ MapBox Layers
 
 ``python manage.py packages -o add_mapbox_layer -j /path/to/mapbox_style.json -n "New MapBox Layer"``
 
-Arches allows you to make direct references to styles or layers that have been previously defined in `MapBox Studio <https://www.mapbox.com/studio/>`_. You can make entirely new basemap renderings, save them in your MapBox account, then download the style definition and use it here. Read more about `MapBox Styles <https://www.mapbox.com/help/studio-manual-styles/>`_.
+Arches allows you to make direct references to styles or layers that have been previously defined in `MapBox Studio <https://www.mapbox.com/studio/>`_. You can make entirely new basemap renderings, save them in your MapBox account, then download the style definition and use it here. Read more about `MapBox Styles <https://www.mapbox.com/help/studio-manual-styles/>`_. For more information on commands to create and delete MapBox layers see: :ref:`Creating and Deleting Map Layers`.
 
 Additionally, you can take a MapBox JSON file and place any mapbox.js layer definition in the ``layers`` section, as long as you define its source in the ``sources`` section.
 
