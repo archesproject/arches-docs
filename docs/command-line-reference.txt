@@ -415,20 +415,30 @@ just substitute ``card_component`` for ``widget``. JSON files are used
 to register Card Components.
 
 
-Creating Map Layers
-=======================
+Creating and Deleting Map Layers
+================================
 
 
 See :ref:`Creating New Map Layers` for file format requirements and other in-depth information.
 
-MapBox
-------
+Add a MapBox Layer
+------------------
 .. code-block:: bash
 
    python manage.py packages -o add_mapbox_layer -j /path/to/mapbox_style.json -n "New MapBox Layer" [{-b|--is_basemap}] [{-i|--layer_icon} 'icon_class'}]
 
 -j  The path to the Mapbox JSON file
 -n  The name of the Mapbox layer
+
+
+Delete a MapBox Layer
+---------------------
+.. code-block:: bash
+
+   python manage.py packages -o delete_mapbox_layer -n "name of map layer to be deleted"
+
+-n  The name of the Mapbox layer
+
 
 
 Other Useful Django Commands
