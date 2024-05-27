@@ -165,7 +165,7 @@ While Arches provides a number of utilities to export and import data, generally
 
 1. One can enable the :ref:`Bulk Data Manager` to activate features of the Arches administrative user interface that enable bulk export and import of business data. The Bulk Data Manger is especially useful for performing mass edits, data exports, or data imports of business data. 
 
-2. 
+2. Arches provides various command line utilities to export and import both graph and business data (see :ref:`Resource Import/Export`, :ref:`Import Commands`, and :ref:`Export Commands`). 
 
 
 Arches UUIDs and External (or Legacy) Identifiers
