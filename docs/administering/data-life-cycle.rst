@@ -125,7 +125,7 @@ It is first important to understand the distinctions Arches makes between "graph
 
 In Arches, "business data" refers to instances of records that conform to the graphs you defined. Resource instances and tile data all qualify as business data (see more :ref:`Resource Data`). Like graphs, business data are stored as records in the Arches PostgreSQL database.
 
-Understanding the distinctions between graph and business data will help you understand which data export and import option would best meet your needs. For instance, if you simply want to backup an Arches instance "as is" so that you can restore it along with all of its graph and business data, a good approach would be to simply use the :ref:`PostgreSQL Utilities` for database backup and restoration. However, if you want to only share certain graphs between Arches instances or if you want to do some complex transformations and mass edits on business data (externally from Arches), you may want to use some of the data export and import tools provided by Arches itself.
+Understanding the distinctions between graph and business data will help you understand which data export and import option would best meet your needs. For instance, if you simply want to backup an Arches instance "as is" so that you can restore it along with all of its graph and business data, a good approach would be to simply use the :ref:`PostgreSQL Utilities` for database backup and restoration. However, if you want to only share certain graphs between Arches instances or if you want to do some complex transformations and mass edits on business data (externally from Arches), you may want to use some of the data export and import tools provided by Arches itself (see :ref:`Arches Import and Export Utilities`).
 
 
 PostgreSQL Utilities
@@ -158,14 +158,17 @@ You should carefully manage your database dump files. Different versions of Arch
     If your Arches instance manages digital media files (images, videos, documents, 3D models, etc.), these files will be stored in a file system (or cloud storage service), *NOT* in the Arches PostgreSQL database. In addition to backing up the  Arches PostgreSQL database, you will also need to take additional steps to backup those files and maintain their directory structure.
 
 
-Arches Utilities
-----------------
+Arches Import and Export Utilities
+----------------------------------
 
 While Arches provides a number of utilities to export and import data, generally speaking, :ref:`PostgreSQL Utilities` offers fast and straightforward ways to backup and restore an Arches database. However, there may be scenarios where you may need additional flexibility to manipulate Arches data. In those circumstances, you may want to use Arches data export and import features. 
 
 1. One can enable the :ref:`Bulk Data Manager` to activate features of the Arches administrative user interface that enable bulk export and import of business data. The Bulk Data Manger is especially useful for performing mass edits, data exports, or data imports of business data. 
 
 2. Arches provides various command line utilities to export and import both graph and business data (see :ref:`Resource Import/Export`, :ref:`Import Commands`, and :ref:`Export Commands`). 
+
+The import and export utlities can help in cases where you may want to modify data in ways that are not easily supported by the Arches user interface. For example, you may want to make changes to some of your legacy graph data (Resource Models and or Branches). If you already have business data using those legacy graphs, you may need to first export that business data and then make your updates to the graph. From your export files, you can then import (perhaps after making modifications) the business data for use with your newly updated graphs. The import functions have data validation and integrity checks that reduce risks of corrupting data. Of course, it is still safest to use PostgreSQL utilities to backup your database at different export, modification, and import steps.
+
 
 
 Arches UUIDs and External (or Legacy) Identifiers
