@@ -57,6 +57,13 @@ While there's always some risk of a problem, risk levels can change as your proj
 Version Upgrades and Migrations
 -------------------------------
 
+As a rule, one should make comprehensive backups of Arches databases *prior* to making software updates and version upgrades. 
+
+The Arches core application has ongoing software development to add new features, improve performance, fix bugs and make other enhancements (see: :ref:`Arches Release Process`). Some of these software updates will involve changes to the Arches PostgreSQL database. In cases where software updates require changes to the database, Arches makes use of Django `"migrations" <https://docs.djangoproject.com/en/5.0/topics/migrations/>`_) to automatically update the PostgreSQL database. 
+
+Database migrations may change certain database records, the database schema, or both. We recommend review of the release notes (see :ref:`Arches Releases`) associated with version update to understand the nature of these changes. In any event, because Arches version upgrades typically involve database migrations, we *strongly recommend that you backup your data* prior to attempting an upgrade. See :ref:`PostgreSQL Utilities` below to review PostgreSQL utilities for backing up and restoring your database.   
+
+
 
 Managing Provisional Edits
 --------------------------
@@ -77,7 +84,7 @@ Python developers may want to use the Arches implementation of the Django ORM (s
 
 The safest approach to modifying data using Python and the Django ORM makes use of Arches' data validation and integrity logic. To leverage this logic, your Python code should make use of various proxy models (see `Django's documentation for proxy models <https://docs.djangoproject.com/en/stable/topics/db/models/#proxy-models>`_) that Arches defines. The proxy models defined by Arches often implement data validation and data integrity logic that help protect against data corruption. 
 
-You can import proxy models (with their data validation and integrity logic) as below:
+In Python, one can import proxy models (with their data validation and integrity logic) as below:
 
 .. code-block:: python
 
@@ -108,9 +115,8 @@ Once you've made changes using SQL operations you will need to reindex the datab
 Database Backup Approaches
 ==========================
 
+Again, the most straightforward approach for normal backups is to make use of :ref:`PostgreSQL Utilities` for database backups and restoration. PostgreSQL utilities can be 
 
-Arches Utilities
-----------------
 
 
 PostgreSQL Utilities
@@ -127,7 +133,30 @@ PostgreSQL has powerful utilities (see `Backup and Restore <https://www.postgres
 
 You'll need to modify the command above if your PostgreSQL database is on a different host, uses a different port, or if your Arches database has a different database name. Please review PostgreSQL documentation to understand the different backup and restore options and arguments available for use.
 
+It is generally easiest if you make a comprehensive database backup (the entire schema, records, etc.). If you need to restore a database, it is easiest to restore a database wholesale using the ``--clean`` argument.
+
+.. code-block:: bash
+    
+    # Restoring a backup copy wholesale (completely replacing the my_project database).
+    pg_restore --clean -U postgres -h my_project -d postgres 'my_project-v7-5-2-2024-05-11.dump'
+
+
 You should carefully manage your database dump files. Different versions of Arches will have different database schemas and functions. If you want to restore an Arches database from a dump file, you will need to restore it to an instance of Arches running the same version of Arches. In the example above, the export file "my_project-v7-5-2-2024-05-11.dump" is named to include the Arches version number so this can be matched if restoration is needed.
+
+
+.. warning::
+
+    If your Arches instance manages media files (images, videos, documents, 3D models, etc.), these files will be stored in a file system (or cloud storage service), *NOT* the Arches PostgreSQL database. In addition to backing up the  Arches PostgreSQL database, you will also need to take additional steps to backup those files and maintain their directory structure.
+
+
+Arches Utilities
+----------------
+
+While Arches provides a number of utilities to export and import data, generally speaking, :ref:`PostgreSQL Utilities` offers fast and straightforward ways to backup and restore an Arches database. However, there may be scenarios where you may need additional flexibility to manipulate Arches data. In those circumstances, you may want to use Arches data export and import features. 
+
+It is first important to understand the distinctions Arches makes between "graphs" and "business data". 
+
+One can enable the :ref:`Bulk Data Manager` to activate features of the Arches user interface that enable bulk export and import of business data.
 
 
 
