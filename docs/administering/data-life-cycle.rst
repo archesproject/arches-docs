@@ -115,8 +115,17 @@ Once you've made changes using SQL operations you will need to reindex the datab
 Database Backup Approaches
 ==========================
 
-Again, the most straightforward approach for normal backups is to make use of :ref:`PostgreSQL Utilities` for database backups and restoration. PostgreSQL utilities can be 
+Again, the most straightforward approach for normal backups is to make use of :ref:`PostgreSQL Utilities` for database backups and restoration. Because PostgreSQL is such a popular database application and is especially widely used in conjuction with Django projects, it is easy to find ample help to illustrate and troubleshoot database backup and restoration operations. Nevertheless, because data management needs and tasks can vary widely, Arches supports a number of data export and import features in addition to those available through PostgreSQL. The documentation below will help you understand scenarios where different approaches may be most useful. 
 
+
+Graph and Business Data Background
+----------------------------------
+
+It is first important to understand the distinctions Arches makes between "graphs" and "business data". One can define custom graphs (or reuse graphs already defined by others) in Arches to model and organize data as needed (see: :ref:`Graph Designer`). The information required to define each graph (both **Resource Models** and **Branches**) is stored as records in the Arches PostgreSQL database (see :ref:`Data Model`). 
+
+In Arches, "business data" refers to instances of records that conform to the graphs you defined. Resource instances and tile data all qualify as business data (see more :ref:`Resource Data`). Like graphs, business data are stored as records in the Arches PostgreSQL database.
+
+Understanding the distinctions between graph and business data will help you understand which data export and import option would best meet your needs. For instance, if you simply want to backup an Arches instance "as is" so that you can restore it along with all of its graph and business data, a good approach would be to simply use the :ref:`PostgreSQL Utilities` for database backup and restoration. However, if you want to only share certain graphs between Arches instances or if you want to do some complex transformations and mass edits on business data (externally from Arches), you may want to use some of the data export and import tools provided by Arches itself.
 
 
 PostgreSQL Utilities
@@ -146,7 +155,7 @@ You should carefully manage your database dump files. Different versions of Arch
 
 .. warning::
 
-    If your Arches instance manages media files (images, videos, documents, 3D models, etc.), these files will be stored in a file system (or cloud storage service), *NOT* the Arches PostgreSQL database. In addition to backing up the  Arches PostgreSQL database, you will also need to take additional steps to backup those files and maintain their directory structure.
+    If your Arches instance manages digital media files (images, videos, documents, 3D models, etc.), these files will be stored in a file system (or cloud storage service), *NOT* in the Arches PostgreSQL database. In addition to backing up the  Arches PostgreSQL database, you will also need to take additional steps to backup those files and maintain their directory structure.
 
 
 Arches Utilities
@@ -154,10 +163,9 @@ Arches Utilities
 
 While Arches provides a number of utilities to export and import data, generally speaking, :ref:`PostgreSQL Utilities` offers fast and straightforward ways to backup and restore an Arches database. However, there may be scenarios where you may need additional flexibility to manipulate Arches data. In those circumstances, you may want to use Arches data export and import features. 
 
-It is first important to understand the distinctions Arches makes between "graphs" and "business data". 
+1. One can enable the :ref:`Bulk Data Manager` to activate features of the Arches administrative user interface that enable bulk export and import of business data. The Bulk Data Manger is especially useful for performing mass edits, data exports, or data imports of business data. 
 
-One can enable the :ref:`Bulk Data Manager` to activate features of the Arches user interface that enable bulk export and import of business data.
-
+2. 
 
 
 Arches UUIDs and External (or Legacy) Identifiers
