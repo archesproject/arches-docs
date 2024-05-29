@@ -2,7 +2,7 @@
 Resource Import/Export
 ======================
 
-*Currently, all data import and export operations happen through the Arches command line interface.*
+One uses the Arches command line interface to perform the import and export operations discussed below. For additional information on commandline utilities, please review :ref:`Command Line Reference`. Also, the :ref:`Bulk Data Manager` provides additional options for the import and export of resource data (business data).
 
 Importing Data
 ==============

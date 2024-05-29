@@ -17,6 +17,8 @@
 - [Testing](#testing)
 - [Example Arches Vue Component Integration](#example-arches-vue-component-integration)
 
+---
+
 ## Purpose
 
 The purpose of this style guide is to establish a unified coding style and set of conventions that all contributors should adhere to when writing code for Arches. By following these guidelines, we aim to:
@@ -43,6 +45,8 @@ Please consult these references for any conventions or guidelines not addressed 
 
 This style guide is a living document that evolves over time. We welcome contributions from the community to improve and expand this guide further. If you have suggestions, feedback, or would like to contribute to the style guide, please reach out to us via the [Arches Forum](https://community.archesproject.org/).
 
+---
+
 ## Integrating a Vue Component
 
 When integrating Vue-based views, plugins, or reports into the Arches framework, developers should utilize the `createVueApplication` function provided at `utils/create-vue-application`. This function is specifically designed to facilitate the integration of Vue components within the Arches environment, ensuring seamless compatibility and optimal performance by abstracting interactions with the i18n API and various current and future Vue plugins, such as PrimeVue.
@@ -51,7 +55,7 @@ However, it's important to note that while the `createVueApplication` function i
 
 Example:
 
-```
+```js
 import createVueApplication from 'utils/create-vue-application';
 import MyVueApplication from '@/MyVueApplication.vue';
 
@@ -66,6 +70,8 @@ The `createVueApplication` function takes a Vue component (`MyVueApplication` in
 
 Once the Vue application is created using `createVueApplication`, it returns a Vue application instance (`vueApp`), which can then be further manipulated or customized as needed. In the example, the `vueApp` instance is mounted to a specific element in the DOM with the mount method, using the CSS selector `#my-vue-application-mounting-point` to identify the mounting point.
 
+---
+
 ## Single-Responsibility Principle and Component Decomposition
 
 In Vue development, it's crucial to adhere to the Single Responsibility Principle (SRP) and practice component decomposition to ensure that Vue components remain maintainable and scalable. The SRP dictates that each Vue component should have a single responsibility or purpose. By focusing on doing one thing and doing it well, components become easier to understand, modify, and maintain. Following the SRP leads to more modular, reusable, and testable code. 
@@ -74,7 +80,7 @@ Component decomposition involves breaking down complex Vue components into small
 
 Example:
 
-```
+```vue
 <script setup>
 import { ref } from 'vue';
 import { User } from '@/types/User';
@@ -110,6 +116,8 @@ In this example:
 - The `UserProfile` component integrates these smaller components directly in the template.
 - By decomposing the `UserProfile` component into smaller, focused components, we achieve better maintainability and reusability in our Vue application.
 
+---
+
 ## Directory Structure
 
 A well-organized directory structure provides clarity on where to find specific files and components, making it easier for developers to navigate the codebase, understand its architecture, and make modifications efficiently. In Arches Vue applications, we utilize a non-standard directory structure to organize components. 
@@ -138,9 +146,13 @@ As Arches moves forward with integrating components from Vue into Knockout, we f
 
 By utilizing this directory structure, we ensure that components from Vue can seamlessly integrate with Knockout components while maintaining clarity and organization in our codebase. 
 
+---
+
 ## Cascading Style Sheets (CSS)
 
 TBD - This will be included once PrimeVue stylesheets and theme-switching have been enabled.
+
+---
 
 ## Importing Components and Component Pathing Shorthand
 
@@ -159,6 +171,8 @@ import MyTypeScriptFunction from '@/components/MyTypeScriptFunction.ts';
 ```
 
 **It's important to note that Vue and TypeScript components must be imported with their file extensions (e.g., .vue or .ts).**
+
+---
 
 ## TypeScript and ESLint
 
@@ -180,10 +194,12 @@ For instance, if you're developing an Arches project and an Arches application, 
 
 ### Frontend dependency declaration
 
-When adding any new frontend dependencies to your Arches project or application, it's important to declare their types in the `declarations.d.ts` file. This file serves as a central location for declaring global types and interfaces that are used across your project or application. Declaring types for frontend dependencies in `declarations.d.ts` ensures that TypeScript recognizes and understands the types provided by these modules, enabling accurate type checking and providing better IntelliSense support in your editor. 
+When adding any new frontend dependencies to your Arches project or application, it's important to declare their types in the `declarations.d.ts` file **if they do not already have TypeScript typing**. An reliable way to discern whether or not a dependency has typescript typing is to visit the [npm page](www.npmjs.com) for the dependency and look for the `TS` TypeScript badge. 
+
+This file serves as a central location for declaring global types and interfaces that are used across your project or application. Declaring types for frontend dependencies in `declarations.d.ts` ensures that TypeScript recognizes and understands the types provided by these modules, enabling accurate type checking and providing better IntelliSense support in your editor. 
 
 Example:
-```
+```json
 # package.json
     ...
     "dependencies": {
@@ -191,12 +207,16 @@ Example:
         ...
     }
     ...
+```
 
+```ts
 # src/declarations.d.ts
     ...
     declare module 'foo';
 
 ```
+
+---
 
 ## Internationalization (i18n)
 
@@ -204,7 +224,7 @@ We utilize the vue3-gettext library for internationalization (i18n) in Vue compo
 
 Below is an example code snippet demonstrating how we use vue3-gettext for i18n:
 
-```
+```vue
 <script setup lang="ts">
 import { useGettext } from 'vue3-gettext';
 const { $gettext } = useGettext();
@@ -226,6 +246,8 @@ Compile Translations: Run `yarn gettext:compile` to compile translated .po files
 
 For further information, please reference the [vue3-gettext documentation](https://github.com/jshmrtn/vue3-gettext)
 
+---
+
 ## Composition API and Single-file Components
 
 We strongly suggest utilizing the Composition API and Single-file Components for building new features or rewriting existing components into Vue.
@@ -242,7 +264,7 @@ Single-file Components are a feature of Vue that allows developers to define tem
 ### Example
 Here's an example of a Single-file Component that uses the Composition API, notice the <script>, <template>, and <style> tags for a component exist in the same file:
 
-```
+```vue
 <script setup lang="ts">
 import { ref } from 'vue';
 
@@ -265,15 +287,97 @@ const increment = () => {
 
 ```
 
+---
+
 ## Testing
 
-TBD - This will be included once a testing pattern has been explored.
+To ensure the reliability and functionality of our Vue components, we use `vitest` for our testing framework. `vitest` is a fast, modern testing framework that provides a comprehensive suite of tools for writing, running, and debugging tests.
+
+### Why Vitest?
+
+- **Speed**: `vitest` is designed to be fast, reducing the time it takes to run tests and increasing productivity.
+- **Integration**: We plan on eventually migrating our frontend bundler to `vite`, and already having `vitest` in-place will ensure a smooth transition.
+- **Modern Features**: `vitest` supports the latest JavaScript features, ensuring compatibility with contemporary development practices.
+
+### Writing Tests
+**Ensure your tests are placed alongside your components, and have a `.spec.ts` suffix.**
+
+When writing tests for your Vue components, consider the following best practices:
+
+- **Isolation**: Test each component in isolation to ensure that issues can be traced back to specific units of code.
+- **Coverage**: Aim for high test coverage to ensure all paths, including edge cases, are tested.
+- **Readability**: Write clear and concise tests that are easy to understand and maintain.
+
+Here is an example of how to write your tests:
+
+```vue
+<!-- src/ExampleComponent.vue -->
+
+<script setup lang="ts">
+import { useGettext } from 'vue3-gettext';
+const { $gettext } = useGettext();
+
+console.log($gettext('Hello from the <script> tag!'));
+</script>
+
+<template>
+   <h1 class="header">
+       {{ $gettext("Hello from the template!") }}
+   </h1>
+</template>
+
+<style scoped>
+.header {
+   color: red;
+}
+</style>
+```
+
+```js
+// src/ExampleComponent.spec.ts
+
+import { describe, it, expect } from 'vitest';
+import { mount } from '@vue/test-utils';
+
+import ExampleComponent from '@/ExampleComponent.vue';
+
+describe('ExampleComponent', () => {
+   it('renders correctly', () => {
+       const wrapper = mount(ExampleComponent);
+       expect(wrapper.exists()).toBeTruthy();
+   });
+
+   it('renders h1 element with correct text', () => {
+       const wrapper = mount(ExampleComponent);
+       expect(wrapper.find('h1').text()).toBe('Hello from the template!');
+   });
+
+   it('applies scoped styles to h1 element', () => {
+       const wrapper = mount(ExampleComponent);
+       const h1 = wrapper.find('h1');
+       expect(h1.classes()).toContain('header');
+   });
+});
+
+```
+
+### Running tests
+
+To run your tests, use the vitest command in your terminal:
+
+```bash
+yarn vitest
+```
+
+**By following this documentation, you can set up and maintain comprehensive unit and component testing that catches bugs early and improves code quality. For further details, refer to the [Vitest documentation](https://vitest.dev/).**
+
+---
 
 ## Example Arches Vue Component Integration
 
 Below is an example of creating a new plugin for Arches. This example includes import patterns, TypeScript patterns, internationalization, the composition API, single-file components, and Vue/Knockout integration
 
-```
+```js
 // media/js/views/components/plugins/my-plugin.js
 
 import ko from 'knockout';
@@ -293,13 +397,13 @@ ko.components.register('my-plugin', {
 
 ```
 
-```
+```htm
 // templates/views/components/plugins/my-plugin.htm
 
 <div id="my-plugin-mounting-point"></div>
 ```
 
-```
+```vue
 // src/plugins/MyPlugin.vue
 
 <script setup lang="ts">
