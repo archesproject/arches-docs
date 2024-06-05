@@ -96,7 +96,7 @@ You can add the dashboard to an Arches project in just a few easy steps.
 
     .. code-block:: shell
 
-        yarn build_development
+        npm run build_development
 
 
 6. When you're done you should see the Dashboard plugin added to you main navigation bar:
