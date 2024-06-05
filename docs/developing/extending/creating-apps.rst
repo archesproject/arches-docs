@@ -57,24 +57,32 @@ You can add the dashboard to an Arches project in just a few easy steps.
     .. code-block:: python
 
         ARCHES_APPLICATIONS = ("dashboard",)  # be sure to add the trailing comma!
-        INSTALLED_APPS = [
-            ...
-            "demo",
-            "dashboard",
-        ]
 
 
-3. Update your urls.py file in your project. You'll likely need to add the `re_path` import:
+3. Add routing to your project to handle the Arches application. This can be either subdomain routing or path-based routing.
+   - for subdomain routing:
+  
+     - Update your hosts.py file in your project:
+       .. code-block:: python
 
-    .. code-block:: python
+          host_patterns = patterns('',
+            host(r'dashboard', 'dashboard.urls', name='dashboard'),
+            host(r'demo', 'demo.urls', name='demo'),
+          )
+        
 
-        from django.urls import include, path, re_path
+   - for path-based routing:
+     - Update your urls.py file in your project. You'll likely need to add the `re_path` import:
 
-    and then the following path:
+         .. code-block:: python
 
-    .. code-block:: python
+             from django.urls import include, path, re_path
 
-        re_path(r"^", include("dashboard.urls")),
+         and then the following path:
+
+         .. code-block:: python
+
+             re_path(r"^", include("dashboard.urls")),
 
 
 4. From your project run migrate to add the model included in the app:
@@ -88,7 +96,7 @@ You can add the dashboard to an Arches project in just a few easy steps.
 
     .. code-block:: shell
 
-        yarn build_development
+        npm run build_development
 
 
 6. When you're done you should see the Dashboard plugin added to you main navigation bar:
