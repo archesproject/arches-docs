@@ -60,8 +60,9 @@ You can add the dashboard to an Arches project in just a few easy steps.
 
 
 3. Add routing to your project to handle the Arches application. This can be either subdomain routing or path-based routing.
+
    - for subdomain routing:
-  
+
      - Update your hosts.py file in your project:
 
        .. code-block:: python
@@ -73,6 +74,7 @@ You can add the dashboard to an Arches project in just a few easy steps.
         
 
    - for path-based routing:
+
      - Update your urls.py file in your project. You'll likely need to add the `re_path` import:
 
          .. code-block:: python
