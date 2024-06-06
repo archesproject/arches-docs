@@ -63,11 +63,12 @@ You can add the dashboard to an Arches project in just a few easy steps.
    - for subdomain routing:
   
      - Update your hosts.py file in your project:
+
        .. code-block:: python
 
           host_patterns = patterns('',
-            host(r'dashboard', 'dashboard.urls', name='dashboard'),
-            host(r'demo', 'demo.urls', name='demo'),
+            host(re.sub(r'_', r'-', r'dashboard'), 'dashboard.urls', name='dashboard'),
+            host(re.sub(r'_', r'-', r'demo'), 'demo.urls', name='demo'),
           )
         
 
