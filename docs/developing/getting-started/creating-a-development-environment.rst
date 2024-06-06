@@ -171,7 +171,7 @@ In general, you should always expect to
 3) Reinstall javascript dependencies in ``my_project/my_project``::
 
     (ENV)$ cd my_project/my_project
-    (ENV)my_project/my_project$ yarn install
+    (ENV)my_project/my_project$ npm install
 
 **Finally**, if you have added custom logic or content to your project, you must make sure to account for any changes in the core Arches content that you have overwritten or inherited.
 

@@ -14,7 +14,7 @@ To begin development or make a test installation of Arches, you will need the fo
     - Depending on how many uploaded files (images, 3d models, etc) you will have, you may need **much** more disk space. We advise an early evaulation of how much space you *think* you'll need, and then provision twice as much just to be safe...
 :Memory (RAM):  - **4GB**
     - This recommendation is based on the fact that ElasticSearch requires 2GB to run, and as per `official ElasticSearch documentation <https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html#_give_less_than_half_your_memory_to_lucene>`_ no more than half of your system's memory should be dedicated to ElasticSearch.
-    - In production, you very likely need to increase your memory. In building the production (minified) frontend asset bundle, yarn (all by itself!) will require at least 8GB to run. If you don't have enough memory, yarn will likely return an error, sometimes after several minutes or hours of processing. In production, you may also find it useful to allow ElasticSearch to use `up to 32GB <https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html#compressed_oops>`_.
+    - In production, you very likely need to increase your memory. In building the production (minified) frontend asset bundle, npm (all by itself!) will require at least 8GB to run. If you don't have enough memory, npm will likely return an error, sometimes after several minutes or hours of processing. In production, you may also find it useful to allow ElasticSearch to use `up to 32GB <https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html#compressed_oops>`_.
 
 
 Software Dependencies
@@ -40,8 +40,6 @@ Arches requires the following software packages to be installed and available. U
     - **macOS** (See :ref:`macOS and GDAL, GEOS` below)
 :Node.js 16.x (recommended): - Installation: https://nodejs.org/ (choose the installer appropriate to your operating system).
     - NOTE: Arches may not be compatible with later versions of Node.js (after 16) `(see discussion) <https://community.archesproject.org/t/newbie-v7-install-experience-some-hints-and-tips/1782>`_.
-:Yarn >= 1.22, < 2: - Recommended Installation: https://classic.yarnpkg.com/en/docs/install (One can also install Yarn via `apt` on Linux operating systems, `see example <https://github.com/archesproject/arches/blob/f06b838cf1be23471644f8528a630d65c8bff9a7/arches/install/ubuntu_setup.sh#L51>`_).
-    - NOTE: We are pointing to the "classic" yarn installer to avoid installation of more recent versions of yarn that are not compatible with Arches via the Node.js `package manager <https://yarnpkg.com/getting-started/install>`_.
 
 To support long-running task management, like large user downloads, you must install a Celery broker like RabbitMQ or Redis:
 
@@ -79,4 +77,4 @@ For Ubuntu we maintain an `ubuntu_setup.sh <https://raw.githubusercontent.com/ar
     wget https://raw.githubusercontent.com/archesproject/arches/stable/7.5.0/arches/install/ubuntu_setup.sh
     source ./ubuntu_setup.sh
 
-You will be prompted before each dependency is installed, or use ``yes | source ./ubuntu_setup.sh`` to install all components (Postgres/PostGIS, Node/Yarn, and ElasticSearch).
+You will be prompted before each dependency is installed, or use ``yes | source ./ubuntu_setup.sh`` to install all components (Postgres/PostGIS, Node/npm, and ElasticSearch).

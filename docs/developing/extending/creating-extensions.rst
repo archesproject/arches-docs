@@ -162,11 +162,11 @@ By default, the only dependency in a new project's ``package.json`` file is Arch
         }
     }
 
-This means that when you run ``yarn install`` on this file, all dependencies from the corresponding branch of the core Arches repo will be installed (in this example, `package.json from stable/6.0.1 <https://github.com/archesproject/arches/blob/stable/6.0.1/package.json>`_).
+This means that when you run ``npm install`` on this file, all dependencies from the corresponding branch of the core Arches repo will be installed (in this example, `package.json from stable/6.0.1 <https://github.com/archesproject/arches/blob/stable/6.0.1/package.json>`_).
 
-**To add a new package**, you just need to run ``yarn add <package name>`` in your project. This will install the new package and update your ``package.json`` file accordingly.
+**To add a new package**, you just need to run ``npm install <package name>`` in your project. This will install the new package and update your ``package.json`` file accordingly.
 
-For example, to add `OpenLayers <https://openlayers.org>`_, enter the ``my_project`` directory and run ``yarn add ol``. Your ``package.json`` will now look something like:
+For example, to add `OpenLayers <https://openlayers.org>`_, enter the ``my_project`` directory and run ``npm install ol``. Your ``package.json`` will now look something like:
 
 .. code-block:: json
 
@@ -182,4 +182,4 @@ If you are developing a project, keep track of which version of Arches you are d
 
 .. note::
 
-    When you register a new extension there is no way to automaticate the installation of a new JS dependency, so you'll need to manually run ``yarn add`` as described above.
+    When you register a new extension there is no way to automaticate the installation of a new JS dependency, so you'll need to manually run ``npm install `` as described above.
