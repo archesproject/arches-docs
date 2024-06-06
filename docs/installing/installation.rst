@@ -145,13 +145,13 @@ In your current terminal, run the Django development server (with the Arches vir
 Then, in a second terminal, activate the virtual environment used by Arches (this is a required step). Then navigate to the root directory of the project. ( you should be on the same level as `package.json`) and build a frontend asset bundle::
 
     cd my_project/my_project
-    yarn build_development
+    npm run build_development
 
 If you have trouble with this step, see :ref:`Troubleshooting Frontend Builds` below.
 
 .. note::
 
-    ``yarn build_development`` creates a static frontend asset bundle. Any changes made to frontend files (eg. ``.js``) will not be viewable until the asset bundle is rebuilt. run ``yarn build_development`` again to update the asset bundle, or run ``yarn start`` to run an asset bundler server that will detect changes to frontend files and rebuild the bundle appropriately.
+    ``npm run build_development`` creates a static frontend asset bundle. Any changes made to frontend files (eg. ``.js``) will not be viewable until the asset bundle is rebuilt. run ``npm run build_development`` again to update the asset bundle, or run ``npm run start`` to run an asset bundler server that will detect changes to frontend files and rebuild the bundle appropriately.
 
 
 
@@ -244,48 +244,46 @@ Troubleshooting Frontend Builds
 
 Building the frontend assets can sometimes be a source of challenge and frustration. Sometimes a "locked down" computer (with strict security configurations) may cause some trouble. If this is the case, you can try the following steps to interate toward a successful build.
 
-1. Edit your ``.yarnrc`` file to disable strict SSL.
-    To do so, navigate to your project's root directory and open the ``.yarnrc`` file in a text editor. Add the following lines to the end of the file:
+1. Configure ``npm`` to disable strict SSL.
     .. code-block:: bash
 
-        cafile null
-        strict-ssl false
+        npm config set cafile null
+        npm config set strict-ssl false
 
-2. **After the above edits, save the file.**
-3. Remove the ``node_modules`` folder and ``yarn.lock`` file if they exist:
+2. Remove the ``node_modules`` folder and ``package-lock.json`` file if they exist:
     .. code-block:: bash
 
         cd path/to/dir/my_project/my_project
         rm -rf node_modules
-        rm yarn.lock
+        rm package-lock.json
 
-4. If you’re using a virtual environment, activate it. ENV should be replaced with the name of your virtual environment.
+3. If you’re using a virtual environment, activate it. ENV should be replaced with the name of your virtual environment.
     .. code-block:: bash
 
         source ENV/bin/activate
 
-5. Run your Arches Django server and leave it running.
+4. Run your Arches Django server and leave it running.
     .. code-block:: bash
 
         python manage.py runserver
 
-6. **Open a *new terminal* to complete the following steps below.**
+5. **Open a *new terminal* to complete the following steps below.**
 
-7. If you’re using a virtual environment, activate it as in step 4 above. ENV should be replaced with the name of your virtual environment.
+6. If you’re using a virtual environment, activate it as in step 4 above. ENV should be replaced with the name of your virtual environment.
     .. code-block:: bash
 
         source ENV/bin/activate
 
-8. Navigate to the same directory as package.json, and install the frontend dependencies:
+7. Navigate to the same directory as package.json, and install the frontend dependencies:
     .. code-block:: bash
 
         cd path/to/dir/my_project/my_project
-        yarn install
+        npm install
 
-9. Once the dependencies are installed, build your static asset bundle:
+8. Once the dependencies are installed, build your static asset bundle:
     .. code-block:: bash
 
-        yarn build_development
+        npm run build_development
 
 
     If successful, you should see a message indicating that the build was successful. A successful build should make a message looking something like this:

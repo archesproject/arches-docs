@@ -182,9 +182,9 @@ We have integrated TypeScript and ESLint linting as essential components of our 
 
 ### Enforcement
 
-While this integration brings significant benefits to our Vue projects, it's important to note that newly written components will be affected by TypeScript and ESLint linting rules. Developers will need to adhere to TypeScript typing conventions and ESLint rules when writing new components to ensure consistency and compliance with the established coding standards. This enforcement takes place in the `build_development`, `build_test`, and `build_production` yarn processes. Previously written components will not be affected.
+While this integration brings significant benefits to our Vue projects, it's important to note that newly written components will be affected by TypeScript and ESLint linting rules. Developers will need to adhere to TypeScript typing conventions and ESLint rules when writing new components to ensure consistency and compliance with the established coding standards. This enforcement takes place in the `build_development`, `build_test`, and `build_production` npm processes. Previously written components will not be affected.
 
-We have also added the `eslint:check`, `eslint:watch`, `ts:check`, and `ts:watch` yarn scripts.
+We have also added the `eslint:check`, `eslint:watch`, `ts:check`, and `ts:watch` npm scripts.
 
 ### Separate Processes
 
@@ -241,8 +241,8 @@ In this example, we import the `useGettext` function from vue3-gettext and destr
 
 Before using internationalization features, it's important to run the following commands to extract and compile translations:
 
-Extract Translations: Run `yarn gettext:extract` to extract translations from the source code and generate template .pot files.
-Compile Translations: Run `yarn gettext:compile` to compile translated .po files into machine-readable .json files that can be used by the application.
+Extract Translations: Run `npm run gettext:extract` to extract translations from the source code and generate template .pot files.
+Compile Translations: Run `npm run gettext:compile` to compile translated .po files into machine-readable .json files that can be used by the application.
 
 For further information, please reference the [vue3-gettext documentation](https://github.com/jshmrtn/vue3-gettext)
 
@@ -366,7 +366,7 @@ describe('ExampleComponent', () => {
 To run your tests, use the vitest command in your terminal:
 
 ```bash
-yarn vitest
+npm run vitest
 ```
 
 **By following this documentation, you can set up and maintain comprehensive unit and component testing that catches bugs early and improves code quality. For further details, refer to the [Vitest documentation](https://vitest.dev/).**
