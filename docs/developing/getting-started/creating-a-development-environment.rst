@@ -2,7 +2,7 @@
 Creating a Development Environment
 ==================================
 
-The following is our recommedation for creating an Arches environment that works well for developers. The first thing to consider is the general structure that will be in place, presumably all in the same directory:
+The following is our recommendation for creating an Arches environment that works well for developers. The first thing to consider is the general structure that will be in place, presumably all in the same directory:
 
 **Runtime Content**
 
@@ -10,7 +10,7 @@ The following is our recommedation for creating an Arches environment that works
 
 + ``arches/`` - The local clone of your fork of the `archesproject/arches <https://github.com/archesproject/arches>`_ repo, this part of the code is often referred to as "core Arches."
 
-+ ``my_project/`` - The location of your Arches project. This is the app in which you will be making the majority of your front-end customizations (new images, new template contents, etc.).
++ ``my_project/`` - The location of your Arches project. This is the app in which you will be making the majority of your customizations (new images, new template contents, new plugins, etc.).
 
 **Database Configuration Storage**
 
@@ -57,11 +57,13 @@ Core Arches
         (ENV)arches/$ pip install -e .
         (ENV)arches/$ pip install -r arches/install/requirements.txt
         (ENV)arches/$ pip install -r arches/install/requirements_dev.txt
+        (ENV)arches/$ pre-commit install
+        (ENV)arches/$ git config blame.ignoreRevsFile .git-blame-ignore-revs
         (ENV)arches/$ cd ..
-    
+
     .. note::
 
-        If you later switch to a new git branch, you may need to rerun ``pip install -r arches/install/requirements.txt``, as the Python dependencies do change over the course of Arches releases.
+        If you later switch to a new git branch, you may need to rerun both ``pip install -r ...`` commands, as the Python dependencies do change over the course of Arches releases.
 
 The Project
 -----------
@@ -72,6 +74,7 @@ Additionally, we recommend that you turn the new project into a git repo, which 
 
 + A ``.gitignore`` file will already be generated in your project.
 + Make sure all sensitive information (db credentials, API keys, etc.) is stored in ``settings_local.py``, **not** ``settings.py``.
++ Run ``pre-commit install`` from the project root to benefit from auto-fixes for linting and formatting.
 
 The Package (optional)
 ----------------------
