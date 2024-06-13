@@ -37,8 +37,9 @@ Description
         pg_featureserv for example will present this as the layer description.
 
 Geometrynode
-        The UUID of the geojson-feature-collection node that underpins the geometry
+        A forgeign key reference to a Node model object of the type ``geojson-feature-collection`` that underpins the geometry
         of the spatial view.
+
 
 Ismixedgeometrytype
         Boolean value that indicates whether the geometry of the spatial view is a
@@ -48,13 +49,13 @@ Ismixedgeometrytype
         Default value is ``false``.
 
 Language
-        String value language code, such as "en", that defines the language of the spatial view. This is used
+        A forgeign key reference to a Language model object that defines the language of the spatial view. This is used
         to define the language that should be used to for datatypes that have 
         language specific values.
 
-        The language code will be checked against the published graph records for the graph that the geometrynode belongs to as part of the validation process.
+        The Language will be checked against the published graph records for the graph that the geometrynode belongs to as part of the validation process.
 
-        The spatial view fields use the node alias values so do not change is the language is set to be different to
+        The spatial view fields use the node alias values so do not change if the language is set to be different to
         the language that the graph was build using.
 
 Attributenodes
