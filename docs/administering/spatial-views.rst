@@ -47,6 +47,16 @@ Ismixedgeometrytype
 
         Default value is ``false``.
 
+Language
+        String value language code, such as "en", that defines the language of the spatial view. This is used
+        to define the language that should be used to for datatypes that have 
+        language specific values.
+
+        The language code will be checked against the published graph records for the graph that the geometrynode belongs to as part of the validation process.
+
+        The spatial view fields use the node alias values so do not change is the language is set to be different to
+        the language that the graph was build using.
+
 Attributenodes
         A JSON object that contains a list of attribute object defining the UUIDs of
         the nodes that comprise the attributes of the spatial view and a text description
@@ -123,6 +133,7 @@ SQL Insert
                         slug                ,
                         description         ,
                         ismixedgeometrytypes,
+                        languageid          ,
                         attributenodes      ,
                         isactive            ,
                         geometrynodeid
@@ -134,6 +145,7 @@ SQL Insert
                         'artefact',
                         'Defines information relating to the character of man made items of heritage significance as identified by the Portable Antiquities Scheme includes individual artefacts, architectural items, artefact assemblages, individual ecofacts and ecofact assemblages, and environmental samples.',
                         false,
+                        'en',
                         '
                         [{
                             "nodeid": "c30977b0-991e-11ea-ba04-f875a44e0e11",
