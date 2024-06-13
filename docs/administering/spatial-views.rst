@@ -62,7 +62,7 @@ Attributenodes
         the nodes that comprise the attributes of the spatial view and a text description
         of that attribute for metadata.
 
-        .. note:: The name of the attributes are automatically generated from the node name using Postgresql a compliant format.
+        .. note:: The name of the attributes are automatically generated from the node alias using a Postgresql compliant format.
 
         .. code-block:: JSON
 
