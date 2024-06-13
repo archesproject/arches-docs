@@ -36,7 +36,7 @@ Description
         , which can be accessed as metadata for consuming clients where supported.
         pg_featureserv for example will present this as the layer description.
 
-Geometrynodeid
+Geometrynode
         The UUID of the geojson-feature-collection node that underpins the geometry
         of the spatial view.
 
