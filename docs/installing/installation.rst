@@ -151,7 +151,7 @@ If you have trouble with this step, see :ref:`Troubleshooting Frontend Builds` b
 
 .. note::
 
-    ``npm run build_development`` creates a static frontend asset bundle. Any changes made to frontend files (eg. ``.js``) will not be viewable until the asset bundle is rebuilt. run ``npm run build_development`` again to update the asset bundle, or run ``npm run start`` to run an asset bundler server that will detect changes to frontend files and rebuild the bundle appropriately.
+    ``npm run build_development`` creates a static frontend asset bundle. Any changes made to frontend files (eg. ``.js``) will not be viewable until the asset bundle is rebuilt. run ``npm run build_development`` again to update the asset bundle, or run ``npm start`` to run an asset bundler server that will detect changes to frontend files and rebuild the bundle appropriately.
 
 
 
