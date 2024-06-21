@@ -170,6 +170,12 @@ The `create_package` command will help you get started by generating the folder 
 
 #. It is not necessary to populate every directory with data. Only add those files that you would like to share.
 
+.. note:: 
+For more information on populating your package with data, look into the :doc:`Command Line Reference </command-line-reference>`
+
+.. warning::
+If you haven't been developing any custom widgets, delete the sample-widget.json file in your package (extensions/widgets directory).
+
     Once you've added the necessary files to your package, simply compress it as a zip file or push it to a github repository and it's ready to be loaded.
 
 Configuring a Package
