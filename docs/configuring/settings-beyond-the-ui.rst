@@ -237,7 +237,7 @@ File type checking
 ------------------
 Through the `FILE_TYPE_CHECKING` setting, Arches provides three modes for file type checking:
 
-- `None``: files can be uploaded regardless of the `FILE_TYPES` setting. In addition, the integrity checks described below for .zip, .xlsx, and .csv files are skipped.
+- `None`: files can be uploaded regardless of the `FILE_TYPES` setting. In addition, the integrity checks described below for .csv, .zip, .xlsx, and .json files are skipped.
 - `"lenient"`: if the type of the uploaded file can be guessed, the following checks are performed:
     - The guessed file type must be included in `FILE_TYPES`
     - Each row of a .csv file must have the same length as the header (not jagged)
