@@ -184,7 +184,7 @@ We have integrated TypeScript and ESLint linting as essential components of our 
 
 While this integration brings significant benefits to our Vue projects, it's important to note that newly written components will be affected by TypeScript and ESLint linting rules. Developers will need to adhere to TypeScript typing conventions and ESLint rules when writing new components to ensure consistency and compliance with the established coding standards. This enforcement takes place in the `build_development`, `build_test`, and `build_production` npm processes. Previously written components will not be affected.
 
-We have also added the `eslint:check`, `eslint:watch`, `ts:check`, and `ts:watch` npm scripts.
+We have also added the `eslint:check`, `eslint:fix`, `eslint:watch`, `ts:check`, and `ts:watch` npm scripts.
 
 ### Separate Processes
 

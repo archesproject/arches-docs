@@ -259,7 +259,7 @@ Here are some examples of workflows that use custom step components you can look
     - In one of these workflows, find a ``componentName`` that is *not* ``'default-card'``
     - Now, look for that component name in the following two places:
         - `Arches HER Step Components (JS) <https://github.com/archesproject/arches-her/tree/master/arches_her/media/js/views/components/workflows>`_
-        - `Arches HER Step Components (HMTL) <https://github.com/archesproject/arches-her/tree/master/arches_her/templates/views/components/workflows>`_
+        - `Arches HER Step Components (HTML) <https://github.com/archesproject/arches-her/tree/master/arches_her/templates/views/components/workflows>`_
 
 Registering your Workflow
 =========================

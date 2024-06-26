@@ -183,6 +183,6 @@ Running Tests
 
 Tests must be run from core Arches. Enter ``arches/`` and then use::
 
-    (ENV)arches/$ python manage.py test tests --pattern="*.py" --settings="tests.test_settings"
+    (ENV)arches/$ python manage.py test tests --settings="tests.test_settings"
 
 It is possible that you will need to add or update ``settings_local.py`` inside of ``arches/`` in order for the tests to connect to Postgres and Elasticsearch.
