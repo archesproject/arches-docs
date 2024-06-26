@@ -238,7 +238,7 @@ File type checking
 Through the `FILE_TYPE_CHECKING` setting, Arches provides three modes for file type checking:
 
 - `None`: files can be uploaded regardless of the `FILE_TYPES` setting. In addition, the integrity checks described below for .csv, .zip, .xlsx, and .json files are skipped.
-- `"lenient"`: if the type of the uploaded file can be guessed, the following checks are performed:
+- `"lenient"` (Default): If the type of the uploaded file can be guessed, the following checks are performed:
     - The guessed file type must be included in `FILE_TYPES`
     - Each row of a .csv file must have the same length as the header (not jagged)
     - An .xlsx file must be a valid excel workbook
@@ -255,6 +255,9 @@ When evaluating your file type checking security posture, keep in mind that `"st
     Boolean values are deprecated. Until version 8, `True` maps to `"strict"`,
     and `False` maps to `None`. In version 8, providing boolean values will
     raise an exception.
+
+    The default value changed to `"lenient"` from `False` (equivalent to `None`
+    during the deprecation period).
 
 .. note::
     Some files that look like artifacts from creating .zip archives on Macs,
