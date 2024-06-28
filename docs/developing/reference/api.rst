@@ -958,3 +958,220 @@ GeoJSON
             }],
             "type": "FeatureCollection"
         }
+
+Spatial View Management
+=======================
+
+.. http:get:: /api/spatialviews
+
+    Get a list of spatial views that the user has permission to see, based upon the geometry nodes that they have access to
+
+
+    **Example request**:
+
+    .. code-block:: none
+
+        curl -H "Authorization: Bearer {token}" -X GET http://localhost:8000/api/spatialviews
+
+        curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NjYwYmQifQ.-xN_h82PHVTCMA9vdoHrcZxH-x5mb11y1537t3rGzcM" -X GET http://localhost:8000/api/spatialviews
+
+    **Example response**:
+
+    .. code-block:: http
+            
+        HTTP/1.0 200 OK
+        Content-Type: application/json
+
+        [
+            {
+                "attributenodes": [
+                    {
+                        "description": "name",
+                        "nodeid": "bee90060-1cf8-11ef-971a-0242ac130005"
+                    }
+                ],
+                "description": "test_description",
+                "geometrynodeid": "95b2c8de-1cf8-11ef-971a-0242ac130005",
+                "isactive": true,
+                "ismixedgeometrytypes": false,
+                "language": "en",
+                "schema": "public",
+                "slug": "spatialviews_test",
+                "spatialviewid": "3d031564-3304-11ef-af57-0242ac150006"
+            }
+        ]
+
+.. http:get:: /api/spatialviews/{uuid:spatial view id}
+
+    Get a single spatial view by its UUID  
+
+    **Example request**:
+
+    .. code-block:: none
+
+        curl  -X GET http://localhost:8000/api/spatialviews/3d031564-3304-11ef-af57-0242ac150006
+
+        curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NjYwYmQifQ.-xN_h82PHVTCMA9vdoHrcZxH-x5mb11y1537t3rGzcM" -X GET http://localhost:8000/api/spatialviews/3d031564-3304-11ef-af57-0242ac150006
+
+    **Example response**:
+
+    .. code-block:: http
+            
+        HTTP/1.0 200 OK
+        Content-Type: application/json
+
+        {
+            "attributenodes": [
+                {
+                    "description": "name",
+                    "nodeid": "bee90060-1cf8-11ef-971a-0242ac130005"
+                }
+            ],
+            "description": "test_description",
+            "geometrynodeid": "95b2c8de-1cf8-11ef-971a-0242ac130005",
+            "isactive": true,
+            "ismixedgeometrytypes": false,
+            "language": "en",
+            "schema": "public",
+            "slug": "spatialviews_test",
+            "spatialviewid": "3d031564-3304-11ef-af57-0242ac150006"
+        }
+
+.. http:post:: /api/spatialviews
+
+    Create a new spatial view. The user must be a member of the Application Admin group.
+
+    :query description: description of the spatial view
+    :query geometrynodeid: UUID of the geometry node that the spatial view is based on
+    :query isactive: boolean indicating if the spatial view is active
+    :query ismixedgeometrytypes: boolean indicating if the spatial view should create a mixed geometry type view
+    :query language: language of the spatial view (must be a valid language code assigned to a published graph that the geometry node belongs to)
+    :query schema: database schema of the spatial view (this must already have been created)
+    :query slug: slug of the spatial view (this must be unique in the system)
+    :query attributenodes: list of attribute nodes that the spatial view should include (each attribute node must have a nodeid and description)
+
+    **Example request**:
+
+    .. code-block:: none
+
+        curl -X POST -d "description=test_description&geometrynodeid=95b2c8de-1cf8-11ef-971a-0242ac130005&isactive=true&ismixedgeometrytypes=false&language=en&schema=public&slug=spatialviews_test" http://localhost:8000/api/spatialviews
+
+        curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NjYwYmQifQ.-xN_h82PHVTCMA9vdoHrcZxH-x5mb11y1537t3rGzcM" -X POST \
+        -d "{
+            'description': 'test_description',
+            'geometrynodeid': '95b2c8de-1cf8-11ef-971a-0242ac130005',
+            'isactive': true,
+            'ismixedgeometrytypes': false,
+            'language': 'en',
+            'schema': 'public',
+            'slug': 'spatialviews_test',
+            'attributenodes': [
+                {
+                    'description': 'name',
+                    'nodeid': 'bee90060-1cf8-11ef-971a-0242ac130005'
+                }
+            ] 
+        }" http://localhost:8000/api/spatialviews
+
+    **Example response**:
+
+    .. code-block:: http
+            
+        HTTP/1.0 201 Created
+        Content-Type: application/json
+
+        {
+            "attributenodes": [
+                {
+                    "description": "name",
+                    "nodeid": "bee90060-1cf8-11ef-971a-0242ac130005"
+                }
+            ],
+            "description": "test_description",
+            "geometrynodeid": "95b2c8de-1cf8-11ef-971a-0242ac130005",
+            "isactive": true,
+            "ismixedgeometrytypes": false,
+            "language": "en",
+            "schema": "public",
+            "slug": "spatialviews_test",
+            "spatialviewid": "3d031564-3304-11ef-af57-0242ac150006"
+        }
+
+.. http:put:: /api/spatialviews/{uuid:spatial view id}
+
+    Update a spatial view. The user must be a member of the Application Admin group.
+
+    :query spatialviewid: UUID of the spatial view
+    :query description: description of the spatial view
+    :query geometrynodeid: UUID of the geometry node that the spatial view is based on
+    :query isactive: boolean indicating if the spatial view is active
+    :query ismixedgeometrytypes: boolean indicating if the spatial view should create a mixed geometry type view
+    :query language: language of the spatial view (must be a valid language code assigned to a published graph that the geometry node belongs to)
+    :query schema: database schema of the spatial view (this must already have been created)
+    :query slug: slug of the spatial view (this must be unique in the system)
+    :query attributenodes: list of attribute nodes that the spatial view should include (each attribute node must have a nodeid and description)
+
+    **Example request**:
+
+    .. code-block:: none
+
+        curl -X PUT -d "description=test_description&geometrynodeid=95b2c8de-1cf8-11ef-971a-0242ac130005&isactive=true&ismixedgeometrytypes=false&language=en&schema=public&slug=spatialviews_test" http://localhost:8000/api/spatialviews/3d031564-3304-11ef-af57-0242ac150006
+
+        curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NjYwYmQifQ.-xN_h82PHVTCMA9vdoHrcZxH-x5mb11y1537t3rGzcM" -X PUT \
+        -d "{
+            'description': 'test_description',
+            'geometrynodeid': '95b2c8de-1cf8-11ef-971a-0242ac130005',
+            'isactive': false,
+            'ismixedgeometrytypes': false,
+            'language': 'en',
+            'schema': 'public',
+            'slug': 'spatialviews_test',
+            'attributenodes': [
+                {
+                    'description': 'name',
+                    'nodeid': 'bee90060-1cf8-11ef-971a-0242ac130005'
+                }
+            ]
+        }" http://localhost:8000/api/spatialviews/3d031564-3304-11ef-af57-0242ac150006
+
+    **Example response**:
+
+    .. code-block:: http
+            
+        HTTP/1.0 200 OK
+        Content-Type: application/json
+
+        {
+            "spatialviewid": "3d031564-3304-11ef-af57-0242ac150006",
+            "description": "test_description",
+            "geometrynodeid": "95b2c8de-1cf8-11ef-971a-0242ac130005",
+            "isactive": false,
+            "ismixedgeometrytypes": false,
+            "language": "en",
+            "schema": "public",
+            "slug": "spatialviews_test",
+            "attributenodes": [
+                {
+                    "description": "name",
+                    "nodeid": "bee90060-1cf8-11ef-971a-0242ac130005"
+                }
+            ]
+        }
+
+.. http:delete:: /api/spatialviews/{uuid:spatial view id}
+
+    Delete a spatial view. The user must be a member of the Application Admin group.
+
+    **Example request**:
+
+    .. code-block:: none
+
+        curl -X DELETE http://localhost:8000/api/spatialviews/3d031564-3304-11ef-af57-0242ac150006
+
+        curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NjYwYmQifQ.-xN_h82PHVTCMA9vdoHrcZxH-x5mb11y1537t3rGzcM" -X DELETE http://localhost:8000/api/spatialviews/3d031564-3304-11ef-af57-0242ac150006
+
+    **Example response**:
+
+    .. code-block:: http
+            
+        HTTP/1.0 200 OK
