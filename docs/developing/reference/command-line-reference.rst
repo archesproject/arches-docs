@@ -36,13 +36,10 @@ Installs Arches into your virtual environment from a local clone of
 the `archesproject/arches <https://github.com/archesproject/arches>`_
 repo, or your own fork of that repo. To do this properly, create a new
 virtual environment and activate it, clone the repo you want, enter
-that repo's root directory, and then run the command. Also, this
-command must be followed by::
+that repo's root directory, and then run the command.
 
-    pip install -r arches/install/requirements.txt
+If you wish to install the development dependencies too, run `pip install -e '.[dev]'` instead.
 
-in order to properly install all of Arches' python requirements. Make
-sure to use ``\`` instead of ``/`` on Windows.
 
 creating an Arches project
 --------------------------
