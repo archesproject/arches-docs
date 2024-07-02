@@ -36,12 +36,6 @@ You should be able to use Cloud storage regardless of where your app is hosted, 
   You can manually delete files from the bucket for now, or the intrepid developer
   may check out the answer to `this question <https://groups.google.com/forum/#!topic/archesproject/QHKqMISRkV8>`_ on the Arches forum.
 
-.. warning::
-
-  You may run into some version compatibility issues with Arches, Django, and `django-storages <https://pypi.org/project/django-storages/>`_. If your version of Arches uses a version of Django that is <3.2, pip installing django-storages will install the latest version of django (incompatible with Arches) and cause your Arches application to break. If you run into this problem, you may need to use pip to reinstall the Arches requirements as specified in the Arches `requirements.txt` file.
-
-
-
 
 Steps to Follow
 ===============
