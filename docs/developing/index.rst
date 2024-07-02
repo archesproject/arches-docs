@@ -22,6 +22,7 @@ If you are considering software development to customize Arches, please read the
     reference/command-line-reference
     reference/data-model
     reference/import-export
+    reference/search-components
 
 .. toctree::
     :caption: Extending Arches
