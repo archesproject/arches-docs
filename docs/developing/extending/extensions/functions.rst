@@ -59,7 +59,7 @@ are in the top of your Function's ``.py`` file.
 
 :name: **Required** Name is used to unregister a function, and shows up
        in the ``fn list`` command.
-:type: **Required**  As of version 4.2, this should always be set to ``node``
+:type: **Required**  As of version 4.2, this should always be set to ``node`` or ``primarydescriptors``
 :description: **Optional**  Add a description of what your Function does.
 :defaultconfig: **Required** A JSON object with any configuration needed to
                 serve your function's logic
@@ -99,26 +99,31 @@ Function Hooks
 
 Your function needs to extend the ``BaseFunction`` class. Depending on
 what you are trying to do, you will need to implement the ``get``,
-``save``, ``delete``, ``on_import``, and/or ``after_function_save``
+``save``, ``post_save``, ``delete``, ``on_import``, and/or ``after_function_save``
 methods.
 
 .. code-block:: python
 
     class MyFunction(BaseFunction):
 
-        def get(self):
+        def get(self, *args, **kwargs):
             raise NotImplementedError
 
-        def save(self, tile, request):
+        def save(self, *args, **kwargs):
+            raise NotImplementedError
+        
+        # occurrs after Tile.save
+        def post_save(self, *args, **kwargs):
             raise NotImplementedError
 
-        def delete(self, tile, request):
+        def delete(self, *args, **kwargs):
             raise NotImplementedError
 
-        def on_import(self, tile):
+        def on_import(self, *args, **kwargs):
             raise NotImplementedError
 
-        def after_function_save(self, functionxgraph, request):
+        # saves changes to the function itself
+        def after_function_save(self, *args, **kwargs):
             raise NotImplementedError
 
 .. note::
