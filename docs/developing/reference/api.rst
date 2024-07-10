@@ -237,13 +237,13 @@ Concepts
 
     gets a single rdm concept instance
 
-    :query format: {"json"}
-    :query indent: number of spaces to indent json output
-    :query includesubconcepts: option to include sub concepts in the return
-    :query includeparentconcepts: option to include parent concepts in the return
-    :query includerelatedconcepts: option to include related concepts in the return
-    :query depthlimit: limit the number of subconcept layers to return if includesubconcepts is true
-    :query lang: show suboncept results with specified language first
+    :query format: {"json-ld", "json"} (default is ``json-ld``)
+    :query indent: integer number of spaces to indent json output (default is none)
+    :query includesubconcepts: option to include sub concepts in the return (default is ``true``)
+    :query includeparentconcepts: option to include parent concepts in the return (default is ``true``)
+    :query includerelatedconcepts: option to include related concepts in the return (default is ``true``)
+    :query depthlimit: limit the number of subconcept layers to return if includesubconcepts is true (default is none)
+    :query lang: show subconcept results with specified language first (default is project default language)
     :reqheader Authorization: oAuth token for user authentication, see :ref:`/o/token <auth>`
 
     **Example request**:
