@@ -1,6 +1,6 @@
-#############################
-Data Lifecycle Good Practices
-#############################
+############################
+Data Curation Good Practices
+############################
 
 Arches provides tools to support users in the management of complex data, especially in the cultural heritage sector. To use Arches successfully, organizations also need to devote time and resources to maintain Arches, the database managed by Arches, and any digital files (images, videos, 3D models, and other external files) that may also be managed by Arches.
 
@@ -8,7 +8,7 @@ Arches provides tools to support users in the management of complex data, especi
 Data Integrity Risk Management
 ==============================
 
-This section of the documentation provides some guidance about how to maintain the integrity of your Arches managed data, especially during different project lifecycle transitions. Many of the sections below describe different scenarios where one should take preventative measures to reduce risks of data loss or corruption. As is the case with any data management application, there is always some level of risk for data loss. Risk include:
+This section of the documentation provides some guidance about how to maintain the integrity of your Arches managed data, especially during different project transitions. Many of the sections below describe different scenarios where one should take preventative measures to reduce risks of data loss or corruption. As is the case with any data management application, there is always some level of risk for data loss. Risk include:
 
 * Hardware failure
 * Software bugs

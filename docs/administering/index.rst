@@ -18,4 +18,4 @@ and permissions management.
     bulk-data-manager
     managing-permissions
     spatial-views
-    data-life-cycle
+    data-curation
