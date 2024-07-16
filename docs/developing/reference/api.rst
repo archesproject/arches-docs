@@ -506,7 +506,7 @@ Resources
 
     Updates a single resource instance
 
-    :query format: {"json-ld", "arches-json"}
+    :query format: {"json-ld", "arches-json"} (default is ``json-ld``)
     :query indent: number of spaces to indent json output
     :reqheader Authorization: OAuth token for user authentication, see :ref:`/o/token <auth>`
     :reqheader Accept: optional alternative to "format", {"application/json", "application/ld+json"}
@@ -868,7 +868,7 @@ GeoJSON
     WARNING: including primary names has a big impact on performance and is best defered to an additional request
 
     :query resourceid: optional comma delimited list of resource instance UUIDs to filter feature data on
-    :query nodeid: optional node UUID to filter feature data on
+    :query nodeid: optional comma delimited list of node UUIDs to filter feature data on
     :query tileid: optional tile UUID to filter feature data on
     :query nodegroups: optional comma delimited list of nodegroup UUIDs from which to include tile data as properties.
     :query precision: optional number of decimal places returned in coordinate values; used to constrain resultant data volume
