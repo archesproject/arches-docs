@@ -61,7 +61,7 @@ As a rule, one should make comprehensive backups of Arches databases *prior* to 
 
 The Arches core application has ongoing software development to add new features, improve performance, fix bugs and make other enhancements (see: :ref:`Arches Release Process`). Some of these software updates will involve changes to the Arches PostgreSQL database. In cases where software updates require changes to the database, Arches makes use of Django `"migrations" <https://docs.djangoproject.com/en/5.0/topics/migrations/>`_) to automatically update the PostgreSQL database. 
 
-Database migrations may change certain database records, the database schema, or both. We recommend review of the release notes (see :ref:`Arches Releases`) associated with version update to understand the nature of these changes. In any event, because Arches version upgrades typically involve database migrations, we *strongly recommend that you backup your data* prior to attempting an upgrade. See :ref:`PostgreSQL Utilities` below to review PostgreSQL utilities for backing up and restoring your database.   
+Database migrations may change certain database records, the database schema, or both. We recommend review of the release notes (see :ref:`Arches Releases`) associated with version update to understand the nature of these changes. **Follow all release notes instructions to upgrade your Arches project.** Because Arches version upgrades typically involve database migrations, we *strongly recommend that you backup your data* prior to attempting an upgrade. See :ref:`PostgreSQL Utilities` below to review PostgreSQL utilities for backing up and restoring your database.   
 
 
 
