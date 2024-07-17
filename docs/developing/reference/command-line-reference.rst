@@ -304,7 +304,7 @@ models, branches, thesauri, and collections intact.
     python manage.py packages -o create_mapping_file -d 'path_to_destination_directory' -g 'comma separated graph uuids'
 
 -d  Path to directory to place the output in.
--g  One or more graph UUIDs to create a mapping for.
+-g  The graph UUID for which to create a mapping.
 
 This mimics the 'Create Mapping File' command from the Arches Designer UI.
 
