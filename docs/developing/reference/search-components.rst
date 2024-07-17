@@ -2,6 +2,34 @@
 Arches Search Components Documentation
 ======================================
 
+What are Search Components?
+---------------------------
+
+Arches Search is powered by multiple different entities, including a search engine from Elasticsearch.
+For each dimension of a search, including where geospatially, which resource models, or which terms, etc., there
+exists a "Search Component" sometimes called a "Search Filter" to give specific instructions to the search engine 
+for how to execute the logic of the filter. Developers can either override these search components in their project,
+or wholesale create new ones available to users on their Arches instance. Some level of experience with Elasticsearch is strongly recommended.
+
+To override a search component defined in Core Arches, in your project directory `my_proj/my_proj/search/components/`` create a python file of the same name as the search component in Core Arches.
+The python logic in this file will be called by Arches when a search component of that name is used.
+To create your own search components, you can create the python files in `my_proj/my_proj/search_components/`. More information is available in ../extensions/creating-extensions
+
+Long-term Maintainability
+-------------------------
+
+Will your search components break if you upgrade Arches?
+If you _override_ core arches extensions, whether search component or card component or other extension types, you will likely need 
+to update your overridden version every time you upgrade Arches, even for patch releases.
+
+If you create your own search components in your project, the main things to consider with regard to long-term maintenance 
+include:
+
+- the search_components table in the database (whether a new version of Arches introduces data migrations for this table)
+- the `arches/app/search/elasticsearch_dsl_builder` classes in core arches: any changes to the Elasticsearch client configuration and its query classes may impact your search component 
+- the index mappings at `arches/app/search/mappings.py`: any changes to these indices or their mappings may impact your search component however you can create your own custom index if that makes your customizations more maintainable.
+
+
 Map Filter
 ----------
 
