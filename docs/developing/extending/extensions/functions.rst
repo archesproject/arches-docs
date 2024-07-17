@@ -11,6 +11,17 @@ Functions.
 Function must be created, registered, and then associated with a
 Resource Model.
 
+Functions are similar to database triggers. On get, save, post_save, 
+and delete operations of a tile, the Python code in a function is run. 
+For example, the primary descriptor function saves the primary descriptors 
+of a resource model on the save event of a tile. Hypothetically, you could 
+also do something like update an external system on the creation of a 
+tile or send an email notification.
+
+It is important to note that functions are **not run** during import operations 
+(with the exception of non-bulk import via the command line interface, see 
+:ref:`Import business data`). 
+
 Creating a Function
 ===================
 
