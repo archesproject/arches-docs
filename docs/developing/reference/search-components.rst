@@ -5,13 +5,13 @@ Arches Search Components Documentation
 What are Search Components?
 ---------------------------
 
-Arches Search is powered by multiple different entities, including a search engine from Elasticsearch.
-For each dimension of a search, including where geospatially, which resource models, or which terms, etc., there
-exists a "Search Component" sometimes called a "Search Filter" to give specific instructions to the search engine 
+Arches Search is powered by multiple components, including a search engine from Elasticsearch.
+For each search criteria, including geospatial criteria, resource model selections, search terms, etc., there
+exists a "Search Component" sometimes called a "Search Filter". These search components give specific instructions to the search engine 
 for how to execute the logic of the filter. Developers can either override these search components in their project,
-or wholesale create new ones available to users on their Arches instance. Some level of experience with Elasticsearch is strongly recommended.
+or create new ones to make available to users on their Arches instance. Some level of experience with Elasticsearch is strongly recommended.
 
-To override a search component defined in Core Arches, in your project directory `my_proj/my_proj/search/components/`` create a python file of the same name as the search component in Core Arches.
+To override a search component defined in Core Arches, in your project directory `my_proj/my_proj/search/components/` create a python file of the same name as the search component in Core Arches.
 The python logic in this file will be called by Arches when a search component of that name is used.
 To create your own search components, you can create the python files in `my_proj/my_proj/search_components/`. More information is available in ../extensions/creating-extensions
 
