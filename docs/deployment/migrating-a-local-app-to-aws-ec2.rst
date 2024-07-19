@@ -282,7 +282,7 @@ Some additional (advanced) considerations include:
 
 In that example, "my-arches-site.org" is the public domain name. But the items "ip-10-xxx-x-x.eu-west-2.compute.internal", "10.xxx.x.x", and "ip-10-xxx-x-x" are all AWS internal network addresses for the EC2 instance where Arches is deployed. You may need all of these for Arches to work properly.
 
-3. *Arches CSRF Trusted Origins*: Django 4.0, a dependency of Arches 7.5 introduced a new setting for security purposes. In the ``settings.py`` (sometimes set via ``settings_local.py``) you will need to add multiple items to the list of ``CSRF_TRUSTED_ORIGINS``. If you don't include this, users will encounter CSRF error (403) when they attempt to login. See the `Django documentation for details <https://docs.djangoproject.com/en/5.0/releases/4.0/#csrf-trusted-origins-changes>`_. Note the following items (with the ``https://`` prefix):
+3. *Arches CSRF Trusted Origins*: Django 4.0, a dependency of Arches 7.5, introduced further strictness to its CSRF checking by consulting the ``Origin`` header. In the ``settings.py`` (sometimes set via ``settings_local.py``) you will need to add multiple items to the list of ``CSRF_TRUSTED_ORIGINS``. If you don't include this, users will encounter CSRF error (403) when they attempt to login. See the `Django documentation for details <https://docs.djangoproject.com/en/5.0/releases/4.0/#csrf-trusted-origins-changes>`_. Note the following items (with the ``https://`` prefix):
 
 .. code-block:: python
 
