@@ -45,65 +45,57 @@ Installing the **Arches Dashboard** App
 ---------------------------------------
 You can add the dashboard to an Arches project in just a few easy steps.
 
-1. Install if from this repo (or clone this repo and pip install it locally).
-
+1. Install it from this repo (or clone this repo and pip install it locally):
     .. code-block:: shell
 
         pip install git+https://github.com/chiatt/dashboard.git
 
 
-2. Add 'dashboard' as to the ARCHES_APPLICATIONS and INSTALLED_APPS settings in the demo project's settings.py file
-
+2. Add 'dashboard' to the ``INSTALLED_APPS`` setting in the demo project's settings.py file, above your own project:
     .. code-block:: python
 
-        ARCHES_APPLICATIONS = ("dashboard",)  # be sure to add the trailing comma!
+        INSTALLED_APPS = (
+            # other applications already listed
+            "dashboard",
+            "demo",
+        )
 
 
 3. Add routing to your project to handle the Arches application. This can be either subdomain routing or path-based routing.
+    - for subdomain routing:
+        - Update your hosts.py file in your project:
+            .. code-block:: python
 
-   - for subdomain routing:
-
-     - Update your hosts.py file in your project:
-
-       .. code-block:: python
-
-          host_patterns = patterns('',
-            host(re.sub(r'_', r'-', r'dashboard'), 'dashboard.urls', name='dashboard'),
-            host(re.sub(r'_', r'-', r'demo'), 'demo.urls', name='demo'),
-          )
-        
+                host_patterns = patterns('',
+                    host(re.sub(r'_', r'-', r'dashboard'), 'dashboard.urls', name='dashboard'),
+                    host(re.sub(r'_', r'-', r'demo'), 'demo.urls', name='demo'),
+                )
 
    - for path-based routing:
+        - Update your urls.py file in your project. You'll likely need to add the `re_path` import:
+            .. code-block:: python
 
-     - Update your urls.py file in your project. You'll likely need to add the `re_path` import:
+                from django.urls import include, path, re_path
 
-         .. code-block:: python
+        - and then the following path:
+            .. code-block:: python
 
-             from django.urls import include, path, re_path
-
-         and then the following path:
-
-         .. code-block:: python
-
-             re_path(r"^", include("dashboard.urls")),
+                re_path(r"^", include("dashboard.urls")),
 
 
 4. From your project run migrate to add the model included in the app:
-
     .. code-block:: shell
 
         python manage.py migrate
 
 
 5. Next be sure to rebuild your project's frontend to include the plugin:
-
     .. code-block:: shell
 
         npm run build_development
 
 
-6. When you're done you should see the Dashboard plugin added to you main navigation bar:
-
+6. When you're done you should see the Dashboard plugin added to your main navigation bar:
     .. figure:: ../../images/dev/demo-arches-app-dashboard-screenshot.png
         :width: 100%
         :align: center
