@@ -30,7 +30,7 @@ is used to generate the name of the resource, which is used to identify the reso
 in places such as the search results card, map popup and report title. It is also 
 used to generate the resource descriptions displayed in the body of the search 
 results and map popup cards. For more information on configuring primary descriptor
-functions please review: :ref:`define-resource-descriptors` 
+functions please review: :ref:`Set Resource Display Names` 
 
 The resource descriptors are generated on resource instance save. They can also be
 regenerated for all the resources of a particular type by running the elasticsearch 
