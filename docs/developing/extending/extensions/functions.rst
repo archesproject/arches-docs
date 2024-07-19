@@ -25,7 +25,7 @@ It is important to note that functions are **not run** during import operations
 
 Primary Descriptors
 ===================
-Functions are used to make ``primary descriptors``. The primary descriptors function 
+Functions are used to make **primary descriptors**. The primary descriptors function 
 is used to generate the name of the resource, which is used to identify the resource 
 in places such as the search results card, map popup and report title. It is also 
 used to generate the resource descriptions displayed in the body of the search 
