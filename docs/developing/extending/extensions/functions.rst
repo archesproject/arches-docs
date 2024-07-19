@@ -22,6 +22,22 @@ It is important to note that functions are **not run** during import operations
 (with the exception of non-bulk import via the command line interface, see 
 :ref:`Import business data`). 
 
+
+Primary Descriptors
+===================
+Functions are used to make ``primary descriptors``. The primary descriptors function 
+is used to generate the name of the resource, which is used to identify the resource 
+in places such as the search results card, map popup and report title. It is also 
+used to generate the resource descriptions displayed in the body of the search 
+results and map popup cards.
+
+The resource descriptors are generated on resource instance save. They can also be
+regenerated for all the resources of a particular type by running the elasticsearch 
+reindex management command with the ``--recalculate-descriptors`` flag. A description 
+of the elasticsearch management commands can be found here: 
+:ref:`ElasticSearch Management`
+
+
 Creating a Function
 ===================
 
