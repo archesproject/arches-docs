@@ -236,14 +236,7 @@ Now you can run these final commands from the `/home/ubuntu/Projects/my_hip_app`
     (ENV)$ my_hip_app/elasticsearch/elasticsearch-8.5.3/bin/elasticsearch -d
 
 
-3. Install the app
-
-  .. code-block::
-
-    (ENV)$ python manage.py packages -o install
-
-
-4. Run the devserver
+3. Run the devserver
 
   .. code-block::
 
