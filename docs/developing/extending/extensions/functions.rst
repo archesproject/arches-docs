@@ -11,6 +11,34 @@ Functions.
 Function must be created, registered, and then associated with a
 Resource Model.
 
+Functions are similar to database triggers. On get, save, post_save, 
+and delete operations of a tile, the Python code in a function is run. 
+For example, the primary descriptor function saves the primary descriptors 
+of a resource model on the save event of a tile. Hypothetically, you could 
+also do something like update an external system on the creation of a 
+tile or send an email notification.
+
+It is important to note that functions are **not run** during import operations 
+(with the exception of non-bulk import via the command line interface, see 
+:ref:`Import business data`). 
+
+
+Primary Descriptors
+===================
+Functions are used to make **primary descriptors**. The primary descriptors function 
+is used to generate the name of the resource, which is used to identify the resource 
+in places such as the search results card, map popup and report title. It is also 
+used to generate the resource descriptions displayed in the body of the search 
+results and map popup cards. For more information on configuring primary descriptor
+functions please review: :ref:`Set Resource Display Names` 
+
+The resource descriptors are generated on resource instance save. They can also be
+regenerated for all the resources of a particular type by running the elasticsearch 
+reindex management command with the ``--recalculate-descriptors`` flag. A description 
+of the elasticsearch management commands can be found here: 
+:ref:`ElasticSearch Management`
+
+
 Creating a Function
 ===================
 
@@ -59,7 +87,7 @@ are in the top of your Function's ``.py`` file.
 
 :name: **Required** Name is used to unregister a function, and shows up
        in the ``fn list`` command.
-:type: **Required**  As of version 4.2, this should always be set to ``node``
+:type: **Required**  As of version 4.2, this should always be set to ``node`` or ``primarydescriptors``
 :description: **Optional**  Add a description of what your Function does.
 :defaultconfig: **Required** A JSON object with any configuration needed to
                 serve your function's logic
@@ -99,26 +127,31 @@ Function Hooks
 
 Your function needs to extend the ``BaseFunction`` class. Depending on
 what you are trying to do, you will need to implement the ``get``,
-``save``, ``delete``, ``on_import``, and/or ``after_function_save``
+``save``, ``post_save``, ``delete``, ``on_import``, and/or ``after_function_save``
 methods.
 
 .. code-block:: python
 
     class MyFunction(BaseFunction):
 
-        def get(self):
+        def get(self, *args, **kwargs):
             raise NotImplementedError
 
-        def save(self, tile, request):
+        def save(self, *args, **kwargs):
+            raise NotImplementedError
+        
+        # occurrs after Tile.save
+        def post_save(self, *args, **kwargs):
             raise NotImplementedError
 
-        def delete(self, tile, request):
+        def delete(self, *args, **kwargs):
             raise NotImplementedError
 
-        def on_import(self, tile):
+        def on_import(self, *args, **kwargs):
             raise NotImplementedError
 
-        def after_function_save(self, functionxgraph, request):
+        # saves changes to the function itself
+        def after_function_save(self, *args, **kwargs):
             raise NotImplementedError
 
 .. note::
