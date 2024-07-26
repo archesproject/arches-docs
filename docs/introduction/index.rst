@@ -12,3 +12,4 @@ Arches is an enterprise-level system developed to improve data management in sup
     overview
     release-process
     releases
+    acknowledgements
