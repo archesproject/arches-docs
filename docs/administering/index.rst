@@ -19,3 +19,4 @@ and permissions management.
     managing-permissions
     spatial-views
     data-curation
+    security
