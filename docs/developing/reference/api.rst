@@ -409,7 +409,7 @@ Resources
 
     :query format: {"json-ld", "json", "arches-json"} (default is ``json-ld``)
     :query hidden: hide hidden nodes {"true", "false"} (default is ``true``)
-    :query indent: integer number of spaces to indent json output
+    :query indent: integer number of spaces to indent json output (default is ``None``)
     :reqheader Authorization: OAuth token for user authentication, see :ref:`/o/token <auth>`
     :reqheader Accept: optional alternative to "format", {"application/xml", "application/json", "application/ld+json"}
 
