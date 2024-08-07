@@ -22,7 +22,7 @@ General Good Security Practices
 
 * Use strong passwords. A strong password is a combination of characters that resists easy access by trial and error guesswork. One of the most basic, and easiest to implement security measures on can use to protect an Arche instance from unauthorized access. Strong passwords should be used for Arches administrative ("super-user") accounts and connections to Arches dependencies, especially the PostgreSQL database server.
 
-* Use HTTPS on the Web. Use of HTTPS is a critical aspect of securing your Arches instance. If you do not use HTTPS, passwords and other credentials visible and can be intercepted. 
+* Use HTTPS on the Web. Use of HTTPS is a critical aspect of securing your Arches instance. If you do not use HTTPS, passwords and other credentials are visible and can be intercepted. 
 
 * Turn off ``DEBUG`` mode. While testing and developing your Arches instance, it is very helpful to run Arches with the ``DEBUG = True`` setting. That setting provides important debugging information to diagnose and fix problems. However, the ``DEBUG = True`` setting should absolutely **NOT** be used in production, because the diagnostic information provided by debug mode can contain sensitive data. For production, you should be sure to use the ``DEBUG = False`` setting.
 
