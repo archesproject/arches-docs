@@ -507,7 +507,7 @@ Resources
     Updates a single resource instance
 
     :query format: {"json-ld", "arches-json"} (default is ``json-ld``)
-    :query indent: number of spaces to indent json output
+    :query indent: number of spaces to indent json output (default is ``None``)
     :reqheader Authorization: OAuth token for user authentication, see :ref:`/o/token <auth>`
     :reqheader Accept: optional alternative to "format", {"application/json", "application/ld+json"}
 
