@@ -29,7 +29,7 @@ Arches requires the following software packages to be installed and available. U
 :Git >= 2.0: - Installation: https://git-scm.com/downloads
     - **Windows** Choose the "Use Git from the Windows Command Prompt" option during installation.
     - **macOS** You can install Git via `brew`: https://brew.sh/
-:PostgreSQL >= 12 with PostGIS 3:
+:PostgreSQL >= 14 with PostGIS 3:
     - **macOS** Use `Postgres.app <http://postgresapp.com>`_.
     - **Windows** Use the `EnterpriseDB installers <https://www.postgresql.org/download/windows/>`_, and use Stack Builder (included) to get PostGIS. After installation, add the following to your system's ``PATH`` environment variable: ``C:\Program Files\PostgreSQL\12\bin``. Make sure you write down the password that you assign to the ``postgres`` user.
 :Elasticsearch 8: - Installers: https://www.elastic.co/downloads/past-releases/elasticsearch-8-5-1
