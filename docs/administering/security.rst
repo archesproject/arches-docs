@@ -31,6 +31,8 @@ General Good Security Practices
 
 * **Use strong passwords**. A strong password is a combination of characters that resists easy access by trial and error guesswork. Strong passwords provide one of the easiest to implement security measures one can use to protect an Arches instance from unauthorized access. Strong passwords are especially important for accounts with more privileges. They should be used for all Arches administrative ("super-user") accounts and connections to Arches dependencies, especially the PostgreSQL database server.
 
+* **Enable Multifactor Authentication**. Arches provides optional two-factor authentication features. You can enable these features to provide an additional layer of security by more robustly verifing the identity of users attempting to access the application. (See :ref:`Two-factor Authentication`)
+
 * **Keep your Arches instance up-to-date**. The Arches open-source project sees continual updates and improvements. While some of these updates improve performance and capabilities, many updates also center on improvements to security and fixes to close vulnerabilities. To keep Arches secure, you will need to perform regular updates of your instance.
 
 * **Use HTTPS on the Web**. Use of HTTPS is a critical aspect of securing your Arches instance because it encrypts and secures communications over the Web. If you do not use HTTPS, passwords and other credentials are visible and can be intercepted (See :ref:`Implementing SSL`). 
