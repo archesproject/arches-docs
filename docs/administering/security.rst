@@ -33,7 +33,7 @@ General Good Security Practices
 
 * **Enable Multifactor Authentication**. Arches provides optional two-factor authentication features. You can enable these features to provide an additional layer of security by more robustly verifing the identity of users attempting to access the application. (See :ref:`Two-factor Authentication`)
 
-* **Keep your Arches instance up-to-date**. The Arches open-source project sees continual updates and improvements. While some of these updates improve performance and capabilities, many updates also center on improvements to security and fixes to close vulnerabilities. To keep Arches secure, you will need to perform regular updates of your instance.
+* **Keep your Arches instance up-to-date**. The Arches open-source project sees continual updates and improvements. While some of these updates improve performance and capabilities, many updates also center on improvements to security and fixes to close vulnerabilities. To keep Arches secure, you will need to perform regular updates of your instance. If your organization intends to maintain Arches over long time periods, consider deploying a Long Term Support (LTS) release of Arches. LTS releases will see updates and patch fixes, including security fixes, over longer time periods than other releases. (See :ref:`Arches Releases`)
 
 * **Use HTTPS on the Web**. Use of HTTPS is a critical aspect of securing your Arches instance because it encrypts and secures communications over the Web. If you do not use HTTPS, passwords and other credentials are visible and can be intercepted (See :ref:`Implementing SSL`). 
 
