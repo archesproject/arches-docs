@@ -15,7 +15,9 @@ In certain contexts, data security risks can involve legal, financial, reputatio
 
 Principle of Least Privilege
 ============================
-The *Principle of Least Privilege* means giving any users account or processes only those privileges required to perform its intended functions, and no more. This approach helps to clarify how to manage security issues. One can implement the *Principle of Least Privilege* using *Default Deny* models to accessing systems. The *Default Deny* cybersecurity model involves denying access by default and allowing only authorized and explicitly permitted activities. In this model, all network communications and software requests are *denied* unless specifically approved or permitted through predefined rules and policies. Arches version 7.6 implements a *Default Deny* model globally so that Arches administrators need to explicitly determine rules that grant access and modification privileges to Arches managed information.   
+The *Principle of Least Privilege* means giving any users account or processes only those privileges required to perform its intended functions, and no more. This approach helps to clarify how to manage security issues. One can implement the *Principle of Least Privilege* using *Default Deny* models to accessing systems. The *Default Deny* cybersecurity model involves denying access by default and allowing only authorized and explicitly permitted activities. In this model, all network communications and software requests are *denied* unless specifically approved or permitted through predefined rules and policies. 
+
+Arches version 7.6 implements a *Default Deny* setting that can be enabled so that Arches administrators need to explicitly determine rules that grant access and modification privileges to Arches managed resource data. Arches version 8 will likely make *Default Deny* the default setting for Arches. The Arches *Default Deny* model only applies to resource data managed within Arches. One still needs to consider other security concerns (networking, protecting Arches servers, human considerations, etc.) as discussed below.
 
 
 General Good Security Practices
