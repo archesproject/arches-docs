@@ -28,10 +28,10 @@ Turning off the Django debug mode will:
 
 
 
-Add Allowed Hosts and CSRF Trusted Origins to Settings
+Add Allowed Hosts, CSRF Trusted Origins, and Session Cookie Secure to Settings
 ======================================================
 
-``ALLOWED_HOSTS`` acts as a critical safeguard against HTTP Host header attacks, ensuring that your Arches application only responds to valid hostnames. On the other hand, ``CSRF_TRUSTED_ORIGINS`` is instrumental in fortifying your application against Cross-Site Request Forgery (CSRF) attacks by specifying trusted origins for the submission of forms. Both of these settings are required for Arches to work properly in production. These settings are described in more detail in the `Django documentation <https://docs.djangoproject.com/en/5.0/ref/settings/#allowed-hosts>`_.
+``ALLOWED_HOSTS`` acts as a critical safeguard against HTTP Host header attacks, ensuring that your Arches application only responds to valid hostnames. On the other hand, ``CSRF_TRUSTED_ORIGINS`` is instrumental in fortifying your application against Cross-Site Request Forgery (CSRF) attacks by specifying trusted origins for the submission of forms. Finally, ``SESSION_COOKIE_SECURE`` ensures that the cookie containing user authentication information is only transmitted over HTTPS. Each of these settings is required for Arches to work properly in production. These settings are described in more detail in the `Django documentation <https://docs.djangoproject.com/en/4.2/ref/settings/#allowed-hosts>`_.
 
 
 1. *Allowed Hosts*: In ``settings.py`` (sometimes set via ``settings_local.py``) you will need to add multiple items to the list of ``ALLOWED_HOSTS``. Consider the following example:
@@ -48,9 +48,11 @@ In that example, "my-arches-site.org" is the public domain name. But the items "
 
   CSRF_TRUSTED_ORIGINS = ["https://my-arches-site.org", "https://www.my-arches-site.org",]
 
+3. *Session cookies*: Set ``SESSION_COOKIE_SECURE`` to ``True``.
 
+.. code-block:: python
 
-
+  SESSION_COOKIE_SECURE = True
 
 
 Build Production Frontend Assets
