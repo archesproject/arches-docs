@@ -18,3 +18,5 @@ and permissions management.
     bulk-data-manager
     managing-permissions
     spatial-views
+    data-curation
+    security

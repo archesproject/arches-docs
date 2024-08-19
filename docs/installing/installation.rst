@@ -2,6 +2,8 @@
 Installing Core Arches
 ######################
 
+Most of the instructions here will focus on installation of Arches on the Ubuntu distribution of Linux. Arches can also be installed on Windows and macOS, but installation on those operating systems will likely require additional configuration and debugging. 
+
 .. seealso::
 
     If you plan to extend or contribute to Arches, please see :ref:`Creating a Development Environment`.
@@ -9,6 +11,15 @@ Installing Core Arches
 .. seealso::
 
     We have an in-progress `Docker install <https://github.com/archesproject/arches/tree/master/docker>`_, and would love help improving it. You can also review some works-in-progress and community-created approaches to using Docker :ref:`Installation with Docker`
+
+
+Installation on Windows via WSL
+-------------------------------
+Some of the directions below will provide some guidance to instal Arches dependencies and core Arches on machines running the Windows operating system. However, installation on Windows will likely require more configuration (and troubleshooting) than installation on a Linux distribution like Ubuntu. Fortunately, the Windows operating system has a feature called `"Windows Subystem for Linux" (WLS) <https://learn.microsoft.com/en-us/windows/wsl/about>`_ that allows one to run a Linux environment on a Windows machine. With WSL, one can install Arches dependencies and core Arches on an Ubuntu (or other Linux distribution) virtual machine. The steps for installing Arches on a WSL Ubuntu virtual machine will be identical to the steps used to install Arches on an "bare-metal" Ubuntu machine. 
+
+Currently, WSL comes in two architectures. We recommnd using the current default "WSL 2" version of WSL because it has a better file system performance and other benefits. It should be simpler and easier to install Arches on Windows machines via WSL (especially WSL 2). 
+
+
 
 Create a Virtual Environment
 ----------------------------
