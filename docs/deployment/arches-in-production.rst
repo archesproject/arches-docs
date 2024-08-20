@@ -55,6 +55,36 @@ In that example, "my-arches-site.org" is the public domain name. But the items "
   SESSION_COOKIE_SECURE = True
 
 
+Check Security Settings
+=======================
+
+The Django component of Arches has a number of security settings, and these settings can change as you upgrade Arches (including dependency Django libraries). You can find a list of these settings in the `Django documentation <https://docs.djangoproject.com/en/4.2/ref/settings/#security>`_. You can check the settings of your production Arches instance by running the following command:
+
+.. code-block:: bash
+
+  python manage.py check --deploy --tag=security
+
+
+This command provides a current list of security-related settings that you should be aware of. You can then adjust these settings in your ``settings.py`` file (or ``settings_local.py``) as needed. An example of the output of this command is shown below:
+
+.. code-block:: bash
+
+  System check identified some issues:
+
+  WARNINGS:
+  ?: (security.W002) You do not have 'django.middleware.clickjacking.XFrameOptionsMiddleware' in your MIDDLEWARE, so your pages will not be served with an 'x-frame-options' header. Unless there is a good reason for your site to be served in a frame, you should consider enabling this header to help prevent clickjacking attacks.
+  ?: (security.W004) You have not set a value for the SECURE_HSTS_SECONDS setting. If your entire site is served only over SSL, you may want to consider setting a value and enabling HTTP Strict Transport Security. Be sure to read the documentation first; enabling HSTS carelessly can cause serious, irreversible problems.
+  ?: (security.W008) Your SECURE_SSL_REDIRECT setting is not set to True. Unless your site should be available over both SSL and non-SSL connections, you may want to either set this setting True or configure a load balancer or reverse-proxy server to redirect all connections to HTTPS.
+  ?: (security.W012) SESSION_COOKIE_SECURE is not set to True. Using a secure-only session cookie makes it more difficult for network traffic sniffers to hijack user sessions.
+  ?: (security.W016) You have 'django.middleware.csrf.CsrfViewMiddleware' in your MIDDLEWARE, but you have not set CSRF_COOKIE_SECURE to True. Using a secure-only CSRF cookie makes it more difficult for network traffic sniffers to steal the CSRF token.
+  ?: (security.W018) You should not have DEBUG set to True in deployment.
+  ?: (security.W020) ALLOWED_HOSTS must not be empty in deployment.
+  Arches: (arches.W001) Cache backend does not support rate-limiting
+          HINT: Your cache: django.core.cache.backends.locmem.LocMemCache
+          Supported caches: ('django.core.cache.backends.memcached.PyLibMCCache', 'django.core.cache.backends.memcached.PyMemcacheCache', 'django.core.cache.backends.redis.RedisCache')
+
+
+
 Build Production Frontend Assets
 ================================
 
