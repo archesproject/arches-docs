@@ -823,8 +823,9 @@ Use the ``__arches_create_resource_model_views`` function (see above) to create 
 
 .. code-block:: sql
 
-    SELECT __arches_create_resource_model_views(graphid) FROM graphs
-        WHERE isactive = true
+    SELECT __arches_create_resource_model_views(graphid)
+        FROM graphs
+        WHERE publicationid IS NOT NULL
         AND name != 'Arches System Settings';
 
 In our case, the result will be a new schema called ``architectural_resource`` and a table called ``names`` (named for the node furthest up the hierarchy in the nodegroup, in this case, a semantic node).

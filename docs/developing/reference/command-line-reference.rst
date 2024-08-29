@@ -36,13 +36,10 @@ Installs Arches into your virtual environment from a local clone of
 the `archesproject/arches <https://github.com/archesproject/arches>`_
 repo, or your own fork of that repo. To do this properly, create a new
 virtual environment and activate it, clone the repo you want, enter
-that repo's root directory, and then run the command. Also, this
-command must be followed by::
+that repo's root directory, and then run the command.
 
-    pip install -r arches/install/requirements.txt
+If you wish to install the development dependencies too, run `pip install -e '.[dev]'` instead.
 
-in order to properly install all of Arches' python requirements. Make
-sure to use ``\`` instead of ``/`` on Windows.
 
 creating an Arches project
 --------------------------
@@ -319,7 +316,7 @@ create mapping files
     python manage.py packages -o create_mapping_file -d 'path_to_destination_directory' -g 'comma separated graph uuids'
 
 -d  Path to directory to place the output in.
--g  One or more graph UUIDs to create a mapping for.
+-g  The graph UUID for which to create a mapping.
 
 This mimics the 'Create Mapping File' command from the Arches Designer UI. See also :ref:`Mapping File` background.
 

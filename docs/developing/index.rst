@@ -15,6 +15,12 @@ If you are considering software development to customize Arches, please read the
     getting-started/arches-and-elasticsearch
 
 .. toctree::
+    :caption: Orientation for Django Developers
+    :maxdepth: 2
+
+    django-devs/orm-start
+
+.. toctree::
     :caption: Reference Guide
     :maxdepth: 2
 
@@ -22,6 +28,7 @@ If you are considering software development to customize Arches, please read the
     reference/command-line-reference
     reference/data-model
     reference/import-export
+    reference/search-components
 
 .. toctree::
     :caption: Extending Arches
@@ -31,6 +38,7 @@ If you are considering software development to customize Arches, please read the
     extending/creating-extensions
     extending/creating-new-map-layers
     extending/create-html-export-templates
+    extending/customize-html-email-templates
 
 .. toctree::
     :caption: Advanced
