@@ -28,7 +28,7 @@ class Function(models.Model):
                 import_success = True
             except ImportError as e:
                 import_error = e
-            if module != None:
+            if module is not None:
                 break
         if import_success == False:
             print('Failed to import ' + mod_path)

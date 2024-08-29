@@ -237,13 +237,13 @@ Concepts
 
     gets a single rdm concept instance
 
-    :query format: {"json"}
-    :query indent: number of spaces to indent json output
-    :query includesubconcepts: option to include sub concepts in the return
-    :query includeparentconcepts: option to include parent concepts in the return
-    :query includerelatedconcepts: option to include related concepts in the return
-    :query depthlimit: limit the number of subconcept layers to return if includesubconcepts is true
-    :query lang: show suboncept results with specified language first
+    :query format: {"json-ld", "json"} (default is ``json-ld``)
+    :query indent: integer number of spaces to indent json output (default is none)
+    :query includesubconcepts: option to include sub concepts in the return (default is ``true``)
+    :query includeparentconcepts: option to include parent concepts in the return (default is ``true``)
+    :query includerelatedconcepts: option to include related concepts in the return (default is ``true``)
+    :query depthlimit: limit the number of subconcept layers to return if includesubconcepts is true (default is none)
+    :query lang: show subconcept results with specified language first (default is project default language)
     :reqheader Authorization: oAuth token for user authentication, see :ref:`/o/token <auth>`
 
     **Example request**:
@@ -407,8 +407,9 @@ Resources
 
     gets a single resource instance
 
-    :query format: {"xml", "json", "json-ld"}
-    :query indent: number of spaces to indent json output
+    :query format: {"json-ld", "json", "arches-json"} (default is ``json-ld``)
+    :query hidden: hide hidden nodes {"true", "false"} (default is ``true``)
+    :query indent: integer number of spaces to indent json output (default is ``None``)
     :reqheader Authorization: OAuth token for user authentication, see :ref:`/o/token <auth>`
     :reqheader Accept: optional alternative to "format", {"application/xml", "application/json", "application/ld+json"}
 
@@ -505,8 +506,8 @@ Resources
 
     Updates a single resource instance
 
-    :query format: {"json-ld", "arches-json"}
-    :query indent: number of spaces to indent json output
+    :query format: {"json-ld", "arches-json"} (default is ``json-ld``)
+    :query indent: number of spaces to indent json output (default is ``None``)
     :reqheader Authorization: OAuth token for user authentication, see :ref:`/o/token <auth>`
     :reqheader Accept: optional alternative to "format", {"application/json", "application/ld+json"}
 
@@ -867,7 +868,7 @@ GeoJSON
     WARNING: including primary names has a big impact on performance and is best defered to an additional request
 
     :query resourceid: optional comma delimited list of resource instance UUIDs to filter feature data on
-    :query nodeid: optional node UUID to filter feature data on
+    :query nodeids: optional comma delimited list of node UUIDs to filter feature data on
     :query tileid: optional tile UUID to filter feature data on
     :query nodegroups: optional comma delimited list of nodegroup UUIDs from which to include tile data as properties.
     :query precision: optional number of decimal places returned in coordinate values; used to constrain resultant data volume

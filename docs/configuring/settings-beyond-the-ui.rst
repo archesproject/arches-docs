@@ -232,3 +232,35 @@ Once you've saved that change, restart Arches. Arches should now display more ac
 - Updated text contrast
 - Updated html to reflow properly on smaller screen sizes or when the screen is zoomed up to 400%
 - Updated text sizes to use relative sizing
+
+File type checking
+------------------
+Through the `FILE_TYPE_CHECKING` setting, Arches provides three modes for file type checking:
+
+- `None`: files can be uploaded regardless of the `FILE_TYPES` setting. In addition, the integrity checks described below for .csv, .zip, .xlsx, and .json files are skipped.
+- `"lenient"` (Default): If the type of the uploaded file can be guessed, the following checks are performed:
+    - The guessed file type must be included in `FILE_TYPES`
+    - Each row of a .csv file must have the same length as the header (not jagged)
+    - An .xlsx file must be a valid excel workbook
+    - .csv and .json files must be parsable
+    - Files inside a .zip archive will be tested against all of the above
+- `"strict"`: In addition to the above checks, files for which a type cannot be detected are rejected.
+
+When evaluating your file type checking security posture, keep in mind that `"strict"` mode will prevent uploading of simple `.txt` files, as there is no well-known type for them.
+
+.. versionadded:: 7.6
+    The `"lenient"` option.
+
+.. versionchanged:: 7.6
+    Boolean values are deprecated. Until version 8, `True` maps to `"strict"`,
+    and `False` maps to `None`. In version 8, providing boolean values will
+    raise an exception.
+
+    The default value changed to `"lenient"` from `False` (equivalent to `None`
+    during the deprecation period).
+
+.. note::
+    Some files that look like artifacts from creating .zip archives on Macs,
+    such as files beginning with "__MACOSX" or ending with "DS_Store" are
+    currently permitted when contained in .zip archives, even in strict mode,
+    but this behavior may change in future versions of Arches.

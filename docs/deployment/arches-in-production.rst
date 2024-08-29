@@ -28,10 +28,10 @@ Turning off the Django debug mode will:
 
 
 
-Add Allowed Hosts and CSRF Trusted Origins to Settings
+Add Allowed Hosts, CSRF Trusted Origins, and Session Cookie Secure to Settings
 ======================================================
 
-``ALLOWED_HOSTS`` acts as a critical safeguard against HTTP Host header attacks, ensuring that your Arches application only responds to valid hostnames. On the other hand, ``CSRF_TRUSTED_ORIGINS`` is instrumental in fortifying your application against Cross-Site Request Forgery (CSRF) attacks by specifying trusted origins for the submission of forms. Both of these settings are required for Arches to work properly in production. These settings are described in more detail in the `Django documentation <https://docs.djangoproject.com/en/5.0/ref/settings/#allowed-hosts>`_.
+``ALLOWED_HOSTS`` acts as a critical safeguard against HTTP Host header attacks, ensuring that your Arches application only responds to valid hostnames. On the other hand, ``CSRF_TRUSTED_ORIGINS`` is instrumental in fortifying your application against Cross-Site Request Forgery (CSRF) attacks by specifying trusted origins for the submission of forms. Finally, ``SESSION_COOKIE_SECURE`` ensures that the cookie containing user authentication information is only transmitted over HTTPS. Each of these settings is required for Arches to work properly in production. These settings are described in more detail in the `Django documentation <https://docs.djangoproject.com/en/4.2/ref/settings/#allowed-hosts>`_.
 
 
 1. *Allowed Hosts*: In ``settings.py`` (sometimes set via ``settings_local.py``) you will need to add multiple items to the list of ``ALLOWED_HOSTS``. Consider the following example:
@@ -42,14 +42,45 @@ Add Allowed Hosts and CSRF Trusted Origins to Settings
 
 In that example, "my-arches-site.org" is the public domain name. But the items "localhost", "127.0.0.1" are all local network locations where Arches is deployed. You may need all of these for Arches to work properly.
 
-2. *CSRF Trusted Origins*: Django 4.0, a dependency of Arches 7.5 introduced a new setting for security purposes. In the ``settings.py`` (sometimes set via ``settings_local.py``) you will need to add multiple items to the list of ``CSRF_TRUSTED_ORIGINS``. If you don't include this, users will encounter CSRF error (403) then they attempt to login. See the `Django documentation for details <https://docs.djangoproject.com/en/5.0/releases/4.0/#csrf-trusted-origins-changes>`_. Note the following items (with the ``https://`` prefix):
+2. *CSRF Trusted Origins*: Django 4.0, a dependency of Arches 7.5, introduced further strictness to its CSRF checking by consulting the ``Origin`` header. In the ``settings.py`` (sometimes set via ``settings_local.py``) you will need to add multiple items to the list of ``CSRF_TRUSTED_ORIGINS``. If you don't include this, users will encounter CSRF error (403) when they attempt to login. See the `Django documentation for details <https://docs.djangoproject.com/en/5.0/releases/4.0/#csrf-trusted-origins-changes>`_. Note the following items (with the ``https://`` prefix):
 
 .. code-block:: python
 
   CSRF_TRUSTED_ORIGINS = ["https://my-arches-site.org", "https://www.my-arches-site.org",]
 
+3. *Session cookies*: Set ``SESSION_COOKIE_SECURE`` to ``True``.
+
+.. code-block:: python
+
+  SESSION_COOKIE_SECURE = True
 
 
+Check Security Settings
+=======================
+
+The Django component of Arches has a number of security settings, and these settings can change as you upgrade Arches (including dependency Django libraries). You can find a list of these settings in the `Django documentation <https://docs.djangoproject.com/en/4.2/ref/settings/#security>`_. You can check the settings of your production Arches instance by running the following command:
+
+.. code-block:: bash
+
+  python manage.py check --deploy --tag=security
+
+
+This command provides a current list of security-related settings that you should be aware of. You can then adjust these settings in your ``settings.py`` file (or ``settings_local.py``) as needed. An example of the output of this command is shown below:
+
+.. code-block:: bash
+
+  System check identified some issues:
+
+  WARNINGS:
+  ?: (security.W004) You have not set a value for the SECURE_HSTS_SECONDS setting. If your entire site is served only over SSL, you may want to consider setting a value and enabling HTTP Strict Transport Security. Be sure to read the documentation first; enabling HSTS carelessly can cause serious, irreversible problems.
+  ?: (security.W008) Your SECURE_SSL_REDIRECT setting is not set to True. Unless your site should be available over both SSL and non-SSL connections, you may want to either set this setting True or configure a load balancer or reverse-proxy server to redirect all connections to HTTPS.
+  ?: (security.W012) SESSION_COOKIE_SECURE is not set to True. Using a secure-only session cookie makes it more difficult for network traffic sniffers to hijack user sessions.
+  ?: (security.W016) You have 'django.middleware.csrf.CsrfViewMiddleware' in your MIDDLEWARE, but you have not set CSRF_COOKIE_SECURE to True. Using a secure-only CSRF cookie makes it more difficult for network traffic sniffers to steal the CSRF token.
+  ?: (security.W018) You should not have DEBUG set to True in deployment.
+  ?: (security.W020) ALLOWED_HOSTS must not be empty in deployment.
+  Arches: (arches.W001) Cache backend does not support rate-limiting
+          HINT: Your cache: django.core.cache.backends.locmem.LocMemCache
+          Supported caches: ('django.core.cache.backends.memcached.PyLibMCCache', 'django.core.cache.backends.memcached.PyMemcacheCache', 'django.core.cache.backends.redis.RedisCache')
 
 
 

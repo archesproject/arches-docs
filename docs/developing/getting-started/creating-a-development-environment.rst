@@ -54,16 +54,14 @@ Core Arches
 
     .. code-block:: bash
 
-        (ENV)arches/$ pip install -e .
-        (ENV)arches/$ pip install -r arches/install/requirements.txt
-        (ENV)arches/$ pip install -r arches/install/requirements_dev.txt
+        (ENV)arches/$ pip install -e '.[dev]'
         (ENV)arches/$ pre-commit install
         (ENV)arches/$ git config blame.ignoreRevsFile .git-blame-ignore-revs
         (ENV)arches/$ cd ..
 
     .. note::
 
-        If you later switch to a new git branch, you may need to rerun both ``pip install -r ...`` commands, as the Python dependencies do change over the course of Arches releases.
+        If you later switch to a new git branch, you may need to uninstall and reinstall, as the Python dependencies do change over the course of Arches releases.
 
 The Project
 -----------
@@ -164,7 +162,7 @@ In general, you should always expect to
 1) Reinstall Python dependencies in core Arches::
 
     (ENV)$ cd arches
-    (ENV)arches/$ pip install -r requirements.txt
+    (ENV)arches/$ pip install '.[dev]'
 
 2) Apply database migrations in ``my_project``::
 
@@ -183,6 +181,6 @@ Running Tests
 
 Tests must be run from core Arches. Enter ``arches/`` and then use::
 
-    (ENV)arches/$ python manage.py test tests --pattern="*.py" --settings="tests.test_settings"
+    (ENV)arches/$ python manage.py test tests --settings="tests.test_settings"
 
 It is possible that you will need to add or update ``settings_local.py`` inside of ``arches/`` in order for the tests to connect to Postgres and Elasticsearch.
