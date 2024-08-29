@@ -1175,4 +1175,4 @@ Spatial View Management
 
     .. code-block:: http
             
-        HTTP/1.0 200 OK
+        HTTP/1.0 204 OK
