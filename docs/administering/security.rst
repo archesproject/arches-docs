@@ -39,6 +39,8 @@ General Good Security Practices
 
 * **Turn off DEBUG mode**. While testing and developing your Arches instance, it is very helpful to run Arches with the ``DEBUG = True`` setting. That setting provides important debugging information to diagnose and fix problems. However, the ``DEBUG = True`` setting should absolutely **NOT** be used in production, because the diagnostic information provided by debug mode can contain sensitive data, sometimes including access credentials. In production contexts, be sure to use the ``DEBUG = False`` setting. (See :ref:`Introduction to Production Deployment`)
 
+* **Rotate SECRET_KEY and keep it secret**. Arches projects are created with a sample ``SECRET_KEY`` in settings.py, but you should generate one of your own for your production settings file and keep it truly secret.
+
 * **Check Security Settings**. The Django component of Arches has a number of security settings that you should be aware of. While Arches may run in a production deployment with some of these settings omitted, you can improve your security posture by adjusting these settings. To review how your Arches instance is configured see :ref:`Check Security Settings`.
 
 
