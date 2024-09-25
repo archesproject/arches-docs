@@ -46,7 +46,7 @@ creating an Arches project
 
 .. code-block:: bash
 
-   arches-project create <name_of_project> [{-d|--directory} <directory_name>]
+   arches-admin startproject <name_of_project> [{-d|--directory} <directory_name>]
 
 -d, --directory
     (Optional) The name of the directory you'd like your new project located in.

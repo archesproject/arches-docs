@@ -113,7 +113,7 @@ If you are a developer running the latest arches you probably want to create a p
 
     .. code-block:: bash
 
-        arches-project create mynewproject
+        arches-admin startproject mynewproject
 
 
     .. note:: You can use the option ``[{-d|--directory} <directory_name>]`` to change the directory your new project will be created in.

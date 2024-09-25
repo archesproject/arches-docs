@@ -91,11 +91,11 @@ Create a Project
 
 *Linux and macOS*::
 
-    arches-project create my_project
+    arches-admin startproject my_project
 
 *Windows*::
 
-    python ENV\Scripts\arches-project create my_project
+    python ENV\Scripts\arches-admin startproject my_project
 
 :ref:`Common Errors`
 
