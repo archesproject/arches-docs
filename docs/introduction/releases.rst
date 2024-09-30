@@ -8,12 +8,17 @@ You can also view `release tags on Github <https://github.com/archesproject/arch
 Current Release
 ---------------
 
-* 7.5.0 - `notes <https://github.com/archesproject/arches/blob/stable/7.5.0/releases/7.5.0.md>`__
+* 7.6.0 (LTS) - `notes <https://github.com/archesproject/arches/blob/stable/7.6.0/releases/7.6.0.md>`__
 
 -------------
 Past Releases
 -------------
-
+* 7.5.5 - `notes <https://github.com/archesproject/arches/blob/stable/7.5.5/releases/7.5.5.md>`__
+* 7.5.4 - `notes <https://github.com/archesproject/arches/blob/stable/7.5.4/releases/7.5.4.md>`__
+* 7.5.3 - `notes <https://github.com/archesproject/arches/blob/stable/7.5.3/releases/7.5.3.md>`__
+* 7.5.2 - `notes <https://github.com/archesproject/arches/blob/stable/7.5.2/releases/7.5.2.md>`__
+* 7.5.1 - `notes <https://github.com/archesproject/arches/blob/stable/7.5.1/releases/7.5.1.md>`__
+* 7.5.0 - `notes <https://github.com/archesproject/arches/blob/stable/7.5.0/releases/7.5.0.md>`__
 * 7.4.3 - `notes <https://github.com/archesproject/arches/blob/stable/7.4.3/releases/7.4.3.md>`__
 * 7.4.2 - `notes <https://github.com/archesproject/arches/blob/stable/7.4.2/releases/7.4.2.md>`__
 * 7.4.1 - `notes <https://github.com/archesproject/arches/blob/stable/7.4.1/releases/7.4.1.md>`__
