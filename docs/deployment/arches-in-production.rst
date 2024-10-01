@@ -55,6 +55,18 @@ In that example, "my-arches-site.org" is the public domain name. But the items "
   SESSION_COOKIE_SECURE = True
 
 
+More HTTPS Security Settings
+============================
+The ``CSRF_TRUSTED_ORIGINS`` setting permits one to allow CSRF requests from specific origins. One can permit (encryption free) ``HTTP`` requests, but this should be discouraged because ``HTTP`` requests are not secure. In many deployment scenarios (when you deploy Arches behind a proxy or a cloud load balancer), one should also set the ``SECURE_PROXY_SSL_HEADER`` setting to ensure that Django is aware of the proxy's HTTPS status. In ``settings.py`` (sometimes set via ``settings_local.py``) you add this setting with the following code:
+
+.. code-block:: python
+  
+  SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTOCOL", "https")
+
+The ``SECURE_PROXY_SSL_HEADER`` setting is used to determine the actual request is secure. This setting is described in more detail in the `Django documentation <https://docs.djangoproject.com/en/4.2/ref/settings/#secure-proxy-ssl-header>`_.
+
+
+
 Check Security Settings
 =======================
 
