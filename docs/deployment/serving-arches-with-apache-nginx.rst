@@ -41,7 +41,7 @@ will benefit your production installation.
 
     .. note::
 
-        You may need to install the Python dev package specific to your Python version, e.g. ``python3.10-dev``.
+        You may need to install the Python dev package specific to your Python version, e.g. ``python3.11-dev``.
 
     Now follow one of the following two options:
 
@@ -62,7 +62,7 @@ will benefit your production installation.
 
     .. code-block:: bash
 
-        LoadModule wsgi_module "<your venv path>/lib/python3.10/site-packages/mod_wsgi/server/mod_wsgi-py37.cpython-37m-x86_64-linux-gnu.so"
+        LoadModule wsgi_module "<your venv path>/lib/python3.11/site-packages/mod_wsgi/server/mod_wsgi-py37.cpython-37m-x86_64-linux-gnu.so"
         WSGIPythonHome "<your venv path>"
 
     Copy these two lines, you will use them in step 3.
@@ -76,7 +76,7 @@ will benefit your production installation.
         $ sudo apt install libapache2-mod-wsgi-py3
 
     Note that the version of Python 3 installed at the system-level may need to match the version used to create the virtual environment pointed to in the config.
-    For example, if ``libapache2-mod-wsgi-py3`` is compiled against Python 3.10, use Python 3.10 for your virtual environment.
+    For example, if ``libapache2-mod-wsgi-py3`` is compiled against Python 3.11, use Python 3.11 for your virtual environment.
     Installing ``mod-wsgi`` this way means you will not need to load it as a module in the Apaache .conf file.
 
 3.  Create a new Apache .conf file
@@ -95,7 +95,7 @@ will benefit your production installation.
 
         # If you have mod_wsgi installed in your python virtual environment, paste the text generated
         # by 'mod_wsgi-express module-config' here, *before* the VirtualHost is defined.
-        LoadModule wsgi_module "/home/ubuntu/Projects/ENV/lib/python3.10/site-packages/mod_wsgi/server/mod_wsgi-py37.cpython-37m-x86_64-linux-gnu.so"
+        LoadModule wsgi_module "/home/ubuntu/Projects/ENV/lib/python3.11/site-packages/mod_wsgi/server/mod_wsgi-py37.cpython-37m-x86_64-linux-gnu.so"
         WSGIPythonHome "/home/ubuntu/Projects/ENV"
 
         <VirtualHost *:80>

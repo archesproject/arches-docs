@@ -22,8 +22,8 @@ Software Dependencies
 
 Arches requires the following software packages to be installed and available. Ubuntu Linux users see below for an installation script.
 
-:Python >= 3.10: - Installation: https://www.python.org/downloads/
-    - Python 3.10 and later comes with pip
+:Python >= 3.11: - Installation: https://www.python.org/downloads/
+    - Python 3.11 and later comes with pip
     - **Windows** You must choose 32-bit or 64-bit Python based on your system architecture.
     - **macOS** This guide works well if you wish to install via `brew`: https://docs.python-guide.org/starting/install3/osx/
 :Git >= 2.0: - Installation: https://git-scm.com/downloads
