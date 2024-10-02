@@ -26,9 +26,9 @@ Create a Virtual Environment
 
 .. sidebar:: Virtual Environment Reference
 
-    If you are unfamiliar with virtual environments, please take a look at the `Python documentation <https://docs.python.org/3.10/tutorial/venv.html>`_ before continuing.
+    If you are unfamiliar with virtual environments, please take a look at the `Python documentation <https://docs.python.org/3.11/tutorial/venv.html>`_ before continuing.
 
-You need a **Python 3.10+** virtual environment. :ref:`Skip ahead <Install Arches with pip>` if you have already created and activated one. Otherwise, use the commands below for a quick start.
+You need a **Python 3.11+** virtual environment. :ref:`Skip ahead <Install Arches with pip>` if you have already created and activated one. Otherwise, use the commands below for a quick start.
 
 **Create a virtual environment**::
 
@@ -38,7 +38,7 @@ This will generate a new directory called ``ENV``.
 
 .. note::
 
-  On some linux distributions, if the python version is less than 3.10, entering the following command may yield an error but it should alert you to any dependencies you may need to install, after which you'll be able to run this command.
+  On some linux distributions, if the python version is less than 3.11, entering the following command may yield an error but it should alert you to any dependencies you may need to install, after which you'll be able to run this command.
 
 **Activate the virtual environment**
 
@@ -61,7 +61,7 @@ The following are relative paths to an ``activate`` script within ENV.
     python
 
 This will run the Python interpreter and tell you what version is in use. If you don't
-see at least 3.10, check your original Python installation, delete the entire ``ENV``
+see at least 3.11, check your original Python installation, delete the entire ``ENV``
 directory, and create a new virtual environment. Use ``exit()`` or ``ctrl+C`` to
 leave the interpreter.
 
@@ -307,7 +307,7 @@ Building the frontend assets can sometimes be a source of challenge and frustrat
         ../../arches-rdm/arches_rdm/media/js/.gitkeep 1 bytes [built] [code generated]
         ./media/js/ sync ^\.\/.*$ 207 bytes [optional] [built] [code generated]
         ../../arches/arches/app/media/js/ sync ^\.\/.*$ 18.9 KiB [optional] [built] [code generated]
-        ../../ENV/lib/python3.10/site-packages/ sync ^\.\/.*\/media\/js\/.*$ 160 bytes [optional] [built] [code generated]
+        ../../ENV/lib/python3.11/site-packages/ sync ^\.\/.*\/media\/js\/.*$ 160 bytes [optional] [built] [code generated]
         ../../arches-rdm/arches_rdm/media/js/ sync ^\.\/.*$ 160 bytes [optional] [built] [code generated]
         ../../arches/arches/app/media/js/utils/ sync ^.*\/media\/js\/.*$ 160 bytes [optional] [built] [code generated]
         ./media/node_modules/moment/locale/ sync ^\.\/.*$ 3.21 KiB [optional] [built] [code generated]
