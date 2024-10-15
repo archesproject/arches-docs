@@ -2,6 +2,38 @@
 Managing Permissions
 ####################
 
+Arches provides a robust permissions system that allows administrators to control who can access different parts of the application, as well as who can access and modify different resource instances. This is important for ensuring that only authorized users can access or change sensitive data or make changes to the system.
+
+
+Permissions Frameworks
+----------------------
+
+Starting with Arches version 7.6, Arches comes with two different general permissions frameworks. The first "standard" (current behavior and default) permissions framework defaults to allow all resource instance data to be accessible (even to anonymous users) unless otherwise specified. This default standard behavior is most suitable for public-facing applications where all data is intended to be accessible to all users. 
+
+The second "default deny" (strict) permissions framework defaults to deny all resource instance data access (even to authenticated users) unless otherwise specified. This default strict behavior is most suitable for private applications and implementations that manage sensitive data that is intended to be restricted to only certain users. The default deny permissions framework aligns with a ":ref:`Principle of Least Privilege`" model for managing security.
+
+The permissions framework can be set in the ``settings.py`` or the ``settings_local.py`` file by setting the value of the ``PERMISSIONS_FRAMEWORK`` variable. One can implement the "default deny" permissions framework by setting that variable, or one can use that variable to specify a custom permissions framework (that you would have to first install and configure). To set the "default deny" permissions framework, make the following update:
+
+.. code-block:: python
+
+  PERMISSION_FRAMEWORK = "arches_default_deny.ArchesDefaultDenyPermissionFramework"
+  PERMISSION_DEFAULTS = {
+    "graphid": [
+      {
+        "id": "1", 
+        "type": "user", 
+        "permissions": [
+          "no_access_to_resourceinstance",
+        ],
+      }
+    ]
+  }
+
+
+
+Administering Permissions
+-------------------------
+
 Permissions in Arches are handled on a few different levels.
 
 * `Managing Users and Groups in Django Admin`_
