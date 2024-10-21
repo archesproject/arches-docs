@@ -68,13 +68,6 @@ To set default permissions for one or more graphs, add the following to your ``s
           "view_resourceinstance",
         ],
       },
-      {
-        "id": 11, 
-        "type": "group", 
-        "permissions": [
-          "view_resourceinstance",
-        ],
-      },
       # Below, we let user ID 8 have change_resourceinstance privileges
       # for all resource instances in the 'some-graph-id' resource model.
       {
