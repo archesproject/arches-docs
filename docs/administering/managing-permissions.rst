@@ -5,32 +5,91 @@ Managing Permissions
 Arches provides a robust permissions system that allows administrators to control who can access different parts of the application, as well as who can access and modify different resource instances. This is important for ensuring that only authorized users can access or change sensitive data or make changes to the system.
 
 
+----------------------
 Permissions Frameworks
 ----------------------
+The resource instance permission system is customizable (starting with Arches 7.6.). This means that you can choose a permissions framework to determine how permissions are applied to your resources and - if desired - you can even write your own.  Because of how permissions are applied to documents within Elasticsearch, if you choose to change your permissions framework, you will have to reindex your database.
 
-Starting with Arches version 7.6, Arches comes with two different general permissions frameworks. The first "standard" (current behavior and default) permissions framework defaults to allow all resource instance data to be accessible (even to anonymous users) unless otherwise specified. This default standard behavior is most suitable for public-facing applications where all data is intended to be accessible to all users. 
+Starting with Arches version 7.6, Arches comes with two different general permissions frameworks: 1) `Default Allow`, and 2) `Default Deny`.
 
+Default Allow
+^^^^^^^^^^^^^
+The first "standard" (current behavior and default) permissions framework defaults to allow all resource instance data to be accessible (even to anonymous users) unless otherwise specified. This default standard behavior is most suitable for public-facing applications where all data is intended to be accessible to all users. Default Allow has the following behaviors:   
+
+* If the user is a superuser or principal user, permission is allowed.
+* If there are no explicit permissions applied at the user or group level, the user is allowed access (implicit allow).  
+* If ``no_access`` is specified at the user level, access is denied.  
+* If access is allowed at the user level, access is allowed.  
+* If ``no_access`` is specified at the group level (in any group), access is denied.  
+* If access is permitted at the group level (in any group) access is allowed.  
+
+
+Default Deny
+^^^^^^^^^^^^
 The second "default deny" (strict) permissions framework defaults to deny all resource instance data access (even to authenticated users) unless otherwise specified. This default strict behavior is most suitable for private applications and implementations that manage sensitive data that is intended to be restricted to only certain users. The default deny permissions framework aligns with a ":ref:`Principle of Least Privilege`" model for managing security.
 
-The permissions framework can be set in the ``settings.py`` or the ``settings_local.py`` file by setting the value of the ``PERMISSIONS_FRAMEWORK`` variable. One can implement the "default deny" permissions framework by setting that variable, or one can use that variable to specify a custom permissions framework (that you would have to first install and configure). To set the "default deny" permissions framework, make the following update:
+Default Deny is designed to provide a simpler, more intuitive experience with permissions.  As such, the ``no_access`` permission is not used. By default, all users (except for the superuser, which can see all resources, and the creator of the resource) cannot see *any resources*.  Permissions must be added for all resources - either at the group level or user level. This can be done explicitly through the permissions manager or - optionally - one can use default permissions to specify resource level permissions that are applied across Arches. Default Deny has the following behaviors:
+
+* If the user is a superuser or principal user, permission is allowed.
+* If there are no explicit permissions at the group or user level, permission is denied.
+* If there are explicit allow permissions at the user level, the user is allowed.
+* If there are explicit allow permissions at the group level, the user is allowed.  
+
+
+Specifying a Permissions Framework
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The permissions framework can be set in the ``settings.py`` or the ``settings_local.py`` file by setting the value of the ``PERMISSIONS_FRAMEWORK`` variable. One can implement the "default deny" permissions framework by setting that variable, or one can use that variable to specify a custom permissions framework (that you would have to first install and configure). 
+
+To set the "default deny" permissions framework, make the following update:
 
 .. code-block:: python
 
   PERMISSION_FRAMEWORK = "arches_default_deny.ArchesDefaultDenyPermissionFramework"
+
+
+Default (Resource Model) Permissions with Default Deny
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Starting with version 7.6, Arches supports default permissions at the resource model level.  These are only supported for the default deny permission framework. This allows you to specify permissions in your settings.py file that can be applied to a given graph.  These permissions can be group or (less ideally) user level permissions. To use this feature, you need the graph IDs (can be obtained in the graph designer) and User or Group IDs - which can be obtained in the Django admin site (see: :ref:`Django Admin User Interface`).
+
+To set default permissions for one or more graphs, add the following to your ``settings.py`` or ``settings_local.py`` file:
+
+.. code-block:: python
+
   PERMISSION_DEFAULTS = {
-    "graphid": [
+    "some-graph-id": [
+      # Below, we let users in group ID 11 have view_resourceinstance privileges
+      # for all resource instances in the 'some-graph-id' resource model.
       {
-        "id": "1", 
+        "id": 11, 
+        "type": "group", 
+        "permissions": [
+          "view_resourceinstance",
+        ],
+      },
+      {
+        "id": 11, 
+        "type": "group", 
+        "permissions": [
+          "view_resourceinstance",
+        ],
+      },
+      # Below, we let user ID 8 have change_resourceinstance privileges
+      # for all resource instances in the 'some-graph-id' resource model.
+      {
+        "id": 8, 
         "type": "user", 
         "permissions": [
-          "no_access_to_resourceinstance",
+          "change_resourceinstance",
         ],
-      }
-    ]
+      },
+    ],
   }
 
 
 
+-------------------------
 Administering Permissions
 -------------------------
 
