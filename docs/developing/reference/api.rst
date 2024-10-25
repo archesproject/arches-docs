@@ -114,7 +114,7 @@ To allow others to connect to your Arches instance, you must create an OAuth cli
 
     .. code-block:: none
 
-        MOBILE_OAUTH_CLIENT_ID = "<your new Client id>"
+        OAUTH_CLIENT_ID = "<your new Client id>"
 
 .. important::
 
