@@ -243,6 +243,8 @@ resource_model_id property of the mapping file and the -g parameter
 will be ignored. For json export no mapping file is required, instead
 a resource model uuid should be passed into the -g command.
 
+Outputs a csv file with the business data for each resource. For nodes with data from multiple tiles, the command splits the additional data into overall several lines, which are then saved in a separate csv file ending ‘_grouped’. If the --single_file option is used, then the additional rows are included in the main csv file instead. Finally, a relations file is produced that includes all relationships between resources. 
+
 Note that in a Windows command prompt, you may need to replace ``'`` with ``"``.
 
 export business data to shapefile
