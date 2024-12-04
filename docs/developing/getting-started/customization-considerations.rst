@@ -18,7 +18,7 @@ Arches Applications are a powerful way to create customizations that are isolate
 
 
 
-Customization of Simple Extensions
+Custom Extensions
 ==================================
 To increase the likelihood that customizations will have long term compatibility and maintainability with Arches, please use the customization patterns supported and documented by Arches. These patterns include:
 
