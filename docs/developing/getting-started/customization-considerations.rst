@@ -29,10 +29,11 @@ Adherence to the extension design patterns helps to isolate your customizations 
 
 
 Arches Applications
-=======================
+===================
 While the Arches extensions (see above) architecture offers a great deal of flexibility, there may be scenarios where you need additional flexibility. From a sustainability and maintenance perspective, ideally you should isolate your customized module as much as possible from the core of Arches. One way to accomplish this is to develop an  **Arches Application** (see: :ref:`Creating Applications`), which are discrete Python packages that can be integrated into one or more Arches projects. The **Arches Applications** documentation details their development as well as their sustainability advantages.
 
 Arches Applications are a powerful way to create customizations that are isolated from the core of Arches. This isolation can help to reduce the risk of future maintenance and upgrade challenges. Arches Applications create reusable components that can be developed and maintained independently of the core Arches software, and can be shared with the wider Arches community. This can help to ensure that your customizations are more maintainable over time and can help to reduce the overall cost of development and maintenance.
+
 API Based Customizations
 ========================
 The Arches :ref:`API` can be used to support customizations, especially those involving integration of Arches with other information systems. Channeling all connections between Arches and other systems through the API aligns with a design practice often described as "`Loose Coupling <https://en.wikipedia.org/wiki/Loose_coupling>`_". By carefully limiting and simplifying how core Arches interfaces with external information systems, you reduce future maintenance burdens, because problems can be identified and fixed in a more focused manner.
