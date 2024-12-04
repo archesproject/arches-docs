@@ -59,7 +59,7 @@ Getting Started with an Example Arches Application
 ==================================================
 The Arches team created a simple example Arches Application to illustrate how to develop and deploy custom applications. The example application called **Arches Dashboard** displays a summary count of resource instances and tiles in a given Arches project.
 
-The **Arches Dashboard** app provides an example of how to build a custom Arches application. Experience with Django in general, and `Django app development <https://docs.djangoproject.com/en/4.2/ref/applications/#>`_ in particular, would be very useful for Arches Application development. The official Django documentation provides a great starting `tutorial for learning how to create apps <https://docs.djangoproject.com/en/4.2/intro/tutorial01/#creating-the-polls-app>`_.
+The **Arches Dashboard** app provides an example of how to build a custom Arches application. Experience with Arches in general, and Arches project development in particular, would be very useful for Arches Application development. 
 
 
 
