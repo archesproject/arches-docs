@@ -7,7 +7,9 @@ Starting with version 7.5, Arches moved to a new architectural pattern to suppor
 
 What's an Application?
 ======================
-The phrase **Arches Application** describes a Python package that provides some set of features added to the core (standard) Arches application. Arches application can be reused in multiple Arches projects. This terminology about *applications* and *projects* purposefully aligns with the `Django definition and use of these terms <https://docs.djangoproject.com/en/4.2/ref/applications/#projects-and-applications>`_.
+The term **Arches application** describes a Python package (usually pip installed) that provides some set of additional features beyond what core Arches provides. Arches application can be reused in multiple Arches projects.
+
+Applications typically include some combination of models, views, templates, static files, URLs, etc. They’re generally wired into Arches projects with the INSTALLED_APPS setting.
 
 
 .. figure:: ../../images/dev/diagram-custom-apps-in-projects.png
