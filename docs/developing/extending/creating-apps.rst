@@ -19,7 +19,7 @@ The phrase **Arches Application** describes a Python package that provides some 
 
 When are Arches Applications Useful?
 ====================================
-Arches Arches Applications a means to power special purpose features that may not be appropriate for incorporation into the core (standard) Arches application. A given Arches App can be under version control independent of core Arches. This should make it easier to update and upgrade core Arches independently of a custom Arches Application (and vice versa).
+Arches Applications are a means to power special purpose features that may not be appropriate for incorporation into the core (standard) Arches application. A given Arches Application can be under version control independent of core Arches. This should make it easier to update, upgrade, and maintain a custom Arches Application independently of Arches core.
 
 Just like Arches itself, an Arches Application can also be developed, shared with the public, and be made open source. This means that the custom features powered by an Arches Application can be reused widely across the community. Because Arches Application development can proceed independently of core Arches, Arches Applications can be an excellent way for community members to experiment with features beyond those listed on the official Arches software development roadmap `official Arches software development roadmap <https://www.archesproject.org/roadmap/>`_.
 
