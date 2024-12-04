@@ -2,7 +2,7 @@
 Creating Applications
 #####################
 
-Starting with version 7.5, Arches moved to a new architectural pattern to support certain customization needs. This new pattern called **Arches Applications** should make customizations easier to develop and maintain. This architectural pattern also aligns with standard Django practices for the introduction of reusable sets of new features.
+Starting with version 7.5, Arches adopted a new architectural pattern to support the need for implementors to easily share and maintain custom code. This new pattern, called **Arches Applications**, is similar to using "installed apps" in Django. It allows for easier development and maintenance of custom features by aligning with standard Django practices.
 
 
 What's an Application?
