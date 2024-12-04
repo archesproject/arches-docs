@@ -28,7 +28,7 @@ A given Arches Application can also be developed and shared open source. This me
 
 Arches Applications Can Help Avoid Forks
 ----------------------------------------
-Through Arches Applications, desired special features can be added to an Arches instance without forking the core (standard) Arches application code. There are many advantages to avoiding forks of the core (standard) Arches application code. By avoiding forks, one can more easily take advantage of continued upgrades and security patches applied to core Arches. This makes your use of Arches easier to maintain and secure.
+Arches Applications allow you to add special features to an Arches instance without forking the core Arches code. Avoiding forks has several benefits, including easier maintenance and the ability to apply upgrades and security patches provided by core Arches.```
 
 A given Arches Application can also be developed and shared open source. This means that the custom features powered by an Arches Application can be reused across the community in multiple Arches projects.
 
