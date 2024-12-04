@@ -33,7 +33,7 @@ Through Arches Applications, desired special features can be added to an Arches 
 A given Arches Application can also be developed and shared open source. This means that the custom features powered by an Arches Application can be reused across the community in multiple Arches projects.
 
 
-Developing Arches Applications
+Developing an Arches Application
 ------------------------------
 While any given Arches Application can be reused in multiple Arches projects, one must first create an Arches project to host the Arches Application you seek to develop. You start with the following command to create a new Arches project to host your Arches Application:
 
