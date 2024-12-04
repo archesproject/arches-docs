@@ -8,16 +8,6 @@ The practices described here will reduce costs, reduce long term maintenance and
 
 
 
-Customized Applications
-=======================
-While the Arches extensions architecture offers a great deal of flexibility (see below), there may be scenarios where you need additional flexibility. From a sustainability and maintenance perspective, this scenario has important risks that need to be understood and factored into long term resource planning and engineering.
-
-Managing long term sustainability and maintenance risks should be a core software engineering focus. As much as possible, you should ideally isolate your customized module as much as possible from the core of Arches. One way preferred way to accomplish this is to develop  **Arches Applications** (see: :ref:`Creating Applications`), which are discrete Python packages that can be integrated into one or more Arches projects. The **Arches Applications** documentation details their development as well as their sustainability advantages.
-
-Arches Applications are a powerful way to create customizations that are isolated from the core of Arches. This isolation can help to reduce the risk of future maintenance and upgrade challenges. Arches Applications can be developed and maintained independently of the core Arches software, and can be shared with the wider Arches community. This can help to ensure that your customizations are more maintainable over time. Arches Applications can also be used to create reusable components that can be shared with members of the Arches community, which can help to reduce the overall cost of development and maintenance.
-
-
-
 Custom Extensions
 ==================================
 To increase the likelihood that customizations will have long term compatibility and maintainability with Arches, please use the customization patterns supported and documented by Arches. These patterns include:
