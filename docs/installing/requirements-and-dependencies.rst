@@ -38,7 +38,7 @@ Arches requires the following software packages to be installed and available. U
 :GDAL >= 2.2.x: 
     - **Windows** Use the `OSGeo4W installer <https://trac.osgeo.org/osgeo4w/>`_, and choose to install the GDAL package (you don't need QGIS or GRASS). After installation, add ``C:\OSGeo4W64\bin`` to your system's ``PATH`` environment variable.
     - **macOS** (See :ref:`macOS and GDAL, GEOS` below)
-:Node.js 20.x (recommended): - Installation: https://nodejs.org/ (choose the installer appropriate to your operating system).
+:Node.js 20.14.x (recommended): - Installation: https://nodejs.org/ (choose the installer appropriate to your operating system).
     - NOTE: Arches may not be compatible with later versions of Node.js (after 16) `(see discussion) <https://community.archesproject.org/t/newbie-v7-install-experience-some-hints-and-tips/1782>`_.
 
 To support long-running task management, like large user downloads, you must install a Celery broker like RabbitMQ or Redis:
