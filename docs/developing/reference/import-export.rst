@@ -1014,9 +1014,9 @@ To export CSV, use::
 
     python manage.py packages -o export_business_data -d 'path_to_destination_directory' -f 'csv' -c 'path_to_mapping_file' -g 'resource_model_uuid'
 
-When exporting to CSV, you need to use a :ref:`Mapping File`, which will determine the content of your CSV (which nodes are exported, etc.). Add the ``--single_file`` argument to export your grouped data to the same CSV file as the rest of your data.
-
-More about these export commands can be found in :ref:`Export Commands`.
+When exporting to CSV, you need to use a :ref:`Mapping File`, which will determine the content of your CSV (which nodes are exported, etc.). 
+Some tile data that you may want to export to CSV can contain multiple values. By default, Arches would export multiple value tile data to a CSV file with a name ending with "_groups".
+You can change this behavior by adding the ``--single_file`` argument to export your grouped data to the same CSV file as the rest of your data. More about these export commands can be found in :ref:`Export Commands`.
 
 Resource Database Views
 -----------------------
