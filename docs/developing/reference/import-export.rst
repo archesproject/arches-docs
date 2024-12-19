@@ -985,6 +985,7 @@ Directly inserting our records into the new Arches view will look something like
             end;
         $$ language plpgsql;
 
+
     As part of this workaround, *after* you make any bulk updates or inserts to geometries, you'll need execute the following:
 
     .. code-block:: sql
