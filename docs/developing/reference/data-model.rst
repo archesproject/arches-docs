@@ -465,19 +465,19 @@ the primary key for entities of type NodeGroup.
 
 The second, ``nodegroup_id``, is a foreign key attribute (thus also a
 UUID) that refers from somewhere else to a NodeGroup.  For example, a
-Tile object may have an associated NodeGroup; that NodeGroup object
-itself would be referenced as ``tile.nodegroup``, and the NodeGroup's
-UUID -- which in the context of a Tile object is a foreign key --
-would therefore be ``tile.nodegroup_id``.
+Node object may have an associated NodeGroup; that NodeGroup object
+itself would be referenced as ``node.nodegroup``, and the NodeGroup's
+UUID -- which in the context of a Node object is a foreign key --
+would therefore be ``node.nodegroup_id``.
 
-The reason to use ``tile.nodegroup_id``, instead of getting the
+The reason to use ``node.nodegroup_id``, instead of getting the
 NodeGroup's ID by going through the associated NodeGroup object with
-``tile.nodegroup.nodegroupid``, is that the latter would involve an
+``node.nodegroup.nodegroupid``, is that the latter would involve an
 extra database query to fetch the NodeGroup instance, which would be a
 waste if you don't actually need the NodeGroup itself.  When all you
 need is the NodeGroup's UUID -- perhaps because you're just going to
 pass it along to something else that only needs the UUID -- then
 there's no point fetching the entire NodeGroup when you already have
-the Tile in hand and the Tile's ``nodegroup_id`` field is a foreign
-key to the Tile's associated NodeGroup.  You might as well just get
-that foreign key, ``tile.nodegroup_id``, directly.
+the Node in hand and the Node's ``nodegroup_id`` field is a foreign
+key to the Node's associated NodeGroup.  You might as well just get
+that foreign key, ``node.nodegroup_id``, directly.
