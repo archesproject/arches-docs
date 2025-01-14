@@ -70,11 +70,11 @@ Please note that the actual paths that you need to specify for ``GDAL_LIBRARY_PA
 Scripted Dependency Installation
 --------------------------------
 
-For Ubuntu we maintain an `ubuntu_setup.sh <https://raw.githubusercontent.com/archesproject/arches/stable/7.5.0/arches/install/ubuntu_setup.sh>`_ script to install dependencies. It works for 18.04 and 20.04, and preliminary testing shows it to be compatible with 22.04 as well.
+For Ubuntu we maintain an `ubuntu_setup.sh <https://raw.githubusercontent.com/archesproject/arches/stable/7.6.0/arches/install/ubuntu_setup.sh>`_ script to install dependencies. It works for 18.04 and 20.04, and preliminary testing shows it to be compatible with 22.04 as well.
 
 .. code-block:: bash
 
-    wget https://raw.githubusercontent.com/archesproject/arches/stable/7.5.0/arches/install/ubuntu_setup.sh
+    wget https://raw.githubusercontent.com/archesproject/arches/stable/7.6.0/arches/install/ubuntu_setup.sh
     source ./ubuntu_setup.sh
 
 You will be prompted before each dependency is installed, or use ``yes | source ./ubuntu_setup.sh`` to install all components (Postgres/PostGIS, Node/npm, and ElasticSearch).
