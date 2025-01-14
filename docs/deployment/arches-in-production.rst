@@ -97,7 +97,9 @@ This command provides a current list of security-related settings that you shoul
 
 Enable a Cache backend
 ----------------------
-In the ``python manage.py check --deploy --tag=security`` output above, you will see a warning that the cache backend does not support rate-limiting. This is because the default cache backend in Django is ``LocMemCache``, which is an in-memory cache that does not support rate-limiting. To enable rate-limiting, you will need to configure a cache backend that supports rate-limiting. An example cache backend that supports rate-limiting for production deployments is ``django.core.cache.backends.memcached.PyLibMCCache``. To enable this cache backend, add (and modify as needed for your deployment) the following to your ``settings.py`` file (or ``settings_local.py``):
+In the ``python manage.py check --deploy --tag=security`` output above, you will see a warning that the cache backend does not support rate-limiting. This is because the default cache backend in Django is ``LocMemCache``, which is an in-memory cache that does not support rate-limiting. To enable rate-limiting, you will need to configure a cache backend that supports rate-limiting. An example cache backend that supports rate-limiting for production deployments is ``django.core.cache.backends.memcached.PyLibMCCache``. 
+
+In general, enabling caching can play a key role in improving the overall performance and stability (including and beyond security issues) of production Arches deployments. Please be sure to read more about `Django's support for different approaches to caching <https://docs.djangoproject.com/en/5.1/topics/cache/>`_. To enable this cache backend, add (and modify as needed for your deployment) the following to your ``settings.py`` file (or ``settings_local.py``):
 
 .. code-block:: python
 
