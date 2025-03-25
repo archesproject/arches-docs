@@ -78,6 +78,7 @@ The Excel template file also includes a worksheet called "metadata". The metadat
 
 .. note::
     **Bulk Uploading Files**
+
     If you want to import resource instances that include datatype "file-list" nodes, then the files associated with those nodes will need to be imported along with the Excel workbook. To do this, zip compress a folder that includes the Excel workbook to be imported along with the associated files (such as image files) named in the "file-list" nodes. The files (such as image files) should be in the same folder as the Excel workbook (or the import CSV). The zip file should be named the same as the Excel workbook(or the import CSV). The Bulk Data Manager will recognize the zip file and import the files along with the Excel workbook (or the import CSV). A valid zip file structure would look like this:
 
     .. code-block:: bash
@@ -88,6 +89,14 @@ The Excel template file also includes a worksheet called "metadata". The metadat
         ├── image2.jpg
         ├── image3.jpg
         └── image4.jpg
+
+.. note::
+    **Characters in Filenames and Column Names**
+
+    The presence of certain characters in filenames and column names may cause problems with the bulk data importer. Arches may or may not provide information about errors relating to characters used in filenames and column names, which can make such problems frustrating to diagnose. 
+    
+    For filenames, its safest to use only alphanumeric characters, the "-" character, and use the period (".") once to delimit a file extension (like ".jpg", ".csv", ".xlsx", etc.). For column names, similarly limit your use of punctation characters.     
+
 
 Edit
 ====
