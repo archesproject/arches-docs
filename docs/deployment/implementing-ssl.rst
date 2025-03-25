@@ -17,7 +17,7 @@ SSL certificate can be signed either by you using your own private key or by a c
 
 Self signed
 ===========
-A good guide about how to implement this using OpenSSL on Ubuntu 20.04 can be found `here <https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-apache-in-ubuntu-20-04>`_.
+A good guide about how to implement this using OpenSSL on Ubuntu can be found `here <https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-apache-in-ubuntu-20-04>`_. `This guide illustrates how to provide "self-signed" certificates with Nginx <https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu>`_.
 
 .. note::
     This option allows you to implement SSL using your server's IP address without a domain name. However, when accessing the website using any modern browser the connection will be marked as not private.
@@ -35,7 +35,7 @@ Signed by Let's encrypt
 
 Install certbot
 ---------------
-certbot is a tool that helps you obtain a certificate from Let's encrypt. `The official installation instructions for apache running on Ubuntu 20.04 can be found here. <https://certbot.eff.org/lets-encrypt/ubuntufocal-apache>`_
+certbot is a tool that helps you obtain a certificate from Let's encrypt. `The official installation instructions for certbot can be found here. <https://certbot.eff.org/lets-encrypt/>`_
 
 
 Configuring the webserver

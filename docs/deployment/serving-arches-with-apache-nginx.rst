@@ -22,8 +22,7 @@ Configure Apache
 ================
 
 
-The following instructions work for Ubuntu 16.04 - 20.04; minor changes may be necessary for a different OS. This is a very basic Apache configuration, and more fine tuning
-will benefit your production installation.
+The following instructions work for Ubuntu; minor changes may be necessary for a different OS. This is a very basic Apache configuration, and more fine tuning will benefit your production installation.
 
 1. Install Apache.
 
