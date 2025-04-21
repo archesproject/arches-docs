@@ -854,7 +854,7 @@ Directly inserting our records into the new Arches view will look something like
 
 .. note::
 
-    The SQL relational views name views (that one interacts with as database schemas and tables) and columns with node name aliases. Because of this, be sure to avoid using SQL "reserved words" such as "SELECT", "GROUP", "DROP", etc. in node name aliases and resource model names. Also, avoid repeated use of the same name node aliases for nodes that are nested in different branches. Repeated use of node name aliases in different branch structures will lead to incomplete representation of those branches in the relational views. In such cases, you won't be able to access or modify data. 
+    The SQL relational views name views (that one interacts with as database schemas and tables) and columns with some logic that involves node names and node name aliases. Because of this, resource model and branch names can sometimes lead to unexpected and unwanted behaviors in the SQL relational views. You may want to avoid using SQL **reserved words** such as `SELECT`, `GROUP`, `DROP`, etc. in the names of resource models, branches, and node name aliases. Also, avoid repeated use of the same name node aliases for nodes that are nested in different branches. Repeated use of node name aliases in different branch structures will lead to incomplete representation of those branches in the relational views. In such cases, you won't be able to access or modify data. 
 
 
 .. todo::
