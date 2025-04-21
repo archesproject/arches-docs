@@ -846,9 +846,16 @@ Directly inserting our records into the new Arches view will look something like
         transactionid
     from legacy_db.buildings;
 
+
 .. note::
 
     In this case, "Primary" is being given to every name type, because your legacy database did not have more than one name per resource.
+
+
+.. note::
+
+    The SQL relational views name views (that one interacts with as database schemas and tables) and columns with node name aliases. Because of this, be sure to avoid using SQL "reserved words" such as "SELECT", "GROUP", "DROP", etc. in node name aliases and resource model names. Also, avoid repeated use of the same name node aliases for nodes that are nested in different branches. Repeated use of node name aliases in different branch structures will lead to incomplete representation of those branches in the relational views. In such cases, you won't be able to access or modify data. 
+
 
 .. todo::
 
