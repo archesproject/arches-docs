@@ -163,7 +163,7 @@ Passing Data
 ~~~~~~~~~~~~
 
 - **Fetch Proximity**:  
-  Fetch data in the component that actually renders it—don't lift network calls higher than needed.
+  Fetch data in the component that actually renders it. Don't lift network calls higher than needed.
 
 .. code-block:: js
 
@@ -339,7 +339,8 @@ Coding Standards
 
 - **Constants & Literals**:  
     - Declare fixed values in `SCREAMING_SNAKE_CASE`.  
-    - Extract all string literals and magic numbers into named constants.
+    - Declare all string literals and magic numbers as named constants.
+      eg `const POLL_MS = 5000;` 
 
 - **Naming Conventions**:  
   Use descriptive identifiers; avoid single-letter names.
