@@ -1,5 +1,6 @@
+############################
 Arches Vue Integration Guide
-============================
+############################
 
 This guide explains how to embed a Vue 3 application into Arches using the
 ``createVueApplication`` helper. This function bootstraps your app with:
@@ -11,7 +12,7 @@ This guide explains how to embed a Vue 3 application into Arches using the
 - Automatic dark-mode theme switching
 
 Supported Use Cases
-~~~~~~~~~~~~~~~~~~~
+===================
 
 - **Full-page views** (reports, dashboards)  
 - **Standalone plugins**  
@@ -20,7 +21,7 @@ Supported Use Cases
 Not yet supported: Arches “widgets” that require specialized render context.
 
 Quick Start
-~~~~~~~~~~~
+===========
 
 1. **Import** your root component and the helper:
 
@@ -50,7 +51,7 @@ Quick Start
        <div id="my-vue-mount-point"></div>
 
 Knockout Integration Example
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+============================
 
 .. code-block:: js
 
