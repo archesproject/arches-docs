@@ -335,12 +335,12 @@ Coding Standards
 
 - **Function Declarations**:  
     - Use named `function` declarations for component methods; **do not** use anonymous functions or function expressions.
-    - Use of anonymous functions is allowed within parent functions (eg `setTimeout`, `Promise.then`, `filter`, `onMounted`, `computed`, etc.).
+    - Use of anonymous functions is allowed within parent functions (e.g., `setTimeout`, `Promise.then`, `filter`, `onMounted`, `computed`, etc.).
 
 - **Constants & Literals**:  
     - Declare fixed values in `SCREAMING_SNAKE_CASE`.  
     - Declare all string literals and magic numbers as named constants.
-      eg `const POLL_MS = 5000;` 
+      e.g. `const POLL_MS = 5000;` 
 
 - **Naming Conventions**:  
   Use descriptive identifiers; avoid single-letter names.
@@ -420,9 +420,9 @@ Within your `<script setup>` block, organize declarations in this sequence. Omit
 4. **Dependency injection**:  
    e.g. `const api = inject('apiClient')!`  
 5. **Constants & configuration**:  
-   - SCREAMING_SNAKE_CASE for truly constant values  
+   e.g. `const POLL_MS = 5000`
 6. **Reactive state**:  
-   - `const foo = ref(...)`  
+   e.g. `const foo = ref(...)`  
 7. **Computed properties**  
 8. **Watches**  
 9. **Lifecycle hooks**:  
