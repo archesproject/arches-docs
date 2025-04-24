@@ -2,10 +2,6 @@
 Arches Vue Style Guide
 ######################
 
-This document extends and enhances the official Vue style guide, providing additional conventions and best practices tailored specifically for our Arches projects.
-
-Refer to the `official Vue style guide <https://vuejs.org/style-guide/>`_ for baseline standards.
-
 Purpose
 =======
 
