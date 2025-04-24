@@ -657,8 +657,8 @@ No `calc()`
 Theming & Colors
 ~~~~~~~~~~~~~~~~
 
-- **No hard-coded colors or shadows**  
-    Prefer to reference design tokens, e.g. `var(--theme-primary)`, `var(--shadow-level-1)`.  
+- **No hard-coded colors**  
+    Prefer to reference design tokens, e.g. `var(--theme-primary)`.  
 - **Centralize tokens**  
     Define colors, typography, spacing scales, and breakpoints in your theme files.
 
@@ -764,7 +764,7 @@ When crafting your tests, adhere to these best practices:
     // src/components/CounterButton.spec.ts
     import { describe, it, expect } from 'vitest'
     import { mount, flushPromises } from '@vue/test-utils'
-    import CounterButton from './CounterButton.vue'
+    import CounterButton from '@/my_project/components/CounterButton.vue'
 
     describe('CounterButton.vue', () => {
         it('mounts and displays initial count', () => {
