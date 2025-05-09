@@ -2,9 +2,17 @@
 Localizing Arches
 #################
 
-If you want to support localization in your Arches instance, you'll first need to do the following:
+If you want to support localization in your Arches instance, you'll first need to install `gettext <https://www.gnu.org/software/gettext/>`_ on your system. This tool provides the basis for multilingual support for your Arches instance.
 
-1. Update your settings.py file by adding this import statement at the top:
+.. code-block:: bash
+
+    apt update
+    apt upgrade
+    apt install gettext libgettextpo-dev
+
+After `gettext` is installed, continue with the following steps:
+
+1. Update your settings.py (or settings_local.py) file by adding this import statement at the top:
 
 .. code-block:: python
 
@@ -46,10 +54,10 @@ If you want to support localization in your Arches instance, you'll first need t
     # {langcode}-{regioncode} eg: en, en-gb ....
     # a list of language codes can be found here http://www.i18nguy.com/unicode/language-identifiers.html
     LANGUAGES = [
-        ('de', ('German')),
-        ('en', ('English')),
-        ('en-gb', ('British English')),
-        ('es', ('Spanish')),
+        ('de', _('German')),
+        ('en', _('English')),
+        ('en-gb', _('British English')),
+        ('es', _('Spanish')),
     ]
     # override this to permenantly display/hide the language switcher
     SHOW_LANGUAGE_SWITCH = len(LANGUAGES) > 1
@@ -93,6 +101,26 @@ You can import them with the following command
 
 This will attempt to load the graph translation files (graph.po files) for every language specified
 in the LANGUAGES array from settings.py.
+
+
+*******************************
+Localizing the Arches Front End
+*******************************
+
+If you make changes to language configuration settings in Arches, you will need to rebuild the Arches front end to reflect those changes. To do so, navigate to your Arches project directory and run the following command:
+
+.. code-block:: bash
+
+    # remove any node_modules that might have been installed by the arches install
+    rm -rf node_modules
+    rm -f package-lock.json
+    # Now do the NPM install
+    npm install
+    npm run build_development
+    # Now collect the static files again
+    python manage.py collectstatic --clear --noinput
+
+
 
 ************************************************
 Setting up Localized Languages for Business Data
