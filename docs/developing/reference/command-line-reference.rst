@@ -54,7 +54,9 @@ creating an Arches project
     If `-d` is not specified, the new project will be created in the current working directory
     with the name of the project. To match python package `naming conventions
     <https://peps.python.org/pep-0008/#package-and-module-names>`_,
-    underscores ( `_`) will be replaced with dashes ( `-` ) in that directory name.
+    underscores (`_`) will be replaced with dashes (`-`) in that directory name, 
+    which is important if you plan on publishing your project to PyPi as an 
+    :ref:`Arches Application<Creating Applications>`.
 
 
 
