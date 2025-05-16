@@ -50,6 +50,11 @@ creating an Arches project
 
 -d, --directory
     (Optional) The name of the directory you'd like your new project located in.
+    
+    If `-d` is not specified, the new project will be created in the current working directory
+    with the name of the project. To match python package `naming conventions
+    <https://peps.python.org/pep-0008/#package-and-module-names>`_,
+    underscores ( `_`) will be replaced with dashes ( `-` ) in that directory name.
 
 
 
