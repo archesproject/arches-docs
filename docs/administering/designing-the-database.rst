@@ -66,7 +66,8 @@ Core Arches Datatypes
 Nodes in Arches must be configured with a "Data Type", and different datatypes store different kinds of information. For example, a **string** datatype is what you should use to store arbitrary text, like the name or description of a resource. A brief description of all datatype options in core Arches follows. Developers can extend Arches by :ref:`creating their own custom datatypes <datatypes>`.
 
 :semantic: A semantic node **does not store data**. Semantic nodes are used where necessary to make symbolic connections between other nodes, generally in order to follow ontological rules. The top node of every graph is a semantic node.
-:string: Stores a string of text. This could be something simple like a name, or more something elaborate like a descriptive paragraph with formatting and hyperlinks.
+:string: Stores a localized string of text. This could be something simple like a name, or more something elaborate like a descriptive paragraph with formatting and hyperlinks.
+:non-localized-string: Stores a string of text without localization. Use this for text that is equal across all languages such as an identifier or an address.
 :number: Stores a number.
 :file-list: Stores one or mores files. Use this to upload images, documents, etc.
 :concept: Stores one of a series of concepts from the Reference Data Manager. Users will choose a concept in a dropdown list or set of radio buttons. You'll further be prompted to choose a Concept Collection—this controls which concepts the user is able to choose from.
