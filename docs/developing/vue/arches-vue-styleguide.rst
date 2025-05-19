@@ -14,13 +14,10 @@ The purpose of this style guide is to establish a unified coding style and set o
 Basis for Style Guide
 =====================
 
-This style guide for Arches is built on top of the standard Vue.js and TypeScript style guides. As such, it inherits and extends the conventions and best practices outlined in those guides. 
+This style guide for Arches is built on top of the standard Vue.js and TypeScript style guides. As such, it inherits and extends the conventions and best practices outlined in those guides. Any coding style, formatting, or conventions not explicitly covered in this document should be referenced from the official Vue.js and TypeScript style guides. It's important to maintain consistency with these standard guidelines to ensure compatibility and familiarity for developers working with Vue.js and TypeScript projects.
 
-Any coding style, formatting, or conventions not explicitly covered in this document should be referenced from the official Vue.js and TypeScript style guides. It's important to maintain consistency with these standard guidelines to ensure compatibility and familiarity for developers working with Vue.js and TypeScript projects.
-
-For Vue.js, you can refer to the `official Vue style guide <https://vuejs.org/style-guide/>`_. 
-
-Similarly, for TypeScript, you can refer to the `official TypeScript style guide <https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html>`_.
+- For Vue.js, you can refer to the `official Vue style guide <https://vuejs.org/style-guide/>`_. 
+- For TypeScript, you can refer to the `official TypeScript style guide <https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html>`_.
 
 Contributions
 =============
@@ -31,7 +28,7 @@ Frontend Structure
 ==================
 
 File and Folder Naming Conventions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------------
 
 - **Arches entity directories**
     - Use plural, lowercase names to reflect domain concepts.  
@@ -58,59 +55,60 @@ File and Folder Naming Conventions
     - e.g. ``user-profile.ts``, ``map-types.ts``
 
 Top-Level Structure
-~~~~~~~~~~~~~~~~~~~
+-------------------
 
 - Top-level directories **must** align with Arches concepts (e.g., cards, widgets, reports) when such delineation is required. Otherwise, consolidate everything under a single app-level directory.
 
-.. code-block:: shell
+    .. code-block:: shell
 
-    src/
-    └── project_name/
-        ├── plugins
-        ├── reports/
-        │   └── CustomReport/
-        │       ├── components
-        │       └── CustomReport.vue
-        ├── widgets
-        └── types
-        └── utils.ts
+        src/
+        └── project_name/
+            ├── plugins
+            ├── reports/
+            │   └── CustomReport/
+            │       ├── components
+            │       └── CustomReport.vue
+            ├── widgets
+            └── types
+            └── utils.ts
 
-.. code-block:: shell
+    .. code-block:: shell
 
-    src/
-    └── project_name/
-        ├── components/
-        │   └── CustomComponent.vue
-        ├── CustomApplication.vue
-        ├── types
-        └── utils.ts
+        src/
+        └── project_name/
+            ├── components/
+            │   └── CustomComponent.vue
+            ├── CustomApplication.vue
+            ├── types
+            └── utils.ts
 
 - **Why?**
     - **Standardization**: Consistent naming and structure make it easier for developers to navigate the codebase.
     - **Organization**: Grouping related components together makes it easier to find and manage them.
 
 Component Folder Hierarchy
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------
 
 - At every level:
     - **Component files with sub-components** **must** reside in a folder named after the component.
     - **Dependent components** **must** live in a `components/` subdirectory within their **parent component's** folder.
     - **Shared components** (used by more than one parent) **must** be elevated to the `components/` directory at the level of the **highest parent component** that uses them.
 
-.. code-block:: shell
+    .. code-block:: shell
 
-    src/project_name/
-    ├── CustomApplication.vue
-    └── components/
-        └── CustomDashboard/
-            ├── CustomDashboard.vue
+        src/
+        └── project_name/
+            ├── CustomApplication.vue
             └── components/
-                └── DashboardTable/
-                    └── DashboardTable.vue/
-                        └── components/
-                            ├── CustomHeader.vue
-                            ├── TableSection.vue
-                            └── UpdatedFooter.vue
+                └── CustomDashboard/
+                    ├── CustomDashboard.vue
+                    └── components/
+                        └── DashboardTable/
+                            └── DashboardTable.vue/
+                                └── components/
+                                    ├── CustomHeader.vue
+                                    ├── TableSection.vue
+                                    └── UpdatedFooter.vue
 
 - **Why?**
     - **Clarity**: Each component's folder contains everything it needs, making it easier to understand and navigate.
@@ -120,52 +118,54 @@ Component Structure
 ===================
 
 Single-File Components
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 - Single-File Components (SFCs) are the preferred way to define Vue components. 
 
-.. code-block:: vue
+    .. code-block:: vue
 
-    <script setup lang="ts">
-    import { onMounted } from 'vue';
-    import { useGettext } from 'vue3-gettext';
+        <script setup lang="ts">
+        import { onMounted } from 'vue';
+        import { useGettext } from 'vue3-gettext';
 
-    const { $gettext } = useGettext();
+        const { $gettext } = useGettext();
 
-    onMounted(() => {
-        console.log($gettext('Hello from the <script> tag!'));
-    });
-    </script>
+        onMounted(() => {
+            console.log($gettext('Hello from the <script> tag!'));
+        });
+        </script>
 
-    <template>
-        <h1 class="header">
-            {{ $gettext("Hello from the template!") }}
-        </h1>
-    </template>
+        <template>
+            <h1 class="header">
+                {{ $gettext("Hello from the template!") }}
+            </h1>
+        </template>
 
-    <style scoped>
-    .header {
-        color: red;
-    }
-    </style>
+        <style scoped>
+        .header {
+            color: red;
+        }
+        </style>
 
 - **Why?**
     - **Encapsulation**: All component-related code is in one place, making it easier to understand and maintain.
     - **Separation of concerns**: Each section (template, script, style) has its own purpose, improving readability.
 
 Component Decomposition
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 - Components should be decomposed into smaller, reusable components whenever possible. Aim for a single responsibility per component.
 
-.. code-block:: shell
+    .. code-block:: shell
 
-    widgets/
-    └── CustomWidget/
-        ├── components/
-        │   ├── CustomWidgetEditor.vue
-        │   └── CustomWidgetViewer.vue
-        └── CustomWidget.vue
+        src/
+        └── project_name/
+            └── widgets/
+            └── CustomWidget/
+                ├── components/
+                │   ├── CustomWidgetEditor.vue
+                │   └── CustomWidgetViewer.vue
+                └── CustomWidget.vue
 
 - **Why?**
     - **Reusability**: Smaller components can be reused in different contexts, reducing code duplication.
@@ -173,7 +173,7 @@ Component Decomposition
     - **Testing**: Smaller components are easier to test in isolation.
 
 Passing Data
-~~~~~~~~~~~~
+------------
 
 - **Fetch Proximity**
     - Fetch data in the component that actually renders it. Don't lift network calls higher than needed.
@@ -186,9 +186,9 @@ Passing Data
         <script setup lang="ts">
         import { ref, watchEffect } from 'vue';
         import UserTable from '@/my_project/Dashboard/components/UserTable.vue';
+        import type { User } from '@/my_project/types.ts';
 
-        // Parent fetches users even if only UserTable displays them
-        const users = ref([]);
+        const users = ref<User[]>([]);
         watchEffect(async () => {
             users.value = await fetch('/api/users').then(resp => resp.json());
         });
@@ -196,12 +196,11 @@ Passing Data
 
         <template>
             <div class="dashboard">
-                <h1>Dashboard</h1>
-                <!-- Data passed down via prop -->
                 <UserTable :users="users" />
             </div>
         </template>
 
+    .. code-block:: vue
 
         <!-- Good: fetching as close as possible to where data is rendered -->
 
@@ -212,8 +211,6 @@ Passing Data
 
         <template>
             <div class="dashboard">
-                <h1>Dashboard</h1>
-                <!-- Child responsible for its own data -->
                 <UserTable />
             </div>
         </template>
@@ -222,9 +219,8 @@ Passing Data
         <!-- UserTable.vue -->
         <script setup lang="ts">
         import { ref, watchEffect } from 'vue';
-        import type { User } from '@/types';
+        import type { User } from '@/my_project/types.ts';
 
-        // Fetch proximity: fetch here since this component renders the list
         const users = ref<User[]>([]);
         watchEffect(async () => {
             users.value = await fetch('/api/users').then(resp => resp.json());
@@ -241,7 +237,6 @@ Passing Data
                 </tbody>
             </table>
         </template>
-
       
     - **Why?** 
         - **Encapsulation**: Data-fetch logic lives alongside the view that consumes it.  
@@ -275,9 +270,7 @@ Passing Data
 
         <script setup lang="ts">
         import { ref, computed, watchEffect } from 'vue';
-
         import OrderSummary from '@/my_project/OrderSummary.vue';
-
         import type { Order } from '@/my_project/types.ts';
 
         // Raw data fetched here
@@ -298,10 +291,8 @@ Passing Data
 
         <script setup lang="ts">
         import { ref, computed, watchEffect } from 'vue';
-
         import OrderSummary from '@/my_project/OrderSummary.vue';
         import OrderDetails from '@/my_project/OrderDetails.vue';
-
         import type { Order } from '@/my_project/types.ts';
 
         // Raw data fetched here
@@ -375,14 +366,14 @@ The `<script>` Tag
 This block defines a component's logic. Follow these rules for clarity, consistency, and maintainability.
 
 Coding Standards
-~~~~~~~~~~~~~~~~
+----------------
 
 - **Script Scope**
     - All component logic must be declared inside <script setup>, and <script setup> should always have typescript as the defined language.
 
     .. code-block:: vue
 
-        <!-- Good: all logic inside <script setup>, with typescript -->
+        <!-- Good: scoped to component, using typescript -->
         <script setup lang="ts">
         import { ref } from 'vue';
 
@@ -390,7 +381,7 @@ Coding Standards
         function incrementCount() { count.value++ }
         </script>
 
-        <!-- Bad: logic outside of <script setup> -->
+        <!-- Bad: global scope pollution, no typescript -->
         <script>
             const count = 0;
             function incrementCount() { count++; }
@@ -536,7 +527,7 @@ Coding Standards
         - **Documentation**: Type annotations serve as documentation for function behavior and expected input/output.
 
 Import Pathing
-~~~~~~~~~~~~~~
+--------------
 
 - **Use project alias** (`@/…`) for all local imports; avoid raw relative paths. e.g. 
 
@@ -553,7 +544,7 @@ Import Pathing
     - **Maintainability**: Avoids issues with deep nesting and makes it easier to refactor or reorganize the project structure.
 
 Import Order
-~~~~~~~~~~~~
+------------
 
 - Import lines should be grouped and ordered as follows:
     1. **Vue core**  
@@ -604,7 +595,7 @@ Import Order
     </script>
 
 Declaration Order
-~~~~~~~~~~~~~~~~~
+-----------------
 
 - Within your `<script setup>` block, organize declarations in this sequence.
     1. **`defineProps`**  
@@ -676,7 +667,7 @@ The `<template>` Tag
 Defines the component's UI. Keep templates clear, consistent, and easy to scan.
 
 Attribute Ordering & Formatting
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------
 
 - When declaring attributes in your `<template>`, group and order them as follows. Within each group, sort attributes alphabetically.
     1. **Directives** (e.g. `v-for`, `v-if`)  
@@ -720,7 +711,7 @@ Attribute Ordering & Formatting
     - **Maintainability**: Clear structure helps future developers (or yourself) quickly grasp the component's purpose and behavior.
 
 Self-Closing Tags
-~~~~~~~~~~~~~~~~~
+-----------------
 
 - Use self-closing syntax for elements or components without children:
 
@@ -736,7 +727,7 @@ Self-Closing Tags
     - **Consistency**: Using self-closing syntax for void elements (e.g., `<img>`, `<input>`) maintains a consistent style throughout the codebase.
 
 Logic in Templates
-~~~~~~~~~~~~~~~~~~
+------------------
 
 - **No complex logic**  
     - Avoid ternaries, chained method calls, or heavy expressions.  
@@ -759,7 +750,7 @@ Logic in Templates
     - **Performance**: Heavy computations in templates can lead to unnecessary re-renders and performance issues.
 
 Text in Templates
-~~~~~~~~~~~~~~~~~
+-----------------
 
 - **Internationalization**  
     - Wrap all user-facing strings with `$gettext()`.  
@@ -802,7 +793,7 @@ The `<style>` Tag
 Defines component-scoped CSS. Follow these rules for responsive, maintainable, and themeable styles.
 
 Scope
-~~~~~
+-----
 
 - **Scoped styles**  
     - Prefer to use `<style scoped>` to ensure styles are applied only to the component.  
@@ -829,7 +820,7 @@ Scope
     - **Maintainability**: Changes to a component's styles won't affect other components, reducing the risk of introducing undesired behavior.
 
 Layout Patterns
-~~~~~~~~~~~~~~~
+---------------
 
 - **Flexbox & Grid only**  
     - Use `display: flex` for one-dimensional layouts and `display: grid` for two-dimensional arrangements.  
@@ -863,7 +854,7 @@ Layout Patterns
     - **Maintainability**: Using `gap` simplifies spacing management and reduces the need for complex margin calculations.
 
 Units & Sizing
-~~~~~~~~~~~~~~
+--------------
 
 - **`rem` for nearly everything**  
     - Use `rem` units for spacing, typography, gaps, borders, and other dimensional values.
@@ -893,7 +884,7 @@ Units & Sizing
     - **Accessibility**: Relative units ensure that text and elements can be resized according to user preferences, improving accessibility.
 
 Offsets & Positioning
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 - **No hard-coding single-side offsets**  
     - Instead of using `margin-left`, `margin-top`, etc., use logical properties like `margin-inline-start` and `margin-block-start`.
 
@@ -916,7 +907,7 @@ Offsets & Positioning
     - **Avoiding layout shifts**: Negative margins can lead to unexpected layout shifts and make it harder to maintain a consistent design.
 
 No `calc()`
-~~~~~~~~~~~
+-----------
 
 - The `calc()` function is forbidden in component styles.
 
@@ -933,7 +924,7 @@ No `calc()`
     - It can cause unexpected layout shifts, especially in responsive designs.
 
 Theming & Colors
-~~~~~~~~~~~~~~~~
+----------------
 
 - **Design Tokens Only**  
     - Always reference your design tokens instead of raw values. 
@@ -971,7 +962,7 @@ Theming & Colors
     - **Maintainability**: Centralizing tokens makes it easier to update and manage styles.
 
 Selector Naming
-~~~~~~~~~~~~~~~
+---------------
 
 - **Dot-delineated hierarchy**  
     - Prefix selectors with the component's root class, then chain child class names:
@@ -1005,7 +996,7 @@ Testing
 To ensure the reliability and functionality of our Vue components, we use **Vitest** together with **Vue Test Utils**. Vitest is a fast, modern test runner that integrates seamlessly with Vite, while Vue Test Utils provides utilities to mount components and inspect their rendered output.
 
 Test Location & Naming
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 - Co-locate tests next to components, in the same directory.  
 - Test files must end with a ``.spec.ts`` suffix.  
@@ -1032,7 +1023,7 @@ Test Location & Naming
     - **Ease of navigation**: Developers can quickly locate tests related to a specific component or utility without searching through a separate test directory.
 
 Writing Frontend Tests
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 When crafting your tests, adhere to these best practices:
 
@@ -1101,7 +1092,7 @@ When crafting your tests, adhere to these best practices:
     - **Maintainability**: Well-structured tests are easier to maintain and update as the codebase evolves.
 
 Running Frontend Tests
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 - Use the following npm scripts in your terminal:
     - Coverage output will appear under ``coverage/``, showing per-file metrics and highlighting untested lines.
