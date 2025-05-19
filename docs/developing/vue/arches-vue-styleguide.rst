@@ -8,7 +8,7 @@ Table of Contents
 - `Purpose`_
 - `Basis for Style Guide`_
 - `Contributions`_
-- `Frontend Structure`_
+- `Structure and Naming`_
     - `File and Folder Naming Conventions`_
     - `Top-Level Structure`_
     - `Component Folder Hierarchy`_
@@ -16,11 +16,6 @@ Table of Contents
     - `Single-File Components`_
     - `Component Decomposition`_
     - `Passing Data`_
-        - `Fetch Proximity`_
-        - `Primitives First`_
-        - `Derived State`_
-        - `Event Emission`_
-        - `Slots`_
 - `The <script> Tag`_
     - `Coding Standards`_
     - `Import Pathing`_
@@ -66,8 +61,8 @@ Contributions
 
 This style guide is a living document that evolves over time. We welcome contributions from the community to improve and expand this guide further. If you have suggestions, feedback, or would like to contribute to the style guide, please reach out to us via the `Arches Forum <https://community.archesproject.org/>`_.
 
-Frontend Structure
-==================
+Structure and Naming
+====================
 
 File and Folder Naming Conventions
 ----------------------------------
@@ -402,7 +397,7 @@ Passing Data
         - **Flexibility**: Consumers can customize the rendering of specific parts of the component.  
         - **Separation of concerns**: Slots allow for a clear distinction between the component's structure and its content.  
 
-The `<script>` Tag
+The <script> Tag
 ==================
 
 This block defines a component's logic. Follow these rules for clarity, consistency, and maintainability.
@@ -703,7 +698,7 @@ Declaration Order
     }
     </script>
 
-The `<template>` Tag
+The <template> Tag
 ====================
 
 Defines the component's UI. Keep templates clear, consistent, and easy to scan.
@@ -829,7 +824,7 @@ Text in Templates
     - **Internationalization**: Correctly wrapping strings with `$gettext()` ensures they are translatable and can be easily localized.
     - **Semantic HTML**: Using inline elements or semantic tags improves accessibility and SEO by providing context to screen readers and search engines.
 
-The `<style>` Tag
+The <style> Tag
 =================
 
 Defines component-scoped CSS. Follow these rules for responsive, maintainable, and themeable styles.
