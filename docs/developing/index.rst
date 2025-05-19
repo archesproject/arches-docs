@@ -21,6 +21,13 @@ If you are considering software development to customize Arches, please read the
     django-devs/orm-start
 
 .. toctree::
+    :caption: Orientation for Frontend Developers
+    :maxdepth: 2
+
+    vue/arches-vue-integration
+    vue/arches-vue-styleguide
+
+.. toctree::
     :caption: Reference Guide
     :maxdepth: 2
 

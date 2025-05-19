@@ -5,7 +5,7 @@ Arches Vue Integration Guide
 This guide explains how to embed a Vue 3 application into Arches using the
 ``createVueApplication`` helper. This function bootstraps your app with:
 
-- Arches i18n (via vue3-gettext)  
+- Arches frontend internationalization (i18n) via vue3-gettext
 - PrimeVue + default theme  
 - Common services (confirmation, dialogs, toasts)  
 - Shared directives (tooltips, focus trap, scroll animations)  
@@ -53,7 +53,7 @@ Quick Start
 Knockout Integration Example
 ============================
 
-.. code-block:: js
+.. code-block:: vue
 
     // src/my_project/MyPlugin.vue
 
