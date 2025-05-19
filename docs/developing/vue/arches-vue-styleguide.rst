@@ -2,6 +2,48 @@
 Arches Vue Style Guide
 ######################
 
+Table of Contents
+=================
+
+- `Purpose`_
+- `Basis for Style Guide`_
+- `Contributions`_
+- `Frontend Structure`_
+    - `File and Folder Naming Conventions`_
+    - `Top-Level Structure`_
+    - `Component Folder Hierarchy`_
+- `Component Structure`_
+    - `Single-File Components`_
+    - `Component Decomposition`_
+    - `Passing Data`_
+        - `Fetch Proximity`_
+        - `Primitives First`_
+        - `Derived State`_
+        - `Event Emission`_
+        - `Slots`_
+- `The <script> Tag`_
+    - `Coding Standards`_
+    - `Import Pathing`_
+    - `Import Order`_
+    - `Declaration Order`_
+- `The <template> Tag`_
+    - `Attribute Ordering & Formatting`_
+    - `Self-Closing Tags`_
+    - `Logic in Templates`_
+    - `Text in Templates`_
+- `The <style> Tag`_
+    - `Scope`_
+    - `Layout Patterns`_
+    - `Units & Sizing`_
+    - `Offsets & Positioning`_
+    - `No calc()`_
+    - `Theming & Colors`_
+    - `Selector Naming`_
+- `Testing`_
+    - `Test Location & Naming`_
+    - `Writing Frontend Tests`_
+    - `Running Frontend Tests`_
+
 Purpose
 =======
 
