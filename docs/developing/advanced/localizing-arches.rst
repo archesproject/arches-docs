@@ -94,7 +94,7 @@ You can also export strings from your arches graphs for localization using the f
     python manage.py i18n makemessages
 
 
-The above Arches management command creates a standardized `.po` file that you can translate for all the localized information in the graphs. The alternative is to use a Django provided command `django-admin makemessages`, but we do not recommend that approach because that requires one to hand-edit all those values in Arches UI itself. Having the `.po` file can make for a more unified and potentially collaborative experience developing and editing for translations.
+The above Arches management command creates a standardized `.po` file that you can translate for all the localized information in the graphs. The alternative is to use a Django provided command `django-admin makemessages`, but we do not recommend that approach because that requires one to hand-edit all the text values used by the Arches UI itself. Having the `.po` file can make for a more unified and potentially collaborative experience developing and editing for translations.
 
 After you develop the `.po` file, you can import it with the following command:
 
