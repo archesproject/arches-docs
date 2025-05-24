@@ -107,7 +107,7 @@ This will attempt to load the graph translation files (graph.po files) for every
 
 .. note::
   You may encounter issues using PO files that may contain unexpected line endings. If your PO files are under Git version control, you can check line endings in these PO files with this utility:
-  `git ls-files --eol | grep '\.po' | grep 'w/crlf\|w/mixed'`
+  ``git ls-files --eol | grep '\.po' | grep 'w/crlf\|w/mixed'``
 
 
 
