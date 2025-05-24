@@ -102,12 +102,8 @@ After you develop the `.po` file, you can import it with the following command:
 
     python manage.py i18n loadmessages
 
-This will attempt to load the graph translation files (graph.po files) for every language specified in the LANGUAGES array from settings.py.
+This will attempt to load the graph translation files (graph.po files) for every language specified in the ``LANGUAGES`` array from settings.py.
 
-
-.. note::
-  You may encounter issues using PO files that may contain unexpected line endings. If your PO files are under Git version control, you can check line endings in these PO files with this utility:
-  ``git ls-files --eol | grep '\.po' | grep 'w/crlf\|w/mixed'``
 
 
 
