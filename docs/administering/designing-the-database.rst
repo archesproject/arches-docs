@@ -37,7 +37,7 @@ Graph Designer
 
 Almost all aspects of Resource Model and Branch design are handled in the Graph Designer. The exception is Functions, which are handled in the separate Function Manager.
 
-The Graph Designer comprises three tabs, the `Graph Tab`_, `Cards Tab`_, and `Permissions Tab`_. Each tab is used to configure a different aspect of the Resource Model: In the Graph Tab you design the node structure, in the Cards Tab you configure the user interface (card) for each nodegroup, and in the Permissions Tab you are able to assign detailed permission levels to each card. The general workflow for using the Graph Designer is to proceed through the tabs in that same order.
+The Graph Designer comprises three tabs, the `Graph Tab`_, `Cards Tab`_, and `Permissions Tab`_ (the Permissions Tab is available after you click the "Make changes without publishing" option). Each tab is used to configure a different aspect of the Resource Model: In the Graph Tab you design the node structure, in the Cards Tab you configure the user interface (card) for each nodegroup, and in the Permissions Tab you are able to assign detailed permission levels to each card. The general workflow for using the Graph Designer is to proceed through the tabs in that same order.
 
 Graph Tab
 ---------
@@ -142,11 +142,11 @@ The **Related Resources Map Card** enables a more rich user experience for nodes
 Permissions Tab
 ---------------
 
-Arches allows you to define permissions at the card level, so in the Permissions Tab you'll see the card tree, just as in the Cards tab. However, you will only be able to select entire cards, not individual nodes.
+Arches allows you to define permissions at the card level. Because of publication changes to Graphs in version 8, the `Permissions Tab` has been moved from its location in earlier versions of Arches. To access permissions, click the button "Make changes without publishing" (see the animation below). Note, you will only be able to select entire cards, not individual nodes.
 
-.. figure:: ../images/graph-designer-permissions-tab.png
+.. figure:: ../images/arches-ui-permissions-v8.gif
 
-   Screenshot of the Permissions Tab in the Graph Designer, showing an "Actor" Resource Model.
+   Animation showing the activation of the Permissions Tab in the Graph Designer.
 
 Once you have selected one or more cards, you can select a user or user group and then assign one of the following permissions levels:
 
