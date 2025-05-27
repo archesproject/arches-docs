@@ -87,21 +87,26 @@ There are some example commands to make and load PO files in the core arches set
 Localizing Graph Strings within Arches
 **************************************
 
-You can also export strings from your arches graphs for localization using the following Django admin commands (in these examples, we are using the French language code "fr"):
+You can also export strings from your custom Arches templates for localization using the following Django admin commands (in these examples, we are using the French language code "fr"). 
 
-.. code-block:: bash
+1. The first Django-Admin command is:
 
-    django-admin makemessages -l fr 
+    .. code-block:: bash
+
+        django-admin makemessages -l fr 
     
 
-If for some reason you're using language code fr-fr or another regionalized language code, capitalize the second pair of letters, ie, fr-FR or en-GB. In any case, ignore any messages about skipped files due to invalid start bytes, this is normal.
+    If for some reason you're using language code fr-fr or another regionalized language code, capitalize the second pair of letters, ie, fr-FR or en-GB. In any case, ignore any messages about skipped files due to invalid start bytes, this is normal.
 
-.. code-block:: bash
+2. The second Django-Admin command is:
 
-    django-admin compilemessages
+    .. code-block:: bash
+
+        django-admin compilemessages
 
 
-You may get a ton of error messages reading something like: `Execution of msgfmt failed: $filename 'msgid' and 'msgstr' entries do not both begin with '\n'.` Just ignore this and run the compilemessages command again until it works.
+    You may get a ton of error messages reading something like: `Execution of msgfmt failed: $filename 'msgid' and 'msgstr' entries do not both begin with '\n'.` Just ignore this and run the compilemessages command again until it works.
+
 
 Arches also supplies a command to generate PO files to localize graphs you have created in your Arches instance:
 
