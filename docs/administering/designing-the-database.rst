@@ -19,6 +19,50 @@ Let's begin with a brief primer on some of the core concepts upon which Arches i
 
 .. warning:: If you need to have multiple versions of the same graph, perhaps multiple people are designing it or you need to retain earlier iterations while continuing to add nodes, you must Clone the graph. If a graph is renamed, exported, and imported, it will still overwrite the original, because the unique ID will remain unchanged.
 
+
+Graph Versioning (Arches 8+)
+============================
+
+Starting with Arches 8, Resource Models and Branches support versioning through a draft/published workflow. This allows for safer and more controlled updates to your database structure.
+
+
+Version States
+--------------
+
+Each graph (Resource Model or Branch) can exist in two states:
+
+**Draft Version** \- This is where you can make unpublished changes to the graph structure. When working in draft mode, you can:
+- Modify the graph structure (add/remove nodegroups, nodes, etc.)
+- Update card configurations
+- Change widget settings
+
+**Published Version** \- This is the active version of the graph for use with resource instances. In the published state:
+- The graph structure is locked
+- You can still modify UI-related elements (card labels, widget labels, etc.)
+- If you later descide to make a new version of the graph, existing resource instances using a prior version will become read-only
+
+
+Making Changes
+--------------
+
+There are two types of changes you can make to graphs:
+
+1. **Additive Changes** \- Adding new nodegroups or nodes to a graph. These changes are handled automatically by Arches and don't require special data migrations.
+
+2. **Structural Changes** \- Any changes that modify existing nodes, relationships, or data structures. These require:
+   - Creating a new draft version
+   - Making the changes in the draft
+   - Publishing the new version
+   - Writing Django migrations to update existing resources to the new version
+
+
+.. important:: 
+   - When a new version of a graph is published, resources created with the old version become read-only
+   - Resource instances using old versions of a graph remain searchable and indexable
+   - UI-related changes (labels, tooltips, etc.) can be made to published graphs without creating a new graph version
+   - For structural changes, you'll need someone with Django expertise to write database migrations to update existing resources
+
+
 Arches Designer
 ===============
 
