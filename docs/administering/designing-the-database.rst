@@ -54,11 +54,7 @@ During the graph construction process, you are able to create a new Branch from 
 
 .. note:: If you are building a graph that uses an ontology, the ontology rules will automatically be enforced during this graph construction process.
 
-Along the way, you can use the preview button to display the graph in a more graph-like manner. This view will be familiar to users of Arches going back to version 3.0.
 
-.. figure:: ../images/graph-designer-graph-tab-preview.png
-
-   Screenshot of the Graph Tab in the Graph Designer, showing the graph in preview mode.
 
 Core Arches Datatypes
 ---------------------
