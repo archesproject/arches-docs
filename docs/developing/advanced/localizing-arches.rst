@@ -109,6 +109,10 @@ You can also export strings from your custom Arches templates for localization u
     You may get a ton of error messages reading something like: `Execution of msgfmt failed: $filename 'msgid' and 'msgstr' entries do not both begin with '\n'.` Just ignore this and run the compilemessages command again until it works.
 
 
+**************************************
+Localizing Strings within Graph Models
+**************************************
+
 Arches also supplies a command to generate PO files to localize graphs you have created in your Arches instance:
 
 .. code-block:: bash
