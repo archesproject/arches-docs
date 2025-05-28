@@ -32,7 +32,6 @@ Version States
 Each graph (Resource Model or Branch) can exist in two states:
 
 **Draft Version**
-
    - This is where you can make unpublished changes to the graph structure. When working in draft mode, you can:
    - Modify the graph structure (add/remove nodegroups, nodes, etc.)
    - Update card configurations
@@ -40,7 +39,6 @@ Each graph (Resource Model or Branch) can exist in two states:
 
 
 **Published Version**
-
    - This is the active version of the graph for use with resource instances. In the published state:
    - The graph structure is locked
    - You can still modify UI-related elements (card labels, widget labels, etc.)
@@ -59,7 +57,6 @@ There are two types of changes you can make to graphs:
 2. **Structural Changes**
 
    Any changes that modify existing nodes, relationships, or data structures. These require:
-   
       - Creating a new draft version
       - Making the changes in the draft
       - Publishing the new version
