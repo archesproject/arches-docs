@@ -83,8 +83,9 @@ For more information, see `Localization: how to create language files <https://d
 
 There are some example commands to make and load PO files in the core arches settings file that can be found `here <https://github.com/archesproject/arches/blob/dev/7.0.x/arches/settings.py#L193>`_. If loading a new PO file, simply replace the existing po file and run compilemessages.
 
+
 **************************************
-Localizing Graph Strings within Arches
+Localizing Strings within Graph Models
 **************************************
 
 You can also export strings from your custom Arches templates for localization using the following Django admin commands (in these examples, we are using the French language code "fr"). 
