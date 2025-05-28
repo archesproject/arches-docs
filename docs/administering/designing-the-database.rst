@@ -144,6 +144,15 @@ Arches allows you to define permissions at the card level. Because of publicatio
 
    Animation showing the activation of the Permissions Tab in the Graph Designer.
 
+
+Below, you can see a screenshot of the Permissions Tab in the Graph Designer for Arches version 7 and earlier. Note that the interface has changed in version 8, but the functionality is the same.
+
+
+.. figure:: ../images/graph-designer-permissions-tab.png
+
+   Screenshot of the Version 7 (and earlier) Permissions Tab in the Graph Designer.
+
+
 Once you have selected one or more cards, you can select a user or user group and then assign one of the following permissions levels:
 
 :Delete: Allows users to delete instances of this nodegroup. Note, this is not the same as being allowed to delete an entire resource, permissions for which are not handled here.
