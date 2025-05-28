@@ -52,13 +52,18 @@ Making Changes
 
 There are two types of changes you can make to graphs:
 
-1. **Additive Changes** \- Adding new nodegroups or nodes to a graph. These changes are handled automatically by Arches and don't require special data migrations.
+1. **Additive Changes**
 
-2. **Structural Changes** \- Any changes that modify existing nodes, relationships, or data structures. These require:
-   - Creating a new draft version
-   - Making the changes in the draft
-   - Publishing the new version
-   - Writing Django migrations to update existing resources to the new version
+   Adding new nodegroups or nodes to a graph. These changes are handled automatically by Arches and don't require special data migrations.
+
+2. **Structural Changes**
+
+   Any changes that modify existing nodes, relationships, or data structures. These require:
+   
+      - Creating a new draft version
+      - Making the changes in the draft
+      - Publishing the new version
+      - Writing Django migrations to update existing resources to the new version
 
 
 .. important:: 
