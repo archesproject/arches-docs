@@ -42,7 +42,7 @@ Each graph (Resource Model or Branch) can exist in three states:
    - Modify the graph structure (add/remove nodegroups, nodes, etc.)
    - Update card configurations
    - Change widget settings
-   - If you descide to make a new version of the graph, existing resource instances using a prior version will become read-only
+   - If you decide to make a new version of the graph, existing resource instances using a prior version will become read-only
 
 3. **Published Version** This version of a graph is serialized as JSON. This is the version of the graph which the application actively uses.
 
