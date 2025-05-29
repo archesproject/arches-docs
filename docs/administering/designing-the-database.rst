@@ -35,7 +35,6 @@ Each graph (Resource Model or Branch) can exist in three states:
 
    - The graph structure is locked
    - You can still modify UI-related elements (card labels, widget labels, etc.)
-   - If you later descide to make a new version of the graph, existing resource instances using a prior version will become read-only
    - Edit permissions
 
 2. **Draft Version** This is where you can make unpublished changes to the graph structure. When working in draft mode, you can:
@@ -43,6 +42,7 @@ Each graph (Resource Model or Branch) can exist in three states:
    - Modify the graph structure (add/remove nodegroups, nodes, etc.)
    - Update card configurations
    - Change widget settings
+   - If you descide to make a new version of the graph, existing resource instances using a prior version will become read-only
 
 3. **Published Version** This version of a graph is serialized as JSON. This is the version of the graph which the application actively uses.
 
