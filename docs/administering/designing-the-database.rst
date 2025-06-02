@@ -19,6 +19,64 @@ Let's begin with a brief primer on some of the core concepts upon which Arches i
 
 .. warning:: If you need to have multiple versions of the same graph, perhaps multiple people are designing it or you need to retain earlier iterations while continuing to add nodes, you must Clone the graph. If a graph is renamed, exported, and imported, it will still overwrite the original, because the unique ID will remain unchanged.
 
+
+Graph Versioning (Arches 8+)
+============================
+
+Starting with Arches 8, Resource Models and Branches support versioning through a draft/published workflow. This allows for safer and more controlled updates to your database structure.
+
+
+Version States
+--------------
+
+Each graph (Resource Model or Branch) can exist in three states:
+
+1. **Canonical or Current Version** This is the active version of the graph for use with resource instances. In the published state:
+
+   - The graph structure is locked
+   - You can still modify UI-related elements (card labels, widget labels, etc.)
+   - Edit permissions
+
+2. **Draft Version** This is where you can make unpublished changes to the graph structure. When working in draft mode, you can:
+
+   - Modify the graph structure (add/remove nodegroups, nodes, etc.)
+   - Update card configurations
+   - Change widget settings
+   - If you decide to make a new version of the graph, existing resource instances using a prior version will become read-only
+
+3. **Published Version** This version of a graph is serialized as JSON. This is the version of the graph which the application actively uses.
+
+
+Making Changes
+--------------
+
+Users cannot add nodes to a published graph. If you need to make structural changes, you must first create a new version of the graph. There are two main scenarios to consider when migrating resource instance data from one graph version to another:
+
+1. **Additive Changes**
+   Adding new nodegroups or nodes to a graph. These changes are handled automatically by Arches and don't require special data migrations.
+
+2. **Structural Changes**
+   Any changes that modify existing nodes, relationships, or data structures will complicate migrations to a new version of a graph. If one naively chooses to use the Arches automated migration utility, data corruption may result. To avoid such data corruption, one should first review steps described in :ref:`Data Integrity Risk Management` to safeguard your data before attempting migrations across graph versions. Migrating across complex changes to graph versions may require a software developer to write custom Django `migrations <https://docs.djangoproject.com/en/5.0/topics/migrations/>`_.
+
+
+.. figure:: ../images/arches-graph-versioning.png
+
+   Flow diagram of edits to "Current" and "Draft" versions of graphs.
+
+
+
+.. important:: 
+   - When a new version of a graph is published, resources created with the old version become read-only
+   - Resource instances using old versions of a graph remain searchable and indexable
+   - UI-related changes (labels, tooltips, etc.) can be made to published graphs without creating a new graph version
+   - For structural changes, you will likely need someone with Django expertise to write database migrations to update existing resources
+
+
+
+
+
+
+
 Arches Designer
 ===============
 
