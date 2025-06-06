@@ -2,7 +2,7 @@
 Resource Instance Lifecycles
 ############################
 
-Resource Instance Lifecycles provide a way to manage the state of resources instance records in an Arches instance. 
+Resource Instance Lifecycles are a data management feature introduced in Arches version 8. They provide a way to manage the state of resources instance records in an Arches instance.
 
 Overview
 --------
@@ -31,8 +31,14 @@ Arches ships with two default lifecycles:
    * No transitions
    * Used for resources that don't need state management
 
+
+Implementation Details
+----------------------
+Resource Instance Lifecycles are implemented in Arches using Django models. Resource Instance Lifecycles are defined in the `ResourceInstanceLifecycle` model, which can be linked to graphs and resource instances. Each lifecycle can have multiple states defined in the `ResourceInstanceLifecycleState` model.
+
+
 Lifecycle States
-----------------
+~~~~~~~~~~~~~~~~
 
 Each lifecycle state has the following properties:
 
@@ -41,9 +47,6 @@ Each lifecycle state has the following properties:
 * ``is_initial_state``: Whether this is the default state for new resources
 * ``can_delete_resource_instances``: Whether resources in this state can be deleted
 * ``can_edit_resource_instances``: Whether resources in this state can be edited
-
-Implementation Details
-----------------------
 
 Database Structure
 ~~~~~~~~~~~~~~~~~~
@@ -82,9 +85,9 @@ State transitions are managed through the ``ResourceInstance`` model:
         # Can include validation and permission checks
 
 Custom Lifecycles
----------------~~
+~~~~~~~~~~~~~~~~~
 
-To create custom lifecycles:
+Some Arches users may need to define a custom Resource Instance Lifecyle and custom lifecycle stages to support a team's specific data editing and curation needs. A developer can create custom lifecycles:
 
 1. Define a new lifecycle using the Django ORM or SQL:
 
@@ -110,7 +113,7 @@ To create custom lifecycles:
 3. Define valid transitions between states using the xref tables
 
 Lifecycle Functions
--------------------
+~~~~~~~~~~~~~~~~~~~
 
 Arches supports lifecycle-specific functions that can be triggered during state transitions:
 
@@ -119,7 +122,7 @@ Arches supports lifecycle-specific functions that can be triggered during state 
 * These functions can implement custom validation, permissions, or other business logic
 
 Migration Considerations
-------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 When migrating existing Arches data:
 
@@ -127,7 +130,7 @@ When migrating existing Arches data:
 * Custom migration scripts can be written to set specific states based on resource attributes
 
 Permissions and Validation
---------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 While lifecycles don't directly integrate with the permissions system, you can:
 
@@ -135,8 +138,18 @@ While lifecycles don't directly integrate with the permissions system, you can:
 * Use pre-save and post-save events to enforce rules
 * Implement attribute-based access control based on lifecycle states
 
-Best Practices
---------------
+
+Example Use Cases
+-----------------
+
+Resource Instance Lifecycles provide a framework to manage collaboration in the curation of resource instance records. For example, data managers can use lifecycles to control the flow of resource instances through various stages of review and publication. Resource instances can be flagged as "draft" while being prepared, then transitioned to "active" when ready for public access, and finally moved to "retired" when no longer relevant. 
+
+
+Content Management
+~~~~~~~~~~~~~~~~~~
+
+* Draft → Active: Content review and publication
+* Active → Retired: Content flagged as deprecated or outdated, but not (physically) deleted.
 
 State Management
 ~~~~~~~~~~~~~~~~
@@ -144,33 +157,6 @@ State Management
 * Use "draft" for resources in preparation
 * Use "active" for published/current resources
 * Use "retired" for logically deleted resources
-
-Validation
-~~~~~~~~~~
-
-* Implement validation rules for state transitions
-* Consider what operations should be allowed in each state
-
-Permissions
-~~~~~~~~~~~
-
-* Consider implementing custom permission logic for state transitions
-* Use lifecycle states as part of attribute-based access control
-
-Migration
-~~~~~~~~~
-
-* Plan state assignments for existing resources
-* Consider creating custom migration scripts for complex state assignments
-
-Example Use Cases
----------------
-
-Content Management
-~~~~~~~~~~~~~~~~~~
-
-* Draft → Active: Content review and publication
-* Active → Retired: Content archival
 
 Data Quality
 ~~~~~~~~~~~~
@@ -186,10 +172,18 @@ Logical Deletion
 * Maintain referential integrity
 * Allow for data recovery if needed
 
+
+Validation and Permissions
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* A developer can implement custom Arches :ref:`Functions` to build validation rules for state transitions
+* A developer can also implement custom permission logic for state transitions. Doing so can make use lifecycle states as part of attribute-based access controls.
+
+
 Related Topics
 --------------
 
-* :doc:`creating-resources`
-* :doc:`permissions`
-* :doc:`functions`
-* :doc:`migrations`
+* :ref:`Creating and Editing Resources`
+* :ref:`Permissions Tab`
+* :ref:`Functions`
+* :ref:`Version Upgrades and Migrations`
