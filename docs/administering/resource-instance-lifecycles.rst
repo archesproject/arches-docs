@@ -18,6 +18,7 @@ Default Lifecycles
 Arches ships with two default lifecycles:
 
 1. **Standard Lifecycle**
+
    * States: "draft", "active", "retired"
    * Default transitions:
      * draft → active
@@ -27,9 +28,10 @@ Arches ships with two default lifecycles:
    * This is the default lifecycle applied to all graphs unless specified otherwise
 
 2. **Perpetual Lifecycle**
+
    * Single state: "Perpetual"
    * No transitions
-   * Used for resources that don't need state management
+   * Used for resources that don't need lifecycle state management
 
 
 Implementation Details
@@ -56,7 +58,7 @@ Lifecycles are implemented through several database tables:
 * ``resource_instance_lifecycles``: Defines available lifecycles
 * ``resource_instance_lifecycle_states``: Defines states within each lifecycle
 * ``resource_instance_lifecycle_states_from_xref`` and ``resource_instance_lifecycle_states_to_xref``: Define valid transitions between states
-* ``resource_instances``: Links resources to their current lifecycle state
+* ``resource_instances``: Stores resources instance records with their current lifecycle state
 
 Graph Configuration
 ~~~~~~~~~~~~~~~~~~~
@@ -76,7 +78,7 @@ Graphs can be configured to use specific lifecycles:
 State Transitions
 ~~~~~~~~~~~~~~~~~
 
-State transitions are managed through the ``ResourceInstance`` model:
+State transitions are managed through the ``Resource`` proxy model (see :ref:`Arches Use of the Django ORM` for more details). The transitions can be triggered programmatically using the Django ORM:
 
 .. code-block:: python
 
