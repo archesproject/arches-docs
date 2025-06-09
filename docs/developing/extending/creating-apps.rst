@@ -99,12 +99,12 @@ You can add the dashboard to an Arches project in just a few easy steps.
         - Update your urls.py file in your project. You'll likely need to add the `re_path` import:
             .. code-block:: python
 
-                from django.urls import include, path, re_path
+                from django.urls import include, path
 
         - and then the following path:
             .. code-block:: python
 
-                re_path(r"^", include("dashboard.urls")),
+                path(r"^", include("dashboard.urls")),
 
 
 4. From your project run migrate to add the model included in the app:
