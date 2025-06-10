@@ -27,6 +27,13 @@ Arches ships with two default lifecycles:
      * active → draft
    * This is the default lifecycle applied to all graphs unless specified otherwise
 
+.. figure:: ../images/resource-instance-lifecycle-state-transitions.png
+    :width: 80%
+    :align: center
+
+    Standard lifecycle states and their possible transitions.
+
+
 2. **Perpetual Lifecycle**
 
    * Single state: "Perpetual"
