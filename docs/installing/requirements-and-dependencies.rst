@@ -35,9 +35,11 @@ Arches requires the following software packages to be installed and available. U
 :Elasticsearch 8: - Installers: https://www.elastic.co/downloads/past-releases/elasticsearch-8-5-1
     - Elasticsearch is integral to Arches and can be installed and configured many ways.
       For more information, see :ref:`Arches and Elasticsearch`.
-:GDAL >= 2.2.x: 
+:GDAL >= 2.4.x: 
     - **Windows** Use the `OSGeo4W installer <https://trac.osgeo.org/osgeo4w/>`_, and choose to install the GDAL package (you don't need QGIS or GRASS). After installation, add ``C:\OSGeo4W64\bin`` to your system's ``PATH`` environment variable.
     - **macOS** (See :ref:`macOS and GDAL, GEOS` below)
+:GEOS >= 3.8:
+    - See the above GDAL installation instructions above for Windows and macOS
 :Node.js 20.14.x (recommended): - Installation: https://nodejs.org/ (choose the installer appropriate to your operating system).
     - NOTE: Arches may not be compatible with later versions of Node.js (after 16) `(see discussion) <https://community.archesproject.org/t/newbie-v7-install-experience-some-hints-and-tips/1782>`_.
 
@@ -74,7 +76,7 @@ For Ubuntu we maintain an `ubuntu_setup.sh <https://raw.githubusercontent.com/ar
 
 .. code-block:: bash
 
-    wget https://raw.githubusercontent.com/archesproject/arches/stable/7.6.0/arches/install/ubuntu_setup.sh
+    wget https://raw.githubusercontent.com/archesproject/arches/stable/8.0.0/arches/install/ubuntu_setup.sh
     source ./ubuntu_setup.sh
 
 You will be prompted before each dependency is installed, or use ``yes | source ./ubuntu_setup.sh`` to install all components (Postgres/PostGIS, Node/npm, and ElasticSearch).
