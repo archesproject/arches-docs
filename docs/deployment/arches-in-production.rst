@@ -29,7 +29,7 @@ Turning off the Django debug mode will:
 
 
 Add Allowed Hosts, CSRF Trusted Origins, and Session Cookie Secure to Settings
-======================================================
+==============================================================================
 
 ``ALLOWED_HOSTS`` acts as a critical safeguard against HTTP Host header attacks, ensuring that your Arches application only responds to valid hostnames. On the other hand, ``CSRF_TRUSTED_ORIGINS`` is instrumental in fortifying your application against Cross-Site Request Forgery (CSRF) attacks by specifying trusted origins for the submission of forms. Finally, ``SESSION_COOKIE_SECURE`` ensures that the cookie containing user authentication information is only transmitted over HTTPS. Each of these settings is required for Arches to work properly in production. These settings are described in more detail in the `Django documentation <https://docs.djangoproject.com/en/4.2/ref/settings/#allowed-hosts>`_.
 
@@ -93,6 +93,37 @@ This command provides a current list of security-related settings that you shoul
   Arches: (arches.W001) Cache backend does not support rate-limiting
           HINT: Your cache: django.core.cache.backends.locmem.LocMemCache
           Supported caches: ('django.core.cache.backends.memcached.PyLibMCCache', 'django.core.cache.backends.memcached.PyMemcacheCache', 'django.core.cache.backends.redis.RedisCache')
+
+
+Enable a Cache backend
+----------------------
+In the ``python manage.py check --deploy --tag=security`` output above, you will see a warning that the cache backend does not support rate-limiting. This is because the default cache backend in Django is ``LocMemCache``, which is an in-memory cache that does not support rate-limiting. To enable rate-limiting, you will need to configure a cache backend that supports rate-limiting. An example cache backend that supports rate-limiting for production deployments is ``django.core.cache.backends.memcached.PyLibMCCache``. 
+
+In general, enabling caching can play a key role in improving the overall performance and stability (including and beyond security issues) of production Arches deployments. Please be sure to read more about `Django's support for different approaches to caching <https://docs.djangoproject.com/en/5.1/topics/cache/>`_. To enable this cache backend, add (and modify as needed for your deployment) the following to your ``settings.py`` file (or ``settings_local.py``):
+
+.. code-block:: python
+
+  CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
+        'LOCATION': '127.0.0.1:11211'
+    },
+}
+
+
+Rate limiting
+-------------
+In addition to cache and rate-limit related settings to Arches, you should also consider implementing rate-limting configurations for proxy servers and load balancers. Such settings can intercept abusive levels of traffic *before* they start to interfere with the normal functioning of your Arches instance. In setting such configurations, you will to accomodate a "burst" rate, since a user's web browser interacting with Arches will (legitimately) make many requests over a short period of time. An example configuration for rate-limiting in Nginx can look something like this:
+
+.. code-block:: nginx
+
+  limit_req_zone $binary_remote_addr zone=general:10m rate=2r/s;
+
+  server {
+      location / {
+          limit_req zone=general burst=20;
+      }
+  } 
 
 
 

@@ -9,5 +9,6 @@ This User Guide should help Arches users perform basic data entry and retrieval 
     :maxdepth: 2
 
     creating-resources
+    updating-resources
     deleting-resources
     searching

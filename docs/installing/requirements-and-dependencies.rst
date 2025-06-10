@@ -38,7 +38,7 @@ Arches requires the following software packages to be installed and available. U
 :GDAL >= 2.2.x: 
     - **Windows** Use the `OSGeo4W installer <https://trac.osgeo.org/osgeo4w/>`_, and choose to install the GDAL package (you don't need QGIS or GRASS). After installation, add ``C:\OSGeo4W64\bin`` to your system's ``PATH`` environment variable.
     - **macOS** (See :ref:`macOS and GDAL, GEOS` below)
-:Node.js 16.x (recommended): - Installation: https://nodejs.org/ (choose the installer appropriate to your operating system).
+:Node.js 20.14.x (recommended): - Installation: https://nodejs.org/ (choose the installer appropriate to your operating system).
     - NOTE: Arches may not be compatible with later versions of Node.js (after 16) `(see discussion) <https://community.archesproject.org/t/newbie-v7-install-experience-some-hints-and-tips/1782>`_.
 
 To support long-running task management, like large user downloads, you must install a Celery broker like RabbitMQ or Redis:
@@ -70,11 +70,11 @@ Please note that the actual paths that you need to specify for ``GDAL_LIBRARY_PA
 Scripted Dependency Installation
 --------------------------------
 
-For Ubuntu we maintain an `ubuntu_setup.sh <https://raw.githubusercontent.com/archesproject/arches/stable/7.5.0/arches/install/ubuntu_setup.sh>`_ script to install dependencies. It works for 18.04 and 20.04, and preliminary testing shows it to be compatible with 22.04 as well.
+For Ubuntu we maintain an `ubuntu_setup.sh <https://raw.githubusercontent.com/archesproject/arches/stable/7.6.6/arches/install/ubuntu_setup.sh>`_ script to install dependencies. We recommend using this with actively supported Ubuntu (LTS) versions (such as 22.04 and 24.04).
 
 .. code-block:: bash
 
-    wget https://raw.githubusercontent.com/archesproject/arches/stable/7.5.0/arches/install/ubuntu_setup.sh
+    wget https://raw.githubusercontent.com/archesproject/arches/stable/7.6.0/arches/install/ubuntu_setup.sh
     source ./ubuntu_setup.sh
 
 You will be prompted before each dependency is installed, or use ``yes | source ./ubuntu_setup.sh`` to install all components (Postgres/PostGIS, Node/npm, and ElasticSearch).
