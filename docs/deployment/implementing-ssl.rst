@@ -101,6 +101,13 @@ You can transfer all the configuration related to arches to the new virtual host
                     Require all granted
         </Directory>
 
+        Alias /files/export_deliverables/ /home/ubuntu/Projects/my_project/my_project/export_deliverables/
+        <Directory /home/ubuntu/Projects/my_project/my_project/export_deliverables/>
+                    Options Indexes FollowSymLinks
+                    AllowOverride None
+                    Require all granted
+        </Directory>
+
         ServerName yourDomainName
         ServerAdmin webmaster@localhost
         DocumentRoot /var/www/html

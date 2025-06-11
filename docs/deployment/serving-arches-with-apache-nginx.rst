@@ -130,6 +130,13 @@ The following instructions work for Ubuntu; minor changes may be necessary for a
                 Require all granted
             </Directory>
 
+            # This section tells Apache where to find search exports.
+            # NOTE: omit this section if you are using S3 for search exports.
+            Alias /files/export_deliverables/ /home/ubuntu/Projects/my_project/my_project/export_deliverables/
+            <Directory /home/ubuntu/Projects/my_project/my_project/export_deliverables/>
+                Require all granted
+            </Directory>
+
             ServerAdmin webmaster@localhost
             DocumentRoot /var/www/html
 
