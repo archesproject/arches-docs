@@ -10,6 +10,7 @@ and permissions management.
     :maxdepth: 2
 
     designing-the-database
+    resource-instance-lifecycles
     ontologies-in-arches
     managing-map-layers
     rdm
