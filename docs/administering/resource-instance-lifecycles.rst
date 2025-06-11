@@ -127,7 +127,7 @@ Lifecycle Functions
 Arches supports lifecycle-specific functions that can be triggered during state transitions:
 
 * Function type: ``lifecyclehandler``
-* Method: ``update_lifecycle_state``
+* Method: ``on_update_lifecycle_state``
 * These functions can implement custom validation, permissions, or other business logic
 
 Migration Considerations
