@@ -8,11 +8,23 @@ You can also view `release tags on Github <https://github.com/archesproject/arch
 Current Release
 ---------------
 
-* 7.6.0 (LTS) - `notes <https://github.com/archesproject/arches/blob/stable/7.6.0/releases/7.6.0.md>`__
+* 8.0.0 (LTS) - `notes <https://github.com/archesproject/arches/blob/stable/8.0.0/releases/8.0.0.md>`__
 
 -------------
 Past Releases
 -------------
+* 7.6.11 (LTS) - `notes <https://github.com/archesproject/arches/blob/stable/7.6.11/releases/7.6.11.md>`__
+* 7.6.10 (LTS) - `notes <https://github.com/archesproject/arches/blob/stable/7.6.10/releases/7.6.10.md>`__
+* 7.6.9 (LTS) - `notes <https://github.com/archesproject/arches/blob/stable/7.6.9/releases/7.6.9.md>`__
+* 7.6.8 (LTS) - `notes <https://github.com/archesproject/arches/blob/stable/7.6.8/releases/7.6.8.md>`__
+* 7.6.7 (LTS) - `notes <https://github.com/archesproject/arches/blob/stable/7.6.7/releases/7.6.7.md>`__
+* 7.6.6 (LTS) - `notes <https://github.com/archesproject/arches/blob/stable/7.6.6/releases/7.6.6.md>`__
+* 7.6.5 (LTS) - `notes <https://github.com/archesproject/arches/blob/stable/7.6.5/releases/7.6.5.md>`__
+* 7.6.4 (LTS) - `notes <https://github.com/archesproject/arches/blob/stable/7.6.4/releases/7.6.4.md>`__
+* 7.6.3 (LTS) - `notes <https://github.com/archesproject/arches/blob/stable/7.6.3/releases/7.6.3.md>`__
+* 7.6.2 (LTS) - `notes <https://github.com/archesproject/arches/blob/stable/7.6.2/releases/7.6.2.md>`__
+* 7.6.1 (LTS) - `notes <https://github.com/archesproject/arches/blob/stable/7.6.1/releases/7.6.1.md>`__
+* 7.6.0 (LTS) - `notes <https://github.com/archesproject/arches/blob/stable/7.6.0/releases/7.6.0.md>`__
 * 7.5.5 - `notes <https://github.com/archesproject/arches/blob/stable/7.5.5/releases/7.5.5.md>`__
 * 7.5.4 - `notes <https://github.com/archesproject/arches/blob/stable/7.5.4/releases/7.5.4.md>`__
 * 7.5.3 - `notes <https://github.com/archesproject/arches/blob/stable/7.5.3/releases/7.5.3.md>`__
