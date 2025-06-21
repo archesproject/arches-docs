@@ -8,7 +8,7 @@ You can also view `release tags on Github <https://github.com/archesproject/arch
 Current Release
 ---------------
 
-* 8.0.0 (LTS) - `notes <https://github.com/archesproject/arches/blob/stable/8.0.0/releases/8.0.0.md>`__
+* 8.0.0 - `notes <https://github.com/archesproject/arches/blob/stable/8.0.0/releases/8.0.0.md>`__
 
 -------------
 Past Releases
