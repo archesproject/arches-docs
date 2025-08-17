@@ -49,10 +49,10 @@ Format must be YYYY-MM-DD, no quotes::
 edtf
 ----
 
-Must be a valid `Extended Date Time Format <https://www.loc.gov/standards/datetime/pre-submission.html>`_ string::
+Must be a valid `Extended Date Time Format <https://www.loc.gov/standards/datetime/edtf.html>`_ string::
 
     "2010-10"
-    "-y10000"
+    "Y-10000"
 
 Arches supports level 2 of the EDTF specification. However, because of a bug in the edtf package used by Arches,
 an error will be thrown for strings like::
@@ -63,6 +63,7 @@ As a workaround, you can use a string like::
 
     "[../1924]"
 
+An `Extended Date Time Format validator is available <https://digital2.library.unt.edu/edtf/>`_.
 
 geojson-feature-collection
 --------------------------
