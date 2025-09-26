@@ -21,6 +21,13 @@ If you are considering software development to customize Arches, please read the
     django-devs/orm-start
 
 .. toctree::
+    :caption: Arches Modular Applications
+    :maxdepth: 2
+
+    modular-applications/about
+    modular-applications/arches-controlled-lists
+
+.. toctree::
     :caption: Reference Guide
     :maxdepth: 2
 
