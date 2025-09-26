@@ -13,7 +13,7 @@ Different Kinds of Arches Applications
 The Arches project uses the term "application" in a number of different senses. Some **Arches applications** are comprehensive and
 stand-alone software to meet the data management needs of a specific community. These comprehensive Arches applications are 
 built on the foundation of core Arches and include extra data modeling, user interface, and other customizations. Comprehensive Arches
-applications are stand-alone tools that are **not intended to combined as a component** installed within a given Arches instance.  
+applications are stand-alone tools and are **not intended to combined as components** within a given Arches instance.  
 
 Examples of (Comprehensive) Arches Applications
 -----------------------------------------------
