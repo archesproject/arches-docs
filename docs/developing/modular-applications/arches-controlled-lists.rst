@@ -43,4 +43,6 @@ If one clicks on a given list, the Arches Controlled Lists user interface displa
     Nodes that use the *Dimension Types - Physical Units* list
 
 
-
+Installing Arches Controlled Lists
+----------------------------------
+The **Arches Controlled Lists** application needs to be installed in the Python virtual environment of your Arches instance. Once installed, you will need to edit your Arches instance's ``settings.py`` and other files. The complete installation instructions can be found here: `Arches Controlled Lists README <https://github.com/archesproject/arches-controlled-lists?tab=readme-ov-file#installation>`_ 
