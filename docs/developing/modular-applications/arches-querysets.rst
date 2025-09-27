@@ -2,7 +2,7 @@
 Arches Querysets (App)
 ======================
 
-**Arches Querysets** is an Arches modular application designed to simplify development of software interfacing with Arches managed data. Arches Querysets provides interfaces that closely align with `Django Querysets <https://docs.djangoproject.com/en/5.2/ref/models/querysets/>`_. Rather than interacting directly with the graph abstractions used in Arches, Arches Querysets enables developers to query Arches managed data using familiar and widely adopted conventions established by Django Querysets. Arches Querysets can be installed as a component of an Arches instance that runs on core Arches version 8 and higher.
+**Arches Querysets** is an Arches modular application designed to simplify development of software interactions with Arches managed data. Arches Querysets provides interfaces that closely align with `Django Querysets <https://docs.djangoproject.com/en/5.2/ref/models/querysets/>`_. Rather than interacting directly with the graph abstractions used in Arches, Arches Querysets enables developers to use node and nodegroup aliases to query Arches managed data using familiar and widely adopted conventions established by Django Querysets. Arches Querysets can be installed as a component of an Arches instance that runs on core Arches version 8 and higher.
 
 
 
