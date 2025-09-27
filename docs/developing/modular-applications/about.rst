@@ -44,9 +44,9 @@ They're generally wired into Arches projects with the INSTALLED_APPS setting.
 
 Examples of Arches Modular Applications (Apps)
 ----------------------------------------------
-* `Arches Controlled Lists <https://github.com/archesproject/arches-controlled-lists>`_ See additional (:ref:`Arches Controlled Lists`) documentation.
+* `Arches Controlled Lists <https://github.com/archesproject/arches-controlled-lists>`_ See additional :ref:`Arches Controlled Lists (App)` documentation.
 * `Arches Modular Reports <https://github.com/archesproject/arches-modular-reports>`_
-* `Arches Querysets <https://github.com/archesproject/arches-querysets>`_
+* `Arches Querysets <https://github.com/archesproject/arches-querysets>`_ See additional :ref:`Arches Querysets (App)` documentation.
 
 
 

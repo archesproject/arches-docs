@@ -26,6 +26,7 @@ If you are considering software development to customize Arches, please read the
 
     modular-applications/about
     modular-applications/arches-controlled-lists
+    modular-applications/arches-querysets
 
 .. toctree::
     :caption: Reference Guide
