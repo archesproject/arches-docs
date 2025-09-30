@@ -1,10 +1,10 @@
-#################################
-About Arches Modular Applications
-#################################
+###################################
+About Arches Extension Applications
+###################################
 
 Starting with version 7.5 and 8, the Arches project adopted a more modular and less monolithic approach to software architecture.
 Instead of integrating all new features into core Arches, the Arches project started to bundle sets of special purpose features as 
-separate modular applications that administrators can choose to install onto an Arches instance. These special purpose modular
+separate modular applications that administrators can choose to install onto an Arches instance. These special purpose extension
 applications have their own code repositories and installation instructions.
 
 
@@ -23,14 +23,14 @@ Examples of (Comprehensive) Arches Applications
 
 
 
-What's a (Modular) Application?
-===============================
+Arches Extension Applications
+=============================
 
-On the other hand, the term **Arches modular application (app)** describes a Python package (usually pip installed) that provides some set 
-of additional features beyond what core Arches provides. Arches application can be reused as a modular component of multiple Arches 
+On the other hand, the term **Arches extension application (app)** describes a Python package (usually pip installed) that provides some set 
+of additional features beyond what core Arches provides. An Arches extension application can be reused as a modular component of multiple Arches 
 projects.
 
-Applications typically include some combination of models, views, templates, static files, URLs, etc. 
+Extension applications typically include some combination of models, views, templates, static files, URLs, etc. 
 They're generally wired into Arches projects with the INSTALLED_APPS setting.
 
 
@@ -38,12 +38,12 @@ They're generally wired into Arches projects with the INSTALLED_APPS setting.
     :width: 100%
     :align: center
 
-    Illustration of Arches projects integrating custom Arches Application.
+    Illustration of Arches projects integrating custom Arches extension application.
 
 
 
-Examples of Arches Modular Applications (Apps)
-----------------------------------------------
+Examples of Arches Extension Applications (Apps)
+------------------------------------------------
 * `Arches Controlled Lists <https://github.com/archesproject/arches-controlled-lists>`_ See additional :ref:`Arches Controlled Lists (App)` documentation.
 * `Arches Modular Reports <https://github.com/archesproject/arches-modular-reports>`_
 * `Arches Querysets <https://github.com/archesproject/arches-querysets>`_ See additional :ref:`Arches Querysets (App)` documentation.

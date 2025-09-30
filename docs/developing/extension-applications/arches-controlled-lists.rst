@@ -2,7 +2,7 @@
 Arches Controlled Lists (App)
 =============================
 
-**Arches Controlled Lists** is an Arches modular application designed to manage controlled lists and reference data within the Arches platform. It is meant to update, improve upon, and replace the functionality of the :ref:`Reference Data Manager (RDM)` (the RDM is slated for deprecation with the upcoming release of Arches version 9, see the `Arches Roadmap <https://github.com/archesproject/arches-roadmap>`_). 
+**Arches Controlled Lists** is an Arches extension application designed to manage controlled lists and reference data within the Arches platform. It is meant to update, improve upon, and replace the functionality of the :ref:`Reference Data Manager (RDM)` (the RDM is slated for deprecation with the upcoming release of Arches version 9, see the `Arches Roadmap <https://github.com/archesproject/arches-roadmap>`_). 
 
 Arches Controlled Lists can be installed as a component of an Arches instance that runs on core Arches version 8 and higher.
 
@@ -52,4 +52,4 @@ If one clicks on a given list, the Arches Controlled Lists user interface displa
 Installing Arches Controlled Lists
 ----------------------------------
 
-The **Arches Controlled Lists** application needs to be installed in the Python virtual environment of your Arches instance. Once installed, you will need to edit your Arches instance's ``settings.py`` and other files. The complete installation instructions can be found here: `Arches Controlled Lists README <https://github.com/archesproject/arches-controlled-lists?tab=readme-ov-file#installation>`_ 
+The **Arches Controlled Lists** extension application needs to be installed in the Python virtual environment of your Arches instance. Once installed, you will need to edit your Arches instance's ``settings.py`` and other files. The complete installation instructions can be found here: `Arches Controlled Lists README <https://github.com/archesproject/arches-controlled-lists?tab=readme-ov-file#installation>`_ 

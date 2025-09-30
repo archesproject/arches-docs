@@ -21,12 +21,12 @@ If you are considering software development to customize Arches, please read the
     django-devs/orm-start
 
 .. toctree::
-    :caption: Arches Modular Applications
+    :caption: Arches Extension Applications
     :maxdepth: 2
 
-    modular-applications/about
-    modular-applications/arches-controlled-lists
-    modular-applications/arches-querysets
+    extension-applications/about
+    extension-applications/arches-controlled-lists
+    extension-applications/arches-querysets
 
 .. toctree::
     :caption: Reference Guide
