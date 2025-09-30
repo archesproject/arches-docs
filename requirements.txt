@@ -3,3 +3,4 @@ pydata-sphinx-theme==0.12.0
 readthedocs-sphinx-ext==2.1.4
 sphinxcontrib-httpdomain
 requests[security]
+vue-lexer==0.0.4
