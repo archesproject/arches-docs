@@ -52,4 +52,6 @@ If one clicks on a given list, the Arches Controlled Lists user interface displa
 Installing Arches Controlled Lists
 ----------------------------------
 
-The **Arches Controlled Lists** extension application needs to be installed in the Python virtual environment of your Arches instance. Once installed, you will need to edit your Arches instance's ``settings.py`` and other files. The complete installation instructions can be found here: `Arches Controlled Lists README <https://github.com/archesproject/arches-controlled-lists?tab=readme-ov-file#installation>`_ 
+The **Arches Controlled Lists** extension application needs to be installed in the Python virtual environment of your Arches instance. Once installed, you will need to edit your Arches instance's ``settings.py`` and other files. 
+
+The complete installation instructions can be found here: `Arches Controlled Lists (Pypi) <https://pypi.org/project/arches-controlled-lists>`_. The source code repository and issue tracking is available here: `Arches Controlled Lists source code <https://github.com/archesproject/arches-controlled-lists>`_ 
