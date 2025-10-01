@@ -11,7 +11,7 @@ Glossary
 The Arches project uses a number of specialized terms. The following glossary provides definitions to Arches terminology as well as links to relevant parts of the documentation relevant to different terms.
 
 - **Arches Application**: 
-  A discrete Python package that can be integrated into one or more Arches projects. Arches Applications help to reduce development and sustainability costs for customizing Arches and adding specialized features. (See :ref:`Arches Applications`)
+  A discrete Python package that can be integrated into one or more Arches projects. Arches Applications help to reduce development and sustainability costs for customizing Arches and adding specialized features. Some Arches Applications are more comprehensive and stand-alone software to meet the data management needs of a specific community (see :ref:`Arches Applications`). Other Arches Applications, termed *Arches Extension Applications* (see :ref:`Arches Extension Applications`), describe modular software components that can be installed and reused for in multiple Arches projects.
 
 - **Arches Designer**: 
   A user interface for facilitating database design, i.e., the creation of Resource Models. The Arches Designer consists of many different tools, such as the Graph Designer, Card Designer, and Permissions, each of which helps build a different facet of Resource Model creation. (See :ref:`Arches Designer`)
@@ -51,6 +51,9 @@ The Arches project uses a number of specialized terms. The following glossary pr
 
 - **Graph**: 
   A network of nodes, connected by edges, that defines the set of attributes for either a Branch or a Resource Model. If an ontology is enforced on the graph, each node will belong to an ontological class and only certain types of edges may be used to connect them. (See :ref:`Graph Definition`)
+
+- **Helper Application (App)**: 
+  A modular software components that can be installed and reused for in multiple Arches projects (see :ref:`Arches Extension Applications`)
 
 - **Implementation, Arches**: 
   A specific deployment of Arches software that is installed, managed, and maintained by an individual, a team, or an organization. Arches implementations can be hosted on hardware owned by an individual or organization, or, alternatively, Arches implementations can run on cloud-computing services.
