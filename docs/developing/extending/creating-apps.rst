@@ -2,11 +2,14 @@
 Creating Applications
 #####################
 
-Starting with version 7.5, Arches adopted a new architectural pattern to support the need for implementors to easily share and maintain custom code. This new pattern, called **Arches Applications**, is similar to using "installed apps" in Django. It allows for easier development and maintenance of custom features by aligning with standard Django practices.
+Starting with version 7.5, Arches adopted a new architectural pattern to support the need for implementors to easily share and maintain custom code. This new pattern, called **Arches Applications**, is similar to using "installed apps" in Django. It allows for easier development and maintenance of custom features by aligning with standard Django practices. 
+
+.. note::
+    The Arches project uses the term "application" in a number of different senses. The term "application" is sometimes used with more standalone (not modular) software such as `Arches for Science <https://www.archesproject.org/arches-for-science/>`_ that is based on core Arches. However, most of the documentation below describes how to develop "extension applications", which are modular components that can be reused in multiple Arches projects. 
 
 
-What's an Application?
-======================
+What's an Arches Application?
+=============================
 The term **Arches application** describes a Python package (usually pip installed) that provides some set of additional features beyond what core Arches provides. Arches application can be reused in multiple Arches projects.
 
 Applications typically include some combination of models, views, templates, static files, URLs, etc. They’re generally wired into Arches projects with the INSTALLED_APPS setting.
@@ -27,16 +30,18 @@ Just like Arches itself, an Arches Application can also be developed, shared wit
 
 `Arches for Science <https://www.archesproject.org/arches-for-science/>`_ illustrates the value of Arches Applications. Arches for Science has several workflows and features (together with additional software dependencies) useful for cultural heritage conservation science. However, these features would be unnecessary for many other core Arches use cases. Keeping these conservation science features in a distinct application allows `Arches for Science software development <https://github.com/archesproject/arches-for-science/>`_ to continue at its own pace, and it reduces pressures to add highly specialized features to core Arches. Arches Applications can therefore help reduce the complexity and maintenance costs of core Arches.
 
+**Arches for Science** is a standalone Arches application. It is not intended to be used as a component for mixing and matching with other Arches applications. On the other hand, `Arches Controlled Lists <https://github.com/archesproject/arches-controlled-lists>`_ is an **Arches Extension Application** that is specifically intended to be used as a reusable modular component for multiple Arches projects. See :ref:`Arches Extension Applications` for more details and links to currently released Arches extension applications. 
+
 
 Arches Applications Can Help Avoid Forks
 ----------------------------------------
-Arches Applications allow you to add special features to an Arches instance without forking the core Arches code. Avoiding forks has several benefits, including easier maintenance and the ability to apply upgrades and security patches provided by core Arches.```
+Arches Applications (of both the standalone and extension variety) allow you to add special features to an Arches instance without forking the core Arches code. Avoiding forks has several benefits, including easier maintenance and the ability to apply upgrades and security patches provided by core Arches.
 
 A given Arches Application can also be developed and shared open source. This means that the custom features powered by an Arches Application can be reused across the community in multiple Arches projects.
 
 
 Developing an Arches Application
-------------------------------
+--------------------------------
 While any given Arches Application can be reused in multiple Arches projects, one must first create an Arches project to host the Arches Application you seek to develop. You start with the following command to create a new Arches project to host your Arches Application:
 
 .. code-block:: shell
