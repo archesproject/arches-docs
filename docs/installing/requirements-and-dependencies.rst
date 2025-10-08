@@ -41,7 +41,6 @@ Arches requires the following software packages to be installed and available. U
 :GEOS >= 3.8:
     - See the above GDAL installation instructions above for Windows and macOS
 :Node.js 20.14.x (recommended): - Installation: https://nodejs.org/ (choose the installer appropriate to your operating system).
-    - NOTE: Arches may not be compatible with later versions of Node.js (after 16) `(see discussion) <https://community.archesproject.org/t/newbie-v7-install-experience-some-hints-and-tips/1782>`_.
 
 To support long-running task management, like large user downloads, you must install a Celery broker like RabbitMQ or Redis:
 
