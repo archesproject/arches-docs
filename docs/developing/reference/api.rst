@@ -121,6 +121,18 @@ To allow others to connect to your Arches instance, you must create an OAuth cli
     + Only make one application, though you are technically allowed to make more.
     + An application is "owned" by whichever user created it, and will not be visible to other users.
 
+
+.. important::
+
+    Be aware that a locked down setting for ``SESSION_COOKIE_SAMESITE`` in your Arches project's 
+    ``settings.py`` or ``settings_local.py`` file may overly restrict access in certain deployment scenarios.
+    If you expect your users to use the password reset links or external OAuth, you need to ensure that 
+    ``SESSION_COOKIE_SAMESITE`` is set to 'Lax'. While the "Strict" setting is technically more secure, 
+    a "Strict" setting will not load a session cookie for users that follow a hyperlink or a 
+    redirect from another site (e.g. from an external OAuth provider).
+
+
+
 Authentication
 ==============
 
