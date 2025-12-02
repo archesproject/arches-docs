@@ -147,6 +147,7 @@ Import Resource Models or Branches in archesjson format
 
 Import reference data in skos/rdf format
 ----------------------------------------
+Data for the Reference Data Manager (RDM) and the Controlled List Manager can be imported from SKOS RDF-XML files. Arches exepcts these files to provide relationships to "Top Concepts" (using ``skos:hasTopConcept``, ``skos:topConceptOf`` properties).
 
 .. code-block:: bash
 
