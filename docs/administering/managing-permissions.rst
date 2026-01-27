@@ -88,23 +88,23 @@ Administering Permissions
 
 Permissions in Arches are handled on a few different levels.
 
-* `Managing Users and Groups in Django Admin`_
+* **Managing Users and Groups in Django Admin**
 
   *Determine who can access what parts of Arches using the built-in Django admin interface.*
 
-* `Resource Model Permissions`_
+* **Resource Model Permissions**
 
   *Determine which Users and Groups can read/edit/delete specific portions of a Resources Model.*
 
-* `Resource Instance Permissions`_
+* **Resource Instance Permissions**
 
   *Grant access to specific Resource instances on a per-User and/or per-Groups basis.*
 
-* `Media Permissions`_
+* **Media Permissions**
 
   *Restrict access to site media.*
 
-* `Map Layer Permissions`_
+* **Map Layer Permissions**
 
   *Restrict access to map layers.*
 
