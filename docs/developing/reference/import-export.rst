@@ -721,11 +721,28 @@ All the resources referenced in the .relations CSV need to already be in your da
 SQL Import
 ==========
 
-Arches provides database functions that are meant to assist with the loading, updating and querying of Arches business data via SQL. This strategy is especially useful if you are migrating an existing SQL database into Arches.
+Arches provides *relational views* database functions that are meant to assist with the loading, updating and querying of Arches business data via SQL. This strategy is especially useful if you are migrating an existing SQL database into Arches in extract, transform, load (ETL) processes.
 
 SQL import is more flexible and faster than loading via CSV, however it requires some SQL skills to write scripts to interact with these data.
 
 The core functions that arches provides allow for flexible, on-demand creation of view entities that create relational database entities representing Arches graph schema in the form of database views.  These database views can be queried using SQL, including `INSERT`, `UPDATE`, and `DELETE` operations.
+
+
+Graph Changes and SQL Data Types
+--------------------------------
+
+The Arches relational views features allows you to use SQL operations in ETL workflows. Arches nodegroups, nodes and Arches data types will be represented in relational view tables that have columns and PostgreSQL data types needed to represent a given node. Complex nodegroups may be represented as multiple related tables (rendered from the relational views).
+
+If you make edits to the nodegroups or nodes in your graph, you will need to refresh the relational views to reflect those changes. For example, if you change cardinality of a nodegroup to allow more than one tile, then you will need to refresh the relational views. You can refresh the relational views with the same operation used in their initial creation (in this case, the relational views for an entire resource model would be updated):
+
+.. code-block:: sql
+
+    SELECT __arches_create_resource_model_views('{UPDATED_MODEL_UUID}');
+
+
+Similarly, if you change the Arches datatype (see: :ref:`Core Arches Datatypes`) of a node from "concept" to "concept-list", you will need to refresh the corresponding relational views. In this scenario, if you use a SQL tool like PgAdmin, you would see a change in the relational view's PostgreSQL data type for that node. It would go from the ``uuid`` data type to the array-uuid ``uuid[]`` data type. You will need to update any legacy SQL queries that interact with a given relation view to accomodate for changes in the Arches graphs.
+
+
 
 View creation functions
 -----------------------
@@ -850,7 +867,7 @@ Directly inserting our records into the new Arches view will look something like
 
 .. note::
 
-    In this case, "Primary" is being given to every name type, because your legacy database did not have more than one name per resource.
+    In this case, "Primary" is being given to every name type, because your legacy database did not have more than one name per resource. 
 
 
 .. note::
