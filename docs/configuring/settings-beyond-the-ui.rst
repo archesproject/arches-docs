@@ -208,7 +208,28 @@ Once your application is set up with the provider, you can configure Arches to u
         "jwks_uri": "https://login.microsoftonline.com/my_tenant_id/discovery/v2.0/keys"
         # enforces token validation on authentication, AVOID setting this to False
         "validate_id_token": True,
+        # ------------------------------------------------------------------
+        # The settings below were introduced in Arches Version 8.1 and later
+        # These settings support Private Key JWT Authentication, see:
+        # https://github.com/archesproject/arches/issues/12473
+        # ------------------------------------------------------------------
+        "token_endpoint_auth_method": "private_key_jwt",
+        "public_certificate": "your_cert.pem",
+        "private_key": "your_key_file.key",
+        "private_key_password": b"password",
     }
+
+
+Details Regarding Private Key JWT Authentication
+------------------------------------------------
+Arches Version 8.1 and later supports `Private Key JWT <https://oauth.net/private-key-jwt/>`_. One can optionally add `jwt_audience <https://datatracker.ietf.org/doc/html/rfc7519#section-4.1.3>`_ to your configuration. You can also provide "public_key" in lieu of a public_certificate - depending on your identity provider. Your certificate and key need to exist either within your project directory or need to be in a place reachable by `certifi <https://github.com/certifi/python-certifi>`_. Also strongly consider storing your password securely in a password vault or external source rather than in your ``settings.py`` file directly. Finally, to support Private Key JWT Authentication include the following in your ``settings.py`` or ``settings_local.py`` files:
+
+
+.. code-block:: python
+
+    # Needed for Private Key JWT Authentication
+    SESSION_COOKIE_SAMESITE = "Lax"
+
 
 
 Accessibility Mode
