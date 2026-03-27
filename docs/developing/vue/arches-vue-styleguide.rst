@@ -8,16 +8,19 @@ Table of Contents
 - `Purpose`_
 - `Basis for Style Guide`_
 - `Contributions`_
-- `Structure and Naming`_
+- `Project Directory Structure & Naming`_
     - `File and Folder Naming Conventions`_
     - `Top-Level Structure`_
     - `Component Folder Hierarchy`_
 - `Component Structure`_
     - `Single-File Components`_
     - `Component Decomposition`_
-    - `Composables`_
-    - `Passing Data`_
-    - `State Management`_
+    - `Slots`_
+- `Data Flow & State`_
+    - `Fetch Proximity`_
+    - `Primitives First`_
+    - `Derived State`_
+    - `Event Emission`_
 - `The <script> Tag`_
     - `Coding Standards`_
     - `Import Pathing`_
@@ -63,95 +66,86 @@ Contributions
 
 This style guide is a living document that evolves over time. We welcome contributions from the community to improve and expand this guide further. If you have suggestions, feedback, or would like to contribute to the style guide, please reach out to us via the `Arches Forum <https://community.archesproject.org/>`_.
 
-Structure and Naming
-====================
+Project Directory Structure & Naming
+=====================================
 
 File and Folder Naming Conventions
 ----------------------------------
 
-- **Arches entity directories**
-    - Use plural, lowercase names to reflect domain concepts.  
-    - e.g. ``cards/``, ``widgets/``, ``reports/``
+**Arches entity directories** — Plural, lowercase names that reflect domain concepts (e.g. ``cards/``, ``widgets/``, ``reports/``).
 
-- **Vue component directories**
-    - One folder per component, named in PascalCase.  
-    - e.g. ``CustomComponent/``
+**Vue component directories** — One folder per component, named in PascalCase (e.g. ``CustomComponent/``).
 
-- **Non-Vue component directories**
-    - Utility or helper folders in kebab-case.  
-    - e.g. ``custom-utility/``, ``date-utils/``
+**Non-Vue component directories** — Utility or helper folders in kebab-case (e.g. ``custom-utility/``, ``date-utils/``).
 
-- **Vue components**
-    - File names in PascalCase with a ``.vue`` extension.  
-    - e.g. ``UserCard.vue``, ``MapViewer.vue``
+**Vue components** — PascalCase filenames with a ``.vue`` extension (e.g. ``UserCard.vue``, ``MapViewer.vue``).
 
-- **Utilities & helpers** 
-    - Use kebab-case, file extension ``.js`` or ``.ts``.  
-    - e.g. ``fetch-api.ts``, ``format-date.js``
+**Utilities & helpers** — kebab-case with a ``.js`` or ``.ts`` extension (e.g. ``fetch-api.ts``, ``format-date.js``).
 
-- **Type files** 
-    - Single-purpose type definitions in kebab-case, ``.ts``.  
-    - e.g. ``user-profile.ts``, ``map-types.ts``
+**Type files** — Single-purpose type definitions in kebab-case ``.ts`` (e.g. ``user-profile.ts``, ``map-types.ts``).
 
 Top-Level Structure
 -------------------
 
-- Top-level directories **must** align with Arches concepts (e.g., cards, widgets, reports) when such delineation is required. Otherwise, consolidate everything under a single app-level directory.
+Top-level directories **must** align with Arches concepts (e.g. cards, widgets, reports) when such delineation is required. Otherwise, consolidate everything under a single app-level directory.
 
-    .. code-block:: shell
+.. code-block:: shell
 
-        src/
-        └── project_name/
-            ├── plugins/
-            ├── reports/
-            │   └── CustomReport/
-            │       ├── components/
-            │       └── CustomReport.vue
-            ├── widgets/
-            ├── types/
-            └── utils.ts
+    src/
+    └── project_name/
+        ├── plugins/
+        ├── reports/
+        │   └── CustomReport/
+        │       ├── components/
+        │       └── CustomReport.vue
+        ├── widgets/
+        ├── types/
+        └── utils.ts
 
-    .. code-block:: shell
+.. code-block:: shell
 
-        src/
-        └── project_name/
-            ├── components/
-            │   └── CustomComponent.vue
-            ├── CustomApplication.vue
-            ├── types/
-            └── utils.ts
+    src/
+    └── project_name/
+        ├── components/
+        │   └── CustomComponent.vue
+        ├── CustomApplication.vue
+        ├── types/
+        └── utils.ts
 
-- **Why?**
-    - **Standardization**: Consistent naming and structure make it easier for developers to navigate the codebase.
-    - **Organization**: Grouping related components together makes it easier to find and manage them.
+**Why?**
+
+- **Standardization**: Consistent naming and structure make it easier for developers to navigate the codebase.
+- **Organization**: Grouping related components together makes it easier to find and manage them.
 
 Component Folder Hierarchy
 --------------------------
 
-- At every level:
-    - **Component files with sub-components** **must** reside in a folder named after the component.
-    - **Dependent components** **must** live in a `components/` subdirectory within their **parent component's** folder.
-    - **Shared components** (used by more than one parent) **must** be elevated to the `components/` directory at the level of the **highest parent component** that uses them.
+At every level of the hierarchy:
 
-    .. code-block:: shell
+- **Component files with sub-components** must reside in a folder named after the component.
+- **Dependent components** must live in a ``components/`` subdirectory within their parent component's folder.
+- **Shared components** (used by more than one parent) must be elevated to the ``components/`` directory at the level of the highest parent component that uses them.
 
-        src/
-        └── project_name/
-            ├── CustomApplication.vue
-            └── components/
-                └── CustomDashboard/
-                    ├── CustomDashboard.vue
-                    └── components/
-                        └── DashboardTable/
-                            ├── DashboardTable.vue
-                            └── components/
-                                ├── CustomHeader.vue
-                                ├── TableSection.vue
-                                └── UpdatedFooter.vue
+.. code-block:: shell
 
-- **Why?**
-    - **Clarity**: Each component's folder contains everything it needs, making it easier to understand and navigate.
-    - **Encapsulation**: Keeps related components together, reducing the risk of naming conflicts and improving modularity.
+    src/
+    └── project_name/
+        ├── CustomApplication.vue
+        └── components/
+            └── CustomDashboard/
+                ├── CustomDashboard.vue
+                └── components/
+                    └── DashboardTable/
+                        ├── DashboardTable.vue
+                        └── components/
+                            ├── CustomHeader.vue
+                            ├── TableSection.vue
+                            └── UpdatedFooter.vue
+
+**Why?**
+
+- **Clarity**: Each component's folder contains everything it needs, making it easier to understand and navigate.
+- **Encapsulation**: Keeps related components together, reducing the risk of naming conflicts and improving modularity.
 
 Component Structure
 ===================
@@ -159,335 +153,159 @@ Component Structure
 Single-File Components
 ----------------------
 
-- Single-File Components (SFCs) are the preferred way to define Vue components. 
+Single-File Components (SFCs) are the preferred way to define Vue components.
 
-    .. code-block:: vue
+.. code-block:: vue
 
-        <script setup lang="ts">
-        import { onMounted } from 'vue';
-        import { useGettext } from 'vue3-gettext';
+    <script setup lang="ts">
+    import { onMounted } from 'vue';
+    import { useGettext } from 'vue3-gettext';
 
-        const { $gettext } = useGettext();
+    const { $gettext } = useGettext();
 
-        onMounted(() => {
-            console.log($gettext('Hello from the <script> tag!'));
-        });
-        </script>
+    onMounted(() => {
+        console.log($gettext('Hello from the <script> tag!'));
+    });
+    </script>
 
-        <template>
-            <h1 class="header">
-                {{ $gettext("Hello from the template!") }}
-            </h1>
-        </template>
+    <template>
+        <h1 class="header">
+            {{ $gettext("Hello from the template!") }}
+        </h1>
+    </template>
 
-        <style scoped>
-        .header {
-            color: red;
-        }
-        </style>
+    <style scoped>
+    .header {
+        color: red;
+    }
+    </style>
 
-- **Why?**
-    - **Encapsulation**: All component-related code is in one place, making it easier to understand and maintain.
-    - **Separation of concerns**: Each section (template, script, style) has its own purpose, improving readability.
+**Why?**
+
+- **Encapsulation**: All component-related code is in one place, making it easier to understand and maintain.
+- **Separation of concerns**: Each section (template, script, style) has its own purpose, improving readability.
 
 Component Decomposition
 -----------------------
 
-- Components should be decomposed into smaller, reusable components whenever possible. Aim for a single responsibility per component.
-
-    .. code-block:: shell
-
-        src/
-        └── project_name/
-            └── widgets/
-                └── CustomWidget/
-                    ├── components/
-                    │   ├── CustomWidgetEditor.vue
-                    │   └── CustomWidgetViewer.vue
-                    └── CustomWidget.vue
-
-- **Why?**
-    - **Reusability**: Smaller components can be reused in different contexts, reducing code duplication.
-    - **Maintainability**: Easier to understand and modify smaller components than large monolithic ones.
-    - **Testing**: Smaller components are easier to test in isolation.
-
-Composables
------------
-
-Composables are functions that encapsulate and reuse stateful reactive logic. They are the preferred pattern for extracting non-trivial logic out of components.
-
-- **Naming**
-    - Composable functions must use the ``useFoo`` convention — camelCase with a ``use`` prefix.
-    - Composable files use kebab-case with a ``.ts`` extension.
-    - e.g. ``useResourceData`` in ``use-resource-data.ts``
-
-- **When to extract**
-    - Extract logic into a composable when it is shared across two or more components, or when a single component's ``<script setup>`` becomes difficult to follow.
-    - Do not extract for its own sake — a composable with a single caller adds indirection without benefit.
-
-- **Location**
-    - Single-use composables live alongside the component in its folder.
-    - Shared composables live in a ``composables/`` directory at the level of the highest component that uses them, following the same elevation rule as shared components.
-
-- **Calling convention**
-    - Always call composables at the top of ``<script setup>``, in position 4 of the declaration order (Set up composables/utilities). Never call them conditionally or inside functions.
-
-.. code-block:: typescript
-
-    // use-resource-data.ts
-    import { ref, watchEffect, type Ref } from 'vue';
-    import { generateArchesURL } from '@/arches/utils/generate-arches-url.ts';
-    import type { Resource } from '@/project_name/types.ts';
-
-    export function useResourceData(resourceId: Ref<string>) {
-        const resource = ref<Resource | null>(null);
-        const isLoading = ref(true);
-
-        watchEffect(async () => {
-            try {
-                isLoading.value = true;
-                const response = await fetch(
-                    generateArchesURL('my_app:resource', { id: resourceId.value })
-                );
-                resource.value = await response.json();
-            } catch (error) {
-                console.error(error);
-            } finally {
-                isLoading.value = false;
-            }
-        });
-
-        return { resource, isLoading };
-    }
+Components should be decomposed into smaller, reusable components whenever possible. Aim for a single responsibility per component.
 
 .. code-block:: vue
 
-    <!-- MyComponent.vue -->
+    <!-- Bad: one component handling both edit and view concerns -->
+
     <script setup lang="ts">
-    import { toRef } from 'vue';
-    import { useResourceData } from '@/project_name/composables/use-resource-data.ts';
+    import { ref } from 'vue';
 
-    const props = defineProps<{ resourceId: string }>();
+    import { useGettext } from 'vue3-gettext';
 
-    // 4. Set up composables/utilities
-    const { resource, isLoading } = useResourceData(toRef(props, 'resourceId'));
+    import type { WidgetDisplayMode } from '@/project_name/types.ts';
+
+    const WIDGET_UPDATE_EVENT = 'update' as const;
+    const DISPLAY_MODE_EDIT = 'edit' as const;
+
+    const { displayMode, widgetValue } = defineProps<{
+        displayMode: WidgetDisplayMode;
+        widgetValue: string;
+    }>();
+
+    const emit = defineEmits<{
+        (event: typeof WIDGET_UPDATE_EVENT, widgetValue: string): void;
+    }>();
+
+    const { $gettext } = useGettext();
+
+    const draftWidgetValue = ref(widgetValue);
     </script>
 
-- **Why?**
-    - **Reusability**: Composables share stateful logic across components without the overhead of a store.
-    - **Testability**: Composables can be tested independently of any component.
-    - **Readability**: Extracting complex logic keeps ``<script setup>`` focused on wiring the UI together.
+    <template>
+        <div
+            v-if="displayMode === DISPLAY_MODE_EDIT"
+            class="custom-widget-editor"
+        >
+            <input
+                v-model="draftWidgetValue"
+                class="custom-widget-editor__input"
+            />
+            <button @click="emit(WIDGET_UPDATE_EVENT, draftWidgetValue)">{{ $gettext('Save') }}</button>
+        </div>
+        <div
+            v-else
+            class="custom-widget-viewer"
+        >
+            <span class="custom-widget-viewer__value">{{ widgetValue }}</span>
+        </div>
+    </template>
 
-Passing Data
-------------
+.. code-block:: vue
 
-- **Fetch Proximity**
-    - Fetch data as close to the consumer as possible. Don't lift network calls higher than needed. When multiple components need the same data, extract the fetch logic into a shared composable. When state must be shared globally across unrelated component trees, use Pinia. See `State Management`_ for guidance on choosing the right mechanism.
+    <!-- Good: CustomWidget.vue delegates to single-responsibility children -->
+    
+    <script setup lang="ts">
+    import CustomWidgetEditor from '@/project_name/widgets/CustomWidget/components/CustomWidgetEditor.vue';
+    import CustomWidgetViewer from '@/project_name/widgets/CustomWidget/components/CustomWidgetViewer.vue';
 
-    .. code-block:: vue
+    import type { WidgetDisplayMode } from '@/project_name/types.ts';
 
-        <!-- Bad: fetching at a high-level parent when only the table needs it -->
+    const WIDGET_UPDATE_EVENT = 'update' as const;
+    const DISPLAY_MODE_EDIT = 'edit' as const;
 
-        <!-- Dashboard.vue -->
-        <script setup lang="ts">
-        import { ref, watchEffect } from 'vue';
-        import UserTable from '@/my_project/Dashboard/components/UserTable.vue';
-        import { generateArchesURL } from '@/arches/utils/generate-arches-url.ts';
-        import type { User } from '@/my_project/types.ts';
+    const { displayMode, widgetValue } = defineProps<{
+        displayMode: WidgetDisplayMode;
+        widgetValue: string;
+    }>();
 
-        const users = ref<User[]>([]);
-        watchEffect(async () => {
-            try {
-                const response = await fetch(generateArchesURL('my_app:users'));
-                users.value = await response.json();
-            } catch (error) {
-                console.error(error);
-            }
-        });
-        </script>
+    const emit = defineEmits<{
+        (event: typeof WIDGET_UPDATE_EVENT, widgetValue: string): void;
+    }>();
+    </script>
 
-        <template>
-            <div class="dashboard">
-                <UserTable :users="users" />
-            </div>
-        </template>
+    <template>
+        <CustomWidgetEditor
+            v-if="displayMode === DISPLAY_MODE_EDIT"
+            :widget-value="widgetValue"
+            @update="emit(WIDGET_UPDATE_EVENT, $event)"
+        />
+        <CustomWidgetViewer
+            v-else
+            :widget-value="widgetValue"
+        />
+    </template>
 
-    .. code-block:: vue
+**Why?**
 
-        <!-- Good: fetching as close as possible to where data is rendered -->
+- **Reusability**: Smaller components can be reused in different contexts, reducing code duplication.
+- **Maintainability**: Easier to understand and modify smaller components than large monolithic ones.
+- **Testing**: Smaller components are easier to test in isolation.
 
-        <!-- Dashboard.vue -->
-        <script setup lang="ts">
-        // Parent no longer fetches users
-        </script>
+Slots
+-----
 
-        <template>
-            <div class="dashboard">
-                <UserTable />
-            </div>
-        </template>
+Use scoped slots when the consumer needs access to slot data; use regular named slots for simple content projection. Name slots clearly to indicate their purpose.
 
+.. code-block:: vue
 
-        <!-- UserTable.vue -->
-        <script setup lang="ts">
-        import { ref, watchEffect } from 'vue';
-        import { generateArchesURL } from '@/arches/utils/generate-arches-url.ts';
-        import type { User } from '@/my_project/types.ts';
+    <template>
+        <MyTable>
+            <!-- Can also use shorthand #header -->
+            <template v-slot:header>
+                {{ $gettext('Table Header') }}
+            </template>
 
-        const users = ref<User[]>([]);
-        watchEffect(async () => {
-            try {
-                const response = await fetch(generateArchesURL('my_app:users'));
-                users.value = await response.json();
-            } catch (error) {
-                console.error(error);
-            }
-        });
-        </script>
+            <!-- Can also use shorthand #row="{ row }" -->
+            <template v-slot:row="{ row }">
+                <MyRow :data="row" />
+            </template>
+        </MyTable>
+    </template>
 
-        <template>
-            <table>
-                <tbody>
-                    <tr v-for="user in users" :key="user.id">
-                        <td>{{ user.name }}</td>
-                        <td>{{ user.email }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </template>
-      
-    - **Why?** 
-        - **Encapsulation**: Data-fetch logic lives alongside the view that consumes it.  
-        - **Limited prop drilling**: Minimizes passing data through unrelated parents.   
-        - **Error isolation**: Failures are handled locally, without cascading side effects.  
+**Why?**
 
-- **Primitives First**
-    - When a component only needs part of a model, pass only what it needs — not the whole object.
+- **Flexibility**: Consumers can customize the rendering of specific parts of the component.
+- **Separation of concerns**: Slots allow for a clear distinction between the component's structure and its content.
 
-    .. code-block:: vue
-
-        <!-- Bad: passing a whole User model just to render a label -->
-        <SubmitButton :user="currentUser" />
-
-        <!-- Good: pass only what the component actually needs -->
-        <SubmitButton :label="currentUser.name" />
-
-    - **Why?**
-        - **Explicit API**: Readers, tools, and developers see exactly which fields the component needs.
-        - **Immutable flow**: Primitives can't be mutated in place, preserving one-way data flow.
-        - **Efficient updates**: Changes to unused object properties won't force re-renders.
-
-- **Derived State**
-    - If a component's sole responsibility is to derive or summarize data, pass the raw data and let it compute internally.
-
-    .. code-block:: vue
-
-        <script setup lang="ts">
-        import { ref, computed, watchEffect } from 'vue';
-        import OrderSummary from '@/my_project/OrderSummary.vue';
-        import { generateArchesURL } from '@/arches/utils/generate-arches-url.ts';
-        import type { Order } from '@/my_project/types.ts';
-
-        // Raw data fetched here
-        const orders = ref<Order[]>([]);
-        watchEffect(async () => {
-            try {
-                const response = await fetch(generateArchesURL('my_app:orders'));
-                orders.value = await response.json();
-            } catch (error) {
-                console.error(error);
-            }
-        });
-        </script>
-
-        <template>
-            <!-- OrderSummary receives the full list and does its own computing -->
-            <OrderSummary :orders="orders" />
-        </template>
-
-    - When multiple children need the same computed value, derive once in the parent and pass primitives to avoid duplication and ensure consistency.
-
-    .. code-block:: vue
-
-        <script setup lang="ts">
-        import { ref, computed, watchEffect } from 'vue';
-        import OrderSummary from '@/my_project/OrderSummary.vue';
-        import OrderDetails from '@/my_project/OrderDetails.vue';
-        import { generateArchesURL } from '@/arches/utils/generate-arches-url.ts';
-        import type { Order } from '@/my_project/types.ts';
-
-        // Raw data fetched here
-        const orders = ref<Order[]>([]);
-        watchEffect(async () => {
-            try {
-                const response = await fetch(generateArchesURL('my_app:orders'));
-                orders.value = await response.json();
-            } catch (error) {
-                console.error(error);
-            }
-        });
-
-        // Derived state: compute once in the parent
-        const totalOrders = computed(() => orders.value.length);
-        </script>
-
-        <template>
-            <!-- Pass the computed value to both children -->
-            <OrderSummary :total-orders="totalOrders" />
-            <OrderDetails :total-orders="totalOrders" />
-        </template>
-
-    - **Why?**  
-        - **Performance**: Avoids recomputing derived values in multiple components.
-        - **Predictable props**: Child components receive only the exact values they need.  
-        - **Consistency**: Ensures every consumer uses the same computed values, preventing drift. 
-
-- **Event Emission** 
-    - Emit semantic events (kebab-case) with typed payloads:
-
-    .. code-block:: vue
-
-        <script setup lang="ts">
-        interface RowSelectedEvent { rowId: number }
-
-        const emit = defineEmits<{
-            (e: 'row-selected', payload: RowSelectedEvent): void
-        }>();
-
-        function onRowClick(id: number) {
-            emit('row-selected', { rowId: id });
-        }
-        </script>
-
-    - **Why?**  
-        - **Explicit contracts**: Consumers know exactly what events to expect and how to handle them.  
-        - **Type safety**: TypeScript ensures the payload matches the expected structure.  
-
-- **Slots**
-    - Use scoped slots when the consumer needs access to slot data; use regular named slots for simple content projection. Name slots clearly to indicate their purpose.
-
-    .. code-block:: vue
-
-        <template>
-            <MyTable>
-                <!-- Can also use shorthand #header -->
-                <template v-slot:header>
-                    {{ $gettext('Table Header') }}
-                </template>
-
-                <!-- Can also use shorthand #row="{ row }" -->
-                <template v-slot:row="{ row }">
-                    <MyRow :data="row" />
-                </template>
-            </MyTable>
-        </template>
-
-    - **Why?**
-        - **Flexibility**: Consumers can customize the rendering of specific parts of the component.
-        - **Separation of concerns**: Slots allow for a clear distinction between the component's structure and its content.
-
-State Management
-----------------
+Data Flow & State
+=================
 
 Use the simplest mechanism that meets your needs. In order of increasing complexity:
 
@@ -501,59 +319,292 @@ Use the simplest mechanism that meets your needs. In order of increasing complex
 
 .. code-block:: vue
 
-    <!-- 1. Props & emits: local parent-child flow -->
-    <MyList :items="items" @item-selected="onItemSelected" />
+    <!-- 1. Props & emits: a tile viewer receives its data from a parent -->
+
+    <TileViewer
+        :tile-id="activeTileId"
+        @tile-saved="onTileSaved"
+    />
 
 .. code-block:: vue
 
-    <!-- 2. provide/inject: deep tree, no prop drilling -->
+    <!-- 2. provide/inject: a resource form provides its ID to deeply nested tile editors,
+         avoiding threading resourceId through every intermediate layout component -->
 
-    <!-- ParentComponent.vue -->
+    <!-- ResourceForm.vue -->
     <script setup lang="ts">
-    import { provide, ref } from 'vue';
-    import type { User } from '@/project_name/types.ts';
+    import { provide, toRef } from 'vue';
 
-    const currentUser = ref<User | null>(null);
-    provide('currentUser', currentUser);
+    const { resourceId } = defineProps<{ resourceId: string }>();
+    provide('resourceId', toRef(() => resourceId));
     </script>
 
-    <!-- DeepChildComponent.vue -->
+    <!-- TileEditor.vue (several levels deep) -->
     <script setup lang="ts">
     import { inject, type Ref } from 'vue';
-    import type { User } from '@/project_name/types.ts';
 
-    const currentUser = inject<Ref<User | null>>('currentUser')!;
+    const resourceId = inject<Ref<string>>('resourceId')!;
     </script>
 
 .. code-block:: typescript
 
-    // 3. Composable: shared fetch logic, each caller gets its own instance
-    // use-resource-list.ts
-    import { ref, watchEffect } from 'vue';
+    // 3. Composable: shared fetch logic — each component that calls useNodegroupData()
+    //    gets its own reactive instance independently tracking its own nodegroup
 
-    export function useResourceList() {
-        const resources = ref([]);
-        watchEffect(async () => { /* fetch */ });
-        return { resources };
+    // use-nodegroup-data.ts
+    import { ref, watchEffect, type Ref } from 'vue';
+
+    import { generateArchesURL } from '@/arches/utils/generate-arches-url.ts';
+
+    import type { Nodegroup } from '@/project_name/types.ts';
+
+    export function useNodegroupData(nodegroupId: Ref<string>) {
+        const nodegroup = ref<Nodegroup | null>(null);
+        watchEffect(async () => {
+            const response = await fetch(
+                generateArchesURL('arches:nodegroup', { id: nodegroupId.value })
+            );
+            nodegroup.value = await response.json();
+        });
+        return { nodegroup };
     }
 
 .. code-block:: typescript
 
-    // 4. Pinia: global state shared across unrelated trees
-    // stores/resource-store.ts
+    // 4. Pinia: the authenticated user is global state — it must be accessible from
+    //    unrelated trees (nav bar, permission checks, audit logging) and persist
+    //    across navigation, making it the one case that genuinely warrants a store
+
+    // stores/auth-store.ts
     import { ref } from 'vue';
+
     import { defineStore } from 'pinia';
 
-    export const useResourceStore = defineStore('resources', () => {
-        const resources = ref([]);
-        async function fetchResources() { /* fetch */ }
-        return { resources, fetchResources };
+    import { generateArchesURL } from '@/arches/utils/generate-arches-url.ts';
+
+    import type { AuthUser } from '@/arches/types.ts';
+
+    export const useAuthStore = defineStore('auth', () => {
+        const currentUser = ref<AuthUser | null>(null);
+        async function fetchCurrentUser() {
+            const response = await fetch(generateArchesURL('arches:me'));
+            currentUser.value = await response.json();
+        }
+        return { currentUser, fetchCurrentUser };
     });
 
-- **Why?**
-    - **Simplicity**: Props are explicit and traceable; escalate only when the complexity genuinely requires it.
-    - **Encapsulation**: Each mechanism has a defined ownership model — props flow down, events flow up, provide/inject scopes to a tree, Pinia is global.
-    - **Testability**: Simpler mechanisms are easier to test; Pinia stores and composables can both be tested independently of components.
+**Why?**
+
+- **Simplicity**: Props are explicit and traceable; escalate only when the complexity genuinely requires it.
+- **Encapsulation**: Each mechanism has a defined ownership model — props flow down, events flow up, provide/inject scopes to a tree, Pinia is global.
+- **Testability**: Simpler mechanisms are easier to test; Pinia stores and composables can both be tested independently of components.
+
+Fetch Proximity
+---------------
+
+Fetch data as close to the consumer as possible. Don't lift network calls higher than needed. When multiple components need the same data, extract the fetch logic into a shared composable. When state must be shared globally across unrelated component trees, use Pinia. See `Data Flow & State`_ for guidance on choosing the right mechanism.
+
+.. code-block:: vue
+
+    <!-- Bad: fetching at a high-level parent when only the table needs it -->
+
+    <script setup lang="ts">
+    import { ref, watchEffect } from 'vue';
+
+    import ResourceTable from '@/my_project/ResourceListView/components/ResourceTable.vue';
+    import { generateArchesURL } from '@/arches/utils/generate-arches-url.ts';
+
+    import type { Resource } from '@/my_project/types.ts';
+
+    const resources = ref<Resource[]>([]);
+    watchEffect(async () => {
+        try {
+            const response = await fetch(generateArchesURL('my_app:resources'));
+            resources.value = await response.json();
+        } catch (error) {
+            console.error(error);
+        }
+    });
+    </script>
+
+    <template>
+        <div class="resource-list-view">
+            <ResourceTable :resources="resources" />
+        </div>
+    </template>
+
+.. code-block:: vue
+
+    <!-- Good: fetching as close as possible to where data is rendered -->
+
+    <!-- ResourceListView.vue -->
+    <script setup lang="ts">
+    import ResourceTable from '@/my_project/ResourceListView/components/ResourceTable.vue';
+    </script>
+
+    <template>
+        <div class="resource-list-view">
+            <ResourceTable />
+        </div>
+    </template>
+
+
+    <!-- ResourceTable.vue -->
+    <script setup lang="ts">
+    import { ref, watchEffect } from 'vue';
+
+    import { generateArchesURL } from '@/arches/utils/generate-arches-url.ts';
+
+    import type { Resource } from '@/my_project/types.ts';
+
+    const resources = ref<Resource[]>([]);
+    watchEffect(async () => {
+        try {
+            const response = await fetch(generateArchesURL('my_app:resources'));
+            resources.value = await response.json();
+        } catch (error) {
+            console.error(error);
+        }
+    });
+    </script>
+
+    <template>
+        <table>
+            <tbody>
+                <tr
+                    v-for="resource in resources"
+                    :key="resource.id"
+                >
+                    <td>{{ resource.displayName }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </template>
+      
+**Why?**
+
+- **Encapsulation**: Data-fetch logic lives alongside the view that consumes it.
+- **Limited prop drilling**: Minimizes passing data through unrelated parents.
+- **Error isolation**: Failures are handled locally, without cascading side effects.
+
+Primitives First
+----------------
+
+When a component only needs part of a model, pass only what it needs — not the whole object.
+
+.. code-block:: vue
+
+    <!-- Bad: passing a whole Resource model just to render a label -->
+    <SubmitButton :resource="selectedResource" />
+
+    <!-- Good: pass only what the component actually needs -->
+    <SubmitButton :label="selectedResource.displayName" />
+
+**Why?**
+
+- **Explicit API**: Readers, tools, and developers see exactly which fields the component needs.
+- **Immutable flow**: Primitives can't be mutated in place, preserving one-way data flow.
+- **Efficient updates**: Changes to unused object properties won't force re-renders.
+
+Derived State
+-------------
+
+If a component's sole responsibility is to derive or summarize data, pass the raw data and let it compute internally.
+
+.. code-block:: vue
+
+    <script setup lang="ts">
+    import { ref, watchEffect } from 'vue';
+
+    import OrderSummary from '@/my_project/OrderSummary.vue';
+
+    import { generateArchesURL } from '@/arches/utils/generate-arches-url.ts';
+
+    import type { Order } from '@/my_project/types.ts';
+
+    // Raw data fetched here
+    const orders = ref<Order[]>([]);
+    watchEffect(async () => {
+        try {
+            const response = await fetch(generateArchesURL('my_app:orders'));
+            orders.value = await response.json();
+        } catch (error) {
+            console.error(error);
+        }
+    });
+    </script>
+
+    <template>
+        <!-- OrderSummary receives the full list and does its own computing -->
+        <OrderSummary :orders="orders" />
+    </template>
+
+When multiple children need the same computed value, derive once in the parent and pass primitives to avoid duplication and ensure consistency.
+
+.. code-block:: vue
+
+    <script setup lang="ts">
+    import { ref, computed, watchEffect } from 'vue';
+
+    import OrderSummary from '@/my_project/OrderSummary.vue';
+    import OrderDetails from '@/my_project/OrderDetails.vue';
+
+    import { generateArchesURL } from '@/arches/utils/generate-arches-url.ts';
+
+    import type { Order } from '@/my_project/types.ts';
+
+    // Raw data fetched here
+    const orders = ref<Order[]>([]);
+    watchEffect(async () => {
+        try {
+            const response = await fetch(generateArchesURL('my_app:orders'));
+            orders.value = await response.json();
+        } catch (error) {
+            console.error(error);
+        }
+    });
+
+    // Derived state: compute once in the parent
+    const totalOrders = computed(() => orders.value.length);
+    </script>
+
+    <template>
+        <!-- Pass the computed value to both children -->
+        <OrderSummary :total-orders="totalOrders" />
+        <OrderDetails :total-orders="totalOrders" />
+    </template>
+
+**Why?**
+
+- **Performance**: Avoids recomputing derived values in multiple components.
+- **Predictable props**: Child components receive only the exact values they need.
+- **Consistency**: Ensures every consumer uses the same computed values, preventing drift.
+
+Event Emission
+--------------
+
+Emit semantic events (kebab-case) with typed payloads:
+
+.. code-block:: vue
+
+    <script setup lang="ts">
+    const ROW_SELECTED_EVENT = 'row-selected' as const;
+
+    interface RowSelectedEvent { rowId: number }
+
+    const emit = defineEmits<{
+        (event: typeof ROW_SELECTED_EVENT, payload: RowSelectedEvent): void
+    }>();
+
+    function onRowClick(id: number) {
+        emit(ROW_SELECTED_EVENT, { rowId: id });
+    }
+    </script>
+
+**Why?**
+
+- **Explicit contracts**: Consumers know exactly what events to expect and how to handle them.
+- **Type safety**: TypeScript ensures the payload matches the expected structure.
 
 The <script> Tag
 ==================
@@ -563,203 +614,215 @@ This block defines a component's logic. Follow these rules for clarity, consiste
 Coding Standards
 ----------------
 
-- **Script Scope**
-    - All component logic must be declared inside <script setup>, and <script setup> should always have typescript as the defined language.
+**Script Scope**
 
-    .. code-block:: vue
+All component logic must be declared inside ``<script setup>``, and ``<script setup>`` should always have TypeScript as the defined language.
 
-        <!-- Good: scoped to component, using typescript -->
-        <script setup lang="ts">
-        import { ref } from 'vue';
+.. code-block:: vue
 
-        const count = ref(0);
-        function incrementCount() { count.value++; }
-        </script>
+    <!-- Good: scoped to component, using typescript -->
+    <script setup lang="ts">
+    import { ref } from 'vue';
 
-        <!-- Bad: global scope pollution, no typescript -->
-        <script>
-            let count = 0;
-            function incrementCount() { count++; }
-        </script>
+    const count = ref(0);
+    function incrementCount() { count.value++; }
+    </script>
 
-    - **Why?**
-        - **TypeScript support**: Enables full TypeScript support directly within each component.
-        - **Scope safety**: All variables and functions are scoped to the component, preventing accidental global pollution.
+    <!-- Bad: global scope pollution, no typescript -->
+    <script>
+        let count = 0;
+        function incrementCount() { count++; }
+    </script>
 
-- **Function Declarations**
-    - Use named `function` declarations for component methods; **do not** use anonymous/arrow functions or function expressions.
-    - Use of anonymous/arrow functions is allowed for inline callbacks (e.g., `setTimeout`, `Promise.then`, `filter`, `onMounted`, `computed`, etc.).
+**Why?**
 
-    .. code-block:: js
+- **TypeScript support**: Enables full TypeScript support directly within each component.
+- **Scope safety**: All variables and functions are scoped to the component, preventing accidental global pollution.
 
-        // Bad: arrow function for component method
-        const incrementCount = () => { count.value++; };
+**Function Declarations**
 
-        // Bad: function expression for component method
-        const incrementCount = function() { count.value++; };
+Use named ``function`` declarations for component methods; **do not** use anonymous/arrow functions or function expressions. Anonymous/arrow functions are allowed for inline callbacks (e.g., ``setTimeout``, ``Promise.then``, ``filter``, ``onMounted``, ``computed``, etc.).
 
-        // Good: named function declaration for component method
-        function incrementCount() { count.value++; }
+.. code-block:: js
 
-        // Good: arrow function used for inline callback
-        setTimeout(() => { count.value++; }, 1000);
+    // Bad: arrow function for component method
+    const incrementCount = () => { count.value++; };
 
-    - **Why?**
-        - **Hoisting**: Named functions are hoisted, allowing them to be called before their declaration in the code. This can help avoid issues with function order and improve readability.
-        - **Debugging**: Named functions provide better stack traces and error messages, making issues easier to diagnose.
+    // Bad: function expression for component method
+    const incrementCount = function() { count.value++; };
 
-- **Constants & Literals**
-    - Declare fixed values in `SCREAMING_SNAKE_CASE`.
-    - Extract string literals and magic numbers as named constants when their meaning isn't self-evident from context, or when they appear in more than one place.
+    // Good: named function declaration for component method
+    function incrementCount() { count.value++; }
 
-    .. code-block:: js
+    // Good: arrow function used for inline callback
+    setTimeout(() => { count.value++; }, 1000);
 
-        // Bad: magic number and string literal
-        function calculateTotal(price) {
-            return price * 0.0825;
+**Why?**
+
+- **Hoisting**: Named functions are hoisted, allowing them to be called before their declaration in the code. This can help avoid issues with function order and improve readability.
+- **Debugging**: Named functions provide better stack traces and error messages, making issues easier to diagnose.
+
+**Constants & Literals**
+
+Declare fixed values in ``SCREAMING_SNAKE_CASE``. Extract string literals and magic numbers as named constants when their meaning isn't self-evident from context, or when they appear in more than one place.
+
+.. code-block:: js
+
+    // Bad: magic number and string literal
+    function calculateTotal(price) {
+        return price * 0.0825;
+    }
+
+    function isOrderComplete(order) {
+        return order.status === 'PENDING';
+    }
+
+    // Good: named constants
+    const TAX_RATE = 0.0825;
+    const ORDER_STATUS_PENDING = 'PENDING';
+
+    function calculateTotal(price) {
+        return price * TAX_RATE;
+    }
+
+    function isOrderComplete(order) {
+        return order.status === ORDER_STATUS_PENDING;
+    }
+
+**Why?**
+
+- **Readability**: Named constants make the code more self-explanatory and easier to understand and debug.
+- **Maintainability**: Changing a single constant is easier than searching for all occurrences of a magic number or string literal.
+
+**Naming Conventions**
+
+Use descriptive identifiers; avoid single-letter names.
+
+.. code-block:: js
+
+    // Bad: single-letter naming
+    function doubleValue(x) { return x * 2; }
+
+    // Good: descriptive naming
+    function doubleValue(value) { return value * 2; }
+
+**Why?**
+
+- **Clarity**: Descriptive names provide context and meaning, making the code easier to read and understand.
+- **Maintainability**: Clear names help future developers (or yourself) quickly grasp the purpose of variables and functions.
+
+**Modularity & Reuse**
+
+Extract non-UI logic (data transformations, business rules) into composables or utility modules.
+
+.. code-block:: js
+
+    // Bad: non-UI logic in component
+    function calculateDiscount(price, discount) {
+        return price - (price * discount);
+    }
+
+    // Good: non-UI logic in utility module
+    import { calculateDiscount } from '@/my_project/utils/discounts.ts';
+
+**Why?**
+
+- **Separation of concerns**: Keeps UI logic separate from business logic, making components easier to read and maintain.
+- **Reusability**: Composables and utility modules can be reused across multiple components, reducing code duplication.
+
+**Side-Effects & Async Handling**
+
+Avoid performing side-effects (API calls, timers, storage access, data formatting, etc.) at module scope in ``<script setup>``. For **data fetching**, use ``watchEffect`` — it runs immediately and re-runs automatically when its reactive dependencies change. Reserve ``onMounted`` (and other lifecycle hooks) for operations that require the DOM to be ready (e.g. measuring elements, initializing a map library). Always wrap async operations in ``try/catch``, handle errors explicitly, and surface failures to the UI or calling code.
+
+.. code-block:: vue
+
+    <script setup lang="ts">
+    import { ref, watchEffect, onMounted } from 'vue';
+    import { generateArchesURL } from '@/arches/utils/generate-arches-url.ts';
+
+    const data = ref(null);
+
+    // Bad: module scope side-effect
+    fetchData(); // runs immediately when the module loads, before the component is ready
+
+    // Good: data fetching with watchEffect
+    watchEffect(async () => {
+        try {
+            const response = await fetch(generateArchesURL('my_app:data'));
+            data.value = await response.json();
+        } catch (error) {
+            console.error(error);
         }
+    });
 
-        function isOrderComplete(order) {
-            return order.status === 'PENDING';
-        }
+    // Good: DOM-dependent work in onMounted
+    onMounted(() => {
+        mapInstance.initialize(document.getElementById('map'));
+    });
+    </script>
 
-        // Good: named constants
-        const TAX_RATE = 0.0825;
-        const ORDER_STATUS_PENDING = 'PENDING';
+**Why?**
 
-        function calculateTotal(price) {
-            return price * TAX_RATE;
-        }
+- **Predictability**: Side-effects should only occur in controlled environments to avoid unexpected behavior.
+- **Reactivity**: ``watchEffect`` automatically tracks reactive dependencies and re-fetches when they change, without needing ``immediate: true``.
+- **Error handling**: Wrapping async operations in ``try/catch`` allows for graceful error handling and user feedback.
 
-        function isOrderComplete(order) {
-            return order.status === ORDER_STATUS_PENDING;
-        }
+**Type Safety**
 
-    - **Why?**
-        - **Readability**: Named constants make the code more self-explanatory and easier to understand and debug.
-        - **Maintainability**: Changing a single constant is easier than searching for all occurrences of a magic number or string literal.
+Import and use explicit types; avoid use of the ``any`` type. Annotate all function return types.
 
-- **Naming Conventions**
-    - Use descriptive identifiers; avoid single-letter names.
+.. code-block:: typescript
 
-    .. code-block:: js
+    // Bad: using any type
+    function fetchData(): any {
+        return fetch(generateArchesURL('my_app:data')).then(response => response.json());
+    }
 
-        // Bad: single-letter naming
-        function doubleValue(x) { return x * 2; }
+    // Good: explicit type annotation
+    interface User {
+        id: number;
+        name: string;
+    }
 
-        // Good: descriptive naming
-        function doubleValue(value) { return value * 2; }
+    function fetchData(): Promise<User[]> {
+        return fetch(generateArchesURL('my_app:data')).then(response => response.json());
+    }
 
-    - **Why?**
-        - **Clarity**: Descriptive names provide context and meaning, making the code easier to read and understand.
-        - **Maintainability**: Clear names help future developers (or yourself) quickly grasp the purpose of variables and functions.
+**Why?**
 
-- **Modularity & Reuse**
-    - Extract non-UI logic (data transformations, business rules) into composables or utility modules.  
-
-    .. code-block:: js
-
-        // Bad: non-UI logic in component
-        function calculateDiscount(price, discount) {
-            return price - (price * discount);
-        }
-
-        // Good: non-UI logic in utility module
-        import { calculateDiscount } from '@/my_project/utils/discounts.ts';
-
-    - **Why?**
-        - **Separation of concerns**: Keeps UI logic separate from business logic, making components easier to read and maintain.
-        - **Reusability**: Composables and utility modules can be reused across multiple components, reducing code duplication.
-
-- **Side-Effects & Async Handling**
-    - Avoid performing side-effects (API calls, timers, storage access, data formatting, etc.) at module scope in ``<script setup>``.
-    - For **data fetching**, use ``watchEffect`` — it runs immediately and re-runs automatically when its reactive dependencies change.
-    - Reserve ``onMounted`` (and other lifecycle hooks) for operations that require the DOM to be ready (e.g. measuring elements, initializing a map library).
-    - Always wrap async operations in ``try/catch``, handle errors explicitly, and surface failures to the UI or calling code.
-
-    .. code-block:: vue
-
-        <script setup lang="ts">
-        import { ref, watchEffect, onMounted } from 'vue';
-        import { generateArchesURL } from '@/arches/utils/generate-arches-url.ts';
-
-        const data = ref(null);
-
-        // Bad: module scope side-effect
-        fetchData(); // runs immediately when the module loads, before the component is ready
-
-        // Good: data fetching with watchEffect
-        watchEffect(async () => {
-            try {
-                const response = await fetch(generateArchesURL('my_app:data'));
-                data.value = await response.json();
-            } catch (error) {
-                console.error(error);
-            }
-        });
-
-        // Good: DOM-dependent work in onMounted
-        onMounted(() => {
-            mapInstance.initialize(document.getElementById('map'));
-        });
-        </script>
-
-    - **Why?**
-        - **Predictability**: Side-effects should only occur in controlled environments to avoid unexpected behavior.
-        - **Reactivity**: ``watchEffect`` automatically tracks reactive dependencies and re-fetches when they change, without needing ``immediate: true``.
-        - **Error handling**: Wrapping async operations in ``try/catch`` allows for graceful error handling and user feedback.
-
-- **Type Safety**
-    - Import and use explicit types; avoid use of the `any` type. Annotate all function return types.
-
-    .. code-block:: typescript
-
-        // Bad: using any type
-        function fetchData(): any {
-            return fetch(generateArchesURL('my_app:data')).then(response => response.json());
-        }
-
-        // Good: explicit type annotation
-        interface User {
-            id: number;
-            name: string;
-        }
-
-        function fetchData(): Promise<User[]> {
-            return fetch(generateArchesURL('my_app:data')).then(response => response.json());
-        }
-
-    - **Why?**
-        - **Type safety**: Using explicit types helps catch errors at compile time, reducing runtime issues.
-        - **Documentation**: Type annotations serve as documentation for function behavior and expected input/output.
+- **Type safety**: Using explicit types helps catch errors at compile time, reducing runtime issues.
+- **Documentation**: Type annotations serve as documentation for function behavior and expected input/output.
 
 Import Pathing
 --------------
 
-- **Use project alias**
-    - Use `@/…` for all local imports; avoid raw relative paths.
+**Use project alias**
 
-    .. code-block:: js
+Use ``@/…`` for all local imports; avoid raw relative paths.
 
-        // Bad: raw relative path
-        import { fetchData } from '../../utils/fetch-data.ts';
-        
-        // Good: project alias
-        import { fetchData } from '@/project_name/utils/fetch-data.ts';
+.. code-block:: js
 
-- **Why?**
-    - **Readability**: Project aliases make it clear where the module is located without needing to trace relative paths.
-    - **Maintainability**: Avoids issues with deep nesting and makes it easier to refactor or reorganize the project structure.
+    // Bad: raw relative path
+    import { fetchData } from '../../utils/fetch-data.ts';
+
+    // Good: project alias
+    import { fetchData } from '@/project_name/utils/fetch-data.ts';
+
+**Why?**
+
+- **Readability**: Project aliases make it clear where the module is located without needing to trace relative paths.
+- **Maintainability**: Avoids issues with deep nesting and makes it easier to refactor or reorganize the project structure.
 
 Import Order
 ------------
 
-- Import lines should be grouped and ordered as follows:
-    1. **Vue core**
-    2. **Third-party modules**
-    3. **Vue components** (third-party → arches core → arches applications → local)
-    4. **Utilities/composables** (third-party → arches core → arches applications → local)
-    5. **Types** (third-party → arches core → arches applications → local)
+Import lines must be grouped and ordered as follows:
+
+1. **Vue core**
+2. **Third-party modules**
+3. **Vue components** (third-party → arches core → arches applications → local)
+4. **Utilities/composables** (third-party → arches core → arches applications → local)
+5. **Types** (third-party → arches core → arches applications → local)
 
 .. code-block:: vue
 
@@ -793,17 +856,18 @@ Import Order
 Declaration Order
 -----------------
 
-- Within your `<script setup>` block, organize declarations in this sequence.
-    1. **`defineProps`**
-    2. **`defineEmits`/`defineExpose`**
-    3. **Dependency injection**
-    4. **Set up composables/utilities**
-    5. **Constants & configuration**
-    6. **Reactive state**
-    7. **Computed properties**
-    8. **Watchers**
-    9. **Lifecycle hooks**
-    10. **Methods/functions**
+Within your ``<script setup>`` block, organize declarations in this sequence:
+
+0. **Static constants**
+1. **`defineProps`**
+2. **`defineEmits`/`defineExpose`**
+3. **Dependency injection**
+4. **Set up composables/utilities**
+5. **Component state**
+6. **Computed properties**
+7. **Watchers**
+8. **Lifecycle hooks**
+9. **Methods/functions**
 
 .. code-block:: vue
 
@@ -813,11 +877,14 @@ Declaration Order
 
     import type { Item } from '@/project_name/types.ts';
 
+    // 0. Static constants
+    const POLL_MS = 5000;
+
     // 1. defineProps
     const props = defineProps<{ id: number }>();
 
     // 2. defineEmits/defineExpose
-    const emit = defineEmits<{ (e: 'loaded'): void }>();
+    const emit = defineEmits<{ (event: 'loaded'): void }>();
     defineExpose({ myMethod: myMethod });
 
     // 3. Dependency injection
@@ -826,17 +893,14 @@ Declaration Order
     // 4. Set up composables/utilities
     const { $gettext } = useGettext();
 
-    // 5. Constants & configuration
-    const POLL_MS = 5000;
-
-    // 6. Reactive state
+    // 5. Component state
     const data = ref<Item[]>([]);
     const isLoading = ref(true);
 
-    // 7. Computed properties
+    // 6. Computed properties
     const hasData = computed(() => data.value.length > 0);
 
-    // 8. Watchers
+    // 7. Watchers
     watchEffect(async () => {
         await loadData();
     });
@@ -845,12 +909,12 @@ Declaration Order
         await loadData();
     }, { immediate: true });
 
-    // 9. Lifecycle hooks
+    // 8. Lifecycle hooks
     onMounted(() => {
         // reserved for DOM-dependent work
     });
 
-    // 10. Methods/functions
+    // 9. Methods/functions
     async function loadData() {
         try {
             isLoading.value = true;
@@ -872,22 +936,19 @@ Defines the component's UI. Keep templates clear, consistent, and easy to scan.
 Attribute Ordering & Formatting
 -------------------------------
 
-- When declaring attributes in your `<template>`, group and order them as follows:
-    1. **Directives** (e.g. `v-for`, `v-if`)
-    2. **Slots** (e.g. `v-slot:header="…"`)
-    3. **Static attributes** (e.g. `id`, `class`)
-    4. **Dynamic props** (e.g. `:prop="…"`)
-    5. **Event listeners** (e.g. `@click="…"`, `@click.prevent="…"`)
+When declaring attributes in your ``<template>``, group and order them as follows:
 
-- Formatting rules:
-    - **Inline vs. Multiline**  
-        - **One attribute**: keep on the same line as the tag.  
-        - **Multiple attributes**: one per line, indented under the tag.  
-    - **Explicit assignment**  
-        - Always write `prop="value"` or `:prop="value"`.  
-        - Do **not** use shorthand (`:prop` without value) or omit values.  
-    - **Kebab-case**  
-        - All attribute names (including custom props and events) **must** use kebab-case.
+1. **Directives** (e.g. ``v-for``, ``v-if``)
+2. **Slots** (e.g. ``v-slot:header="…"``)
+3. **Static attributes** (e.g. ``id``, ``class``)
+4. **Dynamic props** (e.g. ``:prop="…"``)
+5. **Event listeners** (e.g. ``@click="…"``, ``@click.prevent="…"``)
+
+**Inline vs. multiline** — One attribute: keep on the same line as the tag. Two or more: one per line, indented under the tag.
+
+**Explicit assignment** — Always write ``prop="value"`` or ``:prop="value"``. Do not use shorthand (``:prop`` without a value).
+
+**Kebab-case** — All attribute names, including custom props and events, must use kebab-case.
 
 .. code-block:: vue
     
@@ -908,14 +969,15 @@ Attribute Ordering & Formatting
         <UserCard id="userCard" :avatarUrl="user.avatarUrl" @submit.prevent="onSubmit" v-if="isVisible"/>
     </template>
 
-- **Why?**
-    - **Readability**: Consistent ordering and formatting make it easier to scan and understand the template.
-    - **Maintainability**: Clear structure helps future developers (or yourself) quickly grasp the component's purpose and behavior.
+**Why?**
+
+- **Readability**: Consistent ordering and formatting make it easier to scan and understand the template.
+- **Maintainability**: Clear structure helps future developers (or yourself) quickly grasp the component's purpose and behavior.
 
 Self-Closing Tags
 -----------------
 
-- Use self-closing syntax for elements or components without children:
+Use self-closing syntax for elements or components without children:
 
 .. code-block:: vue
 
@@ -924,74 +986,91 @@ Self-Closing Tags
         <img src="@/assets/logo.png" alt="Logo" />
     </template>
 
-- **Why?**
-    - **Clarity**: Self-closing tags clearly indicate that the element has no children, improving readability.
-    - **Consistency**: Using self-closing syntax for void elements (e.g., `<img>`, `<input>`) maintains a consistent style throughout the codebase.
+**Why?**
+
+- **Clarity**: Self-closing tags clearly indicate that the element has no children, improving readability.
+- **Consistency**: Using self-closing syntax for void elements (e.g., `<img>`, `<input>`) maintains a consistent style throughout the codebase.
 
 Logic in Templates
 ------------------
 
-- **No complex logic**  
-    - Avoid ternaries, chained method calls, or heavy expressions.  
-    - Move conditions and transformations into `computed` or methods.  
+Simple ternaries are acceptable. Compound or nested ternaries, chained method calls, and heavy expressions must be moved into ``computed`` properties or methods.
 
 .. code-block:: vue
 
-    <!-- Good: simple v-if, logic lives in computed -->
-    <template>
-        <div v-if="isVisible">{{ displayText }}</div>
-    </template>
+    <!-- Good: simple ternary -->
+    <div :class="isActive ? 'active' : 'inactive'" />
 
-    <!-- Bad: inline ternary and method call -->
-    <template>
-        <div>{{ isVisible ? formatText(user.name) : '—' }}</div>
-    </template>
+    <!-- Bad: compound ternary — move to computed -->
+    <div>{{ isLoading ? '...' : hasError ? errorMessage : displayText }}</div>
 
-- **Why?**
-    - **Readability**: Templates should be easy to read and understand at a glance.  
-    - **Performance**: Heavy computations in templates can lead to unnecessary re-renders and performance issues.
+    <!-- Bad: chained method call — move to computed or method -->
+    <div>{{ items.filter(isActive).map(formatLabel).join(', ') }}</div>
+
+**Why?**
+
+- **Readability**: Templates should be easy to read and understand at a glance.
+- **Performance**: Heavy computations in templates can lead to unnecessary re-renders and performance issues.
 
 Text in Templates
 -----------------
 
-- **Internationalization**
-    - Wrap all user-facing strings with `$gettext()`.
-    - Use ``%{placeholder}`` syntax for runtime values — never concatenate translated strings.
+**Internationalization** — Wrap all user-facing strings with ``$gettext()``. For runtime values, use ``%{placeholder}`` syntax and pass a values object as the second argument. Never concatenate translated strings.
 
-- **HTML in translations**
-    - When a translated string must contain HTML markup, use ``interpolate()`` with ``v-html``. This HTML-escapes the substituted values before they are rendered, preventing user data from injecting markup.
+**When to use interpolate()** — ``$gettext(msg, values)`` handles interpolation for most cases. Use ``interpolate()`` explicitly in two situations:
 
-- **No loose text nodes**
-    - Surround plain text with an inline element (e.g., `<span>`) or semantic tag.
+- The translation contains **HTML markup** that will be rendered via ``v-html``. Omit the third argument so substituted values are HTML-escaped, preventing markup injection.
+- A substituted value may contain **literal angle brackets** (e.g. ``Aircraft <by type>``). Pass ``true`` as the third argument to prevent those characters from being HTML-escaped.
+
+**No loose text nodes** — Surround plain text with an inline element (e.g. ``<span>``) or semantic tag.
 
 .. code-block:: vue
 
     <script setup lang="ts">
     import { useGettext } from 'vue3-gettext';
 
+    import type { RelationshipGroup } from '@/project_name/types.ts';
+
     const { $gettext, interpolate } = useGettext();
 
-    const userName = 'Alice';
+    const { group, authorName } = defineProps<{
+        group: RelationshipGroup;
+        authorName: string;
+    }>();
+
+    // group.label may contain literal angle brackets (e.g. "Aircraft <by type>")
+    // — pass true so they are not HTML-escaped in the returned string
+    function getGroupLabel(): string {
+        return interpolate(
+            $gettext('Top Concept Of: %{parent}'),
+            { parent: group.label },
+            true,
+        );
+    }
     </script>
 
     <template>
-        <!-- Bad: concatenation breaks translator context and is unsafe with v-html -->
-        <div>
-            {{ $gettext('Hello,') }}{{ userName }}!
-            <span v-html="'<b>' + $gettext('Welcome') + '</b> ' + userName" />
-        </div>
+        <div class="concept-detail">
+            <!-- Bad: concatenation breaks translator context -->
+            {{ $gettext('Group:') }} {{ group.label }}
 
-        <!-- Good: placeholders keep the sentence intact; interpolate() escapes values for HTML rendering -->
-        <div>
-            <span>{{ $gettext('Hello, %{name}!', { name: userName }) }}</span>
-            <span v-html="interpolate($gettext('Welcome, <b>%{name}</b>!'), { name: userName })" />
+            <!-- Good: standard interpolation — values passed directly to $gettext -->
+            <h2>{{ $gettext('Group: %{label}', { label: group.label }) }}</h2>
+
+            <!-- Good: interpolate() with true for values that may contain angle brackets -->
+            <span>{{ getGroupLabel() }}</span>
+
+            <!-- Good: interpolate() for HTML in translations rendered via v-html -->
+            <!-- no true — values are HTML-escaped to prevent markup injection -->
+            <span v-html="interpolate($gettext('Added by <b>%{name}</b>'), { name: authorName })" />
         </div>
     </template>
 
-- **Why?**
-    - **Translator context**: Placeholders keep the full sentence intact in ``.po`` files, giving translators the context they need to produce accurate translations.
-    - **HTML safety**: ``interpolate()`` HTML-escapes substituted values before rendering, so user-supplied data cannot inject markup even when using ``v-html``.
-    - **Semantic HTML**: Using inline elements or semantic tags improves accessibility and SEO by providing context to screen readers and search engines.
+**Why?**
+
+- **Translator context**: Placeholders keep the full sentence intact in ``.po`` files, giving translators the context they need to produce accurate translations.
+- **HTML safety**: ``interpolate()`` HTML-escapes substituted values by default, preventing markup injection via ``v-html``. Pass ``true`` only when substituted values are plain text that may legitimately contain angle brackets.
+- **Semantic HTML**: Using inline elements or semantic tags improves accessibility and SEO by providing context to screen readers and search engines.
 
 The <style> Tag
 =================
@@ -1001,9 +1080,7 @@ Defines component-scoped CSS. Follow these rules for responsive, maintainable, a
 Scope
 -----
 
-- **Scoped styles**  
-    - Prefer to use `<style scoped>` to ensure styles are applied only to the component.  
-    - Reserve global styles and design tokens for your global CSS or theme files unless absolutely necessary.
+Prefer ``<style scoped>`` to ensure styles are applied only to the component. Reserve global styles and design tokens for your global CSS or theme files unless absolutely necessary.
 
 .. code-block:: vue
 
@@ -1021,22 +1098,21 @@ Scope
         }
     </style>
 
-- **Why?**
-    - **Isolation**: Scoped styles prevent unintended side effects on other components, ensuring consistent styling.
-    - **Maintainability**: Changes to a component's styles won't affect other components, reducing the risk of introducing undesired behavior.
+**Why?**
+
+- **Isolation**: Scoped styles prevent unintended side effects on other components, ensuring consistent styling.
+- **Maintainability**: Changes to a component's styles won't affect other components, reducing the risk of introducing undesired behavior.
 
 Layout Patterns
 ---------------
 
-- **Flexbox & Grid only**  
-    - Use `display: flex` for one-dimensional layouts and `display: grid` for two-dimensional arrangements.  
-- **Use `gap`**  
-    - Space items with `gap`; do **not** rely on margins for core layout.  
-- **No legacy hacks**
-    - Never use `float` or other outdated layout techniques.
-- **Single-line vs multi-line selectors**
-    - Use single-line selectors for enforcing exactly one style rule.
-    - Use multi-line selectors for grouping multiple rules together.
+**Flexbox & Grid only** — Use ``display: flex`` for one-dimensional layouts and ``display: grid`` for two-dimensional arrangements.
+
+**Use gap** — Space items with ``gap``; do not rely on margins for core layout.
+
+**No legacy hacks** — Never use ``float`` or other outdated layout techniques.
+
+**Single-line vs. multi-line selectors** — Use single-line selectors for a single atomic override; use multi-line selectors when grouping multiple rules.
 
 .. code-block:: css
 
@@ -1052,25 +1128,22 @@ Layout Patterns
         gap: 1rem;
     }
 
-- **Why?**
-    - **Flexibility**: Flexbox and Grid provide powerful layout capabilities for modern web applications.
-    - **Maintainability**: Using `gap` simplifies spacing management and reduces the need for complex margin calculations.
-    - **Scanability**: Single-line selectors signal a single atomic override and are easy to scan past. Multi-line formatting means each property appears on its own line in diffs, making code review clearer.
+**Why?**
+
+- **Flexibility**: Flexbox and Grid provide powerful layout capabilities for modern web applications.
+- **Maintainability**: Using `gap` simplifies spacing management and reduces the need for complex margin calculations.
+- **Scanability**: Single-line selectors signal a single atomic override and are easy to scan past. Multi-line formatting means each property appears on its own line in diffs, making code review clearer.
 
 Units & Sizing
 --------------
 
-- **`rem` for nearly everything**  
-    - Use `rem` units for spacing, typography, gaps, borders, and other dimensional values.
+**rem for nearly everything** — Use ``rem`` units for spacing, typography, gaps, borders, and other dimensional values.
 
-- **Viewport units sparingly**  
-    - Reserve `vh`/`vw` for elements that must span the viewport (e.g., full-screen sections or modals).
+**Viewport units sparingly** — Reserve ``vh``/``vw`` for elements that must span the viewport (e.g. full-screen sections or modals).
 
-- **Percentages for fluid layouts**  
-    - Apply `%` when you need relative sizing (e.g., fluid widths in responsive grids).
+**Percentages for fluid layouts** — Apply ``%`` when you need relative sizing (e.g. fluid widths in responsive grids).
 
-- **No `px`**  
-    - Avoid `px` units entirely to ensure scalability, accessibility, and consistent theming.
+**No px** — Avoid ``px`` units entirely to ensure scalability, accessibility, and consistent theming.
 
 .. code-block:: css
 
@@ -1083,17 +1156,16 @@ Units & Sizing
     /* Good: using percentage for fluid layout */
     .container { width: 100%; }
 
-- **Why?**
-    - **Scalability**: Using `rem` and `%` units allows for better scaling across different screen sizes and resolutions.
-    - **Accessibility**: Relative units ensure that text and elements can be resized according to user preferences, improving accessibility.
+**Why?**
+
+- **Scalability**: Using `rem` and `%` units allows for better scaling across different screen sizes and resolutions.
+- **Accessibility**: Relative units ensure that text and elements can be resized according to user preferences, improving accessibility.
 
 Offsets & Positioning
 ---------------------
-- **No hard-coding single-side offsets**  
-    - Instead of using `margin-left`, `margin-top`, etc., use logical properties like `margin-inline-start` and `margin-block-start`.
+**No single-side offsets** — Use logical properties (``margin-inline-start``, ``margin-block-start``) instead of physical directional properties like ``margin-left`` or ``margin-top``.
 
-- **No negative margins**  
-    - Negative `margin-*` values are forbidden.
+**No negative margins** — Negative ``margin-*`` values are forbidden.
 
 .. code-block:: css
 
@@ -1104,14 +1176,15 @@ Offsets & Positioning
     .container { padding-inline-start: 1rem; }
     .item { margin-inline-start: 0; }
 
-- **Why?**
-    - **Logical properties**: Using logical properties ensures consistent behavior across different language displays (e.g. left-to-right vs. right-to-left).
-    - **Avoiding layout shifts**: Negative margins can lead to unexpected layout shifts and make it harder to maintain a consistent design.
+**Why?**
+
+- **Logical properties**: Using logical properties ensures consistent behavior across different language displays (e.g. left-to-right vs. right-to-left).
+- **Avoiding layout shifts**: Negative margins can lead to unexpected layout shifts and make it harder to maintain a consistent design.
 
 No `calc()`
 -----------
 
-- Avoid `calc()` for layout problems that flexbox or grid can solve directly.
+Avoid ``calc()`` for layout problems that flexbox or grid can solve directly.
 
 .. code-block:: css
 
@@ -1125,26 +1198,21 @@ No `calc()`
         grid-template-columns: 1fr auto;
     }
 
-- `calc()` is acceptable when genuinely mixing units that cannot be expressed otherwise (e.g. ``height: calc(100vh - var(--header-height))``).
+**Why?**
 
-- **Why?**
-    - Layout math in `calc()` is often a sign that flexbox or grid would be a cleaner solution.
-    - Mixing `calc()` with hardcoded pixel values creates fragile layouts that break when surrounding elements change.
+- Layout math in `calc()` is often a sign that flexbox or grid would be a cleaner solution.
+- Mixing `calc()` with hardcoded pixel values creates fragile layouts that break when surrounding elements change.
 
 Theming & Colors
 ----------------
 
-- **Design Tokens Only**  
-    - Always reference your design tokens instead of raw values. 
+**Design tokens only** — Always reference design tokens instead of raw values.
 
-- **Centralize & Document**  
-    - Keep all tokens (colors, typography scales, breakpoints, etc.) in a single theme file.
+**Centralize & document** — Keep all tokens (colors, typography scales, breakpoints) in a single theme file.
 
-- **Semantic Layers**  
-    - Build on top of raw palette entries with semantic tokens (e.g. ``--color-success``) so UI intent drives your choices.
+**Semantic layers** — Build on top of raw palette entries with semantic tokens (e.g. ``--color-success``) so UI intent drives your choices.
 
-- **Light/Dark Support**  
-    - Define variants for both modes in your theme preset.
+**Light/dark support** — Define variants for both modes in your theme preset.
 
 .. code-block:: js
 
@@ -1165,8 +1233,7 @@ Theming & Colors
         }
     });
 
-- **Consuming tokens in CSS**
-    - PrimeVue tokens are available as CSS custom properties using the ``--p-`` prefix (set by Arches's ``DEFAULT_THEME``). Reference them directly in ``<style scoped>`` blocks.
+**Consuming tokens in CSS** — PrimeVue tokens are available as CSS custom properties using the ``--p-`` prefix (set by Arches's ``DEFAULT_THEME``). Reference them directly in ``<style scoped>`` blocks.
 
 .. code-block:: css
 
@@ -1177,16 +1244,16 @@ Theming & Colors
     /* Never use raw values */
     .my-heading { color: #579ddb; }  /* Bad */
 
-- **Why?**
-    - **Consistency**: Using design tokens ensures a consistent look and feel across the application.
-    - **Maintainability**: Centralizing tokens makes it easier to update and manage styles.
-    - **Dark mode**: Token values automatically swap between light and dark variants — raw values do not.
+**Why?**
+
+- **Consistency**: Using design tokens ensures a consistent look and feel across the application.
+- **Maintainability**: Centralizing tokens makes it easier to update and manage styles.
+- **Dark mode**: Token values automatically swap between light and dark variants — raw values do not.
 
 Selector Naming
 ---------------
 
-- **Dot-delineated hierarchy**  
-    - Prefix selectors with the component's root class, then chain child class names:
+Prefix selectors with the component's root class, then chain child class names:
 
 .. code-block:: css
 
@@ -1205,9 +1272,10 @@ Selector Naming
         color: var(--p-primary-500);
     }
 
-- **Why?**
-    - **Clarity**: Dot-delineated selectors make the component's internal structure self-documenting — a reader can understand the component's layout from the CSS alone.
-    - **Specificity control**: Chaining from the root class makes specificity intentional and predictable, avoiding unexpected override order within the component.
+**Why?**
+
+- **Clarity**: Dot-delineated selectors make the component's internal structure self-documenting — a reader can understand the component's layout from the CSS alone.
+- **Specificity control**: Chaining from the root class makes specificity intentional and predictable, avoiding unexpected override order within the component.
 
 Testing
 =======
@@ -1237,29 +1305,25 @@ Test Location & Naming
                 ├── CustomReport.vue
                 └── CustomReport.spec.ts
 
-- **Why?**
-    - **Organization**: Grouping tests by component or utility helps maintain a clean project structure.
-    - **Ease of navigation**: Developers can quickly locate tests related to a specific component or utility without searching through a separate test directory.
+**Why?**
+
+- **Organization**: Grouping tests by component or utility helps maintain a clean project structure.
+- **Ease of navigation**: Developers can quickly locate tests related to a specific component or utility without searching through a separate test directory.
 
 Writing Frontend Tests
 ----------------------
 
 When crafting your tests, adhere to these best practices:
 
-- **Isolation**
-    - Test components with real children where possible. Only stub external services, API calls, and third-party libraries that are difficult to mount in jsdom.
+**Isolation** — Test components with real children where possible. Only stub external services, API calls, and third-party libraries that are difficult to mount in jsdom.
 
-- **Coverage**  
-    - Cover all code paths, including edge cases (error states, conditional rendering, emitted events).
+**Coverage** — Cover all code paths, including edge cases (error states, conditional rendering, emitted events).
 
-- **Readability**  
-    - Use clear, descriptive test names and group related tests with ``describe`` blocks.
+**Readability** — Use clear, descriptive test names and group related tests with ``describe`` blocks.
 
-- **Async Handling**  
-    - Use ``flushPromises`` or ``await nextTick()`` after triggering asynchronous updates.
+**Async handling** — Use ``flushPromises`` or ``await nextTick()`` after triggering asynchronous updates.
 
-- **Cleanup**  
-    - Unmount or destroy wrappers if they persist between tests (though Vitest's JSDOM resets per test by default).
+**Cleanup** — Unmount or destroy wrappers if they persist between tests (though Vitest's JSDOM resets per test by default).
 
 .. code-block:: vue
 
@@ -1305,15 +1369,16 @@ When crafting your tests, adhere to these best practices:
         });
     });
 
-- **Why?**
-    - **Isolation**: Testing components in isolation helps identify issues more easily and ensures that tests are not affected by other components.
-    - **Readability**: Clear and descriptive test names make it easier for developers to understand the purpose of each test.
-    - **Maintainability**: Well-structured tests are easier to maintain and update as the codebase evolves.
+**Why?**
+
+- **Isolation**: Testing components in isolation helps identify issues more easily and ensures that tests are not affected by other components.
+- **Readability**: Clear and descriptive test names make it easier for developers to understand the purpose of each test.
+- **Maintainability**: Well-structured tests are easier to maintain and update as the codebase evolves.
 
 Running Frontend Tests
 ----------------------
 
-- Use the following npm scripts in your terminal:
+Use the following npm scripts in your terminal:
 
 .. code-block:: shell
 

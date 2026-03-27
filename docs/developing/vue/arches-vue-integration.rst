@@ -39,11 +39,11 @@ As a general rule, avoid:
 - Data attributes on mount points
 - Global JavaScript variables set by Django templates
 - Knockout observable bindings passed into Vue
-- ``initialProps`` via ``createVueApplication`` (see `\`\`createVueApplication\`\` API`_)
+- ``initialProps`` via ``createVueApplication`` (see :ref:`createvueapplication-api`)
 
 ``initialProps`` exists as an escape hatch for cases where bootstrapping truly requires
-server-provided data and a fetch round-trip is not feasible. Use it sparingly and document
-the reason clearly when you do.
+server-provided data and a fetch round-trip is not feasible.
+Use it sparingly and document the reason clearly when you do.
 
 Quick Start
 ===========
@@ -163,10 +163,13 @@ object, which Django generates at runtime.
     const url = generateArchesURL('my_app:resources', {}, undefined, { page: 1, limit: 10 });
     // → /en/resources?page=1&limit=10
 
-- **Why?**
-    - **Language awareness**: URLs are automatically prefixed with the active language code.
-    - **No hardcoding**: URL patterns are defined once in Django and consumed in the frontend without duplication.
-    - **Type safety**: Parameters are typed as ``string | number``, preventing malformed URLs.
+**Why?**
+
+- **Language awareness**: URLs are automatically prefixed with the active language code.
+- **No hardcoding**: URL patterns are defined once in Django and consumed in the frontend without duplication.
+- **Type safety**: Parameters are typed as ``string | number``, preventing malformed URLs.
+
+.. _createvueapplication-api:
 
 ``createVueApplication`` API
 ============================
@@ -186,7 +189,8 @@ Returns a ``Promise<App>`` — a Vue application instance ready to be mounted.
 - ``initialProps`` *(optional, avoid)* — Avoid passing props from the Django/Knockout
   layer. All application state should originate inside Vue. See `Frontend Agnosticism`_.
 
-**The returned ``app`` instance**
+The returned ``app`` instance
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Before calling ``.mount()``, you can register additional plugins or set global
 properties on the returned app:
