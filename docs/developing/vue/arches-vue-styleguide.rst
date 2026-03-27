@@ -859,8 +859,8 @@ Declaration Order
 Within your ``<script setup>`` block, organize declarations in this sequence:
 
 0. **Static constants**
-1. **`defineProps`**
-2. **`defineEmits`/`defineExpose`**
+1. **defineProps**
+2. **defineEmits/defineExpose**
 3. **Dependency injection**
 4. **Set up composables/utilities**
 5. **Component state**
