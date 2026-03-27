@@ -19,6 +19,64 @@ Let's begin with a brief primer on some of the core concepts upon which Arches i
 
 .. warning:: If you need to have multiple versions of the same graph, perhaps multiple people are designing it or you need to retain earlier iterations while continuing to add nodes, you must Clone the graph. If a graph is renamed, exported, and imported, it will still overwrite the original, because the unique ID will remain unchanged.
 
+
+Graph Versioning (Arches 8+)
+============================
+
+Starting with Arches 8, Resource Models and Branches support versioning through a draft/published workflow. This allows for safer and more controlled updates to your database structure.
+
+
+Version States
+--------------
+
+Each graph (Resource Model or Branch) can exist in three states:
+
+1. **Canonical or Current Version** This is the active version of the graph for use with resource instances. In the published state:
+
+   - The graph structure is locked
+   - You can still modify UI-related elements (card labels, widget labels, etc.)
+   - Edit permissions
+
+2. **Draft Version** This is where you can make unpublished changes to the graph structure. When working in draft mode, you can:
+
+   - Modify the graph structure (add/remove nodegroups, nodes, etc.)
+   - Update card configurations
+   - Change widget settings
+   - If you decide to make a new version of the graph, existing resource instances using a prior version will become read-only
+
+3. **Published Version** This version of a graph is serialized as JSON. This is the version of the graph which the application actively uses.
+
+
+Making Changes
+--------------
+
+Users cannot add nodes to a published graph. If you need to make structural changes, you must first create a new version of the graph. There are two main scenarios to consider when migrating resource instance data from one graph version to another:
+
+1. **Additive Changes**
+   Adding new nodegroups or nodes to a graph. These changes are handled automatically by Arches and don't require special data migrations.
+
+2. **Structural Changes**
+   Any changes that modify existing nodes, relationships, or data structures will complicate migrations to a new version of a graph. If one naively chooses to use the Arches automated migration utility, data corruption may result. To avoid such data corruption, one should first review steps described in :ref:`Data Integrity Risk Management` to safeguard your data before attempting migrations across graph versions. Migrating across complex changes to graph versions may require a software developer to write custom Django `migrations <https://docs.djangoproject.com/en/5.0/topics/migrations/>`_.
+
+
+.. figure:: ../images/arches-graph-versioning.png
+
+   Flow diagram of edits to "Current" and "Draft" versions of graphs.
+
+
+
+.. important:: 
+   - When a new version of a graph is published, resources created with the old version become read-only
+   - Resource instances using old versions of a graph remain searchable and indexable
+   - UI-related changes (labels, tooltips, etc.) can be made to published graphs without creating a new graph version
+   - For structural changes, you will likely need someone with Django expertise to write database migrations to update existing resources
+
+
+
+
+
+
+
 Arches Designer
 ===============
 
@@ -37,7 +95,7 @@ Graph Designer
 
 Almost all aspects of Resource Model and Branch design are handled in the Graph Designer. The exception is Functions, which are handled in the separate Function Manager.
 
-The Graph Designer comprises three tabs, the `Graph Tab`_, `Cards Tab`_, and `Permissions Tab`_. Each tab is used to configure a different aspect of the Resource Model: In the Graph Tab you design the node structure, in the Cards Tab you configure the user interface (card) for each nodegroup, and in the Permissions Tab you are able to assign detailed permission levels to each card. The general workflow for using the Graph Designer is to proceed through the tabs in that same order.
+The Graph Designer comprises three tabs, the `Graph Tab`_, `Cards Tab`_, and `Permissions Tab`_ (the Permissions Tab is available after you click the "Make changes without publishing" option). Each tab is used to configure a different aspect of the Resource Model: In the Graph Tab you design the node structure, in the Cards Tab you configure the user interface (card) for each nodegroup, and in the Permissions Tab you are able to assign detailed permission levels to each card. The general workflow for using the Graph Designer is to proceed through the tabs in that same order.
 
 Graph Tab
 ---------
@@ -54,11 +112,7 @@ During the graph construction process, you are able to create a new Branch from 
 
 .. note:: If you are building a graph that uses an ontology, the ontology rules will automatically be enforced during this graph construction process.
 
-Along the way, you can use the preview button to display the graph in a more graph-like manner. This view will be familiar to users of Arches going back to version 3.0.
 
-.. figure:: ../images/graph-designer-graph-tab-preview.png
-
-   Screenshot of the Graph Tab in the Graph Designer, showing the graph in preview mode.
 
 Core Arches Datatypes
 ---------------------
@@ -66,7 +120,8 @@ Core Arches Datatypes
 Nodes in Arches must be configured with a "Data Type", and different datatypes store different kinds of information. For example, a **string** datatype is what you should use to store arbitrary text, like the name or description of a resource. A brief description of all datatype options in core Arches follows. Developers can extend Arches by :ref:`creating their own custom datatypes <datatypes>`.
 
 :semantic: A semantic node **does not store data**. Semantic nodes are used where necessary to make symbolic connections between other nodes, generally in order to follow ontological rules. The top node of every graph is a semantic node.
-:string: Stores a string of text. This could be something simple like a name, or more something elaborate like a descriptive paragraph with formatting and hyperlinks.
+:string: Stores a localized string of text. This could be something simple like a name, or more something elaborate like a descriptive paragraph with formatting and hyperlinks.
+:non-localized-string: Stores a string of text without localization. Use this for text that is equal across all languages such as an identifier or an address.
 :number: Stores a number.
 :file-list: Stores one or mores files. Use this to upload images, documents, etc.
 :concept: Stores one of a series of concepts from the Reference Data Manager. Users will choose a concept in a dropdown list or set of radio buttons. You'll further be prompted to choose a Concept Collection—this controls which concepts the user is able to choose from.
@@ -141,11 +196,20 @@ The **Related Resources Map Card** enables a more rich user experience for nodes
 Permissions Tab
 ---------------
 
-Arches allows you to define permissions at the card level, so in the Permissions Tab you'll see the card tree, just as in the Cards tab. However, you will only be able to select entire cards, not individual nodes.
+Arches allows you to define permissions at the card level. Because of publication changes to Graphs in version 8, the `Permissions Tab` has been moved from its location in earlier versions of Arches. To access permissions, click the button "Make changes without publishing" (see the animation below). Note, you will only be able to select entire cards, not individual nodes.
+
+.. figure:: ../images/arches-ui-permissions-v8.gif
+
+   Animation showing the activation of the Permissions Tab in the Graph Designer.
+
+
+Below, you can see a screenshot of the Permissions Tab in the Graph Designer for Arches version 7 and earlier. Note that the interface has changed in version 8, but the functionality is the same.
+
 
 .. figure:: ../images/graph-designer-permissions-tab.png
 
-   Screenshot of the Permissions Tab in the Graph Designer, showing an "Actor" Resource Model.
+   Screenshot of the Version 7 (and earlier) Permissions Tab in the Graph Designer.
+
 
 Once you have selected one or more cards, you can select a user or user group and then assign one of the following permissions levels:
 

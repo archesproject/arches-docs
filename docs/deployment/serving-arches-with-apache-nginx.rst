@@ -22,8 +22,7 @@ Configure Apache
 ================
 
 
-The following instructions work for Ubuntu 16.04 - 20.04; minor changes may be necessary for a different OS. This is a very basic Apache configuration, and more fine tuning
-will benefit your production installation.
+The following instructions work for Ubuntu; minor changes may be necessary for a different OS. This is a very basic Apache configuration, and more fine tuning will benefit your production installation.
 
 1. Install Apache.
 
@@ -128,6 +127,13 @@ will benefit your production installation.
             # NOTE: omit this section if you are using S3 for uploaded media
             Alias /files/uploadedfiles/ /home/ubuntu/Projects/my_project/my_project/uploadedfiles/
             <Directory /home/ubuntu/Projects/my_project/my_project/uploadedfiles/>
+                Require all granted
+            </Directory>
+
+            # This section tells Apache where to find search exports.
+            # NOTE: omit this section if you are using S3 for search exports.
+            Alias /files/export_deliverables/ /home/ubuntu/Projects/my_project/my_project/export_deliverables/
+            <Directory /home/ubuntu/Projects/my_project/my_project/export_deliverables/>
                 Require all granted
             </Directory>
 

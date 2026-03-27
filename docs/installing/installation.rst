@@ -101,7 +101,8 @@ Create a Project
 
 .. note::
 
-    You can add ``--directory path/to/dir`` to change the directory your new project will be created in.
+    You can add ``--directory path/to/dir`` to change the directory your new project will be created in. 
+    Additional details in the :ref:`command line reference<creating an Arches project>`.
 
 
 .. warning::

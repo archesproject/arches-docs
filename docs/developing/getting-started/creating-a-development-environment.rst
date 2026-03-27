@@ -54,7 +54,7 @@ Core Arches
 
     .. code-block:: bash
 
-        (ENV)arches/$ pip install -e '.[dev]'
+        (ENV)arches/$ pip install -e . --group dev
         (ENV)arches/$ pre-commit install
         (ENV)arches/$ git config blame.ignoreRevsFile .git-blame-ignore-revs
         (ENV)arches/$ cd ..

@@ -50,6 +50,13 @@ creating an Arches project
 
 -d, --directory
     (Optional) The name of the directory you'd like your new project located in.
+    
+    If `-d` is not specified, the new project will be created in the current working directory
+    with the name of the project. To match python package `naming conventions
+    <https://peps.python.org/pep-0008/#package-and-module-names>`_,
+    underscores (`_`) will be replaced with dashes (`-`) in that directory name, 
+    which is important if you plan on publishing your project to PyPi as an 
+    :ref:`Arches Application<Creating Applications>`.
 
 
 
@@ -140,6 +147,7 @@ Import Resource Models or Branches in archesjson format
 
 Import reference data in skos/rdf format
 ----------------------------------------
+Data for the Reference Data Manager (RDM) and the Controlled List Manager can be imported from SKOS RDF-XML files. Arches exepcts these files to provide relationships to "Top Concepts" (using ``skos:hasTopConcept``, ``skos:topConceptOf`` properties).
 
 .. code-block:: bash
 
@@ -242,6 +250,8 @@ will export all resources of the type indicated in the
 resource_model_id property of the mapping file and the -g parameter
 will be ignored. For json export no mapping file is required, instead
 a resource model uuid should be passed into the -g command.
+
+Outputs a csv file with the business data for each resource. For nodes with data from multiple tiles, the command splits the additional data into overall several lines, which are then saved in a separate csv file ending ‘_grouped’. If the --single_file option is used, then the additional rows are included in the main csv file instead. Finally, a relations file is produced that includes all relationships between resources. 
 
 Note that in a Windows command prompt, you may need to replace ``'`` with ``"``.
 

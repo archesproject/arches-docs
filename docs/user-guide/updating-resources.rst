@@ -1,12 +1,12 @@
-##################
+################################
 Automatically Updating Resources
-##################
+################################
 
 Arches provides user interface features to update resource instances when the corresponding Graph changes. 
 
 
 Automatically update resource instances
---------------------------------------------
+---------------------------------------
 When publishing a new Graph, you are given the option to update the associated resource instances accordingly. This is a generic process that follows a specifc set of rules. It's good for handling minor changes, but for more complex changes you will likely want to write a business data migration. 
 `(see Django documentation for how to write custom data migrations <https://docs.djangoproject.com/en/5.0/topics/migrations/#data-migrations>`_
 

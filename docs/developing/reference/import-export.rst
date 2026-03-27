@@ -49,10 +49,10 @@ Format must be YYYY-MM-DD, no quotes::
 edtf
 ----
 
-Must be a valid `Extended Date Time Format <https://www.loc.gov/standards/datetime/pre-submission.html>`_ string::
+Must be a valid `Extended Date Time Format <https://www.loc.gov/standards/datetime/edtf.html>`_ string::
 
     "2010-10"
-    "-y10000"
+    "Y-10000"
 
 Arches supports level 2 of the EDTF specification. However, because of a bug in the edtf package used by Arches,
 an error will be thrown for strings like::
@@ -63,6 +63,7 @@ As a workaround, you can use a string like::
 
     "[../1924]"
 
+An `Extended Date Time Format validator is available <https://digital2.library.unt.edu/edtf/>`_.
 
 geojson-feature-collection
 --------------------------
@@ -846,9 +847,16 @@ Directly inserting our records into the new Arches view will look something like
         transactionid
     from legacy_db.buildings;
 
+
 .. note::
 
     In this case, "Primary" is being given to every name type, because your legacy database did not have more than one name per resource.
+
+
+.. note::
+
+    The SQL relational views name views (that one interacts with as database schemas and tables) and columns with some logic that involves node names and node name aliases. Because of this, resource model and branch names can sometimes lead to unexpected and unwanted behaviors in the SQL relational views. You may want to avoid using SQL **reserved words** such as `SELECT`, `GROUP`, `DROP`, etc. in the names of resource models, branches, and node name aliases. Also, avoid repeated use of the same name node aliases for nodes that are nested in different branches. Repeated use of node name aliases in different branch structures will lead to incomplete representation of those branches in the relational views. In such cases, you won't be able to access or modify data. 
+
 
 .. todo::
 
@@ -1015,9 +1023,9 @@ To export CSV, use::
 
     python manage.py packages -o export_business_data -d 'path_to_destination_directory' -f 'csv' -c 'path_to_mapping_file' -g 'resource_model_uuid'
 
-When exporting to CSV, you need to use a :ref:`Mapping File`, which will determine the content of your CSV (which nodes are exported, etc.). Add the ``--single_file`` argument to export your grouped data to the same CSV file as the rest of your data.
-
-More about these export commands can be found in :ref:`Export Commands`.
+When exporting to CSV, you need to use a :ref:`Mapping File`, which will determine the content of your CSV (which nodes are exported, etc.). 
+Some tile data that you may want to export to CSV can contain multiple values. By default, Arches would export multiple value tile data to a CSV file with a name ending with "_groups".
+You can change this behavior by adding the ``--single_file`` argument to export your grouped data to the same CSV file as the rest of your data. More about these export commands can be found in :ref:`Export Commands`.
 
 Resource Database Views
 -----------------------
