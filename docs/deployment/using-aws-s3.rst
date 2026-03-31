@@ -117,7 +117,7 @@ app.  Before beginning, you will need to have set up and logged into your AWS ac
 
     Activate your virtual environment and run this command
 
-    .. code-block::
+    .. code-block:: bash
 
       (ENV) $: pip install boto3==1.26 django-storages==1.13
 
@@ -127,13 +127,13 @@ app.  Before beginning, you will need to have set up and logged into your AWS ac
 
     1. Find the line that defines the settings "INSTALLED_APPS" and add 'storages' to it. It should look like this
 
-        .. code-block::
+        .. code-block:: python
 
           INSTALLED_APPS = INSTALLED_APPS + (PACKAGE_NAME, 'storages',)
 
     2. Next, add the following lines, replacing the AWS settings values with information from earlier steps (remember the `credentials.csv` file you downloaded?)
 
-        .. code-block::
+        .. code-block:: python
 
           STORAGES = {
               "default": {
@@ -146,8 +146,7 @@ app.  Before beginning, you will need to have set up and logged into your AWS ac
           AWS_STORAGE_BUCKET_NAME = 'aws_bucket_name'
           AWS_ACCESS_KEY_ID = 'aws_access_key_id'
           AWS_SECRET_ACCESS_KEY = 'aws_secret_access_key'
-          S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
-          MEDIA_URL = S3_URL
+
 
     3. Restart your web server.
 
