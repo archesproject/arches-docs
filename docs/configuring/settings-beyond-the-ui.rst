@@ -231,6 +231,9 @@ Arches Version 8.1 and later supports `Private Key JWT <https://oauth.net/privat
     SESSION_COOKIE_SAMESITE = "Lax"
 
 
+The ``SESSION_COOKIE_SAMESITE`` setting is required because ``private_key_jwt`` uses POST requests and ``client_secret`` uses GET requests. These patterns impact authentication redirects. Without the above session, a session cookie won't be returned on redirect and the user will appear not to be logged in.
+
+
 
 Accessibility Mode
 ------------------
