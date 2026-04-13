@@ -82,7 +82,7 @@ File and Folder Naming Conventions
 
 **Utilities & helpers** — kebab-case with a ``.js`` or ``.ts`` extension (e.g. ``fetch-api.ts``, ``format-date.js``).
 
-**Type files** — Single-purpose type definitions in kebab-case ``.ts`` (e.g. ``user-profile.ts``, ``map-types.ts``).
+**Type files** — Use a ``types.ts`` file, placed wherever the types are needed: next to the files that share them, or at the app root if they're used globally.
 
 Top-Level Structure
 -------------------
@@ -616,7 +616,7 @@ Coding Standards
 
 **Script Scope**
 
-All component logic must be declared inside ``<script setup>``, and ``<script setup>`` should always have TypeScript as the defined language.
+All component logic must be declared inside ``<script setup lang="ts">`` tags with TypeScript as the defined language.
 
 .. code-block:: vue
 
