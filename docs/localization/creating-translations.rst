@@ -33,16 +33,19 @@ Getting Started
 ---------------
 To get started, sign into Weblate or Create an Account: `https://hosted.weblate.org/accounts/login/?next=/hosting/ <https://hosted.weblate.org/accounts/login/?next=/hosting/>`_ 
 
-There are several projects under the Arches workspace in Weblate, including Arches v8.  If you don't already have access, [request access here] and you'll be invited to create a user account in Weblate. This will give you access to the UI that allows you to effectively translate or review other translated content for Arches. 
+There are several projects under the Arches workspace in Weblate, including Arches v8.  If you don’t already have access, send a request to `contact@archesproject.org <contact@archesproject.org>`_ for an invitation to create a user account in Weblate.  This will give you access to the UI that allows you to effectively translate or review other translated content for Arches.  
 
 
 Orientation
 -----------
 
 
-1. Search for the project name (eg., "Arches 8.0") and select the project. Defaults to the "Languages" tab, which shows you the translation status of that project in languages for which a translation has been started already.
+1. Search for the project name (eg., "Arches 8.0") and select the project.
 
-2. If the language you are translating is not on the list, create a post on the Arches Project Forum to request a new language
+2. Defaults to the "Languages" tab, which shows you the translation status of that project in languages for which a translation has been started already.
+
+    a. If the language you are translating is not on the list, `create a post on the Arches Project Forum <https://community.archesproject.org/tag/translation/17%C2%A0>`_ to request a new language
+
 
 .. figure:: ../images/localization/01_All_Language_Status.png
     :width: 100%
@@ -79,7 +82,9 @@ How to Translate
 
 In order to translate, you must first create an account in Weblate, and project administrators must designate you as a user with Translate permissions.
 
-Navigate to the Project > Language as described above to access the translation dashboard for a specific language.  Clicking on "Untranslated strings," or on the "Translate" option to the right, will take you to the UI for translating in the chosen language.
+Navigate to the **Project > Language** as described above to access the translation dashboard for a specific language.  Clicking on "Untranslated strings," or on the "Translate" option to the right, will take you to the UI for translating in the chosen language.
+
+Use the “Filters” drop down to select “Untranslated strings.”
 
 
 .. figure:: ../images/localization/03_Fliter_to_Untranslated.png
@@ -137,19 +142,18 @@ To begin reviewing and approving text strings, you should be familiar with a few
     Example of the Review User-Interface
 
 
-To begin reviewing and approving text strings, you should be familiar with a few components of the review UI.
 
-1. Context:  This shows you the text in English of the string that is currently loaded for review or editing.
+1. Context: This shows you the text in English of the string that is currently loaded for review or editing.
 
-2. Input Field:  This will display the translated string in the chosen language (in the example, Spanish).
+2. Input Field: This will display the translated string in the chosen language (in the example, Spanish).
 
 3. Review State: This will default to "Waiting for Review," but the reviewer can select "Needs Editing" or "Approved" upon completion of their review.
 
-4. Save Options:  Once you begin or complete review of a string, use these options to either save and automatically advance to the next untranslated string or to save and remain on the current string.
+4. Save Options: Once you begin or complete review of a string, use these options to either save and automatically advance to the next untranslated string or to save and remain on the current string.
 
 5. Skip:  Allows you to advance to the next un-reviewed string whether or not you have reviewed or saved the current string.
 
-The lower UI will show nearby strings by default. If you click directly on any one, you will navigate to that string and it will be loaded into the review interface above. 
+6. The lower UI will show nearby strings by default. If you click directly on any one, you will navigate to that string and it will be loaded into the review interface above. 
 
 
 
