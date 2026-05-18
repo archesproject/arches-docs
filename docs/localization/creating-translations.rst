@@ -44,7 +44,7 @@ Orientation
 
 2. Defaults to the "Languages" tab, which shows you the translation status of that project in languages for which a translation has been started already.
 
-    a. If the language you are translating is not on the list, `create a post on the Arches Project Forum <https://community.archesproject.org/tag/translation/17%C2%A0>`_ to request a new language
+3. If the language you are translating is not on the list, `create a post on the Arches Project Forum <https://community.archesproject.org/tag/translation/17%C2%A0>`_ to request a new language
 
 
 .. figure:: ../images/localization/01_All_Language_Status.png
