@@ -36,7 +36,7 @@ This section provides an introduction to Arches and instructions for installing 
 For Arches Administrators and Users
 -----------------------------------
 
-This section provides information on how to configure and administer Arches, as well a brief discussion on how to create, edit, delete and search resources in Arches.
+This section provides information on how to configure and administer Arches, as well a brief discussion on how to create, edit, delete and search resources in Arches. An additional section provides guidance for multi-lingual translation and localization of Arches. 
 
 .. toctree::
     :maxdepth: 2
@@ -44,6 +44,7 @@ This section provides information on how to configure and administer Arches, as 
     configuring/index
     administering/index
     user-guide/index
+    localization/index
 
 -----------------------------------
 
