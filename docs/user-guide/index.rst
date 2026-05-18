@@ -1,6 +1,6 @@
-============
+==========
 User Guide
-============
+==========
 
 This User Guide should help Arches users perform basic data entry and retrieval tasks.
 
