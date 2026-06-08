@@ -197,8 +197,8 @@ In ``settings_local.py`` add this line::
 
     RESTRICT_MEDIA_ACCESS = True
 
-
-By default Arches serves media through the ``/files`` endpoint proxy (after the file has been added to a resource instance). That the ``/files`` endpoint is authenticated, and you can manage permissions to it using the :ref:`Permissions Tab`. However, if you store your files locally on you server, you can configure your server to bypass Arches altogether and allow unauthenticated access to media files (see more about configuring Arches with Apache or Nginx: :ref:`Serving Arches with Apache or Nginx`) . In this scenario, there's nothing Arches can do about your server configuration. In other words, if your server is configured to allow access to media files directly, Arches will have no control over file access.
+.. note::
+  By default Arches serves media through the ``/files`` endpoint proxy (after the file has been added to a resource instance). That the ``/files`` endpoint is authenticated, and you can manage permissions to it using the :ref:`Permissions Tab`. However, if you store your files locally on you server, you can configure your server to bypass Arches altogether and allow unauthenticated access to media files (see more about configuring Arches with Apache or Nginx: :ref:`Serving Arches with Apache or Nginx`) . In this scenario, there's nothing Arches can do about your server configuration. In other words, if your server is configured to allow access to media files directly, Arches will have no control over file access.
 
 
 
