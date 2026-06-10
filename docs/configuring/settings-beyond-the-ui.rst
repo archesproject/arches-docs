@@ -179,10 +179,11 @@ To configure what group new users are put into, add the following lines of code 
 
 If you would like to change which group new users are added to, replace 'Crowdsource Editor' with the group you would like to use.
 
+
 Using Single Sign-On With an External OAuth Provider
 ----------------------------------------------------
 
-To take advantage of single sign-on using an organiztion's identity provider, users can be routed through an external OAuth provider for authentication based on their email's domain.
+To take advantage of single sign-on using an organization's identity provider, users can be routed through an external OAuth provider for authentication based on their email's domain. Arches currently only supports configuration for **one OAuth provider**, it does not support multiple OAuth providers. You can, however, combine use of an external OAuth Provider with user accounts and logins managed by Arches.  
 
 Your arches application will need to use SSL and be configured with an application ID from your provider.  This application ID will need to be configured with a redirect URL to your Arches application at auth/eoauth_cb, for example: https://qa.archesproject.org/auth/eoauth_cb
 
