@@ -224,6 +224,13 @@ Data Archiving (with External Repositories)
 
 Arches provides excellent support for active data management. However, data curation needs and expectations (particularly in the cultural heritage sector) can extend to time scales well beyond the life of a given Arches instance. Long term data archiving requires additional planning and institutional arrangements.
 
+..  note::
+    Below is an excellent recent open access article that guides cultural heritage professionals on key issues relating to data curation, preservation and archiving (and how these differ from saving backups):
+
+    Roberts Thompson, Amanda, Christopher Nicholson, Kelly Brown, Kathryn MacFarland, Glenna Nielsen-Grimm, and Rachel Fernandez, Responding to the Digital Curation Crisis: Definitions and Recommendations for Cultural Heritage, *Advances in Archaeological Practice*, 2026, 1–22 `http://dx.doi.org/10.1017/aap.2026.10152 <http://dx.doi.org/10.1017/aap.2026.10152>`_
+
+
+
 While data archiving is inherently challenging, Arches' emphasis on open data formats and open standards should greatly facilitate long term data preservation:
 
 1. **Open Formats**: Open (non-proprietary) and widely used file formats can be read by a wide range of software on a wide range of operating systems. These characteristics make open formats preferred for digital preservation. Arches exports structured data in open text-based file formats (GeoJSON, JSON, and CSV). These open, text-based formats will facilitate preservation. PostgreSQL dumps (especially in the text-based SQL format) can also be archived, though these are less preferred because they would likely contain SQL operations specific to PostgreSQL and are thus less interoperable. 
