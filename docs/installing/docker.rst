@@ -21,13 +21,23 @@ We recommend that you gain some understanding about how Docker works as well as 
 
 This document will guide you through the process of using Docker to install Arches on your system. Even if you do not want to use Docker to deploy Arches, the review of Arches Docker setups can still provide a useful guide to see how various dependencies and configurations fit together.
 
-.. IMPORTANT:: Arches currently lacks an "official" approach to installation using Docker. The examples that we discus here are drawn from various works-in-progress and community-created approaches. They should be helpful to get started with Docker and Arches, but they are not fully tested for production deployments.
+.. IMPORTANT:: Arches currently lacks an "official" approach to installation using Docker. The examples that we discus here are drawn from various community-created approaches. They should be helpful to get started with Docker and Arches, but they are not fully tested for production deployments.
 
 
-Prerequisites
-=============
 
-Before you begin, ensure that your system meets the following requirements:
+Arches Containers
+=================
+
+Thanks to the `development team at Historic England <https://github.com/HistoricEngland>`_, the Arches community has a streamlined way to deploy and manage containerized instances of Arches for use as development environments via `Arches Containers <https://github.com/HistoricEngland/arches-containers>`_ . This primarily serves as a tool for developers to get started with different versions of Arches for software development. **Arches Containers** can also make it easier to launch Arches for testing and evaluation. See the `Arches Containers project repo <https://github.com/HistoricEngland/arches-containers>`_ for instructions and other documentation.
+
+
+
+
+
+Prerequisites for Using Docker with Arches
+==========================================
+
+**Arches Containers** provides a streamlined approach for using Arches with Docker. However, if you are already familiar with Docker you can use alternatives to Arches Containers. Before you begin, ensure that your system meets the following requirements:
 
 Docker:
     Docker must be installed on your system. You can download Docker from the official website: https://www.docker.com/get-started
