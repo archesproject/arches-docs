@@ -8,11 +8,15 @@ You can also view `release tags on Github <https://github.com/archesproject/arch
 Current Release
 ---------------
 
-* 8.1.0 - `notes <https://github.com/archesproject/arches/blob/stable/8.1.0/releases/8.1.0.md>`__
+* 8.1.4 - `notes <https://github.com/archesproject/arches/blob/stable/8.1.4/releases/8.1.4.md>`__
 
 -------------
 Past Releases
 -------------
+* 8.1.3 - `notes <https://github.com/archesproject/arches/blob/stable/8.1.3/releases/8.1.3.md>`__
+* 8.1.2 - `notes <https://github.com/archesproject/arches/blob/stable/8.1.2/releases/8.1.2.md>`__
+* 8.1.1 - `notes <https://github.com/archesproject/arches/blob/stable/8.1.1/releases/8.1.1.md>`__
+* 8.1.0 - `notes <https://github.com/archesproject/arches/blob/stable/8.1.0/releases/8.1.0.md>`__
 * 8.0.9 - `notes <https://github.com/archesproject/arches/blob/stable/8.0.9/releases/8.0.9.md>`__
 * 8.0.8 - `notes <https://github.com/archesproject/arches/blob/stable/8.0.8/releases/8.0.8.md>`__
 * 8.0.7 - `notes <https://github.com/archesproject/arches/blob/stable/8.0.7/releases/8.0.7.md>`__
@@ -23,6 +27,9 @@ Past Releases
 * 8.0.2 - `notes <https://github.com/archesproject/arches/blob/stable/8.0.2/releases/8.0.2.md>`__
 * 8.0.1 - `notes <https://github.com/archesproject/arches/blob/stable/8.0.1/releases/8.0.1.md>`__
 * 8.0.0 - `notes <https://github.com/archesproject/arches/blob/stable/8.0.1/releases/8.0.0.md>`__
+* 7.6.25 (LTS) - `notes <https://github.com/archesproject/arches/blob/stable/7.6.25/releases/7.6.25.md>`__
+* 7.6.24 (LTS) - `notes <https://github.com/archesproject/arches/blob/stable/7.6.24/releases/7.6.24.md>`__
+* 7.6.23 (LTS) - `notes <https://github.com/archesproject/arches/blob/stable/7.6.23/releases/7.6.23.md>`__
 * 7.6.22 (LTS) - `notes <https://github.com/archesproject/arches/blob/stable/7.6.22/releases/7.6.22.md>`__
 * 7.6.21 (LTS) - `notes <https://github.com/archesproject/arches/blob/stable/7.6.21/releases/7.6.21.md>`__
 * 7.6.20 (LTS) - `notes <https://github.com/archesproject/arches/blob/stable/7.6.20/releases/7.6.20.md>`__
