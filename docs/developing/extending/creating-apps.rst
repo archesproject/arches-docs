@@ -30,7 +30,10 @@ Just like Arches itself, an Arches Application can also be developed, shared wit
 
 `Arches for Science <https://www.archesproject.org/arches-for-science/>`_ illustrates the value of Arches Applications. Arches for Science has several workflows and features (together with additional software dependencies) useful for cultural heritage conservation science. However, these features would be unnecessary for many other core Arches use cases. Keeping these conservation science features in a distinct application allows `Arches for Science software development <https://github.com/archesproject/arches-for-science/>`_ to continue at its own pace, and it reduces pressures to add highly specialized features to core Arches. Arches Applications can therefore help reduce the complexity and maintenance costs of core Arches.
 
-**Arches for Science** is a standalone Arches application. It is not intended to be used as a component for mixing and matching with other Arches applications. On the other hand, `Arches Controlled Lists <https://github.com/archesproject/arches-controlled-lists>`_ is an **Arches Extension Application** that is specifically intended to be used as a reusable modular component for multiple Arches projects. See :ref:`Arches Extension Applications` for more details and links to currently released Arches extension applications. 
+
+Comprehensive (Standalone) Versus Modular Applications
+------------------------------------------------------
+A growing family of comprehensive Arches applications, including `Arches for Science <https://www.archesproject.org/arches-for-science/>`_ and `Arches Lingo <https://github.com/archesproject/arches-lingo>`_, should be considered as standalone software. These are not intended to be used as components for mixing and matching with other Arches applications. On the other hand, `Arches Controlled Lists <https://github.com/archesproject/arches-controlled-lists>`_ is an **Arches Extension Application** that is specifically intended to be used as a reusable modular component for multiple Arches projects. See :ref:`Arches Extension Applications` for more details and links to currently released Arches extension applications. 
 
 
 Arches Applications Can Help Avoid Forks

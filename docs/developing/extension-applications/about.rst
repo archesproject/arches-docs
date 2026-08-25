@@ -18,6 +18,7 @@ applications are stand-alone tools and are **not intended to combined as compone
 Examples of (Comprehensive) Arches Applications
 -----------------------------------------------
 * `Arches for HERs <https://www.archesproject.org/arches-for-hers/>`_
+* `Arches Lingo <https://github.com/archesproject/arches-lingo>`_
 * `Arches for Science <https://www.archesproject.org/arches-for-science/>`_
 * `Arches for Reference and Sample Collections (RaSColls) <https://www.archesproject.org/rascolls/>`_
 
@@ -44,10 +45,14 @@ They're generally wired into Arches projects with the INSTALLED_APPS setting.
 
 Examples of Arches Extension Applications (Apps)
 ------------------------------------------------
-* `Arches Component Lab <https://github.com/archesproject/arches-component-lab>`_
-* `Arches Controlled Lists <https://github.com/archesproject/arches-controlled-lists>`_ See additional :ref:`Arches Controlled Lists (App)` documentation.
-* `Arches Modular Reports <https://github.com/archesproject/arches-modular-reports>`_
-* `Arches Querysets <https://github.com/archesproject/arches-querysets>`_ See additional :ref:`Arches Querysets (App)` documentation.
+* `Arches Vue Components <https://github.com/archesproject/arches-vue-components>`_. See also :ref:`Arches Vue Integration Guide` and :ref:`Arches Vue Style Guide`.
+* `Arches Controlled Lists <https://github.com/archesproject/arches-controlled-lists>`_. See additional :ref:`Arches Controlled Lists (App)` documentation.
+* `Arches Modular Reports <https://github.com/archesproject/arches-modular-reports>`_.
+* `Arches Querysets <https://github.com/archesproject/arches-querysets>`_. See additional :ref:`Arches Querysets (App)` documentation.
+
+
+.. note::
+    The extension application `Arches Component Lab <https://github.com/archesproject/arches-component-lab>`_ is now **deprecated and archived**. It is replaced by `Arches Vue Components <https://github.com/archesproject/arches-vue-components>`_
 
 
 
