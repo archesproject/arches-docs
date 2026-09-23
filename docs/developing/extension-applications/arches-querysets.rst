@@ -15,6 +15,7 @@ As a convenience for developers, Arches Querysets aligns with the conventions an
 
 Installing Arches Querysets
 ---------------------------
-The **Arches Querysets** extension application needs to be installed in the Python virtual environment of your Arches instance. Once installed, you will need to edit your Arches instance's ``settings.py`` and other files. 
 
-The complete installation instructions can be found here: `Arches Querysets (Pypi) <https://pypi.org/project/arches-querysets>`_. The source code repository and issue tracking is available here: `Arches Querysets <https://github.com/archesproject/arches-querysets>`_ 
+As of Arches 8.2.0, **Arches Querysets** ships with Arches itself as ``arches.extensions.querysets``. There is nothing to install: enable it by adding it to ``INSTALLED_APPS``, along with the supporting settings described in :ref:`Applications Bundled with Arches`.
+
+On Arches 8.0 and 8.1, the application is installed separately into the Python virtual environment of your Arches instance, and you will then need to edit your Arches instance's ``settings.py`` and other files. Those installation instructions can be found here: `Arches Querysets (Pypi) <https://pypi.org/project/arches-querysets>`_. The source code repository and issue tracking is available here: `Arches Querysets <https://github.com/archesproject/arches-querysets>`_ 
