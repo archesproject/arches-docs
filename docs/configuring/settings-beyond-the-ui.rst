@@ -99,7 +99,7 @@ By default Arches will bin your data in the search page time wheel based on your
 
 You may decide, however, that the bins do not reflect your data very well, and in that case you can manually define your time wheel configuration by editing the TIMEWHEEL_DATE_TIERS setting.
 
-Here is an example of a custom time wheel::
+Here is an example of a custom time wheel:
 
 
 .. code-block:: python
@@ -131,7 +131,7 @@ Properties:
     - "range" - A range is optional, but including one will restrict the bins to only those within the range.
 
 If you do need to represent decades or years in your time wheel and this impacts performance, you can cache the time wheel for users that may load the search page frequently. To do so, you just need to activate caching for your project.
-If you have Memcached running at the following location `127.0.0.1:11211` then the time wheel will automatically be cached for the 'anonymous' user. If not you can update the CACHES setting of your project::
+If you have Memcached running at the following location `127.0.0.1:11211` then the time wheel will automatically be cached for the 'anonymous' user. If not you can update the CACHES setting of your project:
 
 
 .. code-block:: python
@@ -162,7 +162,7 @@ For example, if I wanted to cache the time wheel for the admin user for 5 minute
 Configuring Captcha
 -------------------
 
-Setting up your captcha will help protect your production from spam and other unwanted bots. To set up your production with captcha, first `register your captcha <https://www.google.com/recaptcha/intro/v3beta.html>`_ and then add the captcha keys to your project's settings.py. Do this by adding the following::
+Setting up your captcha will help protect your production from spam and other unwanted bots. To set up your production with captcha, first `register your captcha <https://www.google.com/recaptcha/intro/v3beta.html>`_ and then add the captcha keys to your project's settings.py. Do this by adding the following:
 
 
 .. code-block:: python
@@ -177,7 +177,7 @@ Replace the x's with your captcha keys.
 Enabling User Sign-up
 ---------------------
 
-To enable users to sign up through the Arches UI, you will have to add the following lines of code to your project's settings.py::
+To enable users to sign up through the Arches UI, you will have to add the following lines of code to your project's **settings.py**:
 
 
 .. code-block:: python
@@ -192,15 +192,14 @@ To enable users to sign up through the Arches UI, you will have to add the follo
             },
         },
     }
-
     DEFAULT_FROM_EMAIL = MAILERS["default"]["OPTIONS"]["username"]
 
 
 .. note::
-    Django 6.1, a key dependency required by Arches, made significant changes to email configuration in `settings.py`. If you are upgrading from an earlier version of Arches that used an earlier version of Django, please review Arches developer release notes for detailed instructions on how to update your `settings.py` configurations.
+    Django 6.1, a key dependency required by Arches, made significant changes to email configuration in **settings.py**. If you are upgrading from an earlier version of Arches that used an earlier version of Django, please review Arches developer release notes for detailed instructions on how to update your **settings.py** configurations.
 
 
-Update the `username` and `password` values in the `MAILERS` dictionary of your `settings.py` file with the correct email credentials and save the file. It is possible that this may not be enough to support your production of Arches. In that case, there's more information on setting up an email backend on the `Django site <https://docs.djangoproject.com/en/stable/topics/email/#smtp-backend>`_.
+Update the `username` and `password` values in the `MAILERS` dictionary of your **settings.py** file with the correct email credentials and save the file. It is possible that this may not be enough to support your production of Arches. In that case, there's more information on setting up an email backend on the `Django site <https://docs.djangoproject.com/en/stable/topics/email/#smtp-backend>`_.
 
 
 To configure what group new users are put into, add the following lines of code to your project's settings.py::
