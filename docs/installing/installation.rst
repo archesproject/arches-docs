@@ -26,9 +26,9 @@ Create a Virtual Environment
 
 .. sidebar:: Virtual Environment Reference
 
-    If you are unfamiliar with virtual environments, please take a look at the `Python documentation <https://docs.python.org/3.11/tutorial/venv.html>`_ before continuing.
+    If you are unfamiliar with virtual environments, please take a look at the `Python documentation <https://docs.python.org/3.12/tutorial/venv.html>`_ before continuing.
 
-You need a **Python 3.11+** virtual environment. :ref:`Skip ahead <Install Arches with pip>` if you have already created and activated one. Otherwise, use the commands below for a quick start.
+You need a **Python 3.12+** virtual environment. :ref:`Skip ahead <Install Arches with pip>` if you have already created and activated one. Otherwise, use the commands below for a quick start.
 
 **Create a virtual environment**::
 
