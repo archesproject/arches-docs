@@ -58,6 +58,7 @@ Admins can change these requirements by configuring the `AUTH_PASSWORD_VALIDATOR
 
 
 .. code-block:: python
+    
     AUTH_PASSWORD_VALIDATORS = [
         {
             'NAME': 'arches.app.utils.password_validation.NumericPasswordValidator', #Passwords cannot be entirely numeric
@@ -102,12 +103,12 @@ Here is an example of a custom time wheel::
 
 
 .. code-block:: python
-
+    
     TIMEWHEEL_DATE_TIERS = {
-    "name": "Millennium",
-    "interval": 1000,
-    "root": True,
-    "child": {
+        "name": "Millennium",
+        "interval": 1000,
+        "root": True,
+        "child": {
             "name": "Century",
             "interval": 100,
             "range": {"min": 1500, "max": 2000},
@@ -134,7 +135,7 @@ If you have Memcached running at the following location `127.0.0.1:11211` then t
 
 
 .. code-block:: python
-
+    
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
@@ -165,7 +166,7 @@ Setting up your captcha will help protect your production from spam and other un
 
 
 .. code-block:: python
-
+    
     RECAPTCHA_PUBLIC_KEY = 'x'
     RECAPTCHA_PRIVATE_KEY = 'x'
 
@@ -180,7 +181,7 @@ To enable users to sign up through the Arches UI, you will have to add the follo
 
 
 .. code-block:: python
-
+    
     MAILERS = {
         "default": {
             "OPTIONS": {
