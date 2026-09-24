@@ -58,7 +58,6 @@ Admins can change these requirements by configuring the `AUTH_PASSWORD_VALIDATOR
 
 
 .. code-block:: python
-
     AUTH_PASSWORD_VALIDATORS = [
         {
             'NAME': 'arches.app.utils.password_validation.NumericPasswordValidator', #Passwords cannot be entirely numeric
