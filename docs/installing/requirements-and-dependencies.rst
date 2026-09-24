@@ -75,7 +75,7 @@ For Ubuntu we maintain an `ubuntu_setup.sh <https://raw.githubusercontent.com/ar
 
 .. code-block:: bash
 
-    wget https://raw.githubusercontent.com/archesproject/arches/stable/8.0.0/arches/install/ubuntu_setup.sh
+    wget https://raw.githubusercontent.com/archesproject/arches/stable/8.2.0/arches/install/ubuntu_setup.sh
     source ./ubuntu_setup.sh
 
 You will be prompted before each dependency is installed, or use ``yes | source ./ubuntu_setup.sh`` to install all components (Postgres/PostGIS, Node/npm, and ElasticSearch).
