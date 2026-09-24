@@ -124,11 +124,11 @@ Here is an example of a custom time wheel:
 Each tier, ('Millennium', 'Century', 'Decade' are each tiers) will be reflected as ring in the time wheel.
 Properties:
 
-    - "name" - The name that will appear in the description of the selected period
-    - "interval" - The number of years in each bin. For example, if your data spans 3000 years, and your interval is 1000, you will get three bins in that tier.
-    - "root" - This applies only to the root of the config and should not be modified.
-    - "child" - Adding a child will add an additional tier to your time wheel. You can nest as deeply as you like, but the higher the resolution of your time wheel, the longer it will take to generate the wheel.
-    - "range" - A range is optional, but including one will restrict the bins to only those within the range.
+- "name" - The name that will appear in the description of the selected period
+- "interval" - The number of years in each bin. For example, if your data spans 3000 years, and your interval is 1000, you will get three bins in that tier.
+- "root" - This applies only to the root of the config and should not be modified.
+- "child" - Adding a child will add an additional tier to your time wheel. You can nest as deeply as you like, but the higher the resolution of your time wheel, the longer it will take to generate the wheel.
+- "range" - A range is optional, but including one will restrict the bins to only those within the range.
 
 If you do need to represent decades or years in your time wheel and this impacts performance, you can cache the time wheel for users that may load the search page frequently. To do so, you just need to activate caching for your project.
 If you have Memcached running at the following location `127.0.0.1:11211` then the time wheel will automatically be cached for the 'anonymous' user. If not you can update the CACHES setting of your project:
