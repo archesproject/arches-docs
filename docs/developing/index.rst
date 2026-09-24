@@ -32,6 +32,7 @@ If you are considering software development to customize Arches, please read the
     :maxdepth: 2
 
     extension-applications/about
+    extension-applications/bundled-applications
     extension-applications/arches-controlled-lists
     extension-applications/arches-querysets
 

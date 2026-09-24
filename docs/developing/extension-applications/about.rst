@@ -33,6 +33,11 @@ projects.
 Extension applications typically include some combination of models, views, templates, static files, URLs, etc. 
 They're generally wired into Arches projects with the INSTALLED_APPS setting.
 
+Most extension applications are released and installed separately from Arches. As of Arches 8.2.0, a few of them
+instead ship inside the ``arches`` distribution itself, so that they version and release with Arches and need no
+separate installation. They are still opt-in by way of INSTALLED_APPS. See
+:ref:`Applications Bundled with Arches`.
+
 
 .. figure:: ../../images/dev/diagram-custom-apps-in-projects.png
     :width: 100%
@@ -45,9 +50,10 @@ They're generally wired into Arches projects with the INSTALLED_APPS setting.
 Examples of Arches Extension Applications (Apps)
 ------------------------------------------------
 * `Arches Component Lab <https://github.com/archesproject/arches-component-lab>`_
-* `Arches Controlled Lists <https://github.com/archesproject/arches-controlled-lists>`_ See additional :ref:`Arches Controlled Lists (App)` documentation.
+* `Arches Controlled Lists <https://github.com/archesproject/arches-controlled-lists>`_ Bundled with Arches as of 8.2.0. See additional :ref:`Arches Controlled Lists (App)` documentation.
 * `Arches Modular Reports <https://github.com/archesproject/arches-modular-reports>`_
-* `Arches Querysets <https://github.com/archesproject/arches-querysets>`_ See additional :ref:`Arches Querysets (App)` documentation.
+* `Arches Querysets <https://github.com/archesproject/arches-querysets>`_ Bundled with Arches as of 8.2.0. See additional :ref:`Arches Querysets (App)` documentation.
+* `Arches Vue Components <https://github.com/archesproject/arches-vue-components>`_ Bundled with Arches as of 8.2.0.
 
 
 
