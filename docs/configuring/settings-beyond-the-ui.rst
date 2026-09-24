@@ -171,6 +171,7 @@ Setting up your captcha will help protect your production from spam and other un
     RECAPTCHA_PRIVATE_KEY = 'x'
 
 
+
 Replace the x's with your captcha keys.
 
 Enabling User Sign-up
