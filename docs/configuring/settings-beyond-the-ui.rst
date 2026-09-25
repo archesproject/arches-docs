@@ -147,16 +147,21 @@ If you have Memcached running at the following location `127.0.0.1:11211` then t
     }
 
 
-This will cache the time wheel to your project's directory. There are other ways to define your cache that you may want to use. You can read more about those options in `Django's cache documentation <https://docs.djangoproject.com/en/stable/topics/cache/>`_.
+This will cache the time wheel to your project's directory. There are other ways to define your cache that you may want to use (for example, see :ref:`Enable a Cache backend`). You can read more about those options in `Django's cache documentation <https://docs.djangoproject.com/en/stable/topics/cache/>`_.
 
-By default the time wheel will only be cached for 'anonymous' user for 24 hours. To add other users or to change the cache duration, you will need to modify this setting::
+By default the time wheel will only be cached for 'anonymous' user for 24 hours. To add other users or to change the cache duration, you will need to modify this setting:
 
-    `CACHE_BY_USER = {'anonymous': 3600  * 24}`
+.. code-block:: python
+
+    CACHE_BY_USER = {'anonymous': 3600  * 24}
+
 
 The CACHE_BY_USER keys are user names and their corresponding value is the duration (in seconds) of the cache for that user.
-For example, if I wanted to cache the time wheel for the admin user for 5 minutes, I would change the CACHE_BY_USER setting to::
+For example, if I wanted to cache the time wheel for the admin user for 5 minutes, I would change the CACHE_BY_USER setting to:
 
-    `CACHE_BY_USER = {'anonymous': 3600  * 24, 'admin': 300}`
+.. code-block:: python
+
+    CACHE_BY_USER = {'anonymous': 3600  * 24, 'admin': 300}
 
 
 Configuring Captcha
