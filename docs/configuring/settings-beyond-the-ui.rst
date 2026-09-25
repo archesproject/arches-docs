@@ -56,6 +56,7 @@ By default, Arches requires that passwords meet the following criteria:
 
 Admins can change these requirements by configuring the `AUTH_PASSWORD_VALIDATORS`:code: setting in their projects **settings_local.py** file. Below is the default validator setting:
 
+
 .. code-block:: python
 
     AUTH_PASSWORD_VALIDATORS = [
@@ -82,6 +83,7 @@ Admins can change these requirements by configuring the `AUTH_PASSWORD_VALIDATOR
         },
     ]
 
+
 To **remove a password validator** in Arches, you can simply remove a validator from the list of `AUTH_PASSWORD_VALIDATORS`:code:.
 
 To modify the list of **required special characters**, simply edit the list of characters in the `special_characters`:code: option in the `SpecialCharacterValidator` validator.
@@ -97,13 +99,16 @@ By default Arches will bin your data in the search page time wheel based on your
 
 You may decide, however, that the bins do not reflect your data very well, and in that case you can manually define your time wheel configuration by editing the TIMEWHEEL_DATE_TIERS setting.
 
-Here is an example of a custom time wheel::
+Here is an example of a custom time wheel:
+
+
+.. code-block:: python
 
     TIMEWHEEL_DATE_TIERS = {
-    "name": "Millennium",
-    "interval": 1000,
-    "root": True,
-    "child": {
+        "name": "Millennium",
+        "interval": 1000,
+        "root": True,
+        "child": {
             "name": "Century",
             "interval": 100,
             "range": {"min": 1500, "max": 2000},
@@ -115,17 +120,21 @@ Here is an example of a custom time wheel::
         }
     }
 
+
 Each tier, ('Millennium', 'Century', 'Decade' are each tiers) will be reflected as ring in the time wheel.
 Properties:
 
-    - "name" - The name that will appear in the description of the selected period
-    - "interval" - The number of years in each bin. For example, if your data spans 3000 years, and your interval is 1000, you will get three bins in that tier.
-    - "root" - This applies only to the root of the config and should not be modified.
-    - "child" - Adding a child will add an additional tier to your time wheel. You can nest as deeply as you like, but the higher the resolution of your time wheel, the longer it will take to generate the wheel.
-    - "range" - A range is optional, but including one will restrict the bins to only those within the range.
+- "name" - The name that will appear in the description of the selected period
+- "interval" - The number of years in each bin. For example, if your data spans 3000 years, and your interval is 1000, you will get three bins in that tier.
+- "root" - This applies only to the root of the config and should not be modified.
+- "child" - Adding a child will add an additional tier to your time wheel. You can nest as deeply as you like, but the higher the resolution of your time wheel, the longer it will take to generate the wheel.
+- "range" - A range is optional, but including one will restrict the bins to only those within the range.
 
 If you do need to represent decades or years in your time wheel and this impacts performance, you can cache the time wheel for users that may load the search page frequently. To do so, you just need to activate caching for your project.
-If you have Memcached running at the following location `127.0.0.1:11211` then the time wheel will automatically be cached for the 'anonymous' user. If not you can update the CACHES setting of your project::
+If you have Memcached running at the following location `127.0.0.1:11211` then the time wheel will automatically be cached for the 'anonymous' user. If not you can update the CACHES setting of your project:
+
+
+.. code-block:: python
 
     CACHES = {
         'default': {
@@ -137,40 +146,66 @@ If you have Memcached running at the following location `127.0.0.1:11211` then t
         }
     }
 
-This will cache the time wheel to your project's directory. There are other ways to define your cache that you may want to use. You can read more about those options in `Django's cache documentation <https://docs.djangoproject.com/en/stable/topics/cache/>`_.
 
-By default the time wheel will only be cached for 'anonymous' user for 24 hours. To add other users or to change the cache duration, you will need to modify this setting::
+This will cache the time wheel to your project's directory. There are other ways to define your cache that you may want to use (for example, see :ref:`Enable a Cache backend`). You can read more about those options in `Django's cache documentation <https://docs.djangoproject.com/en/stable/topics/cache/>`_.
 
-    `CACHE_BY_USER = {'anonymous': 3600  * 24}`
+By default the time wheel will only be cached for 'anonymous' user for 24 hours. To add other users or to change the cache duration, you will need to modify this setting:
+
+.. code-block:: python
+
+    CACHE_BY_USER = {'anonymous': 3600  * 24}
+
 
 The CACHE_BY_USER keys are user names and their corresponding value is the duration (in seconds) of the cache for that user.
-For example, if I wanted to cache the time wheel for the admin user for 5 minutes, I would change the CACHE_BY_USER setting to::
+For example, if I wanted to cache the time wheel for the admin user for 5 minutes, I would change the CACHE_BY_USER setting to:
 
-    `CACHE_BY_USER = {'anonymous': 3600  * 24, 'admin': 300}`
+.. code-block:: python
+
+    CACHE_BY_USER = {'anonymous': 3600  * 24, 'admin': 300}
 
 
 Configuring Captcha
 -------------------
 
-Setting up your captcha will help protect your production from spam and other unwanted bots. To set up your production with captcha, first `register your captcha <https://www.google.com/recaptcha/intro/v3beta.html>`_ and then add the captcha keys to your project's settings.py. Do this by adding the following::
+Setting up your captcha will help protect your production from spam and other unwanted bots. To set up your production with captcha, first `register your captcha <https://www.google.com/recaptcha/intro/v3beta.html>`_ and then add the captcha keys to your project's settings.py. Do this by adding the following:
+
+
+.. code-block:: python
 
     RECAPTCHA_PUBLIC_KEY = 'x'
     RECAPTCHA_PRIVATE_KEY = 'x'
+
+
 
 Replace the x's with your captcha keys.
 
 Enabling User Sign-up
 ---------------------
 
-To enable users to sign up through the Arches UI, you will have to add the following lines of code to your project's settings.py::
+To enable users to sign up through the Arches UI, you will have to add the following lines of code to your project's **settings.py**:
 
-    EMAIL_USE_TLS = True
-    EMAIL_HOST = 'smtp.gmail.com'
-    EMAIL_HOST_USER = 'xxxx@xxx.com'
-    EMAIL_HOST_PASSWORD = 'xxxxxxx'
-    EMAIL_PORT = 587
 
-Update the EMAIL_HOST_USER and EMAIL_HOST_PASSWORD with the correct email credentials and save the file. It is possible that this may not be enough to support your production of Arches. In that case, there's more information on setting up an email backend on the `Django site <https://docs.djangoproject.com/en/stable/topics/email/#smtp-backend>`_.
+.. code-block:: python
+
+    MAILERS = {
+        "default": {
+            "OPTIONS": {
+                "use_tls": True,
+                # "host": "smtp.gmail.com",
+                "username": "xxxx@xxx.com",
+                # "password" = "xxxxxxx",
+            },
+        },
+    }
+    DEFAULT_FROM_EMAIL = MAILERS["default"]["OPTIONS"]["username"]
+
+
+.. note::
+    Django 6.1, a key dependency required by Arches, made significant changes to email configuration in **settings.py**. If you are upgrading from an earlier version of Arches that used an earlier version of Django, please review Arches developer release notes for detailed instructions on how to update your **settings.py** configurations.
+
+
+Update the `username` and `password` values in the `MAILERS` dictionary of your **settings.py** file with the correct email credentials and save the file. It is possible that this may not be enough to support your production of Arches. In that case, there's more information on setting up an email backend on the `Django site <https://docs.djangoproject.com/en/stable/topics/email/#smtp-backend>`_.
+
 
 To configure what group new users are put into, add the following lines of code to your project's settings.py::
 
@@ -187,6 +222,7 @@ To take advantage of single sign-on using an organiztion's identity provider, us
 Your arches application will need to use SSL and be configured with an application ID from your provider.  This application ID will need to be configured with a redirect URL to your Arches application at auth/eoauth_cb, for example: https://qa.archesproject.org/auth/eoauth_cb
 
 Once your application is set up with the provider, you can configure Arches to use it by updating EXTERNAL_OAUTH_CONFIGURATION, for example using an Azure AD tenant could look something like this:
+
 
 .. code-block:: python
 

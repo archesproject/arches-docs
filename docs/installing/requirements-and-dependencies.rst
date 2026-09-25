@@ -22,14 +22,14 @@ Software Dependencies
 
 Arches requires the following software packages to be installed and available. Ubuntu Linux users see below for an installation script.
 
-:Python >= 3.11: - Installation: https://www.python.org/downloads/
-    - Python 3.11 and later comes with pip
+:Python >= 3.13 (3.14 is recommended): - Installation: https://www.python.org/downloads/
+    - Python 3.13 and later comes with pip
     - **Windows** You must choose 32-bit or 64-bit Python based on your system architecture.
     - **macOS** This guide works well if you wish to install via `brew`: https://docs.python-guide.org/starting/install3/osx/
 :Git >= 2.0: - Installation: https://git-scm.com/downloads
     - **Windows** Choose the "Use Git from the Windows Command Prompt" option during installation.
     - **macOS** You can install Git via `brew`: https://brew.sh/
-:PostgreSQL >= 14 with PostGIS 3:
+:PostgreSQL >= 16 (18 is recommended) with PostGIS >= 3.5:
     - **macOS** Use `Postgres.app <http://postgresapp.com>`_.
     - **Windows** Use the `EnterpriseDB installers <https://www.postgresql.org/download/windows/>`_, and use Stack Builder (included) to get PostGIS. After installation, add the following to your system's ``PATH`` environment variable: ``C:\Program Files\PostgreSQL\12\bin``. Make sure you write down the password that you assign to the ``postgres`` user.
 :Elasticsearch 8: - Installers: https://www.elastic.co/downloads/past-releases/elasticsearch-8-5-1
@@ -75,7 +75,7 @@ For Ubuntu we maintain an `ubuntu_setup.sh <https://raw.githubusercontent.com/ar
 
 .. code-block:: bash
 
-    wget https://raw.githubusercontent.com/archesproject/arches/stable/8.0.0/arches/install/ubuntu_setup.sh
+    wget https://raw.githubusercontent.com/archesproject/arches/stable/8.2.0/arches/install/ubuntu_setup.sh
     source ./ubuntu_setup.sh
 
 You will be prompted before each dependency is installed, or use ``yes | source ./ubuntu_setup.sh`` to install all components (Postgres/PostGIS, Node/npm, and ElasticSearch).
