@@ -3,11 +3,12 @@
 Updating one node value (Arches 7.6)
 ====================================
 
-``POST /api/node_value/`` updates one node value in one tile. This page
-describes Arches **7.6.24**. The path is relative to the deployment's base
+``POST /api/node_value/`` updates one node value in one tile. The path is
+relative to the deployment's base
 URL. The route uses ``arches.app.views.api.NodeValue.post``, which reads
 form fields from ``request.POST`` and calls
-``TileProxyModel.update_node_value``. Send form data, not a raw JSON body.
+``TileProxyModel.update_node_value``. The client should send form data,
+not a raw JSON body in the POST request.
 
 A request contains one ``nodeid``. Changing two nodes requires two calls.
 The full-tile ``POST /api/tiles/<tile-uuid>`` is a separate API.
@@ -16,9 +17,9 @@ Authentication and permissions
 ------------------------------
 
 Use an authenticated Arches session or an OAuth bearer token obtained through
-:ref:`/o/token <auth>` for a user in the **Resource Editor** group. The
-7.6.24 view is CSRF exempt, so this particular
-POST needs no CSRF token even with session authentication. Other routes can
+:ref:`/o/token <auth>` for a user in the **Resource Editor** group. In Arches
+7.6, the view is CSRF exempt, so this POST does not require a CSRF token
+when session authentication is used. Other routes can
 have different CSRF rules. Keep cookies and tokens secret.
 
 The user also needs ``write_nodegroup`` permission on the target nodegroup
@@ -242,7 +243,7 @@ processes one ``nodeid`` per request.
 Responses and failure cases
 ---------------------------
 
-In 7.6.24 the view explicitly returns:
+Starting with version 7.6.24, the view explicitly returns:
 
 * **200** with the serialized tile after a completed save. Inspect
   ``data`` and ``provisionaledits`` for the outcome.
