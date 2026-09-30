@@ -1,7 +1,7 @@
 .. _node-value-api:
 
-Updating one node value (Arches 7.6)
-====================================
+Updating one node value
+=======================
 
 ``POST /api/node_value/`` updates one node value in one tile. The path is
 relative to the deployment's base
@@ -16,17 +16,16 @@ The full-tile ``POST /api/tiles/<tile-uuid>`` is a separate API.
 Authentication and permissions
 ------------------------------
 
-Use an authenticated Arches session or an OAuth bearer token obtained through
-:ref:`/o/token <auth>` for a user in the **Resource Editor** group. In Arches
-7.6, the view is CSRF exempt, so this POST does not require a CSRF token
-when session authentication is used. Other routes can
-have different CSRF rules. Keep cookies and tokens secret.
+Use an authenticated Arches session or an OAuth bearer token from
+:ref:`/o/token <auth>` for a user in the **Resource Editor** group. In Arches,
+this POST is CSRF exempt when using session authentication, so no CSRF
+token is required here. Keep cookies and tokens secret.
 
-The user also needs ``write_nodegroup`` permission on the target nodegroup
-and permission to edit the resource. A Resource Reviewer calling this route
-must pass the Resource Editor group check too. Anonymous callers and users
-outside that group get HTTP 403 from the group decorator. Nodegroup and
-resource permission failures return HTTP 403 from the view.
+The user must also have ``write_nodegroup`` permission on the target
+nodegroup and permission to edit the resource. Resource Reviewers must also
+pass the Resource Editor group check. Anonymous users or users outside that
+group receive HTTP 403 from the group decorator. Permission failures on the
+nodegroup or resource return HTTP 403 from the view.
 
 node_value form fields
 ----------------------
@@ -36,38 +35,43 @@ node_value form fields
    :widths: 19 22 59
 
    * - Field
-     - Existing-tile update
+     - Required/Optional
      - Meaning
    * - ``nodeid``
      - Required
-     - UUID of one node in the resource's graph. A missing or unknown node
-       returns 404. Resolve it from model metadata.
+     - UUID of the node to update in the resource graph. If it is missing or
+       unknown, the request returns 404. Resolve node UUIDs from a resource graph.
    * - ``tileid``
-     - Required for a safe update
-     - UUID of this tile instance. Omission or an unknown UUID can enter
-       the tile creation path.
+     - Optional
+     - UUID of the tile to edit. If omitted or invalid, the request may go
+       down the tile or resource creation path instead of updating an existing
+       tile.
    * - ``resourceinstanceid``
-     - Supply and verify
-     - Resource UUID, used when no existing tile is found. For an existing
-       tile, the view does **not** compare it with the tile's resource ID.
-       Omitting both a usable tile ID and resource ID can create a resource.
+     - Optional
+     - Resource instance UUID. Only used when no existing tile is found using
+       the ``tileid``.
+       Will create a new tile in an existing resource instance if supplied.
+       If not supplied, a new resource instance and new tile will be created.
    * - ``data``
-     - Required for a value update
-     - Form string transformed by the node's datatype. Missing data becomes
-       ``None`` before conversion; that is not a documented clearing method.
+     - Required
+     - Raw form value converted using the node's datatype. If missing, it is
+       treated as ``None`` before conversion; that is not a documented way to
+       clear a value.
    * - ``format``
      - Optional
-     - Passed to the datatype's ``transform_value_for_tile`` method.
-       Its effect is datatype specific; omit it for the string examples.
+     - Extra datatype-specific hint passed to
+       ``transform_value_for_tile``. Currently only used for certain datatypes,
+       such as GeoJSON.
    * - ``operation``
      - Optional
-     - Only ``append`` has a special path, and only for an existing tile:
-       the view calls that datatype's ``update`` method. Omit for replacement.
-       Not every datatype supports append.
+     - ``append`` is the only operation with special handling, and only for an
+       existing tile and datatypes that support it, such as GeoJSON. Omit it
+       for normal replacement. Other operation strings follow the replacement
+       path rather than returning a validation error.
    * - ``transaction_id``
      - Optional
-     - UUID forwarded to tile save and its edit log. Use a new UUID to
-       correlate history entries for one logical edit.
+     - UUID used to group related save and edit-log entries into one logical
+       change.
 
 Finding the node and tile
 -------------------------
@@ -92,7 +96,7 @@ Then read ``GET /api/tiles/<tile-uuid>`` and verify both
 ``resourceinstance_id`` and ``nodegroup_id`` before POST.
 
 A tile UUID identifies one tile instance, not every resource using the same
-model. If no tile exists, the 7.6.24 helper can create a blank tile and
+model. If no tile exists, the tile helper can create a blank tile and
 parent tiles. Supply an existing ``resourceinstanceid`` and omit
 ``tileid`` only when creation is intentional. This route cannot select
 a particular parent or repeating nodegroup instance for creation; use
@@ -243,8 +247,6 @@ processes one ``nodeid`` per request.
 Responses and failure cases
 ---------------------------
 
-Starting with version 7.6.24, the view explicitly returns:
-
 * **200** with the serialized tile after a completed save. Inspect
   ``data`` and ``provisionaledits`` for the outcome.
 * **404** with JSON string ``"Node not found"`` for an unknown or missing
@@ -259,14 +261,14 @@ tile/resource mismatch, or invalid datatype values. Conversion and save
 errors may become server errors. An unknown tile UUID can enter the creation
 path, and a mismatched ``resourceinstanceid`` does not protect an existing
 tile. Validate UUID syntax, graph membership, tile ownership, and datatype
-input before POST. A CSRF rejection is not expected for this exempt route
-in stock 7.6.24; authentication and permission checks still apply.
+input before POST. A CSRF rejection is not expected for this exempt route;
+authentication and permission checks still apply.
 
 Implementation references
 -------------------------
 
-The `7.6.24 route <https://github.com/archesproject/arches/blob/7.6.24/arches/urls.py>`_,
-`NodeValue view <https://github.com/archesproject/arches/blob/7.6.24/arches/app/views/api.py>`_,
-`tile update and save methods <https://github.com/archesproject/arches/blob/7.6.24/arches/app/models/tile.py>`_,
-and `datatype transforms <https://github.com/archesproject/arches/tree/7.6.24/arches/app/datatypes>`_
-are the source for this page. Behavior in other releases is not asserted.
+The `route <https://github.com/archesproject/arches/blob/dev/7.6.x/arches/urls.py#L556>`_,
+`NodeValue view <https://github.com/archesproject/arches/blob/dev/7.6.x/arches/app/views/api.py#L1739>`_,
+`tile update method <https://github.com/archesproject/arches/blob/dev/7.6.x/arches/app/models/tile.py#L737>`_,
+and `datatype transforms <https://github.com/archesproject/arches/tree/dev/7.6.x/arches/app/datatypes>`_
+are the source for this page.
