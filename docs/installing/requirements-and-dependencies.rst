@@ -32,7 +32,7 @@ Arches requires the following software packages to be installed and available. U
 :PostgreSQL >= 14 (16 is recommended) with PostGIS >= 3.5:
     - **macOS** Use `Postgres.app <http://postgresapp.com>`_.
     - **Windows** Use the `EnterpriseDB installers <https://www.postgresql.org/download/windows/>`_, and use Stack Builder (included) to get PostGIS. After installation, add the following to your system's ``PATH`` environment variable: ``C:\Program Files\PostgreSQL\12\bin``. Make sure you write down the password that you assign to the ``postgres`` user.
-:Elasticsearch 8: - Installers: https://www.elastic.co/downloads/past-releases/elasticsearch-8-5-1
+:Elasticsearch >= 8.19: - Installers: https://www.elastic.co/downloads/past-releases/elasticsearch-8-19-22
     - Elasticsearch is integral to Arches and can be installed and configured many ways.
       For more information, see :ref:`Arches and Elasticsearch`.
 :GDAL >= 2.2.x: 
