@@ -145,7 +145,7 @@ html_theme_options = {
    ],
    "logo": {
         "text": "",
-        "image_dark": "images/Arches-Logo_TM.png",
+        "image_dark": "Arches-Logo_TM.png",
         "alt_text": "Arches Documentation",
     },
 }
