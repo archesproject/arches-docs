@@ -25,6 +25,7 @@ If you are considering software development to customize Arches, please read the
     :maxdepth: 2
 
     reference/api
+    reference/node-value-api
     reference/command-line-reference
     reference/data-model
     reference/import-export
