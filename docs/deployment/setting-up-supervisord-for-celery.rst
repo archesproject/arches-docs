@@ -101,6 +101,16 @@ The default configuration files in the `conf.d` directory discussed above need u
 After fixing the command syntax, the celery worker should function. However, you may still have trouble getting celery beat to work (https://github.com/archesproject/arches/issues/9243). Celery beat schedules periodic tasks (much like a `crontab` in a Linux operating system) using a Python implementation. In many cases, Arches will function without (evident) problems even if celery beat does not work. However, if you have workarounds or fixes, please let us know!
 
 
+Known Issue with RabbitMQ deprecated features in v4.3
+-----------------------------------------------------
+The RabbitMQ release 4.3 fully deprecates some features that are used in the versions of celery used by Arches 7.6 and later releases. To as a workaround, you can add the following line to your ``rabbitmq.conf`` configuration:
+
+.. code-block::
+
+  deprecated_features.permit.transient_nonexcl_queues = true
+
+
+
 Restart ``supervisord`` on Reboot
 ---------------------------------
 
