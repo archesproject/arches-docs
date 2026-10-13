@@ -103,7 +103,7 @@ After fixing the command syntax, the celery worker should function. However, you
 
 Known Issue with RabbitMQ deprecated features in v4.3
 -----------------------------------------------------
-The RabbitMQ release 4.3 fully deprecates some features that are used in the versions of celery used by Arches 7.6 and later releases. To as a workaround, you can add the following line to your ``rabbitmq.conf`` configuration:
+The RabbitMQ release 4.3 fully deprecates some features that are used in the versions of celery used by Arches 7.6 and later releases. If you see errors with RabbitMQ like this, you may need to add the following line to your ``rabbitmq.conf`` configuration:
 
 .. code-block::
 
