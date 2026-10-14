@@ -7,7 +7,7 @@ Spatial Views (preview)
 As of Arches version 6.1.0, it is possible to create spatial views of resource instance data that can be consumed
 by any client that supports PostGIS spatial views.
 
-Currently the preview only allows the spatial views to be created in Django admin by managing the Spatial Views entities.
+Spatial views can be created in Django admin, through the spatial view API, or with SQL (see :ref:`Creating your first spatial view`).
 
 The spatial views are only able to represent the data in a flattened state, meaning that the data in nested cards are
 flattened into a single comma separated attribute value, with the card sort order honoured. Therefore, it is important
@@ -105,6 +105,37 @@ Isactive
 
         Default is ``true``.
 
+Dbroles
+        An optional JSON list of PostgreSQL role names that are granted ``SELECT`` on the spatial view,
+        for example ``["gis_reader"]``. Default is ``[]``.
+
+        The grants are reapplied every time Arches rebuilds the view (when the definition is saved and
+        when ``__arches_refresh_spatial_views()`` runs after a bulk load), so they are not lost on rebuild.
+        Roles that do not exist in the database are skipped, so a definition can be loaded before its
+        roles have been created.
+
+        Removing a role from the list removes its access the next time the view is rebuilt. A role must
+        be removed from ``Dbroles`` on every spatial view before a DBA can ``DROP ROLE`` it.
+
+Creating a database role
+========================
+
+Arches does not create database roles for spatial views. Before creating a spatial view, a database
+administrator must create a login role for clients to use, for example:
+
+.. code-block:: SQL
+
+        CREATE ROLE gis_reader LOGIN PASSWORD '<a strong password>';
+        GRANT CONNECT ON DATABASE "my-arches-db" TO gis_reader;
+        GRANT USAGE ON SCHEMA public TO gis_reader;
+
+Replace ``public`` with the ``Schema`` of your spatial views. Quote the database name so that names
+containing characters such as hyphens are handled correctly.
+
+.. warning:: Spatial views do not apply Arches resource permissions. Anyone who can edit a spatial view
+        (Arches Application Administrators and Django admin users) can expose its data to any existing
+        database role by adding it to ``Dbroles``. Choose roles deliberately.
+
 Creating your first spatial view
 ================================
 
@@ -112,12 +143,19 @@ Django Admin
 ------------
 
         1. Logging in as a superuser, navigate to ``/admin/models/spatialview`` and click the ``ADD SPATIAL VIEW +`` button.
-        2. Complete the spatial view details and click the ``Save`` button.
+        2. Complete the spatial view details, entering the roles that should have access in ``Dbroles``
+           as a JSON list (for example ``["gis_reader"]``), and click the ``Save`` button.
 
         .. image:: /images/arches_spatial_views_create_django.png
             :alt: create arches spatial view in django admin
             :width: 500px
             :align: center
+
+Spatial View API
+----------------
+
+        Spatial views can also be created and edited through the spatial view API. Include the roles
+        in the request body, for example ``"dbroles": ["gis_reader"]``.
 
 SQL Insert
 ----------
@@ -137,7 +175,8 @@ SQL Insert
                         languageid          ,
                         attributenodes      ,
                         isactive            ,
-                        geometrynodeid
+                        geometrynodeid      ,
+                        dbroles
                 )
                 VALUES
                 (
@@ -182,7 +221,8 @@ SQL Insert
                     ]
                         ',
                         true,
-                        'f7ccc8b9-f447-11eb-9cb1-a87eeabdefba'
+                        'f7ccc8b9-f447-11eb-9cb1-a87eeabdefba',
+                        '["gis_reader"]'
                 );
 
 
@@ -195,13 +235,27 @@ to connect to the database using the following credentials:
     * *host*: the hostname of the arches database server
     * *port*: the port of the arches database server
     * *database*: the name of the arches database
-    * *user*: arches_spatial_views
-    * *password*: arches_spatial_views
+    * *user*: a role listed in the spatial view's ``Dbroles`` (see :ref:`Creating a database role`)
+    * *password*: the password set for that role
 
 If you are using a client that requires views to geometry type specific (for example ArcGIS), ensure that you have set ``Ismixedgeometrytype`` to false.
 
-.. important:: Currently it is not possible to use the user/groups permissions to restrict access.
-        You will need to manually create specific database users and assign them to the spatial views.
+.. important:: Arches user and group permissions do not restrict access to spatial views. Access is controlled
+        only by the database roles listed in each view's ``Dbroles``.
+
+
+Upgrading from earlier versions
+===============================
+
+Earlier versions of Arches created an ``arches_spatial_views`` login role with a well-known default password.
+Arches 8.2 no longer creates this role. If it exists when you upgrade, it is added to ``Dbroles`` on all
+existing spatial views, so existing clients keep working.
+
+Spatial views created after the upgrade start with an empty ``Dbroles`` list. Add ``arches_spatial_views``
+(or another role) to them explicitly if clients need access.
+
+If you keep the ``arches_spatial_views`` role, change its default password. If you no longer use it, remove it
+from ``Dbroles`` on every spatial view and then drop the role.
 
 
 Example Usage
@@ -219,5 +273,5 @@ Once you have installed the application to run on your machine, open the config 
 
 Set the DbConnection setting to the following and restart the application::
 
-        DbConnection = "postgresql://arches_spatial_views:arches_spatial_views@<HOSTNAME>:<PORT>/<DBNAME>"
+        DbConnection = "postgresql://<USER>:<PASSWORD>@<HOSTNAME>:<PORT>/<DBNAME>"
 
