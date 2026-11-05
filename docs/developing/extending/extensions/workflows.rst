@@ -236,6 +236,19 @@ Workflows often contain more elaborate final steps than the default one presente
 
 As you can see, the component gathers all data for the resource and markdown simply hard-codes the presenation of each individual node.
 
+
+Rebuilt the Frondend Asset Bundle
+---------------------------------
+
+Once you've completed development of your workflow, you will need to rebuild the frontend asset bundle. Just to be sure, restart the Arches server and reuild the webpack bundle:
+
+.. code-block:: bash
+
+    npm run build_development
+
+
+
+
 Full Example Workflow
 ---------------------
 
