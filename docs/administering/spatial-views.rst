@@ -23,8 +23,8 @@ Spatialviewid
         Unique identifier for the spatial view.
 
 Schema
-        The database schema that the spatial view belongs to. The schema ``public`` is used by
-        default. If another schema is used, then it must have already been created in the database.
+        The database schema that the spatial view belongs to. ``public`` is used by
+        default but if another is used then it must have already been created in the database.
 
 Slug
         This is will be joined with the ``Schema`` to form the name of the spatial
@@ -32,13 +32,14 @@ Slug
         and hyphens. It cannot start with a number.
 
 Description
-        The text that is added as a comment on the spatial view in the database, 
-        which can be accessed as metadata for consuming clients where supported.
-        Note that ``pg_featureserv`` will present this as the layer description.
+        The text that is added as a comment on the spatial view in the database
+        , which can be accessed as metadata for consuming clients where supported.
+        pg_featureserv for example will present this as the layer description.
 
 Geometrynode
-        A forgeign key reference to a Node model object of the type ``geojson-feature-collection`` 
-        that underpins the geometry of the spatial view.
+        A forgeign key reference to a Node model object of the type ``geojson-feature-collection`` that underpins the geometry
+        of the spatial view.
+
 
 Ismixedgeometrytype
         Boolean value that indicates whether the geometry of the spatial view is a
@@ -49,10 +50,10 @@ Ismixedgeometrytype
 
 Language
         A forgeign key reference to a Language model object that defines the language of the spatial view. This is used
-        to define the language that should be used to for datatypes that have language specific values.
+        to define the language that should be used to for datatypes that have 
+        language specific values.
 
-        The Language will be checked against the published graph records for the graph that the ``geometrynode`` 
-        belongs to as part of the validation process.
+        The Language will be checked against the published graph records for the graph that the geometrynode belongs to as part of the validation process.
 
         The spatial view fields use the node alias values so do not change if the language is set to be different to
         the language that the graph was build using.
@@ -104,7 +105,7 @@ Isactive
 
         Default is ``true``.
 
-Creating your First Spatial View
+Creating your first spatial view
 ================================
 
 Django Admin
@@ -185,8 +186,8 @@ SQL Insert
                 );
 
 
-Using the Spatial Views
-=======================
+Using the spatial views
+========================
 
 To use the spatial views in your client application or datasource for a service, you will need to configure that client
 to connect to the database using the following credentials:
@@ -206,11 +207,11 @@ If you are using a client that requires views to geometry type specific (for exa
 Example Usage
 =============
 
-Both ``pg_featureserv`` and ``pg_tileserv`` are lightweight open source feature and vector tile service providers that can 
-be used with these spatial views. See:
+pg_featureserv and pg_tileserv are lightweight open source feature and vector tile service providers that can be used with these
+spatial views.
 
-`https://access.crunchydata.com/documentation/pg_featureserv/latest/ <https://access.crunchydata.com/documentation/pg_featureserv/latest/>`_
-`https://access.crunchydata.com/documentation/pg_tileserv/latest/ <https://access.crunchydata.com/documentation/pg_tileserv/latest/>`_
+https://access.crunchydata.com/documentation/pg_featureserv/latest/
+https://access.crunchydata.com/documentation/pg_tileserv/latest/
 
 Once you have installed the application to run on your machine, open the config file located at:
 
