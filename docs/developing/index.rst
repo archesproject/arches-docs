@@ -33,7 +33,7 @@ If you are considering software development to customize Arches, please read the
 
     extension-applications/about
     extension-applications/bundled-applications
-    extension-applications/arches-controlled-lists
+    extension-applications/arches-controlled-lists/index
     extension-applications/arches-querysets
 
 .. toctree::

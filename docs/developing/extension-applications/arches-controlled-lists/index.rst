@@ -6,6 +6,14 @@ Arches Controlled Lists (App)
 
 Arches Controlled Lists can be installed as a component of an Arches instance that runs on core Arches version 8 and higher.
 
+If you are currently using the RDM, see :ref:`Choosing Between Controlled Lists and Lingo` and :ref:`Migrating from the RDM to Controlled Lists`.
+
+.. toctree::
+    :maxdepth: 1
+
+    choosing-controlled-lists-or-lingo
+    migrating-from-the-rdm
+
 
 Arches Controlled Lists Uses
 ----------------------------
@@ -29,7 +37,7 @@ Arches Controlled Lists User Interface (UI)
 
 The Arches Controlled Lists user interface is accessible to authorized users via the menu icons on the far left. List items are organized in a hierarchy of lists. In the example below, the list item for *grams* is contained in the parent *Dimension Types - Physical Units* list.
 
-.. figure:: ../../images/dev/arches-controlled-lists-1.png
+.. figure:: ../../../images/dev/arches-controlled-lists-1.png
     :width: 100%
     :align: center
 
@@ -38,7 +46,7 @@ The Arches Controlled Lists user interface is accessible to authorized users via
 
 If one clicks on a given list, the Arches Controlled Lists user interface displays the nodes that make use of the selected list. See the screenshot below.
 
-.. figure:: ../../images/dev/arches-controlled-lists-2.png
+.. figure:: ../../../images/dev/arches-controlled-lists-2.png
     :width: 100%
     :align: center
 
