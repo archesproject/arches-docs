@@ -23,7 +23,7 @@ Spatialviewid
         Unique identifier for the spatial view.
 
 Schema
-        The database schema that the spatial view belongs to. ``public`` is used by
+        The database schema that the spatial view belongs to. The schema ``public`` is used by
         default but if another is used then it must have already been created in the database.
 
 Slug
@@ -32,14 +32,13 @@ Slug
         and hyphens. It cannot start with a number.
 
 Description
-        The text that is added as a comment on the spatial view in the database
-        , which can be accessed as metadata for consuming clients where supported.
-        pg_featureserv for example will present this as the layer description.
+        The text that is added as a comment on the spatial view in the database, 
+        which can be accessed as metadata for consuming clients where supported.
+        Note that ``pg_featureserv`` will present this as the layer description.
 
 Geometrynode
-        A forgeign key reference to a Node model object of the type ``geojson-feature-collection`` that underpins the geometry
-        of the spatial view.
-
+        A forgeign key reference to a Node model object of the type ``geojson-feature-collection`` 
+        that underpins the geometry of the spatial view.
 
 Ismixedgeometrytype
         Boolean value that indicates whether the geometry of the spatial view is a
@@ -49,14 +48,15 @@ Ismixedgeometrytype
         Default value is ``false``.
 
 Language
-        A forgeign key reference to a Language model object that defines the language of the spatial view. This is used
-        to define the language that should be used to for datatypes that have 
+        A forgeign key reference to a Language model object that defines the language of the spatial view. 
+        This is used to define the language that should be used to for datatypes that have 
         language specific values.
 
-        The Language will be checked against the published graph records for the graph that the geometrynode belongs to as part of the validation process.
+        The Language will be checked against the published graph records for the graph that the 
+        ``geometrynode`` belongs to as part of the validation process.
 
-        The spatial view fields use the node alias values so do not change if the language is set to be different to
-        the language that the graph was build using.
+        The spatial view fields use the node alias values so do not change if the language is set 
+        to be different to the language that the graph was build using.
 
 Attributenodes
         A JSON object that contains a list of attribute object defining the UUIDs of
@@ -117,7 +117,8 @@ Dbroles
         Removing a role from the list removes its access the next time the view is rebuilt. A role must
         be removed from ``Dbroles`` on every spatial view before a DBA can ``DROP ROLE`` it.
 
-Creating a database role
+
+Creating a Database Role
 ========================
 
 Arches does not create database roles for spatial views. Before creating a spatial view, a database
@@ -134,9 +135,11 @@ containing characters such as hyphens are handled correctly.
 
 .. warning:: Spatial views do not apply Arches resource permissions. Anyone who can edit a spatial view
         (Arches Application Administrators and Django admin users) can expose its data to any existing
-        database role by adding it to ``Dbroles``. Choose roles deliberately.
+        database role by adding it to ``Dbroles``. Choose roles deliberately, and consider security
+        implications.
 
-Creating your first spatial view
+
+Creating your First Spatial View
 ================================
 
 Django Admin
@@ -226,7 +229,7 @@ SQL Insert
                 );
 
 
-Using the spatial views
+Using the Spatial Views
 ========================
 
 To use the spatial views in your client application or datasource for a service, you will need to configure that client
@@ -244,11 +247,11 @@ If you are using a client that requires views to geometry type specific (for exa
         only by the database roles listed in each view's ``Dbroles``.
 
 
-Upgrading from earlier versions
+Upgrading from Earlier Versions
 ===============================
 
 Earlier versions of Arches created an ``arches_spatial_views`` login role with a well-known default password.
-Arches 8.2 no longer creates this role. If it exists when you upgrade, it is added to ``Dbroles`` on all
+**Arches 8.2 no longer creates this role.** If it exists when you upgrade, it is added to ``Dbroles`` on all
 existing spatial views, so existing clients keep working.
 
 Spatial views created after the upgrade start with an empty ``Dbroles`` list. Add ``arches_spatial_views``
@@ -261,11 +264,11 @@ from ``Dbroles`` on every spatial view and then drop the role.
 Example Usage
 =============
 
-pg_featureserv and pg_tileserv are lightweight open source feature and vector tile service providers that can be used with these
-spatial views.
+Both ``pg_featureserv`` and ``pg_tileserv`` are lightweight open source feature and vector tile service providers that can be used with these
+spatial views. See documentation:
 
-https://access.crunchydata.com/documentation/pg_featureserv/latest/
-https://access.crunchydata.com/documentation/pg_tileserv/latest/
+`https://access.crunchydata.com/documentation/pg_featureserv/latest/ <https://access.crunchydata.com/documentation/pg_featureserv/latest/>`_
+`https://access.crunchydata.com/documentation/pg_tileserv/latest/ <https://access.crunchydata.com/documentation/pg_tileserv/latest/>`_
 
 Once you have installed the application to run on your machine, open the config file located at:
 
