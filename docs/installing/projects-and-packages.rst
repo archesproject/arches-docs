@@ -66,6 +66,7 @@ To load a package simply run the load_package command using your \*project's man
 -y     accept defaults (will overwrite existing branches and system settings with those in the package)
 -bulk  uses `bulk_save` methods which run faster but don't call an object's regular `save` method
 -dev	 loads three test users
+--skip_branches  skips loading branch graphs from the package. Resource models are still loaded.
 
 
 .. note:: **Destructive Arguments for load_package**
@@ -81,6 +82,8 @@ To load a package simply run the load_package command using your \*project's man
 If you do not pass the ``-db True`` to the load_package command, your database will not be recreated. If you already have resource models and branches with the same id as those you are importing, you will be prompted to confirm whether you would like to keep or overwrite each model or branch.
 
 If you pass the ``-bulk`` argument, know that any resource instances that rely on functions to dynamically create/edit tiles will not be called during package load. Additionally, some logging statements may not print to console during import of reference data. Whereas the default `save` methods create an edit in the edit history for each individual tile created, ``-bulk`` will instead create a single edit for all tiles, of type: "bulk_create". Resource creation will still be individually saved to edit history.
+
+Starting with version 8.2, you can pass the ``--skip_branches`` argument to load a package's resource models without loading the branch graphs in its ``graphs/branches`` directory. Resource models are loaded as usual. If a resource model contains nodes that were added from a branch that does not exist in your database, those nodes are still loaded. Links to missing source branches are not created in the database because such invalid links would cause the import to fail.
 
 
 .. note:: **Where and When do I use load_package ?**

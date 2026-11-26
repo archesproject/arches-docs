@@ -76,11 +76,17 @@ loading a package into a project
 
 .. code-block:: bash
 
-    python manage.py packages -o load_package -s source_of_package [-db]
+    python manage.py packages -o load_package -s source_of_package [-db] [--skip_branches]
 
 -db
         Add this boolean argument to force the destruction
         and recreation of your database before loading the package.
+
+--skip_branches
+        Add this boolean argument to skip loading the package's branch
+        graphs. Resource models are still loaded. Useful for systems
+        which will not be used for branch/graph development. Available
+        starting with version 8.2.
 
 The source (``-s``) of a package can be either a path to a local
 directory, the location of a local zipfile containing a package, or
